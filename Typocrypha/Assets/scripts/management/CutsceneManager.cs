@@ -8,6 +8,7 @@ public class CutsceneManager : MonoBehaviour {
 	public StateManager state_manager; // manages global state/scenes
 	public Text display_text; // text where dialogue will be displayed
 	public Text name_text; // text where name will be displayed
+	public SpriteRenderer sprite_holder; // where speaking character sprite will go
 	public TextScroll text_scroll; // displays text character by character
 
 	int curr_line; // current line of dialogue
@@ -37,6 +38,9 @@ public class CutsceneManager : MonoBehaviour {
 		if (!text_scroll.is_print) {
 			if (curr_line >= scene.dialogue.Length) return false;
 			name_text.text = scene.whos_talking [curr_line]; // print name of speaker
+			Sprite npc_sprite = // set sprite of current speaker
+				Resources.Load<Sprite>("sprites/" + scene.npc_sprites[curr_line].Trim());
+			sprite_holder.sprite = npc_sprite;
 			text_scroll.startPrint (scene.dialogue [curr_line], display_text);
 			++curr_line;
 		} else { // dump if dialogue already started

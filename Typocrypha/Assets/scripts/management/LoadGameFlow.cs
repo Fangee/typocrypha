@@ -20,7 +20,7 @@ public class LoadGameFlow : MonoBehaviour {
 
 	// parses gameflow file which should be a tab-delimited txt file (from excel)
 	void parseFile() {
-		text_file = (TextAsset) Resources.Load (file_name);
+		text_file = Resources.Load<TextAsset> (file_name);
 		string[] lines = text_file.text.Split(line_delim);
 		int scene_count = 0; // total number of scenes in game
 		int.TryParse (lines [0].Split (col_delim) [0], out scene_count);
@@ -56,6 +56,7 @@ public class LoadGameFlow : MonoBehaviour {
 		List<string> npcs = new List<string> ();
 		List<string> whos_talking = new List<string> ();
 		List<string> dialogue = new List<string> ();
+		List<string> npc_sprites = new List<string> ();
 		int i = pos;
 		for (; i < lines.Length; i++) {
 			string[] cols = lines [i].Split (col_delim);
@@ -64,12 +65,13 @@ public class LoadGameFlow : MonoBehaviour {
 			} else if (cols [0].CompareTo ("DIALOGUE") == 0) { // read in dialogue
 				whos_talking.Add (cols[1]);
 				dialogue.Add (cols [2]);
+				npc_sprites.Add (cols [3]);
 			} else { // otherwise, scene is done
 				break;
 			}
 		}
-		scene_arr [curr_scene] = new CutScene (npcs.ToArray (), 
-			whos_talking.ToArray(), dialogue.ToArray ());
+		scene_arr [curr_scene] = new CutScene (npcs.ToArray (), whos_talking.ToArray(), 
+			dialogue.ToArray (), npc_sprites.ToArray());
 		return i;
 	}
 

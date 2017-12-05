@@ -18,29 +18,17 @@ public class CutScene : GameScene {
 	public string[] npcs; // array of npc names (TEMP: should be npc objects)
 	public string[] whos_talking; // who is saying each line of dialogue
 	public string[] dialogue; // lines of dialogue for this scene
-	public int curr_line; // index of current dialogue line
+	public string[] npc_sprites; // name of sprite files for each talking scene
 
 	// constructs a new cutscene
-	public CutScene(string[] i_npcs, string[] i_whos_talking, string[] i_dialogue) {
+	public CutScene(string[] i_npcs, string[] i_whos_talking, 
+		            string[] i_dialogue, string[] i_npc_sprites) {
 		npcs = i_npcs;
 		whos_talking = i_whos_talking;
 		dialogue = i_dialogue;
-		curr_line = 0;
+		npc_sprites = i_npc_sprites;
 	}
 
-	// returns next line of dialogue (null if at end)
-	public string nextDialogueLine() {
-		if (curr_line >= dialogue.Length) {
-			return null;
-		} else {
-			return dialogue [curr_line++];
-		}
-	}
-
-	// returns who is saying the current line
-	public string currSpeaker() {
-		return whos_talking [curr_line];
-	}
 }
 
 // represents a battle scene
