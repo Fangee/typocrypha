@@ -34,9 +34,10 @@ public class TrackTyping : MonoBehaviour {
 			count = 0;
 		} else if (Input.GetKey (KeyCode.Backspace)) {
 			if (Input.GetKeyDown (KeyCode.Backspace)) {
-				if (count > 0)
+				if (count > 0) {
 					buffer = buffer.Remove (count - 1, 1);
-				count = count - 1;
+					count = count - 1;
+				}
 			}
 		} else {
 			string in_str = Input.inputString;
