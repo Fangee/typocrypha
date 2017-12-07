@@ -33,11 +33,9 @@ public class CutScene : GameScene {
 
 // represents a battle scene
 public class BattleScene : GameScene {
-	public string[] enemies; // array of enemy names (TEMP: should be enemy objects)
+	public EnemyStats[] enemy_stats; // stats for all enemies
 
-	public BattleScene(string[] i_enemies) {
-		enemies = i_enemies;
+	public BattleScene(EnemyStats[] i_enemy_stats) {
+		enemy_stats = i_enemy_stats;
 	}
-
-	// BATTLE STUFF
 }

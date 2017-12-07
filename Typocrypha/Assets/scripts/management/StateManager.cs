@@ -52,7 +52,7 @@ public class StateManager : MonoBehaviour {
 			battle_manager.enabled = true;
 			dialogue_box.SetActive (false);
 			battle_manager.startBattle ((BattleScene)next_scene);
-			StartCoroutine (nextSceneDelayed (3.0f)); // change after waiting for a bit
+			//StartCoroutine (nextSceneDelayed (3.0f)); // change after waiting for a bit
 			break;
 		}
 		return true;

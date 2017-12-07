@@ -79,12 +79,16 @@ public class LoadGameFlow : MonoBehaviour {
 	// returns line number at the end of this scene in file
 	int parseBattle(string[] lines, int pos, int curr_scene) {
 		// read in lines of scene
-		List<string> enemies = new List<string>();
+		List<EnemyStats> enemies = new List<EnemyStats>();
 		int i = pos;
 		for (; i < lines.Length; i++) {
 			string[] cols = lines [i].Split (col_delim);
 			if (cols [0].CompareTo ("ENEMY") == 0) { // read in enemy
-				enemies.Add (cols [1]);
+				EnemyStats new_stats = new EnemyStats();
+				new_stats.name = cols [1];
+				int.TryParse (cols [2], out new_stats.max_hp);
+				float.TryParse (cols [3], out new_stats.atk_time);
+				enemies.Add (new_stats);
 			} else { // otherwise, scene is done
 				break;
 			}
