@@ -9,6 +9,7 @@ public class BattleManager : MonoBehaviour {
 	public GameObject enemy_prefab; // prefab for enemy object
 	public int target_ind; // index of currently targeted enemy
 	public Transform target_ret; // shows where target is
+	public float enemy_spacing; // space between enemies
 	Enemy[] enemy_arr; // array of Enemy components (size 3)
 
 	// start battle scene
@@ -18,7 +19,7 @@ public class BattleManager : MonoBehaviour {
 		for (int i = 0; i < scene.enemy_stats.Length; i++) {
 			GameObject new_enemy = GameObject.Instantiate (enemy_prefab, transform);
 			new_enemy.transform.localScale = new Vector3 (1, 1, 1);
-			new_enemy.transform.localPosition = new Vector3 (i * 3, 0, 0);
+			new_enemy.transform.localPosition = new Vector3 (i * enemy_spacing, 0, 0);
 			enemy_arr [i] = new_enemy.GetComponent<Enemy> ();
 			enemy_arr [i].setStats (scene.enemy_stats [i]);
 		}
@@ -34,7 +35,7 @@ public class BattleManager : MonoBehaviour {
 		if (target_ind < 0) target_ind = 0;
 		if (target_ind > 2) target_ind = 2;
 		// move target reticule
-		target_ret.localPosition = new Vector3 (target_ind * 3, -1, 0);
+		target_ret.localPosition = new Vector3 (target_ind * enemy_spacing, -1, 0);
 	}
 
 	// attack currently targeted enemy with spell

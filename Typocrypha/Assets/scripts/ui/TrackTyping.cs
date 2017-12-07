@@ -15,6 +15,7 @@ public class TrackTyping : MonoBehaviour {
 	string buffer; // contains typed text
 	int count; // number of characters typed
 	string[] rows = { "qwertyuiop", "asdfghjkl", "zxcvbnm", " " };
+	float[] row_offsets = { 0f, 24f, 72f, 0 };
 
 	void Start () {
 		typed_text.text = "";
@@ -60,7 +61,7 @@ public class TrackTyping : MonoBehaviour {
 				GameObject new_key = GameObject.Instantiate (key_prefab);
 				new_key.transform.SetParent (keyboard);
 				new_key.transform.localScale = new Vector3 (1, 1, 1);
-				new_key.transform.localPosition = new Vector3 (j*64, i*-64, 0);
+				new_key.transform.localPosition = new Vector3 (row_offsets[i] + j*48, i*-48, 0);
 				new_key.GetComponentInChildren<Text> ().text = rows [i] [j].ToString();
 				key_map.Add (rows [i] [j], new_key.GetComponent<Image> ());
 			}
