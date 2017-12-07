@@ -8,6 +8,8 @@ public abstract class Spell
 {
     public abstract void cast(Enemy[] targets, int selected);
 
+    public abstract void enemyCast(Enemy[] allies, int position);
+
     //Apllies prefix and suffix to spell. both arguments can be null (if no prefix or suffix)
     public void Modify(ElementMod e, StyleMod s)
     {
@@ -59,6 +61,15 @@ public class AttackSpell : Spell
     public override void cast(Enemy[] targets, int selected)
     {
         Debug.Log("Attack spell cast");
+        int damage = power - targets[selected].getStats().defense;
+        targets[selected].damage(damage);
+        return;
+    }
+
+    public override void enemyCast(Enemy[] allies, int position)
+    {
+        int damage = power - Player.defense;
+        Player.damage(damage, element);
         return;
     }
 }
@@ -70,6 +81,11 @@ public class HealSpell : Spell
         Debug.Log("Heal spell cast");
         return;
     }
+
+    public override void enemyCast(Enemy[] allies, int position)
+    {
+        throw new System.NotImplementedException();
+    }
 }
 //Spells that attempt to shield friendly entities (CURRENTLY INCOMPLETE)
 public class ShieldSpell : Spell
@@ -78,6 +94,11 @@ public class ShieldSpell : Spell
     {
         Debug.Log("Shield spell cast");
         return;
+    }
+
+    public override void enemyCast(Enemy[] allies, int position)
+    {
+        throw new System.NotImplementedException();
     }
 }
 //Contains the data associated with an Element keyword

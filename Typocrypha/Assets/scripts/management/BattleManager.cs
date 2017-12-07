@@ -22,6 +22,8 @@ public class BattleManager : MonoBehaviour {
 			new_enemy.transform.localPosition = new Vector3 (i * enemy_spacing, 0, 0);
 			enemy_arr [i] = new_enemy.GetComponent<Enemy> ();
 			enemy_arr [i].setStats (scene.enemy_stats [i]);
+            enemy_arr[i].field = enemy_arr; //Give enemey access to field
+            enemy_arr[i].position = i;      //Log enemy position in field
 		}
 		target_ind = 0;
 	}
@@ -40,7 +42,8 @@ public class BattleManager : MonoBehaviour {
 
 	// attack currently targeted enemy with spell
 	public void attackCurrent(string spell) {
-		// TEMP: just get 'attacked' by whatever player typed
-		enemy_arr[target_ind].beAttacked(spell); 
-	}
+        //Send spell, Enemy state, and traget index to parser and caster 
+        GameObject spellDict = GameObject.FindGameObjectWithTag("SpellDictionary");
+        spellDict.GetComponent<SpellDictionary>().parseAndCast(spell, enemy_arr, target_ind);
+    }
 }

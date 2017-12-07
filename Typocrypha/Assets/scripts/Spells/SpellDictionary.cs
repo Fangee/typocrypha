@@ -12,8 +12,7 @@ public class SpellDictionary : MonoBehaviour
         is_loaded = false;
         buildDicts(); // load gameflow file
         is_loaded = true;
-        Debug.Log("Dict loaded");
-        parseAndCast("fire sword derp", null, 0);
+        Debug.Log("Dict loaded"); 
     }
 
     public void Update()
@@ -27,11 +26,6 @@ public class SpellDictionary : MonoBehaviour
     public string file_name; // name of gameflow file
     char[] line_delim = { '\n' };
 	char[] col_delim = { '\t' };
-
-    //Dictionaries containing spells associated with keywords
-    private Dictionary<string, Spell> spells = new Dictionary<string, Spell>();
-    private Dictionary<string, ElementMod> elements = new Dictionary<string, ElementMod>();
-    private Dictionary<string, StyleMod> styles = new Dictionary<string, StyleMod>();
 
     // parses Dictionary file which should be a tab-delimited txt file (from excel)
     public void buildDicts()
@@ -190,6 +184,38 @@ public class SpellDictionary : MonoBehaviour
         return true;
 
     }
+    //
+    public void enemyCast(Enemy caster, SpellData spell, Enemy[] field, int position)
+    {
+        Spell s = spells[spell.root];
+        Spell c = createSpellFromType(s.type);
+        s.copyInto(c);
+        ElementMod e;
+        StyleMod st;
+        if (spell.element == null)
+            e = null;
+        else
+            e = elements[spell.element];
+        if (spell.style == null)
+            st = null;
+        else
+            st = styles[spell.style];
+        c.Modify(e, st);
+        c.enemyCast(field, position);
+    }
+
+    public float getCastingTime(SpellData s, float speed)
+    {
+        float time = spells[s.root].cooldown;
+        if (s.element != null)
+            time += elements[s.element].cooldownMod;
+        if (s.style != null)
+            time += styles[s.style].cooldownMod;
+        return time * speed;
+    }
+
+    //PRIVATE//--------------------------------------------------------------------------------------------------------------------------------------------//
+
     //Helper method for casting spells
     //root cannot equal null
     private void cast(string root, string element, string style, Enemy[] targets, int selected)
@@ -229,4 +255,35 @@ public class SpellDictionary : MonoBehaviour
         else
             return null;
     }
+
+    //Dictionaries containing spells associated with keywords
+    private Dictionary<string, Spell> spells = new Dictionary<string, Spell>();
+    private Dictionary<string, ElementMod> elements = new Dictionary<string, ElementMod>();
+    private Dictionary<string, StyleMod> styles = new Dictionary<string, StyleMod>();
 }
+
+public class SpellData
+{
+    //Make a new spelldata instance with root keyword root, element keyword prefix, and style keyword suffix
+    public SpellData(string root, string prefix = null, string suffix = null)
+    {
+        this.root = root;
+        element = prefix;
+        style = suffix;
+    }
+    public string root;
+    public string element;
+    public string style;
+    public override string ToString()
+    {
+        string result;
+        if (element != null)
+            result = element + "-" + root;
+        else
+            result = root;
+        if (style != null)
+            result += ("-" + style);
+        return result;
+    }
+}
+
