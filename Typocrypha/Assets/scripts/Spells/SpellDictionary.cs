@@ -2,20 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpellDictionary{
-
-    // Use this for initialization
-    SpellDictionary(string path)
-    { 
+//Stores all the spell info and contains methods to parse and cast spells from player input
+//Currently does not actually support player or enemy casting, but has parsing
+public class SpellDictionary : MonoBehaviour
+{
+    //Loads the spell dictionary at the beginning of the game
+    public void Start()
+    {
         is_loaded = false;
-        buildDicts(path); // load gameflow file
+        buildDicts(); // load gameflow file
         is_loaded = true;
+        Debug.Log("Dict loaded");
+        parseAndCast("fire sword derp", null, 0);
     }
 
-	public bool is_loaded; // is the spellDict done loading?
+    public void Update()
+    {
+
+    }
+
+    public bool is_loaded; // is the spellDict done loading?
 
 	TextAsset text_file; // original text asset
-	char[] line_delim = { '\n' };
+    public string file_name; // name of gameflow file
+    char[] line_delim = { '\n' };
 	char[] col_delim = { '\t' };
 
     //Dictionaries containing spells associated with keywords
@@ -24,9 +34,9 @@ public class SpellDictionary{
     private Dictionary<string, StyleMod> styles = new Dictionary<string, StyleMod>();
 
     // parses Dictionary file which should be a tab-delimited txt file (from excel)
-    void buildDicts(string path)
+    public void buildDicts()
     {
-		text_file = Resources.Load<TextAsset> (path);
+		text_file = Resources.Load<TextAsset> (file_name);
 		string[] lines = text_file.text.Split(line_delim);
         string[] cols;
         int i = 1;
@@ -42,6 +52,7 @@ public class SpellDictionary{
             }
             string type = cols[1].Trim();
             Spell s = createSpellFromType(type);
+            s.type = type;
             s.description = cols[2].Trim();
             int.TryParse(cols[3].Trim(), out s.power);
             int.TryParse(cols[4].Trim(), out s.cooldown);
@@ -106,7 +117,107 @@ public class SpellDictionary{
             i++;
         }
     }
+    //parses input spell, casts if valid (true), botches if misspelled but structure is valid (true), fizzles if invalid structure (false)
+    public bool parseAndCast(string spell, Enemy[] targets, int selected)
+    {
+        char[] delim = { ' ' };
+        string[] lines = spell.Split(delim);
+        if (lines.Length == 1)
+        {
+            string first = lines[0].Trim();
+            if (spells.ContainsKey(first))
+                spells[first].cast(targets,selected);
+            else
+                botch("b", null, null);
+        }
+        else if (lines.Length == 2)
+        {
+            string first = lines[0].Trim();
+            string second = lines[1].Trim();
+            if (spells.ContainsKey(first))
+            {
+                if (styles.ContainsKey(second))
+                    cast(first, null, second, targets, selected);
+                else
+                    botch(first, null, "b");
+            }
+            else if (spells.ContainsKey(second))
+            {
+                if (elements.ContainsKey(first))
+                    cast(second, first, null, targets, selected);
+                else
+                    botch("b", second, null);
+            }
+        }
+        else if (lines.Length == 3)
+        {
+            string elem = lines[0].Trim();
+            string root = lines[1].Trim();
+            string style = lines[2].Trim();
+            if (spells.ContainsKey(root))
+            {
+                if (elements.ContainsKey(elem))
+                {
+                    if (styles.ContainsKey(style))
+                        cast(root, elem, style, targets, selected);
+                    else
+                        botch(root, elem, "b");
+                }
+                else if (styles.ContainsKey(style))
+                {
+                    botch(root, "b", style);
+                }
+                else
+                {
+                    botch(root, "b", "b");
+                }
+            }
+            else if (elements.ContainsKey(elem))
+            {
+                if (styles.ContainsKey(style))
+                    botch("b", elem, style);
+                else
+                    botch("b", elem, "b");
+            }
+            else if (styles.ContainsKey(style))
+                botch("b", "b", style);
+            else
+                botch("b", "b", "b");
 
+        }
+        else
+            return false;
+        return true;
+
+    }
+    //Helper method for casting spells
+    //root cannot equal null
+    private void cast(string root, string element, string style, Enemy[] targets, int selected)
+    {
+        Spell s = spells[root];
+        Spell c = createSpellFromType(s.type);
+        s.copyInto(c);
+        ElementMod e;
+        StyleMod st;
+        if (element == null)
+            e = null;
+        else
+            e = elements[element];
+        if (style == null)
+            st = null;
+        else
+            st = styles[style];
+        c.Modify(e, st);
+        c.cast(targets, selected);
+
+    }
+    //Will contain method for botching a spell
+    private void botch(string root, string elem, string style)
+    {
+        Debug.Log("Botched cast: " + root + "-" + elem + "-" + style);
+        return;
+    }
+    //Helper method for cloning appropriately typed spells
     private Spell createSpellFromType(string type)
     {
         if (type.CompareTo("attack") == 0)

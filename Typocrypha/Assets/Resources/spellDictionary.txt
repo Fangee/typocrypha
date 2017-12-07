@@ -1,0 +1,11 @@
+name (root)	spell type	spellbook description	power	cooldown	hit %	Status Mod	pattern
+sword	attack	a basic attack	10	4	85	0	MT
+END							
+name (elem)	element	cooldown mod					
+fire	fire	0					
+ice	ice	0					
+lightning	lightning	0					
+END							
+name (style)	powerMod	cooldown mod	hit% mod	status effect mod	pattern		
+aimed	-5	0	15	0			
+END							
