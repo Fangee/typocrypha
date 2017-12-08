@@ -48,6 +48,6 @@ public class BattleManager : MonoBehaviour {
 	// attack currently targeted enemy with spell
 	public void attackCurrent(string spell) {
         //Send spell, Enemy state, and traget index to parser and caster 
-        spellDict.GetComponent<SpellDictionary>().parseAndCast(spell, enemy_arr, target_ind);
+        spellDict.GetComponent<SpellDictionary>().parseAndCast(spell, enemy_arr, target_ind,Player.main);
     }
 }

@@ -22,7 +22,6 @@ public struct EnemyStats {
 
 // defines enemy behaviour
 public class Enemy : MonoBehaviour {
-    private SpellDictionary dict;
     public bool is_dead; // is enemy dead?
     public Enemy[] field; //State of battle scene (for ally-target casting)
     public int position; //index to field (current position)
@@ -32,8 +31,10 @@ public class Enemy : MonoBehaviour {
     int curr_spell = 0;
 	int curr_hp; // current amount of health
 	float curr_time; // current time (from 0 to atk_time)
+    private Player target = Player.main; //Current target;
+    private SpellDictionary dict; //Dictionary to refer to (set in setStats)
 
-	void Start() {
+    void Start() {
 		is_dead = false;
        	
     }
@@ -46,7 +47,7 @@ public class Enemy : MonoBehaviour {
         //DEFAULT until other enemy stats are added to scenes or can be loaded somehow (Maybe lets build a database in a seperate excel?)
         setSpells(sp);
         dict = GameObject.FindGameObjectWithTag("SpellDictionary").GetComponent<SpellDictionary>();
-        stats.speed = 1;
+        stats.speed = ((float)1.1) + Random.Range(0,(float)0.75);
         stats.attack = 1;
         stats.defense = 1;
 		enemy_sprite = GetComponent<SpriteRenderer> ();
@@ -72,7 +73,7 @@ public class Enemy : MonoBehaviour {
 			yield return new WaitForSeconds (0.1f);
 			curr_time += 0.1f;
 			if (curr_time >= stats.atk_time) {
-				attackPlayer (s);
+				attackPlayer (s,target);
                 curr_spell++;
                 if (curr_spell >= spells.Length)//Reached end of spell list
                     curr_spell = 0;
@@ -84,10 +85,10 @@ public class Enemy : MonoBehaviour {
 	}
 
 	// attacks player with specified spell
-	void attackPlayer(SpellData s) {
+	void attackPlayer(SpellData s, Player target) {
 		Debug.Log (stats.name + " casts " + s.ToString());
 		StartCoroutine (swell ());
-        dict.GetComponent<SpellDictionary>().enemyCast(this, s, field, position);
+        dict.GetComponent<SpellDictionary>().enemyCast(this, s, field, position, target);
 	}
 
 	// be attacked by the player

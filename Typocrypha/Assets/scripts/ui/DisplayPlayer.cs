@@ -10,8 +10,8 @@ public class DisplayPlayer : MonoBehaviour {
 	public Text cast_text; // display's what player is casting
 
 	void Update () {
-		health_text.text = Player.curr_hp.ToString ();
-		shield_text.text = Player.shield.ToString ();
-		cast_text.text = Player.last_cast;
+		health_text.text = Player.main.Curr_hp.ToString ();
+		shield_text.text = Player.main.Shield.ToString ();
+		cast_text.text = Player.main.Last_cast;
 	}
 }

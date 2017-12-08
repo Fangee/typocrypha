@@ -15,11 +15,6 @@ public class SpellDictionary : MonoBehaviour
         Debug.Log("Dict loaded"); 
     }
 
-    public void Update()
-    {
-
-    }
-
     public bool is_loaded; // is the spellDict done loading?
 
 	TextAsset text_file; // original text asset
@@ -112,67 +107,72 @@ public class SpellDictionary : MonoBehaviour
         }
     }
     //parses input spell, casts if valid (true), botches if misspelled but structure is valid (true), fizzles if invalid structure (false)
-    public bool parseAndCast(string spell, Enemy[] targets, int selected)
+    public bool parseAndCast(string spell, Enemy[] targets, int selected, Player caster)
     {
         char[] delim = { ' ' };
         string[] lines = spell.Split(delim);
-		if (lines.Length == 1) {
+		if (lines.Length == 1)
+        {
 			string first = lines [0].Trim ();
 			if (spells.ContainsKey (first)) {
-				Player.last_cast = spell;
-				spells [first].cast (targets, selected);
+				caster.Last_cast = spell;
+				spells [first].cast (targets, selected, caster);
 			} else 
-				botch ("b", null, null);
-		} else if (lines.Length == 2) {
+				botch ("b", null, null, caster);
+		}
+        else if (lines.Length == 2)
+        {
 			string first = lines [0].Trim ();
 			string second = lines [1].Trim ();
 			if (spells.ContainsKey (first)) {
 				if (styles.ContainsKey (second)) {
-					Player.last_cast = spell;
-					cast (first, null, second, targets, selected);
+					caster.Last_cast = spell;
+					cast (first, null, second, targets, selected, caster);
 				} else
-					botch (first, null, "b");
+					botch (first, null, "b", caster);
 			} else if (spells.ContainsKey (second)) {
 				if (elements.ContainsKey (first)) {
-					Player.last_cast = spell;
-					cast (second, first, null, targets, selected);
+					caster.Last_cast = spell;
+					cast (second, first, null, targets, selected, caster);
 				} else
-					botch ("b", second, null);
+					botch ("b", second, null, caster);
 			}
-		} else if (lines.Length == 3) {
+		}
+        else if (lines.Length == 3)
+        {
 			string elem = lines [0].Trim ();
 			string root = lines [1].Trim ();
 			string style = lines [2].Trim ();
 			if (spells.ContainsKey (root)) {
 				if (elements.ContainsKey (elem)) {
 					if (styles.ContainsKey (style)) {
-						Player.last_cast = spell;
-						cast (root, elem, style, targets, selected);
+						caster.Last_cast = spell;
+						cast (root, elem, style, targets, selected, caster);
 					} else
-						botch (root, elem, "b");
+						botch (root, elem, "b", caster);
 				} else if (styles.ContainsKey (style)) {
-					botch (root, "b", style);
+					botch (root, "b", style, caster);
 				} else {
-					botch (root, "b", "b");
+					botch (root, "b", "b", caster);
 				}
 			} else if (elements.ContainsKey (elem)) {
 				if (styles.ContainsKey (style))
-					botch ("b", elem, style);
+					botch ("b", elem, style, caster);
 				else
-					botch ("b", elem, "b");
+					botch ("b", elem, "b", caster);
 			} else if (styles.ContainsKey (style))
-				botch ("b", "b", style);
+				botch ("b", "b", style, caster);
 			else
-				botch ("b", "b", "b");
+				botch ("b", "b", "b", caster);
 
 		} else {
-			Player.last_cast = "ERROR";
+			caster.Last_cast = "ERROR";
 			return false;
 		}
         return true;
     }
     //
-    public void enemyCast(Enemy caster, SpellData spell, Enemy[] field, int position)
+    public void enemyCast(Enemy caster, SpellData spell, Enemy[] field, int position, Player target)
     {
         Spell s = spells[spell.root];
         Spell c = createSpellFromType(s.type);
@@ -188,7 +188,7 @@ public class SpellDictionary : MonoBehaviour
         else
             st = styles[spell.style];
         c.Modify(e, st);
-        c.enemyCast(field, position);
+        c.enemyCast(field, position, target);
     }
 
     public float getCastingTime(SpellData s, float speed)
@@ -205,7 +205,7 @@ public class SpellDictionary : MonoBehaviour
 
     //Helper method for casting spells
     //root cannot equal null
-    private void cast(string root, string element, string style, Enemy[] targets, int selected)
+    private void cast(string root, string element, string style, Enemy[] targets, int selected, Player caster)
     {
         Spell s = spells[root];
         Spell c = createSpellFromType(s.type);
@@ -221,14 +221,14 @@ public class SpellDictionary : MonoBehaviour
         else
             st = styles[style];
         c.Modify(e, st);
-        c.cast(targets, selected);
+        c.cast(targets, selected, caster);
 
     }
     //Will contain method for botching a spell
-    private void botch(string root, string elem, string style)
+    private void botch(string root, string elem, string style, Player caster)
     {
         Debug.Log("Botched cast: " + root + "-" + elem + "-" + style);
-		Player.last_cast = "Botch";
+		caster.Last_cast = "Botch";
         return;
     }
     //Helper method for cloning appropriately typed spells

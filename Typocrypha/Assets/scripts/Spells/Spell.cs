@@ -6,9 +6,9 @@ using UnityEngine;
 //A spell must inherit from this class to define specific functionality
 public abstract class Spell
 {
-    public abstract void cast(Enemy[] targets, int selected);
+    public abstract void cast(Enemy[] targets, int selected, Player p);
 
-    public abstract void enemyCast(Enemy[] allies, int position);
+    public abstract void enemyCast(Enemy[] allies, int position, Player p);
 
     //Apllies prefix and suffix to spell. both arguments can be null (if no prefix or suffix)
     public void Modify(ElementMod e, StyleMod s)
@@ -58,31 +58,31 @@ public abstract class Spell
 //Spells that attempt to do damage to opposing entities (CURRENTLY INCOMPLETE)
 public class AttackSpell : Spell
 {
-    public override void cast(Enemy[] targets, int selected)
+    public override void cast(Enemy[] targets, int selected, Player p)
     {
         Debug.Log("Attack spell cast");
-        int damage = power - targets[selected].getStats().defense;
+        int damage = power + p.Attack - targets[selected].getStats().defense;
         targets[selected].damage(damage);
         return;
     }
 
-    public override void enemyCast(Enemy[] allies, int position)
+    public override void enemyCast(Enemy[] allies, int position, Player p)
     {
-        int damage = power - Player.defense;
-        Player.damage(damage, element);
+        int damage = power - p.Defense;
+        p.damage(damage, element);
         return;
     }
 }
 //Spells that attempt to heal friendly entities (CURRENTLY INCOMPLETE)
 public class HealSpell : Spell
 {
-    public override void cast(Enemy[] targets, int selected)
+    public override void cast(Enemy[] targets, int selected, Player p)
     {
         Debug.Log("Heal spell cast");
         return;
     }
 
-    public override void enemyCast(Enemy[] allies, int position)
+    public override void enemyCast(Enemy[] allies, int position, Player p)
     {
         throw new System.NotImplementedException();
     }
@@ -90,13 +90,13 @@ public class HealSpell : Spell
 //Spells that attempt to shield friendly entities (CURRENTLY INCOMPLETE)
 public class ShieldSpell : Spell
 {
-    public override void cast(Enemy[] targets, int selected)
+    public override void cast(Enemy[] targets, int selected, Player p)
     {
         Debug.Log("Shield spell cast");
         return;
     }
 
-    public override void enemyCast(Enemy[] allies, int position)
+    public override void enemyCast(Enemy[] allies, int position, Player p)
     {
         throw new System.NotImplementedException();
     }
