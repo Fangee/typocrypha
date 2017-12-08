@@ -87,7 +87,6 @@ public class LoadGameFlow : MonoBehaviour {
 				EnemyStats new_stats = new EnemyStats();
 				new_stats.name = cols [1];
 				int.TryParse (cols [2], out new_stats.max_hp);
-				float.TryParse (cols [3], out new_stats.atk_time);
 				enemies.Add (new_stats);
 			} else { // otherwise, scene is done
 				break;

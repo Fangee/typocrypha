@@ -6,11 +6,16 @@ using UnityEngine.UI;
 // manages battle sequences
 public class BattleManager : MonoBehaviour {
 	public StateManager state_manager; // manages global state/scenes
+	public GameObject spellDict; // spell dictionary object
 	public GameObject enemy_prefab; // prefab for enemy object
 	public int target_ind; // index of currently targeted enemy
 	public Transform target_ret; // shows where target is
 	public float enemy_spacing; // space between enemies
 	Enemy[] enemy_arr; // array of Enemy components (size 3)
+
+	void Start() {
+
+	}
 
 	// start battle scene
 	public void startBattle(BattleScene scene) {
@@ -43,7 +48,6 @@ public class BattleManager : MonoBehaviour {
 	// attack currently targeted enemy with spell
 	public void attackCurrent(string spell) {
         //Send spell, Enemy state, and traget index to parser and caster 
-        GameObject spellDict = GameObject.FindGameObjectWithTag("SpellDictionary");
         spellDict.GetComponent<SpellDictionary>().parseAndCast(spell, enemy_arr, target_ind);
     }
 }

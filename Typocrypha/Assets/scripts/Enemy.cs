@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour {
     public bool is_dead; // is enemy dead?
     public Enemy[] field; //State of battle scene (for ally-target casting)
     public int position; //index to field (current position)
+	SpriteRenderer enemy_sprite; // this enemy's sprite
     EnemyStats stats; // stats of enemy
     SpellData[] spells; // castable spells
     int curr_spell = 0;
@@ -34,7 +35,7 @@ public class Enemy : MonoBehaviour {
 
 	void Start() {
 		is_dead = false;
-       
+       	
     }
 
 	public void setStats(EnemyStats i_stats) {
@@ -48,6 +49,7 @@ public class Enemy : MonoBehaviour {
         stats.speed = 1;
         stats.attack = 1;
         stats.defense = 1;
+		enemy_sprite = GetComponent<SpriteRenderer> ();
         //Start Attacking
         StartCoroutine (timer ()); 
 	}
@@ -82,21 +84,29 @@ public class Enemy : MonoBehaviour {
 	}
 
 	// attacks player with specified spell
-	// NOTE: once we have a spell class/etc, we might want to replace parameter with that
 	void attackPlayer(SpellData s) {
 		Debug.Log (stats.name + " casts " + s.ToString());
+		StartCoroutine (swell ());
         dict.GetComponent<SpellDictionary>().enemyCast(this, s, field, position);
 	}
 
 	// be attacked by the player
-	// NOTE: once we have a spell class/etc, we might want to replace parameter with that
 	public void damage(int d) {
 		Debug.Log (stats.name + " was hit for " + d);
-		curr_hp -= d; // TEMP: hard coded for now
+		curr_hp -= d;
+		// make enemy sprite fade as damaged (lazy health rep)
+		enemy_sprite.color = new Color(1, 1, 1, (float)curr_hp/stats.max_hp);
 		if (curr_hp <= 0) { // check if killed
 			Debug.Log (stats.name + " has been slain!");
 			is_dead = true;
 			GameObject.Destroy (gameObject);
 		}
+	}
+
+	// cause enemy to swell in size for a short period of time (lazy attack rep)
+	IEnumerator swell() {
+		transform.localScale = new Vector3 (1.25f, 1.25f, 1.25f);
+		yield return new WaitForSeconds (0.25f);
+		transform.localScale = new Vector3 (1f, 1f, 1f);
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class Player
 {
@@ -14,11 +15,12 @@ public static class Player
     public static int accuracy = 0;
     public static int evasion = 0;
     public static bool is_dead = false;
+	public static string last_cast = ""; // last casted spell
 
     public static bool damage(int d, string type)
     {
         Debug.Log("Player" + " was hit for " + d + " of " + type + " damage");
-        curr_hp -= d; // TEMP: hard coded for now
+        curr_hp -= d; 
         if (curr_hp <= 0)
         { // check if killed
             Debug.Log("Player" + " has been slain!");
