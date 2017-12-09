@@ -65,6 +65,11 @@ public class Enemy : MonoBehaviour {
         this.spells = spells;
     }
 
+	// returns curr_time/atk_time
+	public float getProgress() {
+		return curr_time / stats.atk_time;
+	}
+
 	// keep track of time, and attack whenever curr_time = atk_time
 	IEnumerator timer() {
         SpellData s = spells[curr_spell];        //Initialize with currnet spell

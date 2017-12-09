@@ -6,15 +6,10 @@ using UnityEngine.UI;
 // bar meter for representing health/charge/shield/etc
 public class BarMeter : MonoBehaviour {
 	float percent; // percent full
-	float width; // width of max length of bar
-	float height; // height of bar
 	RectTransform bar; // bar's rect transform
 
 	void Start () {
-		percent = 1;
-		width = GetComponent<RectTransform> ().rect.width;
-		height = GetComponent<RectTransform> ().rect.height;
-		bar = GetComponentInChildren<RectTransform> ();
+		bar = transform.GetChild(0).gameObject.GetComponent<RectTransform> ();
 	}
 
 	// set bar length

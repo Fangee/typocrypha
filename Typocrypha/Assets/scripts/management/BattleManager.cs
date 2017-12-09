@@ -8,6 +8,7 @@ public class BattleManager : MonoBehaviour {
 	public StateManager state_manager; // manages global state/scenes
 	public GameObject spellDict; // spell dictionary object
 	public GameObject enemy_prefab; // prefab for enemy object
+	public EnemyChargeBars charge_bars; // creates and amanges charge bars
 	public int target_ind; // index of currently targeted enemy
 	public Transform target_ret; // shows where target is
 	public float enemy_spacing; // space between enemies
@@ -21,14 +22,18 @@ public class BattleManager : MonoBehaviour {
 	public void startBattle(BattleScene scene) {
 		Debug.Log ("Battle! (goes on infinitely)");
 		enemy_arr = new Enemy[3];
+		charge_bars.initChargeBars (enemy_arr);
 		for (int i = 0; i < scene.enemy_stats.Length; i++) {
 			GameObject new_enemy = GameObject.Instantiate (enemy_prefab, transform);
 			new_enemy.transform.localScale = new Vector3 (1, 1, 1);
 			new_enemy.transform.localPosition = new Vector3 (i * enemy_spacing, 0, 0);
 			enemy_arr [i] = new_enemy.GetComponent<Enemy> ();
 			enemy_arr [i].setStats (scene.enemy_stats [i]);
-            enemy_arr[i].field = enemy_arr; //Give enemey access to field
-            enemy_arr[i].position = i;      //Log enemy position in field
+            enemy_arr [i].field = enemy_arr; //Give enemey access to field
+            enemy_arr [i].position = i;      //Log enemy position in field
+			Vector3 bar_pos = new_enemy.transform.position;
+			bar_pos.Set (bar_pos.x, bar_pos.y + 1, bar_pos.z);
+			charge_bars.makeChargeMeter(i, bar_pos);
 		}
 		target_ind = 0;
 	}
