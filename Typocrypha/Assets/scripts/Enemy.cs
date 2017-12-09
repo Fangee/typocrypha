@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour {
 	int curr_hp; // current amount of health
 	float curr_time; // current time (from 0 to atk_time)
     private Player target = Player.main; //Current target;
-    private SpellDictionary dict; //Dictionary to refer to (set in setStats)
+    private static SpellDictionary dict; //Dictionary to refer to (set in setStats)
 
     void Start() {
 		is_dead = false;
@@ -46,8 +46,9 @@ public class Enemy : MonoBehaviour {
         SpellData[] sp = { new SpellData("sword") };
         //DEFAULT until other enemy stats are added to scenes or can be loaded somehow (Maybe lets build a database in a seperate excel?)
         setSpells(sp);
-        dict = GameObject.FindGameObjectWithTag("SpellDictionary").GetComponent<SpellDictionary>();
-        stats.speed = ((float)1.1) + Random.Range(0,(float)0.75);
+        if(dict == null)
+            dict = GameObject.FindGameObjectWithTag("SpellDictionary").GetComponent<SpellDictionary>();
+        stats.speed = (1.1F) + Random.Range(0,0.75F);
         stats.attack = 1;
         stats.defense = 1;
 		enemy_sprite = GetComponent<SpriteRenderer> ();
@@ -72,7 +73,7 @@ public class Enemy : MonoBehaviour {
 
 	// keep track of time, and attack whenever curr_time = atk_time
 	IEnumerator timer() {
-        SpellData s = spells[curr_spell];        //Initialize with currnet spell
+        SpellData s = spells[curr_spell];        //Initialize with current spell
         stats.atk_time = dict.getCastingTime(s, stats.speed);   //Get casting time
 		while (!is_dead) {
 			yield return new WaitForSeconds (0.1f);

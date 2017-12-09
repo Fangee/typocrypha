@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>2017.2.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -229,9 +227,12 @@
     <Compile Include="Assets\scripts\management\StateManager.cs" />
     <Compile Include="Assets\scripts\Player.cs" />
     <Compile Include="Assets\scripts\SetResolution.cs" />
+    <Compile Include="Assets\scripts\Spells\CooldownList.cs" />
     <Compile Include="Assets\scripts\Spells\Spell.cs" />
     <Compile Include="Assets\scripts\Spells\SpellDictionary.cs" />
+    <Compile Include="Assets\scripts\ui\BarMeter.cs" />
     <Compile Include="Assets\scripts\ui\DisplayPlayer.cs" />
+    <Compile Include="Assets\scripts\ui\EnemyChargeBars.cs" />
     <Compile Include="Assets\scripts\ui\TextScroll.cs" />
     <Compile Include="Assets\scripts\ui\TrackTyping.cs" />
     <Compile Include="Assets\scripts\Utility\Timer.cs" />

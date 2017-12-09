@@ -11,12 +11,10 @@ public abstract class Spell
     //Enemy casts this spell from input position at target player
     public abstract void enemyCast(Enemy[] allies, int position, Player target);
     //Starts spell cooldown using coroutine support from the Timer class 
-    public void startCooldown(float time)
+    public void startCooldown(CooldownList l, string name, float time)
     {
         finish_time = time;
-        if (timer == null)
-            timer = GameObject.FindGameObjectWithTag("Timer").GetComponent<Timer>();
-        timer.newTimer(time, curr_time, isNotOnCooldown);
+        l.add(name, time, curr_time, isNotOnCooldown);
     }
 
     //Apllies prefix and suffix to spell. both arguments can be null (if no prefix or suffix)
@@ -66,8 +64,6 @@ public abstract class Spell
 
     //Cooldown properties
 
-    //Timer Object that allows access to CoRoutines
-    private static Timer timer = null;
     //bool ref for passing timer.newTimer
     Ref<bool> isNotOnCooldown = new Ref<bool>(true);
     //Returns true is on cooldown, false otherwise

@@ -6,6 +6,8 @@ using UnityEngine;
 //Currently does not actually support player or enemy casting, but has parsing
 public class SpellDictionary : MonoBehaviour
 {
+    public CooldownList cooldown;
+    
     //Loads the spell dictionary at the beginning of the game
     public void Start()
     {
@@ -213,6 +215,11 @@ public class SpellDictionary : MonoBehaviour
             Debug.Log("Cast failed: " + root + " is on cooldown for " + s.TimeLeft + " seconds");
             return;
         }
+        if(cooldown.isFull())
+        {
+            Debug.Log("Cast failed: cooldownList is full!");
+            return;
+        }
         Spell c = createSpellFromType(s.type);//Create copy to not mutate spell definition (in dict)
         s.copyInto(c);
         ElementMod e;
@@ -226,7 +233,7 @@ public class SpellDictionary : MonoBehaviour
         else//Get style keyword from style dictionary
             st = styles[style];
         c.Modify(e, st);//Modify copy with style and/or element keywords (if applicable)
-        s.startCooldown(c.cooldown * caster.Speed);//Start spell cooldown (with modified casting time from copy)
+        s.startCooldown(cooldown, root, c.cooldown * caster.Speed);//Start spell cooldown (with modified casting time from copy)
         Debug.Log(root + " is going on cooldown for " + (c.cooldown * caster.Speed) + " seconds");
         c.cast(targets, selected, caster);//Apply actual spell effect
 
@@ -241,7 +248,12 @@ public class SpellDictionary : MonoBehaviour
             Debug.Log("Cast failed: " + root + " is on cooldown for " + s.TimeLeft + " seconds");
             return;
         }
-        s.startCooldown(s.cooldown * caster.Speed);//Start spell cooldown (with modified casting time from copy)
+        if (cooldown.isFull())
+        {
+            Debug.Log("Cast failed: cooldownList is full!");
+            return;
+        }
+        s.startCooldown(cooldown, root, s.cooldown * caster.Speed);//Start spell cooldown (with modified casting time from copy)
         Debug.Log(root + " is going on cooldown for " + (s.cooldown * caster.Speed) + " seconds");
         s.cast(targets, selected, caster);//Apply actual spell effect
     }
