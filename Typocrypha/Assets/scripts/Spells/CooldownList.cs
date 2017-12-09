@@ -33,7 +33,7 @@ public class CooldownList : MonoBehaviour {
             c.Update();
         }
 	}
-    // keep track of time, and attack whenever curr_time = atk_time
+    // keep track of time, update bars, and delete bars if done
     IEnumerator timer(float finish_time, Ref<float> curr_time, Ref<bool> is_finished, CooldownBar c)
     {
         is_finished.Obj = false;
@@ -75,6 +75,7 @@ public class CooldownList : MonoBehaviour {
             new_bar.transform.position = world_pos;
             bar = new_bar.GetComponent<BarMeter>();
             this.name = name;
+			bar.setText(name);
         }
 
         // Use this for initialization

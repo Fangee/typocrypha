@@ -21,6 +21,7 @@ public class EnemyChargeBars : MonoBehaviour {
 		new_bar.transform.localScale = new Vector3 (1, 1, 1);
 		new_bar.transform.position = world_pos;
 		charge_bars [pos] = new_bar.GetComponent<BarMeter> ();
+		charge_bars [pos].setText ("");
 	}
 
 	// update charge bars

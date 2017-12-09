@@ -7,9 +7,16 @@ using UnityEngine.UI;
 public class BarMeter : MonoBehaviour {
 	float percent; // percent full
 	RectTransform bar; // bar's rect transform
+	Text bar_text; // bar's text label
 
-	void Start () {
+	void Awake () {
 		bar = transform.GetChild(0).gameObject.GetComponent<RectTransform> ();
+		bar_text = GetComponentInChildren<Text> ();
+	}
+
+	// set bar text
+	public void setText(string new_txt) {
+		bar_text.text = new_txt;
 	}
 
 	// set bar length
