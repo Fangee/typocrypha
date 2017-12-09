@@ -31,7 +31,7 @@ public class Player
         stats.max_shield = 100;
         stats.attack = 0;
         stats.defense = 0;
-        stats.speed = 2;
+        stats.speed = 1;
         stats.accuracy = 0;
         stats.evasion = 0;
     }

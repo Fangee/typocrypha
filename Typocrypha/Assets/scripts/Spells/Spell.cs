@@ -10,7 +10,7 @@ public abstract class Spell
     public abstract void cast(Enemy[] targets, int selected, Player caster);
     //Enemy casts this spell from input position at target player
     public abstract void enemyCast(Enemy[] allies, int position, Player target);
-
+    //Starts spell cooldown using coroutine support from the Timer class 
     public void startCooldown(float time)
     {
         finish_time = time;
