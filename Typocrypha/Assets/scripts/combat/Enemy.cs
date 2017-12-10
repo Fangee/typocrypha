@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour {
     public bool is_dead; // is enemy dead?
     public Enemy[] field; //State of battle scene (for ally-target casting)
     public int position; //index to field (current position)
-	SpriteRenderer enemy_sprite; // this enemy's sprite
+	public SpriteRenderer enemy_sprite; // this enemy's sprite
     EnemyStats stats; // stats of enemy
     SpellData[] spells; // castable spells
     int curr_spell = 0;
@@ -81,9 +81,11 @@ public class Enemy : MonoBehaviour {
 			curr_time += 0.1f;
 			if (curr_time >= stats.atk_time) {
 				BattleManager.main.pause = true; // pause battle for attack
+				BattleEffects.main.toggleDim(enemy_sprite);
 				yield return new WaitForSeconds (1f);
 				attackPlayer (s,target);
 				yield return new WaitForSeconds (1f);
+				BattleEffects.main.toggleDim(enemy_sprite);
                 curr_spell++;
                 if (curr_spell >= spells.Length)//Reached end of spell list
                     curr_spell = 0;
@@ -99,6 +101,7 @@ public class Enemy : MonoBehaviour {
 	void attackPlayer(SpellData s, Player target) {
 		Debug.Log (stats.name + " casts " + s.ToString());
 		StartCoroutine (swell ());
+		BattleEffects.main.screenShake (0.5f);
         dict.GetComponent<SpellDictionary>().enemyCast(this, s, field, position, target);
 	}
 
