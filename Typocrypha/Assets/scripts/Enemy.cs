@@ -36,7 +36,6 @@ public class Enemy : MonoBehaviour {
 
     void Start() {
 		is_dead = false;
-       	
     }
 
 	public void setStats(EnemyStats i_stats) {
@@ -77,15 +76,21 @@ public class Enemy : MonoBehaviour {
         stats.atk_time = dict.getCastingTime(s, stats.speed);   //Get casting time
 		while (!is_dead) {
 			yield return new WaitForSeconds (0.1f);
+			while (BattleManager.main.pause)
+				yield return new WaitForSeconds (0.1f);
 			curr_time += 0.1f;
 			if (curr_time >= stats.atk_time) {
+				BattleManager.main.pause = true; // pause battle for attack
+				yield return new WaitForSeconds (1f);
 				attackPlayer (s,target);
+				yield return new WaitForSeconds (1f);
                 curr_spell++;
                 if (curr_spell >= spells.Length)//Reached end of spell list
                     curr_spell = 0;
                 s = spells[curr_spell]; //get next spell
                 stats.atk_time = dict.getCastingTime(s, stats.speed);//get new casting time
                 curr_time = 0;
+				BattleManager.main.pause = false; // unpause
 			}
 		}
 	}
@@ -113,7 +118,7 @@ public class Enemy : MonoBehaviour {
 	// cause enemy to swell in size for a short period of time (lazy attack rep)
 	IEnumerator swell() {
 		transform.localScale = new Vector3 (1.25f, 1.25f, 1.25f);
-		yield return new WaitForSeconds (0.25f);
+		yield return new WaitForSeconds (1f);
 		transform.localScale = new Vector3 (1f, 1f, 1f);
 	}
 }

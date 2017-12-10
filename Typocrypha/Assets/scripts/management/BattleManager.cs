@@ -5,17 +5,19 @@ using UnityEngine.UI;
 
 // manages battle sequences
 public class BattleManager : MonoBehaviour {
-	public StateManager state_manager; // manages global state/scenes
+	public static BattleManager main = null; // static instance accessible globally
 	public GameObject spellDict; // spell dictionary object
 	public GameObject enemy_prefab; // prefab for enemy object
 	public EnemyChargeBars charge_bars; // creates and amanges charge bars
 	public int target_ind; // index of currently targeted enemy
 	public Transform target_ret; // shows where target is
 	public float enemy_spacing; // space between enemies
+	public bool pause; // is battle paused?
 	Enemy[] enemy_arr; // array of Enemy components (size 3)
 
-	void Start() {
-
+	void Awake() {
+		if (main == null) main = this;
+		pause = false;
 	}
 
 	// start battle scene
@@ -52,7 +54,16 @@ public class BattleManager : MonoBehaviour {
 
 	// attack currently targeted enemy with spell
 	public void attackCurrent(string spell) {
-        //Send spell, Enemy state, and traget index to parser and caster 
-        spellDict.GetComponent<SpellDictionary>().parseAndCast(spell, enemy_arr, target_ind,Player.main);
+		StartCoroutine (pauseAttackCurrent (spell));
     }
+
+	// pause for player attack, play animations, unpause
+	IEnumerator pauseAttackCurrent(string spell) {
+		BattleManager.main.pause = true;
+		yield return new WaitForSeconds (1f);
+		//Send spell, Enemy state, and target index to parser and caster 
+		spellDict.GetComponent<SpellDictionary>().parseAndCast(spell, enemy_arr, target_ind,Player.main);
+		yield return new WaitForSeconds (1f);
+		BattleManager.main.pause = false;
+	}
 }

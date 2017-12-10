@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 // manages cutscenes
 public class CutsceneManager : MonoBehaviour {
-	public StateManager state_manager; // manages global state/scenes
+	public static CutsceneManager main = null; // static gloval ref
 	public Text display_text; // text where dialogue will be displayed
 	public Text name_text; // text where name will be displayed
 	public SpriteRenderer sprite_holder; // where speaking character sprite will go
@@ -13,6 +13,10 @@ public class CutsceneManager : MonoBehaviour {
 
 	int curr_line; // current line of dialogue
 	CutScene scene; // cutscene object
+
+	void Awake() {
+		if (main == null) main = this;
+	}
 
 	// start cutscene
 	public void startCutscene(CutScene i_scene) {
@@ -28,7 +32,7 @@ public class CutsceneManager : MonoBehaviour {
 		// go to next line if space is pressed
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			// if dialogue over, go to next scene
-			if (!nextLine ()) state_manager.nextScene ();
+			if (!nextLine ()) StateManager.main.nextScene ();
 		}
 	}
 

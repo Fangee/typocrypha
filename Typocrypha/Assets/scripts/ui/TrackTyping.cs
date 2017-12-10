@@ -7,10 +7,10 @@ using UnityEngine.UI;
 // tracks player's typing
 public class TrackTyping : MonoBehaviour {
 	public Text typed_text; // shows typed text
+	public Text entry_ok; // displays 'OK' or 'NO' if player can type or not
 	public Dictionary<char, Image> key_map; // map from characters to key images
 	public Transform keyboard; // keyboard transform (holds key images)
 	public GameObject key_prefab; // prefab for key image object
-	public BattleManager battle_manager; // manages battles (receives cast spells)
 
 	string buffer; // contains typed text
 	int count; // number of characters typed
@@ -29,10 +29,14 @@ public class TrackTyping : MonoBehaviour {
 	}
 
 	void Update () {
+		if (BattleManager.main.pause || BattleManager.main.enabled == false) {
+			entry_ok.text = "NO";
+			return;
+		} else entry_ok.text = "OK";
 		// check key presses
 		if (Input.GetKeyDown (KeyCode.Return)) {
 			Debug.Log ("Player casts " + buffer);
-			battle_manager.attackCurrent (buffer); // attack currently targeted enemy
+			BattleManager.main.attackCurrent (buffer); // attack currently targeted enemy
 			buffer = "";
 			count = 0;
 		} else if (Input.GetKey (KeyCode.Backspace)) {
