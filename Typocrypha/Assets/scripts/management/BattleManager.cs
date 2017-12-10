@@ -65,7 +65,8 @@ public class BattleManager : MonoBehaviour {
 		//Send spell, Enemy state, and target index to parser and caster 
 		spellDict.GetComponent<SpellDictionary>().parseAndCast(spell, enemy_arr, target_ind, Player.main);
 		yield return new WaitForSeconds (1f);
-		BattleEffects.main.toggleDim (enemy_arr[target_ind].enemy_sprite);
+        if(enemy_arr[target_ind] != null)
+		    BattleEffects.main.toggleDim (enemy_arr[target_ind].enemy_sprite);
 		BattleManager.main.pause = false;
 	}
 }

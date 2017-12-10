@@ -55,7 +55,7 @@ public class TrackTyping : MonoBehaviour {
 				StartCoroutine(colorKey(c));
 		}
 		// update display
-		typed_text.text = buffer;
+		typed_text.text = buffer.Replace(" ", "-").ToUpper();
 	}
 
 	// create visual keyboard keys

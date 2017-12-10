@@ -114,7 +114,8 @@ public class Enemy : MonoBehaviour {
 		if (curr_hp <= 0) { // check if killed
 			Debug.Log (stats.name + " has been slain!");
 			is_dead = true;
-			GameObject.Destroy (gameObject);
+            BattleEffects.main.toggleDim(enemy_sprite);
+            GameObject.Destroy (gameObject);
 		}
 	}
 

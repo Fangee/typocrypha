@@ -64,7 +64,6 @@ public class CooldownList : MonoBehaviour {
     private class CooldownBar
     {
         public BarMeter bar;
-        string name;
         Ref<float> curr_time;
         float finish_time;
 
@@ -76,14 +75,7 @@ public class CooldownList : MonoBehaviour {
             new_bar.transform.localScale = new Vector3(1, 1, 1);
             new_bar.transform.position = world_pos;
             bar = new_bar.GetComponent<BarMeter>();
-            this.name = name;
-			bar.setText(name);
-        }
-
-        // Use this for initialization
-        void Start()
-        {
-
+			bar.setText(name.ToUpper());
         }
 
         // Update is called once per frame
