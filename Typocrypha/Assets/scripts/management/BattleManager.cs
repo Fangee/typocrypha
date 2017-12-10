@@ -13,7 +13,7 @@ public class BattleManager : MonoBehaviour {
 	public Transform target_ret; // shows where target is
 	public float enemy_spacing; // space between enemies
 	public bool pause; // is battle paused?
-	Enemy[] enemy_arr; // array of Enemy components (size 3)
+	public Enemy[] enemy_arr; // array of Enemy components (size 3)
 
 	void Awake() {
 		if (main == null) main = this;
@@ -24,7 +24,7 @@ public class BattleManager : MonoBehaviour {
 	public void startBattle(BattleScene scene) {
 		Debug.Log ("Battle! (goes on infinitely)");
 		enemy_arr = new Enemy[3];
-		charge_bars.initChargeBars (enemy_arr);
+		charge_bars.initChargeBars ();
 		for (int i = 0; i < scene.enemy_stats.Length; i++) {
 			GameObject new_enemy = GameObject.Instantiate (enemy_prefab, transform);
 			new_enemy.transform.localScale = new Vector3 (1, 1, 1);
@@ -54,6 +54,10 @@ public class BattleManager : MonoBehaviour {
 
 	// attack currently targeted enemy with spell
 	public void attackCurrent(string spell) {
+		if (enemy_arr [target_ind].is_dead) {
+			Debug.Log ("target is alrady dead!");
+			return; // don't attack dead enemies
+		}
 		StartCoroutine (pauseAttackCurrent (spell));
     }
 
@@ -62,13 +66,11 @@ public class BattleManager : MonoBehaviour {
 		BattleManager.main.pause = true;
 		BattleEffects.main.setDim (true, enemy_arr[target_ind].enemy_sprite);
 		yield return new WaitForSeconds (1f);
-		//Send spell, Enemy state, and target index to parser and caster 
-		spellDict.GetComponent<SpellDictionary>().parseAndCast(spell, enemy_arr, target_ind, Player.main);
+		BattleEffects.main.spriteShake (enemy_arr[target_ind].gameObject.transform, 0.5f, 0.1f);
 		yield return new WaitForSeconds (1f);
-		if (enemy_arr [target_ind] != null)
-			BattleEffects.main.setDim (false, enemy_arr [target_ind].enemy_sprite);
-		else
-			BattleEffects.main.setDim (false, null);
+		BattleEffects.main.setDim (false, enemy_arr [target_ind].enemy_sprite);
+		//Send spell, Enemy state, and target index to parser and caster
+		spellDict.GetComponent<SpellDictionary>().parseAndCast(spell, enemy_arr, target_ind, Player.main);
 		BattleManager.main.pause = false;
 	}
 }

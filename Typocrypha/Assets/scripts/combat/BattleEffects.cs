@@ -24,19 +24,36 @@ public class BattleEffects : MonoBehaviour {
 		}
 	}
 
-	// shake the screen for sec seconds
-	public void screenShake(float sec) {
-		StartCoroutine (screenShakeCR(sec));
+	// shake the screen for sec seconds and amt intensity
+	public void screenShake(float sec, float amt) {
+		StartCoroutine (screenShakeCR(sec, amt));
 	}
 
 	// coroutine that shakes screen over time
-	IEnumerator screenShakeCR(float sec) {
+	IEnumerator screenShakeCR(float sec, float amt) {
 		float curr_time = 0;
 		while (curr_time < sec) {
-			cam_pos.position = Random.insideUnitCircle * 0.1f;
+			cam_pos.position = Random.insideUnitCircle * amt;
 			yield return new WaitForSeconds(0.1f);
 			curr_time += 0.1f;
 		}
 		cam_pos.position = new Vector3 (0, 0, 0);
+	}
+
+	// shake a sprite for sec seconds and amt intensity
+	public void spriteShake(Transform pos, float sec, float amt) {
+		StartCoroutine(spriteShakeCR (pos, sec, amt));
+	}
+
+	// coroutine that shakes sprite over time
+	IEnumerator spriteShakeCR(Transform pos, float sec, float amt) {
+		Vector3 old_pos = pos.position;
+		float curr_time = 0;
+		while (curr_time < sec) {
+			pos.position = (Vector3)old_pos + (Vector3)(Random.insideUnitCircle * amt);
+			yield return new WaitForSeconds (0.1f);
+			curr_time += 0.1f;
+		}
+		pos.position = old_pos;
 	}
 }

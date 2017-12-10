@@ -74,6 +74,11 @@ public class Enemy : MonoBehaviour {
 		return curr_time / atk_time;
 	}
 
+	// returns name of current spell
+	public SpellData getCurrSpell() {
+		return stats.spells[curr_spell];
+	}
+
 	// keep track of time, and attack whenever curr_time = atk_time
 	IEnumerator timer() {
         SpellData s = stats.spells[curr_spell];        //Initialize with current spell
@@ -105,7 +110,7 @@ public class Enemy : MonoBehaviour {
 	void attackPlayer(SpellData s, Player target) {
 		Debug.Log (stats.name + " casts " + s.ToString());
 		StartCoroutine (swell ());
-		BattleEffects.main.screenShake (0.5f);
+		BattleEffects.main.screenShake (0.5f, 0.1f);
         dict.GetComponent<SpellDictionary>().enemyCast(this, s, field, position, target);
 	}
 
@@ -132,7 +137,7 @@ public class Enemy : MonoBehaviour {
 			Debug.Log (stats.name + " has been slain!");
 			is_dead = true;
             BattleEffects.main.setDim(false, enemy_sprite);
-            GameObject.Destroy (gameObject);
+            //GameObject.Destroy (gameObject);
 		}
 	}
 

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// enum for how a cast went (successful cast, botched, fizzled, etc)
+public enum CastStatus { SUCCESS, BOTCH, FIZZLE, ONCOOLDOWN };
+
 //Stores all the spell info and contains methods to parse and cast spells from player input
 //Currently does not actually support player or enemy casting, but has parsing
 public class SpellDictionary : MonoBehaviour
@@ -108,8 +111,9 @@ public class SpellDictionary : MonoBehaviour
             i++;
         }
     }
-    //parses input spell, casts if valid (true), botches if misspelled but structure is valid (true), fizzles if invalid structure (false)
-    public bool parseAndCast(string spell, Enemy[] targets, int selected, Player caster)
+
+    //parses input spell, casts if valid, botches if misspelled but structure is valid, fizzles if invalid structure
+	public CastStatus parseAndCast(string spell, Enemy[] targets, int selected, Player caster)
     {
         char[] delim = { ' ' };
         string[] lines = spell.Split(delim);
@@ -118,9 +122,11 @@ public class SpellDictionary : MonoBehaviour
 			string first = lines [0].Trim ();
 			if (spells.ContainsKey (first)) {
 				caster.Last_cast = spell;
-                castUnmodified(first, targets, selected, caster);
-			} else 
+				castUnmodified (first, targets, selected, caster);
+			} else {
 				botch ("b", null, null, caster);
+				return CastStatus.BOTCH;
+			}
 		}
         else if (lines.Length == 2)
         {
@@ -130,14 +136,18 @@ public class SpellDictionary : MonoBehaviour
 				if (styles.ContainsKey (second)) {
 					caster.Last_cast = spell;
 					cast (first, null, second, targets, selected, caster);
-				} else
+				} else {
 					botch (first, null, "b", caster);
+					return CastStatus.BOTCH;
+				}
 			} else if (spells.ContainsKey (second)) {
 				if (elements.ContainsKey (first)) {
 					caster.Last_cast = spell;
 					cast (second, first, null, targets, selected, caster);
-				} else
+				} else {
 					botch ("b", second, null, caster);
+					return CastStatus.BOTCH;
+				}
 			}
 		}
         else if (lines.Length == 3)
@@ -150,28 +160,37 @@ public class SpellDictionary : MonoBehaviour
 					if (styles.ContainsKey (style)) {
 						caster.Last_cast = spell;
 						cast (root, elem, style, targets, selected, caster);
-					} else
+					} else {
 						botch (root, elem, "b", caster);
+						return CastStatus.BOTCH;
+					}
 				} else if (styles.ContainsKey (style)) {
 					botch (root, "b", style, caster);
+					return CastStatus.BOTCH;
 				} else {
 					botch (root, "b", "b", caster);
+					return CastStatus.BOTCH;
 				}
 			} else if (elements.ContainsKey (elem)) {
-				if (styles.ContainsKey (style))
+				if (styles.ContainsKey (style)) {
 					botch ("b", elem, style, caster);
-				else
+					return CastStatus.BOTCH;
+				} else {
 					botch ("b", elem, "b", caster);
-			} else if (styles.ContainsKey (style))
+					return CastStatus.BOTCH;
+				}
+			} else if (styles.ContainsKey (style)) {
 				botch ("b", "b", style, caster);
-			else
+				return CastStatus.BOTCH;
+			} else {
 				botch ("b", "b", "b", caster);
-
+				return CastStatus.BOTCH;
+			}
 		} else {
-			caster.Last_cast = "ERROR";
-			return false;
+			caster.Last_cast = "FIZZLE";
+			return CastStatus.FIZZLE;
 		}
-        return true;
+		return CastStatus.SUCCESS;
     }
     //Casts enemy spell
     public void enemyCast(Enemy caster, SpellData spell, Enemy[] field, int position, Player target)
