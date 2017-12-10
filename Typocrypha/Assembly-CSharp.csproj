@@ -56,6 +56,7 @@
      <Compile Include="Assets\scripts\combat\Player.cs" />
      <Compile Include="Assets\scripts\management\BattleManager.cs" />
      <Compile Include="Assets\scripts\management\CutsceneManager.cs" />
+     <Compile Include="Assets\scripts\management\EnemyDatabase.cs" />
      <Compile Include="Assets\scripts\management\GameScene.cs" />
      <Compile Include="Assets\scripts\management\LoadGameFlow.cs" />
      <Compile Include="Assets\scripts\management\StateManager.cs" />
@@ -72,6 +73,7 @@
      <Compile Include="Assets\scripts\Utility\UtilityClasses.cs" />
      <None Include="Assets\Resources\gameflow.txt" />
      <None Include="Assets\Resources\spellDictionary.txt" />
+     <None Include="Assets\Resources\enemyDatabase.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -60,13 +60,15 @@ public class BattleManager : MonoBehaviour {
 	// pause for player attack, play animations, unpause
 	IEnumerator pauseAttackCurrent(string spell) {
 		BattleManager.main.pause = true;
-		BattleEffects.main.toggleDim (enemy_arr[target_ind].enemy_sprite);
+		BattleEffects.main.setDim (true, enemy_arr[target_ind].enemy_sprite);
 		yield return new WaitForSeconds (1f);
 		//Send spell, Enemy state, and target index to parser and caster 
 		spellDict.GetComponent<SpellDictionary>().parseAndCast(spell, enemy_arr, target_ind, Player.main);
 		yield return new WaitForSeconds (1f);
-        if(enemy_arr[target_ind] != null)
-		    BattleEffects.main.toggleDim (enemy_arr[target_ind].enemy_sprite);
+		if (enemy_arr [target_ind] != null)
+			BattleEffects.main.setDim (false, enemy_arr [target_ind].enemy_sprite);
+		else
+			BattleEffects.main.setDim (false, null);
 		BattleManager.main.pause = false;
 	}
 }

@@ -85,17 +85,17 @@ public class Enemy : MonoBehaviour {
 			curr_time += 0.1f;
 			if (curr_time >= atk_time) {
 				BattleManager.main.pause = true; // pause battle for attack
-				BattleEffects.main.toggleDim(enemy_sprite);
+				BattleEffects.main.setDim(true, enemy_sprite);
 				yield return new WaitForSeconds (1f);
 				attackPlayer (s,target);
 				yield return new WaitForSeconds (1f);
-				BattleEffects.main.toggleDim(enemy_sprite);
                 curr_spell++;
                 if (curr_spell >= stats.spells.Length)//Reached end of spell list
                     curr_spell = 0;
                 s = stats.spells[curr_spell]; //get next spell
                 atk_time = dict.getCastingTime(s, stats.speed);//get new casting time
                 curr_time = 0;
+				BattleEffects.main.setDim(false, enemy_sprite);
 				BattleManager.main.pause = false; // unpause
 			}
 		}
@@ -131,7 +131,7 @@ public class Enemy : MonoBehaviour {
 		if (curr_hp <= 0) { // check if killed
 			Debug.Log (stats.name + " has been slain!");
 			is_dead = true;
-            BattleEffects.main.toggleDim(enemy_sprite);
+            BattleEffects.main.setDim(false, enemy_sprite);
             GameObject.Destroy (gameObject);
 		}
 	}

@@ -8,26 +8,19 @@ public class BattleEffects : MonoBehaviour {
 	public Transform cam_pos; // main camera
 	public SpriteRenderer dimmer; // dimmer image
 	public Canvas canvas; // canvas component
-	bool dimmed; // is scene currently dimmed?
 
 	void Awake() {
 		if (main == null) main = this;
-		dimmed = false;
 	}
 
-	// dim screen (everything except target)
-	// if target is null, dim everything except canvas
-	public void toggleDim(SpriteRenderer target) {
-		if (!dimmed) {
+	// turn dim on/off
+	public void setDim(bool dim, SpriteRenderer target) {
+		if (dim) {
 			if (target != null) target.sortingOrder = 10;
-			else                canvas.sortingOrder = 10;
 			dimmer.color = new Color (0, 0, 0, 0.5f);
-			dimmed = true;
 		} else {
 			if (target != null) target.sortingOrder = 0;
-			else                canvas.sortingOrder = 0;
 			dimmer.color = new Color (0, 0, 0, 0);
-			dimmed = false;
 		}
 	}
 
