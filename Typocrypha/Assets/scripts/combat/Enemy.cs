@@ -2,22 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// simple container for enemy stats
-public struct EnemyStats {
-	public string name;    // name of enemy
-    public int max_hp;     // max health
-	public float atk_time; // time it takes to attack
+// simple container for enemy stats (Not a struct anymore cuz structs pass by value in c#)
+public class EnemyStats {
+    public EnemyStats(string name, int hp, int shield, int atk, int def, float speed, int acc, int evade, float[] vsElem = null, SpellData[] sp = null)
+    {
+        this.name = name;
+        max_hp = hp;
+        max_shield = shield;
+        attack = atk;
+        defense = def;
+        this.speed = speed;
+        accuracy = acc;
+        evasion = evade;
+        vsElement = vsElem;
+        spells = sp;
+    }
+	public readonly string name;    // name of enemy
+    public readonly int max_hp;     // max health
                            // also will eventually have other stats
     //Makes casting easier (irrelevant right now)
-    public int max_shield;
-    public int shield;
+    public readonly int max_shield;
     //Spell modifiers (to be used when spellcasting is hooked up)
-    public int attack;     //numerical damage boost
-    public int defense;    //numerical damage reduction
-    public float speed;    //percentage of casting time reduction
-    public int accuracy;   //numerical hitchance boost
-    public int evasion;    //numerical dodgechance boost
-    //ADD elemental weaknesses/resistances
+    public readonly int attack;     //numerical damage boost
+    public readonly int defense;    //numerical damage reduction
+    public readonly float speed;    //percentage of casting time reduction
+    public readonly int accuracy;   //numerical hitchance boost
+    public readonly int evasion;    //numerical dodgechance boost
+    public readonly float[] vsElement; //elemental weaknesses/resistances
+    public readonly SpellData[] spells; // castable spells
 }
 
 // defines enemy behaviour
@@ -26,11 +38,13 @@ public class Enemy : MonoBehaviour {
     public Enemy[] field; //State of battle scene (for ally-target casting)
     public int position; //index to field (current position)
 	public SpriteRenderer enemy_sprite; // this enemy's sprite
-    EnemyStats stats; // stats of enemy
-    SpellData[] spells; // castable spells
+    EnemyStats stats; // stats of enemy DO NOT MUTATE
+
     int curr_spell = 0;
 	int curr_hp; // current amount of health
-	float curr_time; // current time (from 0 to atk_time)
+    int curr_shield; //current amount of shield
+    float curr_time; // current time (from 0 to atk_time)
+    float atk_time; // time it takes to attack
     private Player target = Player.main; //Current target;
     private static SpellDictionary dict; //Dictionary to refer to (set in setStats)
 
@@ -41,15 +55,10 @@ public class Enemy : MonoBehaviour {
 	public void setStats(EnemyStats i_stats) {
 		stats = i_stats;
 		curr_hp = stats.max_hp;
+        curr_shield = stats.max_shield;
 		curr_time = 0;
-        SpellData[] sp = { new SpellData("sword") };
-        //DEFAULT until other enemy stats are added to scenes or can be loaded somehow (Maybe lets build a database in a seperate excel?)
-        setSpells(sp);
         if(dict == null)
             dict = GameObject.FindGameObjectWithTag("SpellDictionary").GetComponent<SpellDictionary>();
-        stats.speed = (1.1F) + Random.Range(0,0.75F);
-        stats.attack = 1;
-        stats.defense = 1;
 		enemy_sprite = GetComponent<SpriteRenderer> ();
         //Start Attacking
         StartCoroutine (timer ()); 
@@ -60,26 +69,21 @@ public class Enemy : MonoBehaviour {
         return stats;
     }
 
-    public void setSpells(SpellData[] spells)
-    {
-        this.spells = spells;
-    }
-
 	// returns curr_time/atk_time
 	public float getProgress() {
-		return curr_time / stats.atk_time;
+		return curr_time / atk_time;
 	}
 
 	// keep track of time, and attack whenever curr_time = atk_time
 	IEnumerator timer() {
-        SpellData s = spells[curr_spell];        //Initialize with current spell
-        stats.atk_time = dict.getCastingTime(s, stats.speed);   //Get casting time
+        SpellData s = stats.spells[curr_spell];        //Initialize with current spell
+        atk_time = dict.getCastingTime(s, stats.speed);   //Get casting time
 		while (!is_dead) {
 			yield return new WaitForSeconds (0.1f);
 			while (BattleManager.main.pause)
 				yield return new WaitForSeconds (0.1f);
 			curr_time += 0.1f;
-			if (curr_time >= stats.atk_time) {
+			if (curr_time >= atk_time) {
 				BattleManager.main.pause = true; // pause battle for attack
 				BattleEffects.main.toggleDim(enemy_sprite);
 				yield return new WaitForSeconds (1f);
@@ -87,10 +91,10 @@ public class Enemy : MonoBehaviour {
 				yield return new WaitForSeconds (1f);
 				BattleEffects.main.toggleDim(enemy_sprite);
                 curr_spell++;
-                if (curr_spell >= spells.Length)//Reached end of spell list
+                if (curr_spell >= stats.spells.Length)//Reached end of spell list
                     curr_spell = 0;
-                s = spells[curr_spell]; //get next spell
-                stats.atk_time = dict.getCastingTime(s, stats.speed);//get new casting time
+                s = stats.spells[curr_spell]; //get next spell
+                atk_time = dict.getCastingTime(s, stats.speed);//get new casting time
                 curr_time = 0;
 				BattleManager.main.pause = false; // unpause
 			}
@@ -106,9 +110,22 @@ public class Enemy : MonoBehaviour {
 	}
 
 	// be attacked by the player
-	public void damage(int d) {
-		Debug.Log (stats.name + " was hit for " + d);
-		curr_hp -= d;
+	public void damage(int d, int element) {
+        //Apply elemental weakness/resistances
+        int dMod = Mathf.FloorToInt(stats.vsElement[element] * d);
+		Debug.Log (stats.name + " was hit for " + dMod + " of " + Elements.toString(element) + " damage");
+        if (curr_shield > 0)
+        {
+            if (curr_shield - dMod < 0)
+            {
+                curr_shield = 0;
+                curr_hp -= (dMod - curr_shield);
+            }
+            else
+                curr_shield -= dMod;
+        }
+        else
+            curr_hp -= dMod;
 		// make enemy sprite fade as damaged (lazy health rep)
 		enemy_sprite.color = new Color(1, 1, 1, (float)curr_hp/stats.max_hp);
 		if (curr_hp <= 0) { // check if killed

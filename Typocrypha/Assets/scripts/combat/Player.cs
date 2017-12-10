@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-//Struct containing Player stat data
+//Class containing Player stat data (structs are pass by value)
 //Can be used to set player stats or construct a new player with given stats
 //Can also be used as a stat buff/debuff modifier
-public struct PlayerStats
+public class PlayerStats
 {
     public int max_hp;
     public int max_shield;
@@ -14,6 +14,7 @@ public struct PlayerStats
     public int speed;
     public int accuracy;
     public int evasion;
+    public float[] vsElem;
 }
 
 //Contains Static referrence to global Player (Player.main)
@@ -27,6 +28,7 @@ public class Player
     //Construct player with default stats
     public Player()
     {
+        stats = new PlayerStats();
         stats.max_hp = 100;
         stats.max_shield = 100;
         stats.attack = 0;
@@ -34,6 +36,11 @@ public class Player
         stats.speed = 1;
         stats.accuracy = 0;
         stats.evasion = 0;
+        stats.vsElem = new float[Elements.count];
+        for(int i = 0; i < Elements.count; i++)
+        {
+            stats.vsElem[i] = 1.0F;
+        }
     }
     //Construct player with specified stats
     public Player(PlayerStats i_stats)
@@ -145,21 +152,22 @@ public class Player
         curr_shield = Max_shield;
     }
     //Damage player (hits shield first, if shield remains)
-    public bool damage(int d, string type)
+    public bool damage(int d, int element)
     {
+        int dMod = Mathf.FloorToInt(stats.vsElem[element] * d);
         if(curr_shield > 0)
         {
-            if (curr_shield - d < 0)
+            if (curr_shield - dMod < 0)
             {
                 curr_shield = 0;
-                curr_hp -= (d - curr_shield);
+                curr_hp -= (dMod - curr_shield);
             }
             else
-                curr_shield -= d;
+                curr_shield -= dMod;
         }
         else
-            curr_hp -= d;
-        Debug.Log("Player" + " was hit for " + d + " of " + type + " damage");
+            curr_hp -= dMod;
+        Debug.Log("Player" + " was hit for " + dMod + " of " + Elements.toString(element) + " damage");
         if (Curr_hp <= 0)
         { // check if killed
             Debug.Log("Player" + " has been slain!");

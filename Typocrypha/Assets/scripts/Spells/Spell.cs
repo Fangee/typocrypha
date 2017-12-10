@@ -57,7 +57,7 @@ public abstract class Spell
     public float cooldown;              //Spell's base cooldown
     public int hitPercentage;           //Spell's base hit chance (1 = 1%)
     public int elementEffectMod;        //Spell's base elemental effect chance (1 = 1%)
-    public string element = "null";     //Spell's elemental damage type
+    public int element = Elements.@null;     //Spell's elemental damage type
     public string type = "null";        //Spell's effect type (attack, shield, heal, etc.)
     //Targets: {R,M,L,Player,CursorDependent?}
     public bool[] targets = { false, false, false, false, false };
@@ -94,7 +94,7 @@ public class AttackSpell : Spell
     public override void cast(Enemy[] targets, int selected, Player caster)
     {
         int damage = power + caster.Attack - targets[selected].getStats().defense;
-        targets[selected].damage(damage);
+        targets[selected].damage(damage, element);
         return;
     }
 
@@ -136,7 +136,7 @@ public class ShieldSpell : Spell
 //Contains the data associated with an Element keyword
 public class ElementMod
 {
-    public string element;      //Elemental modifier to apply
+    public int element;      //Elemental modifier to apply
     public float cooldownMod;
 
 }

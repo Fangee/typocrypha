@@ -74,7 +74,7 @@ public class SpellDictionary : MonoBehaviour
                 break;
             }
             ElementMod e = new ElementMod();
-            e.element = cols[1].Trim();
+            e.element = Elements.fromString(cols[1].Trim());
             float.TryParse(cols[2].Trim(), out e.cooldownMod);
             elements.Add(key, e);
             i++;
@@ -304,7 +304,54 @@ public class SpellData
             result = root;
         if (style != null)
             result += ("-" + style);
-        return result;
+        return result.ToUpper();
     }
 }
+//Class containing element constants and associated methods.
+//Essentially a glorified int enum 
+public static class Elements
+{
+    public const int count = 4;
+
+    public const int @null = 0;
+    public const int fire = 1;
+    public const int ice = 2;
+    public const int lightning = 3;
+
+    //Returns integer form of element for equivalent elementName string
+    public static int fromString(string elementName)
+    {
+        switch (elementName)
+        {
+            case "null":
+                return @null;
+            case "fire":
+                return fire;
+            case "ice":
+                return ice;
+            case "lightning":
+                return lightning;
+            default:
+                return @null;
+        }
+    }
+
+    public static string toString(int elementNum)
+    {
+        switch (elementNum)
+        {
+            case 0:
+                return "null";
+            case 1:
+                return "fire";
+            case 2:
+                return "ice";
+            case 3:
+                return "lightning";
+            default:
+                return "error";
+        }
+    }
+}
+
 

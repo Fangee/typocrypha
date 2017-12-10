@@ -7,6 +7,7 @@ public class LoadGameFlow : MonoBehaviour {
 	public string file_name; // name of gameflow file
 	public bool is_loaded; // is the gameflow done loading?
 	public GameScene[] scene_arr; // array of gamescenes
+    public EnemyDatabase enemy_data;//Enemy database
 
 	TextAsset text_file; // original text asset
 	char[] line_delim = { '\n' };
@@ -14,7 +15,9 @@ public class LoadGameFlow : MonoBehaviour {
 
 	void Start () {
 		is_loaded = false;
-		parseFile (); // load gameflow file
+        EnemyDatabase.main.build();//Build enemy database (so data is ready for cutscene building
+        enemy_data = EnemyDatabase.main;
+        parseFile (); // load gameflow file
 		is_loaded = true;
 	}
 
@@ -84,9 +87,7 @@ public class LoadGameFlow : MonoBehaviour {
 		for (; i < lines.Length; i++) {
 			string[] cols = lines [i].Split (col_delim);
 			if (cols [0].CompareTo ("ENEMY") == 0) { // read in enemy
-				EnemyStats new_stats = new EnemyStats();
-				new_stats.name = cols [1];
-				int.TryParse (cols [2], out new_stats.max_hp);
+				EnemyStats new_stats = enemy_data.getData(cols[1]);
 				enemies.Add (new_stats);
 			} else { // otherwise, scene is done
 				break;
