@@ -62,15 +62,25 @@ public class BattleManager : MonoBehaviour {
     }
 
 	// pause for player attack, play animations, unpause
-	IEnumerator pauseAttackCurrent(string spell) {
+	IEnumerator pauseAttackCurrent(string spell){
 		BattleManager.main.pause = true;
 		BattleEffects.main.setDim (true, enemy_arr[target_ind].enemy_sprite);
 		yield return new WaitForSeconds (1f);
-		BattleEffects.main.spriteShake (enemy_arr[target_ind].gameObject.transform, 0.5f, 0.1f);
-		yield return new WaitForSeconds (1f);
+        //	BattleEffects.main.spriteShake (enemy_arr[target_ind].gameObject.transform, 0.5f, 0.1f);
+        //Send spell, Enemy state, and target index to parser and caster
+        spellDict.GetComponent<SpellDictionary>().parseAndCast(spell.ToLower(), enemy_arr, target_ind, Player.main);
+        yield return new WaitForSeconds (1f);
 		BattleEffects.main.setDim (false, enemy_arr [target_ind].enemy_sprite);
-		//Send spell, Enemy state, and target index to parser and caster
-		spellDict.GetComponent<SpellDictionary>().parseAndCast(spell, enemy_arr, target_ind, Player.main);
+        updateEnemies();
 		BattleManager.main.pause = false;
 	}
+    //Updates death and opacity of enemies after pause in puaseAttackCurrent
+    private void updateEnemies()
+    {
+        for(int i = 0; i < enemy_arr.Length; i++)
+        {
+            if (!enemy_arr[i].is_dead)
+                enemy_arr[i].updateCondition();
+        }
+    }
 }

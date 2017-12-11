@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // simple container for enemy stats (Not a struct anymore cuz structs pass by value in c#)
@@ -48,6 +47,14 @@ public class Enemy : MonoBehaviour {
     private Player target = Player.main; //Current target;
     private static SpellDictionary dict; //Dictionary to refer to (set in setStats)
 
+    public int Curr_hp
+    {
+        get
+        {
+            return curr_hp;
+        }
+    }
+
     void Start() {
 		is_dead = false;
     }
@@ -68,6 +75,7 @@ public class Enemy : MonoBehaviour {
     {
         return stats;
     }
+
 
 	// returns curr_time/atk_time
 	public float getProgress() {
@@ -119,6 +127,7 @@ public class Enemy : MonoBehaviour {
         //Apply elemental weakness/resistances
         int dMod = Mathf.FloorToInt(stats.vsElement[element] * d);
 		Debug.Log (stats.name + " was hit for " + dMod + " of " + Elements.toString(element) + " damage");
+        //Apply shield
         if (curr_shield > 0)
         {
             if (curr_shield - dMod < 0)
@@ -131,15 +140,24 @@ public class Enemy : MonoBehaviour {
         }
         else
             curr_hp -= dMod;
-		// make enemy sprite fade as damaged (lazy health rep)
-		enemy_sprite.color = new Color(1, 1, 1, (float)curr_hp/stats.max_hp);
-		if (curr_hp <= 0) { // check if killed
-			Debug.Log (stats.name + " has been slain!");
-			is_dead = true;
-            BattleEffects.main.setDim(false, enemy_sprite);
-            //GameObject.Destroy (gameObject);
-		}
-	}
+        if(dMod > 0)
+            BattleEffects.main.spriteShake(gameObject.transform, 0.5f, 0.1f * Mathf.Log( dMod, 7F));
+        //opacity and death are now updated in updateCondition()
+
+    }
+    
+    //Updates opacity and death(after pause in battlemanager)
+    public void updateCondition()
+    {
+        // make enemy sprite fade as damaged (lazy health rep)
+        enemy_sprite.color = new Color(1, 1, 1, (float)curr_hp / stats.max_hp);
+        if (curr_hp <= 0)
+        { // check if killed
+            Debug.Log(stats.name + " has been slain!");
+            is_dead = true;
+        }
+
+    }
 
 	// cause enemy to swell in size for a short period of time (lazy attack rep)
 	IEnumerator swell() {
