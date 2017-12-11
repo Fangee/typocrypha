@@ -10,7 +10,16 @@ public class EnemyChargeBars : MonoBehaviour {
 	Vector3 x_offset; // offset to account for width of bar
 	BarMeter[] charge_bars; // charge bars for enemies
 
-	void Awake() {
+    //Get-only
+    public BarMeter[] Charge_bars
+    {
+        get
+        {
+            return charge_bars;
+        }
+    }
+
+    void Awake() {
 		initialized = false;
 		x_offset = new Vector3 (-0.5f * bar_width, 0, 0);
 		charge_bars = new BarMeter[3];

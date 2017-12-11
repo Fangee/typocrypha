@@ -33,6 +33,7 @@ public class BattleManager : MonoBehaviour {
 			enemy_arr [i].setStats (scene.enemy_stats [i]);
             enemy_arr [i].field = enemy_arr; //Give enemey access to field
             enemy_arr [i].position = i;      //Log enemy position in field
+            enemy_arr[i].bars = charge_bars; //Give enemy access to charge_bars
 			Vector3 bar_pos = new_enemy.transform.position;
 			bar_pos.Set (bar_pos.x, bar_pos.y + 1, bar_pos.z);
 			charge_bars.makeChargeMeter(i, bar_pos);

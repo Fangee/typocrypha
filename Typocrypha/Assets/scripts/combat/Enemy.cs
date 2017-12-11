@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 // simple container for enemy stats (Not a struct anymore cuz structs pass by value in c#)
 public class EnemyStats {
@@ -37,16 +38,29 @@ public class EnemyStats {
 
 // defines enemy behaviour
 public class Enemy : MonoBehaviour {
+
+    //Const fields//
+
+    private const float stagger_mult_constant = 1F;//Amount to multiply max_stagger by when calculating stagger time
+    private const float stagger_add_constant = 5F;//Amount to add when calculating stagger time
+
+    //Public fields//
+
     public bool is_dead; // is enemy dead?
+    public bool is_stunned; // is the enemy stunned?
     public Enemy[] field; //State of battle scene (for ally-target casting)
     public int position; //index to field (current position)
+    public EnemyChargeBars bars;
 	public SpriteRenderer enemy_sprite; // this enemy's sprite
-    EnemyStats stats; // stats of enemy DO NOT MUTATE
 
+    //Private fields
+
+    EnemyStats stats; // stats of enemy DO NOT MUTATE
     int curr_spell = 0;
 	int curr_hp; // current amount of health
     int curr_shield; //current amount of shield
-    int curr_stagger; //current amount of stagger
+    int curr_stagger = 0; //current amount of stagger
+    float stagger_time; //The time an enemy's stun will last
     float curr_time; // current time (from 0 to atk_time)
     float atk_time; // time it takes to attack
     private Player target = Player.main; //Current target;
@@ -60,7 +74,7 @@ public class Enemy : MonoBehaviour {
 		stats = i_stats;
 		curr_hp = stats.max_hp;
         curr_shield = stats.max_shield;
-        curr_stagger = stats.max_stagger;
+        stagger_time = (stats.max_stagger * stagger_mult_constant) + stagger_add_constant;
 		curr_time = 0;
         if(dict == null)
             dict = GameObject.FindGameObjectWithTag("SpellDictionary").GetComponent<SpellDictionary>();
@@ -88,12 +102,30 @@ public class Enemy : MonoBehaviour {
 
 	// keep track of time, and attack whenever curr_time = atk_time
 	IEnumerator timer() {
+        float curr_stagger_time = 0F;
         SpellData s = stats.spells[curr_spell];        //Initialize with current spell
         atk_time = dict.getCastingTime(s, stats.speed);   //Get casting time
 		while (!is_dead) {
 			yield return new WaitForSeconds (0.1f);
 			while (BattleManager.main.pause)
 				yield return new WaitForSeconds (0.1f);
+            while(is_stunned)//Stop attack loop from continuing while the enemy is stunned
+            {
+                if (curr_stagger_time >= stagger_time)//End stun if time up
+                {
+                    unStun();
+                    curr_stagger_time = 0F;
+                }
+                else//Wait longer
+                {
+                    yield return new WaitForSeconds(0.1f);
+                    if (!BattleManager.main.pause)
+                    {
+                        curr_stagger_time += 0.1F;
+                        BattleEffects.main.spriteShake(gameObject.transform, 0.05f, 0.05f);
+                    }
+                }
+            }
 			curr_time += 0.1f;
 			if (curr_time >= atk_time) {
 				BattleManager.main.pause = true; // pause battle for attack
@@ -123,28 +155,58 @@ public class Enemy : MonoBehaviour {
 
 	// be attacked by the player
 	public void damage(int d, int element) {
+        int staggerDamage = 0;
         //Apply elemental weakness/resistances
-        int dMod = Mathf.FloorToInt(stats.vsElement[element] * d);
+        float dMod = stats.vsElement[element] * d;
+        //Calculate stagger damage (UNFINISHED add crit, mods, etc)
+        if (stats.vsElement[element] > 1)//If enemy is weak
+            staggerDamage++;
+        //Apply stun damage mod
+        if (is_stunned)
+            dMod *= (1.25F + (0.25F * staggerDamage));
 		Debug.Log (stats.name + " was hit for " + dMod + " of " + Elements.toString(element) + " damage");
         //Apply shield
         if (curr_shield > 0)
         {
-            if (curr_shield - dMod < 0)
+            if (curr_shield - dMod < 0)//Shield breaks
             {
                 curr_shield = 0;
-                curr_hp -= (dMod - curr_shield);
+                curr_hp -= Mathf.FloorToInt(dMod - curr_shield);
+                if (staggerDamage >= 1)
+                    curr_stagger++;
             }
             else
-                curr_shield -= dMod;
+                curr_shield -= Mathf.FloorToInt(dMod);
         }
         else
-            curr_hp -= dMod;
+        {
+            curr_hp -= Mathf.FloorToInt(dMod);
+            if (staggerDamage >= 1)
+                curr_stagger++;
+        }
+        //Apply stun if applicable
+        if (curr_stagger >= stats.max_stagger)
+            stun();
+        //Apply shake if hit
         if(dMod > 0)
             BattleEffects.main.spriteShake(gameObject.transform, 0.5f, 0.1f * Mathf.Log( dMod, 7F));
         //opacity and death are now updated in updateCondition()
 
     }
     
+    private void stun()
+    {
+        bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 0.5F, 0);
+        is_stunned = true;
+    }
+
+    private void unStun()
+    {
+        bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0.9F, 0);
+        is_stunned = false;
+        curr_stagger = 0;
+    }
+
     //Updates opacity and death(after pause in battlemanager)
     public void updateCondition()
     {
