@@ -3,11 +3,14 @@ using UnityEngine;
 
 // simple container for enemy stats (Not a struct anymore cuz structs pass by value in c#)
 public class EnemyStats {
-    public EnemyStats(string name, int hp, int shield, int atk, int def, float speed, int acc, int evade, float[] vsElem = null, SpellData[] sp = null)
+    //Sorry for the massive constructor but all the vals are readonly so...
+    public EnemyStats(string name, string sprite, int hp, int shield, int stag, int atk, int def, float speed, int acc, int evade, float[] vsElem = null, SpellData[] sp = null)
     {
         this.name = name;
+        sprite_path = sprite;
         max_hp = hp;
         max_shield = shield;
+        max_stagger = stag;
         attack = atk;
         defense = def;
         this.speed = speed;
@@ -17,8 +20,9 @@ public class EnemyStats {
         spells = sp;
     }
 	public readonly string name;    // name of enemy
+    public readonly string sprite_path; //path of sprite/resource to load at creation
     public readonly int max_hp;     // max health
-                           // also will eventually have other stats
+    public readonly int max_stagger; //max stagger
     //Makes casting easier (irrelevant right now)
     public readonly int max_shield;
     //Spell modifiers (to be used when spellcasting is hooked up)
@@ -42,18 +46,11 @@ public class Enemy : MonoBehaviour {
     int curr_spell = 0;
 	int curr_hp; // current amount of health
     int curr_shield; //current amount of shield
+    int curr_stagger; //current amount of stagger
     float curr_time; // current time (from 0 to atk_time)
     float atk_time; // time it takes to attack
     private Player target = Player.main; //Current target;
     private static SpellDictionary dict; //Dictionary to refer to (set in setStats)
-
-    public int Curr_hp
-    {
-        get
-        {
-            return curr_hp;
-        }
-    }
 
     void Start() {
 		is_dead = false;
@@ -63,10 +60,12 @@ public class Enemy : MonoBehaviour {
 		stats = i_stats;
 		curr_hp = stats.max_hp;
         curr_shield = stats.max_shield;
+        curr_stagger = stats.max_stagger;
 		curr_time = 0;
         if(dict == null)
             dict = GameObject.FindGameObjectWithTag("SpellDictionary").GetComponent<SpellDictionary>();
 		enemy_sprite = GetComponent<SpriteRenderer> ();
+        enemy_sprite.sprite = Resources.Load<Sprite>(stats.sprite_path);
         //Start Attacking
         StartCoroutine (timer ()); 
 	}
