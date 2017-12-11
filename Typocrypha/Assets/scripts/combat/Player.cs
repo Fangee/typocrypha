@@ -14,11 +14,11 @@ public class PlayerStats
     public int speed;
     public int accuracy;
     public int evasion;
-    public float[] vsElem;
+    public float[] vsElement;
 }
 
 //Contains Static referrence to global Player (Player.main)
-public class Player
+public class Player : ICaster
 {
     //Main player character (Static Global Basically)
     public static Player main = new Player();
@@ -36,10 +36,10 @@ public class Player
         stats.speed = 1;
         stats.accuracy = 0;
         stats.evasion = 0;
-        stats.vsElem = new float[Elements.count];
+        stats.vsElement = new float[Elements.count];
         for(int i = 0; i < Elements.count; i++)
         {
-            stats.vsElem[i] = 1.0F;
+            stats.vsElement[i] = 1.0F;
         }
     }
     //Construct player with specified stats
@@ -152,21 +152,43 @@ public class Player
         curr_shield = Max_shield;
     }
     //Damage player (hits shield first, if shield remains)
-    public bool damage(int d, int element)
+    public void damage(int d, int element, ICaster caster, bool reflect = false)
     {
-        int dMod = Mathf.FloorToInt(stats.vsElem[element] * d);
+        //Reflect damage to caster if enemy reflects this element
+        if (stats.vsElement[element] == Elements.reflect && reflect == false)
+        {
+            int dRef = d + stats.defense;
+            Debug.Log("Palyer reflects " + dRef + " " + Elements.toString(element) + " damage back at enemy");
+            caster.damage(dRef, element, this, true);
+            return;
+        }
+        //Absorb damage if enemy absorbs this type
+        else if (stats.vsElement[element] == Elements.absorb)
+        {
+            Debug.Log("Player absorbs for " + d + " " + Elements.toString(element) + " damage");
+            curr_hp += d;
+            if (curr_hp > stats.max_hp)
+                curr_hp = stats.max_hp;
+            return;
+        }
+        float dMod;
+        //Stop 
+        if (reflect == false || stats.vsElement[element] != Elements.reflect)
+            dMod = stats.vsElement[element] * d;
+        else
+            dMod = d * Elements.reflect_mod; 
         if(curr_shield > 0)
         {
             if (curr_shield - dMod < 0)
             {
                 curr_shield = 0;
-                curr_hp -= (dMod - curr_shield);
+                curr_hp -= Mathf.FloorToInt(dMod - curr_shield);
             }
             else
-                curr_shield -= dMod;
+                curr_shield -= Mathf.FloorToInt(dMod);
         }
         else
-            curr_hp -= dMod;
+            curr_hp -= Mathf.FloorToInt(dMod);
         Debug.Log("Player" + " was hit for " + dMod + " of " + Elements.toString(element) + " damage");
         if (Curr_hp <= 0)
         { // check if killed
@@ -178,6 +200,6 @@ public class Player
 			StateManager.main.revertScene (2f);
             is_dead = true;
         }
-        return Is_dead;
+       // return Is_dead;
     }
 }

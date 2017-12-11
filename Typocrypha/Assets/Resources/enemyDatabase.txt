@@ -1,5 +1,5 @@
-Name(ID)	sprite_name	max_hp	max_shield	max_stagger	ATK	DEF	SPEED	ACC	EVADE	null wk/res	fire wk/res	ice wk/res	lightning wk/res	Spell1 (root)	Spell1 (elem)	Spell1(style)	Spell x (root)	Spell x (elem)	Spell x (style)	
+Name(ID)	sprite_name	max_hp	max_shield	max_stagger	ATK	DEF	SPEED	ACC	EVADE	null wk/res	fire wk/res	ice wk/res	bolt wk/res	Spell1 (root)	Spell1 (elem)	Spell1(style)	Spell x (root)	Spell x (elem)	Spell x (style)	
 Slime	frog_mario	10	0	1	0	0	2	0	0	1	0.5	1.5	1	sword	null	null	poke	null	null	END
 Tanuki	tanuki_mario	100	0	3	0	0	2.5	0	10	1.2	1	1	1	spear	null	null	END			
-The Evil Eye	frog_mario	50	0	2	2	2	1.5	5	5	1	2	0.75	1	sword	null	null	spear	fire	null	END
+The Evil Eye	frog_mario	50	0	2	2	2	1.5	5	5	-1	2	0.75	-2	sword	null	null	spear	fire	null	END
 END																				

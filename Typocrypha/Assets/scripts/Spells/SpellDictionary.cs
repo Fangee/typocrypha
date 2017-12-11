@@ -335,7 +335,11 @@ public static class Elements
     public const int @null = 0;
     public const int fire = 1;
     public const int ice = 2;
-    public const int lightning = 3;
+    public const int bolt = 3;
+
+    public const int absorb = -1;
+    public const int reflect = -2;
+    public const int reflect_mod = 1;
 
     //Returns integer form of element for equivalent elementName string
     public static int fromString(string elementName)
@@ -348,8 +352,8 @@ public static class Elements
                 return fire;
             case "ice":
                 return ice;
-            case "lightning":
-                return lightning;
+            case "bolt":
+                return bolt;
             default:
                 return @null;
         }
@@ -366,11 +370,17 @@ public static class Elements
             case 2:
                 return "ice";
             case 3:
-                return "lightning";
+                return "bolt";
             default:
                 return "error";
         }
     }
 }
+
+public interface ICaster
+{
+    void damage(int d, int element, ICaster caster, bool reflect = false);
+}
+
 
 

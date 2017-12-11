@@ -37,7 +37,7 @@ public class EnemyStats {
 }
 
 // defines enemy behaviour
-public class Enemy : MonoBehaviour {
+public class Enemy : MonoBehaviour, ICaster {
 
     //Const fields//
 
@@ -59,7 +59,7 @@ public class Enemy : MonoBehaviour {
     int curr_spell = 0;
 	int curr_hp; // current amount of health
     int curr_shield; //current amount of shield
-    int curr_stagger = 0; //current amount of stagger
+    int curr_stagger; //current amount of stagger
     float stagger_time; //The time an enemy's stun will last
     float curr_time; // current time (from 0 to atk_time)
     float atk_time; // time it takes to attack
@@ -75,6 +75,7 @@ public class Enemy : MonoBehaviour {
 		curr_hp = stats.max_hp;
         curr_shield = stats.max_shield;
         stagger_time = (stats.max_stagger * stagger_mult_constant) + stagger_add_constant;
+        curr_stagger = stats.max_stagger;
 		curr_time = 0;
         if(dict == null)
             dict = GameObject.FindGameObjectWithTag("SpellDictionary").GetComponent<SpellDictionary>();
@@ -154,10 +155,31 @@ public class Enemy : MonoBehaviour {
 	}
 
 	// be attacked by the player
-	public void damage(int d, int element) {
+	public void damage(int d, int element, ICaster caster, bool reflect = false) {
+        //Reflect damage to caster if enemy reflects this element
+        if(stats.vsElement[element] == Elements.reflect  && reflect == false)
+        {
+            int dRef = d + stats.defense;
+            Debug.Log("Enemy reflects " + dRef + " " + Elements.toString(element) + " damage back at player");
+            caster.damage(dRef, element, this, true);
+            return;
+        }
+        //Absorb damage if enemy absorbs this type
+        else if(stats.vsElement[element] == Elements.absorb)
+        {
+            Debug.Log("Enemy absorbs " + d + " " + Elements.toString(element) + " damage");
+            curr_hp += d;
+            if (curr_hp > stats.max_hp)
+                curr_hp = stats.max_hp;
+            return;
+        }
         int staggerDamage = 0;
         //Apply elemental weakness/resistances
-        float dMod = stats.vsElement[element] * d;
+        float dMod;
+        if (reflect == false || stats.vsElement[element] != Elements.reflect)
+            dMod = stats.vsElement[element] * d;
+        else
+            dMod = d * Elements.reflect_mod;
         //Calculate stagger damage (UNFINISHED add crit, mods, etc)
         if (stats.vsElement[element] > 1)//If enemy is weak
             staggerDamage++;
@@ -172,8 +194,8 @@ public class Enemy : MonoBehaviour {
             {
                 curr_shield = 0;
                 curr_hp -= Mathf.FloorToInt(dMod - curr_shield);
-                if (staggerDamage >= 1)
-                    curr_stagger++;
+                if (staggerDamage >= 1 && is_stunned == false)
+                    curr_stagger--;
             }
             else
                 curr_shield -= Mathf.FloorToInt(dMod);
@@ -181,11 +203,12 @@ public class Enemy : MonoBehaviour {
         else
         {
             curr_hp -= Mathf.FloorToInt(dMod);
-            if (staggerDamage >= 1)
-                curr_stagger++;
+            //Stagger if enemy is actually damaged
+            if (staggerDamage >= 1 && is_stunned == false && dMod > 0)
+                curr_stagger--;
         }
         //Apply stun if applicable
-        if (curr_stagger >= stats.max_stagger)
+        if (curr_stagger <= 0 && is_stunned == false)
             stun();
         //Apply shake if hit
         if(dMod > 0)
@@ -204,7 +227,7 @@ public class Enemy : MonoBehaviour {
     {
         bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0.9F, 0);
         is_stunned = false;
-        curr_stagger = 0;
+        curr_stagger = stats.max_stagger;
     }
 
     //Updates opacity and death(after pause in battlemanager)

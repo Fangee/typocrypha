@@ -94,14 +94,14 @@ public class AttackSpell : Spell
     public override void cast(Enemy[] targets, int selected, Player caster)
     {
         int damage = power + caster.Attack - targets[selected].getStats().defense;
-        targets[selected].damage(damage, element);
+        targets[selected].damage(damage, element, caster);
         return;
     }
 
     public override void enemyCast(Enemy[] allies, int position, Player target)
     {
         int damage = power - target.Defense;
-        target.damage(damage, element);
+        target.damage(damage, element, allies[position]);
         return;
     }
 }
