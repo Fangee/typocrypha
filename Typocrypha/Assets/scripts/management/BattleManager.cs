@@ -8,12 +8,14 @@ public class BattleManager : MonoBehaviour {
 	public static BattleManager main = null; // static instance accessible globally
 	public GameObject spellDict; // spell dictionary object
 	public GameObject enemy_prefab; // prefab for enemy object
-	public EnemyChargeBars charge_bars; // creates and amanges charge bars
+	public EnemyChargeBars charge_bars; // creates and mananges charge bars
+	public CooldownList cooldown_list; // creates and manages player's cooldowns
 	public int target_ind; // index of currently targeted enemy
 	public Transform target_ret; // shows where target is
 	public float enemy_spacing; // space between enemies
 	public bool pause; // is battle paused?
 	public Enemy[] enemy_arr; // array of Enemy components (size 3)
+	public int enemy_count; // number of enemies in battle
 
 	void Awake() {
 		if (main == null) main = this;
@@ -22,8 +24,9 @@ public class BattleManager : MonoBehaviour {
 
 	// start battle scene
 	public void startBattle(BattleScene scene) {
-		Debug.Log ("Battle! (goes on infinitely)");
+		Debug.Log ("Battle!");
 		enemy_arr = new Enemy[3];
+		enemy_count = scene.enemy_stats.Length;
 		charge_bars.initChargeBars ();
 		for (int i = 0; i < scene.enemy_stats.Length; i++) {
 			GameObject new_enemy = GameObject.Instantiate (enemy_prefab, transform);
@@ -38,6 +41,7 @@ public class BattleManager : MonoBehaviour {
 			bar_pos.Set (bar_pos.x, bar_pos.y + 1, bar_pos.z);
 			charge_bars.makeChargeMeter(i, bar_pos);
 		}
+		pause = false;
 		target_ind = 0;
 	}
 
@@ -64,7 +68,7 @@ public class BattleManager : MonoBehaviour {
 
 	// pause for player attack, play animations, unpause
 	IEnumerator pauseAttackCurrent(string spell){
-		BattleManager.main.pause = true;
+		pause = true;
 		BattleEffects.main.setDim (true, enemy_arr[target_ind].enemy_sprite);
 		yield return new WaitForSeconds (1f);
         //	BattleEffects.main.spriteShake (enemy_arr[target_ind].gameObject.transform, 0.5f, 0.1f);
@@ -73,15 +77,32 @@ public class BattleManager : MonoBehaviour {
         yield return new WaitForSeconds (1f);
 		BattleEffects.main.setDim (false, enemy_arr [target_ind].enemy_sprite);
         updateEnemies();
-		BattleManager.main.pause = false;
+		pause = false;
 	}
     //Updates death and opacity of enemies after pause in puaseAttackCurrent
     private void updateEnemies()
     {
+		int curr_dead = 0;
         for(int i = 0; i < enemy_arr.Length; i++)
         {
-            if (!enemy_arr[i].is_dead)
-                enemy_arr[i].updateCondition();
+			enemy_arr [i].updateCondition ();
+			if (enemy_arr [i].is_dead) ++curr_dead;
         }
+		if (curr_dead == enemy_count) // end battle if all enemies dead
+		{
+			Debug.Log("you win!");
+			cooldown_list.removeAll ();
+			StartCoroutine(StateManager.main.nextSceneDelayed(2.0f));
+		}
     }
+	//removes all enemies and charge bars
+	public void stopBattle() {
+		pause = true;
+		foreach (Enemy enemy in enemy_arr) {
+			if (enemy != null) GameObject.Destroy (enemy.gameObject);
+		}
+		enemy_arr = null;
+		cooldown_list.removeAll ();
+		charge_bars.removeAll ();
+	}
 }

@@ -145,7 +145,7 @@ public class Enemy : MonoBehaviour {
 		}
 	}
 
-	// attacks player with specified spell
+	// pause battle, attack player with specified spell
 	void attackPlayer(SpellData s, Player target) {
 		Debug.Log (stats.name + " casts " + s.ToString());
 		StartCoroutine (swell ());
@@ -216,6 +216,7 @@ public class Enemy : MonoBehaviour {
         { // check if killed
             Debug.Log(stats.name + " has been slain!");
             is_dead = true;
+			StopAllCoroutines ();
         }
 
     }

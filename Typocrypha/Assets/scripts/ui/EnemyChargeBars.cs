@@ -6,7 +6,6 @@ using UnityEngine;
 public class EnemyChargeBars : MonoBehaviour {
 	public GameObject chargebar_prefab; // prefab for charge bar
 	public float bar_width; // width of bar
-	bool initialized; // have bars been initialized?
 	Vector3 x_offset; // offset to account for width of bar
 	BarMeter[] charge_bars; // charge bars for enemies
 
@@ -20,14 +19,13 @@ public class EnemyChargeBars : MonoBehaviour {
     }
 
     void Awake() {
-		initialized = false;
 		x_offset = new Vector3 (-0.5f * bar_width, 0, 0);
 		charge_bars = new BarMeter[3];
 	}
 
-	// init enemy_arr and charge_bars arrays
+	// init charge bars
 	public void initChargeBars() {
-		initialized = true;
+		this.enabled = true;
 	}
 
 	// creates a new charge meter for an enemy at world_pos
@@ -41,14 +39,25 @@ public class EnemyChargeBars : MonoBehaviour {
 		charge_bars [pos].setText ("");
 	}
 
+	// removes all charge bars
+	public void removeAll() {
+		this.enabled = false;
+		foreach (BarMeter chargebar in charge_bars)
+			GameObject.Destroy (chargebar.gameObject);
+	}
+
 	// update charge bars
 	void Update() {
-		if (!BattleManager.main.enabled || !initialized) return;
+		if (!BattleManager.main.enabled) return;
 		for (int i = 0; i < 3; i++) {
-			if (BattleManager.main.enemy_arr [i] != null) {
+			if (charge_bars [i] != null) {
 				Enemy enemy = BattleManager.main.enemy_arr [i];
-				charge_bars [i].setValue (enemy.getProgress());
-				charge_bars [i].setText (enemy.getCurrSpell().ToString());
+				if (!enemy.is_dead) {
+					charge_bars [i].setValue (enemy.getProgress ());
+					charge_bars [i].setText (enemy.getCurrSpell ().ToString ());
+				} else { // if enemy has died, remove bar
+					GameObject.Destroy(charge_bars[i].gameObject);
+				}
 			}
 		}
 	}

@@ -60,6 +60,14 @@ public class CooldownList : MonoBehaviour {
             i--;
         }
     }
+	//remove all bars
+	public void removeAll() {
+		StopAllCoroutines ();
+		foreach (CooldownBar c in spells) {
+			GameObject.Destroy (c.bar.gameObject);
+		}
+		spells.Clear ();
+	}
 
     private class CooldownBar
     {

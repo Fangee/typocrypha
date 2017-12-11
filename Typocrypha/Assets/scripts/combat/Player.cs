@@ -171,6 +171,11 @@ public class Player
         if (Curr_hp <= 0)
         { // check if killed
             Debug.Log("Player" + " has been slain!");
+			BattleManager.main.pause = true;
+			BattleEffects.main.setDim (false, null);
+			restoreToFull ();
+			BattleManager.main.stopBattle ();
+			StateManager.main.revertScene (2f);
             is_dead = true;
         }
         return Is_dead;

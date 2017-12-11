@@ -1,16 +1,23 @@
-3			
+4			
 START_SCENE	INTRO		
 END_SCENE			
 START_SCENE	CUTSCENE		
 NPC	Tanuki		
 NPC	Frog		
-DIALOGUE	Tanuki	It'sa me! Tanuki man!	tanuki_mario
-DIALOGUE	Frog	Ribbit Ribbit Ribbit Ribbit. Ribbit Ribbit. Riiiiibbbbiiiiiiiiit.	frog_mario
-DIALOGUE	Tanuki	Well goodbye.	tanuki_mario
+DIALOGUE	Tanuki	Hey you! You're walking in the wrong part of town.	tanuki_mario
+DIALOGUE	Frog	Ribbit Ribbit! (Yeah frog-face! Wrong part of town!)	frog_mario
+DIALOGUE	Tanuki	Let's get em!	tanuki_mario
 END_SCENE			
 START_SCENE	BATTLE		
 ENEMY	Slime		
 ENEMY	The Evil Eye		
 ENEMY	Tanuki		
+END_SCENE			
+START_SCENE	CUTSCENE		
+NPC	Tanuki		
+NPC	Frog		
+DIALOGUE	Tanuki	Oh my god. You killed Frog!	tanuki_mario
+DIALOGUE	Frog	(He's not moving)	frog_mario
+DIALOGUE	Tanuki	I'm out of here!	tanuki_mario
 END_SCENE			
 END_GAME			

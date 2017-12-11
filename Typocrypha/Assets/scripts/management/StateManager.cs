@@ -28,6 +28,10 @@ public class StateManager : MonoBehaviour {
 	// transition to next scene; returns false if at end
 	public bool nextScene() {
 		if (curr_scene >= scene_arr.Length - 1) {
+			track_typing.enabled = false;
+			CutsceneManager.main.enabled = false;
+			BattleManager.main.enabled = false;
+			dialogue_box.SetActive (false);
 			Debug.Log ("game over");
 			return false;
 		}
@@ -55,10 +59,15 @@ public class StateManager : MonoBehaviour {
 			BattleManager.main.enabled = true;
 			dialogue_box.SetActive (false);
 			BattleManager.main.startBattle ((BattleScene)next_scene);
-			//StartCoroutine (nextSceneDelayed (3.0f)); // change after waiting for a bit
 			break;
 		}
 		return true;
+	}
+
+	// goes back to beginning of current scene (after seconds)
+	public void revertScene(float seconds) {
+		--curr_scene;
+		StartCoroutine (nextSceneDelayed (seconds));
 	}
 
 	// go to next scene after a delay
