@@ -13,9 +13,9 @@ public class DisplayPlayer : MonoBehaviour {
 
 	void Update () {
 		health_text.text = Player.main.Curr_hp.ToString ();
-		shield_text.text = Player.main.Shield.ToString ();
+		shield_text.text = Player.main.Curr_shield.ToString ();
 		cast_text.text = Player.main.Last_cast;
 		health_bar.setValue ((float)Player.main.Curr_hp/Player.main.Stats.max_hp);
-		shield_bar.setValue ((float)Player.main.Shield/Player.main.Stats.max_shield);
+		shield_bar.setValue ((float)Player.main.Curr_shield/Player.main.Stats.max_shield);
 	}
 }

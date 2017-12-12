@@ -23,16 +23,7 @@ public class Enemy : MonoBehaviour, ICaster {
     private const float stagger_mult_constant = 1F;//Amount to multiply max_stagger by when calculating stagger time
     private const float stagger_add_constant = 5F;//Amount to add when calculating stagger time
 
-    //Public fields//
-
-    public bool is_dead; // is enemy dead?
-    public bool is_stunned; // is the enemy stunned?
-    public Enemy[] allies; //State of battle scene (for ally-target casting)
-    public ICaster[] targets;//State of the player and their allies (for target-casting)
-
-    public int position; //index to field (current position)
-    public EnemyChargeBars bars;
-	public SpriteRenderer enemy_sprite; // this enemy's sprite
+    //ICaster Properties//
 
     public CasterStats Stats
     {
@@ -41,11 +32,37 @@ public class Enemy : MonoBehaviour, ICaster {
             return stats;
         }
     }
+    public int Curr_hp
+    {
+        get
+        {
+            return curr_hp;
+        }
+
+        set
+        {
+            curr_hp = value;
+        }
+    }
+    public int Curr_shield { get { return curr_shield; } set { curr_shield = value; } }
+    public int Curr_stagger { get { return curr_stagger; } set { curr_stagger = value; } }
+    public bool Is_stunned { get { return is_stunned; } }
+
+    //Public fields//
+
+    public bool is_dead; // is enemy dead?
+    public Enemy[] allies; //State of battle scene (for ally-target casting)
+    public ICaster[] targets;//State of the player and their allies (for target-casting)
+
+    public int position; //index to field (current position)
+    public EnemyChargeBars bars;
+	public SpriteRenderer enemy_sprite; // this enemy's sprite
 
     //Private fields
     private int selected = 1;//Which target in targets is selected (index to targets)
     EnemyStats stats; // stats of enemy DO NOT MUTATE
 
+    bool is_stunned; // is the enemy stunned?
     int curr_spell = 0;
 	int curr_hp; // current amount of health
     int curr_shield; //current amount of shield
@@ -61,10 +78,10 @@ public class Enemy : MonoBehaviour, ICaster {
 
 	public void setStats(EnemyStats i_stats) {
 		stats = i_stats;
-		curr_hp = stats.max_hp;
-        curr_shield = stats.max_shield;
+		Curr_hp = stats.max_hp;
+        Curr_shield = stats.max_shield;
         stagger_time = (stats.max_stagger * stagger_mult_constant) + stagger_add_constant;
-        curr_stagger = stats.max_stagger;
+        Curr_stagger = stats.max_stagger;
 		curr_time = 0;
         if(dict == null)
             dict = GameObject.FindGameObjectWithTag("SpellDictionary").GetComponent<SpellDictionary>();
@@ -176,7 +193,7 @@ public class Enemy : MonoBehaviour, ICaster {
     {
         bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0.9F, 0);
         is_stunned = false;
-        curr_stagger = stats.max_stagger;
+        Curr_stagger = stats.max_stagger;
     }
 
     //Updates opacity and death(after pause in battlemanager)

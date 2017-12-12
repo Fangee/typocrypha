@@ -35,6 +35,42 @@ public class Player : ICaster
         stats = i_stats;
     }
 
+    //ICaster Poroperties
+
+    PlayerStats stats;
+    public CasterStats Stats { get { return stats; } }
+    public int Curr_hp
+    {
+        get
+        {
+            return curr_hp;
+        }
+        set
+        {
+            curr_hp = value;
+        }
+    }
+    public int Curr_shield
+    {
+        get
+        {
+            return curr_shield;
+        }
+        set
+        {
+            curr_shield = value;
+        }
+    }
+    public int Curr_stagger
+    {
+        get
+        {
+            return 0;
+        }
+        set { return; }
+    }
+    public bool Is_stunned { get { return false; } }
+
     //Fields
 
     int curr_hp = 100;
@@ -44,20 +80,6 @@ public class Player : ICaster
 
     //READ ONLY PROPERTIES
 
-    public int Curr_hp
-    {
-        get
-        {
-            return curr_hp;
-        }
-    }
-    public int Shield
-    {
-        get
-        {
-            return curr_shield;
-        }
-    }
     public bool Is_dead
     {
         get
@@ -91,8 +113,6 @@ public class Player : ICaster
 
     //ICaster interface overrides
 
-    PlayerStats stats;
-    public CasterStats Stats { get { return stats; } }
     //Damage player
     public void damage(int d, int element, ICaster caster, bool reflect = false)
     {
