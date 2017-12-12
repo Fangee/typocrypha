@@ -2,13 +2,16 @@ name (root)	spell type	spellbook description	power	cooldown	hit %	Status Mod	pat
 sword	attack	a basic attack	10	4	85	0	MT
 spear	attack	a basic long cool atk	20	10	90	0	MT
 falchion	attack	a basic super long atk	30	15	75	0	LMT
+cleaver	attack	a targeted wide atk	10	10	75	0	LMRT
+sacrifice	attack	"hurts self, does big ds"	40	10	95	0	LRmS
+whiff	attack	always misses (debug )	1000000	1	-1000	0	MT
 poke	attack	high damage for debugging	999	1	100	0	MT
 END							
-name (elem)	element	cooldown mod					
-fire	fire	0					
-ice	ice	0					
-bolt	bolt	0					
+name (elem)	element	spellbook description	cooldown mod				
+fire	fire	adds fire element to spell	0				
+ice	ice	adds ice element to spell	0				
+bolt	bolt	adds bolt element to spell	0				
 END							
-name (style)	powerMod	cooldown mod	hit% mod	status effect mod	pattern		
-aimed	-5	0	15	0			
+name (style)	powerMod	spellbook description	cooldown mod	hit% mod	status effect mod	pattern	
+aimed	-5	"+acc, -power"	0	15	0	None	
 END							

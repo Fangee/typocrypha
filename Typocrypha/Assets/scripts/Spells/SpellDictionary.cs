@@ -46,6 +46,7 @@ public class SpellDictionary : MonoBehaviour
             }
             string type = cols[1].Trim();
             Spell s = createSpellFromType(type);
+            s.name = key;
             s.type = type;
             s.description = cols[2].Trim();
             int.TryParse(cols[3].Trim(), out s.power);
@@ -53,16 +54,32 @@ public class SpellDictionary : MonoBehaviour
             int.TryParse(cols[5].Trim(), out s.hitPercentage);
             int.TryParse(cols[6].Trim(), out s.elementEffectMod);
             string pattern = cols[7].Trim();
-            if (pattern.Contains("L"))
-                s.targets[0] = true;
-            if (pattern.Contains("M"))
-                s.targets[1] = true;
-            if (pattern.Contains("R"))
-                s.targets[2] = true;
-            if (pattern.Contains("S"))
-                s.targets[3] = true;
-            if (pattern.Contains("T"))
-                s.targets[4] = true;
+            if (pattern.Contains("A"))
+            {
+                s.targetData = new TargetData(true);
+                s.targetData.selfCenter = false;
+                s.targetData.targeted = false;
+            }
+            else
+            {
+                s.targetData = new TargetData(false);
+                if (pattern.Contains("L"))
+                    s.targetData.enemyL = true;
+                if (pattern.Contains("M"))
+                    s.targetData.enemyM = true;
+                if (pattern.Contains("R"))
+                    s.targetData.enemyR = true;
+                if (pattern.Contains("l"))
+                    s.targetData.allyL = true;
+                if (pattern.Contains("m"))
+                    s.targetData.allyM = true;
+                if (pattern.Contains("r"))
+                    s.targetData.enemyR = true;
+                if (pattern.Contains("S"))
+                    s.targetData.selfCenter = true;
+                if (pattern.Contains("T"))
+                    s.targetData.targeted = true;
+            }
             spells.Add(key, s);
             i++;
         }
@@ -77,8 +94,10 @@ public class SpellDictionary : MonoBehaviour
                 break;
             }
             ElementMod e = new ElementMod();
+            e.name = key;
             e.element = Elements.fromString(cols[1].Trim());
-            float.TryParse(cols[2].Trim(), out e.cooldownMod);
+            e.description = cols[2].Trim();
+            float.TryParse(cols[3].Trim(), out e.cooldownMod);
             elements.Add(key, e);
             i++;
         }
@@ -92,21 +111,41 @@ public class SpellDictionary : MonoBehaviour
                 return;
             }
             StyleMod s = new StyleMod();
+            s.name = key;
             int.TryParse(cols[1].Trim(), out s.powerMod);
-            float.TryParse(cols[2].Trim(), out s.cooldownMod);
+            s.description = cols[2].Trim();
+            float.TryParse(cols[3].Trim(), out s.cooldownMod);
             int.TryParse(cols[3].Trim(), out s.accMod);
             int.TryParse(cols[4].Trim(), out s.statusEffectChanceMod);
             string pattern = cols[7].Trim();
-            if (pattern.Contains("L"))
-                s.targets[0] = true;
-            if (pattern.Contains("M"))
-                s.targets[1] = true;
-            if (pattern.Contains("R"))
-                s.targets[2] = true;
-            if (pattern.Contains("S"))
-                s.targets[3] = true;
-            if (pattern.Contains("T"))
-                s.targets[4] = true;
+            if (pattern.Contains("N"))
+                s.isTarget = false;
+            else if (pattern.Contains("A"))
+            {
+                s.targets = new TargetData(true);
+                s.targets.selfCenter = false;
+                s.targets.targeted = false;
+            }
+            else
+            {
+                s.targets = new TargetData(false);
+                if (pattern.Contains("L"))
+                    s.targets.enemyL = true;
+                if (pattern.Contains("M"))
+                    s.targets.enemyM = true;
+                if (pattern.Contains("R"))
+                    s.targets.enemyR = true;
+                if (pattern.Contains("l"))
+                    s.targets.allyL = true;
+                if (pattern.Contains("m"))
+                    s.targets.allyM = true;
+                if (pattern.Contains("r"))
+                    s.targets.enemyR = true;
+                if (pattern.Contains("S"))
+                    s.targets.selfCenter = true;
+                if (pattern.Contains("T"))
+                    s.targets.targeted = true;
+            }
             styles.Add(key, s);
             i++;
         }
@@ -196,6 +235,7 @@ public class SpellDictionary : MonoBehaviour
     //Casts spell from NPC (enemy or ally)
     public void NPC_Cast(SpellData spell, ICaster[] targets, int selected, ICaster[] allies, int position)
     {
+        ICaster caster = allies[position];
         Spell s = spells[spell.root];
         Spell c = createSpellFromType(s.type);
         s.copyInto(c);
@@ -210,7 +250,11 @@ public class SpellDictionary : MonoBehaviour
         else
             st = styles[spell.style];
         c.Modify(e, st);
-        c.cast(targets, selected, allies, position);
+        List<ICaster> toCastAt = c.target(targets, selected, allies, position);
+        foreach(ICaster target in toCastAt)
+        {
+            c.cast(target, caster);
+        }
     }
     //Gets casting time of input spell
     public float getCastingTime(SpellData s, float speed)
@@ -256,7 +300,11 @@ public class SpellDictionary : MonoBehaviour
         c.Modify(e, st);//Modify copy with style and/or element keywords (if applicable)
         s.startCooldown(cooldown, root, c.cooldown * caster.Stats.speed);//Start spell cooldown (with modified casting time from copy)
         Debug.Log(root + " is going on cooldown for " + (c.cooldown * caster.Stats.speed) + " seconds");
-        c.cast(targets, selected, allies, position);//Apply actual spell effect
+        List<ICaster> toCastAt = c.target(targets, selected, allies, position);
+        foreach (ICaster target in toCastAt)
+        {
+            c.cast(target, caster);
+        }
 
     }
     //Helper method to cast root-only spells
@@ -277,7 +325,11 @@ public class SpellDictionary : MonoBehaviour
         }
         s.startCooldown(cooldown, root, s.cooldown * caster.Stats.speed);//Start spell cooldown (with modified casting time from copy)
         Debug.Log(root + " is going on cooldown for " + (s.cooldown * caster.Stats.speed) + " seconds");
-        s.cast(targets, selected, allies, position);//Apply actual spell effect
+        List<ICaster> toCastAt = s.target(targets, selected, allies, position);
+        foreach (ICaster target in toCastAt)
+        {
+            s.cast(target, caster);
+        }
     }
     //Will contain method for botching a spell
     private void botch(string root, string elem, string style, Player caster)
