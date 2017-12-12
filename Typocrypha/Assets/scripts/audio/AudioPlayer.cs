@@ -17,6 +17,9 @@ public class AudioPlayer : MonoBehaviour {
 	AudioSource[] sfx_channels; // sfx channels
 	AssetBundle cutscenemusic;
 	AssetBundle battlemusic;
+	AssetBundle uisfx;
+	AssetBundle spellsfx;
+	AssetBundle battlesfx;
 	AssetBundle speakingsfx;
 	// ... add more asset bundles for diff audio assets here
 
@@ -27,6 +30,9 @@ public class AudioPlayer : MonoBehaviour {
 	void Start() {
 		cutscenemusic = AssetBundle.LoadFromFile ("Assets/AssetBundles/cutscenemusic");
 		battlemusic = AssetBundle.LoadFromFile ("Assets/AssetBundles/battlemusic");
+		uisfx = AssetBundle.LoadFromFile ("Assets/AssetBundles/uisfx");
+		spellsfx = AssetBundle.LoadFromFile ("Assets/AssetBundles/spellsfx");
+		battlesfx = AssetBundle.LoadFromFile ("Assets/AssetBundles/battlesfx");
 		speakingsfx = AssetBundle.LoadFromFile ("Assets/AssetBundles/speakingsfx");
 		sfx_channels = new AudioSource[sfx.childCount];
 		for (int i = 0; i < sfx.childCount; i++) // put all sfx channels into array
@@ -37,19 +43,28 @@ public class AudioPlayer : MonoBehaviour {
 	public void setSFX(int channel, SFXType type, string name) {
 		switch (type) {
 		case SFXType.UI:
+			sfx_channels [channel].clip = uisfx.LoadAsset<AudioClip> (name);
 			break;
 		case SFXType.SPELL:
+			sfx_channels [channel].clip = spellsfx.LoadAsset<AudioClip> (name);
 			break;
 		case SFXType.SPEAKING:
-			sfx_channels [channel].clip = speakingsfx.LoadAsset<AudioClip> (name);
+			sfx_channels [channel].clip = battlesfx.LoadAsset<AudioClip> (name);
 			break;
 		case SFXType.BATTLE:
+			sfx_channels [channel].clip = speakingsfx.LoadAsset<AudioClip> (name);
 			break;
 		}
 	}
 
 	// play current sfx in channel
 	public void playSFX(int channel) {
+		sfx_channels [channel].Play ();
+	}
+
+	// load and play sfx directly
+	public void playSFX(int channel, SFXType type, string name) {
+		setSFX (channel, type, name);
 		sfx_channels [channel].Play ();
 	}
 

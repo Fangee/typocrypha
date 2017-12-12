@@ -48,6 +48,7 @@ public class BattleManager : MonoBehaviour {
 
 	// check if player switches targets or attacks
 	void Update() {
+		int old_ind = target_ind;
 		// move target left or right
 		if (Input.GetKeyDown (KeyCode.LeftArrow)) --target_ind;
 		if (Input.GetKeyDown (KeyCode.RightArrow)) ++target_ind;
@@ -56,12 +57,14 @@ public class BattleManager : MonoBehaviour {
 		if (target_ind > 2) target_ind = 2;
 		// move target reticule
 		target_ret.localPosition = new Vector3 (target_ind * enemy_spacing, -1, 0);
+		// play effect sound if target was moved
+		if (old_ind != target_ind) AudioPlayer.main.playSFX(0, SFXType.UI, "menu_boop");
 	}
 
 	// attack currently targeted enemy with spell
 	public void attackCurrent(string spell) {
 		if (enemy_arr [target_ind].is_dead) {
-			Debug.Log ("target is alrady dead!");
+			Debug.Log ("target is already dead!");
 			return; // don't attack dead enemies
 		}
 		StartCoroutine (pauseAttackCurrent (spell));
@@ -71,7 +74,8 @@ public class BattleManager : MonoBehaviour {
 	IEnumerator pauseAttackCurrent(string spell){
 		pause = true;
 		BattleEffects.main.setDim (true, enemy_arr[target_ind].enemy_sprite);
-		yield return new WaitForSeconds (1f);
+		AudioPlayer.main.playSFX (1, SFXType.SPELL, "magic_sound"); 
+		yield return new WaitForSeconds (1.5f);
         //	BattleEffects.main.spriteShake (enemy_arr[target_ind].gameObject.transform, 0.5f, 0.1f);
         //Send spell, Enemy state, and target index to parser and caster
         spellDict.GetComponent<SpellDictionary>().parseAndCast(spell.ToLower(), enemy_arr, target_ind, Player.main);

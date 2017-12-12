@@ -131,7 +131,8 @@ public class Enemy : MonoBehaviour, ICaster {
 			if (curr_time >= atk_time) {
 				BattleManager.main.pause = true; // pause battle for attack
 				BattleEffects.main.setDim(true, enemy_sprite);
-				yield return new WaitForSeconds (1f);
+				AudioPlayer.main.playSFX (1, SFXType.SPELL, "magic_sound"); 
+				yield return new WaitForSeconds (1.5f);
 				attackPlayer (s,target);
 				yield return new WaitForSeconds (1f);
                 curr_spell++;
@@ -210,11 +211,12 @@ public class Enemy : MonoBehaviour, ICaster {
         //Apply stun if applicable
         if (curr_stagger <= 0 && is_stunned == false)
             stun();
-        //Apply shake if hit
-        if(dMod > 0)
-            BattleEffects.main.spriteShake(gameObject.transform, 0.5f, 0.1f * Mathf.Log( dMod, 7F));
+        //Apply shake and sfx if hit
+		if (dMod > 0) {
+			AudioPlayer.main.playSFX (2, SFXType.BATTLE, "take_damage"); 
+			BattleEffects.main.spriteShake (gameObject.transform, 0.5f, 0.1f * Mathf.Log (dMod, 7F));
+		}
         //opacity and death are now updated in updateCondition()
-
     }
     
     private void stun()

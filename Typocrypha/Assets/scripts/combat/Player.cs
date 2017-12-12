@@ -189,7 +189,10 @@ public class Player : ICaster
         }
         else
             curr_hp -= Mathf.FloorToInt(dMod);
-        Debug.Log("Player" + " was hit for " + dMod + " of " + Elements.toString(element) + " damage");
+		if (dMod > 0) {
+			AudioPlayer.main.playSFX (2, SFXType.BATTLE, "take_damage"); 
+			Debug.Log ("Player" + " was hit for " + dMod + " of " + Elements.toString (element) + " damage");
+		}
         if (Curr_hp <= 0)
         { // check if killed
             Debug.Log("Player" + " has been slain!");
