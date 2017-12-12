@@ -41,6 +41,7 @@ public class AudioPlayer : MonoBehaviour {
 		
 	// sets specified sfx channel
 	public void setSFX(int channel, SFXType type, string name) {
+		name = name.Trim ();
 		switch (type) {
 		case SFXType.UI:
 			sfx_channels [channel].clip = uisfx.LoadAsset<AudioClip> (name);
@@ -48,10 +49,10 @@ public class AudioPlayer : MonoBehaviour {
 		case SFXType.SPELL:
 			sfx_channels [channel].clip = spellsfx.LoadAsset<AudioClip> (name);
 			break;
-		case SFXType.SPEAKING:
+		case SFXType.BATTLE:
 			sfx_channels [channel].clip = battlesfx.LoadAsset<AudioClip> (name);
 			break;
-		case SFXType.BATTLE:
+		case SFXType.SPEAKING:
 			sfx_channels [channel].clip = speakingsfx.LoadAsset<AudioClip> (name);
 			break;
 		}

@@ -43,7 +43,7 @@ public class CutsceneManager : MonoBehaviour {
 				Resources.Load<Sprite>("sprites/" + scene.npc_sprites[curr_line].Trim());
 			sprite_holder.sprite = npc_sprite;
 			if (curr_line != 0) // play advance dialogue sfx
-				AudioPlayer.main.playSFX(1, SFXType.UI, "menu_boop"); 
+				AudioPlayer.main.playSFX(0, SFXType.UI, "menu_boop"); 
 			AudioPlayer.main.playMusic(MusicType.CUTSCENE, scene.music_tracks[curr_line]);
 			text_scroll.startPrint (scene.dialogue [curr_line], display_text, "speak_boop");
 			++curr_line;
