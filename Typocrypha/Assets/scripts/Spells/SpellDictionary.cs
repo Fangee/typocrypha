@@ -59,7 +59,7 @@ public class SpellDictionary : MonoBehaviour
                 s.targets[1] = true;
             if (pattern.Contains("R"))
                 s.targets[2] = true;
-            if (pattern.Contains("P"))
+            if (pattern.Contains("S"))
                 s.targets[3] = true;
             if (pattern.Contains("T"))
                 s.targets[4] = true;
@@ -103,7 +103,7 @@ public class SpellDictionary : MonoBehaviour
                 s.targets[1] = true;
             if (pattern.Contains("R"))
                 s.targets[2] = true;
-            if (pattern.Contains("P"))
+            if (pattern.Contains("S"))
                 s.targets[3] = true;
             if (pattern.Contains("T"))
                 s.targets[4] = true;
@@ -113,8 +113,9 @@ public class SpellDictionary : MonoBehaviour
     }
 
     //parses input spell, casts if valid, botches if misspelled but structure is valid, fizzles if invalid structure
-	public CastStatus parseAndCast(string spell, Enemy[] targets, int selected, Player caster)
+	public CastStatus parseAndCast(string spell, ICaster[] targets, int selected, ICaster[] allies, int position)
     {
+        Player caster =  (Player) allies[position];
         char[] delim = { ' ' };
         string[] lines = spell.Split(delim);
 		if (lines.Length == 1)
@@ -122,7 +123,7 @@ public class SpellDictionary : MonoBehaviour
 			string first = lines [0].Trim ();
 			if (spells.ContainsKey (first)) {
 				caster.Last_cast = spell;
-				castUnmodified (first, targets, selected, caster);
+                castUnmodified(first, targets, selected, allies, position);
 			} else {
 				botch ("b", null, null, caster);
 				return CastStatus.BOTCH;
@@ -135,7 +136,7 @@ public class SpellDictionary : MonoBehaviour
 			if (spells.ContainsKey (first)) {
 				if (styles.ContainsKey (second)) {
 					caster.Last_cast = spell;
-					cast (first, null, second, targets, selected, caster);
+					cast (first, null, second, targets, selected, allies, position);
 				} else {
 					botch (first, null, "b", caster);
 					return CastStatus.BOTCH;
@@ -143,7 +144,7 @@ public class SpellDictionary : MonoBehaviour
 			} else if (spells.ContainsKey (second)) {
 				if (elements.ContainsKey (first)) {
 					caster.Last_cast = spell;
-					cast (second, first, null, targets, selected, caster);
+					cast (second, first, null, targets, selected, allies, position);
 				} else {
 					botch ("b", second, null, caster);
 					return CastStatus.BOTCH;
@@ -159,7 +160,7 @@ public class SpellDictionary : MonoBehaviour
 				if (elements.ContainsKey (elem)) {
 					if (styles.ContainsKey (style)) {
 						caster.Last_cast = spell;
-						cast (root, elem, style, targets, selected, caster);
+						cast (root, elem, style, targets, selected, allies, position);
 					} else {
 						botch (root, elem, "b", caster);
 						return CastStatus.BOTCH;
@@ -192,8 +193,8 @@ public class SpellDictionary : MonoBehaviour
 		}
 		return CastStatus.SUCCESS;
     }
-    //Casts enemy spell
-    public void enemyCast(Enemy caster, SpellData spell, Enemy[] field, int position, Player target)
+    //Casts spell from NPC (enemy or ally)
+    public void NPC_Cast(SpellData spell, ICaster[] targets, int selected, ICaster[] allies, int position)
     {
         Spell s = spells[spell.root];
         Spell c = createSpellFromType(s.type);
@@ -209,7 +210,7 @@ public class SpellDictionary : MonoBehaviour
         else
             st = styles[spell.style];
         c.Modify(e, st);
-        c.enemyCast(field, position, target);
+        c.cast(targets, selected, allies, position);
     }
     //Gets casting time of input spell
     public float getCastingTime(SpellData s, float speed)
@@ -226,8 +227,9 @@ public class SpellDictionary : MonoBehaviour
 
     //Helper method for casting spells
     //root cannot equal null
-    private void cast(string root, string element, string style, Enemy[] targets, int selected, Player caster)
+    private void cast(string root, string element, string style, ICaster[] targets, int selected, ICaster[] allies, int position)
     {
+        ICaster caster = allies[position];
         Spell s = spells[root];//Get root keyword from dictionary
         if (s.IsOnCooldown)//Casting fails if root is on cooldown
         {
@@ -252,15 +254,16 @@ public class SpellDictionary : MonoBehaviour
         else//Get style keyword from style dictionary
             st = styles[style];
         c.Modify(e, st);//Modify copy with style and/or element keywords (if applicable)
-        s.startCooldown(cooldown, root, c.cooldown * caster.Speed);//Start spell cooldown (with modified casting time from copy)
-        Debug.Log(root + " is going on cooldown for " + (c.cooldown * caster.Speed) + " seconds");
-        c.cast(targets, selected, caster);//Apply actual spell effect
+        s.startCooldown(cooldown, root, c.cooldown * caster.Stats.speed);//Start spell cooldown (with modified casting time from copy)
+        Debug.Log(root + " is going on cooldown for " + (c.cooldown * caster.Stats.speed) + " seconds");
+        c.cast(targets, selected, allies, position);//Apply actual spell effect
 
     }
     //Helper method to cast root-only spells
     //root cannot equal null
-    private void castUnmodified(string root, Enemy[] targets, int selected, Player caster)
+    private void castUnmodified(string root, ICaster[] targets, int selected, ICaster[] allies, int position)
     {
+        ICaster caster = allies[position];
         Spell s = spells[root];//Get root keyword from dictionary
         if (s.IsOnCooldown)//Casting fails if root is on cooldown
         {
@@ -272,9 +275,9 @@ public class SpellDictionary : MonoBehaviour
             Debug.Log("Cast failed: cooldownList is full!");
             return;
         }
-        s.startCooldown(cooldown, root, s.cooldown * caster.Speed);//Start spell cooldown (with modified casting time from copy)
-        Debug.Log(root + " is going on cooldown for " + (s.cooldown * caster.Speed) + " seconds");
-        s.cast(targets, selected, caster);//Apply actual spell effect
+        s.startCooldown(cooldown, root, s.cooldown * caster.Stats.speed);//Start spell cooldown (with modified casting time from copy)
+        Debug.Log(root + " is going on cooldown for " + (s.cooldown * caster.Stats.speed) + " seconds");
+        s.cast(targets, selected, allies, position);//Apply actual spell effect
     }
     //Will contain method for botching a spell
     private void botch(string root, string elem, string style, Player caster)
@@ -375,11 +378,6 @@ public static class Elements
                 return "error";
         }
     }
-}
-
-public interface ICaster
-{
-    void damage(int d, int element, ICaster caster, bool reflect = false);
 }
 
 

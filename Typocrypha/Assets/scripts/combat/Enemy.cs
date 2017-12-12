@@ -3,36 +3,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // simple container for enemy stats (Not a struct anymore cuz structs pass by value in c#)
-public class EnemyStats {
+public class EnemyStats : CasterStats {
     //Sorry for the massive constructor but all the vals are readonly so...
     public EnemyStats(string name, string sprite, int hp, int shield, int stag, int atk, int def, float speed, int acc, int evade, float[] vsElem = null, SpellData[] sp = null)
+        : base(name, hp, shield, stag, atk, def, speed, acc, evade, vsElem)
     {
-        this.name = name;
         sprite_path = sprite;
-        max_hp = hp;
-        max_shield = shield;
-        max_stagger = stag;
-        attack = atk;
-        defense = def;
-        this.speed = speed;
-        accuracy = acc;
-        evasion = evade;
-        vsElement = vsElem;
         spells = sp;
     }
-	public readonly string name;    // name of enemy
     public readonly string sprite_path; //path of sprite/resource to load at creation
-    public readonly int max_hp;     // max health
-    public readonly int max_stagger; //max stagger
-    //Makes casting easier (irrelevant right now)
-    public readonly int max_shield;
-    //Spell modifiers (to be used when spellcasting is hooked up)
-    public readonly int attack;     //numerical damage boost
-    public readonly int defense;    //numerical damage reduction
-    public readonly float speed;    //percentage of casting time reduction
-    public readonly int accuracy;   //numerical hitchance boost
-    public readonly int evasion;    //numerical dodgechance boost
-    public readonly float[] vsElement; //elemental weaknesses/resistances
     public readonly SpellData[] spells; // castable spells
 }
 
@@ -48,14 +27,25 @@ public class Enemy : MonoBehaviour, ICaster {
 
     public bool is_dead; // is enemy dead?
     public bool is_stunned; // is the enemy stunned?
-    public Enemy[] field; //State of battle scene (for ally-target casting)
+    public Enemy[] allies; //State of battle scene (for ally-target casting)
+    public ICaster[] targets;//State of the player and their allies (for target-casting)
+
     public int position; //index to field (current position)
     public EnemyChargeBars bars;
 	public SpriteRenderer enemy_sprite; // this enemy's sprite
 
-    //Private fields
+    public CasterStats Stats
+    {
+        get
+        {
+            return stats;
+        }
+    }
 
+    //Private fields
+    private int selected = 1;//Which target in targets is selected (index to targets)
     EnemyStats stats; // stats of enemy DO NOT MUTATE
+
     int curr_spell = 0;
 	int curr_hp; // current amount of health
     int curr_shield; //current amount of shield
@@ -63,7 +53,6 @@ public class Enemy : MonoBehaviour, ICaster {
     float stagger_time; //The time an enemy's stun will last
     float curr_time; // current time (from 0 to atk_time)
     float atk_time; // time it takes to attack
-    private Player target = Player.main; //Current target;
     private static SpellDictionary dict; //Dictionary to refer to (set in setStats)
 
     void Start() {
@@ -100,7 +89,7 @@ public class Enemy : MonoBehaviour, ICaster {
 	public SpellData getCurrSpell() {
 		return stats.spells[curr_spell];
 	}
-
+    //Main attack AI
 	// keep track of time, and attack whenever curr_time = atk_time
 	IEnumerator timer() {
         float curr_stagger_time = 0F;
@@ -133,7 +122,7 @@ public class Enemy : MonoBehaviour, ICaster {
 				BattleEffects.main.setDim(true, enemy_sprite);
 				AudioPlayer.main.playSFX (1, SFXType.SPELL, "magic_sound"); 
 				yield return new WaitForSeconds (1.5f);
-				attackPlayer (s,target);
+				attackPlayer (s);
 				yield return new WaitForSeconds (1f);
                 curr_spell++;
                 if (curr_spell >= stats.spells.Length)//Reached end of spell list
@@ -148,11 +137,11 @@ public class Enemy : MonoBehaviour, ICaster {
 	}
 
 	// pause battle, attack player with specified spell
-	void attackPlayer(SpellData s, Player target) {
+	void attackPlayer(SpellData s) {
 		Debug.Log (stats.name + " casts " + s.ToString());
 		StartCoroutine (swell ());
 		BattleEffects.main.screenShake (0.5f, 0.1f);
-        dict.GetComponent<SpellDictionary>().enemyCast(this, s, field, position, target);
+        dict.GetComponent<SpellDictionary>().NPC_Cast(s,targets, selected, allies, position);
 	}
 
 	// be attacked by the player
@@ -160,71 +149,29 @@ public class Enemy : MonoBehaviour, ICaster {
         //Reflect damage to caster if enemy reflects this element
         if(stats.vsElement[element] == Elements.reflect  && reflect == false)
         {
-            int dRef = d + stats.defense;
-            Debug.Log("Enemy reflects " + dRef + " " + Elements.toString(element) + " damage back at player");
-            caster.damage(dRef, element, this, true);
+            Debug.Log("Enemy reflects " + d + " " + Elements.toString(element) + " damage back at player");
+            caster.damage(d, element, this, true);
             return;
         }
-        //Absorb damage if enemy absorbs this type
-        else if(stats.vsElement[element] == Elements.absorb)
-        {
-            Debug.Log("Enemy absorbs " + d + " " + Elements.toString(element) + " damage");
-            curr_hp += d;
-            if (curr_hp > stats.max_hp)
-                curr_hp = stats.max_hp;
-            return;
-        }
-        int staggerDamage = 0;
-        //Apply elemental weakness/resistances
-        float dMod;
-        if (reflect == false || stats.vsElement[element] != Elements.reflect)
-            dMod = stats.vsElement[element] * d;
-        else
-            dMod = d * Elements.reflect_mod;
-        //Calculate stagger damage (UNFINISHED add crit, mods, etc)
-        if (stats.vsElement[element] > 1)//If enemy is weak
-            staggerDamage++;
-        //Apply stun damage mod
-        if (is_stunned)
-            dMod *= (1.25F + (0.25F * staggerDamage));
-		Debug.Log (stats.name + " was hit for " + dMod + " of " + Elements.toString(element) + " damage");
-        //Apply shield
-        if (curr_shield > 0)
-        {
-            if (curr_shield - dMod < 0)//Shield breaks
-            {
-                curr_shield = 0;
-                curr_hp -= Mathf.FloorToInt(dMod - curr_shield);
-                if (staggerDamage >= 1 && is_stunned == false)
-                    curr_stagger--;
-            }
-            else
-                curr_shield -= Mathf.FloorToInt(dMod);
-        }
-        else
-        {
-            curr_hp -= Mathf.FloorToInt(dMod);
-            //Stagger if enemy is actually damaged
-            if (staggerDamage >= 1 && is_stunned == false && dMod > 0)
-                curr_stagger--;
-        }
+
+        bool damaged = CasterOps.calcDamage(d, element, caster, this, ref curr_hp, ref curr_shield, ref curr_stagger, is_stunned);
         //Apply stun if applicable
         if (curr_stagger <= 0 && is_stunned == false)
             stun();
         //Apply shake and sfx if hit
-		if (dMod > 0) {
+		if (damaged) {
 			AudioPlayer.main.playSFX (2, SFXType.BATTLE, "take_damage"); 
-			BattleEffects.main.spriteShake (gameObject.transform, 0.5f, 0.1f * Mathf.Log (dMod, 7F));
+			BattleEffects.main.spriteShake (gameObject.transform, 0.5f, 0.1f);
 		}
         //opacity and death are now updated in updateCondition()
     }
-    
+    //Apply stun condition to enemy
     private void stun()
     {
         bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 0.5F, 0);
         is_stunned = true;
     }
-
+    //Un-stun enemy
     private void unStun()
     {
         bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0.9F, 0);

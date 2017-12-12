@@ -10,11 +10,13 @@ public class BattleManager : MonoBehaviour {
 	public GameObject enemy_prefab; // prefab for enemy object
 	public EnemyChargeBars charge_bars; // creates and mananges charge bars
 	public CooldownList cooldown_list; // creates and manages player's cooldowns
-	public int target_ind; // index of currently targeted enemy
 	public Transform target_ret; // shows where target is
 	public float enemy_spacing; // space between enemies
 	public bool pause; // is battle paused?
 	public Enemy[] enemy_arr; // array of Enemy components (size 3)
+    public int target_ind; // index of currently targeted enemy
+    public ICaster[] player_arr = { null, Player.main, null }; // array of Player and allies (size 3)
+    public int player_ind = 1;
 	public int enemy_count; // number of enemies in battle
 
 	void Awake() {
@@ -34,8 +36,9 @@ public class BattleManager : MonoBehaviour {
 			new_enemy.transform.localPosition = new Vector3 (i * enemy_spacing, 0, 0);
 			enemy_arr [i] = new_enemy.GetComponent<Enemy> ();
 			enemy_arr [i].setStats (scene.enemy_stats [i]);
-            enemy_arr [i].field = enemy_arr; //Give enemey access to field
+            enemy_arr [i].allies = enemy_arr; //Give enemey access to field
             enemy_arr [i].position = i;      //Log enemy position in field
+            enemy_arr[i].targets = player_arr;//Give enemy access to player field
             enemy_arr[i].bars = charge_bars; //Give enemy access to charge_bars
 			Vector3 bar_pos = new_enemy.transform.position;
 			bar_pos.Set (bar_pos.x, bar_pos.y + 1, bar_pos.z);
@@ -78,7 +81,7 @@ public class BattleManager : MonoBehaviour {
 		yield return new WaitForSeconds (1.5f);
         //	BattleEffects.main.spriteShake (enemy_arr[target_ind].gameObject.transform, 0.5f, 0.1f);
         //Send spell, Enemy state, and target index to parser and caster
-        spellDict.GetComponent<SpellDictionary>().parseAndCast(spell.ToLower(), enemy_arr, target_ind, Player.main);
+        spellDict.GetComponent<SpellDictionary>().parseAndCast(spell.ToLower(), enemy_arr, target_ind, player_arr, player_ind);
         yield return new WaitForSeconds (1f);
 		BattleEffects.main.setDim (false, enemy_arr [target_ind].enemy_sprite);
         updateEnemies();

@@ -6,10 +6,8 @@ using UnityEngine;
 //A spell must inherit from this class to define specific functionality
 public abstract class Spell
 {
-    //Casts this spell at selected enemy
-    public abstract void cast(Enemy[] targets, int selected, Player caster);
-    //Enemy casts this spell from input position at target player
-    public abstract void enemyCast(Enemy[] allies, int position, Player target);
+    //Casts this spell at selected target (at targets[selected])
+    public abstract void cast(ICaster[] targets, int selected, ICaster[]allies, int position);
     //Starts spell cooldown using coroutine support from the Timer class 
     public void startCooldown(CooldownList l, string name, float time)
     {
@@ -52,6 +50,8 @@ public abstract class Spell
         targets.CopyTo(s.targets, 0);
     }
 
+    //public fields
+
     public string description;          //Spell's description (in spellbook)
     public int power;                   //Spell's intensity (not necessarily just damage)
     public float cooldown;              //Spell's base cooldown
@@ -59,12 +59,12 @@ public abstract class Spell
     public int elementEffectMod;        //Spell's base elemental effect chance (1 = 1%)
     public int element = Elements.@null;     //Spell's elemental damage type
     public string type = "null";        //Spell's effect type (attack, shield, heal, etc.)
-    //Targets: {R,M,L,Player,CursorDependent?}
+    //Targets: {R,M,L,Self,CursorDependent?}
     public bool[] targets = { false, false, false, false, false };
 
     //Cooldown properties
 
-    //bool ref for passing timer.newTimer
+    //bool ref for passing to CooldownList
     Ref<bool> isNotOnCooldown = new Ref<bool>(true);
     //Returns true is on cooldown, false otherwise
     public bool IsOnCooldown
@@ -79,7 +79,7 @@ public abstract class Spell
             isNotOnCooldown.Obj = !value;
         }
     }
-    //float ref for passing to timer.newTimer
+    //float ref for passing to CooldownList
     Ref<float> curr_time = new Ref<float>(0.0F);
     //How many seconds to finish spell
     float finish_time = 0.0F;
@@ -88,33 +88,20 @@ public abstract class Spell
         get { return finish_time - curr_time.Obj; }
     }
 }
-//Spells that attempt to do damage to opposing entities (CURRENTLY INCOMPLETE)
+//Spells that attempt to do damage to opposing entities (Add targeting)
 public class AttackSpell : Spell
 {
-    public override void cast(Enemy[] targets, int selected, Player caster)
+    public override void cast(ICaster[] targets, int selected, ICaster[] allies, int position)
     {
-        int damage = power + caster.Attack - targets[selected].getStats().defense;
-        targets[selected].damage(damage, element, caster);
-        return;
-    }
-
-    public override void enemyCast(Enemy[] allies, int position, Player target)
-    {
-        int damage = power - target.Defense;
-        target.damage(damage, element, allies[position]);
+        ICaster caster = allies[position];
+        targets[selected].damage(power, element, caster);
         return;
     }
 }
 //Spells that attempt to heal friendly entities (CURRENTLY INCOMPLETE)
 public class HealSpell : Spell
 {
-    public override void cast(Enemy[] targets, int selected, Player caster)
-    {
-        Debug.Log("Heal spell cast");
-        return;
-    }
-
-    public override void enemyCast(Enemy[] allies, int position, Player p)
+    public override void cast(ICaster[] targets, int selected, ICaster[] allies, int position)
     {
         throw new System.NotImplementedException();
     }
@@ -122,13 +109,7 @@ public class HealSpell : Spell
 //Spells that attempt to shield friendly entities (CURRENTLY INCOMPLETE)
 public class ShieldSpell : Spell
 {
-    public override void cast(Enemy[] targets, int selected, Player caster)
-    {
-        Debug.Log("Shield spell cast");
-        return;
-    }
-
-    public override void enemyCast(Enemy[] allies, int position, Player p)
+    public override void cast(ICaster[] targets, int selected, ICaster[] allies, int position)
     {
         throw new System.NotImplementedException();
     }
