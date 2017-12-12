@@ -48,7 +48,7 @@ public class LoadGameFlow : MonoBehaviour {
 	// parses intro scene; pos is the line number of the scene in file
 	// returns line number at the end of this scene in file
 	int parseIntroScene(string[] lines, int pos, int curr_scene) {
-		scene_arr [curr_scene] = new IntroScene ();
+		scene_arr [curr_scene] = new IntroScene ("");
 		return pos;
 	}
 
@@ -56,6 +56,7 @@ public class LoadGameFlow : MonoBehaviour {
 	// returns line number at the end of this scene in file
 	int parseCutScene(string[] lines, int pos, int curr_scene) {
 		// read in lines of scene
+		string music_track = "";
 		List<string> npcs = new List<string> ();
 		List<string> whos_talking = new List<string> ();
 		List<string> dialogue = new List<string> ();
@@ -63,7 +64,9 @@ public class LoadGameFlow : MonoBehaviour {
 		int i = pos;
 		for (; i < lines.Length; i++) {
 			string[] cols = lines [i].Split (col_delim);
-			if (cols [0].CompareTo ("NPC") == 0) { // read in npc
+			if (cols [0].CompareTo ("MUSIC") == 0) { // read in track name
+				music_track = cols[1];
+			} else if (cols [0].CompareTo ("NPC") == 0) { // read in npc
 				npcs.Add (cols [1]);
 			} else if (cols [0].CompareTo ("DIALOGUE") == 0) { // read in dialogue
 				whos_talking.Add (cols[1]);
@@ -73,7 +76,7 @@ public class LoadGameFlow : MonoBehaviour {
 				break;
 			}
 		}
-		scene_arr [curr_scene] = new CutScene (npcs.ToArray (), whos_talking.ToArray(), 
+		scene_arr [curr_scene] = new CutScene (music_track, npcs.ToArray (), whos_talking.ToArray(), 
 			dialogue.ToArray (), npc_sprites.ToArray());
 		return i;
 	}
@@ -82,18 +85,21 @@ public class LoadGameFlow : MonoBehaviour {
 	// returns line number at the end of this scene in file
 	int parseBattle(string[] lines, int pos, int curr_scene) {
 		// read in lines of scene
+		string music_track = "";
 		List<EnemyStats> enemies = new List<EnemyStats>();
 		int i = pos;
 		for (; i < lines.Length; i++) {
 			string[] cols = lines [i].Split (col_delim);
-			if (cols [0].CompareTo ("ENEMY") == 0) { // read in enemy
+			if (cols [0].CompareTo ("MUSIC") == 0) {
+				music_track = cols [1];
+			} else if (cols [0].CompareTo ("ENEMY") == 0) { // read in enemy
 				EnemyStats new_stats = enemy_data.getData(cols[1]);
 				enemies.Add (new_stats);
 			} else { // otherwise, scene is done
 				break;
 			}
 		}
-		scene_arr [curr_scene] = new BattleScene (enemies.ToArray ());
+		scene_arr [curr_scene] = new BattleScene (music_track, enemies.ToArray ());
 		return i;
 	}
 }

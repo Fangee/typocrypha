@@ -43,6 +43,7 @@ public class BattleManager : MonoBehaviour {
 		}
 		pause = false;
 		target_ind = 0;
+		AudioPlayer.main.playMusic (MusicType.BATTLE, scene.music_track);
 	}
 
 	// check if player switches targets or attacks

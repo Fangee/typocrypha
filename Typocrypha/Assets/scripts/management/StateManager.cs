@@ -27,6 +27,7 @@ public class StateManager : MonoBehaviour {
 
 	// transition to next scene; returns false if at end
 	public bool nextScene() {
+		AudioPlayer.main.stopAll (); // stop all playing audio
 		if (curr_scene >= scene_arr.Length - 1) {
 			track_typing.enabled = false;
 			CutsceneManager.main.enabled = false;

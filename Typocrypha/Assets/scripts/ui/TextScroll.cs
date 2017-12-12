@@ -36,6 +36,7 @@ public class TextScroll : MonoBehaviour {
 	IEnumerator scrollText() {
 		int text_pos = 0;
 		while (text_pos < in_text.Length) {
+			AudioPlayer.main.playSpeakingSFX ();
 			out_text.text += in_text [text_pos++];
 			yield return new WaitForSeconds (delay);
 		}
