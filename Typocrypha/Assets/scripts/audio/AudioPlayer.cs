@@ -28,12 +28,12 @@ public class AudioPlayer : MonoBehaviour {
 	}
 
 	void Start() {
-		cutscenemusic = AssetBundle.LoadFromFile ("Assets/AssetBundles/cutscenemusic");
-		battlemusic = AssetBundle.LoadFromFile ("Assets/AssetBundles/battlemusic");
-		uisfx = AssetBundle.LoadFromFile ("Assets/AssetBundles/uisfx");
-		spellsfx = AssetBundle.LoadFromFile ("Assets/AssetBundles/spellsfx");
-		battlesfx = AssetBundle.LoadFromFile ("Assets/AssetBundles/battlesfx");
-		speakingsfx = AssetBundle.LoadFromFile ("Assets/AssetBundles/speakingsfx");
+		cutscenemusic = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "cutscenemusic"));
+		battlemusic = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "battlemusic"));
+		uisfx = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "uisfx"));
+		spellsfx = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "spellsfx"));
+		battlesfx = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "battlesfx"));
+		speakingsfx = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "speakingsfx"));
 		sfx_channels = new AudioSource[sfx.childCount];
 		for (int i = 0; i < sfx.childCount; i++) // put all sfx channels into array
 			sfx_channels[i] = sfx.GetChild(i).gameObject.GetComponent<AudioSource>();
