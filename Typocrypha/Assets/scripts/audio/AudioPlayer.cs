@@ -6,11 +6,8 @@ using UnityEngine;
 // different types of music
 public enum MusicType { CUTSCENE, BATTLE };
 
-// SFX CHANNELS: (can be changed)
-//   0 - menu/UI sounds
-//   1 - spell cast sounds
-//   2 - battle sounds (taking damage, etc)
-//   3 - speaking sounds
+// different types of sfx
+public enum SFXType { UI, SPELL, BATTLE, SPEAKING };
 
 // manages playing music and sfx
 public class AudioPlayer : MonoBehaviour {
@@ -25,29 +22,41 @@ public class AudioPlayer : MonoBehaviour {
 
 	void Awake() {
 		if (main == null) main = this;
-		cutscenemusic = AssetBundle.LoadFromFile ("Assets/AssetBundles/cutscenemusic");
-		battlemusic = AssetBundle.LoadFromFile ("Assets/AssetBundles/battlemusic");
-		speakingsfx = AssetBundle.LoadFromFile ("Assets/AssetBundles/speakingsfx");
 	}
 
 	void Start() {
+		cutscenemusic = AssetBundle.LoadFromFile ("Assets/AssetBundles/cutscenemusic");
+		battlemusic = AssetBundle.LoadFromFile ("Assets/AssetBundles/battlemusic");
+		speakingsfx = AssetBundle.LoadFromFile ("Assets/AssetBundles/speakingsfx");
 		sfx_channels = new AudioSource[sfx.childCount];
 		for (int i = 0; i < sfx.childCount; i++) // put all sfx channels into array
 			sfx_channels[i] = sfx.GetChild(i).gameObject.GetComponent<AudioSource>();
 	}
-
-	// sets specified speaking sfx
-	public void setSpeakingSFX(string name) {
-		sfx_channels [3].clip = speakingsfx.LoadAsset<AudioClip> (name);
+		
+	// sets specified sfx channel
+	public void setSFX(int channel, SFXType type, string name) {
+		switch (type) {
+		case SFXType.UI:
+			break;
+		case SFXType.SPELL:
+			break;
+		case SFXType.SPEAKING:
+			sfx_channels [channel].clip = speakingsfx.LoadAsset<AudioClip> (name);
+			break;
+		case SFXType.BATTLE:
+			break;
+		}
 	}
 
-	// play speaking sfx current
-	public void playSpeakingSFX() {
-		sfx_channels [3].Play ();
+	// play current sfx in channel
+	public void playSFX(int channel) {
+		sfx_channels [channel].Play ();
 	}
 
 	// play music from specified type
 	public void playMusic(MusicType type, string name) {
+		if (name.CompareTo ("_") == 0) return; // skip if null song
+		Debug.Log ("playing music:" + name);
 		switch (type) {
 		case MusicType.CUTSCENE:
 			music.clip = cutscenemusic.LoadAsset<AudioClip> (name);

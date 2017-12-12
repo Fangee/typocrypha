@@ -22,10 +22,6 @@ public class CutsceneManager : MonoBehaviour {
 	public void startCutscene(CutScene i_scene) {
 		scene = i_scene;
 		curr_line = 0; // reset dialogue
-		Debug.Log("NPCs in cutscene:");
-		foreach (string npc in scene.npcs)
-			Debug.Log ("  " + npc);
-		AudioPlayer.main.playMusic (MusicType.CUTSCENE, scene.music_track);
 		nextLine ();
 	}
 
@@ -46,8 +42,8 @@ public class CutsceneManager : MonoBehaviour {
 			Sprite npc_sprite = // set sprite of current speaker
 				Resources.Load<Sprite>("sprites/" + scene.npc_sprites[curr_line].Trim());
 			sprite_holder.sprite = npc_sprite;
-			AudioPlayer.main.setSpeakingSFX ("speak_boop"); // set speaker's speaking sfx
-			text_scroll.startPrint (scene.dialogue [curr_line], display_text);
+			AudioPlayer.main.playMusic(MusicType.CUTSCENE, scene.music_tracks[curr_line]);
+			text_scroll.startPrint (scene.dialogue [curr_line], display_text, "speak_boop");
 			++curr_line;
 		} else { // dump if dialogue already started
 			text_scroll.dump ();

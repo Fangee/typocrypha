@@ -109,7 +109,7 @@ MonoBehaviour:
   m_MinSize: {x: 583, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 25
+  controlID: 32
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_MinSize: {x: 306, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 26
+  controlID: 33
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_MinSize: {x: 306, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 27
+  controlID: 34
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -176,8 +176,8 @@ MonoBehaviour:
     y: 0
     width: 296
     height: 404
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -201,8 +201,8 @@ MonoBehaviour:
     y: 0
     width: 683
     height: 404
-  m_MinSize: {x: 104, y: 121}
-  m_MaxSize: {x: 4004, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 16}
@@ -434,9 +434,9 @@ MonoBehaviour:
     height: 383
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 2ef6ffff
-    m_LastClickedID: -2514
-    m_ExpandedIDs: 68e2ffff14eaffff2ef6ffff5cfaffff00000000
+    m_SelectedIDs: 66290000
+    m_LastClickedID: 10598
+    m_ExpandedIDs: a6fbffff00000000e6290000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -598,7 +598,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/audio/music/battle_music
+    - Assets/scripts/management
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -609,7 +609,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 186}
     m_SelectedIDs: a0210000
     m_LastClickedID: 8608
-    m_ExpandedIDs: 0000000096280000a6280000e6280000062900000a290000162900002a29000032290000
+    m_ExpandedIDs: 00000000502700007c2700009a270000b6270000c2270000e227000022280000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -634,24 +634,24 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 0}
+    scrollPos: {x: 0, y: 557.8711}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000096280000a6280000d8280000e6280000ee2800002a290000e22d0000
+    m_ExpandedIDs: 00000000502700007c270000802700009a270000b6270000bc270000c2270000c8270000e2270000e8270000ea2700000828000022280000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: GameScene
+      m_OriginalName: GameScene
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 1900
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 10}
     m_SearchString: 

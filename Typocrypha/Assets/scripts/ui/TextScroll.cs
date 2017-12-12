@@ -17,7 +17,8 @@ public class TextScroll : MonoBehaviour {
 	}
 
 	// start printing string to Text display
-	public void startPrint(string in_txt, Text out_txt) {
+	public void startPrint(string in_txt, Text out_txt, string speak_sfx) {
+		AudioPlayer.main.setSFX (3, SFXType.SPEAKING, speak_sfx); // put sfx in channel 3
 		in_text = in_txt;
 		out_text = out_txt;
 		out_text.text = "";
@@ -36,7 +37,7 @@ public class TextScroll : MonoBehaviour {
 	IEnumerator scrollText() {
 		int text_pos = 0;
 		while (text_pos < in_text.Length) {
-			AudioPlayer.main.playSpeakingSFX ();
+			AudioPlayer.main.playSFX (3); // play speaking sfx
 			out_text.text += in_text [text_pos++];
 			yield return new WaitForSeconds (delay);
 		}
