@@ -159,8 +159,7 @@ public class Enemy : MonoBehaviour, ICaster {
         if (curr_stagger <= 0 && is_stunned == false)
             stun();
         //Apply shake and sfx if hit
-		if (damaged) {
-			AudioPlayer.main.playSFX (2, SFXType.BATTLE, "take_damage"); 
+		if (damaged) { 
 			BattleEffects.main.spriteShake (gameObject.transform, 0.5f, 0.1f);
 		}
         //opacity and death are now updated in updateCondition()
@@ -168,6 +167,7 @@ public class Enemy : MonoBehaviour, ICaster {
     //Apply stun condition to enemy
     private void stun()
     {
+		AudioPlayer.main.playSFX (2, SFXType.BATTLE, "sfx_stagger");
         bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 0.5F, 0);
         is_stunned = true;
     }

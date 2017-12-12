@@ -61,7 +61,7 @@ public class BattleManager : MonoBehaviour {
 		// move target reticule
 		target_ret.localPosition = new Vector3 (target_ind * enemy_spacing, -1, 0);
 		// play effect sound if target was moved
-		if (old_ind != target_ind) AudioPlayer.main.playSFX(0, SFXType.UI, "menu_boop");
+		if (old_ind != target_ind) AudioPlayer.main.playSFX(0, SFXType.UI, "sfx_enemy_select");
 	}
 
 	// attack currently targeted enemy with spell

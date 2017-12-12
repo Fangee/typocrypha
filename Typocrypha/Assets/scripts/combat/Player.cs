@@ -107,10 +107,7 @@ public class Player : ICaster
         int curr_stagger = 0;
         bool damaged = CasterOps.calcDamage(d, element, caster, this, ref curr_hp, ref curr_shield, ref curr_stagger);
 
-
-
         if (damaged) {
-			AudioPlayer.main.playSFX (2, SFXType.BATTLE, "take_damage"); 
 		}
         if (Curr_hp <= 0)
         { // check if killed

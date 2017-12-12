@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 958485642
+CRC: 2733530105
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9dd972e5ba71693f55bc4d9e49e03965
+    Hash: 2bbb4419f3a44ac54d9605a69a17cc3a
   TypeTreeHash:
     serializedVersion: 2
     Hash: 3f7d0c5e0986ec71841622bcb2f9be1c
@@ -12,5 +12,8 @@ ClassTypes:
 - Class: 83
   Script: {instanceID: 0}
 Assets:
+- Assets/audio/sfx/battle_sfx/sfx_stagger.wav
 - Assets/audio/sfx/battle_sfx/take_damage.ogg
+- Assets/audio/sfx/battle_sfx/sfx_enemy_weakcrit_dmg.wav
+- Assets/audio/sfx/battle_sfx/sfx_party_weakcrit_dmg.wav
 Dependencies: []

@@ -36,6 +36,7 @@ public class TrackTyping : MonoBehaviour {
 		// check key presses
 		if (Input.GetKeyDown (KeyCode.Return)) {
 			Debug.Log ("Player casts " + buffer);
+			AudioPlayer.main.playSFX (0, SFXType.UI, "sfx_enter");
 			BattleManager.main.attackCurrent (buffer); // attack currently targeted enemy
 			buffer = "";
 			count = 0;
