@@ -47,10 +47,11 @@ public class Enemy : MonoBehaviour, ICaster {
     public int Curr_shield { get { return curr_shield; } set { curr_shield = value; } }
     public int Curr_stagger { get { return curr_stagger; } set { curr_stagger = value; } }
     public bool Is_stunned { get { return is_stunned; } }
+    public bool Is_dead { get { return is_dead; } }
 
     //Public fields//
 
-    public bool is_dead; // is enemy dead?
+    bool is_dead; // is enemy dead?
     public Enemy[] allies; //State of battle scene (for ally-target casting)
     public ICaster[] targets;//State of the player and their allies (for target-casting)
 

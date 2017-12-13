@@ -70,6 +70,13 @@ public class Player : ICaster
         set { return; }
     }
     public bool Is_stunned { get { return false; } }
+    public bool Is_dead
+    {
+        get
+        {
+            return is_dead;
+        }
+    }
 
     //Fields
 
@@ -80,13 +87,7 @@ public class Player : ICaster
 
     //READ ONLY PROPERTIES
 
-    public bool Is_dead
-    {
-        get
-        {
-            return is_dead;
-        }
-    }
+ 
 
     //READ/WRITE PROPERTIES
 

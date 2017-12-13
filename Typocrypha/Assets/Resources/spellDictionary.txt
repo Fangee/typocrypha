@@ -7,6 +7,8 @@ sacrifice	attack	"hurts self, does big ds"	40	10	95	10	0	LRmS
 splash	attack	always misses (debug )	1	1	-1000	10	0	MT				
 poke	attack	high damage for debugging	999	1	100	0	0	MT				
 weakpnt	attack	always crits (debug)	2	1	100	100	0	MT				
+death	attack	kills self (debug)	999	1	100	0	0	mS				
+stun	attack	deal stagger to all	1	1	100	100	0	LMR				
 END												
 name (elem)	element	spellbook description	cooldown+	cooldown*								
 fire	fire	adds fire element to spell	0	1								

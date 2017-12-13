@@ -10,7 +10,8 @@ public interface ICaster
     int Curr_hp { get; set; }
     int Curr_shield { get; set; }
     int Curr_stagger { get; set; }
-    bool Is_stunned { get;}
+    bool Is_stunned { get; }
+    bool Is_dead { get; }
 
     void damage(int d, int element, ICaster caster, bool crit, bool reflect = false);
 }

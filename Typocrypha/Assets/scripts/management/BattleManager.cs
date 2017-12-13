@@ -69,10 +69,7 @@ public class BattleManager : MonoBehaviour {
 
 	// attack currently targeted enemy with spell
 	public void attackCurrent(string spell) {
-		if (enemy_arr [target_ind].is_dead) {
-			Debug.Log ("target is already dead!");
-			return; // don't attack dead enemies
-		}
+        //Can attack dead enemies now, just wont cast spell at them
 		StartCoroutine (pauseAttackCurrent (spell));
     }
 
@@ -97,8 +94,10 @@ public class BattleManager : MonoBehaviour {
 		int curr_dead = 0;
         for(int i = 0; i < enemy_arr.Length; i++)
         {
-			enemy_arr [i].updateCondition ();
-			if (enemy_arr [i].is_dead) ++curr_dead;
+            if(!enemy_arr[i].Is_dead)
+			    enemy_arr [i].updateCondition ();
+			else
+                ++curr_dead;
         }
 		if (curr_dead == enemy_count) // end battle if all enemies dead
 		{

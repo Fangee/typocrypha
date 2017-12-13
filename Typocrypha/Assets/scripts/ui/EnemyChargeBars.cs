@@ -52,7 +52,7 @@ public class EnemyChargeBars : MonoBehaviour {
 		for (int i = 0; i < 3; i++) {
 			if (charge_bars [i] != null) {
 				Enemy enemy = BattleManager.main.enemy_arr [i];
-				if (!enemy.is_dead) {
+				if (!enemy.Is_dead) {
 					charge_bars [i].setValue (enemy.getProgress ());
 					charge_bars [i].setText (enemy.getCurrSpell ().ToString ());
 				} else { // if enemy has died, remove bar
