@@ -13,9 +13,12 @@ public static class CasterOps
         float dMod = base_power;
         int staggerDamage = 0;
 
-        //Apply buff/debuffs here
+        //Apply buff/debuffs here (NOT DONE)
+        CasterStats casterMod = caster.Stats;
+        CasterStats targetMod = target.Stats;
 
-        //Apply stat mods here
+        //Apply attack bonus formula here
+        dMod *= casterMod.attack;
 
         //Absorb damage if enemy absorbs this type
         if (target.Stats.vsElement[element] == Elements.absorb)
@@ -27,6 +30,12 @@ public static class CasterOps
                 target.Curr_hp += Mathf.CeilToInt(dMod);
             return false;
         }
+
+        //Subtract enemy defense penalty here
+        dMod = dMod - (dMod * targetMod.defense);
+
+        //Add random modifier here
+        dMod *= Random.Range(0.9F, 1.1F);
 
         //Apply crit here
         if (crit)
@@ -40,19 +49,19 @@ public static class CasterOps
         //Apply stun damage mod (if stunned)
         if (is_stunned)
             dMod *= (1.25F + (0.25F * staggerDamage));
-        Debug.Log(target.Stats.name + " was hit for " + dMod + " of " + Elements.toString(element) + " damage x" + target.Stats.vsElement[element]);
+        Debug.Log(target.Stats.name + " was hit for " + dMod + " (ceiling) of " + Elements.toString(element) + " damage x" + target.Stats.vsElement[element]);
         //Apply shield
         if (target.Curr_shield > 0)
         {
             if (target.Curr_shield - dMod < 0)//Shield breaks
             {
                 target.Curr_shield = 0;
-                target.Curr_hp -= Mathf.FloorToInt(dMod - target.Curr_shield);
+                target.Curr_hp -= Mathf.CeilToInt(dMod - target.Curr_shield);
                 if (staggerDamage >= 1 && is_stunned == false)
                     target.Curr_stagger--;
             }
             else
-                target.Curr_shield -= Mathf.FloorToInt(dMod);
+                target.Curr_shield -= Mathf.CeilToInt(dMod);
         }
         else
         {

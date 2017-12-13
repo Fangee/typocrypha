@@ -6,7 +6,7 @@ using UnityEngine;
 public class CasterStats
 {
     //Sets all read-only values
-    public CasterStats(string name, int hp, int shield, int stagger, float atk, float def, float speed, int acc, int evade, float[] vsElem = null)
+    public CasterStats(string name, int hp, int shield, int stagger, float atk, float def, float speed, float acc, int evade, float[] vsElem = null)
     {
         this.name = name;
         max_hp = hp;
@@ -30,7 +30,7 @@ public class CasterStats
     public readonly float attack;      //numerical damage boost
     public readonly float defense;     //numerical damage reduction
     public readonly float speed;       //percentage of casting time reduction
-    public readonly int accuracy;      //numerical hitchance boost
+    public readonly float accuracy;      //numerical hitchance boost
     public readonly int evasion;       //numerical dodgechance boost
     public readonly float[] vsElement; //elemental weaknesses/resistances
     //Return the equivalent of this + CasterStats mod (to be used for stat buff/debuffs)
@@ -42,7 +42,7 @@ public class CasterStats
         float atk = attack + mod.attack;
         float def = defense + mod.defense;
         float spd = speed + mod.speed;
-        int acc = accuracy + mod.accuracy;
+        float acc = accuracy + mod.accuracy;
         int evade = evasion + mod.evasion;
         float[] vE;
         if (mod.vsElement == null)

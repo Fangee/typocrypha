@@ -28,8 +28,8 @@ public class EnemyDatabase
         string[] cols;
         //Declare fields
         string name, sprite_path;
-        int max_hp, max_shield, max_stagger, atk,def,acc,evade;//declare stat variables
-        float speed;
+        int max_hp, max_shield, max_stagger,evade;//declare stat variables
+        float speed, acc, atk, def;
         float[] vsElem;
         //For each line in input file
         for (int i = 1; lines[i].Trim().CompareTo("END") != 0; i++)
@@ -41,10 +41,10 @@ public class EnemyDatabase
             int.TryParse(cols[++ind].Trim(), out max_hp);
             int.TryParse(cols[++ind].Trim(), out max_shield);
             int.TryParse(cols[++ind].Trim(), out max_stagger);
-            int.TryParse(cols[++ind].Trim(), out atk);
-            int.TryParse(cols[++ind].Trim(), out def);
+            float.TryParse(cols[++ind].Trim(), out atk);
+            float.TryParse(cols[++ind].Trim(), out def);
             float.TryParse(cols[++ind].Trim(), out speed);
-            int.TryParse(cols[++ind].Trim(), out acc);
+            float.TryParse(cols[++ind].Trim(), out acc);
             int.TryParse(cols[++ind].Trim(), out evade);
             vsElem = new float[Elements.count];
             //Read in elemental weakness/resistances

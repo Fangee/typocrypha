@@ -99,6 +99,7 @@ public class SpellDictionary : MonoBehaviour
             e.element = Elements.fromString(cols[1].Trim());
             e.description = cols[2].Trim();
             float.TryParse(cols[3].Trim(), out e.cooldownMod);
+            float.TryParse(cols[4].Trim(), out e.cooldownModM);
             elements.Add(key, e);
             i++;
         }
@@ -115,11 +116,16 @@ public class SpellDictionary : MonoBehaviour
             s.name = key;
             int.TryParse(cols[1].Trim(), out s.powerMod);
             s.description = cols[2].Trim();
-            float.TryParse(cols[3].Trim(), out s.cooldownMod);
-            int.TryParse(cols[3].Trim(), out s.accMod);
-            int.TryParse(cols[4].Trim(), out s.critMod);
-            int.TryParse(cols[5].Trim(), out s.statusEffectChanceMod);
-            string pattern = cols[6].Trim();
+            float.TryParse(cols[3].Trim(), out s.powerModM);
+            float.TryParse(cols[4].Trim(), out s.cooldownMod);
+            float.TryParse(cols[5].Trim(), out s.cooldownModM);
+            int.TryParse(cols[6].Trim(), out s.accMod);
+            float.TryParse(cols[7].Trim(), out s.accModM);
+            int.TryParse(cols[8].Trim(), out s.critMod);
+            float.TryParse(cols[9].Trim(), out s.critModM);
+            int.TryParse(cols[10].Trim(), out s.statusEffectChanceMod);
+            float.TryParse(cols[11].Trim(), out s.statusEffectChanceModM);
+            string pattern = cols[12].Trim();
             if (pattern.Contains("N"))
                 s.isTarget = false;
             else if (pattern.Contains("A"))
@@ -262,10 +268,24 @@ public class SpellDictionary : MonoBehaviour
     public float getCastingTime(SpellData s, float speed)
     {
         float time = spells[s.root].cooldown;
-        if (s.element != null)
+        if (s.element != null && s.style != null)
+        {
+            float baseTime = time;
+            time *= elements[s.element].cooldownModM;
+            time += (baseTime * styles[s.style].cooldownModM) - baseTime;
             time += elements[s.element].cooldownMod;
-        if (s.style != null)
             time += styles[s.style].cooldownMod;
+        }
+        else if(s.element != null)
+        {
+            time *= elements[s.element].cooldownModM;
+            time += elements[s.element].cooldownMod;
+        }
+        else if (s.style != null)
+        {
+            time *= styles[s.style].cooldownModM;
+            time += styles[s.style].cooldownMod;
+        }
         return time * speed;
     }
 

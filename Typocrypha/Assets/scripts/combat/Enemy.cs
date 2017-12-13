@@ -5,7 +5,7 @@ using UnityEngine.UI;
 // simple container for enemy stats (Not a struct anymore cuz structs pass by value in c#)
 public class EnemyStats : CasterStats {
     //Sorry for the massive constructor but all the vals are readonly so...
-    public EnemyStats(string name, string sprite, int hp, int shield, int stag, int atk, int def, float speed, int acc, int evade, float[] vsElem = null, SpellData[] sp = null)
+    public EnemyStats(string name, string sprite, int hp, int shield, int stag, float atk, float def, float speed, float acc, int evade, float[] vsElem = null, SpellData[] sp = null)
         : base(name, hp, shield, stag, atk, def, speed, acc, evade, vsElem)
     {
         sprite_path = sprite;

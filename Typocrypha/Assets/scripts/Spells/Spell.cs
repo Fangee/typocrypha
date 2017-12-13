@@ -18,19 +18,45 @@ public abstract class Spell
     }
     //Apllies prefix and suffix to spell. both arguments can be null (if no prefix or suffix)
     public void Modify(ElementMod e, StyleMod s)
-    {       
-        if(e != null)//Add element modifier
+    {
+        //Handle Cooldown (sequence matters)
+        if (e != null && s != null)
+        {
+            float baseTime = cooldown;
+            cooldown *= e.cooldownModM;
+            cooldown += (baseTime * s.cooldownModM) - baseTime;
+            cooldown += e.cooldownMod;
+            cooldown += s.cooldownMod;
+        }
+        else if (e != null)
+        {
+            cooldown *= e.cooldownModM;
+            cooldown += e.cooldownMod;
+        }
+        else if (s != null)
+        {
+            cooldown *= s.cooldownModM;
+            cooldown += s.cooldownMod;
+        }
+        //Add rest of stuff
+        if (e != null)//Add element modifier
         {
             element = e.element;
-            cooldown += e.cooldownMod;
             name = e.name + "-" + name;
         }
         if(s != null)//Add style modifier
         {
+            //Apply power mod
+            power = Mathf.CeilToInt(power * s.powerModM);
             power += s.powerMod;
-            cooldown += s.cooldownMod;
+            //Apply acc mod
+            hitPercentage = Mathf.CeilToInt(hitPercentage * s.accModM);
             hitPercentage += s.accMod;
+            //Appl crit mod
+            critPercentage = Mathf.CeilToInt(critPercentage * s.critModM);
             critPercentage += s.critMod;
+            //Apply status % mod
+            elementEffectMod = Mathf.CeilToInt(elementEffectMod * s.statusEffectChanceModM);
             elementEffectMod += s.statusEffectChanceMod;
             if (s.isTarget == true)
             {
@@ -92,7 +118,7 @@ public abstract class Spell
     {
         if (checkStun && target.Is_stunned)
             return true;
-        int chance = hitPercentage + caster.Stats.accuracy - target.Stats.evasion;
+        int chance = Mathf.CeilToInt(hitPercentage * caster.Stats.accuracy) - target.Stats.evasion;
         if((Random.Range(0.0F, 1F) * 100) <= chance)
             return true;
         Debug.Log(caster.Stats.name + " missed " + target.Stats.name + "!");
@@ -103,11 +129,11 @@ public abstract class Spell
     //ONLY CALL IN CAST (or after spell has been been properly modified with Modify())
     protected bool critCheck(ICaster target, ICaster caster)
     {
-        int chance = critPercentage;
+        float accBonus = Mathf.Clamp(((caster.Stats.accuracy - 1) * (1 - (target.Stats.evasion * 0.01F))) * 0.2F, 0, 2) * 10;
+        float chance = critPercentage + accBonus;
         if ((Random.Range(0.0F, 1F) * 100) <= chance)
         {
             Debug.Log(caster.Stats.name + " scores a critical with " + name + " on " + target.Stats.name);
-            power = Mathf.CeilToInt(power * 1.5F);
             return true;
         }
         return false;
@@ -161,7 +187,12 @@ public class AttackSpell : Spell
         if(hitCheck(target,caster, true))
         {
             bool crit = critCheck(target, caster);
-            target.damage(power, element, caster, crit);
+            int powerMod;
+            if (crit)
+                powerMod = Mathf.CeilToInt(power * 1.5F);
+            else
+                powerMod = power;
+            target.damage(powerMod, element, caster, crit);
         }
     }
 }
@@ -188,6 +219,7 @@ public class ElementMod
     public string description;
     public int element;      //Elemental modifier to apply
     public float cooldownMod;
+    public float cooldownModM;
 
 }
 //Contains the data associated with a Style keyword
@@ -198,13 +230,17 @@ public class StyleMod
     public int powerMod;
     public float powerModM = 0;
     public float cooldownMod;
+    public float cooldownModM;
     public int accMod;
+    public float accModM;
     public int critMod;
+    public float critModM;
     public int statusEffectChanceMod;
+    public float statusEffectChanceModM;
     public bool isTarget = true;
     public TargetData targets;
 }
-
+//Unfinished (CREATE A BETTER VERSION FOR TARGET MOD MODULATION)
 public class TargetData
 {
     public TargetData(bool b)
@@ -234,10 +270,13 @@ public class TargetData
         enemyL = t.enemyL;
         enemyM = t.enemyM;
         enemyR = t.enemyR;
-        allyL = t.allyL;
-        allyM = t.allyM;
-        allyR = t.allyR;
-        selfCenter = t.selfCenter;
+        if(!(allyL || allyM || allyR))
+        {
+            allyL = t.allyL;
+            allyM = t.allyM;
+            allyR = t.allyR;
+            selfCenter = t.selfCenter;
+        }
         targeted = t.targeted;
     }
 }
