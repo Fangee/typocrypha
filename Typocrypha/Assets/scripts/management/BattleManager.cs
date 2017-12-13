@@ -77,10 +77,11 @@ public class BattleManager : MonoBehaviour {
 	IEnumerator pauseAttackCurrent(string spell){
 		pause = true;
 		BattleEffects.main.setDim (true, enemy_arr[target_ind].enemy_sprite);
-		AudioPlayer.main.playSFX (1, SFXType.SPELL, "magic_sound"); 
+		//AudioPlayer.main.playSFX (1, SFXType.SPELL, "magic_sound");
 		yield return new WaitForSeconds (1.5f);
-        //	BattleEffects.main.spriteShake (enemy_arr[target_ind].gameObject.transform, 0.5f, 0.1f);
-        //Send spell, Enemy state, and target index to parser and caster
+		AudioPlayer.main.playSFX (1, SFXType.SPELL, "Cutting_SFX");
+		AnimationPlayer.main.playAnimation (AnimationType.SPELL, "cut", enemy_arr[target_ind].transform.position, false);
+		//Send spell, Enemy state, and target index to parser and caster
         spellDict.GetComponent<SpellDictionary>().parseAndCast(spell.ToLower(), enemy_arr, target_ind, player_arr, player_ind);
         yield return new WaitForSeconds (1f);
 		BattleEffects.main.setDim (false, enemy_arr [target_ind].enemy_sprite);
