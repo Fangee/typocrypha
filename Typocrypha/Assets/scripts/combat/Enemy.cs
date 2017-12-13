@@ -113,9 +113,8 @@ public class Enemy : MonoBehaviour, ICaster {
         SpellData s = stats.spells[curr_spell];        //Initialize with current spell
         atk_time = dict.getCastingTime(s, stats.speed);   //Get casting time
 		while (!is_dead) {
-			yield return new WaitForSeconds (0.1f);
-			while (BattleManager.main.pause)
-				yield return new WaitForSeconds (0.1f);
+			yield return new WaitForEndOfFrame ();
+			yield return new WaitWhile (() => BattleManager.main.pause);
             while(is_stunned)//Stop attack loop from continuing while the enemy is stunned
             {
                 if (curr_stagger_time >= stagger_time)//End stun if time up
@@ -125,15 +124,15 @@ public class Enemy : MonoBehaviour, ICaster {
                 }
                 else//Wait longer
                 {
-                    yield return new WaitForSeconds(0.1f);
+					yield return new WaitForEndOfFrame();
                     if (!BattleManager.main.pause)
                     {
-                        curr_stagger_time += 0.1F;
+						curr_stagger_time += Time.deltaTime;
                         BattleEffects.main.spriteShake(gameObject.transform, 0.05f, 0.05f);
                     }
                 }
             }
-			curr_time += 0.1f;
+			curr_time += Time.deltaTime;
 			if (curr_time >= atk_time) {
 				BattleManager.main.pause = true; // pause battle for attack
 				BattleEffects.main.setDim(true, enemy_sprite);

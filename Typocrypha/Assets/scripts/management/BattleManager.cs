@@ -51,6 +51,9 @@ public class BattleManager : MonoBehaviour {
 
 	// check if player switches targets or attacks
 	void Update() {
+		if (Input.GetKeyDown (KeyCode.BackQuote)) // toggle pause
+			pause = !pause;
+		if (pause) return;
 		int old_ind = target_ind;
 		// move target left or right
 		if (Input.GetKeyDown (KeyCode.LeftArrow)) --target_ind;

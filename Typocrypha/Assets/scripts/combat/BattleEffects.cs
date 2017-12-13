@@ -34,8 +34,8 @@ public class BattleEffects : MonoBehaviour {
 		float curr_time = 0;
 		while (curr_time < sec) {
 			cam_pos.position = Random.insideUnitCircle * amt;
-			yield return new WaitForSeconds(0.1f);
-			curr_time += 0.1f;
+			yield return new WaitForEndOfFrame();
+			curr_time += Time.deltaTime;
 		}
 		cam_pos.position = new Vector3 (0, 0, 0);
 	}
@@ -51,8 +51,8 @@ public class BattleEffects : MonoBehaviour {
 		float curr_time = 0;
 		while (curr_time < sec) {
 			pos.position = (Vector3)old_pos + (Vector3)(Random.insideUnitCircle * amt);
-			yield return new WaitForSeconds (0.1f);
-			curr_time += 0.1f;
+			yield return new WaitForEndOfFrame();
+			curr_time += Time.deltaTime;
 		}
 		pos.position = old_pos;
 	}

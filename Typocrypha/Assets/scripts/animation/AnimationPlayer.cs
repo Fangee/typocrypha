@@ -19,6 +19,7 @@ public class AnimationPlayer : MonoBehaviour {
 	public static AnimationPlayer main = null; // global static ref
 	public Transform display_pos; // positions display
 	public SpriteRenderer display_sprite; // renders display
+	public int anim_frames; // number of game frames per animation frame
 	SpriteComparer sprite_comparer; // compares sprites
 	AssetBundle spellanim; // spell animations bundle
 
@@ -49,7 +50,8 @@ public class AnimationPlayer : MonoBehaviour {
 		do {
 			foreach (Sprite sprite in sprites) {
 				display_sprite.sprite = sprite;
-				yield return new WaitForSeconds (0.1f);
+				for (int i = 0; i < anim_frames; ++i)
+					yield return new WaitForEndOfFrame();
 			}
 		} while(loop);
 		display_sprite.sprite = null;
