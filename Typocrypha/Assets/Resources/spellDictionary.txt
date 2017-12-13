@@ -1,17 +1,18 @@
-name (root)	spell type	spellbook description	power	cooldown	hit %	Status Mod	pattern
-sword	attack	a basic attack	10	4	85	0	MT
-spear	attack	a basic long cool atk	20	10	90	0	MT
-falchion	attack	a basic super long atk	30	15	75	0	LMT
-cleaver	attack	a targeted wide atk	10	10	75	0	LMRT
-sacrifice	attack	"hurts self, does big ds"	40	10	95	0	LRmS
-whiff	attack	always misses (debug )	1000000	1	-1000	0	MT
-poke	attack	high damage for debugging	999	1	100	0	MT
-END							
-name (elem)	element	spellbook description	cooldown mod				
-fire	fire	adds fire element to spell	0				
-ice	ice	adds ice element to spell	0				
-bolt	bolt	adds bolt element to spell	0				
-END							
-name (style)	powerMod	spellbook description	cooldown mod	hit% mod	status effect mod	pattern	
-aimed	-5	"+acc, -power"	0	15	0	None	
-END							
+name (root)	spell type	spellbook description	power	cooldown	hit %	crit %	Status Mod	pattern
+sword	attack	a basic attack	10	4	85	10	0	MT
+spear	attack	a basic long cool atk	20	10	90	15	0	MT
+falchion	attack	a basic super long atk	30	15	75	10	0	MT
+cleaver	attack	a targeted wide atk	10	10	75	10	0	LMRT
+sacrifice	attack	"hurts self, does big ds"	40	10	95	10	0	LRmS
+splash	attack	always misses (debug )	1	1	-1000	10	0	MT
+poke	attack	high damage for debugging	999	1	100	0	0	MT
+weakpnt	attack	always crits (debug)	2	1	100	100	0	MT
+END								
+name (elem)	element	spellbook description	cooldown mod					
+fire	fire	adds fire element to spell	0					
+ice	ice	adds ice element to spell	0					
+bolt	bolt	adds bolt element to spell	0					
+END								
+name (style)	powerMod	spellbook description	cooldown mod	hit% mod	crit % mod	status effect mod	pattern	
+aimed	-5	"+acc, -power"	0	15	0	0	None	
+END								

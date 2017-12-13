@@ -162,16 +162,16 @@ public class Enemy : MonoBehaviour, ICaster {
 	}
 
 	// be attacked by the player
-	public void damage(int d, int element, ICaster caster, bool reflect = false) {
+	public void damage(int d, int element, ICaster caster, bool crit, bool reflect = false) {
         //Reflect damage to caster if enemy reflects this element
         if(stats.vsElement[element] == Elements.reflect  && reflect == false)
         {
             Debug.Log("Enemy reflects " + d + " " + Elements.toString(element) + " damage back at player");
-            caster.damage(d, element, this, true);
+            caster.damage(d, element, caster, crit, true);
             return;
         }
 
-        bool damaged = CasterOps.calcDamage(d, element, caster, this, ref curr_hp, ref curr_shield, ref curr_stagger, is_stunned);
+        bool damaged = CasterOps.calcDamage(d, element, caster, this, crit, Is_stunned);
         //Apply stun if applicable
         if (curr_stagger <= 0 && is_stunned == false)
             stun();

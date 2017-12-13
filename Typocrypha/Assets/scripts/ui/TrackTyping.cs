@@ -35,7 +35,7 @@ public class TrackTyping : MonoBehaviour {
 		} else entry_ok.text = "OK";
 		// check key presses
 		if (Input.GetKeyDown (KeyCode.Return)) {
-			Debug.Log ("Player casts " + buffer);
+			Debug.Log ("Player casts " + buffer.ToUpper().Replace(' ', '-'));
 			AudioPlayer.main.playSFX (0, SFXType.UI, "sfx_enter");
 			BattleManager.main.attackCurrent (buffer); // attack currently targeted enemy
 			buffer = "";

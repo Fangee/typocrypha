@@ -114,18 +114,17 @@ public class Player : ICaster
     //ICaster interface overrides
 
     //Damage player
-    public void damage(int d, int element, ICaster caster, bool reflect = false)
+    public void damage(int d, int element, ICaster caster, bool crit, bool reflect = false)
     {
         //Reflect damage to caster if enemy reflects this element
         if (stats.vsElement[element] == Elements.reflect && reflect == false)
         {
-            int dRef = d + (int)stats.defense;
+            int dRef = d;
             Debug.Log("Player reflects " + dRef + " " + Elements.toString(element) + " damage back at enemy");
-            caster.damage(dRef, element, this, true);
+            caster.damage(dRef, element, caster, crit, true);
             return;
         }
-        int curr_stagger = 0;
-        bool damaged = CasterOps.calcDamage(d, element, caster, this, ref curr_hp, ref curr_shield, ref curr_stagger);
+        bool damaged = CasterOps.calcDamage(d, element, caster, this, crit);
 
         if (damaged) {
 		}

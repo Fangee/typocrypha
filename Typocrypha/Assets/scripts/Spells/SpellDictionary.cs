@@ -52,8 +52,9 @@ public class SpellDictionary : MonoBehaviour
             int.TryParse(cols[3].Trim(), out s.power);
             float.TryParse(cols[4].Trim(), out s.cooldown);
             int.TryParse(cols[5].Trim(), out s.hitPercentage);
-            int.TryParse(cols[6].Trim(), out s.elementEffectMod);
-            string pattern = cols[7].Trim();
+            int.TryParse(cols[6].Trim(), out s.critPercentage);
+            int.TryParse(cols[7].Trim(), out s.elementEffectMod);
+            string pattern = cols[8].Trim();
             if (pattern.Contains("A"))
             {
                 s.targetData = new TargetData(true);
@@ -116,8 +117,9 @@ public class SpellDictionary : MonoBehaviour
             s.description = cols[2].Trim();
             float.TryParse(cols[3].Trim(), out s.cooldownMod);
             int.TryParse(cols[3].Trim(), out s.accMod);
-            int.TryParse(cols[4].Trim(), out s.statusEffectChanceMod);
-            string pattern = cols[7].Trim();
+            int.TryParse(cols[4].Trim(), out s.critMod);
+            int.TryParse(cols[5].Trim(), out s.statusEffectChanceMod);
+            string pattern = cols[6].Trim();
             if (pattern.Contains("N"))
                 s.isTarget = false;
             else if (pattern.Contains("A"))
@@ -277,7 +279,7 @@ public class SpellDictionary : MonoBehaviour
         Spell s = spells[root];//Get root keyword from dictionary
         if (s.IsOnCooldown)//Casting fails if root is on cooldown
         {
-            Debug.Log("Cast failed: " + root + " is on cooldown for " + s.TimeLeft + " seconds");
+            Debug.Log("Cast failed: " + root.ToUpper() + " is on cooldown for " + s.TimeLeft + " seconds");
             return;
         }
         if(cooldown.isFull())
@@ -299,7 +301,7 @@ public class SpellDictionary : MonoBehaviour
             st = styles[style];
         c.Modify(e, st);//Modify copy with style and/or element keywords (if applicable)
         s.startCooldown(cooldown, root, c.cooldown * caster.Stats.speed);//Start spell cooldown (with modified casting time from copy)
-        Debug.Log(root + " is going on cooldown for " + (c.cooldown * caster.Stats.speed) + " seconds");
+        Debug.Log(root.ToUpper() + " is going on cooldown for " + (c.cooldown * caster.Stats.speed) + " seconds");
         List<ICaster> toCastAt = c.target(targets, selected, allies, position);
         foreach (ICaster target in toCastAt)
         {
@@ -315,7 +317,7 @@ public class SpellDictionary : MonoBehaviour
         Spell s = spells[root];//Get root keyword from dictionary
         if (s.IsOnCooldown)//Casting fails if root is on cooldown
         {
-            Debug.Log("Cast failed: " + root + " is on cooldown for " + s.TimeLeft + " seconds");
+            Debug.Log("Cast failed: " + root.ToUpper() + " is on cooldown for " + s.TimeLeft + " seconds");
             return;
         }
         if (cooldown.isFull())
@@ -324,7 +326,7 @@ public class SpellDictionary : MonoBehaviour
             return;
         }
         s.startCooldown(cooldown, root, s.cooldown * caster.Stats.speed);//Start spell cooldown (with modified casting time from copy)
-        Debug.Log(root + " is going on cooldown for " + (s.cooldown * caster.Stats.speed) + " seconds");
+        Debug.Log(root.ToUpper() + " is going on cooldown for " + (s.cooldown * caster.Stats.speed) + " seconds");
         List<ICaster> toCastAt = s.target(targets, selected, allies, position);
         foreach (ICaster target in toCastAt)
         {

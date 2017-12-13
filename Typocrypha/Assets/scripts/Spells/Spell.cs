@@ -23,17 +23,20 @@ public abstract class Spell
         {
             element = e.element;
             cooldown += e.cooldownMod;
+            name = e.name + "-" + name;
         }
         if(s != null)//Add style modifier
         {
             power += s.powerMod;
             cooldown += s.cooldownMod;
             hitPercentage += s.accMod;
+            critPercentage += s.critMod;
             elementEffectMod += s.statusEffectChanceMod;
             if (s.isTarget == true)
             {
                 targetData.modify(s.targets);
             }
+            name += ("-" + s.name);
         }
     }
     //Returns target pattern of spell as a List of ICasters
@@ -69,9 +72,11 @@ public abstract class Spell
     //ONLY USE IN SPELLDICTIONARY
     public void copyInto(Spell s)
     {
+        s.name = name;
         s.power = power;
         s.cooldown = cooldown;
         s.hitPercentage = hitPercentage;
+        s.critPercentage = critPercentage;
         s.elementEffectMod = elementEffectMod;
         s.element = element;
         s.targetData = new TargetData(false);
@@ -81,13 +86,30 @@ public abstract class Spell
     //protected methods
 
     //Return true if spell hits target, else false (does not actually apply spell effect)
+    //Factors in target stunState if checkStun = true
     //ONLY CALL IN CAST (or after spell has been been properly modified with Modify())
-    protected bool hitCheck(ICaster target, ICaster caster)
+    protected bool hitCheck(ICaster target, ICaster caster, bool checkStun = false)
     {
+        if (checkStun && target.Is_stunned)
+            return true;
         int chance = hitPercentage + caster.Stats.accuracy - target.Stats.evasion;
         if((Random.Range(0.0F, 1F) * 100) <= chance)
             return true;
         Debug.Log(caster.Stats.name + " missed " + target.Stats.name + "!");
+        return false;
+    }
+    //Return true if spell crits target, else false. Multiplies power by 1.5 if a hit (round up)
+    //Factors in target stunState if checkStun = true
+    //ONLY CALL IN CAST (or after spell has been been properly modified with Modify())
+    protected bool critCheck(ICaster target, ICaster caster)
+    {
+        int chance = critPercentage;
+        if ((Random.Range(0.0F, 1F) * 100) <= chance)
+        {
+            Debug.Log(caster.Stats.name + " scores a critical with " + name + " on " + target.Stats.name);
+            power = Mathf.CeilToInt(power * 1.5F);
+            return true;
+        }
         return false;
     }
 
@@ -98,6 +120,7 @@ public abstract class Spell
     public int power;                   //Spell's intensity (not necessarily just damage)
     public float cooldown;              //Spell's base cooldown
     public int hitPercentage;           //Spell's base hit chance (1 = 1%)
+    public int critPercentage;          //Spell's base crit chance (1 = 1%)
     public int elementEffectMod;        //Spell's base elemental effect chance (1 = 1%)
     public int element = Elements.@null;     //Spell's elemental damage type
     public string type = "null";        //Spell's effect type (attack, shield, heal, etc.)
@@ -135,9 +158,11 @@ public class AttackSpell : Spell
 {
     public override void cast(ICaster target, ICaster caster)
     {
-        if(hitCheck(target,caster))
-            target.damage(power, element, caster);
-        return;
+        if(hitCheck(target,caster, true))
+        {
+            bool crit = critCheck(target, caster);
+            target.damage(power, element, caster, crit);
+        }
     }
 }
 //Spells that attempt to heal friendly entities (CURRENTLY INCOMPLETE)
@@ -171,8 +196,10 @@ public class StyleMod
     public string name;
     public string description;
     public int powerMod;
+    public float powerModM = 0;
     public float cooldownMod;
     public int accMod;
+    public int critMod;
     public int statusEffectChanceMod;
     public bool isTarget = true;
     public TargetData targets;

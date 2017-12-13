@@ -12,6 +12,6 @@ public interface ICaster
     int Curr_stagger { get; set; }
     bool Is_stunned { get;}
 
-    void damage(int d, int element, ICaster caster, bool reflect = false);
+    void damage(int d, int element, ICaster caster, bool crit, bool reflect = false);
 }
 
