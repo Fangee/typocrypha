@@ -109,6 +109,7 @@ public class Enemy : MonoBehaviour, ICaster {
     //Main attack AI
 	// keep track of time, and attack whenever curr_time = atk_time
 	IEnumerator timer() {
+		Vector3 original_pos = transform.position;
         float curr_stagger_time = 0F;
         SpellData s = stats.spells[curr_spell];        //Initialize with current spell
         atk_time = dict.getCastingTime(s, stats.speed);   //Get casting time
@@ -117,19 +118,14 @@ public class Enemy : MonoBehaviour, ICaster {
 			yield return new WaitWhile (() => BattleManager.main.pause);
             while(is_stunned)//Stop attack loop from continuing while the enemy is stunned
             {
+				yield return new WaitForEndOfFrame();
+				BattleEffects.main.spriteShake(gameObject.transform, 0.05f, Time.deltaTime * 2);
+				yield return new WaitWhile (() => BattleManager.main.pause);
+				curr_stagger_time += Time.deltaTime;
                 if (curr_stagger_time >= stagger_time)//End stun if time up
                 {
                     unStun();
                     curr_stagger_time = 0F;
-                }
-                else//Wait longer
-                {
-					yield return new WaitForEndOfFrame();
-                    if (!BattleManager.main.pause)
-                    {
-						curr_stagger_time += Time.deltaTime;
-                        BattleEffects.main.spriteShake(gameObject.transform, 0.05f, 0.05f);
-                    }
                 }
             }
 			curr_time += Time.deltaTime;

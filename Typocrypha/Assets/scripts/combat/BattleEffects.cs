@@ -51,8 +51,10 @@ public class BattleEffects : MonoBehaviour {
 		float curr_time = 0;
 		while (curr_time < sec) {
 			pos.position = (Vector3)old_pos + (Vector3)(Random.insideUnitCircle * amt);
-			yield return new WaitForEndOfFrame();
-			curr_time += Time.deltaTime;
+			for (int i = 0; i < 4; ++i) {
+				yield return new WaitForEndOfFrame ();
+				curr_time += Time.deltaTime;
+			}
 		}
 		pos.position = old_pos;
 	}
