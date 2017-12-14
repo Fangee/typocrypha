@@ -8,7 +8,7 @@ public static class CasterOps
     //Applies damage formula base on base_power (spell strength) and stats of caster and target)
     //damages ref stats appropriately (will not go below zero)
     //Precondition: target.Stats.vsElement[element] != Elements.reflect
-    public static bool calcDamage(int base_power, int element, ICaster caster, ICaster target, bool crit, bool is_stunned = false)
+    public static bool calcDamage(CastData data, int base_power, int element, ICaster caster, ICaster target, bool crit, bool is_stunned = false)
     {
         float dMod = base_power;
         int staggerDamage = 0;
@@ -28,6 +28,9 @@ public static class CasterOps
                 target.Curr_hp = target.Stats.max_hp;
             else
                 target.Curr_hp += Mathf.CeilToInt(dMod);
+
+            data.damageInflicted = Mathf.CeilToInt(-1 * dMod);
+            data.elementalData = CastData.vsElement.ABSORB;
             return false;
         }
 
@@ -44,12 +47,18 @@ public static class CasterOps
         //Apply elemental weakness/resistances
         dMod *= target.Stats.vsElement[element];
         if (target.Stats.vsElement[element] > 1)//If enemy is weak
+        {
+            data.elementalData = CastData.vsElement.WEAK;
             staggerDamage++;
+        }
+        else if(target.Stats.vsElement[element] < 1)
+            data.elementalData = CastData.vsElement.RESISTANT;
+        else
+            data.elementalData = CastData.vsElement.NEUTERAL;
 
         //Apply stun damage mod (if stunned)
         if (is_stunned)
             dMod *= (1.25F + (0.25F * staggerDamage));
-        Debug.Log(target.Stats.name + " was hit for " + dMod + " (ceiling) of " + Elements.toString(element) + " damage x" + target.Stats.vsElement[element]);
         //Apply shield
         if (target.Curr_shield > 0)
         {
@@ -72,6 +81,7 @@ public static class CasterOps
         }
         if (target.Curr_hp < 0)
             target.Curr_hp = 0;
+        data.damageInflicted = Mathf.CeilToInt(dMod);
         return dMod > 0;
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // enum for how a cast went (successful cast, botched, fizzled, etc)
-public enum CastStatus { SUCCESS, BOTCH, FIZZLE, ONCOOLDOWN };
+public enum CastStatus { SUCCESS, BOTCH, FIZZLE, ONCOOLDOWN, COOLDOWNFULL };
 
 //Stores all the spell info and contains methods to parse and cast spells from player input
 //Currently does not actually support player or enemy casting, but has parsing
@@ -159,89 +159,141 @@ public class SpellDictionary : MonoBehaviour
         }
     }
 
-    //parses input spell, casts if valid, botches if misspelled but structure is valid, fizzles if invalid structure
-	public CastStatus parseAndCast(string spell, ICaster[] targets, int selected, ICaster[] allies, int position)
+    //parses input spell, and returns an appropriate CastStatus code and a built (possibly null, possibly invalid Spelldata)
+	public CastStatus parse(string spell, out SpellData s)
     {
-        Player caster =  (Player) allies[position];
         char[] delim = { ' ' };
         string[] lines = spell.Split(delim);
+        CastStatus status;
 		if (lines.Length == 1)
         {
 			string first = lines [0].Trim ();
-			if (spells.ContainsKey (first)) {
-				caster.Last_cast = spell;
-                castUnmodified(first, targets, selected, allies, position);
-			} else {
-				botch ("b", null, null, caster);
-				return CastStatus.BOTCH;
+			if (spells.ContainsKey (first))
+            {
+                s = new SpellData(first);
+                status = CastStatus.SUCCESS;
+			}
+            else
+            {
+				s = new SpellData ("b", null, null);
+				status = CastStatus.BOTCH;
 			}
 		}
         else if (lines.Length == 2)
         {
 			string first = lines [0].Trim ();
 			string second = lines [1].Trim ();
-			if (spells.ContainsKey (first)) {
-				if (styles.ContainsKey (second)) {
-					caster.Last_cast = spell;
-					cast (first, null, second, targets, selected, allies, position);
-				} else {
-					botch (first, null, "b", caster);
-					return CastStatus.BOTCH;
+			if (spells.ContainsKey (first))
+            {
+				if (styles.ContainsKey (second))
+                {
+                    s = new SpellData(first, null, second);
+                    status = CastStatus.SUCCESS;
 				}
-			} else if (spells.ContainsKey (second)) {
-				if (elements.ContainsKey (first)) {
-					caster.Last_cast = spell;
-					cast (second, first, null, targets, selected, allies, position);
-				} else {
-					botch ("b", second, null, caster);
-					return CastStatus.BOTCH;
+                else
+                {
+					s = new SpellData(first, null, "b");
+					status = CastStatus.BOTCH;
 				}
 			}
+            else if (spells.ContainsKey (second))
+            {
+				if (elements.ContainsKey (first))
+                {
+                    s = new SpellData(second, first, null);
+                    status = CastStatus.SUCCESS;
+				}
+                else
+                {
+					s = new SpellData("b", second, null);
+					status = CastStatus.BOTCH;
+				}
+			}
+            else
+            {
+                s = new SpellData("b", "b", null);
+                status = CastStatus.BOTCH;
+            }
 		}
         else if (lines.Length == 3)
         {
 			string elem = lines [0].Trim ();
 			string root = lines [1].Trim ();
 			string style = lines [2].Trim ();
-			if (spells.ContainsKey (root)) {
-				if (elements.ContainsKey (elem)) {
-					if (styles.ContainsKey (style)) {
-						caster.Last_cast = spell;
-						cast (root, elem, style, targets, selected, allies, position);
-					} else {
-						botch (root, elem, "b", caster);
-						return CastStatus.BOTCH;
+			if (spells.ContainsKey (root))
+            {
+				if (elements.ContainsKey (elem))
+                {
+					if (styles.ContainsKey (style))
+                    {
+                        s = new SpellData(root, elem, style);
+                        status = CastStatus.SUCCESS;
 					}
-				} else if (styles.ContainsKey (style)) {
-					botch (root, "b", style, caster);
-					return CastStatus.BOTCH;
-				} else {
-					botch (root, "b", "b", caster);
-					return CastStatus.BOTCH;
+                    else
+                    {
+						s = new SpellData (root, elem, "b");
+						status = CastStatus.BOTCH;
+					}
 				}
-			} else if (elements.ContainsKey (elem)) {
-				if (styles.ContainsKey (style)) {
-					botch ("b", elem, style, caster);
-					return CastStatus.BOTCH;
-				} else {
-					botch ("b", elem, "b", caster);
-					return CastStatus.BOTCH;
+                else if (styles.ContainsKey (style))
+                {
+					s = new SpellData(root, "b", style);
+					status = CastStatus.BOTCH;
 				}
-			} else if (styles.ContainsKey (style)) {
-				botch ("b", "b", style, caster);
-				return CastStatus.BOTCH;
-			} else {
-				botch ("b", "b", "b", caster);
-				return CastStatus.BOTCH;
+                else
+                {
+					s = new SpellData(root, "b", "b");
+					status = CastStatus.BOTCH;
+				}
 			}
-		} else {
-			caster.Last_cast = "FIZZLE";
-			return CastStatus.FIZZLE;
+            else if (elements.ContainsKey (elem))
+            {
+				if (styles.ContainsKey (style))
+                {
+					s = new SpellData("b", elem, style);
+					status = CastStatus.BOTCH;
+				}
+                else
+                {
+					s = new SpellData("b", elem, "b");
+					status = CastStatus.BOTCH;
+				}
+			}
+            else if (styles.ContainsKey (style))
+            {
+				s = new SpellData("b", "b", style);
+				status = CastStatus.BOTCH;
+			}
+            else
+            {
+				s = new SpellData("b", "b", "b");
+				status = CastStatus.BOTCH;
+			}
 		}
-		return CastStatus.SUCCESS;
+        else
+        {
+			s = new SpellData("FIZZLE");
+			status = CastStatus.FIZZLE;
+		}
+        //Get Cooldown
+        if (status == CastStatus.SUCCESS)
+        {
+            if (cooldown.isFull())
+            {
+                return CastStatus.COOLDOWNFULL;
+            }
+            else if (isOnCooldown(s))
+            {
+                return CastStatus.ONCOOLDOWN;
+            }
+            else
+                return CastStatus.SUCCESS;
+        }
+        else
+            return status;
     }
     //Casts spell from NPC (enemy or ally)
-    public void NPC_Cast(SpellData spell, ICaster[] targets, int selected, ICaster[] allies, int position)
+    public List<CastData> cast(SpellData spell, ICaster[] targets, int selected, ICaster[] allies, int position)
     {
         ICaster caster = allies[position];
         Spell s = spells[spell.root];
@@ -259,10 +311,22 @@ public class SpellDictionary : MonoBehaviour
             st = styles[spell.style];
         c.Modify(e, st);
         List<ICaster> toCastAt = c.target(targets, selected, allies, position);
+        List<CastData> data = new List<CastData>();
         foreach(ICaster target in toCastAt)
         {
-            c.cast(target, caster);
+            CastData castData = c.cast(target, caster);
+            if(castData.reflect == true)
+                castData.setLocationData(caster, target);
+            else
+                castData.setLocationData(target, caster);
+            data.Add(castData);
         }
+        return data;
+    }
+    //Will contain method for botching a spell
+    public List<CastData> botch(SpellData s, ICaster[] targets, int selected, ICaster[] allies, int position)
+    {
+        return null;
     }
     //Gets casting time of input spell
     public float getCastingTime(SpellData s, float speed)
@@ -288,78 +352,47 @@ public class SpellDictionary : MonoBehaviour
         }
         return time * speed;
     }
+    //Starts cooldown of spell
+    public void startCooldown(SpellData data, Player caster)
+    {
+        Spell spell = spells[data.root];
+        ElementMod e;
+        StyleMod s;
+        float cooldownTime = spell.cooldown;
+        if (data.element != null && data.style != null)
+        {
+            e = elements[data.element];
+            s = styles[data.style];
+            float baseTime = cooldownTime;
+            cooldownTime *= e.cooldownModM;
+            cooldownTime += (baseTime * s.cooldownModM) - baseTime;
+            cooldownTime += e.cooldownMod;
+            cooldownTime += s.cooldownMod;
+        }
+        else if (data.element != null)
+        {
+            e = elements[data.element];
+            cooldownTime *= e.cooldownModM;
+            cooldownTime += e.cooldownMod;
+        }
+        else if (data.style != null)
+        {
+            s = styles[data.style];
+            cooldownTime *= s.cooldownModM;
+            cooldownTime += s.cooldownMod;
+        }
+        spell.startCooldown(cooldown, data.root, caster.Stats.speed * cooldownTime);
+    }
+    //Return cooldown of spell
+    //Pre: spell is on cooldown
+    public float getTimeLeft(SpellData data)
+    {
+        Spell s = spells[data.root];
+        return s.TimeLeft;
+    }
 
     //PRIVATE//--------------------------------------------------------------------------------------------------------------------------------------------//
 
-    //Helper method for casting spells
-    //root cannot equal null
-    private void cast(string root, string element, string style, ICaster[] targets, int selected, ICaster[] allies, int position)
-    {
-        ICaster caster = allies[position];
-        Spell s = spells[root];//Get root keyword from dictionary
-        if (s.IsOnCooldown)//Casting fails if root is on cooldown
-        {
-            Debug.Log("Cast failed: " + root.ToUpper() + " is on cooldown for " + s.TimeLeft + " seconds");
-            return;
-        }
-        if(cooldown.isFull())
-        {
-            Debug.Log("Cast failed: cooldownList is full!");
-            return;
-        }
-        Spell c = createSpellFromType(s.type);//Create copy to not mutate spell definition (in dict)
-        s.copyInto(c);
-        ElementMod e;
-        StyleMod st;
-        if (element == null)//If no element keyword
-            e = null;
-        else//Get element keyword from element dictionary
-            e = elements[element];
-        if (style == null)//If no style keyword
-            st = null;
-        else//Get style keyword from style dictionary
-            st = styles[style];
-        c.Modify(e, st);//Modify copy with style and/or element keywords (if applicable)
-        s.startCooldown(cooldown, root, c.cooldown * caster.Stats.speed);//Start spell cooldown (with modified casting time from copy)
-        Debug.Log(root.ToUpper() + " is going on cooldown for " + (c.cooldown * caster.Stats.speed) + " seconds");
-        List<ICaster> toCastAt = c.target(targets, selected, allies, position);
-        foreach (ICaster target in toCastAt)
-        {
-            c.cast(target, caster);
-        }
-
-    }
-    //Helper method to cast root-only spells
-    //root cannot equal null
-    private void castUnmodified(string root, ICaster[] targets, int selected, ICaster[] allies, int position)
-    {
-        ICaster caster = allies[position];
-        Spell s = spells[root];//Get root keyword from dictionary
-        if (s.IsOnCooldown)//Casting fails if root is on cooldown
-        {
-            Debug.Log("Cast failed: " + root.ToUpper() + " is on cooldown for " + s.TimeLeft + " seconds");
-            return;
-        }
-        if (cooldown.isFull())
-        {
-            Debug.Log("Cast failed: cooldownList is full!");
-            return;
-        }
-        s.startCooldown(cooldown, root, s.cooldown * caster.Stats.speed);//Start spell cooldown (with modified casting time from copy)
-        Debug.Log(root.ToUpper() + " is going on cooldown for " + (s.cooldown * caster.Stats.speed) + " seconds");
-        List<ICaster> toCastAt = s.target(targets, selected, allies, position);
-        foreach (ICaster target in toCastAt)
-        {
-            s.cast(target, caster);
-        }
-    }
-    //Will contain method for botching a spell
-    private void botch(string root, string elem, string style, Player caster)
-    {
-        Debug.Log("Botched cast: " + root + "-" + elem + "-" + style);
-		caster.Last_cast = "Botch";
-        return;
-    }
     //Helper method for cloning appropriately typed spells
     private Spell createSpellFromType(string type)
     {
@@ -372,13 +405,25 @@ public class SpellDictionary : MonoBehaviour
         else
             return null;
     }
+    //Returns if spell s is on cooldown
+    //Pre: coolDownList is not full
+    private bool isOnCooldown(SpellData s)
+    {
+        Spell spell = spells[s.root];//Get root keyword from dictionary
+        if (spell.IsOnCooldown)//Casting fails if root is on cooldown
+        {
+            return true;
+        }
+        return false;
+    }
 
     //Dictionaries containing spells associated with keywords
     private Dictionary<string, Spell> spells = new Dictionary<string, Spell>();
     private Dictionary<string, ElementMod> elements = new Dictionary<string, ElementMod>();
     private Dictionary<string, StyleMod> styles = new Dictionary<string, StyleMod>();
 }
-
+//A class containing the required data to cast a spell (with defined keyword composition)
+//Also contains associated methods like ToString()
 public class SpellData
 {
     //Make a new spelldata instance with root keyword root, element keyword prefix, and style keyword suffix
@@ -391,6 +436,7 @@ public class SpellData
     public string root;
     public string element;
     public string style;
+    //Returns a string representation of the spell (Display mode, with "-" delimiters and all caps)
     public override string ToString()
     {
         string result;
@@ -403,12 +449,61 @@ public class SpellData
         return result.ToUpper();
     }
 }
+//A class containing the result data from a casted spell (which can be used to generate animations an effects)
+//Contains hit/miss, crit, stun, elemental weakness/resistance status, damage inflicted, etc.
+//Does not contain cast status data (Botch, Fizzle)
+public class CastData
+{
+    //Elemental vs status
+    public enum vsElement
+    {
+        INVALID,
+        NEUTERAL,
+        WEAK,
+        RESISTANT,
+        ABSORB,
+        REFLECT,
+    }
+
+    //Data fields
+    public bool isHit = false;
+    public bool isCrit = false;
+    public bool isStun = false;
+    public int damageInflicted = 0;
+    public int element = Elements.notAnElement;
+    public vsElement elementalData = vsElement.INVALID;
+
+    public ICaster Target
+    {
+        get { return target; }
+    }
+    public ICaster Caster
+    {
+        get { return caster; }
+    }
+
+    //Location data (used for targeting)
+    ICaster target;
+    ICaster caster;
+
+    //Just used, in cast INNACURATE
+    public bool reflect = false;
+
+    //Used to set location data
+    public void setLocationData(ICaster target, ICaster caster)
+    {
+        this.target = target;
+        this.caster = caster;
+    }
+  
+}
 //Class containing element constants and associated methods.
-//Essentially a glorified int enum 
+//Essentially a glorified int enum
 public static class Elements
 {
     public const int count = 4;
 
+    public const int notAnElement = -1;
     public const int @null = 0;
     public const int fire = 1;
     public const int ice = 2;
@@ -416,6 +511,7 @@ public static class Elements
 
     public const int absorb = -1;
     public const int reflect = -2;
+    public const int weak = -3;
     public const int reflect_mod = 1;
 
     //Returns integer form of element for equivalent elementName string
@@ -432,7 +528,7 @@ public static class Elements
             case "bolt":
                 return bolt;
             default:
-                return @null;
+                return notAnElement;
         }
     }
 
@@ -449,7 +545,7 @@ public static class Elements
             case 3:
                 return "bolt";
             default:
-                return "error";
+                return "not an element";
         }
     }
 }

@@ -9,7 +9,7 @@ public abstract class Spell
     //public methods
 
     //Casts this spell at selected target (at targets[selected])
-    public abstract void cast(ICaster target, ICaster caster);
+    public abstract CastData cast(ICaster target, ICaster caster);
     //Starts spell cooldown using coroutine support from the Timer class 
     public void startCooldown(CooldownList l, string name, float time)
     {
@@ -19,32 +19,33 @@ public abstract class Spell
     //Apllies prefix and suffix to spell. both arguments can be null (if no prefix or suffix)
     public void Modify(ElementMod e, StyleMod s)
     {
-        //Handle Cooldown (sequence matters)
-        if (e != null && s != null)
-        {
-            float baseTime = cooldown;
-            cooldown *= e.cooldownModM;
-            cooldown += (baseTime * s.cooldownModM) - baseTime;
-            cooldown += e.cooldownMod;
-            cooldown += s.cooldownMod;
-        }
-        else if (e != null)
-        {
-            cooldown *= e.cooldownModM;
-            cooldown += e.cooldownMod;
-        }
-        else if (s != null)
-        {
-            cooldown *= s.cooldownModM;
-            cooldown += s.cooldownMod;
-        }
+        ////Handle Cooldown (sequence matters)
+        //if (e != null && s != null)
+        //{
+        //    float baseTime = cooldown;
+        //    cooldown *= e.cooldownModM;
+        //    cooldown += (baseTime * s.cooldownModM) - baseTime;
+        //    cooldown += e.cooldownMod;
+        //    cooldown += s.cooldownMod;
+        //}
+        //else if (e != null)
+        //{
+        //    cooldown *= e.cooldownModM;
+        //    cooldown += e.cooldownMod;
+        //}
+        //else if (s != null)
+        //{
+        //    cooldown *= s.cooldownModM;
+        //    cooldown += s.cooldownMod;
+        //}
+
         //Add rest of stuff
         if (e != null)//Add element modifier
         {
             element = e.element;
             name = e.name + "-" + name;
         }
-        if(s != null)//Add style modifier
+        if (s != null)//Add style modifier
         {
             //Apply power mod
             power = Mathf.CeilToInt(power * s.powerModM);
@@ -114,28 +115,36 @@ public abstract class Spell
     //Return true if spell hits target, else false (does not actually apply spell effect)
     //Factors in target stunState if checkStun = true
     //ONLY CALL IN CAST (or after spell has been been properly modified with Modify())
-    protected bool hitCheck(ICaster target, ICaster caster, bool checkStun = false)
+    protected bool hitCheck(CastData data, ICaster target, ICaster caster, bool checkStun = false)
     {
         if (checkStun && target.Is_stunned)
+        {
+            data.isHit = true;
             return true;
+        }
+
         int chance = Mathf.CeilToInt(hitPercentage * caster.Stats.accuracy) - target.Stats.evasion;
         if((Random.Range(0.0F, 1F) * 100) <= chance)
+        {
+            data.isHit = true;
             return true;
-        Debug.Log(caster.Stats.name + " missed " + target.Stats.name + "!");
+        }
+        data.isHit = false;
         return false;
     }
     //Return true if spell crits target, else false. Multiplies power by 1.5 if a hit (round up)
     //Factors in target stunState if checkStun = true
     //ONLY CALL IN CAST (or after spell has been been properly modified with Modify())
-    protected bool critCheck(ICaster target, ICaster caster)
+    protected bool critCheck(CastData data, ICaster target, ICaster caster)
     {
         float accBonus = Mathf.Clamp(((caster.Stats.accuracy - 1) * (1 - (target.Stats.evasion * 0.01F))) * 0.2F, 0, 2) * 10;
         float chance = critPercentage + accBonus;
         if ((Random.Range(0.0F, 1F) * 100) <= chance)
         {
-            Debug.Log(caster.Stats.name + " scores a critical with " + name + " on " + target.Stats.name);
+            data.isCrit = true;
             return true;
         }
+        data.isCrit = false;
         return false;
     }
 
@@ -182,24 +191,27 @@ public abstract class Spell
 //Spells that attempt to do damage to opposing entities (Add targeting)
 public class AttackSpell : Spell
 {
-    public override void cast(ICaster target, ICaster caster)
+    public override CastData cast(ICaster target, ICaster caster)
     {
-        if(hitCheck(target,caster, true))
+        CastData data = new CastData();
+        data.element = element;
+        if(hitCheck(data, target,caster, true))
         {
-            bool crit = critCheck(target, caster);
+            bool crit = critCheck(data, target, caster);
             int powerMod;
             if (crit)
                 powerMod = Mathf.CeilToInt(power * 1.5F);
             else
                 powerMod = power;
-            target.damage(powerMod, element, caster, crit);
+            target.damage(data, powerMod, element, caster, crit);
         }
+        return data;
     }
 }
 //Spells that attempt to heal friendly entities (CURRENTLY INCOMPLETE)
 public class HealSpell : Spell
 {
-    public override void cast(ICaster target, ICaster caster)
+    public override CastData cast(ICaster target, ICaster caster)
     {
         throw new System.NotImplementedException();
     }
@@ -207,7 +219,7 @@ public class HealSpell : Spell
 //Spells that attempt to shield friendly entities (CURRENTLY INCOMPLETE)
 public class ShieldSpell : Spell
 {
-    public override void cast(ICaster target, ICaster caster)
+    public override CastData cast(ICaster target, ICaster caster)
     {
         throw new System.NotImplementedException();
     }

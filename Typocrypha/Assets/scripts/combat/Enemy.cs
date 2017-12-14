@@ -48,6 +48,14 @@ public class Enemy : MonoBehaviour, ICaster {
     public int Curr_stagger { get { return curr_stagger; } set { curr_stagger = value; } }
     public bool Is_stunned { get { return is_stunned; } }
     public bool Is_dead { get { return is_dead; } }
+    public ICasterType CasterType
+    {
+        get
+        {
+            return ICasterType.ENEMY;
+        }
+    }
+
 
     //Public fields//
 
@@ -154,23 +162,26 @@ public class Enemy : MonoBehaviour, ICaster {
 		Debug.Log (stats.name + " casts " + s.ToString());
 		StartCoroutine (swell ());
 		BattleEffects.main.screenShake (0.5f, 0.1f);
-        dict.GetComponent<SpellDictionary>().NPC_Cast(s,targets, selected, allies, position);
+        dict.GetComponent<SpellDictionary>().cast(s,targets, selected, allies, position);
 	}
 
 	// be attacked by the player
-	public void damage(int d, int element, ICaster caster, bool crit, bool reflect = false) {
-        //Reflect damage to caster if enemy reflects this element
+	public void damage(CastData data, int d, int element, ICaster caster, bool crit, bool reflect = false) {
+        //Reflect damage to caster if enemy reflects this element (FIX for targeting)
         if(stats.vsElement[element] == Elements.reflect  && reflect == false)
         {
             Debug.Log("Enemy reflects " + d + " " + Elements.toString(element) + " damage back at player");
-            caster.damage(d, element, caster, crit, true);
+            data.reflect = true;
+            caster.damage(data, d, element, caster, crit, true);
             return;
         }
-
-        bool damaged = CasterOps.calcDamage(d, element, caster, this, crit, Is_stunned);
+        bool damaged = CasterOps.calcDamage(data, d, element, caster, this, crit, Is_stunned);
         //Apply stun if applicable
         if (curr_stagger <= 0 && is_stunned == false)
+        {
+            data.isStun = true;
             stun();
+        }   
         //Apply shake and sfx if hit
 		if (damaged) { 
 			BattleEffects.main.spriteShake (gameObject.transform, 0.5f, 0.1f);
@@ -180,8 +191,6 @@ public class Enemy : MonoBehaviour, ICaster {
     //Apply stun condition to enemy
     private void stun()
     {
-		AudioPlayer.main.playSFX (2, SFXType.BATTLE, "sfx_stagger");
-        bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 0.5F, 0);
         is_stunned = true;
     }
     //Un-stun enemy

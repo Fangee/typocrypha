@@ -77,6 +77,7 @@ public class Player : ICaster
             return is_dead;
         }
     }
+    public ICasterType CasterType { get {return ICasterType.PLAYER; } }
 
     //Fields
 
@@ -115,17 +116,17 @@ public class Player : ICaster
     //ICaster interface overrides
 
     //Damage player
-    public void damage(int d, int element, ICaster caster, bool crit, bool reflect = false)
+    public void damage(CastData data, int d, int element, ICaster caster, bool crit, bool reflect = false)
     {
-        //Reflect damage to caster if enemy reflects this element
+        //Reflect damage to caster if enemy reflects this element (FIX WITH CASTDATA)
         if (stats.vsElement[element] == Elements.reflect && reflect == false)
         {
             int dRef = d;
             Debug.Log("Player reflects " + dRef + " " + Elements.toString(element) + " damage back at enemy");
-            caster.damage(dRef, element, caster, crit, true);
+            caster.damage(data, dRef, element, caster, crit, true);
             return;
         }
-        bool damaged = CasterOps.calcDamage(d, element, caster, this, crit);
+        bool damaged = CasterOps.calcDamage(data, d, element, caster, this, crit);
 
         if (damaged) {
 		}

@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ICasterType
+{
+    INVALID,
+    PLAYER,
+    ENEMY,
+    NPC_ALLY,
+}
+
 //Povides OOP structure neccesary for Universal casting
 //Anything that can cast
 public interface ICaster
@@ -12,7 +20,8 @@ public interface ICaster
     int Curr_stagger { get; set; }
     bool Is_stunned { get; }
     bool Is_dead { get; }
-
-    void damage(int d, int element, ICaster caster, bool crit, bool reflect = false);
+    ICasterType CasterType { get; }
+    //Note: cast data actually functions as an input/output variable
+    void damage(CastData data, int d, int element, ICaster caster, bool crit, bool reflect = false);
 }
 
