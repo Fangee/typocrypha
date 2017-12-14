@@ -85,10 +85,6 @@ public class BattleManager : MonoBehaviour {
 
         yield return new WaitForSeconds (1.5f);
 
-        //MOVE TO CAST AND PROCESS WHEN POSSIBLE/IF YOU KNOW HOW
-        AudioPlayer.main.playSFX(1, SFXType.SPELL, "Cutting_SFX");
-        AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", enemy_arr[target_ind].transform.position, false);
-
         //SPELLCASTING AND CASTDATA PROCESSING HERE//
 
         SpellData s;
@@ -174,15 +170,18 @@ public class BattleManager : MonoBehaviour {
                 else//Spell hits
                 {
                     //Process hit graphics
+					AudioPlayer.main.playSFX(1, SFXType.SPELL, "Cutting_SFX");
 
                     if (d.isCrit)//Spell is crit
                     {
                         Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
+						AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_party_weakcrit_dmg");
                         //process crit graphics
                     }
                     Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.vsElement[d.element]);
                     //Process elemental wk/resist/absorb/reflect graphics
                     //Process damage graphics
+					BattleEffects.main.screenShake(0.5f, 0.1f);
                 }
             }
             else if (d.Target.CasterType == ICasterType.NPC_ALLY)
@@ -201,11 +200,14 @@ public class BattleManager : MonoBehaviour {
                 else//Spell hits
                 {
                     //Process hit graphics
+					AudioPlayer.main.playSFX(1, SFXType.SPELL, "Cutting_SFX");
+					AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", enemy_arr[target_ind].transform.position, false);
 
                     if (d.isCrit)//Spell is crit
                     {
                         Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
-                        //process crit graphics
+						AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_enemy_weakcrit_dmg");
+						//process crit graphics
                     }
                     if (d.isStun)
                     {
@@ -217,6 +219,7 @@ public class BattleManager : MonoBehaviour {
                     Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.vsElement[d.element]);
                     //Process elemental wk/resist/absorb/reflect graphics
                     //Process damage graphics
+					if (d.damageInflicted > 0) BattleEffects.main.spriteShake (e.gameObject.transform, 0.5f, 0.1f);
                 }
             }
         }

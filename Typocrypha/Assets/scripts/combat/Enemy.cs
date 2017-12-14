@@ -158,7 +158,6 @@ public class Enemy : MonoBehaviour, ICaster {
 	void attackPlayer(SpellData s) {
         Debug.Log(stats.name + " casts " + s.ToString());
         StartCoroutine(swell());
-        BattleEffects.main.screenShake(0.5f, 0.1f);
         field.enemyCast(dict.GetComponent<SpellDictionary>(), s, position);
 	}
 
@@ -179,10 +178,6 @@ public class Enemy : MonoBehaviour, ICaster {
             data.isStun = true;
             stun();
         }   
-        //Apply shake and sfx if hit
-		if (damaged) { 
-			BattleEffects.main.spriteShake (gameObject.transform, 0.5f, 0.1f);
-		}
         //opacity and death are now updated in updateCondition()
     }
     //Apply stun condition to enemy
