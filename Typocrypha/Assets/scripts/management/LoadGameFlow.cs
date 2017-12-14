@@ -133,7 +133,7 @@ public class LoadGameFlow : MonoBehaviour {
 				case 'L': who_speak [0] = true; break;
 				case 'M': who_speak [1] = true; break;
 				case 'R': who_speak [2] = true; break;
-				case 'P':who_speak [3] = true; break;
+				case 'P': who_speak [3] = true; break;
 			}
 		}
 		// parse dialogue

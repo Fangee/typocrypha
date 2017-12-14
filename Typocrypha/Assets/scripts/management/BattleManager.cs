@@ -11,14 +11,15 @@ public class BattleManager : MonoBehaviour {
 	public EnemyChargeBars charge_bars; // creates and mananges charge bars
 	public CooldownList cooldown_list; // creates and manages player's cooldowns
 	public Transform target_ret; // shows where target is
+	public GameObject dialogue_box; // text box for dialogue
 	public float enemy_spacing; // space between enemies
+
 	public bool pause; // is battle paused?
 	public Enemy[] enemy_arr; // array of Enemy components (size 3)
     public int target_ind; // index of currently targeted enemy
     public ICaster[] player_arr = { null, Player.main, null }; // array of Player and allies (size 3)
     public int player_ind = 1;
 	public int enemy_count; // number of enemies in battle
-
 	BattleScene curr_battle; // current battle scene
 
 	void Awake() {
@@ -106,8 +107,8 @@ public class BattleManager : MonoBehaviour {
         //END PAUSE//
 
 		BattleEffects.main.setDim (false, enemy_arr [target_ind].enemy_sprite);
-        updateEnemies();
 		pause = false;
+		updateEnemies();
 	}
 
     //Casts from an ally position at target enemy_arr[target]: calls processCast on results
@@ -225,6 +226,7 @@ public class BattleManager : MonoBehaviour {
     private void updateEnemies()
     {
 		bool interrupted = checkInterrupts (); // check for interrupts
+		if (interrupted) return;
 		int curr_dead = 0;
         for(int i = 0; i < enemy_arr.Length; i++)
         {
@@ -260,16 +262,31 @@ public class BattleManager : MonoBehaviour {
 					Debug.Log ("enemy health condition fulfilled " + binter.who_cond + ":" + binter.health_cond);
 					interrupted = true;
 					curr_battle.interrupts [i] = null;
+					StartCoroutine (playInterrupt (binter.scene));
 				}
 			} else { // for player health
 				if ((float)Player.main.Curr_hp / (float)Player.main.Stats.max_hp <= binter.health_cond) {
-					Debug.Log ("player health condition fulfilled");
+					Debug.Log ("player health condition fulfilled:" + (float)Player.main.Curr_hp / (float)Player.main.Stats.max_hp);
 					interrupted = true;
 					curr_battle.interrupts [i] = null;
+					StartCoroutine (playInterrupt (binter.scene));
 				}
 			}
 		}
 		return interrupted;
+	}
+	// plays a battle interrupt
+	IEnumerator playInterrupt(CutScene scene) {
+		pause = true;
+		dialogue_box.SetActive (true);
+		CutsceneManager.main.enabled = true;
+		CutsceneManager.main.battle_interrupt = true;
+		CutsceneManager.main.startCutscene (scene);
+		yield return new WaitUntil (() => CutsceneManager.main.at_end);
+		CutsceneManager.main.enabled = false;
+		dialogue_box.SetActive (false);
+		updateEnemies ();
+		pause = false;
 	}
 	//removes all enemies and charge bars
 	public void stopBattle() {

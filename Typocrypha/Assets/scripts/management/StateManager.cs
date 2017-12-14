@@ -50,6 +50,7 @@ public class StateManager : MonoBehaviour {
 		case "CutScene":
 			track_typing.enabled = false;
 			CutsceneManager.main.enabled = true;
+			CutsceneManager.main.battle_interrupt = false;
 			BattleManager.main.enabled = false;
 			dialogue_box.SetActive (true);
 			CutsceneManager.main.startCutscene ((CutScene)next_scene);

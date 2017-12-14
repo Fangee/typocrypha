@@ -10,6 +10,8 @@ public class CutsceneManager : MonoBehaviour {
 	public Text name_text; // text where name will be displayed
 	public SpriteRenderer sprite_holder; // where speaking character sprite will go
 	public TextScroll text_scroll; // displays text character by character
+	public bool at_end; // is dialogue at end of current scene?
+	public bool battle_interrupt; // is the current scene a battle cutscene?
 
 	int curr_line; // current line of dialogue
 	CutScene scene; // cutscene object
@@ -20,6 +22,7 @@ public class CutsceneManager : MonoBehaviour {
 
 	// start cutscene
 	public void startCutscene(CutScene i_scene) {
+		at_end = false;
 		scene = i_scene;
 		curr_line = 0; // reset dialogue
 		nextLine ();
@@ -29,7 +32,11 @@ public class CutsceneManager : MonoBehaviour {
 		// go to next line if space is pressed
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			// if dialogue over, go to next scene
-			if (!nextLine ()) StateManager.main.nextScene ();
+			if (!nextLine ()) {
+				at_end = true;
+				if (!battle_interrupt)
+					StateManager.main.nextScene ();
+			}
 		}
 	}
 
