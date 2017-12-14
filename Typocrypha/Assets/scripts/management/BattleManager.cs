@@ -19,6 +19,8 @@ public class BattleManager : MonoBehaviour {
     public int player_ind = 1;
 	public int enemy_count; // number of enemies in battle
 
+	BattleScene curr_battle; // current battle scene
+
 	void Awake() {
 		if (main == null) main = this;
 		pause = false;
@@ -27,6 +29,7 @@ public class BattleManager : MonoBehaviour {
 	// start battle scene
 	public void startBattle(BattleScene scene) {
 		Debug.Log ("Battle!");
+		curr_battle = scene;
 		enemy_arr = new Enemy[3];
 		enemy_count = scene.enemy_stats.Length;
 		charge_bars.initChargeBars ();
@@ -221,13 +224,13 @@ public class BattleManager : MonoBehaviour {
     //Updates death and opacity of enemies after pause in puaseAttackCurrent
     private void updateEnemies()
     {
+		bool interrupted = checkInterrupts (); // check for interrupts
 		int curr_dead = 0;
         for(int i = 0; i < enemy_arr.Length; i++)
         {
             if(!enemy_arr[i].Is_dead)
 			    enemy_arr [i].updateCondition ();
-			else
-                ++curr_dead;
+			if (enemy_arr [i].Is_dead) ++curr_dead;
         }
 		if (curr_dead == enemy_count) // end battle if all enemies dead
 		{
@@ -236,6 +239,38 @@ public class BattleManager : MonoBehaviour {
 			StartCoroutine(StateManager.main.nextSceneDelayed(2.0f));
 		}
     }
+	// checks and plays battle interruptions (returns true if an interrupt occured)
+	bool checkInterrupts() {
+		bool interrupted = false;
+		// check for interrupt scenes
+		for (int i = 0; i < curr_battle.interrupts.Length; ++i) {
+			if (curr_battle.interrupts [i] == null) continue;
+			BattleInterrupt binter = curr_battle.interrupts [i];
+			// make sure all speaking members are still alive
+			for (int j = 0; j < 3; j++) {
+				if (binter.who_speak [j] && enemy_arr [j].Is_dead) {
+					curr_battle.interrupts [i] = null;
+					continue;
+				}
+			}
+			// check if condition is fulfilled
+			if (binter.who_cond < 3) { // for enemy health
+				Enemy curr_enemy = enemy_arr [binter.who_cond];
+				if ((float)curr_enemy.Curr_hp / (float)curr_enemy.Stats.max_hp <= binter.health_cond) {
+					Debug.Log ("enemy health condition fulfilled " + binter.who_cond + ":" + binter.health_cond);
+					interrupted = true;
+					curr_battle.interrupts [i] = null;
+				}
+			} else { // for player health
+				if ((float)Player.main.Curr_hp / (float)Player.main.Stats.max_hp <= binter.health_cond) {
+					Debug.Log ("player health condition fulfilled");
+					interrupted = true;
+					curr_battle.interrupts [i] = null;
+				}
+			}
+		}
+		return interrupted;
+	}
 	//removes all enemies and charge bars
 	public void stopBattle() {
 		pause = true;

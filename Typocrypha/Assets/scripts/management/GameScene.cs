@@ -17,7 +17,7 @@ public class IntroScene : GameScene {
 
 // represents a cutscene
 public class CutScene : GameScene {
-	public string[] npcs; // array of npc names (TEMP: should be npc objects)
+	public string[] npcs; // array of npc names 
 	public string[] whos_talking; // who is saying each line of dialogue
 	public string[] dialogue; // lines of dialogue for this scene
 	public string[] npc_sprites; // name of sprite files for each talking scene
@@ -35,13 +35,25 @@ public class CutScene : GameScene {
 
 }
 
+// represents a cutscene that happens in the middle of a battle
+public class BattleInterrupt {
+	public CutScene scene; // scene to play
+	// array of size 4 describing who is in scene (true if in scene, and must be alive for scene to play)
+	// 0-3, left, middle right, player
+	public bool[] who_speak;
+	public int who_cond; // whose health we track (0-3)
+	public float health_cond; // how low health must be to trigger cutscene
+}
+
 // represents a battle scene
 public class BattleScene : GameScene {
 	public EnemyStats[] enemy_stats; // stats for all enemies
 	public string[] music_tracks; // music tracks for battle
+	public BattleInterrupt[] interrupts; // mid battle cutscenes
 
-	public BattleScene(EnemyStats[] i_enemy_stats, string[] i_music_tracks) {
+	public BattleScene(EnemyStats[] i_enemy_stats, string[] i_music_tracks, BattleInterrupt[] i_interrupts) {
 		enemy_stats = i_enemy_stats;
 		music_tracks = i_music_tracks;
+		interrupts = i_interrupts;
 	}
 }

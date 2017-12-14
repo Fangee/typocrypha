@@ -86,23 +86,81 @@ public class LoadGameFlow : MonoBehaviour {
 		// read in lines of scene
 		List<string> music_tracks = new List<string>();
 		List<EnemyStats> enemies = new List<EnemyStats>();
+		List<BattleInterrupt> interrupts = new List<BattleInterrupt> ();
 		int i = pos;
 		for (; i < lines.Length; i++) {
 			string[] cols = lines [i].Split (col_delim);
 			if (cols [0].CompareTo ("MUSIC") == 0) {
 				for (int j = 1; j < cols.Length; ++j) {
 					if (cols [j].CompareTo ("") != 0) {
-						music_tracks.Add (cols [j].Trim());
+						music_tracks.Add (cols [j].Trim ());
 					}
 				}
 			} else if (cols [0].CompareTo ("ENEMY") == 0) { // read in enemy
-				EnemyStats new_stats = enemy_data.getData(cols[1]);
+				EnemyStats new_stats = enemy_data.getData (cols [1]);
 				enemies.Add (new_stats);
+			} else if (cols[0].CompareTo("INTERRUPT") == 0) { // interrupt scene
+				i = parseInterrupt(lines, i, interrupts);
 			} else { // otherwise, scene is done
 				break;
 			}
 		}
-		scene_arr [curr_scene] = new BattleScene (enemies.ToArray (), music_tracks.ToArray());
+		scene_arr [curr_scene] = new BattleScene (enemies.ToArray (), music_tracks.ToArray(), 
+			interrupts.ToArray());
+		return i;
+	}
+
+	// parses battlescene interruption
+	// returns line number at end of interrupt
+	int parseInterrupt(string[] lines, int pos, List<BattleInterrupt> interrupts) {
+		bool[] who_speak = { false, false, false, false };
+		int who_cond = -1;
+		float health_cond = -1;
+		// parse first line, which contains the interrupt condition
+		string[] first = lines[pos].Split (col_delim);
+		// get who condition tracks
+		switch (first [1].Trim()) { 
+			case "LEFT_HEALTH": who_cond = 0; break;
+			case "MIDDLE_HEALTH": who_cond = 1; break;
+			case "RIGHT_HEALTH": who_cond = 2; break;
+			case "PLAYER_HEALTH": who_cond = 3; break;
+		}
+		// get percent health condition
+		float.TryParse(first[2], out health_cond);
+		// get who's talking in scene
+		foreach (char c in first[3]) {
+			switch (c) {
+				case 'L': who_speak [0] = true; break;
+				case 'M': who_speak [1] = true; break;
+				case 'R': who_speak [2] = true; break;
+				case 'P':who_speak [3] = true; break;
+			}
+		}
+		// parse dialogue
+		List<string> whos_talking = new List<string> ();
+		List<string> dialogue = new List<string> ();
+		List<string> npc_sprites = new List<string> ();
+		List<string> music_tracks = new List<string>();
+		int i = pos + 1;
+		for (; i < lines.Length; ++i) {
+			string[] cols = lines [i].Split (col_delim);
+			if (cols [0].CompareTo ("DIALOGUE") == 0) {
+				whos_talking.Add (cols [1]);
+				dialogue.Add (cols [2]);
+				npc_sprites.Add (cols [3].Trim ());
+				music_tracks.Add (cols [4].Trim ());
+			} else {
+				break;
+			}
+		}
+		CutScene battle_cutscene = new CutScene (null, whos_talking.ToArray(), 
+			dialogue.ToArray (), npc_sprites.ToArray(), music_tracks.ToArray());
+		BattleInterrupt battle_interrupt = new BattleInterrupt ();
+		battle_interrupt.scene = battle_cutscene;
+		battle_interrupt.who_speak = who_speak;
+		battle_interrupt.who_cond = who_cond;
+		battle_interrupt.health_cond = health_cond;
+		interrupts.Add (battle_interrupt);
 		return i;
 	}
 }
