@@ -36,9 +36,8 @@ public class BattleManager : MonoBehaviour {
 			new_enemy.transform.localPosition = new Vector3 (i * enemy_spacing, 0, 0);
 			enemy_arr [i] = new_enemy.GetComponent<Enemy> ();
 			enemy_arr [i].setStats (scene.enemy_stats [i]);
-            enemy_arr [i].allies = enemy_arr; //Give enemey access to field
+            enemy_arr [i].field = this; //Give enemey access to field (for calling spellcasts
             enemy_arr [i].position = i;      //Log enemy position in field
-            enemy_arr[i].targets = player_arr;//Give enemy access to player field
             enemy_arr[i].bars = charge_bars; //Give enemy access to charge_bars
 			Vector3 bar_pos = new_enemy.transform.position;
 			bar_pos.Set (bar_pos.x, bar_pos.y + 1, bar_pos.z);
@@ -108,6 +107,18 @@ public class BattleManager : MonoBehaviour {
 		pause = false;
 	}
 
+    //Casts from an ally position at target enemy_arr[target]: calls processCast on results
+    public void NPC_Cast(SpellDictionary dict, SpellData s, int position, int target)
+    {
+        List<CastData> data = dict.cast(s, enemy_arr, target, player_arr, position);
+        processCast(data, s);
+    }
+    //Casts from an enemy position: calls processCast on results
+    public void enemyCast(SpellDictionary dict, SpellData s, int position)
+    {
+        List<CastData> data = dict.cast(s, player_arr, player_ind, enemy_arr, position);
+        processCast(data, s);
+    }
     //Cast/Botch/Cooldown/Fizzle, with associated effects and processing
     //all animation and attack effects should be processed here
     //ONLY CALL FOR A PLAYER CAST

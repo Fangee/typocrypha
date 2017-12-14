@@ -60,15 +60,12 @@ public class Enemy : MonoBehaviour, ICaster {
     //Public fields//
 
     bool is_dead; // is enemy dead?
-    public Enemy[] allies; //State of battle scene (for ally-target casting)
-    public ICaster[] targets;//State of the player and their allies (for target-casting)
 
+    public BattleManager field;
     public int position; //index to field (current position)
     public EnemyChargeBars bars;
 	public SpriteRenderer enemy_sprite; // this enemy's sprite
 
-    //Private fields
-    private int selected = 1;//Which target in targets is selected (index to targets)
     EnemyStats stats; // stats of enemy DO NOT MUTATE
 
     bool is_stunned; // is the enemy stunned?
@@ -159,10 +156,10 @@ public class Enemy : MonoBehaviour, ICaster {
 
 	// pause battle, attack player with specified spell
 	void attackPlayer(SpellData s) {
-		Debug.Log (stats.name + " casts " + s.ToString());
-		StartCoroutine (swell ());
-		BattleEffects.main.screenShake (0.5f, 0.1f);
-        dict.GetComponent<SpellDictionary>().cast(s,targets, selected, allies, position);
+        Debug.Log(stats.name + " casts " + s.ToString());
+        StartCoroutine(swell());
+        BattleEffects.main.screenShake(0.5f, 0.1f);
+        field.enemyCast(dict.GetComponent<SpellDictionary>(), s, position);
 	}
 
 	// be attacked by the player
