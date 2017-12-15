@@ -25,6 +25,10 @@ public class EnemyChargeBars : MonoBehaviour {
 
 	// init charge bars
 	public void initChargeBars() {
+		if (charge_bars != null)
+			foreach (BarMeter bar in charge_bars)
+				if (bar != null) GameObject.Destroy(bar.gameObject);
+		charge_bars = new BarMeter[3];
 		this.enabled = true;
 	}
 
@@ -43,12 +47,12 @@ public class EnemyChargeBars : MonoBehaviour {
 	public void removeAll() {
 		this.enabled = false;
 		foreach (BarMeter chargebar in charge_bars)
-			GameObject.Destroy (chargebar.gameObject);
+			if (chargebar != null) GameObject.Destroy (chargebar.gameObject);
 	}
 
 	// update charge bars
 	void Update() {
-		if (!BattleManager.main.enabled) return;
+		if (!BattleManager.main.enabled || BattleManager.main.pause) return;
 		for (int i = 0; i < 3; i++) {
 			if (charge_bars [i] != null) {
 				Enemy enemy = BattleManager.main.enemy_arr [i];
@@ -56,7 +60,7 @@ public class EnemyChargeBars : MonoBehaviour {
 					charge_bars [i].setValue (enemy.getProgress ());
 					charge_bars [i].setText (enemy.getCurrSpell ().ToString ());
 				} else { // if enemy has died, remove bar
-					GameObject.Destroy(charge_bars[i].gameObject);
+					charge_bars[i].gameObject.SetActive(false);
 				}
 			}
 		}

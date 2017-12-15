@@ -229,7 +229,7 @@ public class BattleManager : MonoBehaviour {
     }
 
     //Updates death and opacity of enemies after pause in puaseAttackCurrent
-    private void updateEnemies()
+    public void updateEnemies()
     {
 		bool interrupted = checkInterrupts (); // check for interrupts
 		if (interrupted) return;
@@ -243,7 +243,7 @@ public class BattleManager : MonoBehaviour {
 		if (curr_dead == enemy_count) // end battle if all enemies dead
 		{
 			Debug.Log("you win!");
-			cooldown_list.removeAll ();
+			stopBattle ();
 			StartCoroutine(StateManager.main.nextSceneDelayed(2.0f));
 		}
     }
@@ -255,12 +255,14 @@ public class BattleManager : MonoBehaviour {
 			if (curr_battle.interrupts [i] == null) continue;
 			BattleInterrupt binter = curr_battle.interrupts [i];
 			// make sure all speaking members are still alive
+			bool dead_speaker = false;
 			for (int j = 0; j < 3; j++) {
 				if (binter.who_speak [j] && enemy_arr [j].Is_dead) {
 					curr_battle.interrupts [i] = null;
-					continue;
+					dead_speaker = true;
 				}
 			}
+			if (dead_speaker) continue;
 			// check if condition is fulfilled
 			if (binter.who_cond < 3) { // for enemy health
 				Enemy curr_enemy = enemy_arr [binter.who_cond];
@@ -303,5 +305,6 @@ public class BattleManager : MonoBehaviour {
 		enemy_arr = null;
 		cooldown_list.removeAll ();
 		charge_bars.removeAll ();
+		stagger_bars.removeAll ();
 	}
 }

@@ -25,6 +25,10 @@ public class EnemyStaggerBars : MonoBehaviour {
 
 	// init stagger bars
 	public void initStaggerBars() {
+		if (stagger_bars != null)
+			foreach (BarMeter bar in stagger_bars)
+				if (bar != null) GameObject.Destroy(bar.gameObject);
+		stagger_bars = new BarMeter[3];
 		this.enabled = true;
 	}
 
@@ -43,19 +47,19 @@ public class EnemyStaggerBars : MonoBehaviour {
 	public void removeAll() {
 		this.enabled = false;
 		foreach (BarMeter staggerbar in stagger_bars)
-			GameObject.Destroy (staggerbar.gameObject);
+			if (staggerbar != null) GameObject.Destroy (staggerbar.gameObject);
 	}
 
 	// update stagger bars
 	void Update() {
-		if (!BattleManager.main.enabled) return;
+		if (!BattleManager.main.enabled || BattleManager.main.pause) return;
 		for (int i = 0; i < 3; i++) {
 			if (stagger_bars [i] != null) {
 				Enemy enemy = BattleManager.main.enemy_arr [i];
 				if (!enemy.Is_dead) {
 					stagger_bars [i].setValue (enemy.getStagger ());
 				} else { // if enemy has died, remove bar
-					GameObject.Destroy(stagger_bars[i].gameObject);
+					stagger_bars[i].gameObject.SetActive(false);
 				}
 			}
 		}

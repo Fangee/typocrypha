@@ -159,6 +159,7 @@ public class Enemy : MonoBehaviour, ICaster {
                 curr_time = 0;
 				BattleEffects.main.setDim(false, enemy_sprite);
 				BattleManager.main.pause = false; // unpause
+				BattleManager.main.updateEnemies();
 			}
 		}
 	}
