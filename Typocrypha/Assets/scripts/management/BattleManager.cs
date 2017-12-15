@@ -201,7 +201,7 @@ public class BattleManager : MonoBehaviour {
                 {
                     //Process hit graphics
 					AudioPlayer.main.playSFX(1, SFXType.SPELL, "Cutting_SFX");
-					AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", enemy_arr[target_ind].transform.position, 1);
+					AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", e.transform.position, 1);
 
                     if (d.isCrit)//Spell is crit
                     {
