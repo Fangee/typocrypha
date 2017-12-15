@@ -1,14 +1,19 @@
-name (root)	spell type	spellbook description	power	cooldown	hit %	crit %	status%	pattern				
-sword	attack	a basic attack	10	4	85	10	0	MT				
-spear	attack	a basic long cool atk	20	10	90	15	0	MT				
-falchion	attack	a basic super long atk	30	15	75	10	0	MT				
-cleaver	attack	a targeted wide atk	10	10	75	10	0	LMRT				
-sacrifice	attack	"hurts self, does big ds"	40	10	95	10	0	LRmS				
-splash	attack	always misses (debug )	1	1	-1000	10	0	MT				
-poke	attack	high damage for debugging	999	1	100	0	0	MT				
-weakpnt	attack	always crits (debug)	2	1	100	100	0	MT				
-death	attack	kills self (debug)	999	1	100	0	0	mS				
-stun	attack	deal stagger to all	1	1	100	100	0	LMR				
+name (root)	spell type	spellbook description	power	cooldown	hit %	crit %	status%	pattern	buff/debuffs	buff %		
+sword	attack	a basic attack	10	4	85	10	0	MT	None	0		
+spear	attack	a basic long cool atk	20	10	90	15	0	MT	None	0		
+falchion	attack	a basic super long atk	30	15	75	10	0	MT	None	0		
+cleaver	attack	a targeted wide atk	10	10	75	10	0	LMRT	None	0		
+sacrifice	attack	"hurts self, does big ds"	40	10	95	10	0	LRmS	None	0		
+crush	attack	applies def- debuff	10	10	80	10	0	MT	D	100		
+splash	attack	always misses (debug )	1	1	-1000	10	0	MT	None	0		
+poke	attack	high damage for debugging	999	1	100	0	0	MT	None	0		
+weakpnt	attack	always crits (debug)	2	1	100	100	0	MT	None	0		
+death	attack	kills self (debug)	999	1	100	0	0	mS	None	0		
+stun	attack	deal stagger to all	1	1	100	100	0	LMR	None	0		
+debilitate	buff	1 lvl of all non-elem debuffs	1	20	100	10	0	MT	ADSHE	100		
+prayer	buff	1 lvl of all non-elem buffs	1	50	100	10	0	mS	adshe	100		
+weakness	buff	lowers target all elem resist	1	1	100	10	0	MT	UFIB	100		
+strength	buff	increases all elem resist	1	1	100	10	0	mS	ufib	100		
 END												
 name (elem)	element	spellbook description	cooldown+	cooldown*								
 fire	fire	adds fire element to spell	0	1								

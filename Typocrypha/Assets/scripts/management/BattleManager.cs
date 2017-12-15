@@ -178,7 +178,7 @@ public class BattleManager : MonoBehaviour {
 						AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_party_weakcrit_dmg");
                         //process crit graphics
                     }
-                    Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.vsElement[d.element]);
+                    Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement(d.Target.BuffDebuff, d.element));
                     //Process elemental wk/resist/absorb/reflect graphics
                     //Process damage graphics
 					BattleEffects.main.screenShake(0.5f, 0.1f);
@@ -216,7 +216,7 @@ public class BattleManager : MonoBehaviour {
                         AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_stagger");
                         charge_bars.Charge_bars[e.position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 0.5F, 0);
                     }
-                    Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.vsElement[d.element]);
+                    Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement(d.Target.BuffDebuff, d.element));
                     //Process elemental wk/resist/absorb/reflect graphics
                     //Process damage graphics
 					if (d.damageInflicted > 0) BattleEffects.main.spriteShake (e.gameObject.transform, 0.5f, 0.1f);

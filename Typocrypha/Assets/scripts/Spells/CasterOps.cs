@@ -14,14 +14,14 @@ public static class CasterOps
         int staggerDamage = 0;
 
         //Apply buff/debuffs here (NOT DONE)
-        CasterStats casterMod = caster.Stats;
-        CasterStats targetMod = target.Stats;
+        CasterStats casterMod = applyBuff(caster);
+        CasterStats targetMod = applyBuff(target);
 
         //Apply attack bonus formula here
         dMod *= casterMod.attack;
 
         //Absorb damage if enemy absorbs this type
-        if (target.Stats.vsElement[element] == Elements.absorb)
+        if (targetMod.vsElement[element] == Elements.absorb)
         {
             Debug.Log(target.Stats.name + " absorbs " + dMod + " " + Elements.toString(element) + " damage");
             if (target.Curr_hp + Mathf.CeilToInt(dMod) > target.Stats.max_hp)
@@ -30,7 +30,7 @@ public static class CasterOps
                 target.Curr_hp += Mathf.CeilToInt(dMod);
 
             data.damageInflicted = Mathf.CeilToInt(-1 * dMod);
-            data.elementalData = CastData.vsElement.ABSORB;
+            data.elementalData = Elements.vsElement.ABSORB;
             return false;
         }
 
@@ -45,16 +45,21 @@ public static class CasterOps
             staggerDamage++;
 
         //Apply elemental weakness/resistances
-        dMod *= target.Stats.vsElement[element];
-        if (target.Stats.vsElement[element] > 1)//If enemy is weak
+        dMod *= targetMod.vsElement[element];
+        if (targetMod.vsElement[element] == 0.0F)
+            data.elementalData = Elements.vsElement.NULLIFY;
+        else if (targetMod.vsElement[element] > 1)//If enemy is weak
         {
-            data.elementalData = CastData.vsElement.WEAK;
+            if (targetMod.vsElement[element] > 2)
+                data.elementalData = Elements.vsElement.SUPERWEAK;
+            else
+                data.elementalData = Elements.vsElement.WEAK;
             staggerDamage++;
         }
-        else if(target.Stats.vsElement[element] < 1)
-            data.elementalData = CastData.vsElement.RESISTANT;
+        else if (targetMod.vsElement[element] < 1)
+            data.elementalData = Elements.vsElement.RESISTANT;
         else
-            data.elementalData = CastData.vsElement.NEUTERAL;
+            data.elementalData = Elements.vsElement.NEUTERAL;
 
         //Apply stun damage mod (if stunned)
         if (is_stunned)
@@ -83,5 +88,10 @@ public static class CasterOps
             target.Curr_hp = 0;
         data.damageInflicted = Mathf.CeilToInt(dMod);
         return dMod > 0;
+    }
+    //Applies ICaster's buff/debuff state to its stats
+    public static CasterStats applyBuff(ICaster caster)
+    {
+        return caster.Stats.modify(caster.BuffDebuff);
     }
 }

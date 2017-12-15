@@ -108,6 +108,9 @@ public abstract class Spell
         s.element = element;
         s.targetData = new TargetData(false);
         s.targetData.modify(targetData);
+        if(buff != null)
+            s.buff = new BuffData(buff);
+        s.buffPercentage = buffPercentage;
     }
 
     //protected methods
@@ -115,7 +118,7 @@ public abstract class Spell
     //Return true if spell hits target, else false (does not actually apply spell effect)
     //Factors in target stunState if checkStun = true
     //ONLY CALL IN CAST (or after spell has been been properly modified with Modify())
-    protected bool hitCheck(CastData data, ICaster target, ICaster caster, bool checkStun = false)
+    protected virtual bool hitCheck(CastData data, ICaster target, ICaster caster, bool checkStun = false)
     {
         if (checkStun && target.Is_stunned)
         {
@@ -123,7 +126,7 @@ public abstract class Spell
             return true;
         }
 
-        int chance = Mathf.CeilToInt(hitPercentage * caster.Stats.accuracy) - target.Stats.evasion;
+        int chance = Mathf.CeilToInt(hitPercentage * caster.Stats.getModAcc(caster.BuffDebuff)) - target.Stats.getModEvade(target.BuffDebuff);
         if((Random.Range(0.0F, 1F) * 100) <= chance)
         {
             data.isHit = true;
@@ -135,17 +138,36 @@ public abstract class Spell
     //Return true if spell crits target, else false. Multiplies power by 1.5 if a hit (round up)
     //Factors in target stunState if checkStun = true
     //ONLY CALL IN CAST (or after spell has been been properly modified with Modify())
-    protected bool critCheck(CastData data, ICaster target, ICaster caster)
+    protected virtual bool critCheck(CastData data, ICaster target, ICaster caster, out int newPower)
     {
-        float accBonus = Mathf.Clamp(((caster.Stats.accuracy - 1) * (1 - (target.Stats.evasion * 0.01F))) * 0.2F, 0, 2) * 10;
+        float accBonus = Mathf.Clamp(((caster.Stats.getModAcc(caster.BuffDebuff) -1) * (1 - (target.Stats.getModEvade(target.BuffDebuff) * 0.01F))) * 0.2F, 0, 2) * 10;
         float chance = critPercentage + accBonus;
         if ((Random.Range(0.0F, 1F) * 100) <= chance)
         {
             data.isCrit = true;
+            newPower = Mathf.CeilToInt(power * 1.5F);
             return true;
         }
         data.isCrit = false;
+        newPower = power;
         return false;
+    }
+    //Returns true if spell inflicts a buff/debuff on target, and inflicts the buff/debuff
+    protected virtual bool buffCheck(CastData data, ICaster target, ICaster caster, int powerMod)
+    {
+        if ((Random.Range(0.0F, 1F) * 100) <= buffPercentage)
+        {
+            data.isBuff = true;
+            data.buffInflicted = buff;
+            inflictBuff(target, caster, powerMod);
+            return true;
+        }
+        return false;
+    }
+    //Inflects buff/debuff on target
+    protected void inflictBuff(ICaster target, ICaster caster, float mod)
+    {
+        target.BuffDebuff.modify(buff.multiply(Mathf.CeilToInt(mod)));
     }
 
     //public fields
@@ -158,9 +180,10 @@ public abstract class Spell
     public int critPercentage;          //Spell's base crit chance (1 = 1%)
     public int elementEffectMod;        //Spell's base elemental effect chance (1 = 1%)
     public int element = Elements.@null;     //Spell's elemental damage type
+    public BuffData buff = null;               //Spell's buff/debuff to inflict
+    public int buffPercentage;          //Chance of inflicting buff/debuff
     public string type = "null";        //Spell's effect type (attack, shield, heal, etc.)
-    //Targets: {L ,M ,R ,leftAlly, mAlly, rAlly, SelfCenter, CursorDependent?}
-    public TargetData targetData;
+    public TargetData targetData;       //Spell's targeting data
 
     //Cooldown properties
 
@@ -188,7 +211,8 @@ public abstract class Spell
         get { return finish_time - curr_time.Obj; }
     }
 }
-//Spells that attempt to do damage to opposing entities (Add targeting)
+//Spells that attempt to do damage to opposing entities (or self and/or allies)
+//Can have a chance to buff/debuff
 public class AttackSpell : Spell
 {
     public override CastData cast(ICaster target, ICaster caster)
@@ -197,17 +221,72 @@ public class AttackSpell : Spell
         data.element = element;
         if(hitCheck(data, target,caster, true))
         {
-            bool crit = critCheck(data, target, caster);
             int powerMod;
-            if (crit)
-                powerMod = Mathf.CeilToInt(power * 1.5F);
-            else
-                powerMod = power;
+            bool crit = critCheck(data, target, caster, out powerMod);                
             target.damage(data, powerMod, element, caster, crit);
+            if (buff != null)
+                buffCheck(data, target, caster, powerMod);
         }
         return data;
     }
+
+
 }
+//Spells that buff/debuff enemies, but do not do damage
+public class BuffSpell : Spell
+{
+    public override CastData cast(ICaster target, ICaster caster)
+    {
+        CastData data = new CastData();
+        data.element = element;
+        int powerMod;
+        critCheck(data, target, caster, out powerMod);
+        buffCheck(data, target, caster, powerMod);
+        return data;
+    }
+    protected override bool buffCheck(CastData data, ICaster target, ICaster caster, int powerMod)
+    {
+        Elements.vsElement vs = target.Stats.getModVsElement(target.BuffDebuff, element);
+        switch (vs)
+        {
+            case Elements.vsElement.REFLECT:
+                data.reflect = true;
+                inflictBuff(caster, target, powerMod);
+                break;
+            case Elements.vsElement.ABSORB:
+                buff.makeBuff();
+                inflictBuff(target, caster, powerMod);
+                break;
+            case Elements.vsElement.RESISTANT:
+                if ((Random.Range(0.0F, 1F) * 100) > 50)
+                {
+                    data.isHit = false;
+                    return false;
+                }
+                inflictBuff(target, caster, powerMod);
+                break;
+            case Elements.vsElement.NULLIFY:
+                data.isHit = false;
+                return false;
+            case Elements.vsElement.NEUTERAL:
+                inflictBuff(target, caster, powerMod);
+                break;
+            case Elements.vsElement.WEAK:
+                inflictBuff(target, caster, powerMod * 1.5F);
+                break;
+            case Elements.vsElement.SUPERWEAK:
+                inflictBuff(target, caster, powerMod * 2);
+                break;
+            case Elements.vsElement.INVALID:
+                throw new System.NotImplementedException();
+        }
+        data.isBuff = true;
+        data.isHit = true;
+        data.buffInflicted = buff;
+        return true;
+    }
+}
+
 //Spells that attempt to heal friendly entities (CURRENTLY INCOMPLETE)
 public class HealSpell : Spell
 {

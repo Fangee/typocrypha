@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour, ICaster {
             return stats;
         }
     }
+    public BuffDebuff BuffDebuff { get { return buffDebuff; } }
     public int Curr_hp
     {
         get
@@ -67,6 +68,7 @@ public class Enemy : MonoBehaviour, ICaster {
 	public SpriteRenderer enemy_sprite; // this enemy's sprite
 
     EnemyStats stats; // stats of enemy DO NOT MUTATE
+    BuffDebuff buffDebuff = new BuffDebuff(); // buff/debuff state
 
     bool is_stunned; // is the enemy stunned?
     int curr_spell = 0;
@@ -171,7 +173,7 @@ public class Enemy : MonoBehaviour, ICaster {
             caster.damage(data, d, element, caster, crit, true);
             return;
         }
-        bool damaged = CasterOps.calcDamage(data, d, element, caster, this, crit, Is_stunned);
+        CasterOps.calcDamage(data, d, element, caster, this, crit, Is_stunned);
         //Apply stun if applicable
         if (curr_stagger <= 0 && is_stunned == false)
         {
