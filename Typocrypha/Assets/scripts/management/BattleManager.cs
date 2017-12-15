@@ -9,6 +9,7 @@ public class BattleManager : MonoBehaviour {
 	public GameObject spellDict; // spell dictionary object
 	public GameObject enemy_prefab; // prefab for enemy object
 	public EnemyChargeBars charge_bars; // creates and mananges charge bars
+	public EnemyStaggerBars stagger_bars; // creates and manages stagger bars
 	public CooldownList cooldown_list; // creates and manages player's cooldowns
 	public Transform target_ret; // shows where target is
 	public GameObject dialogue_box; // text box for dialogue
@@ -34,6 +35,7 @@ public class BattleManager : MonoBehaviour {
 		enemy_arr = new Enemy[3];
 		enemy_count = scene.enemy_stats.Length;
 		charge_bars.initChargeBars ();
+		stagger_bars.initStaggerBars ();
 		for (int i = 0; i < scene.enemy_stats.Length; i++) {
 			GameObject new_enemy = GameObject.Instantiate (enemy_prefab, transform);
 			new_enemy.transform.localScale = new Vector3 (1, 1, 1);
@@ -46,6 +48,7 @@ public class BattleManager : MonoBehaviour {
 			Vector3 bar_pos = new_enemy.transform.position;
 			bar_pos.Set (bar_pos.x, bar_pos.y + 1, bar_pos.z);
 			charge_bars.makeChargeMeter(i, bar_pos);
+			stagger_bars.makeStaggerMeter (i, bar_pos);
 		}
 		pause = false;
 		target_ind = 0;

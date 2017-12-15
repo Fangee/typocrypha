@@ -76,6 +76,7 @@ public class Enemy : MonoBehaviour, ICaster {
     int curr_shield; //current amount of shield
     int curr_stagger; //current amount of stagger
     float stagger_time; //The time an enemy's stun will last
+	float curr_stagger_time; // current time staggered
     float curr_time; // current time (from 0 to atk_time)
     float atk_time; // time it takes to attack
     private static SpellDictionary dict; //Dictionary to refer to (set in setStats)
@@ -114,11 +115,17 @@ public class Enemy : MonoBehaviour, ICaster {
 	public SpellData getCurrSpell() {
 		return stats.spells[curr_spell];
 	}
+
+	// returns progress of stagger bar
+	public float getStagger() {
+		if (is_stunned) return curr_stagger_time / stagger_time;
+		else            return ((float)curr_stagger/(float)stats.max_stagger);
+	}
     //Main attack AI
 	// keep track of time, and attack whenever curr_time = atk_time
 	IEnumerator timer() {
 		Vector3 original_pos = transform.position;
-        float curr_stagger_time = 0F;
+        curr_stagger_time = 0F;
         SpellData s = stats.spells[curr_spell];        //Initialize with current spell
         atk_time = dict.getCastingTime(s, stats.speed);   //Get casting time
 		while (!is_dead) {
