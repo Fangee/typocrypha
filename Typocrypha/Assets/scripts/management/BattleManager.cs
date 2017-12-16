@@ -9,6 +9,7 @@ public class BattleManager : MonoBehaviour {
 	public GameObject spellDict; // spell dictionary object
 	public GameObject enemy_prefab; // prefab for enemy object
 	public EnemyChargeBars charge_bars; // creates and mananges charge bars
+	public EnemyStaggerBars stagger_bars; // creates and manages stagger bars
 	public CooldownList cooldown_list; // creates and manages player's cooldowns
 	public Transform target_ret; // shows where target is
 	public GameObject dialogue_box; // text box for dialogue
@@ -42,6 +43,7 @@ public class BattleManager : MonoBehaviour {
 		enemy_arr = new Enemy[3];
 		enemy_count = scene.enemy_stats.Length;
 		charge_bars.initChargeBars ();
+		stagger_bars.initStaggerBars ();
 		for (int i = 0; i < scene.enemy_stats.Length; i++) {
 			GameObject new_enemy = GameObject.Instantiate (enemy_prefab, transform);
 			new_enemy.transform.localScale = new Vector3 (1, 1, 1);
@@ -54,6 +56,7 @@ public class BattleManager : MonoBehaviour {
 			Vector3 bar_pos = new_enemy.transform.position;
 			bar_pos.Set (bar_pos.x, bar_pos.y + 1, bar_pos.z);
 			charge_bars.makeChargeMeter(i, bar_pos);
+			stagger_bars.makeStaggerMeter (i, bar_pos);
 		}
 		pause = false;
 		target_ind = 0;
@@ -186,7 +189,7 @@ public class BattleManager : MonoBehaviour {
 						AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_party_weakcrit_dmg");
                         //process crit graphics
                     }
-                    Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.vsElement[d.element]);
+                    Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement(d.Target.BuffDebuff, d.element));
                     //Process elemental wk/resist/absorb/reflect graphics
                     //Process damage graphics
 					BattleEffects.main.screenShake(0.5f, 0.1f);
@@ -209,7 +212,7 @@ public class BattleManager : MonoBehaviour {
                 {
                     //Process hit graphics
 					AudioPlayer.main.playSFX(1, SFXType.SPELL, "Cutting_SFX");
-					AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", enemy_arr[target_ind].transform.position, 1);
+					AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", e.transform.position, 1);
 
                     if (d.isCrit)//Spell is crit
                     {
@@ -225,8 +228,7 @@ public class BattleManager : MonoBehaviour {
                         AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_stagger");
                         charge_bars.Charge_bars[e.position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 0.5F, 0);
                     }
-
-                    Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.vsElement[d.element]);
+                    Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement(d.Target.BuffDebuff, d.element));
                     //Process elemental wk/resist/absorb/reflect graphics
                     //Process damage graphics
 					popp.spawnText (d.damageInflicted.ToString(), POP_TIMER, e.transform.position + DMGNUM_OFFSET);
@@ -237,7 +239,7 @@ public class BattleManager : MonoBehaviour {
     }
 
     //Updates death and opacity of enemies after pause in puaseAttackCurrent
-    private void updateEnemies()
+    public void updateEnemies()
     {
 		bool interrupted = checkInterrupts (); // check for interrupts
 		if (interrupted) return;
@@ -251,7 +253,7 @@ public class BattleManager : MonoBehaviour {
 		if (curr_dead == enemy_count) // end battle if all enemies dead
 		{
 			Debug.Log("you win!");
-			cooldown_list.removeAll ();
+			stopBattle ();
 			StartCoroutine(StateManager.main.nextSceneDelayed(2.0f));
 		}
     }
@@ -263,12 +265,14 @@ public class BattleManager : MonoBehaviour {
 			if (curr_battle.interrupts [i] == null) continue;
 			BattleInterrupt binter = curr_battle.interrupts [i];
 			// make sure all speaking members are still alive
+			bool dead_speaker = false;
 			for (int j = 0; j < 3; j++) {
 				if (binter.who_speak [j] && enemy_arr [j].Is_dead) {
 					curr_battle.interrupts [i] = null;
-					continue;
+					dead_speaker = true;
 				}
 			}
+			if (dead_speaker) continue;
 			// check if condition is fulfilled
 			if (binter.who_cond < 3) { // for enemy health
 				Enemy curr_enemy = enemy_arr [binter.who_cond];
@@ -311,5 +315,6 @@ public class BattleManager : MonoBehaviour {
 		enemy_arr = null;
 		cooldown_list.removeAll ();
 		charge_bars.removeAll ();
+		stagger_bars.removeAll ();
 	}
 }

@@ -33,29 +33,41 @@ public class CasterStats
     public readonly float accuracy;      //numerical hitchance boost
     public readonly int evasion;       //numerical dodgechance boost
     public readonly float[] vsElement; //elemental weaknesses/resistances
-    //Return the equivalent of this + CasterStats mod (to be used for stat buff/debuffs)
-    CasterStats modify(CasterStats mod)
-    {
-        int hp = max_hp + mod.max_hp;
-        int shield = max_shield + mod.max_shield;
-        int stag = max_stagger + mod.max_stagger;
-        float atk = attack + mod.attack;
-        float def = defense + mod.defense;
-        float spd = speed + mod.speed;
-        float acc = accuracy + mod.accuracy;
-        int evade = evasion + mod.evasion;
-        float[] vE;
-        if (mod.vsElement == null)
-            vE = null;
-        else
-        {
-            vE = new float[Elements.count];
 
-            for (int i = 0; i < Elements.count; i++)
-            {
-                vE[i] = vsElement[i] + mod.vsElement[i];
-            }
+    //Return the equivalent of this modified by debuff mod
+    public CasterStats modify(BuffDebuff mod)
+    {
+        float atk = attack * mod.Attack;
+        float def = defense * mod.Defense;
+        float spd = speed * mod.Speed;
+        float acc = accuracy * mod.Accuracy;
+        int evade = Mathf.FloorToInt(evasion * mod.Evasion);
+        float[] vE;
+        vE = new float[Elements.count];
+
+        for (int i = 0; i < Elements.count; i++) 
+        {
+            vE[i] = mod.modElementState(vsElement[i], i);
         }
-        return new CasterStats(name, hp, shield, stag, atk, def, spd, acc, evade, vE);
+            
+        return new CasterStats(name, max_hp, max_shield, max_stagger, atk, def, spd, acc, evade, vE);
+    }
+    //Just get debuff modified ACCURACY
+    public float getModAcc(BuffDebuff mod)
+    {
+        return accuracy * mod.Accuracy;
+    }
+    //Just get debuff modified EVADE
+    public int getModEvade(BuffDebuff mod)
+    {
+        return Mathf.FloorToInt(evasion * mod.Evasion);
+    }
+    public Elements.vsElement getModVsElement(BuffDebuff mod, int element)
+    {
+        return mod.modElementLevel(vsElement[element], element);
+    }
+    public float getFloatVsElement(BuffDebuff mod, int element)
+    {
+        return mod.modElementState(vsElement[element], element);
     }
 }

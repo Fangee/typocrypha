@@ -81,6 +81,53 @@ public class SpellDictionary : MonoBehaviour
                 if (pattern.Contains("T"))
                     s.targetData.targeted = true;
             }
+            string buff = cols[9].Trim();
+            if(!buff.Contains("N"))
+            {
+                s.buff = new BuffData();
+                int level;
+                if (type == "buff")
+                    level = s.power;
+                else
+                    level = 1;
+                if (buff.Contains("A"))
+                    s.buff.attackMod = -1 * level;
+                else if (buff.Contains("a"))
+                    s.buff.attackMod = level;
+                if (buff.Contains("D"))
+                    s.buff.defenseMod = -1 * level;
+                else if (buff.Contains("d"))
+                    s.buff.defenseMod = level;
+                if (buff.Contains("S"))
+                    s.buff.speedMod = -1 * level;
+                else if (buff.Contains("s"))
+                    s.buff.speedMod = level;
+                if (buff.Contains("H"))
+                    s.buff.accuracyMod = -1 * level;
+                else if (buff.Contains("h"))
+                    s.buff.accuracyMod = level;
+                if (buff.Contains("E"))
+                    s.buff.evasionMod = -1 * level;
+                else if (buff.Contains("e"))
+                    s.buff.evasionMod = level;
+                if (buff.Contains("U"))
+                    s.buff.vsElemMod[Elements.@null] = -1 * level;
+                else if (buff.Contains("u"))
+                    s.buff.vsElemMod[Elements.@null] = level;
+                if (buff.Contains("F"))
+                    s.buff.vsElemMod[Elements.fire] = -1 * level;
+                else if (buff.Contains("f"))
+                    s.buff.vsElemMod[Elements.fire] = level;
+                if (buff.Contains("I"))
+                    s.buff.vsElemMod[Elements.ice] = -1 * level;
+                else if (buff.Contains("i"))
+                    s.buff.vsElemMod[Elements.ice] = level;
+                if (buff.Contains("B"))
+                    s.buff.vsElemMod[Elements.bolt] = -1 * level;
+                else if (buff.Contains("b"))
+                    s.buff.vsElemMod[Elements.bolt] = level;
+            }
+            int.TryParse(cols[10].Trim(), out s.buffPercentage);
             spells.Add(key, s);
             i++;
         }
@@ -398,12 +445,14 @@ public class SpellDictionary : MonoBehaviour
     {
         if (type.CompareTo("attack") == 0)
             return new AttackSpell();
+        else if (type.CompareTo("buff") == 0)
+            return new BuffSpell();
         else if (type.CompareTo("heal") == 0)
             return new HealSpell();
         else if (type.CompareTo("shield") == 0)
             return new ShieldSpell();
         else
-            return null;
+            throw new System.NotImplementedException();
     }
     //Returns if spell s is on cooldown
     //Pre: coolDownList is not full
@@ -454,24 +503,15 @@ public class SpellData
 //Does not contain cast status data (Botch, Fizzle)
 public class CastData
 {
-    //Elemental vs status
-    public enum vsElement
-    {
-        INVALID,
-        NEUTERAL,
-        WEAK,
-        RESISTANT,
-        ABSORB,
-        REFLECT,
-    }
-
     //Data fields
     public bool isHit = false;
     public bool isCrit = false;
     public bool isStun = false;
+    public bool isBuff = false;
     public int damageInflicted = 0;
     public int element = Elements.notAnElement;
-    public vsElement elementalData = vsElement.INVALID;
+    public Elements.vsElement elementalData = Elements.vsElement.INVALID;
+    public BuffData buffInflicted = null;
 
     public ICaster Target
     {
@@ -501,6 +541,19 @@ public class CastData
 //Essentially a glorified int enum
 public static class Elements
 {
+    //Elemental vs status
+    public enum vsElement
+    {
+        INVALID,
+        REFLECT,
+        ABSORB,
+        NULLIFY,
+        RESISTANT,
+        NEUTERAL,
+        WEAK,
+        SUPERWEAK,
+    }
+
     public const int count = 4;
 
     public const int notAnElement = -1;
@@ -548,6 +601,58 @@ public static class Elements
                 return "not an element";
         }
     }
+
+    public static vsElement modLevel(vsElement level, int amount)
+    {
+        if(level != vsElement.INVALID)
+            return (vsElement)(Utility.Math.Clamp((int)level + amount, 1, 7));
+        return vsElement.INVALID;
+    }
+
+    public static vsElement getLevel(float value)
+    {
+        if (value == -2F)
+            return vsElement.REFLECT;
+        else if (value == -1F)
+            return vsElement.ABSORB;
+        else if (value == 1F)
+            return vsElement.NEUTERAL;
+        else if (value == 0F)
+            return vsElement.NULLIFY;
+        else if (value < 1)
+            return vsElement.RESISTANT;
+        else if (value > 2)
+            return vsElement.SUPERWEAK;
+        else if (value > 1)
+            return vsElement.WEAK;
+        else
+            return vsElement.INVALID;
+    }
+    public static float getFloat(vsElement level)
+    {
+        switch (level)
+        {
+            case vsElement.NEUTERAL:
+                return 1;
+            case vsElement.NULLIFY:
+                return 0;
+            case vsElement.REFLECT:
+                return reflect;
+            case vsElement.ABSORB:
+                return absorb;
+            case vsElement.RESISTANT:
+                return 0.5F;
+            case vsElement.WEAK:
+                return 1.5F;
+            case vsElement.SUPERWEAK:
+                return 2;
+            case vsElement.INVALID:
+                throw new System.NotImplementedException();
+            default:
+                throw new System.NotImplementedException();
+        }
+    }
+
 }
 
 

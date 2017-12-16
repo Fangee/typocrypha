@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour, ICaster {
             return stats;
         }
     }
+    public BuffDebuff BuffDebuff { get { return buffDebuff; } }
     public int Curr_hp
     {
         get
@@ -67,6 +68,7 @@ public class Enemy : MonoBehaviour, ICaster {
 	public SpriteRenderer enemy_sprite; // this enemy's sprite
 
     EnemyStats stats; // stats of enemy DO NOT MUTATE
+    BuffDebuff buffDebuff = new BuffDebuff(); // buff/debuff state
 
     bool is_stunned; // is the enemy stunned?
     int curr_spell = 0;
@@ -74,6 +76,7 @@ public class Enemy : MonoBehaviour, ICaster {
     int curr_shield; //current amount of shield
     int curr_stagger; //current amount of stagger
     float stagger_time; //The time an enemy's stun will last
+	float curr_stagger_time; // current time staggered
     float curr_time; // current time (from 0 to atk_time)
     float atk_time; // time it takes to attack
     private static SpellDictionary dict; //Dictionary to refer to (set in setStats)
@@ -112,11 +115,17 @@ public class Enemy : MonoBehaviour, ICaster {
 	public SpellData getCurrSpell() {
 		return stats.spells[curr_spell];
 	}
+
+	// returns progress of stagger bar
+	public float getStagger() {
+		if (is_stunned) return curr_stagger_time / stagger_time;
+		else            return ((float)curr_stagger/(float)stats.max_stagger);
+	}
     //Main attack AI
 	// keep track of time, and attack whenever curr_time = atk_time
 	IEnumerator timer() {
 		Vector3 original_pos = transform.position;
-        float curr_stagger_time = 0F;
+        curr_stagger_time = 0F;
         SpellData s = stats.spells[curr_spell];        //Initialize with current spell
         atk_time = dict.getCastingTime(s, stats.speed);   //Get casting time
 		while (!is_dead) {
@@ -125,7 +134,7 @@ public class Enemy : MonoBehaviour, ICaster {
             while(is_stunned)//Stop attack loop from continuing while the enemy is stunned
             {
 				yield return new WaitForEndOfFrame();
-				BattleEffects.main.spriteShake(gameObject.transform, 0.05f, Time.deltaTime * 2);
+				BattleEffects.main.spriteShake(gameObject.transform, Time.deltaTime * 2, 0.05f);
 				yield return new WaitWhile (() => BattleManager.main.pause);
 				curr_stagger_time += Time.deltaTime;
                 if (curr_stagger_time >= stagger_time)//End stun if time up
@@ -150,6 +159,7 @@ public class Enemy : MonoBehaviour, ICaster {
                 curr_time = 0;
 				BattleEffects.main.setDim(false, enemy_sprite);
 				BattleManager.main.pause = false; // unpause
+				BattleManager.main.updateEnemies();
 			}
 		}
 	}
@@ -171,7 +181,7 @@ public class Enemy : MonoBehaviour, ICaster {
             caster.damage(data, d, element, caster, crit, true);
             return;
         }
-        bool damaged = CasterOps.calcDamage(data, d, element, caster, this, crit, Is_stunned);
+        CasterOps.calcDamage(data, d, element, caster, this, crit, Is_stunned);
         //Apply stun if applicable
         if (curr_stagger <= 0 && is_stunned == false)
         {

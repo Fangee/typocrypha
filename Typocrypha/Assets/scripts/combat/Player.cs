@@ -7,7 +7,7 @@ using UnityEngine.UI;
 //Can also be used as a stat buff/debuff modifier with CasterStats.modify;
 public class PlayerStats : CasterStats
 {
-    public PlayerStats() : base("Player", 100, 100, -1, 1F, 0, 1F, 1F, 0, new float[Elements.count])
+    public PlayerStats() : base("Player", 100, 100, -1, 1F, 0.1F, 1F, 1F, 4, new float[Elements.count])
     {
         for (int i = 0; i < Elements.count; i++)
         {
@@ -39,6 +39,8 @@ public class Player : ICaster
 
     PlayerStats stats;
     public CasterStats Stats { get { return stats; } }
+    BuffDebuff buffDebuff = new BuffDebuff();
+    public BuffDebuff BuffDebuff { get { return buffDebuff; } }
     public int Curr_hp
     {
         get
