@@ -22,9 +22,17 @@ public class BattleManager : MonoBehaviour {
 	public int enemy_count; // number of enemies in battle
 	BattleScene curr_battle; // current battle scene
 
+	public GameObject popper; //object that handles pop-up graphics (GraphicsPopper)
+	Popper popp; //holds popper script component
+	const float POP_TIMER = 2f; //pop-ups last this many seconds long
+	Vector3 DMGNUM_OFFSET = new Vector3 (-1,0,0); //where the damage number should be
+	Vector3 UNDER_OFFSET = new Vector3 (-1,-1,0); //where something under the damage num should be
+
 	void Awake() {
 		if (main == null) main = this;
 		pause = false;
+
+		popp = popper.GetComponent<Popper>();
 	}
 
 	// start battle scene
@@ -208,6 +216,7 @@ public class BattleManager : MonoBehaviour {
                         Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
 						AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_enemy_weakcrit_dmg");
 						//process crit graphics
+						popp.spawnText ("crit", POP_TIMER, e.transform.position + UNDER_OFFSET);
                     }
                     if (d.isStun)
                     {
@@ -216,9 +225,11 @@ public class BattleManager : MonoBehaviour {
                         AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_stagger");
                         charge_bars.Charge_bars[e.position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 0.5F, 0);
                     }
+
                     Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.vsElement[d.element]);
                     //Process elemental wk/resist/absorb/reflect graphics
                     //Process damage graphics
+					popp.spawnText (d.damageInflicted.ToString(), POP_TIMER, e.transform.position + DMGNUM_OFFSET);
 					if (d.damageInflicted > 0) BattleEffects.main.spriteShake (e.gameObject.transform, 0.5f, 0.1f);
                 }
             }
