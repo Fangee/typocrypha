@@ -28,6 +28,7 @@ public class BattleManager : MonoBehaviour {
 	const float POP_TIMER = 2f; //pop-ups last this many seconds long
 	Vector3 DMGNUM_OFFSET = new Vector3 (-1,0,0); //where the damage number should be
 	Vector3 UNDER_OFFSET = new Vector3 (-1,-1,0); //where something under the damage num should be
+	Vector3 OVER_OFFSET = new Vector3 (-1,1,0); //where something under the damage num should be
 
 	void Awake() {
 		if (main == null) main = this;
@@ -219,7 +220,7 @@ public class BattleManager : MonoBehaviour {
                         Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
 						AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_enemy_weakcrit_dmg");
 						//process crit graphics
-						popp.spawnText ("crit", POP_TIMER, e.transform.position + UNDER_OFFSET);
+						popp.spawnSprite ("sprites/critical", POP_TIMER, e.transform.position + UNDER_OFFSET);
                     }
                     if (d.isStun)
                     {
@@ -228,9 +229,26 @@ public class BattleManager : MonoBehaviour {
                         AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_stagger");
                         charge_bars.Charge_bars[e.position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 0.5F, 0);
                     }
-                    Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement(d.Target.BuffDebuff, d.element));
-                    //Process elemental wk/resist/absorb/reflect graphics
-                    //Process damage graphics
+
+					Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement (d.Target.BuffDebuff, d.element));
+                    
+					//Process elemental wk/resist/absorb/reflect graphics
+					switch (d.elementalData)
+					{
+						case Elements.vsElement.REFLECT:
+							popp.spawnSprite ("sprites/reflect", POP_TIMER, e.transform.position + OVER_OFFSET);
+							break;
+						case Elements.vsElement.ABSORB:
+							popp.spawnSprite ("sprites/absorb", POP_TIMER, e.transform.position + OVER_OFFSET);
+							break;
+						case Elements.vsElement.RESISTANT:
+							popp.spawnSprite ("sprites/resistant", POP_TIMER, e.transform.position + OVER_OFFSET);
+							break;
+						case Elements.vsElement.WEAK:
+							popp.spawnSprite ("sprites/weak", POP_TIMER, e.transform.position + OVER_OFFSET);
+							break;
+					}
+					//Process damage graphics
 					popp.spawnText (d.damageInflicted.ToString(), POP_TIMER, e.transform.position + DMGNUM_OFFSET);
 					if (d.damageInflicted > 0) BattleEffects.main.spriteShake (e.gameObject.transform, 0.5f, 0.1f);
                 }

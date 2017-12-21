@@ -10,11 +10,12 @@ public class Popper : MonoBehaviour {
 	GameObject txtObj;
 	PopText pt;
 
-	public GameObject popsprite_prefab;
-	GameObject sprObj;
-	PopSprite ps;
+	public GameObject popimage_prefab;
+	GameObject imgObj;
+	PopImage pi;
 
 
+	//prints (message) for (delay) seconds at (pos) 
 	public void spawnText (string message, float delay, Vector3 pos) {
 		txtObj = GameObject.Instantiate (poptext_prefab, transform);
 		txtObj.transform.position = pos;
@@ -22,11 +23,12 @@ public class Popper : MonoBehaviour {
 		pt.display (message, delay);
 	}
 
+	//prints image (picName) for (delay) seconds at (pos) 
 	public void spawnSprite (string picName, float delay, Vector3 pos) {
-		sprObj = GameObject.Instantiate (popsprite_prefab, transform);
-		sprObj.transform.position = pos;
-		ps = sprObj.GetComponent<PopSprite>();
-		ps.display (picName, delay);
+		imgObj = GameObject.Instantiate (popimage_prefab, transform);
+		imgObj.transform.position = pos;
+		pi = imgObj.GetComponent<PopImage>();
+		pi.display (picName, delay);
 	}
 
 }
