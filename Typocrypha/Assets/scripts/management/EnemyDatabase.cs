@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyDatabase
 {
     public static EnemyDatabase main = new EnemyDatabase("enemyDatabase");
+	public bool is_loaded = false; // is enemy database loaded?
     Dictionary<string, EnemyStats> database = new Dictionary<string, EnemyStats>();
 
     private const int numFields = 10;
@@ -72,6 +73,7 @@ public class EnemyDatabase
             database.Add(stats.name, stats);
         }
         Debug.Log("Enemy Database Loaded");
+		is_loaded = true;
     }
     public EnemyStats getData(string id)
     {

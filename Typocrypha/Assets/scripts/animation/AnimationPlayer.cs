@@ -18,6 +18,7 @@ public enum AnimationType { SPELL };
 // plays effect animations
 public class AnimationPlayer : MonoBehaviour {
 	public static AnimationPlayer main = null; // global static ref
+	public bool ready; // are all of the assets loaded?
 	public int anim_frames; // number of game frames per animation frame
 	SpriteComparer sprite_comparer; // compares sprites
 	AssetBundle spellanim; // spell animations bundle
@@ -25,10 +26,13 @@ public class AnimationPlayer : MonoBehaviour {
 	void Awake() {
 		if (main == null) main = this;
 		sprite_comparer = new SpriteComparer ();
+		ready = false;
 	}
 
 	void Start() {
 		spellanim = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "spellanim"));
+		ready = true;
+		Debug.Log ("finished loading animations");
 	}
 
 	// plays specified animation; returns coroutine to keep track of animation's progress

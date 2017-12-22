@@ -7,20 +7,47 @@ using UnityEngine.UI;
 public class StateManager : MonoBehaviour {
 	public static StateManager main = null; // static global reference
 	public LoadGameFlow load_game_flow; // loads the gameflow file
+	public SpellDictionary spell_dictionary; // manages spells
 	public TrackTyping track_typing; // tracks player's typing
 	public GameObject dialogue_box; // text box for dialogue
+	public bool loaded; // are all the assets (databases, AssetBundles, etc) loaded?
+	public bool ready; // is main scene ready (all components are ready)?
 
 	GameScene[] scene_arr; // array of gamescenes (loaded by load_game_flow)
 	int curr_scene; // current index of game scene
 
 	void Awake() {
 		if (main == null) main = this;
+		loaded = false;
+		ready = false;
 	}
 
-	IEnumerator Start () {
-		while (!load_game_flow.is_loaded) // wait for gameflow to load
-			yield return new WaitForSeconds (0.1f);
+	void Start () {
+		StartCoroutine (waitForLoad ());
+	}
+
+	// waits for files to load
+	IEnumerator waitForLoad() {
+		yield return new WaitUntil (() => spell_dictionary.is_loaded);
+		yield return new WaitUntil (() => EnemyDatabase.main.is_loaded);
+		yield return new WaitUntil (() => load_game_flow.is_loaded);
 		scene_arr = load_game_flow.scene_arr;
+		yield return new WaitUntil (() => AudioPlayer.main.ready);
+		yield return new WaitUntil (() => AnimationPlayer.main.ready);
+		loaded = true;
+		Debug.Log ("done loading assets");
+	}
+
+	// update is called after all Start functions have finished
+	void Update() {
+		if (!ready && loaded) {
+			Debug.Log ("statemanager is ready");
+			ready = true;
+		}
+	}
+
+	// starts game from first scene
+	public void startFirstScene() {
 		curr_scene = -1;
 		nextScene ();
 	}

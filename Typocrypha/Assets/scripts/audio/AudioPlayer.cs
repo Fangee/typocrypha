@@ -12,6 +12,7 @@ public enum SFXType { UI, SPELL, BATTLE, SPEAKING };
 // manages playing music and sfx
 public class AudioPlayer : MonoBehaviour {
 	public static AudioPlayer main = null; // static global ref
+	public bool ready; // are all the assets loaded?
 	public AudioSource music; // plays music
 	public Transform sfx; // contains sfx channels
 	AudioSource[] sfx_channels; // sfx channels
@@ -25,6 +26,7 @@ public class AudioPlayer : MonoBehaviour {
 
 	void Awake() {
 		if (main == null) main = this;
+		ready = false;
 	}
 
 	void Start() {
@@ -37,6 +39,8 @@ public class AudioPlayer : MonoBehaviour {
 		sfx_channels = new AudioSource[sfx.childCount];
 		for (int i = 0; i < sfx.childCount; i++) // put all sfx channels into array
 			sfx_channels[i] = sfx.GetChild(i).gameObject.GetComponent<AudioSource>();
+		ready = true;
+		Debug.Log ("finished loading audio");
 	}
 		
 	// sets specified sfx channel
