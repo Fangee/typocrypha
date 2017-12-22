@@ -24,7 +24,9 @@ public class AnimationPlayer : MonoBehaviour {
 	AssetBundle spellanim; // spell animations bundle
 
 	void Awake() {
+		DontDestroyOnLoad(transform.gameObject);
 		if (main == null) main = this;
+		else GameObject.Destroy (gameObject); // avoid multiple copies
 		sprite_comparer = new SpriteComparer ();
 		ready = false;
 	}

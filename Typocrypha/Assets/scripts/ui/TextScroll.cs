@@ -26,6 +26,13 @@ public class TextScroll : MonoBehaviour {
 		curr = StartCoroutine (scrollText ());
 	}
 
+	// start deleting string in Text display
+	public void startDelete(string delete_sfx) {
+		AudioPlayer.main.setSFX (3, SFXType.SPEAKING, delete_sfx); // put sfx in channel 3
+		is_print = true;
+		curr = StartCoroutine (deleteScrollText ());
+	}
+
 	// dump rest of string to output
 	public void dump() {
 		StopCoroutine (curr);
@@ -39,6 +46,16 @@ public class TextScroll : MonoBehaviour {
 		while (text_pos < in_text.Length) {
 			AudioPlayer.main.playSFX (3); // play speaking sfx
 			out_text.text += in_text [text_pos++];
+			yield return new WaitForSeconds (delay);
+		}
+		is_print = false;
+	}
+
+	// deletes characters currently in buffer one by one
+	IEnumerator deleteScrollText() {
+		int text_pos = in_text.Length - 2;
+		while (text_pos >= 0) {
+			out_text.text = out_text.text.Substring(0, text_pos--);
 			yield return new WaitForSeconds (delay);
 		}
 		is_print = false;

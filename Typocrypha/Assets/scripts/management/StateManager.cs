@@ -12,6 +12,7 @@ public class StateManager : MonoBehaviour {
 	public GameObject dialogue_box; // text box for dialogue
 	public bool loaded; // are all the assets (databases, AssetBundles, etc) loaded?
 	public bool ready; // is main scene ready (all components are ready)?
+	public bool start_immediate; // should main scene start when loaded? (useful for skipping title for debug)
 
 	GameScene[] scene_arr; // array of gamescenes (loaded by load_game_flow)
 	int curr_scene; // current index of game scene
@@ -43,6 +44,7 @@ public class StateManager : MonoBehaviour {
 		if (!ready && loaded) {
 			Debug.Log ("statemanager is ready");
 			ready = true;
+			if (start_immediate) startFirstScene ();
 		}
 	}
 

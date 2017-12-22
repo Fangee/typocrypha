@@ -25,7 +25,9 @@ public class AudioPlayer : MonoBehaviour {
 	// ... add more asset bundles for diff audio assets here
 
 	void Awake() {
+		DontDestroyOnLoad(transform.gameObject);
 		if (main == null) main = this;
+		else GameObject.Destroy (gameObject); // avoid multiple copies
 		ready = false;
 	}
 
@@ -46,6 +48,7 @@ public class AudioPlayer : MonoBehaviour {
 	// sets specified sfx channel
 	public void setSFX(int channel, SFXType type, string name) {
 		name = name.Trim ();
+		if (name.CompareTo ("null") == 0) return;
 		switch (type) {
 		case SFXType.UI:
 			sfx_channels [channel].clip = uisfx.LoadAsset<AudioClip> (name);
