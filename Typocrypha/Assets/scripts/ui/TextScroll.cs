@@ -27,8 +27,11 @@ public class TextScroll : MonoBehaviour {
 	}
 
 	// start deleting string in Text display
-	public void startDelete(string delete_sfx) {
+	public void startDelete(string in_txt, Text out_txt, string delete_sfx) {
 		AudioPlayer.main.setSFX (3, SFXType.SPEAKING, delete_sfx); // put sfx in channel 3
+		in_text = in_txt;
+		out_text = out_txt;
+		out_text.text = in_text;
 		is_print = true;
 		curr = StartCoroutine (deleteScrollText ());
 	}

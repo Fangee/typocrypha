@@ -6,6 +6,7 @@ using UnityEngine.UI;
 // manages the game state (cutscene/battle/etc)
 public class StateManager : MonoBehaviour {
 	public static StateManager main = null; // static global reference
+	public IntroSequence intro_sequence; // manages/plays intro sequence
 	public LoadGameFlow load_game_flow; // loads the gameflow file
 	public SpellDictionary spell_dictionary; // manages spells
 	public TrackTyping track_typing; // tracks player's typing
@@ -69,12 +70,11 @@ public class StateManager : MonoBehaviour {
 		string scene_type = next_scene.GetType ().ToString ();
 		switch(scene_type) {
 		case "IntroScene":
-			Debug.Log ("Intro! (please wait to change)");
 			track_typing.enabled = true;
 			CutsceneManager.main.enabled = false;
 			BattleManager.main.enabled = false;
 			dialogue_box.SetActive (false);
-			StartCoroutine (nextSceneDelayed (3.0f)); // change after waiting for a bit
+			intro_sequence.startIntro ((IntroScene)next_scene);
 			break;
 		case "CutScene":
 			track_typing.enabled = false;
