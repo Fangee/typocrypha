@@ -16,6 +16,7 @@ public class TitleScreen : MonoBehaviour {
 
 	void Awake () {
 		new_file_button.onClick.AddListener (transitionToStart);
+		quit_button.onClick.AddListener (() => Application.Quit());
 	}
 
 	// starts title screen music/ui/animations/etc

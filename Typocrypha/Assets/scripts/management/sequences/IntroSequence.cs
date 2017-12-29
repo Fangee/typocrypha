@@ -43,7 +43,7 @@ public class IntroSequence : MonoBehaviour {
 		float dist = Vector2.Distance (player_ui.transform.position, player_ui_pos);
 		while (dist > 0.01) {
 			player_ui.transform.position = 
-				Vector2.MoveTowards (player_ui.transform.position, player_ui_pos, dist/100);
+				Vector2.MoveTowards (player_ui.transform.position, player_ui_pos, dist/10);
 			dist = Vector2.Distance (player_ui.transform.position, player_ui_pos);
 			yield return new WaitForEndOfFrame ();
 		}
