@@ -14,10 +14,20 @@ public class LoadGameFlow : MonoBehaviour {
 	char[] line_delim = { '\n' };
 	char[] col_delim = { '\t' };
 	char[] coord_delim = { ',' };
+	Dictionary<string, Vector2> npc_sprite_pos; // maps position macros
+	 
+
+	void Awake() {
+		npc_sprite_pos = new Dictionary<string, Vector2> { 
+			{"LEFT", new Vector2(-5, 1) }, 
+			{"CENTER", new Vector2(0, 1) },
+			{"RIGHT", new Vector2(5, 1) } 
+		};
+	}
 
 	void Start () {
 		is_loaded = false;
-        EnemyDatabase.main.build();//Build enemy database (so data is ready for cutscene building
+		EnemyDatabase.main.build();//Build enemy database (so data is ready for cutscene building)
         enemy_data = EnemyDatabase.main;
         parseFile (); // load gameflow file
 		is_loaded = true;
@@ -101,7 +111,7 @@ public class LoadGameFlow : MonoBehaviour {
 				float.TryParse (coords [1], out y);
 				npc_pair.second.Add (new Vector2 (x, y));
 			} else { // preset macro location (i.e. "LEFT" "RIGHT" etc)
-				npc_pair.second.Add (new Vector2 (0, 0)); // TEMP
+				npc_pair.second.Add (npc_sprite_pos[loc]);
 			}
 		}
 		return npc_pair;

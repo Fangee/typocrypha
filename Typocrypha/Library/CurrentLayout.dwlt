@@ -110,7 +110,7 @@ MonoBehaviour:
   m_MinSize: {x: 613, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 10
+  controlID: 142
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 63
+  controlID: 119
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -395,9 +395,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: d4300000
-    m_LastClickedID: 0
-    m_ExpandedIDs: 2ac9ffff9efbffff00000000102e00001e2e0000862e00003e2f0000
+    m_SelectedIDs: 82290000
+    m_LastClickedID: 10626
+    m_ExpandedIDs: 9efbffff000000008229000090290000b02a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -459,7 +459,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/excel
+    - Assets/scripts/management/parsing
   m_ViewMode: 0
   m_StartGridSize: 16
   m_LastFolders: []
@@ -470,7 +470,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 186}
     m_SelectedIDs: a0210000
     m_LastClickedID: 8608
-    m_ExpandedIDs: 00000000a4270000aa270000b0270000c62700000028000006280000282800002e2800003c2800006628000074280000d0280000e4280000062900000c290000582a0000
+    m_ExpandedIDs: 00000000a6270000ac270000b2270000c8270000f827000002280000082800002a280000302800003e280000682800007628000082280000a0280000d6280000ea2800000c29000012290000c02b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -495,24 +495,24 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 0}
+    scrollPos: {x: 0, y: 133}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000a4270000aa270000b0270000c6270000f62700000028000006280000282800002e2800003c2800006628000074280000802800009e280000d0280000e4280000062900000c290000582a0000
+    m_ExpandedIDs: 00000000a6270000ac270000b2270000f827000002280000082800002a280000302800003e280000682800007628000082280000a0280000d6280000ea2800000c29000012290000c02b0000d22b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: ParseCutscene
+      m_OriginalName: ParseCutscene
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 11222
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 8}
     m_SearchString: 
@@ -586,9 +586,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.22672375, y: 3.7274137, z: -0.059453234}
+    m_Target: {x: -0.5229167, y: 1.7583861, z: -0.09897297}
     speed: 2
-    m_Value: {x: -0.22672375, y: 3.7274137, z: -0.059453234}
+    m_Value: {x: -0.5229167, y: 1.7583861, z: -0.09897297}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -616,9 +616,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 8.098553
+    m_Target: 12.077124
     speed: 2
-    m_Value: 8.098553
+    m_Value: 12.077124
   m_Ortho:
     m_Target: 1
     speed: 2
