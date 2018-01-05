@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 // loads gameflow file that defines dialgue, battles, etc
@@ -12,6 +13,7 @@ public class LoadGameFlow : MonoBehaviour {
 	TextAsset text_file; // original text asset
 	char[] line_delim = { '\n' };
 	char[] col_delim = { '\t' };
+	char[] coord_delim = { ',' };
 
 	void Start () {
 		is_loaded = false;
@@ -56,28 +58,53 @@ public class LoadGameFlow : MonoBehaviour {
 	// returns line number at the end of this scene in file
 	int parseCutScene(string[] lines, int pos, int curr_scene) {
 		// read in lines of scene
-		List<string> npcs = new List<string> ();
 		List<string> whos_talking = new List<string> ();
 		List<string> dialogue = new List<string> ();
-		List<string> npc_sprites = new List<string> ();
+		List<List<string>> npc_sprites = new List<List<string>> ();
+		List<List<Vector2>> npc_pos = new List<List<Vector2>> ();
 		List<string> music_tracks = new List<string>();
 		int i = pos;
 		for (; i < lines.Length; i++) {
 			string[] cols = lines [i].Split (col_delim);
-			if (cols [0].CompareTo ("NPC") == 0) { // read in npc
-				npcs.Add (cols [1]);
-			} else if (cols [0].CompareTo ("DIALOGUE") == 0) { // read in dialogue
+			if (cols [0].CompareTo ("DIALOGUE") == 0) { // read in dialogue
 				whos_talking.Add (cols[1]);
 				dialogue.Add (cols [2]);
-				npc_sprites.Add (cols [3].Trim());
-				music_tracks.Add (cols [4].Trim());
+				music_tracks.Add (cols [3].Trim());
+				var npc_pair = parseNPCSprites (cols);
+				npc_sprites.Add (npc_pair.first);
+				npc_pos.Add (npc_pair.second);
 			} else { // otherwise, scene is done
 				break;
 			}
 		}
-		scene_arr [curr_scene] = new CutScene (npcs.ToArray (), whos_talking.ToArray(), 
-			dialogue.ToArray (), npc_sprites.ToArray(), music_tracks.ToArray());
+		string[][] npc_sprites_arr = npc_sprites.Select (a => a.ToArray ()).ToArray ();
+		Vector2[][] npc_pos_arr = npc_pos.Select (a => a.ToArray ()).ToArray ();
+		scene_arr [curr_scene] = new CutScene (whos_talking.ToArray(), dialogue.ToArray (), 
+			npc_sprites_arr, npc_pos_arr, music_tracks.ToArray());
 		return i;
+	}
+
+	// parses list of sprites to display for a line of dialogue
+	Pair<List<string>, List<Vector2>> parseNPCSprites(string[] line) {
+		Pair<List<string>, List<Vector2>> npc_pair = new Pair<List<string>, List<Vector2>> (); 
+		npc_pair.first = new List<string> (); // list of sprite names
+		npc_pair.second = new List<Vector2> (); // list of location Vector2s
+		for (int i = 4;;i+=2) {
+			string speaker = line [i].Trim();
+			if (speaker.CompareTo ("END_DIALOGUE") == 0) break;
+			npc_pair.first.Add (speaker); // add name of sprite
+			string loc = line [i + 1].Trim ().Replace("\"", "");
+			if (loc.Contains (",")) { // parse absolute location
+				string[] coords = loc.Split (coord_delim);
+				float x, y;
+				float.TryParse (coords [0], out x);
+				float.TryParse (coords [1], out y);
+				npc_pair.second.Add (new Vector2 (x, y));
+			} else { // preset macro location (i.e. "LEFT" "RIGHT" etc)
+				npc_pair.second.Add (new Vector2 (0, 0)); // TEMP
+			}
+		}
+		return npc_pair;
 	}
 
 	// parses a battle scene; pos is the line number of the scene in file
@@ -139,7 +166,8 @@ public class LoadGameFlow : MonoBehaviour {
 		// parse dialogue
 		List<string> whos_talking = new List<string> ();
 		List<string> dialogue = new List<string> ();
-		List<string> npc_sprites = new List<string> ();
+		List<List<string>> npc_sprites = new List<List<string>> ();
+		List<List<Vector2>> npc_pos = new List<List<Vector2>> ();
 		List<string> music_tracks = new List<string>();
 		int i = pos + 1;
 		for (; i < lines.Length; ++i) {
@@ -147,14 +175,18 @@ public class LoadGameFlow : MonoBehaviour {
 			if (cols [0].CompareTo ("DIALOGUE") == 0) {
 				whos_talking.Add (cols [1]);
 				dialogue.Add (cols [2]);
-				npc_sprites.Add (cols [3].Trim ());
-				music_tracks.Add (cols [4].Trim ());
+				music_tracks.Add (cols [3].Trim ());
+				var npc_pair = parseNPCSprites (cols);
+				npc_sprites.Add (npc_pair.first);
+				npc_pos.Add (npc_pair.second);
 			} else {
 				break;
 			}
 		}
-		CutScene battle_cutscene = new CutScene (null, whos_talking.ToArray(), 
-			dialogue.ToArray (), npc_sprites.ToArray(), music_tracks.ToArray());
+		string[][] npc_sprites_arr = npc_sprites.Select (a => a.ToArray ()).ToArray ();
+		Vector2[][] npc_pos_arr = npc_pos.Select (a => a.ToArray ()).ToArray ();
+		CutScene battle_cutscene = new CutScene (whos_talking.ToArray(), dialogue.ToArray (), 
+			npc_sprites_arr, npc_pos_arr, music_tracks.ToArray());
 		BattleInterrupt battle_interrupt = new BattleInterrupt ();
 		battle_interrupt.scene = battle_cutscene;
 		battle_interrupt.who_speak = who_speak;
