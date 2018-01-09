@@ -254,7 +254,7 @@ public class SpellDictionary : MonoBehaviour
 				}
                 else
                 {
-					s = new SpellData("b", second, null);
+					s = new SpellData(second, "b", null);
 					status = CastStatus.BOTCH;
 				}
 			}
