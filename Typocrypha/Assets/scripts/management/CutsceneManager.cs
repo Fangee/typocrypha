@@ -68,7 +68,6 @@ public class CutsceneManager : MonoBehaviour {
 		GameObject display = new GameObject (); // make a new sprite holder
 		display.transform.SetParent (sprite_holder.gameObject.transform);
 		display.name = "NPCSprite" + display.transform.GetSiblingIndex ();
-		Debug.Log (pos.x + " " + pos.y);
 		display.transform.position = pos;
 		SpriteRenderer sprite_r = display.AddComponent<SpriteRenderer> ();
 		sprite_r.sprite = npc_sprite;
