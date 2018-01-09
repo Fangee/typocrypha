@@ -4,12 +4,14 @@ using UnityEngine;
 
 // enum for how a cast went (successful cast, botched, fizzled, etc)
 public enum CastStatus { SUCCESS, BOTCH, FIZZLE, ONCOOLDOWN, COOLDOWNFULL };
+public enum WordType { ROOT, STYLE, ELEMENT};
 
 //Stores all the spell info and contains methods to parse and cast spells from player input
 //Currently does not actually support player or enemy casting, but has parsing
 public class SpellDictionary : MonoBehaviour
 {
     public CooldownList cooldown;
+    public SpellBook spellBook;
     
     //Loads the spell dictionary at the beginning of the game
     public void Start()
@@ -436,6 +438,52 @@ public class SpellDictionary : MonoBehaviour
     {
         Spell s = spells[data.root];
         return s.TimeLeft;
+    }
+    //Registeres all keywords in Spelldata s if unregistered
+    //Returns bool[elem,root,style] (true if successful register, false if already registered
+    //Pre: s is a valid spell
+    public bool[] safeRegister(SpellData s)
+    {
+        bool[] results = { false, false, false };
+        if(spellBook.isNotRegistered(s.root))
+        {
+            spellBook.register(s.root, spells[s.root].type, spells[s.root].description);
+            results[1] = true;
+        }
+        if(s.element != null && spellBook.isNotRegistered(s.element))
+        {
+            spellBook.register(s.element, "element", elements[s.element].description);
+            results[0] = true;
+        }
+        if (s.style != null && spellBook.isNotRegistered(s.style))
+        {
+            spellBook.register(s.style, "style", styles[s.style].description);
+            results[2] = true;
+        }
+        return results;
+    }
+    //Registers individual keyword
+    //Pre: s != null
+    public bool safeRegister(string word)
+    {
+        if (spellBook.isNotRegistered(word))
+        {
+            if (spells.ContainsKey(word))
+            {
+                spellBook.register(word, spells[word].type, spells[word].description);
+                return true;
+            }
+            else if (styles.ContainsKey(word))
+            {
+                spellBook.register(word, "element", elements[word].description);
+                return true;
+            }
+            else if (elements.ContainsKey(word))
+            {
+                spellBook.register(word, "style", styles[word].description);
+            }
+        }
+        return false;
     }
 
     //PRIVATE//--------------------------------------------------------------------------------------------------------------------------------------------//

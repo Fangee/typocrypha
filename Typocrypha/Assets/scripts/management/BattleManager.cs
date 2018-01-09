@@ -6,7 +6,7 @@ using UnityEngine.UI;
 // manages battle sequences
 public class BattleManager : MonoBehaviour {
 	public static BattleManager main = null; // static instance accessible globally
-	public GameObject spellDict; // spell dictionary object
+	public SpellDictionary spellDict; // spell dictionary object
 	public GameObject enemy_prefab; // prefab for enemy object
 	public EnemyChargeBars charge_bars; // creates and mananges charge bars
 	public EnemyStaggerBars stagger_bars; // creates and manages stagger bars
@@ -254,6 +254,11 @@ public class BattleManager : MonoBehaviour {
                 }
             }
         }
+        //Register unregistered keywords here
+        bool [] regData = spellDict.safeRegister(s);
+        //Process regData (for register graphics) here. 
+        //format is bool [3], where regData[0] is true if s.element is new, regData[1] is true if s.root is new, and regData[2] is true if s.style is new
+
     }
 
     //Updates death and opacity of enemies after pause in puaseAttackCurrent
