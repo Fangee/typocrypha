@@ -8,14 +8,15 @@ public class LoadGameFlow : MonoBehaviour {
 	public bool is_loaded; // is the gameflow done loading?
 	public GameScene[] scene_arr; // array of gamescenes
     public EnemyDatabase enemy_data;//Enemy database
+    public SpellDictionary spellDictionary;
 
 	TextAsset text_file; // original text asset
 	char[] line_delim = { '\n' };
 	char[] col_delim = { '\t' };
 
-    private const string system_name = "Clarke";
-    private const string system_sprite = "tanuki_mario";
-    private const string register_track = "frogs";
+    private const string system_name = "CLARKE";
+    private const string system_sprite = "system";
+    private const string register_track = "STOP";
 
 	void Start () {
 		is_loaded = false;
@@ -65,6 +66,7 @@ public class LoadGameFlow : MonoBehaviour {
 		List<string> dialogue = new List<string> ();
 		List<string> npc_sprites = new List<string> ();
 		List<string> music_tracks = new List<string>();
+        List<CutsceneEvent> events = new List<CutsceneEvent>();
 		int i = pos;
 		for (; i < lines.Length; i++) {
 			string[] cols = lines [i].Split (col_delim);
@@ -75,14 +77,18 @@ public class LoadGameFlow : MonoBehaviour {
 				dialogue.Add (cols [2]);
 				npc_sprites.Add (cols [3].Trim());
 				music_tracks.Add (cols [4].Trim());
+                events.Add(null);
 			} else if(cols [0].CompareTo ("REGISTER") == 0) { // read in register event
+                //Add hard-coded attributes
                 whos_talking.Add(system_name);
                 npc_sprites.Add(system_sprite);
                 music_tracks.Add(register_track);
+                //generate text and bake registration event
                 List<string> words = new List<string>();
                 for(int j = 1; cols[j].Trim().CompareTo("END") != 0; j++) {
                     words.Add(cols[j].Trim());
                 }
+                events.Add(new RegisterSpellEvent(words, spellDictionary));
                 if (words.Count < 1) {
                     dialogue.Add("No new words");
                     continue;
@@ -108,7 +114,7 @@ public class LoadGameFlow : MonoBehaviour {
 			}
 		}
 		scene_arr [curr_scene] = new CutScene (npcs.ToArray (), whos_talking.ToArray(), 
-			dialogue.ToArray (), npc_sprites.ToArray(), music_tracks.ToArray());
+			dialogue.ToArray (), npc_sprites.ToArray(), music_tracks.ToArray(), events.ToArray());
 		return i;
 	}
 
@@ -173,6 +179,7 @@ public class LoadGameFlow : MonoBehaviour {
 		List<string> dialogue = new List<string> ();
 		List<string> npc_sprites = new List<string> ();
 		List<string> music_tracks = new List<string>();
+        List<CutsceneEvent> events = new List<CutsceneEvent>();
 		int i = pos + 1;
 		for (; i < lines.Length; ++i) {
 			string[] cols = lines [i].Split (col_delim);
@@ -181,12 +188,53 @@ public class LoadGameFlow : MonoBehaviour {
 				dialogue.Add (cols [2]);
 				npc_sprites.Add (cols [3].Trim ());
 				music_tracks.Add (cols [4].Trim ());
-			} else {
+			} else if (cols[0].CompareTo("REGISTER") == 0)
+            { // read in register event
+                //Add hard-coded attributes
+                whos_talking.Add(system_name);
+                npc_sprites.Add(system_sprite);
+                music_tracks.Add(register_track);
+                //generate text and bake registration event
+                List<string> words = new List<string>();
+                for (int j = 1; cols[j].Trim().CompareTo("END") != 0; j++)
+                {
+                    words.Add(cols[j].Trim());
+                }
+                events.Add(new RegisterSpellEvent(words, spellDictionary));
+                if (words.Count < 1)
+                {
+                    dialogue.Add("No new words");
+                    continue;
+                }
+                else if (words.Count == 1)
+                {
+                    dialogue.Add("Keyword " + words[0] + " was registered");
+                    continue;
+                }
+                else if (words.Count == 2)
+                {
+                    dialogue.Add("Keywords " + words[0] + " and " + words[1] + " were registered");
+                    continue;
+                }
+                string wordlist = "Keywords ";
+                for (int j = 0; j < words.Count; j++)
+                {
+                    if (j == words.Count - 1)
+                    {
+                        wordlist += " and " + words[j];
+                        break;
+                    }
+                    wordlist += words[j] + ", ";
+                }
+                wordlist += " were registered";
+                dialogue.Add(wordlist);
+            }
+            else {
 				break;
 			}
 		}
 		CutScene battle_cutscene = new CutScene (null, whos_talking.ToArray(), 
-			dialogue.ToArray (), npc_sprites.ToArray(), music_tracks.ToArray());
+			dialogue.ToArray (), npc_sprites.ToArray(), music_tracks.ToArray(), events.ToArray());
 		BattleInterrupt battle_interrupt = new BattleInterrupt ();
 		battle_interrupt.scene = battle_cutscene;
 		battle_interrupt.who_speak = who_speak;

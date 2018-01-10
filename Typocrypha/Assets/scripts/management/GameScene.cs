@@ -22,15 +22,17 @@ public class CutScene : GameScene {
 	public string[] dialogue; // lines of dialogue for this scene
 	public string[] npc_sprites; // name of sprite files for each talking scene
 	public string[] music_tracks; // names of tracks for each dialogue sequence
+    public CutsceneEvent[] events;
 
 	// constructs a new cutscene
 	public CutScene(string[] i_npcs, string[] i_whos_talking, 
-		string[] i_dialogue, string[] i_npc_sprites, string[] i_music_tracks) {
+		string[] i_dialogue, string[] i_npc_sprites, string[] i_music_tracks, CutsceneEvent[] events) {
 		npcs = i_npcs;
 		whos_talking = i_whos_talking;
 		dialogue = i_dialogue;
 		npc_sprites = i_npc_sprites;
 		music_tracks = i_music_tracks;
+        this.events = events;
 	}
 
 }
