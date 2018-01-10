@@ -1,38 +1,39 @@
-4				
-START_SCENE	INTRO			
-END_SCENE				
-START_SCENE	CUTSCENE	jazzy_retro_battle_theme		
-NPC	Tanuki			
-NPC	Frog			
-DIALOGUE	Tanuki	Hey you! You're walking in the wrong part of town.	tanuki_mario	jazzy_retro_battle_theme
-DIALOGUE	Frog	Ribbit Ribbit! (Yeah frog-face! Wrong part of town!)	frog_mario	frogs
-DIALOGUE	Tanuki	Let's get em!	tanuki_mario	jazzy_retro_battle_theme
-END_SCENE				
-START_SCENE	BATTLE			
-MUSIC	sample_incomplete_war_remix			
-ENEMY	Slime			
-ENEMY	The Evil Eye			
-ENEMY	Tanuki			
-INTERRUPT	MIDDLE_HEALTH	0.5	L	
-DIALOGUE	Tanuki	"Ribbit! (Wow, you're actually killing the Evil Eye!)"	frog_mario	_
-END_INTERRUPT				
-INTERRUPT	MIDDLE_HEALTH	0	R	
-DIALOGUE	Tanuki	Did you just kill the Evil Eye? Did- Did you win?	tanuki_mario	_
-DIALOGUE	Tanuki	Holy crap.	tanuki_mario	_
-INTERRUPT_END				
-INTERRUPT	RIGHT_HEALTH	0	R	
-DIALOGUE	Tanuki	Ah! You have defeated me!	tanuki_mario	_
-END_INTERRUPT				
-INTERRUPT	PLAYER_HEALTH	0.75	LR	
-DIALOGUE	Tanuki	Ha! Feel the wrath of Tanuki and Frog!	tanuki_mario	_
-DIALOGUE	Frog	Ribbit Ribbit Rrrrrrribbit! (Frog is actually just making frog sounds right now)	frog_mario	_
-END_INTERRUPT				
-END_SCENE				
-START_SCENE	CUTSCENE			
-NPC	Tanuki			
-NPC	Frog			
-DIALOGUE	Tanuki	Ugh! How are you so powerful? You even killed Frog!	tanuki_mario	second_hand
-DIALOGUE	Frog	(He's not moving)	frog_mario	_
-DIALOGUE	Tanuki	Bleh. (ded)	tanuki_mario	_
-END_SCENE				
-END_GAME				
+4					
+START_SCENE	INTRO				
+END_SCENE					
+START_SCENE	CUTSCENE	jazzy_retro_battle_theme			
+NPC	Tanuki				
+NPC	Frog				
+DIALOGUE	Tanuki	Hey you! You're walking in the wrong part of town.	tanuki_mario	jazzy_retro_battle_theme	
+DIALOGUE	Frog	Ribbit Ribbit! (Yeah frog-face! Wrong part of town!)	frog_mario	frogs	
+DIALOGUE	Tanuki	Let's get em!	tanuki_mario	jazzy_retro_battle_theme	
+REGISTER	SWORD	SPEAR	FALCHION	PRAYER	END
+END_SCENE					
+START_SCENE	BATTLE				
+MUSIC	sample_incomplete_war_remix				
+ENEMY	Slime				
+ENEMY	The Evil Eye				
+ENEMY	Tanuki				
+INTERRUPT	MIDDLE_HEALTH	0.5	L		
+DIALOGUE	Tanuki	"Ribbit! (Wow, you're actually killing the Evil Eye!)"	frog_mario	_	
+END_INTERRUPT					
+INTERRUPT	MIDDLE_HEALTH	0	R		
+DIALOGUE	Tanuki	Did you just kill the Evil Eye? Did- Did you win?	tanuki_mario	_	
+DIALOGUE	Tanuki	Holy crap.	tanuki_mario	_	
+INTERRUPT_END					
+INTERRUPT	RIGHT_HEALTH	0	R		
+DIALOGUE	Tanuki	Ah! You have defeated me!	tanuki_mario	_	
+END_INTERRUPT					
+INTERRUPT	PLAYER_HEALTH	0.75	LR		
+DIALOGUE	Tanuki	Ha! Feel the wrath of Tanuki and Frog!	tanuki_mario	_	
+DIALOGUE	Frog	Ribbit Ribbit Rrrrrrribbit! (Frog is actually just making frog sounds right now)	frog_mario	_	
+END_INTERRUPT					
+END_SCENE					
+START_SCENE	CUTSCENE				
+NPC	Tanuki				
+NPC	Frog				
+DIALOGUE	Tanuki	Ugh! How are you so powerful? You even killed Frog!	tanuki_mario	second_hand	
+DIALOGUE	Frog	(He's not moving)	frog_mario	_	
+DIALOGUE	Tanuki	Bleh. (ded)	tanuki_mario	_	
+END_SCENE					
+END_GAME					

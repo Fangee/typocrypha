@@ -13,6 +13,10 @@ public class LoadGameFlow : MonoBehaviour {
 	char[] line_delim = { '\n' };
 	char[] col_delim = { '\t' };
 
+    private const string system_name = "Clarke";
+    private const string system_sprite = "tanuki_mario";
+    private const string register_track = "frogs";
+
 	void Start () {
 		is_loaded = false;
         EnemyDatabase.main.build();//Build enemy database (so data is ready for cutscene building
@@ -71,7 +75,35 @@ public class LoadGameFlow : MonoBehaviour {
 				dialogue.Add (cols [2]);
 				npc_sprites.Add (cols [3].Trim());
 				music_tracks.Add (cols [4].Trim());
-			} else { // otherwise, scene is done
+			} else if(cols [0].CompareTo ("REGISTER") == 0) { // read in register event
+                whos_talking.Add(system_name);
+                npc_sprites.Add(system_sprite);
+                music_tracks.Add(register_track);
+                List<string> words = new List<string>();
+                for(int j = 1; cols[j].Trim().CompareTo("END") != 0; j++) {
+                    words.Add(cols[j].Trim());
+                }
+                if (words.Count < 1) {
+                    dialogue.Add("No new words");
+                    continue;
+                } else if(words.Count == 1) {
+                    dialogue.Add("Keyword " + words[0] + " was registered");
+                    continue;
+                } else if(words.Count == 2) {
+                    dialogue.Add("Keywords " + words[0] + " and " + words[1] + " were registered");
+                    continue;
+                }
+                string wordlist = "Keywords ";
+                for(int j = 0; j < words.Count; j++) {
+                    if(j == words.Count - 1) {
+                        wordlist += " and " + words[j];
+                        break;
+                    }
+                    wordlist += words[j] + ", ";
+                }
+                wordlist += " were registered";
+                dialogue.Add(wordlist);
+            } else { // otherwise, scene is done
 				break;
 			}
 		}

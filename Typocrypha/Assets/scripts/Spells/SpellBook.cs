@@ -18,8 +18,19 @@ public class SpellBook : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        // go to next page if down is pressed
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            nextPage();
+            Debug.Log("Now on page " + data[typeIndex].type + " " + pageIndex / pageSize + 1);
+        }
+        // go to next page if down is pressed
+        if(Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            lastPage();
+            Debug.Log("Now on page " + data[typeIndex].type + " " + pageIndex / pageSize + 1);
+        }
+    }
 
     //Returns true if registered, false if not
     public bool isNotRegistered(string word)
