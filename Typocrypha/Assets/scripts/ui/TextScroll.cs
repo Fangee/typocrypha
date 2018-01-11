@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,11 +11,16 @@ public class TextScroll : MonoBehaviour {
 	public bool is_print; // is currently printing
 
 	string in_text; // current text being printed out
+	string out_buffer; // buffer for what will be shown
+	Stack<Pair<string, string>> tag_stack; // stores currently used tags
 	Text out_text; // where text gets outputted
 	Coroutine curr; // current printing coroutine
 
+	Regex tag_cutoff = new Regex ("<|>|=.*");
+
 	void Start() {
 		is_print = false;
+		tag_stack = new Stack<Pair<string, string>> ();
 	}
 
 	// start printing string to Text display
@@ -46,9 +53,31 @@ public class TextScroll : MonoBehaviour {
 	// print characters to Text object one by one
 	IEnumerator scrollText() {
 		int text_pos = 0;
+		out_buffer = "";
 		while (text_pos < in_text.Length) {
+			if (in_text [text_pos].CompareTo ('<') == 0) { // check if tag
+				if (in_text [text_pos + 1].CompareTo ('/') == 0) { // check if end tag (pop)
+					string end_tag = tag_stack.Pop().second; // remove tag from stack
+					out_buffer += end_tag;                   // place end tag directly into buffer
+					text_pos += end_tag.Length;              // move text_pos over after tag
+				} else { // otherwise, is a start tag (push)
+					Pair<string, string> tag = new Pair<string, string>();
+					// get starting tag
+					int fstart_pos = text_pos;
+					int fend_pos = in_text.IndexOf ('>', fstart_pos);
+					tag.first = in_text.Substring (fstart_pos, fend_pos - fstart_pos + 1);
+					// generate ending tag
+					tag.second = "</" + tag_cutoff.Replace(tag.first, "") + ">";
+					tag_stack.Push (tag);    // add tag to tag stack
+					text_pos = fend_pos + 1; // set new text_pos at end of start tag
+					out_buffer += tag.first; // add start tag to out_buffer (end tag is added later)
+				}
+				continue;
+			}
+			if (text_pos >= in_text.Length) break;
 			AudioPlayer.main.playSFX (3); // play speaking sfx
-			out_text.text += in_text [text_pos++];
+			out_buffer += in_text [text_pos++];
+			out_text.text = out_buffer + tag_stack.Aggregate ("", (acc, next) => acc + next.second); // functional programming trick to build end tags
 			yield return new WaitForSeconds (delay);
 		}
 		is_print = false;

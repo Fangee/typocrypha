@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 // manages cutscenes
 public class CutsceneManager : MonoBehaviour {
-	public static CutsceneManager main = null; // static gloval ref
+	public static CutsceneManager main = null; // static global ref
 	public Text display_text; // text where dialogue will be displayed
 	public Text name_text; // text where name will be displayed
 	public SpriteRenderer sprite_holder; // where speaking character sprite will go
@@ -46,9 +46,12 @@ public class CutsceneManager : MonoBehaviour {
 		if (!text_scroll.is_print) {
 			if (curr_line >= scene.dialogue.Length) return false;
 			name_text.text = scene.whos_talking [curr_line]; // show name of speaker
-			Sprite npc_sprite = // set sprite of current speaker
-				Resources.Load<Sprite>("sprites/" + scene.npc_sprites[curr_line].Trim());
-			sprite_holder.sprite = npc_sprite;
+			clearNPCSprite(); // clear old sprites
+			for (int i = 0; i < scene.npc_sprites[curr_line].Length; ++i) {
+				Sprite npc_sprite = // set sprite of current speaker
+					Resources.Load<Sprite>("sprites/" + scene.npc_sprites[curr_line][i].Trim());
+				displayNPCSprite (npc_sprite, scene.npc_pos[curr_line][i]);
+			}
 			if (curr_line != 0) // play advance dialogue sfx
 				AudioPlayer.main.playSFX(0, SFXType.UI, "sfx_next_textbox"); 
 			AudioPlayer.main.playMusic(MusicType.CUTSCENE, scene.music_tracks[curr_line]);
@@ -60,5 +63,21 @@ public class CutsceneManager : MonoBehaviour {
 			text_scroll.dump ();
 		}
 		return true;
+	}
+
+	// displays a sprite at given position; sprite becomes a child object of 'sprite_holder'
+	void displayNPCSprite(Sprite npc_sprite, Vector2 pos) {
+		GameObject display = new GameObject (); // make a new sprite holder
+		display.transform.SetParent (sprite_holder.gameObject.transform);
+		display.name = "NPCSprite" + display.transform.GetSiblingIndex ();
+		display.transform.position = pos;
+		SpriteRenderer sprite_r = display.AddComponent<SpriteRenderer> ();
+		sprite_r.sprite = npc_sprite;
+	}
+
+	// clears all currently displayed npc sprites
+	void clearNPCSprite() {
+		foreach (Transform child in sprite_holder.gameObject.transform)
+			GameObject.Destroy (child.gameObject);
 	}
 }
