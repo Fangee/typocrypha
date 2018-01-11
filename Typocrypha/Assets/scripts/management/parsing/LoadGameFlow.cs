@@ -93,8 +93,13 @@ public class LoadGameFlow : MonoBehaviour {
 			} else if(cols [0].CompareTo ("REGISTER") == 0) { // read in register event
                 //Add hard-coded attributes
                 whos_talking.Add(system_name);
-                npc_sprites.Add(system_sprite);
                 music_tracks.Add(register_track);
+                List<string> NPC = new List<string>();
+                NPC.Add(system_sprite);
+                npc_sprites.Add(NPC);
+                List<Vector2> NPC_POS = new List<Vector2>();
+                NPC_POS.Add(new Vector2(0, 1));
+                npc_pos.Add(NPC_POS);
                 //generate text and bake registration event
                 List<string> words = new List<string>();
                 for(int j = 1; cols[j].Trim().CompareTo("END") != 0; j++) {
@@ -128,7 +133,7 @@ public class LoadGameFlow : MonoBehaviour {
 		string[][] npc_sprites_arr = npc_sprites.Select (a => a.ToArray ()).ToArray ();
 		Vector2[][] npc_pos_arr = npc_pos.Select (a => a.ToArray ()).ToArray ();
 		scene_arr [curr_scene] = new CutScene (whos_talking.ToArray(), dialogue.ToArray (), 
-			npc_sprites_arr, npc_pos_arr, music_tracks.ToArray());
+			npc_sprites_arr, npc_pos_arr, music_tracks.ToArray(), events.ToArray());
 		return i;
 	}
 
@@ -228,12 +233,18 @@ public class LoadGameFlow : MonoBehaviour {
 				var npc_pair = parseNPCSprites (cols);
 				npc_sprites.Add (npc_pair.first);
 				npc_pos.Add (npc_pair.second);
+                events.Add(null);
 			} else if (cols[0].CompareTo("REGISTER") == 0)
             { // read in register event
                 //Add hard-coded attributes
                 whos_talking.Add(system_name);
-                npc_sprites.Add(system_sprite);
                 music_tracks.Add(register_track);
+                List<string> NPC = new List<string>();
+                NPC.Add(system_sprite);
+                npc_sprites.Add(NPC);
+                List<Vector2> NPC_POS = new List<Vector2>();
+                NPC_POS.Add(new Vector2(0, 1));
+                npc_pos.Add(NPC_POS);
                 //generate text and bake registration event
                 List<string> words = new List<string>();
                 for (int j = 1; cols[j].Trim().CompareTo("END") != 0; j++)
@@ -276,7 +287,7 @@ public class LoadGameFlow : MonoBehaviour {
 		string[][] npc_sprites_arr = npc_sprites.Select (a => a.ToArray ()).ToArray ();
 		Vector2[][] npc_pos_arr = npc_pos.Select (a => a.ToArray ()).ToArray ();
 		CutScene battle_cutscene = new CutScene (whos_talking.ToArray(), dialogue.ToArray (), 
-			npc_sprites_arr, npc_pos_arr, music_tracks.ToArray());
+			npc_sprites_arr, npc_pos_arr, music_tracks.ToArray(), events.ToArray());
 		BattleInterrupt battle_interrupt = new BattleInterrupt ();
 		battle_interrupt.scene = battle_cutscene;
 		battle_interrupt.who_speak = who_speak;

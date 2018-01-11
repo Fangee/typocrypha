@@ -100,13 +100,12 @@ public class BattleManager : MonoBehaviour {
         //SPELLCASTING AND CASTDATA PROCESSING HERE//
 
         SpellData s;
-        SpellDictionary d = spellDict.GetComponent<SpellDictionary>();
 		//Send spell, Enemy state, and target index to parser and caster
-        CastStatus status = d.parse(spell.ToLower(),  out s);
+        CastStatus status = spellDict.parse(spell.ToLower(),  out s);
         //Set last_cast
         ((Player)player_arr[player_ind]).Last_cast = s.ToString();
         //Cast/Botch/Cooldown/Fizzle, with associated effects and processing
-        playerCast(d, s, status);
+        playerCast(spellDict, s, status);
 
         //END SPELLCASTING AND CASTDATA PROCESSING//
 

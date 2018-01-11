@@ -26,7 +26,7 @@ public class CutScene : GameScene {
 
 	// constructs a new cutscene
 	public CutScene(string[] i_whos_talking, string[] i_dialogue, 
-		string[][] i_npc_sprites, Vector2[][] i_npc_pos, string[] i_music_tracks) {
+		string[][] i_npc_sprites, Vector2[][] i_npc_pos, string[] i_music_tracks, CutsceneEvent[] events) {
 		whos_talking = i_whos_talking;
 		dialogue = i_dialogue;
 		npc_sprites = i_npc_sprites;
