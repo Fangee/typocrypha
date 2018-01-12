@@ -107,7 +107,7 @@ public abstract class Spell
         s.elementEffectMod = elementEffectMod;
         s.element = element;
         s.targetData = new TargetData(false);
-        s.targetData.modify(targetData);
+        s.targetData.copyInto(targetData);
         if(buff != null)
             s.buff = new BuffData(buff);
         s.buffPercentage = buffPercentage;
@@ -358,16 +358,43 @@ public class TargetData
 
     public void modify(TargetData t)
     {
-        enemyL = t.enemyL;
-        enemyM = t.enemyM;
-        enemyR = t.enemyR;
-        if(!(allyL || allyM || allyR))
+        bool targets_enemy = (enemyL || enemyM || enemyR);
+        bool targets_ally = (allyL || allyM || allyR);
+        if (targets_enemy && targets_ally)
+        {
+            enemyL = t.enemyL;
+            enemyM = t.enemyM;
+            enemyR = t.enemyR;
+            allyL = t.enemyL;
+            allyM = t.enemyM;
+            allyR = t.enemyR;
+            targeted = t.targeted;
+            selfCenter = t.selfCenter;
+        }
+        else if (targets_enemy)
+        {
+            enemyL = t.enemyL;
+            enemyM = t.enemyM;
+            enemyR = t.enemyR;
+            targeted = t.targeted;
+        }
+        else if(targets_ally)
         {
             allyL = t.allyL;
             allyM = t.allyM;
             allyR = t.allyR;
             selfCenter = t.selfCenter;
         }
-        targeted = t.targeted;
+    }
+    public void copyInto(TargetData copyTo)
+    {
+        enemyL = copyTo.enemyL;
+        enemyM = copyTo.enemyM;
+        enemyR = copyTo.enemyR;
+        targeted = copyTo.targeted;
+        allyL = copyTo.allyL;
+        allyM = copyTo.allyM;
+        allyR = copyTo.allyR;
+        selfCenter = copyTo.selfCenter;
     }
 }
