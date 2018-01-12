@@ -501,12 +501,13 @@ public class SpellDictionary : MonoBehaviour
 
     //PRIVATE//--------------------------------------------------------------------------------------------------------------------------------------------//
 
-    private const int seperatorInd = 7; //Index of '/' seperator in friend spells
+    private const int seperatorInd = 7; //Index of '/' seperator in ally spells
+    private const string allyString = "friend"; //String before '/' in ally spells
 
     //Helper method for cloning appropriately typed spells
     private Spell createSpellFromType(string type)
     {
-        if (type.Contains("friend"))
+        if (type.Contains(allyString))
             return createSpellFromType(type.Substring(seperatorInd));
         else if (type.CompareTo("attack") == 0)
             return new AttackSpell();
@@ -522,8 +523,8 @@ public class SpellDictionary : MonoBehaviour
     //Get proper spell type for registry (needed for ally spells)
     private string regType(string root)
     {
-        if (spells[root].type.Contains("friend"))
-            return "friend";
+        if (spells[root].type.Contains(allyString))
+            return allyString;
         return spells[root].type;
     }
     //Returns if spell s is on cooldown
