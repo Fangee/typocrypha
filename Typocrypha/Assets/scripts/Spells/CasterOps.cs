@@ -5,6 +5,21 @@ using UnityEngine;
 //Defines static operations for ICaster children
 public static class CasterOps
 {
+    //Applies reflect and prints appropriate debug log
+    //Returns true if reflected, false if not.
+    //MAY need fixing for targeting
+    public static bool calcReflect(CastData data, int d, int element, ICaster caster, ICaster target, bool crit, bool reflect)
+    {
+        //Reflect damage to caster if enemy reflects this element (FIX for targeting)
+        if (target.Stats.vsElement[element] == Elements.reflect && reflect == false)
+        {
+            Debug.Log(target.Stats.name + " reflects " + d + " " + Elements.toString(element) + " damage back at " + caster.Stats.name);
+            data.reflect = true;
+            caster.damage(data, d, element, caster, crit, true);
+            return true;
+        }
+        return false;
+    }
     //Applies damage formula base on base_power (spell strength) and stats of caster and target)
     //damages ref stats appropriately (will not go below zero)
     //Precondition: target.Stats.vsElement[element] != Elements.reflect

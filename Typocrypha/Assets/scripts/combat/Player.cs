@@ -120,14 +120,9 @@ public class Player : ICaster
     //Damage player
     public void damage(CastData data, int d, int element, ICaster caster, bool crit, bool reflect = false)
     {
-        //Reflect damage to caster if enemy reflects this element (FIX WITH CASTDATA)
-        if (stats.vsElement[element] == Elements.reflect && reflect == false)
-        {
-            int dRef = d;
-            Debug.Log("Player reflects " + dRef + " " + Elements.toString(element) + " damage back at enemy");
-            caster.damage(data, dRef, element, caster, crit, true);
+        //Apply reflect and return if applicable
+        if (CasterOps.calcReflect(data, d, element, caster, this, crit, reflect))
             return;
-        }
         bool damaged = CasterOps.calcDamage(data, d, element, caster, this, crit);
 
         if (damaged) {

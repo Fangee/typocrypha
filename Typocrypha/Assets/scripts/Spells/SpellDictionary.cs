@@ -439,6 +439,9 @@ public class SpellDictionary : MonoBehaviour
         Spell s = spells[data.root];
         return s.TimeLeft;
     }
+
+    //SPELLBOOK MANAGEMENT
+
     //Registeres all keywords in Spelldata s if unregistered
     //Returns bool[elem,root,style] (true if successful register, false if already registered
     //Pre: s is a valid spell
@@ -484,6 +487,16 @@ public class SpellDictionary : MonoBehaviour
             }
         }
         return false;
+    }
+    //Moves page up in member spellBook
+    public bool pageUp()
+    {
+        return spellBook.lastPage();
+    }
+    //Moves page down in member spellBook
+    public bool pageDown()
+    {
+        return spellBook.nextPage();
     }
 
     //PRIVATE//--------------------------------------------------------------------------------------------------------------------------------------------//

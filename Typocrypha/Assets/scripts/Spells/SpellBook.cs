@@ -18,18 +18,7 @@ public class SpellBook : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        // go to next page if down is pressed
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            nextPage();
-            Debug.Log("Now on page " + data[typeIndex].type + " " + pageIndex / pageSize + 1);
-        }
-        // go to next page if down is pressed
-        if(Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            lastPage();
-            Debug.Log("Now on page " + data[typeIndex].type + " " + pageIndex / pageSize + 1);
-        }
+
     }
 
     //Returns true if registered, false if not
@@ -83,9 +72,11 @@ public class SpellBook : MonoBehaviour {
                 return false;
             typeIndex++;
             pageIndex = 0;
+            Debug.Log("Now on page " + data[typeIndex].type + " " + pageIndex / pageSize + 1);
             return true;
         }
         pageIndex += pageSize;
+        Debug.Log("Now on page " + data[typeIndex].type + " " + pageIndex / pageSize + 1);
         return true;
     }
     //Goes to last page of spellbook (if one exists)
@@ -98,9 +89,11 @@ public class SpellBook : MonoBehaviour {
                 return false;
             typeIndex--;
             pageIndex = (data[typeIndex].Count - (data[typeIndex].Count % pageSize));
+            Debug.Log("Now on page " + data[typeIndex].type + " " + pageIndex / pageSize + 1);
             return true;
         }
         pageIndex -= pageSize;
+        Debug.Log("Now on page " + data[typeIndex].type + " " + pageIndex / pageSize + 1);
         return true;
 
     }

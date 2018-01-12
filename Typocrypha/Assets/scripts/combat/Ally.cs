@@ -2,16 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// simple container for enemy stats (Not a struct anymore cuz structs pass by value in c#)
+public class AllyStats : CasterStats
+{
+    //Sorry for the massive constructor but all the vals are readonly so...
+    public AllyStats(string name, int hp, int shield, int stag, float atk, float def, float speed, float acc, int evade, float[] vsElem = null, SpellData sp = null)
+        : base(name, hp, shield, stag, atk, def, speed, acc, evade, vsElem)
+    {
+        spell = sp;
+    }
+    public readonly SpellData spell; // castable spells
+}
+
 public class Ally : MonoBehaviour, ICaster {
+
+    public Ally(AllyStats stats)
+    {
+        this.stats = stats;
+    }
+    private AllyStats stats;
     public CasterStats Stats
     {
         get
         {
-            throw new System.NotImplementedException();
+            return stats;
         }
     }
 
-    private BuffDebuff buffDebuff;
+    private BuffDebuff buffDebuff = new BuffDebuff();
     public BuffDebuff BuffDebuff { get { return buffDebuff; } }
 
     private int gauge_value = 50;

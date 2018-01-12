@@ -70,6 +70,9 @@ public class BattleManager : MonoBehaviour {
 			pause = !pause;
 		if (pause) return;
 		int old_ind = target_ind;
+
+        //TARGET RETICULE CODE 
+
 		// move target left or right
 		if (Input.GetKeyDown (KeyCode.LeftArrow)) --target_ind;
 		if (Input.GetKeyDown (KeyCode.RightArrow)) ++target_ind;
@@ -80,7 +83,20 @@ public class BattleManager : MonoBehaviour {
 		target_ret.localPosition = new Vector3 (target_ind * enemy_spacing, -1, 0);
 		// play effect sound if target was moved
 		if (old_ind != target_ind) AudioPlayer.main.playSFX(0, SFXType.UI, "sfx_enemy_select");
-	}
+
+        //SPELLBOOK CODE
+
+        // go to next page if down is pressed
+        if (Input.GetKeyDown(KeyCode.DownArrow) && spellDict.pageDown())
+        {
+            //play page change SFX here
+        }
+        // go to next page if down is pressed
+        if (Input.GetKeyDown(KeyCode.UpArrow) && spellDict.pageUp())
+        {
+            //play page change SFX here
+        }
+    }
 
 	// attack currently targeted enemy with spell
 	public void attackCurrent(string spell) {
