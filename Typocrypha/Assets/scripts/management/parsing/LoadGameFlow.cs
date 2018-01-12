@@ -9,6 +9,7 @@ public class LoadGameFlow : MonoBehaviour {
 	public bool is_loaded; // is the gameflow done loading?
 	public GameScene[] scene_arr; // array of gamescenes
     public EnemyDatabase enemy_data;//Enemy database
+    public AllyDatabase ally_data;//Ally database
     public SpellDictionary spellDictionary;
 
 	TextAsset text_file; // original text asset
@@ -34,6 +35,8 @@ public class LoadGameFlow : MonoBehaviour {
 		is_loaded = false;
 		EnemyDatabase.main.build();//Build enemy database (so data is ready for cutscene building)
         enemy_data = EnemyDatabase.main;
+        AllyDatabase.main.build();
+        ally_data = AllyDatabase.main;
         parseFile (); // load gameflow file
 		is_loaded = true;
 	}
@@ -166,6 +169,7 @@ public class LoadGameFlow : MonoBehaviour {
 		// read in lines of scene
 		List<string> music_tracks = new List<string>();
 		List<EnemyStats> enemies = new List<EnemyStats>();
+        List<AllyStats> allies = new List<AllyStats>();
 		List<BattleInterrupt> interrupts = new List<BattleInterrupt> ();
 		int i = pos;
 		for (; i < lines.Length; i++) {
@@ -179,13 +183,16 @@ public class LoadGameFlow : MonoBehaviour {
 			} else if (cols [0].CompareTo ("ENEMY") == 0) { // read in enemy
 				EnemyStats new_stats = enemy_data.getData (cols [1]);
 				enemies.Add (new_stats);
-			} else if (cols[0].CompareTo("INTERRUPT") == 0) { // interrupt scene
+			} else if(cols [0].CompareTo ("ALLY") == 0) {
+                AllyStats new_stats = ally_data.getData(cols[1]);
+                allies.Add(new_stats);
+            } else if (cols[0].CompareTo("INTERRUPT") == 0) { // interrupt scene
 				i = parseInterrupt(lines, i, interrupts);
 			} else { // otherwise, scene is done
 				break;
 			}
 		}
-		scene_arr [curr_scene] = new BattleScene (enemies.ToArray (), music_tracks.ToArray(), 
+		scene_arr [curr_scene] = new BattleScene (enemies.ToArray (), allies.ToArray(), music_tracks.ToArray(), 
 			interrupts.ToArray());
 		return i;
 	}

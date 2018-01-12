@@ -50,11 +50,13 @@ public class BattleInterrupt {
 // represents a battle scene
 public class BattleScene : GameScene {
 	public EnemyStats[] enemy_stats; // stats for all enemies
+    public AllyStats[] ally_stats; // stats for all allies
 	public string[] music_tracks; // music tracks for battle
 	public BattleInterrupt[] interrupts; // mid battle cutscenes
 
-	public BattleScene(EnemyStats[] i_enemy_stats, string[] i_music_tracks, BattleInterrupt[] i_interrupts) {
+	public BattleScene(EnemyStats[] i_enemy_stats, AllyStats[] i_ally_stats, string[] i_music_tracks, BattleInterrupt[] i_interrupts) {
 		enemy_stats = i_enemy_stats;
+        ally_stats = i_ally_stats;
 		music_tracks = i_music_tracks;
 		interrupts = i_interrupts;
 	}

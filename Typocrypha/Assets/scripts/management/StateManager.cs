@@ -32,7 +32,8 @@ public class StateManager : MonoBehaviour {
 	IEnumerator waitForLoad() {
 		yield return new WaitUntil (() => spell_dictionary.is_loaded);
 		yield return new WaitUntil (() => EnemyDatabase.main.is_loaded);
-		yield return new WaitUntil (() => load_game_flow.is_loaded);
+        yield return new WaitUntil(() => AllyDatabase.main.is_loaded);
+        yield return new WaitUntil (() => load_game_flow.is_loaded);
 		scene_arr = load_game_flow.scene_arr;
 		yield return new WaitUntil (() => AudioPlayer.main.ready);
 		yield return new WaitUntil (() => AnimationPlayer.main.ready);

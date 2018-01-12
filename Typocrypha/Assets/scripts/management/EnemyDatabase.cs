@@ -10,6 +10,7 @@ public class EnemyDatabase
     Dictionary<string, EnemyStats> database = new Dictionary<string, EnemyStats>();
 
     private const int numFields = 10;
+    private const string assetPath = "sprites/";
 
     TextAsset text_file; // original text asset
     public string file_name; // name of database file
@@ -35,6 +36,8 @@ public class EnemyDatabase
         //For each line in input file
         for (int i = 1; lines[i].Trim().CompareTo("END") != 0; i++)
         {
+            //FIELDS//
+
             cols = lines[i].Split(col_delim);
             int ind = 0;//Allows new stats to be added without changing the constants
             name = cols[ind].Trim();
@@ -48,11 +51,17 @@ public class EnemyDatabase
             float.TryParse(cols[++ind].Trim(), out acc);
             int.TryParse(cols[++ind].Trim(), out evade);
             vsElem = new float[Elements.count];
+
+            //ELEMENTS//
+
             //Read in elemental weakness/resistances
             for (int j = numFields; j < numFields + Elements.count; j++)
             {
                 float.TryParse(cols[j].Trim(), out vsElem[j - numFields]);
             }
+
+            //SPELLS//
+
             //Read in Spell List
             List<SpellData> spells = new List<SpellData>();
             for (int j = numFields + Elements.count; cols[j].Trim().CompareTo("END") != 0; j++)
@@ -69,7 +78,7 @@ public class EnemyDatabase
                 SpellData s = new SpellData(root, elem, style);
                 spells.Add(s);
             }
-            EnemyStats stats = new EnemyStats(name, "sprites/" + sprite_path, max_hp, max_shield, max_stagger, atk, def, speed, acc, evade, vsElem, spells.ToArray());
+            EnemyStats stats = new EnemyStats(name, assetPath + sprite_path, max_hp, max_shield, max_stagger, atk, def, speed, acc, evade, vsElem, spells.ToArray());
             database.Add(stats.name, stats);
         }
         Debug.Log("Enemy Database Loaded");

@@ -450,7 +450,7 @@ public class SpellDictionary : MonoBehaviour
         bool[] results = { false, false, false };
         if(spellBook.isNotRegistered(s.root))
         {
-            spellBook.register(s.root, spells[s.root].type, spells[s.root].description);
+            spellBook.register(s.root, regType(s.root), spells[s.root].description);
             results[1] = true;
         }
         if(s.element != null && spellBook.isNotRegistered(s.element))
@@ -473,7 +473,7 @@ public class SpellDictionary : MonoBehaviour
         {
             if (spells.ContainsKey(word))
             {
-                spellBook.register(word, spells[word].type, spells[word].description);
+                spellBook.register(word, regType(word), spells[word].description);
                 return true;
             }
             else if (styles.ContainsKey(word))
@@ -501,10 +501,14 @@ public class SpellDictionary : MonoBehaviour
 
     //PRIVATE//--------------------------------------------------------------------------------------------------------------------------------------------//
 
+    private const int seperatorInd = 7; //Index of '/' seperator in friend spells
+
     //Helper method for cloning appropriately typed spells
     private Spell createSpellFromType(string type)
     {
-        if (type.CompareTo("attack") == 0)
+        if (type.Contains("friend"))
+            return createSpellFromType(type.Substring(seperatorInd));
+        else if (type.CompareTo("attack") == 0)
             return new AttackSpell();
         else if (type.CompareTo("buff") == 0)
             return new BuffSpell();
@@ -514,6 +518,13 @@ public class SpellDictionary : MonoBehaviour
             return new ShieldSpell();
         else
             throw new System.NotImplementedException();
+    }
+    //Get proper spell type for registry (needed for ally spells)
+    private string regType(string root)
+    {
+        if (spells[root].type.Contains("friend"))
+            return "friend";
+        return spells[root].type;
     }
     //Returns if spell s is on cooldown
     //Pre: coolDownList is not full
