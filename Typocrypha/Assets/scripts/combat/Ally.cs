@@ -106,7 +106,8 @@ public class Ally : MonoBehaviour, ICaster {
                     curr_stagger_time = 0F;
                 }
             }
-            gauge_value += 5 * (Time.deltaTime * stats.speed);
+            if(gauge_value < stats.max_hp)
+                gauge_value += 5 * (Time.deltaTime * stats.speed);
         }
     }
 
@@ -125,7 +126,7 @@ public class Ally : MonoBehaviour, ICaster {
     //Gets charge bar percentage full
     public float getPercent()
     {    
-        return gauge_value / stats.max_hp; 
+        return Mathf.Clamp01(gauge_value / stats.max_hp); 
     }
 
     public int position; //position in battle field

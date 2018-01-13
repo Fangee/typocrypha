@@ -1,24 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 //Class that contains and organizes the keyword and description data of the spells known by the player
 //IMPROVE PAGE SYSTEM, NEEDS IMPROVEMENT
 public class SpellBook : MonoBehaviour {
 
+    //UI text objects
+
+    public Text pageTitle;
+    private Text[] entries = new Text[pageSize];
+
     //Private constants
     private const int pageSize = 6;     //Number of entries per page
     private const int entryLength = 2;  //Data fields per entry
+    private const string titleString = "SPELLBOOK - ";
+    private const string emptyEntryText = "";
 
 	// Use this for initialization
 	void Start () {
-		
+        //Build() or build in loadgameflow or load_file or something
+		for(int i = 0; i < pageSize; i++)
+        {
+            entries[i] = gameObject.transform.GetChild(i).GetComponent<Text>();
+            entries[i].text = emptyEntryText;
+        }
+        updatePage();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
     }
 
     //Returns true if registered, false if not
@@ -52,6 +65,7 @@ public class SpellBook : MonoBehaviour {
             l.Sort();
             data.Sort();
         }
+        updatePage();
         Debug.Log(word.ToUpper() + " was registered to the spellbook");
     }
 
@@ -72,11 +86,11 @@ public class SpellBook : MonoBehaviour {
                 return false;
             typeIndex++;
             pageIndex = 0;
-            Debug.Log("Now on page " + data[typeIndex].type + " " + pageIndex / pageSize + 1);
+            updatePage();
             return true;
         }
         pageIndex += pageSize;
-        Debug.Log("Now on page " + data[typeIndex].type + " " + pageIndex / pageSize + 1);
+        updatePage();
         return true;
     }
     //Goes to last page of spellbook (if one exists)
@@ -89,13 +103,34 @@ public class SpellBook : MonoBehaviour {
                 return false;
             typeIndex--;
             pageIndex = (data[typeIndex].Count - (data[typeIndex].Count % pageSize));
-            Debug.Log("Now on page " + data[typeIndex].type + " " + pageIndex / pageSize + 1);
+            updatePage();
             return true;
         }
         pageIndex -= pageSize;
-        Debug.Log("Now on page " + data[typeIndex].type + " " + pageIndex / pageSize + 1);
+        updatePage();
         return true;
 
+    }
+
+    private bool updatePage()
+    {
+        if (data.Count == 0)
+        {
+            pageTitle.text = titleString + "NO SPELLS REGISTERED";
+            return false;
+        }
+        SpellbookList current = data[typeIndex];
+        pageTitle.text = titleString + current.type.ToUpper() + " " + (pageIndex / pageSize + 1);
+        int j = pageIndex;
+        for(int i = 0; i < entries.Length; i++)
+        {
+            if (j < current.Count)
+                entries[i].text = current[j].word.ToUpper() + ": " + current[j].description;
+            else
+                entries[i].text = emptyEntryText;
+            ++j;
+        }
+        return true;
     }
 
     private int typeIndex = 0;
