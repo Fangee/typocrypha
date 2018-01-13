@@ -9,6 +9,7 @@ splash	attack	always misses (debug )	1	1	-1000	10	0	MT	None	0
 poke	attack	high damage for debugging	999	1	100	0	0	MT	None	0		
 weakpnt	attack	always crits (debug)	2	1	100	100	0	MT	None	0		
 death	attack	kills self (debug)	999	1	100	0	0	mS	None	0		
+teamcrit	attack	crits own team (debug)	25	1	100	100	0	lr	None	0		
 stun	attack	deal stagger to all	1	1	100	100	0	LMR	None	0		
 debilitate	buff	1 lvl of all non-elem debuffs	1	20	100	10	0	MT	ADSHE	100		
 prayer	buff	1 lvl of all non-elem buffs	1	50	100	10	0	mS	adshe	100		

@@ -77,7 +77,7 @@ public class SpellDictionary : MonoBehaviour
                 if (pattern.Contains("m"))
                     s.targetData.allyM = true;
                 if (pattern.Contains("r"))
-                    s.targetData.enemyR = true;
+                    s.targetData.allyR = true;
                 if (pattern.Contains("S"))
                     s.targetData.selfCenter = true;
                 if (pattern.Contains("T"))
@@ -197,7 +197,7 @@ public class SpellDictionary : MonoBehaviour
                 if (pattern.Contains("m"))
                     s.targets.allyM = true;
                 if (pattern.Contains("r"))
-                    s.targets.enemyR = true;
+                    s.targets.allyR = true;
                 if (pattern.Contains("S"))
                     s.targets.selfCenter = true;
                 if (pattern.Contains("T"))

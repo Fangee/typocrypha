@@ -9,6 +9,8 @@ public class BattleManager : MonoBehaviour {
 	public SpellDictionary spellDict; // spell dictionary object
 	public GameObject enemy_prefab; // prefab for enemy object
     public GameObject ally_prefab; //prefab for ally object
+    public DisplayAlly ally_left; // left ally UI
+    public DisplayAlly ally_right; // right ally UI
 	public EnemyChargeBars charge_bars; // creates and mananges charge bars
 	public EnemyStaggerBars stagger_bars; // creates and manages stagger bars
 	public CooldownList cooldown_list; // creates and manages player's cooldowns
@@ -74,7 +76,16 @@ public class BattleManager : MonoBehaviour {
             Ally a = new_ally.GetComponent<Ally>();
             a.setStats(scene.ally_stats[i]);
             if (i == 1)
+            {
+                ally_right.setAlly(a);
+                a.transform.position = ally_right.transform.position;
                 ++i;
+            }
+            else
+            {
+                ally_left.setAlly(a);
+                a.transform.position = ally_left.transform.position;
+            }
             a.position = i;
             player_arr[i] = a;
         }
@@ -157,9 +168,20 @@ public class BattleManager : MonoBehaviour {
     //Casts from an ally position at target enemy_arr[target]: calls processCast on results
     public void NPC_Cast(SpellDictionary dict, SpellData s, int position, int target)
     {
-        dict.startCooldown(s, (Player)player_arr[player_ind]);
-        List<CastData> data = dict.cast(s, enemy_arr, target, player_arr, position);
-        processCast(data, s);
+        if(player_arr[position].Is_stunned)
+        {
+            Debug.Log(s.root + " cannot assist you because they are stunned!");
+        }
+        else if (((Ally)player_arr[position]).tryCast())
+        {
+            dict.startCooldown(s, (Player)player_arr[player_ind]);
+            List<CastData> data = dict.cast(s, enemy_arr, target, player_arr, position);
+            processCast(data, s);
+        }
+        else
+        {
+            Debug.Log(s.root + " is not ready to assist you yet!");
+        }
     }
     //Casts from an enemy position: calls processCast on results
     public void enemyCast(SpellDictionary dict, SpellData s, int position)
@@ -246,8 +268,58 @@ public class BattleManager : MonoBehaviour {
             }
             else if (d.Target.CasterType == ICasterType.NPC_ALLY)
             {
-                Debug.Log("ALLY " + d.Target.Stats.name + " has been cast at!");
-                //Implement Graphics for cast at NPC_ALLY (NOT YET POSSIBLE)
+                Ally a = (Ally)d.Target;
+                //Process hit graphics
+                AudioPlayer.main.playSFX(1, SFXType.SPELL, "Cutting_SFX");
+                AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", a.transform.position, 1);
+                if (d.isHit == false)//Spell misses
+                {
+                    Debug.Log(d.Caster.Stats.name + " missed " + d.Target.Stats.name + "!");
+                    //Process miss graphics
+                }
+                else//Spell hits
+                {
+                    //Process hit graphics
+                    AudioPlayer.main.playSFX(1, SFXType.SPELL, "Cutting_SFX");
+                    AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", a.transform.position, 1);
+
+                    if (d.isCrit)//Spell is crit
+                    {
+                        Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
+                        AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_enemy_weakcrit_dmg");
+                        //process crit graphics
+                        popp.spawnSprite("sprites/critical", POP_TIMER, a.transform.position + UNDER_OFFSET);
+                    }
+                    if (d.isStun)
+                    {
+                        //Process stun graphics
+                        Debug.Log(d.Caster.Stats.name + " stuns " + d.Target.Stats.name);
+                        AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_stagger");
+                    }
+
+                    Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement(d.Target.BuffDebuff, d.element));
+
+                    //Process elemental wk/resist/absorb/reflect graphics
+                    switch (d.elementalData)
+                    {
+                        case Elements.vsElement.REFLECT:
+                            popp.spawnSprite("sprites/reflect", POP_TIMER, a.transform.position + OVER_OFFSET);
+                            break;
+                        case Elements.vsElement.ABSORB:
+                            popp.spawnSprite("sprites/absorb", POP_TIMER, a.transform.position + OVER_OFFSET);
+                            break;
+                        case Elements.vsElement.RESISTANT:
+                            popp.spawnSprite("sprites/resistant", POP_TIMER, a.transform.position + OVER_OFFSET);
+                            break;
+                        case Elements.vsElement.WEAK:
+                            popp.spawnSprite("sprites/weak", POP_TIMER, a.transform.position + OVER_OFFSET);
+                            break;
+                    }
+                    //Process damage graphics
+                    popp.spawnText(d.damageInflicted.ToString(), POP_TIMER, a.transform.position + DMGNUM_OFFSET);
+                    if (d.damageInflicted > 0) BattleEffects.main.spriteShake(a.gameObject.transform, 0.5f, 0.1f);
+                }
+
             }
             else//Target is an ENEMY
             {
