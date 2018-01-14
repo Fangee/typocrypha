@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 // manages battle sequences
 public class BattleManager : MonoBehaviour {
-	public static BattleManager main = null; // static instance accessible globally
+	public static BattleManager main = null; // static instance accessible globally (try not to use this)
 	public SpellDictionary spellDict; // spell dictionary object
 	public GameObject enemy_prefab; // prefab for enemy object
     public GameObject ally_prefab; //prefab for ally object
@@ -122,7 +122,7 @@ public class BattleManager : MonoBehaviour {
         {
             //play page change SFX here
         }
-        // go to next page if down is pressed
+        // go to last page if down is pressed
         if (Input.GetKeyDown(KeyCode.UpArrow) && spellDict.pageUp())
         {
             //play page change SFX here
@@ -186,8 +186,26 @@ public class BattleManager : MonoBehaviour {
     //Casts from an enemy position: calls processCast on results
     public void enemyCast(SpellDictionary dict, SpellData s, int position)
     {
+        pause = true; // pause battle for attack
+        BattleEffects.main.setDim(true, enemy_arr[position].GetComponent<SpriteRenderer>());
+        AudioPlayer.main.playSFX(1, SFXType.SPELL, "magic_sound");
+        StartCoroutine(enemy_pause_cast(dict, s, position));
+
+    }
+    //Does the pausing for enemyCast (also does the actual cast calling)
+    private IEnumerator enemy_pause_cast(SpellDictionary dict, SpellData s, int position)
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        enemy_arr[position].startSwell();
         List<CastData> data = dict.cast(s, player_arr, player_ind, enemy_arr, position);
         processCast(data, s);
+
+        yield return new WaitForSeconds(1f);
+
+        BattleEffects.main.setDim(false, enemy_arr[position].GetComponent<SpriteRenderer>());
+        pause = false; // unpause
+        updateEnemies();
     }
     //Cast/Botch/Cooldown/Fizzle, with associated effects and processing
     //all animation and attack effects should be processed here

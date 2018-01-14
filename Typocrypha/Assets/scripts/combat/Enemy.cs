@@ -145,21 +145,13 @@ public class Enemy : MonoBehaviour, ICaster {
             }
 			curr_time += Time.deltaTime;
 			if (curr_time >= atk_time) {
-				BattleManager.main.pause = true; // pause battle for attack
-				BattleEffects.main.setDim(true, enemy_sprite);
-				AudioPlayer.main.playSFX (1, SFXType.SPELL, "magic_sound"); 
-				yield return new WaitForSeconds (1.5f);
 				attackPlayer (s);
-				yield return new WaitForSeconds (1f);
                 curr_spell++;
                 if (curr_spell >= stats.spells.Length)//Reached end of spell list
                     curr_spell = 0;
                 s = stats.spells[curr_spell]; //get next spell
                 atk_time = dict.getCastingTime(s, stats.speed);//get new casting time
                 curr_time = 0;
-				BattleEffects.main.setDim(false, enemy_sprite);
-				BattleManager.main.pause = false; // unpause
-				BattleManager.main.updateEnemies();
 			}
 		}
 	}
@@ -167,8 +159,7 @@ public class Enemy : MonoBehaviour, ICaster {
 	// pause battle, attack player with specified spell
 	void attackPlayer(SpellData s) {
         Debug.Log(stats.name + " casts " + s.ToString());
-        StartCoroutine(swell());
-        field.enemyCast(dict.GetComponent<SpellDictionary>(), s, position);
+        field.enemyCast(dict, s, position);
 	}
 
 	// be attacked by the player
@@ -210,6 +201,12 @@ public class Enemy : MonoBehaviour, ICaster {
 			StopAllCoroutines ();
         }
 
+    }
+
+    //Starts swell from outside class (used in battlemanager.cs)
+    public void startSwell()
+    {
+        StartCoroutine(swell());
     }
 
 	// cause enemy to swell in size for a short period of time (lazy attack rep)
