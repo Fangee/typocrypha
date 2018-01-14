@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//Edits by Valentino Abate
 
 //Event class (use baked in arguments (in constructor) to start function call, finish with call)
 
@@ -32,3 +33,4 @@ public class RegisterSpellEvent : CutsceneEvent
         AudioPlayer.main.playSFX(0, SFXType.SPELL, "magic_sound");
     }
 }
+

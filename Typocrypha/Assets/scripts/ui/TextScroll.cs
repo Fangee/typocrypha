@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
+// edits by James Iwamasa
 
 // displays text character by character
 public class TextScroll : MonoBehaviour {
@@ -18,6 +19,8 @@ public class TextScroll : MonoBehaviour {
 	Coroutine curr; // current printing coroutine
 
 	Regex tag_cutoff = new Regex ("<|>|=.*");
+	Regex evt_cutout = new Regex (Regex.Escape("[") + ".*" + Regex.Escape("]")); // matches events
+	char[] opt_delim = new char[]{ ',' };
 
 	void Start() {
 		is_print = false;
@@ -27,7 +30,7 @@ public class TextScroll : MonoBehaviour {
 	// start printing string to Text display
 	public void startPrint(string in_txt, Text out_txt, string speak_sfx) {
 		AudioPlayer.main.setSFX (3, SFXType.SPEAKING, speak_sfx); // put sfx in channel 3
-		in_text = in_txt;
+		in_text = in_txt.Trim().Replace("\"", "");
 		out_text = out_txt;
 		out_text.text = "";
 		is_print = true;
@@ -48,7 +51,7 @@ public class TextScroll : MonoBehaviour {
 	public void dump() {
 		StopCoroutine (curr);
 		is_print = false;
-		out_text.text = in_text;
+		out_text.text = evt_cutout.Replace(in_text, "");
 	}
 
 	// print characters to Text object one by one
@@ -59,6 +62,9 @@ public class TextScroll : MonoBehaviour {
 		while (text_pos < in_text.Length) {
 			if (in_text [text_pos].CompareTo ('<') == 0) { // check if tag
 				checkTags();
+				continue;
+			} else if (in_text [text_pos].CompareTo ('[') == 0) { // check if text event
+				checkEvents();
 				continue;
 			}
 			if (text_pos >= in_text.Length) break;
@@ -88,6 +94,19 @@ public class TextScroll : MonoBehaviour {
 			text_pos = fend_pos + 1; // set new text_pos at end of start tag
 			out_buffer += tag.first; // add start tag to out_buffer (end tag is added later)
 		}
+	}
+
+	// checks for text events, and parse and play them
+	void checkEvents() {
+		int start_pos = text_pos;
+		int end_pos = in_text.IndexOf (']', start_pos);
+		int eq_pos = in_text.IndexOf ('=', start_pos);
+		string evt = in_text.Substring (start_pos + 1, eq_pos - start_pos - 1);
+		string[] opt;
+		if (eq_pos == -1 || eq_pos > end_pos) opt = new string[0]; // if no '=' 
+		else opt = in_text.Substring (eq_pos + 1, end_pos - eq_pos - 1).Split (opt_delim);
+		TextEvents.main.playEvent (evt, opt);
+		text_pos = end_pos + 1;
 	}
 
 	// deletes characters currently in buffer one by one (doesnt check for tags)

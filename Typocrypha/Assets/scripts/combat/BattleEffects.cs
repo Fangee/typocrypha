@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// edits by James Iwamasa
 
 // causes various effects for battle scenes
 public class BattleEffects : MonoBehaviour {
@@ -31,13 +32,14 @@ public class BattleEffects : MonoBehaviour {
 
 	// coroutine that shakes screen over time
 	IEnumerator screenShakeCR(float sec, float amt) {
+		Vector3 old_pos = cam_pos.position;
 		float curr_time = 0;
 		while (curr_time < sec) {
 			cam_pos.position = Random.insideUnitCircle * amt;
 			yield return new WaitForEndOfFrame();
 			curr_time += Time.deltaTime;
 		}
-		cam_pos.position = new Vector3 (0, 0, 0);
+		cam_pos.position = old_pos;
 	}
 
 	// shake a sprite for sec seconds and amt intensity
