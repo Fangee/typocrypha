@@ -292,6 +292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 0.05
   is_print: 0
+  pause_print: 0
 --- !u!114 &64279248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,6 +304,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d077e59337f584ebefce7554f2c15c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dimmer: {fileID: 1608672956}
+  text_scroll: {fileID: 64279247}
 --- !u!1 &70941748
 GameObject:
   m_ObjectHideFlags: 0
@@ -2603,6 +2606,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 0.1
   is_print: 0
+  pause_print: 0
 --- !u!114 &1041122050
 MonoBehaviour:
   m_ObjectHideFlags: 0

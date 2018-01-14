@@ -83,7 +83,6 @@ public class LoadGameFlow : MonoBehaviour {
 				res_lines.Add (lines [i]);
 			}
 		}
-		foreach (string s in res_lines) Debug.Log ("substitue:" + s);
 		return res_lines.ToArray ();
 	}
 

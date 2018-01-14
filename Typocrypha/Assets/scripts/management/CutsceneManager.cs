@@ -34,12 +34,11 @@ public class CutsceneManager : MonoBehaviour {
 			// if dialogue over, go to next scene
 			if (!nextLine ()) {
 				at_end = true;
-				if (!battle_interrupt)
-					StateManager.main.nextScene ();
+				if (!battle_interrupt) StateManager.main.nextScene ();
 			}
 		}
 	}
-
+		
 	// displays next line of text; returns false if at end
 	bool nextLine() {
 		// check if dialogue is being printed
@@ -63,6 +62,16 @@ public class CutsceneManager : MonoBehaviour {
 			text_scroll.dump ();
 		}
 		return true;
+	}
+
+	// forces next line (for outside callers)
+	// must already be at end of text
+	public void forceNextLine() {
+		nextLine (); // dumps remaining
+		if (!nextLine ()) {
+			at_end = true;
+			if (!battle_interrupt) StateManager.main.nextScene ();
+		}
 	}
 
 	// displays a sprite at given position; sprite becomes a child object of 'sprite_holder'

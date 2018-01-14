@@ -10,12 +10,18 @@ public delegate IEnumerator TextEventDel(string[] opt);
 // event class for events during text dialogue
 public class TextEvents : MonoBehaviour {
 	public static TextEvents main = null;
-	public static Dictionary<string, TextEventDel> text_event_map;
+	public Dictionary<string, TextEventDel> text_event_map;
+	public SpriteRenderer dimmer; // sprite used to cover screen for fade/dim effects
+	public TextScroll text_scroll; // main text scroller for normal dialogue
 
 	void Start() {
 		if (main == null) main = this;
-		if (text_event_map == null) text_event_map = new Dictionary<string, TextEventDel> {
-			{"screen-shake", screenShake}
+		text_event_map = new Dictionary<string, TextEventDel> {
+			{"screen-shake", screenShake},
+			{"block", block},
+			{"pause", pause},
+			{"fade", fade},
+			{"next", next}
 		};
 	}
 
@@ -27,9 +33,8 @@ public class TextEvents : MonoBehaviour {
 	}
 
 	// shakes the screen
-	// input: string[2]
-	//   string[0]: length of shake
-	//   string[1]: intensity of shake
+	// input: [0]: float, length of shake
+	//        [1]: float, intensity of shake
 	IEnumerator screenShake(string[] opt) {
 		Transform cam_tr = Camera.current.transform;
 		Vector3 old_cam_pos = cam_tr.position;
@@ -42,6 +47,53 @@ public class TextEvents : MonoBehaviour {
 			curr_time += Time.deltaTime;
 		}
 		cam_tr.position = old_cam_pos;
+	}
+
+	// blocks or unblocks input
+	// input: [t|f], 't' blocks input until 'f' unblocks
+	IEnumerator block(string[] opt) {
+		if (opt[0].CompareTo("t") == 0) CutsceneManager.main.enabled = false;
+		else 		                    CutsceneManager.main.enabled = true;
+		yield return true;
+	}
+
+	// causes dialogue and cutscene to pause: it is recommended to also block
+	// input: [0]: float, length of pause
+	IEnumerator pause(string[] opt) {
+		text_scroll.pause_print = true; // pause text scroll
+		yield return new WaitForSeconds (float.Parse (opt [0]));
+		text_scroll.pause_print = false;
+	}
+
+	// fades the screen in or out
+	// input: [0]: [in|out], 'in' re-reveals screen, 'out' hides it
+	//        [1]: float, length of fade in seconds
+	IEnumerator fade(string[] opt) {
+		float fade_time = float.Parse (opt [1]);
+		float alpha;
+		float a_step = 1f * 0.017f / fade_time; // amount of change each frame
+		if (opt [0].CompareTo ("out") == 0) { // hide screen
+			alpha = 0;
+			while (alpha < 1f) {
+				yield return new WaitForSeconds(0.017f);
+				alpha += a_step;
+				dimmer.color = new Color (0, 0, 0, alpha);
+			}
+		} else { // show screen
+			alpha = 1;
+			while (alpha > 0f) {
+				yield return new WaitForSeconds(0.017f);
+				alpha -= a_step;
+				dimmer.color = new Color (0, 0, 0, alpha);
+			}
+		}
+	}
+
+	// forces next line of dialogue (SHOULD BE PLACED AT END OF LINE)
+	// input: none
+	IEnumerator next(string[] opt) {
+		CutsceneManager.main.forceNextLine ();
+		yield return true;
 	}
 }
 

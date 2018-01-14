@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class TextScroll : MonoBehaviour {
 	public float delay; // time between displaying characters
 	public bool is_print; // is currently printing
+	public bool pause_print; // is the text scroll paused?
 
 	int text_pos; // position in text
 	string in_text; // current text being printed out
@@ -19,7 +20,7 @@ public class TextScroll : MonoBehaviour {
 	Coroutine curr; // current printing coroutine
 
 	Regex tag_cutoff = new Regex ("<|>|=.*");
-	Regex evt_cutout = new Regex (Regex.Escape("[") + ".*" + Regex.Escape("]")); // matches events
+	Regex evt_cutout = new Regex (Regex.Escape("[") + ".*?" + Regex.Escape("]")); // matches events
 	char[] opt_delim = new char[]{ ',' };
 
 	void Start() {
@@ -34,6 +35,7 @@ public class TextScroll : MonoBehaviour {
 		out_text = out_txt;
 		out_text.text = "";
 		is_print = true;
+		if (curr != null) StopCoroutine (curr);
 		curr = StartCoroutine (scrollText ());
 	}
 
@@ -60,6 +62,9 @@ public class TextScroll : MonoBehaviour {
 		out_buffer = "";
 		tag_stack.Clear ();
 		while (text_pos < in_text.Length) {
+			//yield return new WaitWhile (() => pause_print);
+			while (pause_print) yield return new WaitForEndOfFrame();
+			if (text_pos >= in_text.Length) break;
 			if (in_text [text_pos].CompareTo ('<') == 0) { // check if tag
 				checkTags();
 				continue;
@@ -67,7 +72,6 @@ public class TextScroll : MonoBehaviour {
 				checkEvents();
 				continue;
 			}
-			if (text_pos >= in_text.Length) break;
 			AudioPlayer.main.playSFX (3); // play speaking sfx
 			out_buffer += in_text [text_pos++];
 			out_text.text = out_buffer + tag_stack.Aggregate ("", (acc, next) => acc + next.second); // functional programming trick to build end tags
@@ -101,11 +105,17 @@ public class TextScroll : MonoBehaviour {
 		int start_pos = text_pos;
 		int end_pos = in_text.IndexOf (']', start_pos);
 		int eq_pos = in_text.IndexOf ('=', start_pos);
-		string evt = in_text.Substring (start_pos + 1, eq_pos - start_pos - 1);
+		string evt;
 		string[] opt;
-		if (eq_pos == -1 || eq_pos > end_pos) opt = new string[0]; // if no '=' 
-		else opt = in_text.Substring (eq_pos + 1, end_pos - eq_pos - 1).Split (opt_delim);
+		if (eq_pos == -1 || eq_pos > end_pos) { // if no '='
+			evt = in_text.Substring (start_pos + 1, end_pos - start_pos - 1);
+			opt = new string[0]; 
+		} else {
+			evt = in_text.Substring (start_pos + 1, eq_pos - start_pos - 1);
+			opt = in_text.Substring (eq_pos + 1, end_pos - eq_pos - 1).Split (opt_delim);
+		}
 		TextEvents.main.playEvent (evt, opt);
+		if (end_pos + 1 > in_text.Length) return; // checks for asynchronous strange bugs
 		text_pos = end_pos + 1;
 	}
 
