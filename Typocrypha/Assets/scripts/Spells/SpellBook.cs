@@ -93,16 +93,20 @@ public class SpellBook : MonoBehaviour {
         updatePage();
         return true;
     }
-    //Goes to last page of spellbook (if one exists)
+    //Goes to previous page of spellbook (if one exists)
     //Returns true on success, false on failure (no last page)
     public bool lastPage()
     {
-        if(pageIndex - pageSize <= 0)
+        if(pageIndex - pageSize < 0)
         {
             if (typeIndex <= 0)
                 return false;
             typeIndex--;
-            pageIndex = (data[typeIndex].Count - (data[typeIndex].Count % pageSize));
+            int mod = (data[typeIndex].Count % pageSize);
+            if (mod == 0)
+                pageIndex = data[typeIndex].Count - pageSize;
+            else
+                pageIndex = data[typeIndex].Count - mod;
             updatePage();
             return true;
         }
