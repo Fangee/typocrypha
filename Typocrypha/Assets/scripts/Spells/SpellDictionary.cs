@@ -491,7 +491,7 @@ public class SpellDictionary : MonoBehaviour
     //Moves page up in member spellBook
     public bool pageUp()
     {
-        return spellBook.lastPage();
+        return spellBook.previousPage();
     }
     //Moves page down in member spellBook
     public bool pageDown()
