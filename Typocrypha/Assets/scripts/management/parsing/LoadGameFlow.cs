@@ -12,12 +12,12 @@ public class LoadGameFlow : MonoBehaviour {
     public AllyDatabase ally_data;//Ally database
     public SpellDictionary spellDictionary;
 
+	public List<GameScene> scene_list; // list of gamescenes (converted to array)
 	TextAsset text_file; // original text asset
 	char[] line_delim = { '\n' };
 	char[] col_delim = { '\t' };
 	char[] coord_delim = { ',' };
 	Dictionary<string, Vector2> npc_sprite_pos; // maps position macros
-	 
 
 	void Awake() {
 		npc_sprite_pos = new Dictionary<string, Vector2> { 
@@ -44,10 +44,10 @@ public class LoadGameFlow : MonoBehaviour {
 	// parses gameflow file which should be a tab-delimited txt file (from excel)
 	void parseFile() {
 		text_file = Resources.Load<TextAsset> (file_name);
-		string[] lines = text_file.text.Split(line_delim);
+		string[] lines = substituteLinks(text_file.text.Split(line_delim));
 		int scene_count = 0; // total number of scenes in game
 		int.TryParse (lines [0].Split (col_delim) [0], out scene_count);
-		scene_arr = new GameScene[scene_count];
+		scene_list = new List<GameScene> ();
 		int curr_scene = 0; // current scene being loaded
 		for (int i = 1; i < lines.Length; i++) { // go through each line
 			string[] cols = lines[i].Split(col_delim);
@@ -63,12 +63,34 @@ public class LoadGameFlow : MonoBehaviour {
 				break;
 			}
 		}
+		scene_arr = scene_list.ToArray ();
+	}
+
+	// substitutes in links to other spreadsheets
+	// supports nested links, however, looping links will cause an infinite loop
+	string[] substituteLinks(string[] lines) {
+		int n = lines.Length;
+		List<string> res_lines = new List<string> ();
+		for (int i = 0; i < n; ++i) {
+			string[] cols = lines [i].Split (col_delim);
+			if (cols [0].Trim ().CompareTo ("") == 0) continue;
+			if (cols [0].Trim ().CompareTo ("LINK") == 0) { // substitute link
+				TextAsset link_file = Resources.Load<TextAsset>(cols[1].Trim());
+				string[] link_lines = substituteLinks(link_file.text.Split (line_delim));
+				foreach (string link_line in link_lines)
+					res_lines.Add (link_line);
+			} else {
+				res_lines.Add (lines [i]);
+			}
+		}
+		foreach (string s in res_lines) Debug.Log ("substitue:" + s);
+		return res_lines.ToArray ();
 	}
 
 	// parses intro scene; pos is the line number of the scene in file
 	// returns line number at the end of this scene in file
 	int parseIntroScene(string[] lines, int pos, int curr_scene) {
-		scene_arr [curr_scene] = new IntroScene ();
+		scene_list.Add (new IntroScene ());
 		return pos;
 	}
 
@@ -135,8 +157,8 @@ public class LoadGameFlow : MonoBehaviour {
 		}
 		string[][] npc_sprites_arr = npc_sprites.Select (a => a.ToArray ()).ToArray ();
 		Vector2[][] npc_pos_arr = npc_pos.Select (a => a.ToArray ()).ToArray ();
-		scene_arr [curr_scene] = new CutScene (whos_talking.ToArray(), dialogue.ToArray (), 
-			npc_sprites_arr, npc_pos_arr, music_tracks.ToArray(), events.ToArray());
+		scene_list.Add(new CutScene (whos_talking.ToArray(), dialogue.ToArray (), 
+			npc_sprites_arr, npc_pos_arr, music_tracks.ToArray(), events.ToArray()));
 		return i;
 	}
 
@@ -192,8 +214,8 @@ public class LoadGameFlow : MonoBehaviour {
 				break;
 			}
 		}
-		scene_arr [curr_scene] = new BattleScene (enemies.ToArray (), allies.ToArray(), music_tracks.ToArray(), 
-			interrupts.ToArray());
+		scene_list.Add(new BattleScene (enemies.ToArray (), allies.ToArray(), music_tracks.ToArray(), 
+			interrupts.ToArray()));
 		return i;
 	}
 
