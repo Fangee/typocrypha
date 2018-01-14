@@ -131,7 +131,7 @@ public class Player : ICaster
         { // check if killed
             Debug.Log("Player" + " has been slain!");
 			BattleManager.main.pause = true;
-			BattleEffects.main.setDim (false, null);
+			BattleEffects.main.setDim (false);
 			restoreToFull ();
 			BattleManager.main.stopBattle ();
 			StateManager.main.revertScene (2f);

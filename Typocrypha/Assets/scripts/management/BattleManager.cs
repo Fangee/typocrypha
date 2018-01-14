@@ -11,6 +11,13 @@ public class BattleManager : MonoBehaviour {
     public GameObject ally_prefab; //prefab for ally object
     public DisplayAlly ally_left; // left ally UI
     public DisplayAlly ally_right; // right ally UI
+    public GameObject battleLogCast;
+    private TextMesh logCastText;
+    private MeshRenderer logCastMesh;
+    public GameObject battleLogTalk;
+    private TextMesh logTalkText;
+    private MeshRenderer logTalkMesh;
+    private SpriteRenderer[] battleLogSprites = new SpriteRenderer[2];
 	public EnemyChargeBars charge_bars; // creates and mananges charge bars
 	public EnemyStaggerBars stagger_bars; // creates and manages stagger bars
 	public CooldownList cooldown_list; // creates and manages player's cooldowns
@@ -89,14 +96,33 @@ public class BattleManager : MonoBehaviour {
             a.position = i;
             player_arr[i] = a;
         }
-
-		pause = false;
+        logCastText = battleLogCast.GetComponentInChildren<TextMesh>(true);
+        logTalkText = battleLogTalk.GetComponentInChildren<TextMesh>(true);
+        logCastMesh = battleLogCast.GetComponentInChildren<MeshRenderer>(true);
+        logTalkMesh = battleLogTalk.GetComponentInChildren<MeshRenderer>(true);
+        battleLogSprites[0] = battleLogCast.GetComponentInChildren<SpriteRenderer>(true);
+        battleLogSprites[1] = battleLogTalk.GetComponentInChildren<SpriteRenderer>(true);
+        pause = false;
 		target_ind = 0;
 		AudioPlayer.main.playMusic (MusicType.BATTLE, scene.music_tracks[0]);
 	}
 
-	// check if player switches targets or attacks
-	void Update() {
+    //removes all enemies and charge bars
+    public void stopBattle()
+    {
+        pause = true;
+        foreach (Enemy enemy in enemy_arr)
+        {
+            if (enemy != null) GameObject.Destroy(enemy.gameObject);
+        }
+        enemy_arr = null;
+        cooldown_list.removeAll();
+        charge_bars.removeAll();
+        stagger_bars.removeAll();
+    }
+
+    // check if player switches targets or attacks
+    void Update() {
 		if (Input.GetKeyDown (KeyCode.BackQuote)) // toggle pause
 			pause = !pause;
 		if (pause) return;
@@ -129,6 +155,8 @@ public class BattleManager : MonoBehaviour {
         }
     }
 
+    //CASTING CODE//---------------------------------------------------------------------------------------------------------------------------------------//
+
 	// attack currently targeted enemy with spell
 	public void attackCurrent(string spell) {
         //Can attack dead enemies now, just wont cast spell at them
@@ -139,6 +167,7 @@ public class BattleManager : MonoBehaviour {
 	IEnumerator pauseAttackCurrent(string spell){
 		pause = true;
 		BattleEffects.main.setDim (true, enemy_arr[target_ind].enemy_sprite);
+        battleLog(spell.ToUpper().Replace(' ', '-'), "TODO: say something here");
 
         //BEGIN PAUSE//
 
@@ -160,6 +189,7 @@ public class BattleManager : MonoBehaviour {
 
         //END PAUSE//
 
+        stopBattleLog();
 		BattleEffects.main.setDim (false, enemy_arr [target_ind].enemy_sprite);
 		pause = false;
 		updateEnemies();
@@ -195,6 +225,8 @@ public class BattleManager : MonoBehaviour {
     //Does the pausing for enemyCast (also does the actual cast calling)
     private IEnumerator enemy_pause_cast(SpellDictionary dict, SpellData s, int position)
     {
+        battleLog(s.ToString(), "TODO: say something here");
+
         yield return new WaitForSeconds(1.5f);
 
         enemy_arr[position].startSwell();
@@ -203,6 +235,7 @@ public class BattleManager : MonoBehaviour {
 
         yield return new WaitForSeconds(1f);
 
+        stopBattleLog();
         BattleEffects.main.setDim(false, enemy_arr[position].GetComponent<SpriteRenderer>());
         pause = false; // unpause
         updateEnemies();
@@ -399,27 +432,54 @@ public class BattleManager : MonoBehaviour {
 
     }
 
+    //Enable battle log UI state (call anywhere that the battlemanager pauses to cast)
+    private void battleLog(string cast, string talk)
+    {
+        battleLogCast.SetActive(true);
+        battleLogTalk.SetActive(true);
+        logCastText.text = cast;
+        logTalkText.text = talk;
+        battleLogSprites[0].sortingOrder = 10;
+        battleLogSprites[1].sortingOrder = 10;
+        logCastMesh.sortingOrder = 10;
+        logTalkMesh.sortingOrder = 10;
+    }
+
+    //Stop battle log UI (call after every pause to cast
+    private void stopBattleLog()
+    {
+        battleLogCast.SetActive(false);
+        battleLogTalk.SetActive(false);
+        battleLogSprites[0].sortingOrder = 10;
+        battleLogSprites[1].sortingOrder = 10;
+        logCastMesh.sortingOrder = 0;
+        logTalkMesh.sortingOrder = 0;
+    }
+
     //Updates death and opacity of enemies after pause in puaseAttackCurrent
     public void updateEnemies()
     {
-		bool interrupted = checkInterrupts (); // check for interrupts
-		if (interrupted) return;
-		int curr_dead = 0;
-        for(int i = 0; i < enemy_arr.Length; i++)
+        bool interrupted = checkInterrupts(); // check for interrupts
+        if (interrupted) return;
+        int curr_dead = 0;
+        for (int i = 0; i < enemy_arr.Length; i++)
         {
-            if(!enemy_arr[i].Is_dead)
-			    enemy_arr [i].updateCondition ();
-			if (enemy_arr [i].Is_dead) ++curr_dead;
+            if (!enemy_arr[i].Is_dead)
+                enemy_arr[i].updateCondition();
+            if (enemy_arr[i].Is_dead) ++curr_dead;
         }
-		if (curr_dead == enemy_count) // end battle if all enemies dead
-		{
-			Debug.Log("you win!");
-			stopBattle ();
-			StartCoroutine(StateManager.main.nextSceneDelayed(2.0f));
-		}
+        if (curr_dead == enemy_count) // end battle if all enemies dead
+        {
+            Debug.Log("you win!");
+            stopBattle();
+            StartCoroutine(StateManager.main.nextSceneDelayed(2.0f));
+        }
     }
-	// checks and plays battle interruptions (returns true if an interrupt occured)
-	bool checkInterrupts() {
+
+    //INTERRUPT CODE//-------------------------------------------------------------------------------------------------------------------------------------//
+
+    // checks and plays battle interruptions (returns true if an interrupt occured)
+    bool checkInterrupts() {
 		bool interrupted = false;
 		// check for interrupt scenes
 		for (int i = 0; i < curr_battle.interrupts.Length; ++i) {
@@ -466,16 +526,5 @@ public class BattleManager : MonoBehaviour {
 		dialogue_box.SetActive (false);
 		updateEnemies ();
 		pause = false;
-	}
-	//removes all enemies and charge bars
-	public void stopBattle() {
-		pause = true;
-		foreach (Enemy enemy in enemy_arr) {
-			if (enemy != null) GameObject.Destroy (enemy.gameObject);
-		}
-		enemy_arr = null;
-		cooldown_list.removeAll ();
-		charge_bars.removeAll ();
-		stagger_bars.removeAll ();
 	}
 }
