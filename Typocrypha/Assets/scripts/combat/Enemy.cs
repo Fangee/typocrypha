@@ -165,7 +165,7 @@ public class Enemy : MonoBehaviour, ICaster {
         //graphic
         StartCoroutine(barFlash());
         //sound
-        //AudioPlayer.main.playSFX(1, SFXType.BATTLE, "enemy_attack_ready");
+        AudioPlayer.main.playSFX(1, SFXType.BATTLE, "enemy_attack_ready");
     }
 
     IEnumerator barFlash()
