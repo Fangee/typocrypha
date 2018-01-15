@@ -446,14 +446,14 @@ public class SpellDictionary : MonoBehaviour
     //Return the targeting pattern
     public Pair<bool[], bool[]> getTargetPattern(SpellData data, ICaster[] targets, int selected, ICaster[] allies, int position)
     {
-        if(data.style == null || styles[data.style].isTarget)
+        if(data.style == null || !styles[data.style].isTarget)
         {
             return spells[data.root].targetData.toArrayPair(targets, selected, allies, position);
         }
         else
         {
             TargetData t = new TargetData(false);
-            spells[data.root].targetData.copyInto(t);
+            t.copyFrom(spells[data.root].targetData);
             t.modify(styles[data.style].targets);
             return t.toArrayPair(targets, selected, allies, position);
         }

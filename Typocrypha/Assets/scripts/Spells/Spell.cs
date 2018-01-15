@@ -87,7 +87,7 @@ public abstract class Spell
         s.elementEffectMod = elementEffectMod;
         s.element = element;
         s.targetData = new TargetData(false);
-        s.targetData.copyInto(targetData);
+        s.targetData.copyFrom(targetData);
         if(buff != null)
             s.buff = new BuffData(buff);
         s.buffPercentage = buffPercentage;
@@ -394,15 +394,15 @@ public class TargetData
             selfCenter = mod.selfCenter;
         }
     }
-    public void copyInto(TargetData copyTo)
+    public void copyFrom(TargetData toCopy)
     {
-        enemyL = copyTo.enemyL;
-        enemyM = copyTo.enemyM;
-        enemyR = copyTo.enemyR;
-        targeted = copyTo.targeted;
-        allyL = copyTo.allyL;
-        allyM = copyTo.allyM;
-        allyR = copyTo.allyR;
-        selfCenter = copyTo.selfCenter;
+        enemyL = toCopy.enemyL;
+        enemyM = toCopy.enemyM;
+        enemyR = toCopy.enemyR;
+        targeted = toCopy.targeted;
+        allyL = toCopy.allyL;
+        allyM = toCopy.allyM;
+        allyR = toCopy.allyR;
+        selfCenter = toCopy.selfCenter;
     }
 }
