@@ -35,6 +35,7 @@ public class TextScroll : MonoBehaviour {
 		out_text = out_txt;
 		out_text.text = "";
 		is_print = true;
+		pause_print = false; // unpause text
 		if (curr != null) StopCoroutine (curr);
 		curr = StartCoroutine (scrollText ());
 	}
@@ -69,13 +70,13 @@ public class TextScroll : MonoBehaviour {
 				checkTags();
 				continue;
 			} else if (in_text [text_pos].CompareTo ('[') == 0) { // check if text event
-				checkEvents();
+				checkEvents(); 
 				continue;
 			}
 			AudioPlayer.main.playSFX (3); // play speaking sfx
 			out_buffer += in_text [text_pos++];
 			out_text.text = out_buffer + tag_stack.Aggregate ("", (acc, next) => acc + next.second); // functional programming trick to build end tags
-			yield return new WaitForSeconds (delay);
+			if (delay > 0) yield return new WaitForSeconds (delay);
 		}
 		is_print = false;
 	}

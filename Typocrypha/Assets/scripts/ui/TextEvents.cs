@@ -27,7 +27,8 @@ public class TextEvents : MonoBehaviour {
 			{"next", next},
 			{"center-text-scroll", centerTextScroll},
 			{"center-text-fade", centerTextFade},
-			{"play-sfx", playSFX}
+			{"play-sfx", playSFX},
+			{"set-scroll-delay", setScrollDelay}
 		};
 	}
 
@@ -168,6 +169,13 @@ public class TextEvents : MonoBehaviour {
 	// input: [0]: string, sfx filename
 	IEnumerator playSFX(string[] opt) {
 		AudioPlayer.main.playSFX (opt[0]);
+		yield return true;
+	}
+
+	// sets scroll delay of main dialogue text scroll
+	// input: [0]: float, new delay amount in seconds
+	IEnumerator setScrollDelay(string[] opt) {
+		text_scroll.delay = float.Parse (opt [0]);
 		yield return true;
 	}
 }
