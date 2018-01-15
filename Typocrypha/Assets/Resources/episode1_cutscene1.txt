@@ -7,8 +7,8 @@ DIALOGUE	Player	(Maybe if I just . . . )	_	END_DIALOGUE
 DIALOGUE		"[block=t][set-scroll-delay=0]<size=48>[play-sfx=take_damage][screen-shake=0.2,0.3]THWACK!![pause=1]     [play-sfx=take_damage][screen-shake=0.2,0.3]WHAM!!</size>[set-scroll-delay=0.05][block=f]"	_	END_DIALOGUE
 DIALOGUE	Player	[set-scroll-delay=0.3]. . . [set-scroll-delay=0.05] Did-[pause=0.5]Did it wo[next]	_	END_DIALOGUE
 DIALOGUE	???	"<size=48>[screen-shake=0.3,0.4]HELLO!</size>"	_	END_DIALOGUE
-DIALOGUE	???	"Welcome back (Uncle name here)! You last activated this <color=blue>TYPOCRYPHA</color> unit 1 year, 1 month, and 13 days ago. You have <color=yellow>1023</color> new updates and <color=yellow>33,333</color> new emails."	Naive	END_DIALOGUE
-DIALOGUE	Player	"O-Oh. No, Im not [Uncles name]. I-uh . . . Dammit! How do I reset-"	_	END_DIALOGUE
+DIALOGUE	???	"Welcome back Uncle Nintendo! You last activated this <color=blue>TYPOCRYPHA</color> unit 1 year, 1 month, and 13 days ago. You have <color=yellow>1023</color> new updates and <color=yellow>33,333</color> new emails."	Naive	END_DIALOGUE
+DIALOGUE	Player	"O-Oh. No, Im not him. I-uh . . . Dammit! How do I reset-"	_	END_DIALOGUE
 DIALOGUE	???	<size=48><color=red>ERROR UNIDENTIFIED USER. FORCE SHUTTING DOWN . . .</color></size>	STOP	END_DIALOGUE
 DIALOGUE	Player	"[block=t]NonononoNONON[fade=out,0,0,0,0][pause=3][next]"		END_DIALOGUE
 DIALOGUE	???	"[fade=in,1.5,0,0,0]REINITIALIZING . . . [pause=3][next]"	_	END_DIALOGUE

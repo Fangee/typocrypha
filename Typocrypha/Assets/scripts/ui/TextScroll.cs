@@ -73,7 +73,8 @@ public class TextScroll : MonoBehaviour {
 				checkEvents(); 
 				continue;
 			}
-			AudioPlayer.main.playSFX (3); // play speaking sfx
+			if (in_text[text_pos].CompareTo(' ') != 0)
+				AudioPlayer.main.playSFX (3); // play speaking sfx if not a space
 			out_buffer += in_text [text_pos++];
 			out_text.text = out_buffer + tag_stack.Aggregate ("", (acc, next) => acc + next.second); // functional programming trick to build end tags
 			if (delay > 0) yield return new WaitForSeconds (delay);
