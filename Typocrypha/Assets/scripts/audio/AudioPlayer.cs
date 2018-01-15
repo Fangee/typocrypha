@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-// different types of music
+// different types of music (DEPRECATED)
 public enum MusicType { CUTSCENE, BATTLE };
 
-// different types of sfx
+// different types of sfx (DEPRECATED)
 public enum SFXType { UI, SPELL, BATTLE, SPEAKING, OTHER, size };
 
 // manages playing music and sfx
@@ -16,14 +16,8 @@ public class AudioPlayer : MonoBehaviour {
 	public AudioSource music; // plays music
 	public Transform sfx; // contains sfx channels
 	AudioSource[] sfx_channels; // sfx channels
-	AssetBundle cutscenemusic;
-	AssetBundle battlemusic;
-	AssetBundle uisfx;
-	AssetBundle spellsfx;
-	AssetBundle battlesfx;
-	AssetBundle speakingsfx;
-	AssetBundle othersfx;
-	// ... add more asset bundles for diff audio assets here
+	AssetBundle sfx_bundle;
+	AssetBundle music_bundle;
 
 	void Awake() {
 		DontDestroyOnLoad(transform.gameObject);
@@ -33,41 +27,20 @@ public class AudioPlayer : MonoBehaviour {
 	}
 
 	void Start() {
-		cutscenemusic = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "cutscenemusic"));
-		battlemusic = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "battlemusic"));
-		uisfx = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "uisfx"));
-		spellsfx = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "spellsfx"));
-		battlesfx = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "battlesfx"));
-		speakingsfx = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "speakingsfx"));
-		othersfx = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "othersfx"));
+		sfx_bundle = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "sfx"));
+		music_bundle = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "music"));
 		sfx_channels = new AudioSource[sfx.childCount];
 		for (int i = 0; i < sfx.childCount; i++) // put all sfx channels into array
 			sfx_channels[i] = sfx.GetChild(i).gameObject.GetComponent<AudioSource>();
 		ready = true;
 		Debug.Log ("finished loading audio");
 	}
-		
+
 	// sets specified sfx channel
-	public void setSFX(int channel, SFXType type, string name) {
+	public void setSFX(int channel, string name) {
 		name = name.Trim ();
 		if (name.CompareTo ("null") == 0) return;
-		switch (type) {
-		case SFXType.UI:
-			sfx_channels [channel].clip = uisfx.LoadAsset<AudioClip> (name);
-			break;
-		case SFXType.SPELL:
-			sfx_channels [channel].clip = spellsfx.LoadAsset<AudioClip> (name);
-			break;
-		case SFXType.BATTLE:
-			sfx_channels [channel].clip = battlesfx.LoadAsset<AudioClip> (name);
-			break;
-		case SFXType.SPEAKING:
-			sfx_channels [channel].clip = speakingsfx.LoadAsset<AudioClip> (name);
-			break;
-		case SFXType.OTHER:
-			sfx_channels [channel].clip = othersfx.LoadAsset<AudioClip> (name);
-			break;
-		}
+		sfx_channels [channel].clip = sfx_bundle.LoadAsset<AudioClip> (name);
 	}
 
 	// play current sfx in channel
@@ -75,31 +48,27 @@ public class AudioPlayer : MonoBehaviour {
 		sfx_channels [channel].Play ();
 	}
 
-	// load and play sfx directly
-	public void playSFX(int channel, SFXType type, string name) {
-		setSFX (channel, type, name);
-		sfx_channels [channel].Play ();
+	// play sfx from name (finds first open channel)
+	public void playSFX(string name) {
+		foreach (AudioSource channel in sfx_channels) {
+			if (!channel.isPlaying) {
+				channel.clip = sfx_bundle.LoadAsset<AudioClip> (name);
+				channel.Play ();
+				break;
+			}
+		}
 	}
 
-	// play music from specified type
-	public void playMusic(MusicType type, string name) {
+	// play music from name
+	public void playMusic(string name) {
 		if (name.CompareTo ("_") == 0) return; // skip if null song
-        else if (name.CompareTo ("STOP") == 0)
-        {
-            stopAll();
-            return;
-        } // stop if stop flag
-		Debug.Log ("playing music:" + name);
-		switch (type) {
-		case MusicType.CUTSCENE:
-			music.clip = cutscenemusic.LoadAsset<AudioClip> (name);
-			music.Play ();
-			break;
-		case MusicType.BATTLE:
-			music.clip = battlemusic.LoadAsset<AudioClip> (name);
-			music.Play ();
-			break;
-		}
+		else if (name.CompareTo ("STOP") == 0)
+		{
+			stopAll();
+			return;
+		} // stop if stop flag
+		music.clip = music_bundle.LoadAsset<AudioClip> (name);
+		music.Play ();
 	}
 
 	// stop all audio clips
@@ -117,5 +86,32 @@ public class AudioPlayer : MonoBehaviour {
 				yield return new WaitForEndOfFrame ();
 			}
 		}
+	}
+
+/**************** DEPRECATED AUDIO SYSTEM **********************************/
+
+	// sets specified sfx channel (DEPRECATED)
+	public void setSFX(int channel, SFXType type, string name) {
+		name = name.Trim ();
+		if (name.CompareTo ("null") == 0) return;
+		sfx_channels [channel].clip = sfx_bundle.LoadAsset<AudioClip> (name);
+	}
+
+	// load and play sfx directly (DEPRECATED)
+	public void playSFX(int channel, SFXType type, string name) {
+		setSFX (channel, type, name);
+		sfx_channels [channel].Play ();
+	}
+
+	// play music from specified type (DEPRECATED)
+	public void playMusic(MusicType type, string name) {
+		if (name.CompareTo ("_") == 0) return; // skip if null song
+        else if (name.CompareTo ("STOP") == 0)
+        {
+            stopAll();
+            return;
+        } // stop if stop flag
+		music.clip = music_bundle.LoadAsset<AudioClip> (name);
+		music.Play ();
 	}
 }
