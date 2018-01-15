@@ -146,8 +146,8 @@ public class Enemy : MonoBehaviour, ICaster {
 			curr_time += Time.deltaTime;
 			if (curr_time >= atk_time) {
                 fullBarFX(); // notify player of full bar
-                yield return new WaitForSeconds (1f);
-				attackPlayer (s);
+                yield return new WaitForSeconds(1f);
+                attackPlayer (s);
                 curr_spell++;
                 if (curr_spell >= stats.spells.Length)//Reached end of spell list
                     curr_spell = 0;
@@ -155,20 +155,22 @@ public class Enemy : MonoBehaviour, ICaster {
                 atk_time = dict.getCastingTime(s, stats.speed);//get new casting time
                 curr_time = 0;
                 resetBarFX(); // stop full bar effects
-			}
+            }
 		}
 	}
 
     // effects when enemy is ready to attack
-    void fullBarFX() {
+    void fullBarFX()
+    {
         //graphic
         StartCoroutine(barFlash());
         //sound
-        AudioPlayer.main.playSFX (1, SFXType.BATTLE, "enemy_attack_ready"); 
+        AudioPlayer.main.playSFX(1, SFXType.BATTLE, "enemy_attack_ready");
     }
 
-    IEnumerator barFlash() {
-        for (int i = 0; i<60; i++)
+    IEnumerator barFlash()
+    {
+        for (int i = 0; i < 60; i++)
         {
             bars.Charge_bars[position].setColor(Random.value, Random.value, 0.1F);
 
@@ -178,12 +180,13 @@ public class Enemy : MonoBehaviour, ICaster {
     }
 
     // terminate effects started by fullBarFX()
-    void resetBarFX() {
+    void resetBarFX()
+    {
         bars.Charge_bars[position].setColor(0, 0.9F, 0);
     }
 
-	// pause battle, attack player with specified spell
-	void attackPlayer(SpellData s) {
+    // pause battle, attack player with specified spell
+    void attackPlayer(SpellData s) {
         Debug.Log(stats.name + " casts " + s.ToString());
         field.enemyCast(dict, s, position);
 	}
@@ -210,7 +213,7 @@ public class Enemy : MonoBehaviour, ICaster {
     //Un-stun enemy
     private void unStun()
     {
-        bars.Charge_bars[position].setColor(0, 0.9F, 0);
+        bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0.9F, 0);
         is_stunned = false;
         Curr_stagger = stats.max_stagger;
     }

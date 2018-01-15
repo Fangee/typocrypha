@@ -26,8 +26,9 @@ public class BarMeter : MonoBehaviour {
 	}
 
     // set bar color
-    public void setColor(float r, float g, float b) {
-        gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color (r, g, b);
+    public void setColor(float r, float g, float b)
+    {
+        gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(r, g, b);
     }
 
 }

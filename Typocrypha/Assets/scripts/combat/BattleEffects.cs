@@ -14,6 +14,14 @@ public class BattleEffects : MonoBehaviour {
 		if (main == null) main = this;
 	}
 
+    // turn dim on/off with no associated sprite
+    public void setDim(bool dim)
+    {
+        if (dim)
+            dimmer.color = new Color(0, 0, 0, 0.5f);
+        else
+            dimmer.color = new Color(0, 0, 0, 0);
+    }
 	// turn dim on/off
 	public void setDim(bool dim, SpriteRenderer target) {
 		if (dim) {
@@ -24,6 +32,32 @@ public class BattleEffects : MonoBehaviour {
 			dimmer.color = new Color (0, 0, 0, 0);
 		}
 	}
+    // turn dim on/off (for multiple sprites)
+    public void setDim(bool dim, SpriteRenderer[] targets)
+    {
+        if (dim)
+        {
+            if (targets != null)
+            {
+                foreach (SpriteRenderer s in targets)
+                {
+                    s.sortingOrder = 10;
+                }
+            }
+            dimmer.color = new Color(0, 0, 0, 0.5f);
+        }
+        else
+        {
+            if (targets != null)
+            {
+                foreach (SpriteRenderer s in targets)
+                {
+                    s.sortingOrder = 0;
+                }
+            }
+            dimmer.color = new Color(0, 0, 0, 0);
+        }
+    }
 
 	// shake the screen for sec seconds and amt intensity
 	public void screenShake(float sec, float amt) {

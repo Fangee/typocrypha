@@ -5,12 +5,20 @@ using UnityEngine.UI;
 
 // manages battle sequences
 public class BattleManager : MonoBehaviour {
-	public static BattleManager main = null; // static instance accessible globally
+	public static BattleManager main = null; // static instance accessible globally (try not to use this)
 	public SpellDictionary spellDict; // spell dictionary object
 	public GameObject enemy_prefab; // prefab for enemy object
     public GameObject ally_prefab; //prefab for ally object
     public DisplayAlly ally_left; // left ally UI
     public DisplayAlly ally_right; // right ally UI
+    public GameObject battleLogCast; //Casting log object and Associated reference to store
+    public TextMesh logCastText;
+    public TextMesh logCastInfo;
+    public GameObject battleLogTalk; //talk log object and Associated reference to store
+    public TextMesh logTalkText;
+    public TextMesh logTalkInfo;
+        private MeshRenderer[] battleLogMeshes = new MeshRenderer[4];
+        private SpriteRenderer[] battleLogSprites = new SpriteRenderer[4];
 	public EnemyChargeBars charge_bars; // creates and mananges charge bars
 	public EnemyStaggerBars stagger_bars; // creates and manages stagger bars
 	public CooldownList cooldown_list; // creates and manages player's cooldowns
@@ -90,13 +98,37 @@ public class BattleManager : MonoBehaviour {
             player_arr[i] = a;
         }
 
-		pause = false;
+        //INITIALIZE BATTLELOG STUFF//
+
+        const int numElements = 2;
+        System.Array.Copy(battleLogCast.GetComponentsInChildren<MeshRenderer>(true), 0, battleLogMeshes, 0, numElements);
+        System.Array.Copy(battleLogCast.GetComponentsInChildren<SpriteRenderer>(true), 0, battleLogSprites, 0, numElements);
+        System.Array.Copy(battleLogTalk.GetComponentsInChildren<MeshRenderer>(true), 0, battleLogMeshes, numElements, numElements);
+        System.Array.Copy(battleLogTalk.GetComponentsInChildren<SpriteRenderer>(true), 0, battleLogSprites, numElements, numElements);
+
+        //FINISH//
+
+        pause = false;
 		target_ind = 0;
 		AudioPlayer.main.playMusic (MusicType.BATTLE, scene.music_tracks[0]);
 	}
 
-	// check if player switches targets or attacks
-	void Update() {
+    //removes all enemies and charge bars
+    public void stopBattle()
+    {
+        pause = true;
+        foreach (Enemy enemy in enemy_arr)
+        {
+            if (enemy != null) GameObject.Destroy(enemy.gameObject);
+        }
+        enemy_arr = null;
+        cooldown_list.removeAll();
+        charge_bars.removeAll();
+        stagger_bars.removeAll();
+    }
+
+    // check if player switches targets or attacks
+    void Update() {
 		if (Input.GetKeyDown (KeyCode.BackQuote)) // toggle pause
 			pause = !pause;
 		if (pause) return;
@@ -122,12 +154,14 @@ public class BattleManager : MonoBehaviour {
         {
             //play page change SFX here
         }
-        // go to next page if down is pressed
+        // go to last page if down is pressed
         if (Input.GetKeyDown(KeyCode.UpArrow) && spellDict.pageUp())
         {
             //play page change SFX here
         }
     }
+
+    //CASTING CODE//---------------------------------------------------------------------------------------------------------------------------------------//
 
 	// attack currently targeted enemy with spell
 	public void attackCurrent(string spell) {
@@ -137,30 +171,63 @@ public class BattleManager : MonoBehaviour {
 
 	// pause for player attack, play animations, unpause
 	IEnumerator pauseAttackCurrent(string spell){
-		pause = true;
-		BattleEffects.main.setDim (true, enemy_arr[target_ind].enemy_sprite);
+
+        pause = true;
+
+        //SPELL PARSING//
+
+        SpellData s;
+        //Send spell, Enemy state, and target index to parser and caster
+        CastStatus status = spellDict.parse(spell.ToLower(), out s);
+        
+        //DIMMING AND BATTLELOG//
+
+        BattleEffects.main.setDim(true);
+        Pair<bool[], bool[]> targetPattern = null;
+        int allyPos = getAllyPosition(s.root);
+        if (status == CastStatus.ALLYSPELL)
+        {
+            if(allyPos != -1)
+            {
+                battleLog(spell.ToUpper().Replace(' ', '-'), "ALLY", "TODO: say something here", Utility.String.FirstLetterToUpperCase(s.root));
+                targetPattern = spellDict.getTargetPattern(s, enemy_arr, target_ind, player_arr, allyPos);
+            }
+            else
+            {
+                battleLog(spell.ToUpper().Replace(' ', '-'), "ALLY", "...", "Not here");
+            }
+        }          
+        else if (status == CastStatus.SUCCESS)
+        {
+            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", "TODO: say something here", player_arr[player_ind].Stats.name);
+            targetPattern = spellDict.getTargetPattern(s, enemy_arr, target_ind, player_arr, player_ind);
+        }
+        else
+        {
+            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", "TODO: say something here", player_arr[player_ind].Stats.name);
+        }
+        if(targetPattern != null)
+            raiseTargets(targetPattern.first, targetPattern.second);
 
         //BEGIN PAUSE//
 
         yield return new WaitForSeconds (1.5f);
 
-        //SPELLCASTING AND CASTDATA PROCESSING HERE//
+        //CASTING//
 
-        SpellData s;
-		//Send spell, Enemy state, and target index to parser and caster
-        CastStatus status = spellDict.parse(spell.ToLower(),  out s);
         //Set last_cast
         ((Player)player_arr[player_ind]).Last_cast = s.ToString();
         //Cast/Botch/Cooldown/Fizzle, with associated effects and processing
         playerCast(spellDict, s, status);
 
-        //END SPELLCASTING AND CASTDATA PROCESSING//
-
         yield return new WaitForSeconds (1f);
 
         //END PAUSE//
 
-		BattleEffects.main.setDim (false, enemy_arr [target_ind].enemy_sprite);
+        if (targetPattern != null)
+            lowerTargets(targetPattern.first, targetPattern.second);
+        stopBattleLog();
+		BattleEffects.main.setDim (false);
 		pause = false;
 		updateEnemies();
 	}
@@ -186,8 +253,32 @@ public class BattleManager : MonoBehaviour {
     //Casts from an enemy position: calls processCast on results
     public void enemyCast(SpellDictionary dict, SpellData s, int position)
     {
+        pause = true; // pause battle for attack
+        AudioPlayer.main.playSFX(1, SFXType.SPELL, "magic_sound");
+        StartCoroutine(enemy_pause_cast(dict, s, position));
+
+    }
+    //Does the pausing for enemyCast (also does the actual cast calling)
+    private IEnumerator enemy_pause_cast(SpellDictionary dict, SpellData s, int position)
+    {
+        Pair<bool[], bool[]>  targetPattern = spellDict.getTargetPattern(s, player_arr, 1, enemy_arr, position);
+        BattleEffects.main.setDim(true, enemy_arr[position].GetComponent<SpriteRenderer>());
+        raiseTargets(targetPattern.second, targetPattern.first);
+        battleLog(s.ToString(), "ENEMY", "TODO: say something here", enemy_arr[position].Stats.name);
+
+        yield return new WaitForSeconds(1.5f);
+
+        enemy_arr[position].startSwell();
         List<CastData> data = dict.cast(s, player_arr, player_ind, enemy_arr, position);
         processCast(data, s);
+
+        yield return new WaitForSeconds(1f);
+
+        stopBattleLog();
+        lowerTargets(targetPattern.second, targetPattern.first);
+        BattleEffects.main.setDim(false, enemy_arr[position].GetComponent<SpriteRenderer>());
+        pause = false; // unpause
+        updateEnemies();
     }
     //Cast/Botch/Cooldown/Fizzle, with associated effects and processing
     //all animation and attack effects should be processed here
@@ -199,17 +290,6 @@ public class BattleManager : MonoBehaviour {
         switch (status)//Switched based on caststatus
         {
             case CastStatus.SUCCESS:
-                //NPC cast if appropriate
-                if(player_arr[0].Stats.name.ToLower() == s.root)
-                {
-                    NPC_Cast(dict, s, 0, target_ind);
-                    break;
-                }
-                else if(player_arr[2].Stats.name.ToLower() == s.root)
-                {
-                    NPC_Cast(dict, s, 2, target_ind);
-                    break;
-                }
                 //Player Cast
                 dict.startCooldown(s, (Player)player_arr[player_ind]);
                 data = dict.cast(s, enemy_arr, target_ind, player_arr, player_ind);
@@ -219,6 +299,17 @@ public class BattleManager : MonoBehaviour {
                 data = dict.botch(s, enemy_arr, target_ind, player_arr, player_ind);
                 Debug.Log("Botched cast: " + s.ToString());
                 //Process the data here
+                break;
+            case CastStatus.ALLYSPELL:
+                //NPC cast if appropriate
+                if (player_arr[0].Stats.name.ToLower() == s.root)
+                    NPC_Cast(dict, s, 0, target_ind);
+                else if (player_arr[2].Stats.name.ToLower() == s.root)
+                    NPC_Cast(dict, s, 2, target_ind);
+                else
+                {
+                    Debug.Log(s.root + " isn't here!");
+                }
                 break;
             case CastStatus.ONCOOLDOWN:
                 //Handle effects
@@ -380,28 +471,94 @@ public class BattleManager : MonoBehaviour {
         //format is bool [3], where regData[0] is true if s.element is new, regData[1] is true if s.root is new, and regData[2] is true if s.style is new
 
     }
+    //Raises the targets (array val = true) above the dimmer level
+    private void raiseTargets(bool[] enemy_r, bool[] player_r)
+    {
+        for (int i = 0; i < 3; ++i)
+        {
+            if (enemy_r[i])
+                enemy_arr[i].enemy_sprite.sortingOrder = 10;
+        }
+    }
+    //Lowers the targets (array val = true) below the dimmer level
+    private void lowerTargets(bool[] enemy_r, bool[] player_r)
+    {
+        for (int i = 0; i < 3; ++i)
+        {
+            if (enemy_r[i])
+                enemy_arr[i].enemy_sprite.sortingOrder = 0;
+        }
+    }
+    //Returns true if ally with specified name is in the battle
+    private bool allyIsPresent(string name)
+    {
+        if (player_arr[0] != null && player_arr[0].Stats.name.ToLower() == name.ToLower())
+            return true;
+        if (player_arr[2] != null && player_arr[2].Stats.name.ToLower() == name.ToLower())
+            return true;
+        return false;
+    }
+    //returns the position of ally with specified name (if in battle)
+    private int getAllyPosition(string name)
+    {
+        if (player_arr[0] != null && player_arr[0].Stats.name.ToLower() == name.ToLower())
+            return 0;
+        if (player_arr[2] != null && player_arr[2].Stats.name.ToLower() == name.ToLower())
+            return 2;
+        return -1;
+    }
+    //Enable battle log UI state (call anywhere that the battlemanager pauses to cast)
+    private void battleLog(string cast, string caster, string talk, string speaker)
+    {
+        battleLogCast.SetActive(true);
+        battleLogTalk.SetActive(true);
+        logCastText.text = cast;
+        logCastInfo.text = caster;
+        logTalkText.text = talk;
+        logTalkInfo.text = speaker;
+        for(int i = 0; i < battleLogSprites.Length; ++i)
+        {
+            battleLogSprites[i].sortingOrder = 10;
+            battleLogMeshes[i].sortingOrder = 10;
+        }
+    }
+
+    //Stop battle log UI (call after every pause to cast
+    private void stopBattleLog()
+    {
+        battleLogCast.SetActive(false);
+        battleLogTalk.SetActive(false);
+        for (int i = 0; i < battleLogSprites.Length; ++i)
+        {
+            battleLogSprites[i].sortingOrder = 0;
+            battleLogMeshes[i].sortingOrder = 0;
+        }
+    }
 
     //Updates death and opacity of enemies after pause in puaseAttackCurrent
     public void updateEnemies()
     {
-		bool interrupted = checkInterrupts (); // check for interrupts
-		if (interrupted) return;
-		int curr_dead = 0;
-        for(int i = 0; i < enemy_arr.Length; i++)
+        bool interrupted = checkInterrupts(); // check for interrupts
+        if (interrupted) return;
+        int curr_dead = 0;
+        for (int i = 0; i < enemy_arr.Length; i++)
         {
-            if(!enemy_arr[i].Is_dead)
-			    enemy_arr [i].updateCondition ();
-			if (enemy_arr [i].Is_dead) ++curr_dead;
+            if (!enemy_arr[i].Is_dead)
+                enemy_arr[i].updateCondition();
+            if (enemy_arr[i].Is_dead) ++curr_dead;
         }
-		if (curr_dead == enemy_count) // end battle if all enemies dead
-		{
-			Debug.Log("you win!");
-			stopBattle ();
-			StartCoroutine(StateManager.main.nextSceneDelayed(2.0f));
-		}
+        if (curr_dead == enemy_count) // end battle if all enemies dead
+        {
+            Debug.Log("you win!");
+            stopBattle();
+            StartCoroutine(StateManager.main.nextSceneDelayed(2.0f));
+        }
     }
-	// checks and plays battle interruptions (returns true if an interrupt occured)
-	bool checkInterrupts() {
+
+    //INTERRUPT CODE//-------------------------------------------------------------------------------------------------------------------------------------//
+
+    // checks and plays battle interruptions (returns true if an interrupt occured)
+    bool checkInterrupts() {
 		bool interrupted = false;
 		// check for interrupt scenes
 		for (int i = 0; i < curr_battle.interrupts.Length; ++i) {
@@ -448,16 +605,5 @@ public class BattleManager : MonoBehaviour {
 		dialogue_box.SetActive (false);
 		updateEnemies ();
 		pause = false;
-	}
-	//removes all enemies and charge bars
-	public void stopBattle() {
-		pause = true;
-		foreach (Enemy enemy in enemy_arr) {
-			if (enemy != null) GameObject.Destroy (enemy.gameObject);
-		}
-		enemy_arr = null;
-		cooldown_list.removeAll ();
-		charge_bars.removeAll ();
-		stagger_bars.removeAll ();
 	}
 }

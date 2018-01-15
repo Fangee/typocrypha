@@ -45,6 +45,21 @@ namespace Utility
                 return Mathf.FloorToInt(value);
         }
     }
+    public static class String
+    {
+        //Returns a version of a string with first letter capitalized
+        public static string FirstLetterToUpperCase(this string s)
+        {
+            if (string.IsNullOrEmpty(s))
+                throw new System.ArgumentException("There is no first letter");
+
+            char[] a = s.ToCharArray();
+            a[0] = char.ToUpper(a[0]);
+            return new string(a);
+        }
+
+    }
+
 }
 
 
