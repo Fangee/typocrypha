@@ -7,7 +7,7 @@ using UnityEngine;
 public enum MusicType { CUTSCENE, BATTLE };
 
 // different types of sfx
-public enum SFXType { UI, SPELL, BATTLE, SPEAKING };
+public enum SFXType { UI, SPELL, BATTLE, SPEAKING, OTHER, size };
 
 // manages playing music and sfx
 public class AudioPlayer : MonoBehaviour {
@@ -22,6 +22,7 @@ public class AudioPlayer : MonoBehaviour {
 	AssetBundle spellsfx;
 	AssetBundle battlesfx;
 	AssetBundle speakingsfx;
+	AssetBundle othersfx;
 	// ... add more asset bundles for diff audio assets here
 
 	void Awake() {
@@ -38,6 +39,7 @@ public class AudioPlayer : MonoBehaviour {
 		spellsfx = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "spellsfx"));
 		battlesfx = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "battlesfx"));
 		speakingsfx = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "speakingsfx"));
+		othersfx = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "othersfx"));
 		sfx_channels = new AudioSource[sfx.childCount];
 		for (int i = 0; i < sfx.childCount; i++) // put all sfx channels into array
 			sfx_channels[i] = sfx.GetChild(i).gameObject.GetComponent<AudioSource>();
@@ -61,6 +63,9 @@ public class AudioPlayer : MonoBehaviour {
 			break;
 		case SFXType.SPEAKING:
 			sfx_channels [channel].clip = speakingsfx.LoadAsset<AudioClip> (name);
+			break;
+		case SFXType.OTHER:
+			sfx_channels [channel].clip = othersfx.LoadAsset<AudioClip> (name);
 			break;
 		}
 	}

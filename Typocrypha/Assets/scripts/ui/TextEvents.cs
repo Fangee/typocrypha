@@ -25,7 +25,8 @@ public class TextEvents : MonoBehaviour {
 			{"fade", fade},
 			{"next", next},
 			{"center-text-scroll", centerTextScroll},
-			{"center-text-fade", centerTextFade}
+			{"center-text-fade", centerTextFade},
+			{"play-sfx",playSFX}
 		};
 	}
 
@@ -160,6 +161,19 @@ public class TextEvents : MonoBehaviour {
 				txt.color = new Color (r, g, b, alpha);
 			}
 		}
+	}
+
+	// plays the specified sfx
+	// input: [0]: string, type
+	//        [1]: string, sfx filename
+	IEnumerator playSFX(string[] opt) {
+		for (int i = 0; i < (int)SFXType.size; ++i) {
+			if (((SFXType)i).ToString ().CompareTo (opt [0]) == 0) {
+				AudioPlayer.main.playSFX (4, (SFXType)i, opt[1]);
+				break;
+			}
+		}
+		yield return true;
 	}
 }
 
