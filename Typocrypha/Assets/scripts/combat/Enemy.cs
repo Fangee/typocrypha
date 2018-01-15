@@ -145,19 +145,48 @@ public class Enemy : MonoBehaviour, ICaster {
             }
 			curr_time += Time.deltaTime;
 			if (curr_time >= atk_time) {
-				attackPlayer (s);
+                fullBarFX(); // notify player of full bar
+                yield return new WaitForSeconds(1f);
+                attackPlayer (s);
                 curr_spell++;
                 if (curr_spell >= stats.spells.Length)//Reached end of spell list
                     curr_spell = 0;
                 s = stats.spells[curr_spell]; //get next spell
                 atk_time = dict.getCastingTime(s, stats.speed);//get new casting time
                 curr_time = 0;
-			}
+                resetBarFX(); // stop full bar effects
+            }
 		}
 	}
 
-	// pause battle, attack player with specified spell
-	void attackPlayer(SpellData s) {
+    // effects when enemy is ready to attack
+    void fullBarFX()
+    {
+        //graphic
+        StartCoroutine(barFlash());
+        //sound
+        //AudioPlayer.main.playSFX(1, SFXType.BATTLE, "enemy_attack_ready");
+    }
+
+    IEnumerator barFlash()
+    {
+        for (int i = 0; i < 60; i++)
+        {
+            bars.Charge_bars[position].setColor(Random.value, Random.value, 0.1F);
+
+            yield return new WaitForEndOfFrame();
+        }
+        bars.Charge_bars[position].setColor(1F, 0.1F, 0.1F);
+    }
+
+    // terminate effects started by fullBarFX()
+    void resetBarFX()
+    {
+        bars.Charge_bars[position].setColor(0, 0.9F, 0);
+    }
+
+    // pause battle, attack player with specified spell
+    void attackPlayer(SpellData s) {
         Debug.Log(stats.name + " casts " + s.ToString());
         field.enemyCast(dict, s, position);
 	}
