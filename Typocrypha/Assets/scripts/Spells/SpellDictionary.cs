@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // enum for how a cast went (successful cast, botched, fizzled, etc)
-public enum CastStatus { SUCCESS, BOTCH, FIZZLE, ONCOOLDOWN, COOLDOWNFULL };
+public enum CastStatus { SUCCESS, BOTCH, FIZZLE, ONCOOLDOWN, COOLDOWNFULL, ALLYSPELL };
 public enum WordType { ROOT, STYLE, ELEMENT};
 
 //Stores all the spell info and contains methods to parse and cast spells from player input
@@ -335,6 +335,10 @@ public class SpellDictionary : MonoBehaviour
             {
                 return CastStatus.ONCOOLDOWN;
             }
+            else if (spells[s.root].type.Contains(allyString))
+            {
+                return CastStatus.ALLYSPELL;
+            }
             else
                 return CastStatus.SUCCESS;
         }
@@ -438,6 +442,21 @@ public class SpellDictionary : MonoBehaviour
     {
         Spell s = spells[data.root];
         return s.TimeLeft;
+    }
+    //Return the targeting pattern
+    public Pair<bool[], bool[]> getTargetPattern(SpellData data, ICaster[] targets, int selected, ICaster[] allies, int position)
+    {
+        if(data.style == null || styles[data.style].isTarget)
+        {
+            return spells[data.root].targetData.toArrayPair(targets, selected, allies, position);
+        }
+        else
+        {
+            TargetData t = new TargetData(false);
+            spells[data.root].targetData.copyInto(t);
+            t.modify(styles[data.style].targets);
+            return t.toArrayPair(targets, selected, allies, position);
+        }
     }
 
     //SPELLBOOK MANAGEMENT

@@ -19,26 +19,6 @@ public abstract class Spell
     //Apllies prefix and suffix to spell. both arguments can be null (if no prefix or suffix)
     public void Modify(ElementMod e, StyleMod s)
     {
-        ////Handle Cooldown (sequence matters)
-        //if (e != null && s != null)
-        //{
-        //    float baseTime = cooldown;
-        //    cooldown *= e.cooldownModM;
-        //    cooldown += (baseTime * s.cooldownModM) - baseTime;
-        //    cooldown += e.cooldownMod;
-        //    cooldown += s.cooldownMod;
-        //}
-        //else if (e != null)
-        //{
-        //    cooldown *= e.cooldownModM;
-        //    cooldown += e.cooldownMod;
-        //}
-        //else if (s != null)
-        //{
-        //    cooldown *= s.cooldownModM;
-        //    cooldown += s.cooldownMod;
-        //}
-
         //Add rest of stuff
         if (e != null)//Add element modifier
         {
@@ -347,6 +327,34 @@ public class TargetData
 
     }
 
+    public Pair<bool[], bool[]> toArrayPair(ICaster[] targets, int selected, ICaster[] allies, int position)
+    {
+        bool[] enemy_r = { false, false, false };
+        bool[] ally_r = { false, false, false };
+        int i = 1;
+        if (targeted)//If spell is cursor-dependant
+            i += (selected - 1);
+        if (enemyM && targets[i] != null && !targets[i].Is_dead)//Middle enemy
+            enemy_r[i] = true;
+        i--;
+        if (i >= 0 && enemyL && targets[i] != null && !targets[i].Is_dead)//Left enemy
+            enemy_r[i] = true;
+        i += 2;
+        if (i <= 2 && enemyR && targets[i] != null && !targets[i].Is_dead)//Right enemy
+            enemy_r[i] = true;
+        i = 1;
+        if (selfCenter)//If spell is not cursor-dependant
+            i += (position - 1);
+        if (allyM && allies[i] != null && !allies[i].Is_dead)//Middle ally
+            ally_r[i] = true;
+        i--;
+        if (i >= 0 && allyL && allies[i] != null && !allies[i].Is_dead)//Left ally
+            ally_r[i] = true;
+        i += 2;
+        if (i <= 2 && allyR && allies[i] != null && !allies[i].Is_dead)//Right ally
+            ally_r[i] = true;
+        return new Pair<bool[], bool[]>(enemy_r, ally_r);
+    }
     public bool enemyL;
     public bool enemyM;
     public bool enemyR;
@@ -355,35 +363,35 @@ public class TargetData
     public bool allyR;
     public bool selfCenter;
     public bool targeted;
-
-    public void modify(TargetData t)
+    //Modifies this by target data mod
+    public void modify(TargetData mod)
     {
         bool targets_enemy = (enemyL || enemyM || enemyR);
         bool targets_ally = (allyL || allyM || allyR);
         if (targets_enemy && targets_ally)
         {
-            enemyL = t.enemyL;
-            enemyM = t.enemyM;
-            enemyR = t.enemyR;
-            allyL = t.enemyL;
-            allyM = t.enemyM;
-            allyR = t.enemyR;
-            targeted = t.targeted;
-            selfCenter = t.selfCenter;
+            enemyL = mod.enemyL;
+            enemyM = mod.enemyM;
+            enemyR = mod.enemyR;
+            allyL = mod.enemyL;
+            allyM = mod.enemyM;
+            allyR = mod.enemyR;
+            targeted = mod.targeted;
+            selfCenter = mod.selfCenter;
         }
         else if (targets_enemy)
         {
-            enemyL = t.enemyL;
-            enemyM = t.enemyM;
-            enemyR = t.enemyR;
-            targeted = t.targeted;
+            enemyL = mod.enemyL;
+            enemyM = mod.enemyM;
+            enemyR = mod.enemyR;
+            targeted = mod.targeted;
         }
         else if(targets_ally)
         {
-            allyL = t.allyL;
-            allyM = t.allyM;
-            allyR = t.allyR;
-            selfCenter = t.selfCenter;
+            allyL = mod.allyL;
+            allyM = mod.allyM;
+            allyR = mod.allyR;
+            selfCenter = mod.selfCenter;
         }
     }
     public void copyInto(TargetData copyTo)

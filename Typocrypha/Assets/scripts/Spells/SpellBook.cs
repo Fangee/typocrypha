@@ -119,7 +119,7 @@ public class SpellBook : MonoBehaviour {
         return true;
 
     }
-
+    //Updates Render Data
     private bool updatePage()
     {
         if (data.Count == 0)
