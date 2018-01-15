@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 // edits by James Iwamasa
 
 // represents an event to be played during text dialogue scrolling
@@ -13,6 +14,7 @@ public class TextEvents : MonoBehaviour {
 	public Dictionary<string, TextEventDel> text_event_map;
 	public SpriteRenderer dimmer; // sprite used to cover screen for fade/dim effects
 	public TextScroll text_scroll; // main text scroller for normal dialogue
+	public GameObject center_text; // for showing floating text in the center
 
 	void Start() {
 		if (main == null) main = this;
@@ -21,7 +23,9 @@ public class TextEvents : MonoBehaviour {
 			{"block", block},
 			{"pause", pause},
 			{"fade", fade},
-			{"next", next}
+			{"next", next},
+			{"center-text-scroll", centerTextScroll},
+			{"center-text-fade", centerTextFade}
 		};
 	}
 
@@ -68,23 +72,30 @@ public class TextEvents : MonoBehaviour {
 	// fades the screen in or out
 	// input: [0]: [in|out], 'in' re-reveals screen, 'out' hides it
 	//        [1]: float, length of fade in seconds
+	//        [2]: float, red color component
+	//        [3]: float, green color component
+	//        [4]: float, blue color component
 	IEnumerator fade(string[] opt) {
 		float fade_time = float.Parse (opt [1]);
+		float r = float.Parse (opt [2]);
+		float g = float.Parse (opt [3]);
+		float b = float.Parse (opt [4]);
 		float alpha;
 		float a_step = 1f * 0.017f / fade_time; // amount of change each frame
+		if (a_step > 1) a_step = 1;
 		if (opt [0].CompareTo ("out") == 0) { // hide screen
 			alpha = 0;
 			while (alpha < 1f) {
 				yield return new WaitForSeconds(0.017f);
 				alpha += a_step;
-				dimmer.color = new Color (0, 0, 0, alpha);
+				dimmer.color = new Color (r, g, b, alpha);
 			}
 		} else { // show screen
 			alpha = 1;
 			while (alpha > 0f) {
 				yield return new WaitForSeconds(0.017f);
 				alpha -= a_step;
-				dimmer.color = new Color (0, 0, 0, alpha);
+				dimmer.color = new Color (r, g, b, alpha);
 			}
 		}
 	}
@@ -94,6 +105,61 @@ public class TextEvents : MonoBehaviour {
 	IEnumerator next(string[] opt) {
 		CutsceneManager.main.forceNextLine ();
 		yield return true;
+	}
+
+	// scrolls floating text center aligned in the center of the screen (can also be used to immediately show text)
+	// input: [0]: float, delay time in seconds
+	//        [1]: float, red color
+	//        [2]: float, green color
+	//        [3]: float, blue color
+	//        [4]: string, text to show
+	IEnumerator centerTextScroll(string[] opt) {
+		Text txt = center_text.GetComponent<Text> ();
+		float delay = float.Parse (opt [0]);
+		float r = float.Parse (opt [1]);
+		float g = float.Parse (opt [2]);
+		float b = float.Parse (opt [3]);
+		float a = txt.color.a;
+		string txt_str = opt [4];
+		txt.color = new Color (r, g, b, a);
+		if (delay == 0) { // show text immediately
+			txt.text = txt_str;
+		} else { // scroll text character by character
+			txt.text = "";
+			int txt_pos = 0;
+			while (txt_pos < txt_str.Length) {
+				txt.text += txt_str [txt_pos++];
+				yield return new WaitForSeconds (delay);
+			}
+		}
+	}
+
+	// fades center text in or out
+	// input: [0]: [in|out], 'in' re-reveals screen, 'out' hides it
+	//        [1]: float, length of fade in seconds
+	IEnumerator centerTextFade(string[] opt) {
+		Text txt = center_text.GetComponent<Text> ();
+		Debug.Log ("text fade:" + opt[0] + ":" + txt.color.a);
+		float fade_time = float.Parse (opt [1]);
+		float r = txt.color.r;
+		float g = txt.color.g;
+		float b = txt.color.b;
+		float alpha = txt.color.a;
+		float a_step = 1f * 0.017f / fade_time; // amount of change each frame
+		if (a_step > 1) a_step = 1;
+		if (opt [0].CompareTo ("out") == 0) { // hide text
+			while (alpha > 0f) {
+				yield return new WaitForSeconds(0.017f);
+				alpha -= a_step;
+				txt.color = new Color (r, g, b, alpha);
+			}
+		} else { // show screen
+			while (alpha < 1f) {
+				yield return new WaitForSeconds(0.017f);
+				alpha += a_step;
+				txt.color = new Color (r, g, b, alpha);
+			}
+		}
 	}
 }
 
