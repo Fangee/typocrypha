@@ -143,9 +143,11 @@ public class Enemy : MonoBehaviour, ICaster {
                     curr_stagger_time = 0F;
                 }
             }
-			curr_time += Time.deltaTime;
+            curr_time += Time.deltaTime;
 			if (curr_time >= atk_time) {
-				BattleManager.main.pause = true; // pause battle for attack
+                fullBarFX(); // notify player of full bar
+                yield return new WaitForSeconds (1f);
+                BattleManager.main.pause = true; // pause battle for attack
 				BattleEffects.main.setDim(true, enemy_sprite);
 				AudioPlayer.main.playSFX (1, SFXType.SPELL, "magic_sound"); 
 				yield return new WaitForSeconds (1.5f);
@@ -160,9 +162,33 @@ public class Enemy : MonoBehaviour, ICaster {
 				BattleEffects.main.setDim(false, enemy_sprite);
 				BattleManager.main.pause = false; // unpause
 				BattleManager.main.updateEnemies();
+                resetBarFX(); // stop full bar effects
 			}
 		}
 	}
+
+    // effects when enemy is ready to attack
+    void fullBarFX() {
+        //graphic
+        StartCoroutine(barFlash());
+        //sound
+        AudioPlayer.main.playSFX (1, SFXType.BATTLE, "enemy_attack_ready"); 
+    }
+
+    IEnumerator barFlash() {
+        for (int i = 0; i<60; i++)
+        {
+            bars.Charge_bars[position].setColor(Random.value, Random.value, 0.1F);
+
+            yield return new WaitForEndOfFrame();
+        }
+        bars.Charge_bars[position].setColor(1F, 0.1F, 0.1F);
+    }
+
+    // terminate effects started by fullBarFX()
+    void resetBarFX() {
+        bars.Charge_bars[position].setColor(0, 0.9F, 0);
+    }
 
 	// pause battle, attack player with specified spell
 	void attackPlayer(SpellData s) {
@@ -193,7 +219,7 @@ public class Enemy : MonoBehaviour, ICaster {
     //Un-stun enemy
     private void unStun()
     {
-        bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0.9F, 0);
+        bars.Charge_bars[position].setColor(0, 0.9F, 0);
         is_stunned = false;
         Curr_stagger = stats.max_stagger;
     }

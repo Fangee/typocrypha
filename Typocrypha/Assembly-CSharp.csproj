@@ -53,10 +53,13 @@
   <ItemGroup>
      <Compile Include="Assets\scripts\animation\AnimationPlayer.cs" />
      <Compile Include="Assets\scripts\audio\AudioPlayer.cs" />
+     <Compile Include="Assets\scripts\combat\Ally.cs" />
      <Compile Include="Assets\scripts\combat\BattleEffects.cs" />
      <Compile Include="Assets\scripts\combat\Enemy.cs" />
      <Compile Include="Assets\scripts\combat\Player.cs" />
+     <Compile Include="Assets\scripts\management\AllyDatabase.cs" />
      <Compile Include="Assets\scripts\management\BattleManager.cs" />
+     <Compile Include="Assets\scripts\management\CutsceneEvent.cs" />
      <Compile Include="Assets\scripts\management\CutsceneManager.cs" />
      <Compile Include="Assets\scripts\management\EnemyDatabase.cs" />
      <Compile Include="Assets\scripts\management\GameScene.cs" />
@@ -69,10 +72,12 @@
      <Compile Include="Assets\scripts\Spells\CooldownList.cs" />
      <Compile Include="Assets\scripts\Spells\ICaster.cs" />
      <Compile Include="Assets\scripts\Spells\Spell.cs" />
+     <Compile Include="Assets\scripts\Spells\SpellBook.cs" />
      <Compile Include="Assets\scripts\Spells\SpellDictionary.cs" />
      <Compile Include="Assets\scripts\title\PreTitle.cs" />
      <Compile Include="Assets\scripts\title\TitleScreen.cs" />
      <Compile Include="Assets\scripts\ui\BarMeter.cs" />
+     <Compile Include="Assets\scripts\ui\DisplayAlly.cs" />
      <Compile Include="Assets\scripts\ui\DisplayPlayer.cs" />
      <Compile Include="Assets\scripts\ui\enemy_ui\EnemyChargeBars.cs" />
      <Compile Include="Assets\scripts\ui\enemy_ui\EnemyStaggerBars.cs" />
@@ -85,6 +90,7 @@
      <Compile Include="Assets\scripts\Utility\Pair.cs" />
      <Compile Include="Assets\scripts\Utility\Timer.cs" />
      <Compile Include="Assets\scripts\Utility\UtilityClasses.cs" />
+     <None Include="Assets\Resources\allyDatabase.txt" />
      <None Include="Assets\Resources\gameflow.txt" />
      <None Include="Assets\Resources\cutscene_tests.txt" />
      <None Include="Assets\Resources\spellDictionary.txt" />
@@ -153,25 +159,25 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Users/JTI-PC/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
+ <HintPath>C:/Users/jlawh/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
- <HintPath>C:/Users/JTI-PC/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/Editor/UnityEditor.Advertisements.dll</HintPath>
+ <HintPath>C:/Users/jlawh/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Users/JTI-PC/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.13/UnityEngine.Analytics.dll</HintPath>
+ <HintPath>C:/Users/jlawh/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.13/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Analytics">
- <HintPath>C:/Users/JTI-PC/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.13/Editor/UnityEditor.Analytics.dll</HintPath>
+ <HintPath>C:/Users/jlawh/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.13/Editor/UnityEditor.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Purchasing">
- <HintPath>C:/Users/JTI-PC/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@0.0.19/UnityEngine.Purchasing.dll</HintPath>
+ <HintPath>C:/Users/jlawh/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@0.0.19/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Purchasing">
- <HintPath>C:/Users/JTI-PC/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@0.0.19/Editor/UnityEditor.Purchasing.dll</HintPath>
+ <HintPath>C:/Users/jlawh/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@0.0.19/Editor/UnityEditor.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.StandardEvents">
- <HintPath>C:/Users/JTI-PC/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
+ <HintPath>C:/Users/jlawh/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
