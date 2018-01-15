@@ -143,10 +143,17 @@ public class Enemy : MonoBehaviour, ICaster {
                     curr_stagger_time = 0F;
                 }
             }
-			curr_time += Time.deltaTime;
+            curr_time += Time.deltaTime;
 			if (curr_time >= atk_time) {
+<<<<<<< HEAD
                 fullBarFX(); // notify player of full bar
                 yield return new WaitForSeconds (1f);
+                BattleManager.main.pause = true; // pause battle for attack
+				BattleEffects.main.setDim(true, enemy_sprite);
+				AudioPlayer.main.playSFX (1, SFXType.SPELL, "magic_sound"); 
+				yield return new WaitForSeconds (1.5f);
+=======
+>>>>>>> b4eb5bd17e5606e82de3e89840031cf471f02a04
 				attackPlayer (s);
                 curr_spell++;
                 if (curr_spell >= stats.spells.Length)//Reached end of spell list
@@ -154,7 +161,13 @@ public class Enemy : MonoBehaviour, ICaster {
                 s = stats.spells[curr_spell]; //get next spell
                 atk_time = dict.getCastingTime(s, stats.speed);//get new casting time
                 curr_time = 0;
+<<<<<<< HEAD
+				BattleEffects.main.setDim(false, enemy_sprite);
+				BattleManager.main.pause = false; // unpause
+				BattleManager.main.updateEnemies();
                 resetBarFX(); // stop full bar effects
+=======
+>>>>>>> b4eb5bd17e5606e82de3e89840031cf471f02a04
 			}
 		}
 	}
