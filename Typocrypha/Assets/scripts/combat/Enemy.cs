@@ -145,30 +145,47 @@ public class Enemy : MonoBehaviour, ICaster {
             }
 			curr_time += Time.deltaTime;
 			if (curr_time >= atk_time) {
-				BattleManager.main.pause = true; // pause battle for attack
-				BattleEffects.main.setDim(true, enemy_sprite);
-				AudioPlayer.main.playSFX (1, SFXType.SPELL, "magic_sound"); 
-				yield return new WaitForSeconds (1.5f);
+                fullBarFX(); // notify player of full bar
+                yield return new WaitForSeconds (1f);
 				attackPlayer (s);
-				yield return new WaitForSeconds (1f);
                 curr_spell++;
                 if (curr_spell >= stats.spells.Length)//Reached end of spell list
                     curr_spell = 0;
                 s = stats.spells[curr_spell]; //get next spell
                 atk_time = dict.getCastingTime(s, stats.speed);//get new casting time
                 curr_time = 0;
-				BattleEffects.main.setDim(false, enemy_sprite);
-				BattleManager.main.pause = false; // unpause
-				BattleManager.main.updateEnemies();
+                resetBarFX(); // stop full bar effects
 			}
 		}
 	}
 
+    // effects when enemy is ready to attack
+    void fullBarFX() {
+        //graphic
+        StartCoroutine(barFlash());
+        //sound
+        AudioPlayer.main.playSFX (1, SFXType.BATTLE, "enemy_attack_ready"); 
+    }
+
+    IEnumerator barFlash() {
+        for (int i = 0; i<60; i++)
+        {
+            bars.Charge_bars[position].setColor(Random.value, Random.value, 0.1F);
+
+            yield return new WaitForEndOfFrame();
+        }
+        bars.Charge_bars[position].setColor(1F, 0.1F, 0.1F);
+    }
+
+    // terminate effects started by fullBarFX()
+    void resetBarFX() {
+        bars.Charge_bars[position].setColor(0, 0.9F, 0);
+    }
+
 	// pause battle, attack player with specified spell
 	void attackPlayer(SpellData s) {
         Debug.Log(stats.name + " casts " + s.ToString());
-        StartCoroutine(swell());
-        field.enemyCast(dict.GetComponent<SpellDictionary>(), s, position);
+        field.enemyCast(dict, s, position);
 	}
 
 	// be attacked by the player
@@ -193,7 +210,7 @@ public class Enemy : MonoBehaviour, ICaster {
     //Un-stun enemy
     private void unStun()
     {
-        bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0.9F, 0);
+        bars.Charge_bars[position].setColor(0, 0.9F, 0);
         is_stunned = false;
         Curr_stagger = stats.max_stagger;
     }
@@ -210,6 +227,12 @@ public class Enemy : MonoBehaviour, ICaster {
 			StopAllCoroutines ();
         }
 
+    }
+
+    //Starts swell from outside class (used in battlemanager.cs)
+    public void startSwell()
+    {
+        StartCoroutine(swell());
     }
 
 	// cause enemy to swell in size for a short period of time (lazy attack rep)
