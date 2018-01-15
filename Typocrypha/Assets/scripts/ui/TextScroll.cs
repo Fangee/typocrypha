@@ -115,6 +115,7 @@ public class TextScroll : MonoBehaviour {
 			opt = in_text.Substring (eq_pos + 1, end_pos - eq_pos - 1).Split (opt_delim);
 		}
 		TextEvents.main.playEvent (evt, opt);
+		Debug.Log ("text_event:" + evt + ":" + opt.Aggregate("", (acc, next) => acc + "," + next));
 		if (evt.CompareTo ("next") == 0) return; // forceNextLine will handle rest
 		text_pos = end_pos + 1;
 	}

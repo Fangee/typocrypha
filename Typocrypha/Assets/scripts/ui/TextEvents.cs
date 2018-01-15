@@ -15,6 +15,7 @@ public class TextEvents : MonoBehaviour {
 	public SpriteRenderer dimmer; // sprite used to cover screen for fade/dim effects
 	public TextScroll text_scroll; // main text scroller for normal dialogue
 	public GameObject center_text; // for showing floating text in the center
+	public Camera main_camera; // main camera object
 
 	void Start() {
 		if (main == null) main = this;
@@ -26,7 +27,7 @@ public class TextEvents : MonoBehaviour {
 			{"next", next},
 			{"center-text-scroll", centerTextScroll},
 			{"center-text-fade", centerTextFade},
-			{"play-sfx",playSFX}
+			{"play-sfx", playSFX}
 		};
 	}
 
@@ -41,7 +42,7 @@ public class TextEvents : MonoBehaviour {
 	// input: [0]: float, length of shake
 	//        [1]: float, intensity of shake
 	IEnumerator screenShake(string[] opt) {
-		Transform cam_tr = Camera.current.transform;
+		Transform cam_tr = main_camera.transform;
 		Vector3 old_cam_pos = cam_tr.position;
 		float[] opts = opt.Select((string str) => float.Parse(str)).ToArray();
 		float curr_time = 0;
@@ -164,15 +165,9 @@ public class TextEvents : MonoBehaviour {
 	}
 
 	// plays the specified sfx
-	// input: [0]: string, type
-	//        [1]: string, sfx filename
+	// input: [0]: string, sfx filename
 	IEnumerator playSFX(string[] opt) {
-		for (int i = 0; i < (int)SFXType.size; ++i) {
-			if (((SFXType)i).ToString ().CompareTo (opt [0]) == 0) {
-				AudioPlayer.main.playSFX (4, (SFXType)i, opt[1]);
-				break;
-			}
-		}
+		AudioPlayer.main.playSFX (opt[0]);
 		yield return true;
 	}
 }

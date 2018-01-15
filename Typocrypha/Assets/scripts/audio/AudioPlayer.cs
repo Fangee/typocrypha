@@ -61,7 +61,7 @@ public class AudioPlayer : MonoBehaviour {
 
 	// play music from name
 	public void playMusic(string name) {
-		if (name.CompareTo ("_") == 0) return; // skip if null song
+		if (name.CompareTo ("_") == 0 || name.CompareTo ("") == 0) return; // skip if null song
 		else if (name.CompareTo ("STOP") == 0)
 		{
 			stopAll();
@@ -105,7 +105,7 @@ public class AudioPlayer : MonoBehaviour {
 
 	// play music from specified type (DEPRECATED)
 	public void playMusic(MusicType type, string name) {
-		if (name.CompareTo ("_") == 0) return; // skip if null song
+		if (name.CompareTo ("_") == 0 || name.CompareTo ("") == 0) return; // skip if null song
         else if (name.CompareTo ("STOP") == 0)
         {
             stopAll();
