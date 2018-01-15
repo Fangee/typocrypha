@@ -13,6 +13,7 @@ public class IntroSequence : MonoBehaviour {
 
 	// starts intro sequence
 	public void startIntro(IntroScene scene) {
+        player_ui.transform.position = new Vector3(0, -1000, 0);
 		Debug.Log ("intro start");
 		intro_scene = scene;
 		StartCoroutine (introSequence ());

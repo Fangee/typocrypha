@@ -12,6 +12,8 @@ public class SpellBook : MonoBehaviour {
 
     public Text pageTitle;
     private Text[] entries = new Text[pageSize];
+    private SpriteRenderer upArrow;
+    private SpriteRenderer downArrow;
 
     //Private constants
     private const int pageSize = 6;     //Number of entries per page
@@ -27,6 +29,8 @@ public class SpellBook : MonoBehaviour {
             entries[i] = gameObject.transform.GetChild(i).GetComponent<Text>();
             entries[i].text = emptyEntryText;
         }
+        upArrow = gameObject.transform.GetChild(pageSize).GetComponent<SpriteRenderer>();
+        downArrow = gameObject.transform.GetChild(pageSize + 1).GetComponent<SpriteRenderer>();
         updatePage();
 	}
 	
@@ -93,16 +97,20 @@ public class SpellBook : MonoBehaviour {
         updatePage();
         return true;
     }
-    //Goes to last page of spellbook (if one exists)
-    //Returns true on success, false on failure (no last page)
-    public bool lastPage()
+    //Goes to previous page of spellbook (if one exists)
+    //Returns true on success, false on failure (no previous page)
+    public bool previousPage()
     {
-        if(pageIndex - pageSize <= 0)
+        if(pageIndex - pageSize < 0)
         {
             if (typeIndex <= 0)
                 return false;
             typeIndex--;
-            pageIndex = (data[typeIndex].Count - (data[typeIndex].Count % pageSize));
+            int mod = (data[typeIndex].Count % pageSize);
+            if (mod == 0)
+                pageIndex = data[typeIndex].Count - pageSize;
+            else
+                pageIndex = data[typeIndex].Count - mod;
             updatePage();
             return true;
         }
@@ -111,12 +119,12 @@ public class SpellBook : MonoBehaviour {
         return true;
 
     }
-
+    //Updates Render Data
     private bool updatePage()
     {
         if (data.Count == 0)
         {
-            pageTitle.text = titleString + "NO SPELLS REGISTERED";
+            pageTitle.text = titleString + "NO SPELLS";
             return false;
         }
         SpellbookList current = data[typeIndex];
@@ -130,6 +138,22 @@ public class SpellBook : MonoBehaviour {
                 entries[i].text = emptyEntryText;
             ++j;
         }
+        downArrow.enabled = checkNext();
+        upArrow.enabled = checkPrev();
+        return true;
+    }
+    //returns true iff there is a next page
+    private bool checkNext()
+    {
+        if (pageIndex + pageSize >= data[typeIndex].Count && typeIndex + 1 >= data.Count)
+            return false;
+        return true;
+    }
+    //returns true iff there is a previous page
+    private bool checkPrev()
+    {
+        if (pageIndex - pageSize < 0 && typeIndex <= 0)
+            return false;
         return true;
     }
 

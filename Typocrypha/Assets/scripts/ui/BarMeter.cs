@@ -25,9 +25,4 @@ public class BarMeter : MonoBehaviour {
 		bar.localScale = new Vector3 (percent, 1, 1);
 	}
 
-    // set bar color
-    public void setColor(float r, float g, float b) {
-        gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color (r, g, b);
-    }
-
 }
