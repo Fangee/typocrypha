@@ -278,6 +278,7 @@ public class BattleManager : MonoBehaviour {
         lowerTargets(targetPattern.second, targetPattern.first);
         BattleEffects.main.setDim(false, enemy_arr[position].GetComponent<SpriteRenderer>());
         pause = false; // unpause
+        enemy_arr[position].attack_in_progress = false;
         updateEnemies();
     }
     //Cast/Botch/Cooldown/Fizzle, with associated effects and processing

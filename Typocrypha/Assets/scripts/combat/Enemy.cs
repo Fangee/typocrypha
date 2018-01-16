@@ -61,6 +61,7 @@ public class Enemy : MonoBehaviour, ICaster {
     //Public fields//
 
     bool is_dead; // is enemy dead?
+    public bool attack_in_progress = false;
 
     public BattleManager field;
     public int position; //index to field (current position)
@@ -145,16 +146,19 @@ public class Enemy : MonoBehaviour, ICaster {
             }
 			curr_time += Time.deltaTime;
 			if (curr_time >= atk_time) {
+                attack_in_progress = true;
                 fullBarFX(); // notify player of full bar
                 yield return new WaitForSeconds(1f);
-                attackPlayer (s);
+                yield return new WaitWhile(() => BattleManager.main.pause);
+                if(!is_stunned)
+                    attackPlayer (s);
                 curr_spell++;
                 if (curr_spell >= stats.spells.Length)//Reached end of spell list
                     curr_spell = 0;
                 s = stats.spells[curr_spell]; //get next spell
                 atk_time = dict.getCastingTime(s, stats.speed);//get new casting time
                 curr_time = 0;
-                resetBarFX(); // stop full bar effects
+                //resetBarFX(); // stop full bar effects (now in barFlash)
             }
 		}
 	}
@@ -177,6 +181,10 @@ public class Enemy : MonoBehaviour, ICaster {
             yield return new WaitForEndOfFrame();
         }
         bars.Charge_bars[position].setColor(1F, 0.1F, 0.1F);
+
+        yield return new WaitWhile(() => attack_in_progress);
+
+        resetBarFX();
     }
 
     // terminate effects started by fullBarFX()
