@@ -130,6 +130,24 @@ public class SpellDictionary : MonoBehaviour
                     s.buff.vsElemMod[Elements.bolt] = level;
             }
             int.TryParse(cols[10].Trim(), out s.buffPercentage);
+            switch (cols[11].Trim().ToLower())
+            {
+                case "no_mods":
+                    s.modFlag = Spell.ModFlags.NO_MODIFICATION;
+                    break;
+                case "no_elements":
+                    s.modFlag = Spell.ModFlags.NO_ELEMENT;
+                    break;
+                case "no_styles":
+                    s.modFlag = Spell.ModFlags.NO_STYLE;
+                    break;
+                case "no_targeting":
+                    s.modFlag = Spell.ModFlags.NO_TARGETING;
+                    break;
+                default:
+                    s.modFlag = Spell.ModFlags.NORMAL;
+                    break;
+            }
             spells.Add(key, s);
             i++;
         }

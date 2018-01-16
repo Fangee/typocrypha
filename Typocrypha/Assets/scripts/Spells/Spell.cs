@@ -6,6 +6,10 @@ using UnityEngine;
 //A spell must inherit from this class to define specific functionality
 public abstract class Spell
 {
+    //Enums
+
+    public enum ModFlags { NORMAL, NO_ELEMENT, NO_STYLE, NO_TARGETING, NO_MODIFICATION}
+
     //public methods
 
     //Casts this spell at selected target (at targets[selected])
@@ -19,14 +23,24 @@ public abstract class Spell
     //Apllies prefix and suffix to spell. both arguments can be null (if no prefix or suffix)
     public void Modify(ElementMod e, StyleMod s)
     {
+        //Dont modify if unmodifyable
+        if (modFlag == ModFlags.NO_MODIFICATION)
+            return;
         //Add rest of stuff
-        if (e != null)//Add element modifier
+        if (e != null && modFlag != ModFlags.NO_ELEMENT)//Add element modifier
         {
             element = e.element;
             name = e.name + "-" + name;
         }
-        if (s != null)//Add style modifier
+        if (s != null && modFlag != ModFlags.NO_STYLE)//Add style modifier
         {
+            //Modify targeting data if allowed and necessary
+            if (s.isTarget == true)
+            {
+                if (modFlag == ModFlags.NO_TARGETING)
+                    return;
+                targetData.modify(s.targets);
+            }
             //Apply power mod
             power = Mathf.CeilToInt(power * s.powerModM);
             power += s.powerMod;
@@ -39,10 +53,6 @@ public abstract class Spell
             //Apply status % mod
             elementEffectMod = Mathf.CeilToInt(elementEffectMod * s.statusEffectChanceModM);
             elementEffectMod += s.statusEffectChanceMod;
-            if (s.isTarget == true)
-            {
-                targetData.modify(s.targets);
-            }
             name += ("-" + s.name);
         }
     }
@@ -91,6 +101,7 @@ public abstract class Spell
         if(buff != null)
             s.buff = new BuffData(buff);
         s.buffPercentage = buffPercentage;
+        s.modFlag = modFlag;
     }
 
     //protected methods
@@ -160,10 +171,11 @@ public abstract class Spell
     public int critPercentage;          //Spell's base crit chance (1 = 1%)
     public int elementEffectMod;        //Spell's base elemental effect chance (1 = 1%)
     public int element = Elements.@null;     //Spell's elemental damage type
-    public BuffData buff = null;               //Spell's buff/debuff to inflict
+    public BuffData buff = null;        //Spell's buff/debuff to inflict
     public int buffPercentage;          //Chance of inflicting buff/debuff
     public string type = "null";        //Spell's effect type (attack, shield, heal, etc.)
     public TargetData targetData;       //Spell's targeting data
+    public ModFlags modFlag;            //Shows how to modify this spell
 
     //Cooldown properties
 
