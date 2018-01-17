@@ -28,7 +28,8 @@ public class TextEvents : MonoBehaviour {
 			{"center-text-scroll", centerTextScroll},
 			{"center-text-fade", centerTextFade},
 			{"play-sfx", playSFX},
-			{"set-scroll-delay", setScrollDelay}
+			{"set-scroll-delay", setScrollDelay},
+			{"set-bg", setBG}
 		};
 	}
 
@@ -176,6 +177,13 @@ public class TextEvents : MonoBehaviour {
 	// input: [0]: float, new delay amount in seconds
 	IEnumerator setScrollDelay(string[] opt) {
 		text_scroll.delay = float.Parse (opt [0]);
+		yield return true;
+	}
+
+	// sets background image 
+	// input: [0]: string, name of image file
+	IEnumerator setBG(string[] opt) {
+		BackgroundEffects.main.setBG (opt [0]);
 		yield return true;
 	}
 }

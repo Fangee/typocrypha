@@ -1,6 +1,6 @@
 START_SCENE	CUTSCENE	_		
-DIALOGUE	Player	[set-scroll-delay=0.05]. . .	_	END_DIALOGUE
-DIALOGUE		[block=t][set-scroll-delay=0]click[set-scroll-delay=0.3] . . .[pause=1][set-scroll-delay=0] click.[pause=0.5] click.[pause=0.5][set-scroll-delay=0.05][block=f]	_	END_DIALOGUE
+DIALOGUE	Player	[set-scroll-delay=0.05] . . .	_	END_DIALOGUE
+DIALOGUE		[set-bg=city_night_sky][block=t][set-scroll-delay=0]click[set-scroll-delay=0.3] . . .[pause=1][set-scroll-delay=0] click.[pause=0.5] click.[pause=0.5][set-scroll-delay=0.05][block=f]	_	END_DIALOGUE
 DIALOGUE	Player	Uh . . .[pause=1] Is this thing on?	_	END_DIALOGUE
 DIALOGUE	Player	( . . . Crap. I just got this thing too.)	_	END_DIALOGUE
 DIALOGUE	Player	(Maybe if I just . . . )	_	END_DIALOGUE
