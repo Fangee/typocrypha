@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+// CHANNEL GUIDE:
+//   SFX can be played in one of 8 channels (numbered 0-7).
+//   playSFX(string) will just choose the first one that's available, so for general use, use that
+//   Currently reserved channels:
+//     3: talking effects
 
 // different types of music (DEPRECATED)
 public enum MusicType { CUTSCENE, BATTLE };
@@ -16,6 +21,7 @@ public class AudioPlayer : MonoBehaviour {
 	public AudioSource music; // plays music
 	public Transform sfx; // contains sfx channels
 	AudioSource[] sfx_channels; // sfx channels
+	bool[] channel_reserved; // is that channel reserved?
 	AssetBundle sfx_bundle;
 	AssetBundle music_bundle;
 
@@ -30,16 +36,30 @@ public class AudioPlayer : MonoBehaviour {
 		sfx_bundle = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "sfx"));
 		music_bundle = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "music"));
 		sfx_channels = new AudioSource[sfx.childCount];
-		for (int i = 0; i < sfx.childCount; i++) // put all sfx channels into array
-			sfx_channels[i] = sfx.GetChild(i).gameObject.GetComponent<AudioSource>();
+		channel_reserved = new bool[sfx.childCount];
+		for (int i = 0; i < sfx.childCount; i++)  // put all sfx channels into array
+			sfx_channels [i] = sfx.GetChild (i).gameObject.GetComponent<AudioSource> ();
+		initReservations ();
 		ready = true;
 		Debug.Log ("finished loading audio");
+	}
+
+	// sets preset reservations
+	void initReservations() {
+		channel_reserved [3] = true; // reserved for talking sfx
+		AudioPlayer.main.setSFX (3, "speak_boop"); // put default talk sfx in channel 3
 	}
 
 	// sets specified sfx channel
 	public void setSFX(int channel, string name) {
 		name = name.Trim ();
-		if (name.CompareTo ("null") == 0) return;
+		if (name.CompareTo ("_") == 0) // skip if null song
+			return; 
+		if (name.CompareTo ("") == 0) { // set to no song
+			sfx_channels[channel].Stop();
+			sfx_channels[channel].clip = null;
+			return;
+		}
 		sfx_channels [channel].clip = sfx_bundle.LoadAsset<AudioClip> (name);
 	}
 
@@ -50,8 +70,9 @@ public class AudioPlayer : MonoBehaviour {
 
 	// play sfx from name (finds first open channel)
 	public void playSFX(string name) {
-		foreach (AudioSource channel in sfx_channels) {
-			if (!channel.isPlaying) {
+		for (int i = 0; i < sfx_channels.Length; ++i) {
+			AudioSource channel = sfx_channels [i];
+			if (!channel_reserved[i] && !channel.isPlaying) {
 				channel.clip = sfx_bundle.LoadAsset<AudioClip> (name);
 				channel.Play ();
 				break;
@@ -61,12 +82,18 @@ public class AudioPlayer : MonoBehaviour {
 
 	// play music from name
 	public void playMusic(string name) {
-		if (name.CompareTo ("_") == 0 || name.CompareTo ("") == 0) return; // skip if null song
-		else if (name.CompareTo ("STOP") == 0)
-		{
+		name = name.Trim ();
+		if (name.CompareTo ("_") == 0) // skip if null song
+			return; 
+		if (name.CompareTo ("") == 0) { // set to no song
+			music.Stop();
+			music.clip = null;
+			return;
+		}
+		if (name.CompareTo ("STOP") == 0) { // stop if stop flag
 			stopAll();
 			return;
-		} // stop if stop flag
+		} 
 		music.clip = music_bundle.LoadAsset<AudioClip> (name);
 		music.Play ();
 	}
@@ -88,7 +115,7 @@ public class AudioPlayer : MonoBehaviour {
 		}
 	}
 
-/**************** DEPRECATED AUDIO SYSTEM **********************************/
+/**************** DEPRECATED AUDIO SYSTEM *********************/
 
 	// sets specified sfx channel (DEPRECATED)
 	public void setSFX(int channel, SFXType type, string name) {

@@ -1,22 +1,22 @@
 START_SCENE	CUTSCENE	_		
-DIALOGUE	Player	[set-scroll-delay=0.05] . . .	_	END_DIALOGUE
-DIALOGUE		[set-bg=city_night_sky][block=t][set-scroll-delay=0]click[set-scroll-delay=0.3] . . .[pause=1][set-scroll-delay=0] click.[pause=0.5] click.[pause=0.5][set-scroll-delay=0.05][block=f]	_	END_DIALOGUE
+DIALOGUE	Player	[set-scroll-delay=0.3] . . .	_	END_DIALOGUE
+DIALOGUE		[set-bg=city_night_sky][block=t][set-scroll-delay=0]click[set-scroll-delay=0.3]. . . .[pause=1][set-scroll-delay=0] click.[pause=0.5] click.[pause=0.5][set-scroll-delay=0.05][block=f]	_	END_DIALOGUE
 DIALOGUE	Player	Uh . . .[pause=1] Is this thing on?	_	END_DIALOGUE
-DIALOGUE	Player	( . . . Crap. I just got this thing too.)	_	END_DIALOGUE
+DIALOGUE	Player	(Crap.[pause=0.5] I just got this thing too.)	_	END_DIALOGUE
 DIALOGUE	Player	(Maybe if I just . . . )	_	END_DIALOGUE
-DIALOGUE		"[block=t][set-scroll-delay=0]<size=48>[play-sfx=take_damage][screen-shake=0.2,0.3]THWACK!![pause=1]     [play-sfx=take_damage][screen-shake=0.2,0.3]WHAM!!</size>[set-scroll-delay=0.05][block=f]"	_	END_DIALOGUE
-DIALOGUE	Player	[set-scroll-delay=0.3]. . . [set-scroll-delay=0.05] Did-[pause=0.5]Did it wo[next]	_	END_DIALOGUE
-DIALOGUE	???	"<size=48>[screen-shake=0.3,0.4]HELLO!</size>"	_	END_DIALOGUE
-DIALOGUE	???	"Welcome back Uncle Nintendo! You last activated this <color=blue>TYPOCRYPHA</color> unit 1 year, 1 month, and 13 days ago. You have <color=yellow>1023</color> new updates and <color=yellow>33,333</color> new emails."	Naive	END_DIALOGUE
-DIALOGUE	Player	"O-Oh. No, Im not him. I-uh . . . Dammit! How do I reset-"	_	END_DIALOGUE
-DIALOGUE	???	<size=48><color=red>ERROR UNIDENTIFIED USER. FORCE SHUTTING DOWN . . .</color></size>	STOP	END_DIALOGUE
+DIALOGUE		"[block=t][set-scroll-delay=0][play-sfx=take_damage][screen-shake=0.2,0.3]<size=48>THWACK!![pause=1]   [play-sfx=take_damage][screen-shake=0.2,0.3]WHAM!!</size>[set-scroll-delay=0.05][block=f]"	_	END_DIALOGUE
+DIALOGUE	Player	[block=t][set-scroll-delay=0.3]. . . [set-scroll-delay=0.05] Did-[pause=0.5]Did it wo[next]	_	END_DIALOGUE
+DIALOGUE	???	"[screen-shake=0.3,0.4]<size=48>HELLO!</size>[block=f]"	_	END_DIALOGUE
+DIALOGUE	???	"Welcome back Uncle Nintendo! You last activated this <color=blue>TYPOCRYPHA</color> unit 1 year, 1 month, and 13 days ago. You have <color=orange>1023</color> new updates and <color=yellow>33,333</color> new emails."	Naive	END_DIALOGUE
+DIALOGUE	Player	"O-Oh.[pause=0.5] No, Im not him. I-uh . . . Dammit! How do I reset-"	_	END_DIALOGUE
+DIALOGUE	???	<size=32><color=red>ERROR[pause=1] ERROR[pause=1] UNIDENTIFIED USER. FORCE SHUTTING DOWN . . .</color></size>	STOP	END_DIALOGUE
 DIALOGUE	Player	"[block=t]NonononoNONON[fade=out,0,0,0,0][pause=3][next]"		END_DIALOGUE
 DIALOGUE	???	"[fade=in,1.5,0,0,0]REINITIALIZING . . . [pause=3][next]"	_	END_DIALOGUE
 DIALOGUE	Player	[block=f]OK . . . [pause=1]I think I fixed it. 	_	END_DIALOGUE
 DIALOGUE	Player	. . . Maybe?	_	END_DIALOGUE
 DIALOGUE	Player	Technology sucks.	_	END_DIALOGUE
-DIALOGUE	Player	"[set-scroll-delay=0.3]. . . [set-scroll-delay=0.05] Uh,[pause=0.5] hel[next]"	_	END_DIALOGUE
-DIALOGUE	???	"<size=48>[screen-shake=0.3,0.4]HELLO!</size>"	_	END_DIALOGUE
+DIALOGUE	Player	"[block=t][set-scroll-delay=0.3]. . . [set-scroll-delay=0.05] Uh,[pause=0.5] hel[next]"	_	END_DIALOGUE
+DIALOGUE	???	"<size=48>[screen-shake=0.3,0.4]HELLO!</size>[block=f]"	_	END_DIALOGUE
 DIALOGUE	???	Thank you for purchasing this <color=blue>TYPOCRYPHA</color> unit. I will be your AI operating assistant.	Naive	END_DIALOGUE
 DIALOGUE	Clarke	You can call me Clarke!	_	END_DIALOGUE
 DIALOGUE	Clarke	What's your name?	_	END_DIALOGUE

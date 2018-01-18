@@ -1,7 +1,7 @@
+1								
 START_SCENE	CUTSCENE	jazzy_retro_battle_theme						
-DIALOGUE	Tanuki	[block=t]<size=48>Hey you!</size>[block=f] You're walking in the <color=red>wrong</color> part of town.	jazzy_retro_battle_theme	tanuki_mario	"0,1"	END_DIALOGUE		
-DIALOGUE	Frog	[block=t]Rib[pause=1]bit[pause=1][block=f] <i>Ribbit!</i> <size=24>(Yeah <color=green>frog-face!</color> Wrong part of town!)</size>	frogs	frog_mario	LEFT	END_DIALOGUE		
-DIALOGUE	Tanuki	"Let's [screen-shake=0.2,0.3]get em!"	jazzy_retro_battle_theme	tanuki_mario	RIGHT	frog_mario	"1, 1"	END_DIALOGUE
-DIALOGUE	Frog	"[block=t][fade=out,2,0,0,0][play-sfx=OTHER,Static_Sound]Wait, why is the screen fading away?[pause=2][center-text-fade=in,0][center-text-scroll=0.05,0,0,0,SPOOPY][pause=2][center-text-fade=out,2][pause=3][next]"	STOP	frog_mario	CENTER	END_DIALOGUE		
-DIALOGUE	Tanuki	"[fade=in,0,0,0,0][screen-shake=0.2,0.5]BOO![block=f]"	_	tanuki_mario	CENTER	END_DIALOGUE		
+DIALOGUE	Tanuki	Im going to disappear[hide-text-box=t][set-talk-sfx=] And then will you see me now?[hide-text-box=f]	jazzy_retro_battle_theme	tanuki_mario	"0,1"	END_DIALOGUE		
+DIALOGUE	Frog	[set-talk-sfx=take_damage]Hmm	frogs	frog_mario	LEFT	END_DIALOGUE		
+DIALOGUE	Tanuki	Hmmmmm	jazzy_retro_battle_theme	tanuki_mario	RIGHT	frog_mario	"1, 1"	END_DIALOGUE
 END_SCENE								
+END_GAME								

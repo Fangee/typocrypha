@@ -56,7 +56,7 @@ public class CutsceneManager : MonoBehaviour {
 			AudioPlayer.main.playMusic(MusicType.CUTSCENE, scene.music_tracks[curr_line]);
             if(scene.events[curr_line] != null) //Call special event if applicable
                 scene.events[curr_line].call();
-			text_scroll.startPrint (scene.dialogue [curr_line], display_text, "speak_boop");
+			text_scroll.startPrint (scene.dialogue [curr_line], display_text);
 			++curr_line;
 		} else { // dump if dialogue already started
 			text_scroll.dump ();

@@ -12,10 +12,12 @@ public delegate IEnumerator TextEventDel(string[] opt);
 public class TextEvents : MonoBehaviour {
 	public static TextEvents main = null;
 	public Dictionary<string, TextEventDel> text_event_map;
+
 	public SpriteRenderer dimmer; // sprite used to cover screen for fade/dim effects
 	public TextScroll text_scroll; // main text scroller for normal dialogue
 	public GameObject center_text; // for showing floating text in the center
 	public Camera main_camera; // main camera object
+	public GameObject dialogue_box; // dialogue box object
 
 	void Start() {
 		if (main == null) main = this;
@@ -29,7 +31,9 @@ public class TextEvents : MonoBehaviour {
 			{"center-text-fade", centerTextFade},
 			{"play-sfx", playSFX},
 			{"set-scroll-delay", setScrollDelay},
-			{"set-bg", setBG}
+			{"set-bg", setBG},
+			{"hide-text-box", hideTextBox},
+			{"set-talk-sfx", setTalkSFX}
 		};
 	}
 
@@ -39,6 +43,8 @@ public class TextEvents : MonoBehaviour {
 		if (!text_event_map.TryGetValue (evt, out text_event)) return null;
 		return StartCoroutine(text_event (opt));
 	}
+
+/**************************** TEXT EVENTS *****************************/
 
 	// shakes the screen
 	// input: [0]: float, length of shake
@@ -184,6 +190,28 @@ public class TextEvents : MonoBehaviour {
 	// input: [0]: string, name of image file
 	IEnumerator setBG(string[] opt) {
 		BackgroundEffects.main.setBG (opt [0]);
+		yield return true;
+	}
+
+	// hides/shows dialogue box (NOTE: text is STILL GOING when hidden)
+	// typically, should block when hiding to avoid skipping reshow event
+	// input: [0]: [t|n], hides text box if 't', shows if 'f'
+	IEnumerator hideTextBox(string[] opt) {
+		dialogue_box.SetActive (opt[0].CompareTo("f") == 0);
+		yield return true;
+	}
+
+	// sets the talking sfx
+	// input: [0]: string, name of audio file
+	IEnumerator setTalkSFX(string[] opt) {
+		AudioPlayer.main.setSFX (3, opt[0]); // put sfx in channel 3
+		yield return true;
+	}
+
+	// prompts player to enter something into TYPORCYPHA; resumes on enter
+	// input: [0]: string, type of prompt
+	IEnumerator prompt(string[] opt) {
+		// TODO
 		yield return true;
 	}
 }

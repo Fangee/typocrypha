@@ -75,7 +75,7 @@ public class PreTitle : MonoBehaviour {
 	// execute pre-title sequence
 	IEnumerator sequence() {
 		yield return new WaitForSeconds (2.0f);
-		text_scroll.startPrint ("Please type in the following phrase.", prompt_text, "null");
+		text_scroll.startPrint ("[set-talk-sfx=]Please type in the following phrase.", prompt_text);
 		yield return new WaitWhile(() => text_scroll.is_print);
 		yield return new WaitForSeconds (2.0f);
 		prompt_text.text = target_input;

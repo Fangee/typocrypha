@@ -24,8 +24,8 @@ public class IntroSequence : MonoBehaviour {
 		// show and delete starting text
 		intro_text.SetActive(true);
 		text_scroll.delay = (0.1f);
-		text_scroll.startPrint ("PRESENT DAY         \nANOTHER TIME         \nOUR WORLD",
-			intro_text.GetComponent<Text>(), "null");
+		text_scroll.startPrint ("[set-talk-sfx=]PRESENT DAY         \nANOTHER TIME         \nOUR WORLD",
+			intro_text.GetComponent<Text>());
 		yield return new WaitWhile (() => text_scroll.is_print);
 		yield return new WaitForSeconds (2.0f);
 		text_scroll.delay = (0.05f);

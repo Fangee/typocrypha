@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 // displays text character by character
 public class TextScroll : MonoBehaviour {
+	const float default_delay = 0.05f; // default delay
+
 	public float delay; // time between displaying characters
 	public bool is_print; // is currently printing
 	public bool pause_print; // is the text scroll paused?
@@ -29,14 +31,14 @@ public class TextScroll : MonoBehaviour {
 	}
 
 	// start printing string to Text display
-	public void startPrint(string in_txt, Text out_txt, string speak_sfx) {
-		AudioPlayer.main.setSFX (3, SFXType.SPEAKING, speak_sfx); // put sfx in channel 3
+	public void startPrint(string in_txt, Text out_txt) {
 		in_text = in_txt.Trim().Replace("\"", "");
 		out_text = out_txt;
 		out_text.text = "";
 		is_print = true;
 		pause_print = false; // unpause text
 		if (curr != null) StopCoroutine (curr);
+		TextEvents.main.StopAllCoroutines (); // stop all previously running events
 		curr = StartCoroutine (scrollText ());
 	}
 
@@ -52,9 +54,10 @@ public class TextScroll : MonoBehaviour {
 
 	// dump rest of string to output
 	public void dump() {
-		StopCoroutine (curr);
+		StopCoroutine (curr); // stop current printing
+		TextEvents.main.StopAllCoroutines (); // stop all previously running events
 		is_print = false;
-		out_text.text = evt_cutout.Replace(in_text, "");
+		out_text.text = evt_cutout.Replace(in_text, ""); // dump all text
 	}
 
 	// print characters to Text object one by one
@@ -63,7 +66,6 @@ public class TextScroll : MonoBehaviour {
 		out_buffer = "";
 		tag_stack.Clear ();
 		while (text_pos < in_text.Length) {
-			//yield return new WaitWhile (() => pause_print);
 			while (pause_print) yield return new WaitForEndOfFrame();
 			if (text_pos >= in_text.Length) break;
 			if (in_text [text_pos].CompareTo ('<') == 0) { // check if tag
