@@ -9,7 +9,6 @@ public class EnemyDatabase
 	public bool is_loaded = false; // is enemy database loaded?
     Dictionary<string, EnemyStats> database = new Dictionary<string, EnemyStats>();
 
-    private const int numFields = 10;
     private const string assetPath = "sprites/";
 
     TextAsset text_file; // original text asset
@@ -29,7 +28,7 @@ public class EnemyDatabase
         string[] lines = text_file.text.Split(line_delim);
         string[] cols;
         //Declare fields
-        string name, sprite_path;
+        string name, sprite_path, ai_type;
         int max_hp, max_shield, max_stagger,evade;//declare stat variables
         float speed, acc, atk, def;
         float[] vsElem;
@@ -50,22 +49,43 @@ public class EnemyDatabase
             float.TryParse(cols[++ind].Trim(), out speed);
             float.TryParse(cols[++ind].Trim(), out acc);
             int.TryParse(cols[++ind].Trim(), out evade);
-            vsElem = new float[Elements.count];
+            ai_type = cols[++ind].Trim();
 
             //ELEMENTS//
 
+            vsElem = new float[Elements.count];
             //Read in elemental weakness/resistances
-            for (int j = numFields; j < numFields + Elements.count; j++)
+            for (int j = ++ind; j < ind + Elements.count; j++)
             {
-                float.TryParse(cols[j].Trim(), out vsElem[j - numFields]);
+                float.TryParse(cols[j].Trim(), out vsElem[j - ind]);
             }
 
             //SPELLS//
 
             //Read in Spell List
-            List<SpellData> spells = new List<SpellData>();
-            for (int j = numFields + Elements.count; cols[j].Trim().CompareTo("END") != 0; j++)
+            Dictionary<string, SpellData[]> spellGroups = new Dictionary<string, SpellData[]>();
+            List<SpellData> spells = null;
+            string key = "";
+            for (int j = ind + Elements.count; ; j++)
             {
+                if (cols[j].Trim().CompareTo("END") == 0)
+                {
+                    if (spells != null)
+                    {
+                        spellGroups.Add(key, spells.ToArray());
+                    }
+                    break;
+                }
+                if(cols[j].Trim().Contains("GROUP"))
+                {
+                    if (spells != null)
+                    {
+                        spellGroups.Add(key, spells.ToArray());
+                    }
+                    key = cols[j].Trim().Substring(6);
+                    spells = new List<SpellData>();
+                    j++;
+                }
                 string root = cols[j].Trim();
                 j++;
                 string elem = cols[j].Trim();
@@ -78,7 +98,8 @@ public class EnemyDatabase
                 SpellData s = new SpellData(root, elem, style);
                 spells.Add(s);
             }
-            EnemyStats stats = new EnemyStats(name, assetPath + sprite_path, max_hp, max_shield, max_stagger, atk, def, speed, acc, evade, vsElem, spells.ToArray());
+            EnemySpellList spellList = new EnemySpellList(spellGroups);
+            EnemyStats stats = new EnemyStats(name, assetPath + sprite_path, max_hp, max_shield, max_stagger, atk, def, speed, acc, evade, vsElem, spellList, ai_type);
             database.Add(stats.name, stats);
         }
         Debug.Log("Enemy Database Loaded");

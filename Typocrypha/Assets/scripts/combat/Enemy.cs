@@ -1,18 +1,21 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 // simple container for enemy stats (Not a struct anymore cuz structs pass by value in c#)
 public class EnemyStats : CasterStats {
     //Sorry for the massive constructor but all the vals are readonly so...
-    public EnemyStats(string name, string sprite, int hp, int shield, int stag, float atk, float def, float speed, float acc, int evade, float[] vsElem = null, SpellData[] sp = null)
+    public EnemyStats(string name, string sprite, int hp, int shield, int stag, float atk, float def, float speed, float acc, int evade, float[] vsElem, EnemySpellList sp, string ai_type)
         : base(name, hp, shield, stag, atk, def, speed, acc, evade, vsElem)
     {
         sprite_path = sprite;
+        this.ai_type = ai_type;
         spells = sp;
     }
     public readonly string sprite_path; //path of sprite/resource to load at creation
-    public readonly SpellData[] spells; // castable spells
+    public readonly string ai_type; //type of enemy AI (will be same as name if unique)
+    public readonly EnemySpellList spells; // castable spells
 }
 
 // defines enemy behaviour
@@ -67,12 +70,13 @@ public class Enemy : MonoBehaviour, ICaster {
     public int position; //index to field (current position)
     public EnemyChargeBars bars;
 	public SpriteRenderer enemy_sprite; // this enemy's sprite
+    public EnemyAI AI = null;
 
     EnemyStats stats; // stats of enemy DO NOT MUTATE
     BuffDebuff buffDebuff = new BuffDebuff(); // buff/debuff state
 
     bool is_stunned; // is the enemy stunned?
-    int curr_spell = 0;
+    SpellData curr_spell = null;
 	int curr_hp; // current amount of health
     int curr_shield; //current amount of shield
     int curr_stagger; //current amount of stagger
@@ -97,6 +101,7 @@ public class Enemy : MonoBehaviour, ICaster {
             dict = GameObject.FindGameObjectWithTag("SpellDictionary").GetComponent<SpellDictionary>();
 		enemy_sprite = GetComponent<SpriteRenderer> ();
         enemy_sprite.sprite = Resources.Load<Sprite>(stats.sprite_path);
+        AI = EnemyAI.GetAIFromString(stats.ai_type);
         //Start Attacking
         StartCoroutine (timer ()); 
 	}
@@ -114,7 +119,7 @@ public class Enemy : MonoBehaviour, ICaster {
 
 	// returns name of current spell
 	public SpellData getCurrSpell() {
-		return stats.spells[curr_spell];
+		return curr_spell;
 	}
 
 	// returns progress of stagger bar
@@ -127,8 +132,9 @@ public class Enemy : MonoBehaviour, ICaster {
 	IEnumerator timer() {
 		Vector3 original_pos = transform.position;
         curr_stagger_time = 0F;
-        SpellData s = stats.spells[curr_spell];        //Initialize with current spell
-        atk_time = dict.getCastingTime(s, stats.speed);   //Get casting time
+        int target;
+        curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target);        //Initialize with current spell
+        atk_time = dict.getCastingTime(curr_spell, stats.speed);   //Get casting time
 		while (!is_dead) {
 			yield return new WaitForEndOfFrame ();
 			yield return new WaitWhile (() => BattleManager.main.pause);
@@ -151,12 +157,12 @@ public class Enemy : MonoBehaviour, ICaster {
                 yield return new WaitForSeconds(1f);
                 yield return new WaitWhile(() => BattleManager.main.pause);
                 if(!is_stunned)
-                    attackPlayer (s);
-                curr_spell++;
-                if (curr_spell >= stats.spells.Length)//Reached end of spell list
-                    curr_spell = 0;
-                s = stats.spells[curr_spell]; //get next spell
-                atk_time = dict.getCastingTime(s, stats.speed);//get new casting time
+                    attackPlayer (curr_spell);
+                //Update state (will move to make it so that state change can interrupt cast)
+                AI.updateState(field.enemy_arr, position, field.player_arr);
+                //Get next spell from AI
+                curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target);
+                atk_time = dict.getCastingTime(curr_spell, stats.speed);//get new casting time
                 curr_time = 0;
                 //resetBarFX(); // stop full bar effects (now in barFlash)
             }
@@ -253,3 +259,21 @@ public class Enemy : MonoBehaviour, ICaster {
 		transform.localScale = new Vector3 (1f, 1f, 1f);
 	}
 }
+
+public class EnemySpellList
+{
+    public EnemySpellList(Dictionary<string, SpellData[]> spells)
+    {
+        groups = spells;
+    }
+    private Dictionary<string, SpellData[]> groups;
+    public SpellData[] getSpells(string group)
+    {
+        return groups[group];
+    }
+    public bool hasGroup(string group)
+    {
+        return groups.ContainsKey(group);
+    }
+}
+
