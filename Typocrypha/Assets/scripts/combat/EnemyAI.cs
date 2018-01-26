@@ -2,8 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Base class For enemy AI.
+//Enemy AI has two abstract methods: getNextSpell(), and updateState()
+//getNextSpell() returns the next spell for the enemy to cast and sets the target in out int target
+//updateState updates the state component of the AI module
+//AI modules can be generic (with optional parameters in constructor) or unique (for bosses, etc)
 public abstract class EnemyAI
 {
+    //All possible AI states
     public enum AI_State
     {
         INVALID = -1,
@@ -14,14 +20,18 @@ public abstract class EnemyAI
         HEALTH_LOW,
         HEALTH_CRITICAL,
     }
+    //Current state of this (with associated property)
     protected AI_State state = AI_State.NORMAL;
     public AI_State State { get { return state; } set { state = value; } }
+    //Returns the next spell for the enemy to cast and sets the target in out int target
     public abstract SpellData getNextSpell(EnemySpellList spells, Enemy[] allies, int position, ICaster[] player_arr, out int target);
+    //Updates the state of this AI module based on field data
     public abstract void updateState(Enemy[] allies, int position, ICaster[] player_arr);
 
-    //Static methods
+    //Public static methods
 
-    public static EnemyAI GetAIFromString(string key, int[] parameters = null)
+    //Returns an appropriate EnemyAI derivitive with specified parameters from ID string (MAYBE IMPROVE)
+    public static EnemyAI GetAIFromString(string key, string[] parameters = null)
     {
         switch (key)
         {
@@ -33,6 +43,10 @@ public abstract class EnemyAI
                 throw new System.NotImplementedException(key + " is not an AI type!");
         }
     }
+
+    //Helper static methods (protected)
+
+    //Gets the current spell in the array, and increments the referenced index (current), and sets the index to 0 if the end is reached
     protected static SpellData getSpellSequential(SpellData[] spells, ref int current)
     {
         SpellData ret = spells[current];
@@ -41,7 +55,7 @@ public abstract class EnemyAI
             current = 0;
         return ret;
     }
-
+    //Throw when code tries to access a non-existant spell group
     protected class SpellGroupException : System.Exception
     {
         public SpellGroupException(string message) : base(message)
@@ -50,7 +64,7 @@ public abstract class EnemyAI
         }
     }
 }
-
+//Enemy AI for basic attackers (might be legacy)
 public class AttackerAI1 : EnemyAI
 {
     int currentSpell = 0;
@@ -62,19 +76,21 @@ public class AttackerAI1 : EnemyAI
 
     public override void updateState(Enemy[] allies, int position, ICaster[] player_arr) { return; }
 }
-
+//Enemy AI that switches to a new spell group when health is low and/or critical
+//Uses AttackerAI1 as a backend
 public class HealthLowAI1 : EnemyAI
 {
     protected AttackerAI1 nrmlAtk = new AttackerAI1();
     int currentSpell = 0;
     int lowThresh = 50;
     int criticalThresh = 10;
-    public HealthLowAI1(int[] parameters = null)
+    public HealthLowAI1(string[] parameters = null)
     {
         if(parameters != null)
         {
-            lowThresh = parameters[0];
-            criticalThresh = parameters[1];
+            int.TryParse(parameters[0], out lowThresh);
+            if(parameters.Length > 1)
+                int.TryParse(parameters[1], out criticalThresh);
         }
     }
 

@@ -66,7 +66,7 @@ public class BattleManager : MonoBehaviour {
 			new_enemy.transform.localPosition = new Vector3 (i * enemy_spacing, 0, 0);
 			enemy_arr [i] = new_enemy.GetComponent<Enemy> ();
             enemy_arr[i].field = this; //Give enemey access to field (for calling spellcasts)
-            enemy_arr [i].setStats (scene.enemy_stats [i]); //sets enemy stats (AND INITITIALIZES ATTACKING AND AI)
+            enemy_arr [i].initialize (scene.enemy_stats [i]); //sets enemy stats (AND INITITIALIZES ATTACKING AND AI)
             enemy_arr [i].position = i;      //Log enemy position in field
             enemy_arr[i].bars = charge_bars; //Give enemy access to charge_bars
 			Vector3 bar_pos = new_enemy.transform.position;

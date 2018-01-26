@@ -50,6 +50,9 @@ public class EnemyDatabase
             float.TryParse(cols[++ind].Trim(), out acc);
             int.TryParse(cols[++ind].Trim(), out evade);
             ai_type = cols[++ind].Trim();
+            string[] ai_params = null;
+            if (cols[++ind].Trim() != "none")
+                ai_params = cols[ind].Trim('"').Split(',');
 
             //ELEMENTS//
 
@@ -99,7 +102,7 @@ public class EnemyDatabase
                 spells.Add(s);
             }
             EnemySpellList spellList = new EnemySpellList(spellGroups);
-            EnemyStats stats = new EnemyStats(name, assetPath + sprite_path, max_hp, max_shield, max_stagger, atk, def, speed, acc, evade, vsElem, spellList, ai_type);
+            EnemyStats stats = new EnemyStats(name, assetPath + sprite_path, max_hp, max_shield, max_stagger, atk, def, speed, acc, evade, vsElem, spellList, ai_type, ai_params);
             database.Add(stats.name, stats);
         }
         Debug.Log("Enemy Database Loaded");
