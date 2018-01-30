@@ -224,7 +224,11 @@ public class TextEvents : MonoBehaviour {
 		while (is_prompt)
 			yield return new WaitForEndOfFrame ();
 
-		PlayerDialogueInfo.main.player_name = prompt_input;
+		switch (opt[0]) {
+		case "name":
+			PlayerDialogueInfo.main.player_name = prompt_input;
+			break;
+		}
 		prompt_input = "";
 		track_typing.enabled = false;
 		dialogue_box.SetActive (true);
