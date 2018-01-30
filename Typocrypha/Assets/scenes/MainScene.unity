@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 64279245}
   - component: {fileID: 64279247}
   - component: {fileID: 64279248}
+  - component: {fileID: 64279249}
   m_Layer: 0
   m_Name: CutsceneManager
   m_TagString: Untagged
@@ -304,11 +305,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d077e59337f584ebefce7554f2c15c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  is_prompt: 0
+  prompt_input: 
   dimmer: {fileID: 1608672956}
   text_scroll: {fileID: 64279247}
   center_text: {fileID: 1242473105}
   main_camera: {fileID: 1149999590}
   dialogue_box: {fileID: 261958433}
+  track_typing: {fileID: 585812795}
+--- !u!114 &64279249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 64279244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 909a46e0f3d43b4448959a7d39602a51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &70941748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1230,7 +1245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab68af2f6647994abd00dee75233a5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  file_name: cutscene_tests
+  file_name: episode1
   is_loaded: 0
   spellDictionary: {fileID: 26073438}
 --- !u!1 &542575120

@@ -67,7 +67,7 @@ public class CutsceneManager : MonoBehaviour {
 	// forces next line (for outside callers)
 	// must already be at end of text
 	public void forceNextLine() {
-		nextLine (); // dumps remaining
+		if (text_scroll.is_print) nextLine (); // dumps remaining
 		if (!nextLine ()) {
 			at_end = true;
 			if (!battle_interrupt) StateManager.main.nextScene ();

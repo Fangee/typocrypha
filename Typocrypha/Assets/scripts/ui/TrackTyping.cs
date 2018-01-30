@@ -29,7 +29,8 @@ public class TrackTyping : MonoBehaviour {
 	}
 
 	void Update () {
-		if (BattleManager.main.pause || BattleManager.main.enabled == false) {
+		if ((BattleManager.main.pause || BattleManager.main.enabled == false) &&
+			(!TextEvents.main.is_prompt)) {
 			entry_ok.text = "NO";
 			return;
 		} else entry_ok.text = "OK";
@@ -37,7 +38,13 @@ public class TrackTyping : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Return)) {
 			Debug.Log ("Player casts " + buffer.ToUpper().Replace(' ', '-'));
 			AudioPlayer.main.playSFX (0, SFXType.UI, "sfx_enter");
-			BattleManager.main.attackCurrent (buffer); // attack currently targeted enemy
+			if (TextEvents.main.is_prompt) {
+				TextEvents.main.prompt_input = buffer;
+				TextEvents.main.is_prompt = false;
+			} else {
+				BattleManager.main.attackCurrent (buffer); // attack currently targeted enemy
+			}
+				
 			buffer = "";
 			count = 0;
 		} else if (Input.GetKey (KeyCode.Backspace)) {
