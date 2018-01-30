@@ -11,6 +11,7 @@ public class BattleManager : MonoBehaviour {
     public GameObject ally_prefab; //prefab for ally object
     public DisplayAlly ally_left; // left ally UI
     public DisplayAlly ally_right; // right ally UI
+    public ChatDatabase chat; //Database containing chat lines
     public GameObject battleLogCast; //Casting log object and Associated reference to store
     public TextMesh logCastText;
     public TextMesh logCastInfo;
@@ -64,8 +65,8 @@ public class BattleManager : MonoBehaviour {
 			new_enemy.transform.localScale = new Vector3 (1, 1, 1);
 			new_enemy.transform.localPosition = new Vector3 (i * enemy_spacing, 0, 0);
 			enemy_arr [i] = new_enemy.GetComponent<Enemy> ();
-			enemy_arr [i].setStats (scene.enemy_stats [i]);
-            enemy_arr [i].field = this; //Give enemey access to field (for calling spellcasts
+            enemy_arr[i].field = this; //Give enemey access to field (for calling spellcasts)
+            enemy_arr [i].initialize (scene.enemy_stats [i]); //sets enemy stats (AND INITITIALIZES ATTACKING AND AI)
             enemy_arr [i].position = i;      //Log enemy position in field
             enemy_arr[i].bars = charge_bars; //Give enemy access to charge_bars
 			Vector3 bar_pos = new_enemy.transform.position;
@@ -189,7 +190,7 @@ public class BattleManager : MonoBehaviour {
         {
             if(allyPos != -1)
             {
-                battleLog(spell.ToUpper().Replace(' ', '-'), "ALLY", "TODO: say something here", Utility.String.FirstLetterToUpperCase(s.root));
+                battleLog(spell.ToUpper().Replace(' ', '-'), "ALLY", chat.getLine(player_arr[allyPos].Stats.name), Utility.String.FirstLetterToUpperCase(s.root));
                 targetPattern = spellDict.getTargetPattern(s, enemy_arr, target_ind, player_arr, allyPos);
             }
             else
@@ -199,8 +200,12 @@ public class BattleManager : MonoBehaviour {
         }          
         else if (status == CastStatus.SUCCESS)
         {
-            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", "TODO: say something here", player_arr[player_ind].Stats.name);
+            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("player_1"), player_arr[player_ind].Stats.name);
             targetPattern = spellDict.getTargetPattern(s, enemy_arr, target_ind, player_arr, player_ind);
+        }
+        else if (status == CastStatus.BOTCH)
+        {
+            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("botch"), player_arr[player_ind].Stats.name);
         }
         else
         {
@@ -264,7 +269,7 @@ public class BattleManager : MonoBehaviour {
         Pair<bool[], bool[]>  targetPattern = spellDict.getTargetPattern(s, player_arr, 1, enemy_arr, position);
         BattleEffects.main.setDim(true, enemy_arr[position].GetComponent<SpriteRenderer>());
         raiseTargets(targetPattern.second, targetPattern.first);
-        battleLog(s.ToString(), "ENEMY", "TODO: say something here", enemy_arr[position].Stats.name);
+        battleLog(s.ToString(), "ENEMY", chat.getLine("enemy_general_1"), enemy_arr[position].Stats.name);
 
         yield return new WaitForSeconds(1.5f);
 

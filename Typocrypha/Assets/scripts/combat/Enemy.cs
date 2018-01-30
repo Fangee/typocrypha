@@ -1,18 +1,23 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 // simple container for enemy stats (Not a struct anymore cuz structs pass by value in c#)
 public class EnemyStats : CasterStats {
     //Sorry for the massive constructor but all the vals are readonly so...
-    public EnemyStats(string name, string sprite, int hp, int shield, int stag, float atk, float def, float speed, float acc, int evade, float[] vsElem = null, SpellData[] sp = null)
+    public EnemyStats(string name, string sprite, int hp, int shield, int stag, float atk, float def, float speed, float acc, int evade, float[] vsElem, EnemySpellList sp, string ai_type, string[] ai_params)
         : base(name, hp, shield, stag, atk, def, speed, acc, evade, vsElem)
     {
         sprite_path = sprite;
+        this.ai_type = ai_type;
+        this.ai_params = ai_params;
         spells = sp;
     }
     public readonly string sprite_path; //path of sprite/resource to load at creation
-    public readonly SpellData[] spells; // castable spells
+    public readonly string ai_type; //type of enemy AI (will be same as name if unique)
+    public readonly string[] ai_params;
+    public readonly EnemySpellList spells; // castable spells
 }
 
 // defines enemy behaviour
@@ -63,16 +68,19 @@ public class Enemy : MonoBehaviour, ICaster {
     bool is_dead; // is enemy dead?
     public bool attack_in_progress = false;
 
-    public BattleManager field;
+    public BattleManager field; // the field the enemy is located in (battle state)
     public int position; //index to field (current position)
     public EnemyChargeBars bars;
 	public SpriteRenderer enemy_sprite; // this enemy's sprite
+    public EnemyAI AI = null;
+
+    //Private fields//
 
     EnemyStats stats; // stats of enemy DO NOT MUTATE
     BuffDebuff buffDebuff = new BuffDebuff(); // buff/debuff state
 
     bool is_stunned; // is the enemy stunned?
-    int curr_spell = 0;
+    SpellData curr_spell = null; //A reference to the current spell
 	int curr_hp; // current amount of health
     int curr_shield; //current amount of shield
     int curr_stagger; //current amount of stagger
@@ -80,41 +88,42 @@ public class Enemy : MonoBehaviour, ICaster {
 	float curr_stagger_time; // current time staggered
     float curr_time; // current time (from 0 to atk_time)
     float atk_time; // time it takes to attack
-    private static SpellDictionary dict; //Dictionary to refer to (set in setStats)
+    private SpellDictionary dict; //Dictionary to refer to (set in setStats)
+
+    //Methods//
 
     void Start() {
 		is_dead = false;
     }
-
-	public void setStats(EnemyStats i_stats) {
+    //Initializes enemy stats (and starts attacking routing)
+	public void initialize(EnemyStats i_stats) {
+        //Set stats
 		stats = i_stats;
+        //Initialize combat values
 		Curr_hp = stats.max_hp;
         Curr_shield = stats.max_shield;
         stagger_time = (stats.max_stagger * stagger_mult_constant) + stagger_add_constant;
         Curr_stagger = stats.max_stagger;
 		curr_time = 0;
-        if(dict == null)
-            dict = GameObject.FindGameObjectWithTag("SpellDictionary").GetComponent<SpellDictionary>();
+        //Set dictionary from field
+        dict = field.spellDict;
+        //Get sprite components
 		enemy_sprite = GetComponent<SpriteRenderer> ();
         enemy_sprite.sprite = Resources.Load<Sprite>(stats.sprite_path);
+        //Get AI module
+        AI = EnemyAI.GetAIFromString(stats.ai_type, stats.ai_params);
         //Start Attacking
-        StartCoroutine (timer ()); 
+        StartCoroutine (attackRoutine ()); 
 	}
 
-    public EnemyStats getStats()
-    {
-        return stats;
-    }
-
-
 	// returns curr_time/atk_time
-	public float getProgress() {
+	public float getAtkProgress() {
 		return curr_time / atk_time;
 	}
 
-	// returns name of current spell
+	// returns data of current spell
 	public SpellData getCurrSpell() {
-		return stats.spells[curr_spell];
+		return curr_spell;
 	}
 
 	// returns progress of stagger bar
@@ -124,11 +133,12 @@ public class Enemy : MonoBehaviour, ICaster {
 	}
     //Main attack AI
 	// keep track of time, and attack whenever curr_time = atk_time
-	IEnumerator timer() {
+	IEnumerator attackRoutine() {
 		Vector3 original_pos = transform.position;
         curr_stagger_time = 0F;
-        SpellData s = stats.spells[curr_spell];        //Initialize with current spell
-        atk_time = dict.getCastingTime(s, stats.speed);   //Get casting time
+        int target;
+        curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target);   //Initialize with current spell
+        atk_time = dict.getCastingTime(curr_spell, stats.speed);   //Get casting time
 		while (!is_dead) {
 			yield return new WaitForEndOfFrame ();
 			yield return new WaitWhile (() => BattleManager.main.pause);
@@ -151,12 +161,12 @@ public class Enemy : MonoBehaviour, ICaster {
                 yield return new WaitForSeconds(1f);
                 yield return new WaitWhile(() => BattleManager.main.pause);
                 if(!is_stunned)
-                    attackPlayer (s);
-                curr_spell++;
-                if (curr_spell >= stats.spells.Length)//Reached end of spell list
-                    curr_spell = 0;
-                s = stats.spells[curr_spell]; //get next spell
-                atk_time = dict.getCastingTime(s, stats.speed);//get new casting time
+                    attackPlayer (curr_spell);
+                //Update state (will move to make it so that state change can interrupt cast)
+                AI.updateState(field.enemy_arr, position, field.player_arr);
+                //Get next spell from AI
+                curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target);
+                atk_time = dict.getCastingTime(curr_spell, stats.speed);//get new casting time
                 curr_time = 0;
                 //resetBarFX(); // stop full bar effects (now in barFlash)
             }
@@ -226,7 +236,7 @@ public class Enemy : MonoBehaviour, ICaster {
         Curr_stagger = stats.max_stagger;
     }
 
-    //Updates opacity and death(after pause in battlemanager)
+    //Updates opacity and death (after pause in battlemanager)
     public void updateCondition()
     {
         // make enemy sprite fade as damaged (lazy health rep)
@@ -253,3 +263,22 @@ public class Enemy : MonoBehaviour, ICaster {
 		transform.localScale = new Vector3 (1f, 1f, 1f);
 	}
 }
+//Spell list that contains enemies spells in a useful way (for AI)
+//currently mostly just a dictionary, but may change
+public class EnemySpellList
+{
+    public EnemySpellList(Dictionary<string, SpellData[]> spells)
+    {
+        groups = spells;
+    }
+    private Dictionary<string, SpellData[]> groups;
+    public SpellData[] getSpells(string group)
+    {
+        return groups[group];
+    }
+    public bool hasGroup(string group)
+    {
+        return groups.ContainsKey(group);
+    }
+}
+
