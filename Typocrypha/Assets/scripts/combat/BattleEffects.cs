@@ -10,6 +10,9 @@ public class BattleEffects : MonoBehaviour {
 	public SpriteRenderer dimmer; // dimmer image
 	public Canvas canvas; // canvas component
 
+	const int undim_layer = 10; // layer when enemy sprite is shown
+	const int dim_layer = -5; // layer when enemy sprite is dimmed
+
 	void Awake() {
 		if (main == null) main = this;
 	}
@@ -25,10 +28,10 @@ public class BattleEffects : MonoBehaviour {
 	// turn dim on/off
 	public void setDim(bool dim, SpriteRenderer target) {
 		if (dim) {
-			if (target != null) target.sortingOrder = 10;
+			if (target != null) target.sortingOrder = undim_layer;
 			dimmer.color = new Color (0, 0, 0, 0.5f);
 		} else {
-			if (target != null) target.sortingOrder = 0;
+			if (target != null) target.sortingOrder = dim_layer;
 			dimmer.color = new Color (0, 0, 0, 0);
 		}
 	}
@@ -41,7 +44,7 @@ public class BattleEffects : MonoBehaviour {
             {
                 foreach (SpriteRenderer s in targets)
                 {
-                    s.sortingOrder = 10;
+					s.sortingOrder = undim_layer;
                 }
             }
             dimmer.color = new Color(0, 0, 0, 0.5f);
@@ -52,7 +55,7 @@ public class BattleEffects : MonoBehaviour {
             {
                 foreach (SpriteRenderer s in targets)
                 {
-                    s.sortingOrder = 0;
+					s.sortingOrder = dim_layer;
                 }
             }
             dimmer.color = new Color(0, 0, 0, 0);

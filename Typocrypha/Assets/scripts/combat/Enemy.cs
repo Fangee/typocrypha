@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour, ICaster {
 
     private const float stagger_mult_constant = 1F;//Amount to multiply max_stagger by when calculating stagger time
     private const float stagger_add_constant = 5F;//Amount to add when calculating stagger time
+	private const int enemy_sprite_layer = -5;//Layer of enemy sprite in sorting order
 
     //ICaster Properties//
 
@@ -110,6 +111,7 @@ public class Enemy : MonoBehaviour, ICaster {
         //Get sprite components
 		enemy_sprite = GetComponent<SpriteRenderer> ();
         enemy_sprite.sprite = Resources.Load<Sprite>(stats.sprite_path);
+		enemy_sprite.sortingOrder = enemy_sprite_layer;
         //Get AI module
         AI = EnemyAI.GetAIFromString(stats.ai_type, stats.ai_params);
         //Start Attacking

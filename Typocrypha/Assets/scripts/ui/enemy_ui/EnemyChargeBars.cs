@@ -19,7 +19,7 @@ public class EnemyChargeBars : MonoBehaviour {
     }
 
     void Awake() {
-		x_offset = new Vector3 (-0.5f * bar_width, 0, 0);
+		x_offset = new Vector3 (-0.5f * bar_width, 0, 0); // place halfway (centered)
 		charge_bars = new BarMeter[3];
 	}
 
