@@ -5,16 +5,21 @@ using UnityEngine;
 // performs various background effects
 public class BackgroundEffects : MonoBehaviour {
 	public static BackgroundEffects main;
-	public SpriteRenderer sprite_r;
+	public SRWavySprite wavy_sprite;
 	public SpriteRenderer bg_dimmer;
+
+	const int bg_layer = -10;
 
 	void Start() {
 		if (main == null) main = this;
+		wavy_sprite.waveForce = 0f; // initially, no waving
+		wavy_sprite.sortingLayer = SortingLayer.GetLayerValueFromName("Background");
+		wavy_sprite.orderInLayer = bg_layer;
 	}
 
 	// sets sprite of background image
 	public void setBG(string sprite_name) {
-		sprite_r.sprite = Resources.Load<Sprite> ("sprites/backgrounds/" + sprite_name);
+		wavy_sprite.texture = Resources.Load<Texture2D> ("sprites/backgrounds/" + sprite_name);
 	}
 
 	// fades current background image in/out over 'fade_time' seconds into color 'fade_color'
@@ -33,16 +38,16 @@ public class BackgroundEffects : MonoBehaviour {
 	IEnumerator conveyorBG_cr(float speed) {
 		List<Transform> frames = new List<Transform> ();
 		GameObject frame = new GameObject ();
-		SpriteRenderer frame_r = frame.AddComponent<SpriteRenderer> ();
-		frame_r.sortingOrder = -5;
-		frame_r.sprite = sprite_r.sprite;
+		SRWavySprite frame_r = frame.AddComponent<SRWavySprite> ();
+		frame_r.sortingLayer = bg_layer;
+		frame_r.texture = wavy_sprite.texture;
 		frames.Add (frame.transform);
 		for (;;) {
 			if (frames.Count == 0 || frames[frames.Count - 1].position.x > 0f) {
 				GameObject n_frame = new GameObject ();
-				SpriteRenderer n_frame_r = n_frame.AddComponent<SpriteRenderer> ();
-				n_frame_r.sprite = sprite_r.sprite;
-				n_frame_r.sortingOrder = -10;
+				SRWavySprite n_frame_r = n_frame.AddComponent<SRWavySprite> ();
+				n_frame_r.texture = wavy_sprite.texture;
+				n_frame_r.sortingLayer = bg_layer;
 				n_frame.transform.position = new Vector2 (-20f, 0);
 				frames.Add (n_frame.transform);
 			}
