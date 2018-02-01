@@ -56,6 +56,8 @@ GameObject:
   - component: {fileID: 224428198917546392}
   - component: {fileID: 222674982078519438}
   - component: {fileID: 114118655963158962}
+  - component: {fileID: 114013126539213208}
+  - component: {fileID: 114237309792852682}
   m_Layer: 5
   m_Name: BarText
   m_TagString: Untagged
@@ -63,6 +65,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114013126539213208
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1691227541977936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 1, y: 1}
+  m_UseGraphicAlpha: 1
 --- !u!114 &114118655963158962
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -75,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -83,7 +99,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 02e080ad0623d224087ffa40e2fd4cf2, type: 2}
+    m_Font: {fileID: 12800000, guid: 915ee0073de710d4089f64a5c3e07519, type: 3}
     m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
@@ -95,7 +111,18 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: testTEST
+--- !u!114 &114237309792852682
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1691227541977936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8047914dd99243543a9337d2d5586912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114275580656832060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -214,8 +241,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 32}
-  m_SizeDelta: {x: 192, y: 32}
+  m_AnchoredPosition: {x: 0, y: -60}
+  m_SizeDelta: {x: 336, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224876135628541058
 RectTransform:

@@ -43,6 +43,7 @@ public class BattleManager : MonoBehaviour {
 	Vector3 OVER_OFFSET = new Vector3 (-1,1,0); //where something over the damage num should be
 
 	const float enemy_y_offset = 0.5f; // offset of enemy from y axis
+	const float reticule_y_offset = 1f; // offset of target reticule
 	const int undim_layer = -1; // layer of enemy when enemy sprite is shown
 	const int dim_layer = -5;   // layer of enemy when enemy sprite is dimmed
 
@@ -150,7 +151,7 @@ public class BattleManager : MonoBehaviour {
 		if (target_ind < 0) target_ind = 0;
 		if (target_ind > 2) target_ind = 2;
 		// move target reticule
-		target_ret.localPosition = new Vector3 (target_ind * enemy_spacing, -1, 0);
+		target_ret.localPosition = new Vector3 (target_ind * enemy_spacing, reticule_y_offset, 0);
 		// play effect sound if target was moved
 		if (old_ind != target_ind) AudioPlayer.main.playSFX(0, SFXType.UI, "sfx_enemy_select");
 

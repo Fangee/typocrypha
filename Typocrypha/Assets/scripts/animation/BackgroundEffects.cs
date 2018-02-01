@@ -36,11 +36,6 @@ public class BackgroundEffects : MonoBehaviour {
 	// if speed is negative, moves left, otherwise, right
 	IEnumerator conveyorBG_cr(float speed) {
 		List<Transform> frames = new List<Transform> ();
-		GameObject frame = new GameObject ();
-		SRWavySprite frame_r = frame.AddComponent<SRWavySprite> ();
-		frame_r.sortingLayer = bg_layer;
-		frame_r.texture = wavy_sprite.texture;
-		frames.Add (frame.transform);
 		for (;;) {
 			if (frames.Count == 0 || frames[frames.Count - 1].position.x > 0f) {
 				GameObject n_frame = new GameObject ();
