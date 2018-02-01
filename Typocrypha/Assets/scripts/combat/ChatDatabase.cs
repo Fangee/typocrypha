@@ -45,7 +45,7 @@ public class ChatDatabase : MonoBehaviour
             {
                 int chance;
                 int.TryParse(cols[0].Trim(), out chance);
-                c.add(cols[1].Trim(), chance);
+                c.add(cols[1].Trim().Replace("\"", String.Empty), chance);
             }
         }
         Debug.Log("Done loading chat data");

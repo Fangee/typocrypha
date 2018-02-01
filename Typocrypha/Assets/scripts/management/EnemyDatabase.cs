@@ -28,7 +28,7 @@ public class EnemyDatabase
         string[] lines = text_file.text.Split(line_delim);
         string[] cols;
         //Declare fields
-        string name, sprite_path, ai_type;
+        string name, sprite_path, chat_id, ai_type;
         int max_hp, max_shield, max_stagger,evade;//declare stat variables
         float speed, acc, atk, def;
         float[] vsElem;
@@ -41,6 +41,7 @@ public class EnemyDatabase
             int ind = 0;//Allows new stats to be added without changing the constants
             name = cols[ind].Trim();
             sprite_path = cols[++ind].Trim();
+            chat_id = cols[++ind].Trim().ToLower();
             int.TryParse(cols[++ind].Trim(), out max_hp);
             int.TryParse(cols[++ind].Trim(), out max_shield);
             int.TryParse(cols[++ind].Trim(), out max_stagger);
@@ -102,7 +103,7 @@ public class EnemyDatabase
                 spells.Add(s);
             }
             EnemySpellList spellList = new EnemySpellList(spellGroups);
-            EnemyStats stats = new EnemyStats(name, assetPath + sprite_path, max_hp, max_shield, max_stagger, atk, def, speed, acc, evade, vsElem, spellList, ai_type, ai_params);
+            EnemyStats stats = new EnemyStats(name, chat_id, assetPath + sprite_path, max_hp, max_shield, max_stagger, atk, def, speed, acc, evade, vsElem, spellList, ai_type, ai_params);
             database.Add(stats.name, stats);
         }
         Debug.Log("Enemy Database Loaded");

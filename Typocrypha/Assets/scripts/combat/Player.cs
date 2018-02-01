@@ -7,13 +7,16 @@ using UnityEngine.UI;
 //Can also be used as a stat buff/debuff modifier with CasterStats.modify;
 public class PlayerStats : CasterStats
 {
-    public PlayerStats() : base("Player", 100, 100, -1, 1F, 0.1F, 1F, 1F, 4, new float[Elements.count])
+    public PlayerStats() : base("Player", "ignore this", 100, 100, -1, 1F, 0.1F, 1F, 1F, 4, new float[Elements.count])
     {
         for (int i = 0; i < Elements.count; i++)
         {
             vsElement[i] = 1.0F;
         }
+        chatID = "player_1";
     }
+    private string chatID;
+    public override string ChatDatabaseID { get { return chatID; } }
 }
 
 //Contains Static referrence to global Player (Player.main)
