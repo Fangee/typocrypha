@@ -18,8 +18,8 @@ public class BattleManager : MonoBehaviour {
     public GameObject battleLogTalk; //talk log object and Associated reference to store
     public TextMesh logTalkText;
     public TextMesh logTalkInfo;
-        private MeshRenderer[] battleLogMeshes = new MeshRenderer[4];
-        private SpriteRenderer[] battleLogSprites = new SpriteRenderer[4];
+    private MeshRenderer[] battleLogMeshes = new MeshRenderer[4];
+    private SpriteRenderer[] battleLogSprites = new SpriteRenderer[4];
 	public EnemyChargeBars charge_bars; // creates and mananges charge bars
 	public EnemyStaggerBars stagger_bars; // creates and manages stagger bars
 	public CooldownList cooldown_list; // creates and manages player's cooldowns
@@ -42,6 +42,10 @@ public class BattleManager : MonoBehaviour {
 	Vector3 UNDER_OFFSET = new Vector3 (-1,-1,0); //where something under the damage num should be
 	Vector3 OVER_OFFSET = new Vector3 (-1,1,0); //where something over the damage num should be
 
+	const float enemy_y_offset = 0.5f; // offset of enemy from y axis
+	const int undim_layer = -1; // layer of enemy when enemy sprite is shown
+	const int dim_layer = -5;   // layer of enemy when enemy sprite is dimmed
+
 	void Awake() {
 		if (main == null) main = this;
 		pause = false;
@@ -60,20 +64,7 @@ public class BattleManager : MonoBehaviour {
 		enemy_count = scene.enemy_stats.Length;
 		charge_bars.initChargeBars ();
 		stagger_bars.initStaggerBars ();
-		for (int i = 0; i < scene.enemy_stats.Length; i++) {
-			GameObject new_enemy = GameObject.Instantiate (enemy_prefab, transform);
-			new_enemy.transform.localScale = new Vector3 (1, 1, 1);
-			new_enemy.transform.localPosition = new Vector3 (i * enemy_spacing, 0, 0);
-			enemy_arr [i] = new_enemy.GetComponent<Enemy> ();
-            enemy_arr[i].field = this; //Give enemey access to field (for calling spellcasts)
-            enemy_arr [i].initialize (scene.enemy_stats [i]); //sets enemy stats (AND INITITIALIZES ATTACKING AND AI)
-            enemy_arr [i].position = i;      //Log enemy position in field
-            enemy_arr[i].bars = charge_bars; //Give enemy access to charge_bars
-			Vector3 bar_pos = new_enemy.transform.position;
-			bar_pos.Set (bar_pos.x, bar_pos.y + 1, bar_pos.z);
-			charge_bars.makeChargeMeter(i, bar_pos);
-			stagger_bars.makeStaggerMeter (i, bar_pos);
-		}
+		for (int i = 0; i < scene.enemy_stats.Length; i++) createEnemy (i, scene);
 
         //CREATE ALLIES//
 
@@ -112,6 +103,21 @@ public class BattleManager : MonoBehaviour {
         pause = false;
 		target_ind = 0;
 		AudioPlayer.main.playMusic (MusicType.BATTLE, scene.music_tracks[0]);
+	}
+
+	// creates the enemy specified at 'i' (0-left, 1-mid, 2-right) by the 'scene'
+	void createEnemy(int i, BattleScene scene) {
+		GameObject new_enemy = GameObject.Instantiate (enemy_prefab, transform);
+		new_enemy.transform.localScale = new Vector3 (1, 1, 1);
+		new_enemy.transform.localPosition = new Vector3 (i * enemy_spacing, enemy_y_offset, 0);
+		enemy_arr [i] = new_enemy.GetComponent<Enemy> ();
+		enemy_arr[i].field = this; //Give enemey access to field (for calling spellcasts)
+		enemy_arr [i].initialize (scene.enemy_stats [i]); //sets enemy stats (AND INITITIALIZES ATTACKING AND AI)
+		enemy_arr [i].position = i;      //Log enemy position in field
+		enemy_arr[i].bars = charge_bars; //Give enemy access to charge_bars
+		Vector3 bar_pos = new_enemy.transform.position;
+		charge_bars.makeChargeMeter(i, bar_pos);
+		stagger_bars.makeStaggerMeter (i, bar_pos);
 	}
 
     //removes all enemies and charge bars
@@ -478,12 +484,12 @@ public class BattleManager : MonoBehaviour {
 
     }
     //Raises the targets (array val = true) above the dimmer level
-    private void raiseTargets(bool[] enemy_r, bool[] player_r)
+	private void raiseTargets(bool[] enemy_r, bool[] player_r)
     {
         for (int i = 0; i < 3; ++i)
         {
             if (enemy_r[i])
-                enemy_arr[i].enemy_sprite.sortingOrder = 10;
+				enemy_arr[i].enemy_sprite.sortingOrder = undim_layer;
         }
     }
     //Lowers the targets (array val = true) below the dimmer level
@@ -492,7 +498,7 @@ public class BattleManager : MonoBehaviour {
         for (int i = 0; i < 3; ++i)
         {
             if (enemy_r[i])
-                enemy_arr[i].enemy_sprite.sortingOrder = 0;
+				enemy_arr[i].enemy_sprite.sortingOrder = dim_layer;
         }
     }
     //Returns true if ally with specified name is in the battle

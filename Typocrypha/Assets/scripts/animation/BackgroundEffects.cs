@@ -13,7 +13,6 @@ public class BackgroundEffects : MonoBehaviour {
 	void Start() {
 		if (main == null) main = this;
 		wavy_sprite.waveForce = 0f; // initially, no waving
-		wavy_sprite.sortingLayer = SortingLayer.GetLayerValueFromName("Background");
 		wavy_sprite.orderInLayer = bg_layer;
 	}
 
