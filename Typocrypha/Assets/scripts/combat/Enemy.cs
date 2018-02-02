@@ -65,7 +65,6 @@ public class Enemy : MonoBehaviour, ICaster {
 
     //Public fields//
 
-    bool is_dead; // is enemy dead?
     public bool attack_in_progress = false;
 
     public BattleManager field; // the field the enemy is located in (battle state)
@@ -79,7 +78,9 @@ public class Enemy : MonoBehaviour, ICaster {
     EnemyStats stats; // stats of enemy DO NOT MUTATE
     BuffDebuff buffDebuff = new BuffDebuff(); // buff/debuff state
 
+    bool is_dead; // is enemy dead?
     bool is_stunned; // is the enemy stunned?
+    int target; //Position in player_arr (BattleManager.cs) that this enemy is currently targeting
     SpellData curr_spell = null; //A reference to the current spell
 	int curr_hp; // current amount of health
     int curr_shield; //current amount of shield
@@ -136,7 +137,6 @@ public class Enemy : MonoBehaviour, ICaster {
 	IEnumerator attackRoutine() {
 		Vector3 original_pos = transform.position;
         curr_stagger_time = 0F;
-        int target;
         curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target);   //Initialize with current spell
         atk_time = dict.getCastingTime(curr_spell, stats.speed);   //Get casting time
 		while (!is_dead) {
@@ -206,7 +206,7 @@ public class Enemy : MonoBehaviour, ICaster {
     // pause battle, attack player with specified spell
     void attackPlayer(SpellData s) {
         Debug.Log(stats.name + " casts " + s.ToString());
-        field.enemyCast(dict, s, position);
+        field.enemyCast(dict, s, position, target);
 	}
 
 	// be attacked by the player
