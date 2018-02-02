@@ -207,9 +207,21 @@ public class BattleManager : MonoBehaviour {
         {
             battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("botch"), player_arr[player_ind].Stats.name);
         }
+        else if (status == CastStatus.FIZZLE)
+        {
+            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("fizzle"), player_arr[player_ind].Stats.name);
+        }
+        else if (status == CastStatus.ONCOOLDOWN)
+        {
+            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("oncooldown"), player_arr[player_ind].Stats.name);
+        }
+        else if (status == CastStatus.COOLDOWNFULL)
+        {
+            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("cooldownlistfull"), player_arr[player_ind].Stats.name);
+        }
         else
         {
-            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", "TODO: say something here", player_arr[player_ind].Stats.name);
+            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", "SOMETHING HAS GONE HORRIBLY WRONG", player_arr[player_ind].Stats.name);
         }
         if(targetPattern != null)
             raiseTargets(targetPattern.first, targetPattern.second);
