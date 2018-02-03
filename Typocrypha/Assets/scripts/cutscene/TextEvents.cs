@@ -33,7 +33,8 @@ public class TextEvents : MonoBehaviour {
 			{"set-scroll-delay", setScrollDelay},
 			{"set-bg", setBG},
 			{"hide-text-box", hideTextBox},
-			{"set-talk-sfx", setTalkSFX}
+			{"set-talk-sfx", setTalkSFX},
+            {"evil-eye", evilEye}
 		};
 	}
 
@@ -214,5 +215,11 @@ public class TextEvents : MonoBehaviour {
 		// TODO
 		yield return true;
 	}
+
+    IEnumerator evilEye(string[] opt) {
+        Debug.Log("evil eye lol");
+        AnimationPlayer.main.playAnimation("Evil_Eye", new Vector3(-5, 0, 0), 1);
+        yield return true;
+    }
 }
 
