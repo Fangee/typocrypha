@@ -37,8 +37,8 @@ public class TextEvents : MonoBehaviour {
 			{"set-bg", setBG},
 			{"hide-text-box", hideTextBox},
 			{"set-talk-sfx", setTalkSFX},
-            		{"evil-eye", evilEye},
-            		{"prompt", prompt}
+            {"evil-eye", evilEye},
+            {"prompt", prompt}
 		};
 		is_prompt = false;
 	}
