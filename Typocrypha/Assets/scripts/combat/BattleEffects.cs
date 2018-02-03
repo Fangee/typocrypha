@@ -10,6 +10,12 @@ public class BattleEffects : MonoBehaviour {
 	public SpriteRenderer dimmer; // dimmer image
 	public Canvas canvas; // canvas component
 
+	private int old_dim_layer;
+
+	const int dimmer_show = -2; // layer of dimmer when showing enemies
+	const int undim_layer = -1; // layer of enemy when enemy sprite is shown
+	const int dim_layer = -5;   // layer of enemy when enemy sprite is dimmed
+
 	void Awake() {
 		if (main == null) main = this;
 	}
@@ -24,13 +30,7 @@ public class BattleEffects : MonoBehaviour {
     }
 	// turn dim on/off
 	public void setDim(bool dim, SpriteRenderer target) {
-		if (dim) {
-			if (target != null) target.sortingOrder = 10;
-			dimmer.color = new Color (0, 0, 0, 0.5f);
-		} else {
-			if (target != null) target.sortingOrder = 0;
-			dimmer.color = new Color (0, 0, 0, 0);
-		}
+		setDim(dim, new SpriteRenderer[1]{ target });
 	}
     // turn dim on/off (for multiple sprites)
     public void setDim(bool dim, SpriteRenderer[] targets)
@@ -41,10 +41,12 @@ public class BattleEffects : MonoBehaviour {
             {
                 foreach (SpriteRenderer s in targets)
                 {
-                    s.sortingOrder = 10;
+					s.sortingOrder = undim_layer;
                 }
             }
             dimmer.color = new Color(0, 0, 0, 0.5f);
+			old_dim_layer = dimmer.sortingOrder;
+			dimmer.sortingOrder = dimmer_show;
         }
         else
         {
@@ -52,13 +54,14 @@ public class BattleEffects : MonoBehaviour {
             {
                 foreach (SpriteRenderer s in targets)
                 {
-                    s.sortingOrder = 0;
+					s.sortingOrder = dim_layer;
                 }
             }
             dimmer.color = new Color(0, 0, 0, 0);
+			dimmer.sortingOrder = old_dim_layer;
         }
     }
-
+		
 	// shake the screen for sec seconds and amt intensity
 	public void screenShake(float sec, float amt) {
 		StartCoroutine (screenShakeCR(sec, amt));

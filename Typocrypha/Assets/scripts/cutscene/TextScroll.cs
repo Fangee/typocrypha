@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 // edits by James Iwamasa
+
+// represents a macro substitution function
+public delegate string MacroSubDel(string macro);
 
 // displays text character by character
 public class TextScroll : MonoBehaviour {
@@ -20,6 +24,7 @@ public class TextScroll : MonoBehaviour {
 	Stack<Pair<string, string>> tag_stack; // stores currently used tags
 	Text out_text; // where text gets outputted
 	Coroutine curr; // current printing coroutine
+	Dictionary<string, MacroSubDel> macro_map; // for substituting macros
 
 	Regex tag_cutoff = new Regex ("<|>|=.*");
 	Regex evt_cutout = new Regex (Regex.Escape("[") + ".*?" + Regex.Escape("]")); // matches events
@@ -28,6 +33,9 @@ public class TextScroll : MonoBehaviour {
 	void Start() {
 		is_print = false;
 		tag_stack = new Stack<Pair<string, string>> ();
+		macro_map = new Dictionary<string, MacroSubDel> {
+			{"name", macroNameSub}
+		};
 	}
 
 	// start printing string to Text display
@@ -37,6 +45,7 @@ public class TextScroll : MonoBehaviour {
 		out_text.text = "";
 		is_print = true;
 		pause_print = false; // unpause text
+		substituteMacros();
 		if (curr != null) StopCoroutine (curr);
 		TextEvents.main.StopAllCoroutines (); // stop all previously running events
 		curr = StartCoroutine (scrollText ());
@@ -84,7 +93,7 @@ public class TextScroll : MonoBehaviour {
 		is_print = false;
 	}
 
-	// checks for tags
+	// checks for tags (triangle brackets <>)
 	void checkTags() {
 		if (in_text [text_pos + 1].CompareTo ('/') == 0) { // check if end tag (pop)
 			string end_tag = tag_stack.Pop().second; // remove tag from stack
@@ -104,7 +113,7 @@ public class TextScroll : MonoBehaviour {
 		}
 	}
 
-	// checks for text events, and parse and play them
+	// checks for text events (square brackets []), and parse and play them
 	void checkEvents() {
 		int start_pos = text_pos;
 		int end_pos = in_text.IndexOf (']', start_pos);
@@ -122,6 +131,29 @@ public class TextScroll : MonoBehaviour {
 		Debug.Log ("text_event:" + evt + ":" + opt.Aggregate("", (acc, next) => acc + "," + next));
 		if (evt.CompareTo ("next") == 0) return; // forceNextLine will handle rest
 		text_pos = end_pos + 1;
+	}
+
+	// substiutes macros in 'in_text' (curly braces {})
+	void substituteMacros() {
+		StringBuilder true_str = new StringBuilder ();
+		for (int i = 0; i < in_text.Length;) {
+			if (in_text [i].CompareTo ('{') == 0) {
+				int start_pos = i + 1;
+				int end_pos = in_text.IndexOf ('}', start_pos);
+				string macro = in_text.Substring (start_pos, end_pos - start_pos);
+				string sub = macro_map [macro] (macro);
+				true_str.Append (sub);
+				i = end_pos + 1;
+			} else {
+				true_str.Append (in_text [i++]);
+			}
+		}
+		in_text = true_str.ToString ();
+	}
+
+	// substitutes name macro
+	string macroNameSub(string macro) {
+		return PlayerDialogueInfo.main.player_name;
 	}
 
 	// deletes characters currently in buffer one by one (doesnt check for tags)

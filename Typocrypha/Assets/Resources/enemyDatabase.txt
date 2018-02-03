@@ -1,5 +1,7 @@
-Name(ID)	sprite_name	max_hp	max_shield	max_stagger	ATK	DEF	SPEED	ACC (%)	EVADE	null wk/res	fire wk/res	ice wk/res	bolt wk/res	Spell1 (root)	Spell1 (elem)	Spell1(style)	Spell x (root)	Spell x (elem)	Spell x (style)	
-Slime	frog_mario	10	0	1	1	0	2	1.5	0	1	0.5	1.5	1	sword	null	null	falchion	null	null	END
-Tanuki	tanuki_mario	100	0	3	0.95	-0.2	2.5	1	10	1.2	1	1	1	spear	null	null	spear	null	aimed	END
-The Evil Eye	frog_mario	50	0	2	1.25	0.2	1.5	1	0	-1	2	0.75	-2	sword	null	null	spear	fire	null	END
-END																				
+Name(ID)	sprite_name	max_hp	max_shield	max_stagger	ATK	DEF	SPEED (Higher is lower0	ACC (%)	EVADE	AI type	AI parameters	null wk/res	fire wk/res	ice wk/res	bolt wk/res	SpellGroup 1	Spell1 (root)	Spell1 (elem)	Spell1(style)	Spell x (root)	Spell x (elem)	Spell x (style)	Next Group or END				
+Slime	frog_mario	10	0	1	1	0	2	1.5	0	Attacker1	none	1	0.5	1.5	1	GROUP/DEFAULT	sword	null	null	falchion	null	null	END				
+Tanuki	tanuki	100	0	3	0.95	-0.2	2.5	1	10	Attacker1	none	1.2	1	1	1	GROUP/DEFAULT	spear	null	null	spear	null	aimed	END				
+The Evil Eye	frog_mario	50	0	2	1.25	0.2	1.5	1	0	HealthLow1	"75,25"	-1	2	0.75	-2	GROUP/DEFAULT	sword	null	null	spear	fire	null	GROUP/HEALTH_LOW	quake	null	null	END
+Ladon	ladon	100	0	3	0.95	-0.2	2.5	1	10	Attacker1	none	1.2	1	1	1	GROUP/DEFAULT	spear	null	null	spear	null	aimed	END				
+Lilim	lilim	50	0	2	1.25	0.2	1.5	1	0	HealthLow1	"75,25"	-1	2	0.75	-2	GROUP/DEFAULT	sword	null	null	spear	fire	null	GROUP/HEALTH_LOW	quake	null	null	END
+END																											

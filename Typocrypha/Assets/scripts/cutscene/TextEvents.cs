@@ -12,12 +12,15 @@ public delegate IEnumerator TextEventDel(string[] opt);
 public class TextEvents : MonoBehaviour {
 	public static TextEvents main = null;
 	public Dictionary<string, TextEventDel> text_event_map;
+	public bool is_prompt; // are we prompting input?
+	public string prompt_input; // input from prompt
 
 	public SpriteRenderer dimmer; // sprite used to cover screen for fade/dim effects
 	public TextScroll text_scroll; // main text scroller for normal dialogue
 	public GameObject center_text; // for showing floating text in the center
 	public Camera main_camera; // main camera object
 	public GameObject dialogue_box; // dialogue box object
+	public TrackTyping track_typing; // tracks keyboard input
 
 	void Start() {
 		if (main == null) main = this;
@@ -34,8 +37,10 @@ public class TextEvents : MonoBehaviour {
 			{"set-bg", setBG},
 			{"hide-text-box", hideTextBox},
 			{"set-talk-sfx", setTalkSFX},
-            {"evil-eye", evilEye}
+            		{"evil-eye", evilEye},
+            		{"prompt", prompt}
 		};
+		is_prompt = false;
 	}
 
 	// plays the event 'evt', returning the coroutine created (null if event doesnt exist)
@@ -212,7 +217,24 @@ public class TextEvents : MonoBehaviour {
 	// prompts player to enter something into TYPORCYPHA; resumes on enter
 	// input: [0]: string, type of prompt
 	IEnumerator prompt(string[] opt) {
-		// TODO
+		CutsceneManager.main.enabled = false;
+		dialogue_box.SetActive (false);
+		track_typing.enabled = true;
+		is_prompt = true;
+
+		while (is_prompt)
+			yield return new WaitForEndOfFrame ();
+
+		switch (opt[0]) {
+		case "name":
+			PlayerDialogueInfo.main.player_name = prompt_input;
+			break;
+		}
+		prompt_input = "";
+		track_typing.enabled = false;
+		dialogue_box.SetActive (true);
+		CutsceneManager.main.enabled = true;
+		CutsceneManager.main.forceNextLine ();
 		yield return true;
 	}
 

@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyStaggerBars : MonoBehaviour {
 	public GameObject staggerbar_prefab; // prefab for stagger bar
 	public float bar_width; // width of bar
-	Vector3 x_offset; // offset to account for width of bar
+	Vector3 offset; // offset to account for width of bar
 	BarMeter[] stagger_bars; // stagger bars for enemies
 
 	//Get-only
@@ -19,7 +19,7 @@ public class EnemyStaggerBars : MonoBehaviour {
 	}
 
 	void Awake() {
-		x_offset = new Vector3 (-0.5f * bar_width, 0, 0);
+		offset = new Vector3 (-0.5f * bar_width - 95.5f, -82.95f, 0);
 		stagger_bars = new BarMeter[3];
 	}
 
@@ -38,7 +38,7 @@ public class EnemyStaggerBars : MonoBehaviour {
 		GameObject new_bar = GameObject.Instantiate (staggerbar_prefab, transform);
 		new_bar.transform.localScale = new Vector3 (1, 1, 1);
 		new_bar.transform.position = world_pos;
-		new_bar.transform.localPosition += x_offset;
+		new_bar.transform.localPosition += offset;
 		stagger_bars [pos] = new_bar.GetComponent<BarMeter> ();
 		stagger_bars [pos].setText ("");
 	}

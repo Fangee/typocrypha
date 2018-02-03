@@ -11,14 +11,15 @@ public class BattleManager : MonoBehaviour {
     public GameObject ally_prefab; //prefab for ally object
     public DisplayAlly ally_left; // left ally UI
     public DisplayAlly ally_right; // right ally UI
+    public ChatDatabase chat; //Database containing chat lines
     public GameObject battleLogCast; //Casting log object and Associated reference to store
     public TextMesh logCastText;
     public TextMesh logCastInfo;
     public GameObject battleLogTalk; //talk log object and Associated reference to store
     public TextMesh logTalkText;
     public TextMesh logTalkInfo;
-        private MeshRenderer[] battleLogMeshes = new MeshRenderer[4];
-        private SpriteRenderer[] battleLogSprites = new SpriteRenderer[4];
+    private MeshRenderer[] battleLogMeshes = new MeshRenderer[4];
+    private SpriteRenderer[] battleLogSprites = new SpriteRenderer[4];
 	public EnemyChargeBars charge_bars; // creates and mananges charge bars
 	public EnemyStaggerBars stagger_bars; // creates and manages stagger bars
 	public CooldownList cooldown_list; // creates and manages player's cooldowns
@@ -41,6 +42,11 @@ public class BattleManager : MonoBehaviour {
 	Vector3 UNDER_OFFSET = new Vector3 (-1,-1,0); //where something under the damage num should be
 	Vector3 OVER_OFFSET = new Vector3 (-1,1,0); //where something over the damage num should be
 
+	const float enemy_y_offset = 0.5f; // offset of enemy from y axis
+	const float reticule_y_offset = 1f; // offset of target reticule
+	const int undim_layer = -1; // layer of enemy when enemy sprite is shown
+	const int dim_layer = -5;   // layer of enemy when enemy sprite is dimmed
+
 	void Awake() {
 		if (main == null) main = this;
 		pause = false;
@@ -59,20 +65,7 @@ public class BattleManager : MonoBehaviour {
 		enemy_count = scene.enemy_stats.Length;
 		charge_bars.initChargeBars ();
 		stagger_bars.initStaggerBars ();
-		for (int i = 0; i < scene.enemy_stats.Length; i++) {
-			GameObject new_enemy = GameObject.Instantiate (enemy_prefab, transform);
-			new_enemy.transform.localScale = new Vector3 (1, 1, 1);
-			new_enemy.transform.localPosition = new Vector3 (i * enemy_spacing, 0, 0);
-			enemy_arr [i] = new_enemy.GetComponent<Enemy> ();
-			enemy_arr [i].setStats (scene.enemy_stats [i]);
-            enemy_arr [i].field = this; //Give enemey access to field (for calling spellcasts
-            enemy_arr [i].position = i;      //Log enemy position in field
-            enemy_arr[i].bars = charge_bars; //Give enemy access to charge_bars
-			Vector3 bar_pos = new_enemy.transform.position;
-			bar_pos.Set (bar_pos.x, bar_pos.y + 1, bar_pos.z);
-			charge_bars.makeChargeMeter(i, bar_pos);
-			stagger_bars.makeStaggerMeter (i, bar_pos);
-		}
+		for (int i = 0; i < scene.enemy_stats.Length; i++) createEnemy (i, scene);
 
         //CREATE ALLIES//
 
@@ -113,6 +106,21 @@ public class BattleManager : MonoBehaviour {
 		AudioPlayer.main.playMusic (MusicType.BATTLE, scene.music_tracks[0]);
 	}
 
+	// creates the enemy specified at 'i' (0-left, 1-mid, 2-right) by the 'scene'
+	void createEnemy(int i, BattleScene scene) {
+		GameObject new_enemy = GameObject.Instantiate (enemy_prefab, transform);
+		new_enemy.transform.localScale = new Vector3 (1, 1, 1);
+		new_enemy.transform.localPosition = new Vector3 (i * enemy_spacing, enemy_y_offset, 0);
+		enemy_arr [i] = new_enemy.GetComponent<Enemy> ();
+		enemy_arr[i].field = this; //Give enemey access to field (for calling spellcasts)
+		enemy_arr [i].initialize (scene.enemy_stats [i]); //sets enemy stats (AND INITITIALIZES ATTACKING AND AI)
+		enemy_arr [i].position = i;      //Log enemy position in field
+		enemy_arr[i].bars = charge_bars; //Give enemy access to charge_bars
+		Vector3 bar_pos = new_enemy.transform.position;
+		charge_bars.makeChargeMeter(i, bar_pos);
+		stagger_bars.makeStaggerMeter (i, bar_pos);
+	}
+
     //removes all enemies and charge bars
     public void stopBattle()
     {
@@ -143,7 +151,7 @@ public class BattleManager : MonoBehaviour {
 		if (target_ind < 0) target_ind = 0;
 		if (target_ind > 2) target_ind = 2;
 		// move target reticule
-		target_ret.localPosition = new Vector3 (target_ind * enemy_spacing, -1, 0);
+		target_ret.localPosition = new Vector3 (target_ind * enemy_spacing, reticule_y_offset, 0);
 		// play effect sound if target was moved
 		if (old_ind != target_ind) AudioPlayer.main.playSFX(0, SFXType.UI, "sfx_enemy_select");
 
@@ -189,7 +197,7 @@ public class BattleManager : MonoBehaviour {
         {
             if(allyPos != -1)
             {
-                battleLog(spell.ToUpper().Replace(' ', '-'), "ALLY", "TODO: say something here", Utility.String.FirstLetterToUpperCase(s.root));
+                battleLog(spell.ToUpper().Replace(' ', '-'), "ALLY", chat.getLine(player_arr[allyPos].Stats.name), Utility.String.FirstLetterToUpperCase(s.root));
                 targetPattern = spellDict.getTargetPattern(s, enemy_arr, target_ind, player_arr, allyPos);
             }
             else
@@ -199,8 +207,12 @@ public class BattleManager : MonoBehaviour {
         }          
         else if (status == CastStatus.SUCCESS)
         {
-            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", "TODO: say something here", player_arr[player_ind].Stats.name);
+            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("player_1"), player_arr[player_ind].Stats.name);
             targetPattern = spellDict.getTargetPattern(s, enemy_arr, target_ind, player_arr, player_ind);
+        }
+        else if (status == CastStatus.BOTCH)
+        {
+            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("botch"), player_arr[player_ind].Stats.name);
         }
         else
         {
@@ -264,7 +276,7 @@ public class BattleManager : MonoBehaviour {
         Pair<bool[], bool[]>  targetPattern = spellDict.getTargetPattern(s, player_arr, 1, enemy_arr, position);
         BattleEffects.main.setDim(true, enemy_arr[position].GetComponent<SpriteRenderer>());
         raiseTargets(targetPattern.second, targetPattern.first);
-        battleLog(s.ToString(), "ENEMY", "TODO: say something here", enemy_arr[position].Stats.name);
+        battleLog(s.ToString(), "ENEMY", chat.getLine("enemy_general_1"), enemy_arr[position].Stats.name);
 
         yield return new WaitForSeconds(1.5f);
 
@@ -473,12 +485,12 @@ public class BattleManager : MonoBehaviour {
 
     }
     //Raises the targets (array val = true) above the dimmer level
-    private void raiseTargets(bool[] enemy_r, bool[] player_r)
+	private void raiseTargets(bool[] enemy_r, bool[] player_r)
     {
         for (int i = 0; i < 3; ++i)
         {
             if (enemy_r[i])
-                enemy_arr[i].enemy_sprite.sortingOrder = 10;
+				enemy_arr[i].enemy_sprite.sortingOrder = undim_layer;
         }
     }
     //Lowers the targets (array val = true) below the dimmer level
@@ -487,7 +499,7 @@ public class BattleManager : MonoBehaviour {
         for (int i = 0; i < 3; ++i)
         {
             if (enemy_r[i])
-                enemy_arr[i].enemy_sprite.sortingOrder = 0;
+				enemy_arr[i].enemy_sprite.sortingOrder = dim_layer;
         }
     }
     //Returns true if ally with specified name is in the battle

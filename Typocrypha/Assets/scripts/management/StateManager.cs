@@ -11,6 +11,7 @@ public class StateManager : MonoBehaviour {
 	public SpellDictionary spell_dictionary; // manages spells
 	public TrackTyping track_typing; // tracks player's typing
 	public GameObject dialogue_box; // text box for dialogue
+	public GameObject target_reticule; // targeting reticule for battles
 	public bool loaded; // are all the assets (databases, AssetBundles, etc) loaded?
 	public bool ready; // is main scene ready (all components are ready)?
 	public bool start_immediate; // should main scene start when loaded? (useful for skipping title for debug)
@@ -82,6 +83,7 @@ public class StateManager : MonoBehaviour {
 			CutsceneManager.main.enabled = true;
 			CutsceneManager.main.battle_interrupt = false;
 			BattleManager.main.enabled = false;
+			target_reticule.SetActive (false);
 			dialogue_box.SetActive (true);
 			CutsceneManager.main.startCutscene ((CutScene)next_scene);
 			break;
@@ -89,6 +91,7 @@ public class StateManager : MonoBehaviour {
 			track_typing.enabled = true;
 			CutsceneManager.main.enabled = false;
 			BattleManager.main.enabled = true;
+			target_reticule.SetActive (true);
 			dialogue_box.SetActive (false);
 			BattleManager.main.startBattle ((BattleScene)next_scene);
 			break;

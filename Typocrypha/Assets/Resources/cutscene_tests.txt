@@ -1,7 +1,7 @@
 1								
 START_SCENE	CUTSCENE	jazzy_retro_battle_theme						
-DIALOGUE	Tanuki	Im going to disappear[hide-text-box=t][set-talk-sfx=] And then will you see me now?[hide-text-box=f]	jazzy_retro_battle_theme	tanuki_mario	"0,1"	END_DIALOGUE		
-DIALOGUE	Frog	[set-talk-sfx=take_damage]Hmm	frogs	frog_mario	LEFT	END_DIALOGUE		
-DIALOGUE	Tanuki	Hmmmmm	jazzy_retro_battle_theme	tanuki_mario	RIGHT	frog_mario	"1, 1"	END_DIALOGUE
+DIALOGUE	Tanuki	enter your name.	jazzy_retro_battle_theme	tanuki_mario	"0,1"	END_DIALOGUE		
+DIALOGUE		[prompt=name].	_	END_DIALOGUE				
+DIALOGUE	Tanuki	{name}? good name.	_	tanuki_mario	RIGHT	frog_mario	"1, 1"	END_DIALOGUE
 END_SCENE								
 END_GAME								

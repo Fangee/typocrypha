@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyChargeBars : MonoBehaviour {
 	public GameObject chargebar_prefab; // prefab for charge bar
 	public float bar_width; // width of bar
-	Vector3 x_offset; // offset to account for width of bar
+	Vector3 offset; // offset to account for width of bar
 	BarMeter[] charge_bars; // charge bars for enemies
 
     //Get-only
@@ -19,7 +19,7 @@ public class EnemyChargeBars : MonoBehaviour {
     }
 
     void Awake() {
-		x_offset = new Vector3 (-0.5f * bar_width, 0, 0);
+		offset = new Vector3 (-0.5f * bar_width - 109f, -69.9f, 0); // place halfway (centered)
 		charge_bars = new BarMeter[3];
 	}
 
@@ -38,7 +38,7 @@ public class EnemyChargeBars : MonoBehaviour {
 		GameObject new_bar = GameObject.Instantiate (chargebar_prefab, transform);
 		new_bar.transform.localScale = new Vector3 (1, 1, 1);
 		new_bar.transform.position = world_pos;
-		new_bar.transform.localPosition += x_offset;
+		new_bar.transform.localPosition += offset;
 		charge_bars [pos] = new_bar.GetComponent<BarMeter> ();
 		charge_bars [pos].setText ("");
 	}
@@ -57,7 +57,7 @@ public class EnemyChargeBars : MonoBehaviour {
 			if (charge_bars [i] != null) {
 				Enemy enemy = BattleManager.main.enemy_arr [i];
 				if (!enemy.Is_dead) {
-					charge_bars [i].setValue (enemy.getProgress ());
+					charge_bars [i].setValue (enemy.getAtkProgress ());
 					charge_bars [i].setText (enemy.getCurrSpell ().ToString ());
 				} else { // if enemy has died, remove bar
 					charge_bars[i].gameObject.SetActive(false);
