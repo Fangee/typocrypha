@@ -197,7 +197,7 @@ public class BattleManager : MonoBehaviour {
         {
             if(allyPos != -1)
             {
-                battleLog(spell.ToUpper().Replace(' ', '-'), "ALLY", chat.getLine(player_arr[allyPos].Stats.name), Utility.String.FirstLetterToUpperCase(s.root));
+                battleLog(spell.ToUpper().Replace(' ', '-'), "ALLY", chat.getLine(player_arr[allyPos].Stats.ChatDatabaseID), Utility.String.FirstLetterToUpperCase(s.root));
                 targetPattern = spellDict.getTargetPattern(s, enemy_arr, target_ind, player_arr, allyPos);
             }
             else
@@ -207,16 +207,28 @@ public class BattleManager : MonoBehaviour {
         }          
         else if (status == CastStatus.SUCCESS)
         {
-            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("player_1"), player_arr[player_ind].Stats.name);
+            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine(player_arr[player_ind].Stats.ChatDatabaseID), player_arr[player_ind].Stats.name);
             targetPattern = spellDict.getTargetPattern(s, enemy_arr, target_ind, player_arr, player_ind);
         }
         else if (status == CastStatus.BOTCH)
         {
             battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("botch"), player_arr[player_ind].Stats.name);
         }
+        else if (status == CastStatus.FIZZLE)
+        {
+            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("fizzle"), player_arr[player_ind].Stats.name);
+        }
+        else if (status == CastStatus.ONCOOLDOWN)
+        {
+            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("oncooldown"), player_arr[player_ind].Stats.name);
+        }
+        else if (status == CastStatus.COOLDOWNFULL)
+        {
+            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("cooldownlistfull"), player_arr[player_ind].Stats.name);
+        }
         else
         {
-            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", "TODO: say something here", player_arr[player_ind].Stats.name);
+            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", "SOMETHING HAS GONE HORRIBLY WRONG", player_arr[player_ind].Stats.name);
         }
         if(targetPattern != null)
             raiseTargets(targetPattern.first, targetPattern.second);
@@ -262,26 +274,28 @@ public class BattleManager : MonoBehaviour {
             Debug.Log(s.root + " is not ready to assist you yet!");
         }
     }
+
     //Casts from an enemy position: calls processCast on results
-    public void enemyCast(SpellDictionary dict, SpellData s, int position)
+    public void enemyCast(SpellDictionary dict, SpellData s, int position, int target)
     {
         pause = true; // pause battle for attack
         AudioPlayer.main.playSFX(1, SFXType.SPELL, "magic_sound");
-        StartCoroutine(enemy_pause_cast(dict, s, position));
+        StartCoroutine(enemy_pause_cast(dict, s, position, target));
 
     }
+
     //Does the pausing for enemyCast (also does the actual cast calling)
-    private IEnumerator enemy_pause_cast(SpellDictionary dict, SpellData s, int position)
+    private IEnumerator enemy_pause_cast(SpellDictionary dict, SpellData s, int position, int target)
     {
-        Pair<bool[], bool[]>  targetPattern = spellDict.getTargetPattern(s, player_arr, 1, enemy_arr, position);
+        Pair<bool[], bool[]>  targetPattern = spellDict.getTargetPattern(s, player_arr, target, enemy_arr, position);
         BattleEffects.main.setDim(true, enemy_arr[position].GetComponent<SpriteRenderer>());
         raiseTargets(targetPattern.second, targetPattern.first);
-        battleLog(s.ToString(), "ENEMY", chat.getLine("enemy_general_1"), enemy_arr[position].Stats.name);
+        battleLog(s.ToString(), "ENEMY", chat.getLine(enemy_arr[position].Stats.ChatDatabaseID), enemy_arr[position].Stats.name);
 
         yield return new WaitForSeconds(1.5f);
 
         enemy_arr[position].startSwell();
-        List<CastData> data = dict.cast(s, player_arr, player_ind, enemy_arr, position);
+        List<CastData> data = dict.cast(s, player_arr, target, enemy_arr, position);
         processCast(data, s);
 
         yield return new WaitForSeconds(1f);
@@ -293,6 +307,7 @@ public class BattleManager : MonoBehaviour {
         enemy_arr[position].attack_in_progress = false;
         updateEnemies();
     }
+
     //Cast/Botch/Cooldown/Fizzle, with associated effects and processing
     //all animation and attack effects should be processed here
     //ONLY CALL FOR A PLAYER CAST (NOTE: NPC casts are routed through here as well)
@@ -337,6 +352,7 @@ public class BattleManager : MonoBehaviour {
                 break;
         }
     }
+
     //Method for processing CastData (where all the effects happen)
     //Called by Cast in the SUCCESS CastStatus case, possibly on BOTCH in the future
     //Can be used to process the cast of an enemy or ally, if implemented (put the AI loop in battlemanager)
@@ -484,6 +500,7 @@ public class BattleManager : MonoBehaviour {
         //format is bool [3], where regData[0] is true if s.element is new, regData[1] is true if s.root is new, and regData[2] is true if s.style is new
 
     }
+
     //Raises the targets (array val = true) above the dimmer level
 	private void raiseTargets(bool[] enemy_r, bool[] player_r)
     {
@@ -502,6 +519,7 @@ public class BattleManager : MonoBehaviour {
 				enemy_arr[i].enemy_sprite.sortingOrder = dim_layer;
         }
     }
+
     //Returns true if ally with specified name is in the battle
     private bool allyIsPresent(string name)
     {

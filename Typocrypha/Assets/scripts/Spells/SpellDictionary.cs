@@ -50,7 +50,7 @@ public class SpellDictionary : MonoBehaviour
             Spell s = createSpellFromType(type);
             s.name = key;
             s.type = type;
-            s.description = cols[2].Trim();
+            s.description = cols[2].Trim().Replace("\"", string.Empty);
             int.TryParse(cols[3].Trim(), out s.power);
             float.TryParse(cols[4].Trim(), out s.cooldown);
             int.TryParse(cols[5].Trim(), out s.hitPercentage);
@@ -164,7 +164,7 @@ public class SpellDictionary : MonoBehaviour
             ElementMod e = new ElementMod();
             e.name = key;
             e.element = Elements.fromString(cols[1].Trim());
-            e.description = cols[2].Trim();
+            e.description = cols[2].Trim().Replace("\"", string.Empty);
             float.TryParse(cols[3].Trim(), out e.cooldownMod);
             float.TryParse(cols[4].Trim(), out e.cooldownModM);
             elements.Add(key, e);
@@ -182,7 +182,7 @@ public class SpellDictionary : MonoBehaviour
             StyleMod s = new StyleMod();
             s.name = key;
             int.TryParse(cols[1].Trim(), out s.powerMod);
-            s.description = cols[2].Trim();
+            s.description = cols[2].Trim().Replace("\"", string.Empty);
             float.TryParse(cols[3].Trim(), out s.powerModM);
             float.TryParse(cols[4].Trim(), out s.cooldownMod);
             float.TryParse(cols[5].Trim(), out s.cooldownModM);
@@ -636,7 +636,7 @@ public class CastData
     ICaster target;
     ICaster caster;
 
-    //Just used, in cast INNACURATE
+    //Just used in cast INNACURATE
     public bool reflect = false;
 
     //Used to set location data

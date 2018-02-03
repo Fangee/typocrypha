@@ -27,7 +27,7 @@ public class AllyDatabase
         string[] lines = text_file.text.Split(line_delim);
         string[] cols;
         //Declare fields
-        string name, ID;
+        string name, chat_id, ID;
         int max_hp, max_shield, max_stagger, evade;//declare stat variables
         float speed, acc, atk, def;
         float[] vsElem;
@@ -39,6 +39,7 @@ public class AllyDatabase
             cols = lines[i].Split(col_delim);
             int ind = 0;//Allows new stats to be added without changing the constants
             ID = cols[ind].Trim();
+            chat_id = cols[++ind].Trim().ToLower();
             name = cols[++ind].Trim();
             int.TryParse(cols[++ind].Trim(), out max_hp);
             int.TryParse(cols[++ind].Trim(), out max_shield);
@@ -58,7 +59,7 @@ public class AllyDatabase
                 float.TryParse(cols[j].Trim(), out vsElem[j - numFields]);
             }
 
-            AllyStats stats = new AllyStats(name, max_hp, max_shield, max_stagger, atk, def, speed, acc, evade, vsElem);
+            AllyStats stats = new AllyStats(name, chat_id, max_hp, max_shield, max_stagger, atk, def, speed, acc, evade, vsElem);
             database.Add(ID, stats);
         }
         Debug.Log("Enemy Database Loaded");

@@ -6,8 +6,8 @@ using UnityEngine;
 public class AllyStats : CasterStats
 {
     //Sorry for the massive constructor but all the vals are readonly so...
-    public AllyStats(string name, int hp, int shield, int stag, float atk, float def, float speed, float acc, int evade, float[] vsElem = null)
-        : base(name, hp, shield, stag, atk, def, speed, acc, evade, vsElem)
+    public AllyStats(string name, string chat, int hp, int shield, int stag, float atk, float def, float speed, float acc, int evade, float[] vsElem = null)
+        : base(name, chat, hp, shield, stag, atk, def, speed, acc, evade, vsElem)
     {
         spell = new SpellData(name.ToLower());
     }

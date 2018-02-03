@@ -6,9 +6,10 @@ using UnityEngine;
 public class CasterStats
 {
     //Sets all read-only values
-    public CasterStats(string name, int hp, int shield, int stagger, float atk, float def, float speed, float acc, int evade, float[] vsElem = null)
+    public CasterStats(string name, string chat, int hp, int shield, int stagger, float atk, float def, float speed, float acc, int evade, float[] vsElem = null)
     {
         this.name = name;
+        chatDatabaseID = chat;
         max_hp = hp;
         max_shield = shield;
         max_stagger = stagger;
@@ -34,6 +35,10 @@ public class CasterStats
     public readonly int evasion;       //numerical dodgechance boost
     public readonly float[] vsElement; //elemental weaknesses/resistances
 
+    //chat database stuff
+    private readonly string chatDatabaseID;
+    public virtual string ChatDatabaseID { get{ return chatDatabaseID; } }
+
     //Return the equivalent of this modified by debuff mod
     public CasterStats modify(BuffDebuff mod)
     {
@@ -50,7 +55,7 @@ public class CasterStats
             vE[i] = mod.modElementState(vsElement[i], i);
         }
             
-        return new CasterStats(name, max_hp, max_shield, max_stagger, atk, def, spd, acc, evade, vE);
+        return new CasterStats(name, chatDatabaseID, max_hp, max_shield, max_stagger, atk, def, spd, acc, evade, vE);
     }
     //Just get debuff modified ACCURACY
     public float getModAcc(BuffDebuff mod)
