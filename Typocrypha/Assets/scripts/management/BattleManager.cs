@@ -408,7 +408,7 @@ public class BattleManager : MonoBehaviour {
                         Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
                         AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_enemy_weakcrit_dmg");
                         //process crit graphics
-                        popp.spawnSprite("sprites/critical", POP_TIMER, a.transform.position + UNDER_OFFSET);
+                        popp.spawnSprite("popup_critical", POP_TIMER, a.transform.position + UNDER_OFFSET);
                     }
                     if (d.isStun)
                     {
@@ -423,16 +423,25 @@ public class BattleManager : MonoBehaviour {
                     switch (d.elementalData)
                     {
                         case Elements.vsElement.REFLECT:
-                            popp.spawnSprite("sprites/reflect", POP_TIMER, a.transform.position + OVER_OFFSET);
+                            popp.spawnSprite("popup_reflect", POP_TIMER, a.transform.position + OVER_OFFSET);
                             break;
                         case Elements.vsElement.ABSORB:
-                            popp.spawnSprite("sprites/absorb", POP_TIMER, a.transform.position + OVER_OFFSET);
+                            popp.spawnSprite("popup_absorb", POP_TIMER, a.transform.position + OVER_OFFSET);
+                            break;
+                        case Elements.vsElement.NULLIFY:
+                            popp.spawnSprite("popup_nullify", POP_TIMER, a.transform.position + OVER_OFFSET);
                             break;
                         case Elements.vsElement.RESISTANT:
-                            popp.spawnSprite("sprites/resistant", POP_TIMER, a.transform.position + OVER_OFFSET);
+                            popp.spawnSprite("popup_resistant", POP_TIMER, a.transform.position + OVER_OFFSET);
+                            break;
+                        case Elements.vsElement.NEUTERAL:
+                            popp.spawnSprite("popup_neutral", POP_TIMER, a.transform.position + OVER_OFFSET);
                             break;
                         case Elements.vsElement.WEAK:
-                            popp.spawnSprite("sprites/weak", POP_TIMER, a.transform.position + OVER_OFFSET);
+                            popp.spawnSprite("popup_weak", POP_TIMER, a.transform.position + OVER_OFFSET);
+                            break;
+                        case Elements.vsElement.SUPERWEAK:
+                            popp.spawnSprite("popup_superweak", POP_TIMER, a.transform.position + OVER_OFFSET);
                             break;
                     }
                     //Process damage graphics
@@ -460,7 +469,7 @@ public class BattleManager : MonoBehaviour {
                         Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
 						AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_enemy_weakcrit_dmg");
 						//process crit graphics
-						popp.spawnSprite ("sprites/critical", POP_TIMER, e.transform.position + UNDER_OFFSET);
+						popp.spawnSprite ("popup_critical", POP_TIMER, e.transform.position + UNDER_OFFSET);
                     }
                     if (d.isStun)
                     {
@@ -476,16 +485,16 @@ public class BattleManager : MonoBehaviour {
 					switch (d.elementalData)
 					{
 						case Elements.vsElement.REFLECT:
-							popp.spawnSprite ("sprites/reflect", POP_TIMER, e.transform.position + OVER_OFFSET);
+							popp.spawnSprite ("popup_reflect", POP_TIMER, e.transform.position + OVER_OFFSET);
 							break;
 						case Elements.vsElement.ABSORB:
-							popp.spawnSprite ("sprites/absorb", POP_TIMER, e.transform.position + OVER_OFFSET);
+							popp.spawnSprite ("popup_absorb", POP_TIMER, e.transform.position + OVER_OFFSET);
 							break;
 						case Elements.vsElement.RESISTANT:
-							popp.spawnSprite ("sprites/resistant", POP_TIMER, e.transform.position + OVER_OFFSET);
+							popp.spawnSprite ("popup_resistant", POP_TIMER, e.transform.position + OVER_OFFSET);
 							break;
 						case Elements.vsElement.WEAK:
-							popp.spawnSprite ("sprites/weak", POP_TIMER, e.transform.position + OVER_OFFSET);
+							popp.spawnSprite ("popup_weak", POP_TIMER, e.transform.position + OVER_OFFSET);
 							break;
 					}
 					//Process damage graphics

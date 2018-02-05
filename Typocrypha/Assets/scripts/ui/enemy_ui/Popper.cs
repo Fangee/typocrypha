@@ -14,6 +14,11 @@ public class Popper : MonoBehaviour {
 	GameObject imgObj;
 	PopImage pi;
 
+    AssetBundle ass;
+
+    void Awake () {
+        ass = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "sprites"));
+    }
 
 	//prints (message) for (delay) seconds at (pos) 
 	public void spawnText (string message, float delay, Vector3 pos) {
@@ -24,11 +29,11 @@ public class Popper : MonoBehaviour {
 	}
 
 	//prints image (picName) for (delay) seconds at (pos) 
-	public void spawnSprite (string picName, float delay, Vector3 pos) {
+	public void spawnSprite (string picPath, float delay, Vector3 pos) {
 		imgObj = GameObject.Instantiate (popimage_prefab, transform);
 		imgObj.transform.position = pos;
 		pi = imgObj.GetComponent<PopImage>();
-		pi.display (picName, delay);
+        pi.display (ass.LoadAsset<Sprite> (picPath), delay);
 	}
 
 }

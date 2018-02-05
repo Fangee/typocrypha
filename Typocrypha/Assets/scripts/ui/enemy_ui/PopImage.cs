@@ -13,13 +13,13 @@ public class PopImage : MonoBehaviour {
 	}
 
 	//display image lasting for the specified time
-	public void display (string picName, float delay) {
-		StartCoroutine (ShowPicture (picName, delay));
+	public void display (Sprite spr, float delay) {
+		StartCoroutine (ShowPicture (spr, delay));
 	}
 
 	//ShowMessage coroutine
-	IEnumerator ShowPicture (string picName, float delay) {
-		img.sprite = Resources.Load<Sprite> (picName);
+    IEnumerator ShowPicture (Sprite spr, float delay) {
+        img.sprite = spr;
 		img.rectTransform.sizeDelta = img.sprite.rect.size;
 		yield return new WaitForSeconds (delay);
 		Destroy (gameObject);
