@@ -289,14 +289,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\CreateAssetBundles.cs" />
+    <Compile Include="Assets\WavySprite\Editor\WavySpriteEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\allyDatabase.txt" />
     <None Include="Assets\Resources\chatDatabase.txt" />
     <None Include="Assets\Resources\cutscene_tests.txt" />
     <None Include="Assets\Resources\enemyDatabase.txt" />
+    <None Include="Assets\Resources\episode1.txt" />
+    <None Include="Assets\Resources\episode1_cutscene1.txt" />
+    <None Include="Assets\Resources\eye_test.txt" />
     <None Include="Assets\Resources\gameflow.txt" />
+    <None Include="Assets\Resources\gameflow2.txt" />
     <None Include="Assets\Resources\spellDictionary.txt" />
+    <None Include="Assets\WavySprite\Shaders\WavySprite.shader" />
+    <None Include="Assets\WavySprite\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

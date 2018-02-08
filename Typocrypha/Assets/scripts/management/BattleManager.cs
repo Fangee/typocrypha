@@ -158,21 +158,27 @@ public class BattleManager : MonoBehaviour {
         //SPELLBOOK CODE
 
         // go to next page if down is pressed
-        if (Input.GetKeyDown(KeyCode.DownArrow) && spellDict.pageDown())
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            //play page change SFX here
+            bool pg = spellDict.pageDown();
+            if (pg)
+                AudioPlayer.main.playSFX("sfx_spellbook_scroll", 0.1F);
+            //else {play sfx_thud (player is on the last page this direction)}
         }
         // go to last page if down is pressed
-        if (Input.GetKeyDown(KeyCode.UpArrow) && spellDict.pageUp())
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            //play page change SFX here
+            bool pg = spellDict.pageUp();
+            if (pg)
+                AudioPlayer.main.playSFX("sfx_spellbook_scroll", 0.1F);
+            //else {play sfx_thud (player is on the last page this direction)}
         }
     }
 
     //CASTING CODE//---------------------------------------------------------------------------------------------------------------------------------------//
 
-	// attack currently targeted enemy with spell
-	public void attackCurrent(string spell) {
+    // attack currently targeted enemy with spell
+    public void attackCurrent(string spell) {
         //Can attack dead enemies now, just wont cast spell at them
 		StartCoroutine (pauseAttackCurrent (spell));
     }
@@ -496,9 +502,17 @@ public class BattleManager : MonoBehaviour {
         }
         //Register unregistered keywords here
         bool [] regData = spellDict.safeRegister(s);
+        if (regData[0] || regData[1] || regData[2])
+            StartCoroutine(learnSFX());
         //Process regData (for register graphics) here. 
         //format is bool [3], where regData[0] is true if s.element is new, regData[1] is true if s.root is new, and regData[2] is true if s.style is new
 
+    }
+
+    private IEnumerator learnSFX()
+    {
+        yield return new WaitWhile(() => BattleManager.main.pause);
+        AudioPlayer.main.playSFX("sfx_learn_spell_battle");
     }
 
     //Raises the targets (array val = true) above the dimmer level

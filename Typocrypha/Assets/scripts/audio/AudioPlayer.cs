@@ -68,20 +68,24 @@ public class AudioPlayer : MonoBehaviour {
 		sfx_channels [channel].Play ();
 	}
 
-	// play sfx from name (finds first open channel)
-	public void playSFX(string name) {
-		for (int i = 0; i < sfx_channels.Length; ++i) {
-			AudioSource channel = sfx_channels [i];
-			if (!channel_reserved[i] && !channel.isPlaying) {
-				channel.clip = sfx_bundle.LoadAsset<AudioClip> (name);
-				channel.Play ();
-				break;
-			}
-		}
-	}
+    // play sfx from name with specified volume (finds first open channel)
+    public void playSFX(string name, float volume = 1.0F)
+    {
+        for (int i = 0; i < sfx_channels.Length; ++i)
+        {
+            AudioSource channel = sfx_channels[i];
+            if (!channel_reserved[i] && !channel.isPlaying)
+            {
+                channel.volume = volume;
+                channel.clip = sfx_bundle.LoadAsset<AudioClip>(name);
+                channel.Play();
+                break;
+            }
+        }
+    }
 
-	// play music from name
-	public void playMusic(string name) {
+    // play music from name
+    public void playMusic(string name) {
 		name = name.Trim ();
 		if (name.CompareTo ("_") == 0) // skip if null song
 			return; 
