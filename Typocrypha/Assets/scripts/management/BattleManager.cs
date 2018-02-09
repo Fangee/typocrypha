@@ -160,16 +160,14 @@ public class BattleManager : MonoBehaviour {
         // go to next page if down is pressed
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            bool pg = spellDict.pageDown();
-            if (pg)
+            if (spellDict.pageDown())
                 AudioPlayer.main.playSFX("sfx_spellbook_scroll", 0.3F);
             //else {play sfx_thud (player is on the last page this direction)}
         }
         // go to last page if down is pressed
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            bool pg = spellDict.pageUp();
-            if (pg)
+            if (spellDict.pageUp())
                 AudioPlayer.main.playSFX("sfx_spellbook_scroll", 0.3F);
             //else {play sfx_thud (player is on the last page this direction)}
         }
