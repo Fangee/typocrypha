@@ -393,9 +393,6 @@ public class BattleManager : MonoBehaviour {
             else if (d.Target.CasterType == ICasterType.NPC_ALLY)
             {
                 Ally a = (Ally)d.Target;
-                //Process hit graphics
-                AudioPlayer.main.playSFX("Cutting_SFX");
-                AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", a.transform.position, 1);
                 if (d.isHit == false)//Spell misses
                 {
                     Debug.Log(d.Caster.Stats.name + " missed " + d.Target.Stats.name + "!");
@@ -410,7 +407,7 @@ public class BattleManager : MonoBehaviour {
                     if (d.isCrit)//Spell is crit
                     {
                         Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
-                        AudioPlayer.main.playSFX("sfx_enemy_weakcrit_dmg");
+                        AudioPlayer.main.playSFX("sfx_party_weakcrit_dmg");
                         //process crit graphics
                         popp.spawnSprite("sprites/critical", POP_TIMER, a.transform.position + UNDER_OFFSET);
                     }
