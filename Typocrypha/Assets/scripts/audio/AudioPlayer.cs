@@ -68,7 +68,7 @@ public class AudioPlayer : MonoBehaviour {
 		sfx_channels [channel].Play ();
 	}
 
-    // play sfx from name with specified volume (finds first open channel)
+    // play sfx from name with specified volume modifier (finds first open channel)
     public void playSFX(string name, float volume = 1.0F)
     {
         for (int i = 0; i < sfx_channels.Length; ++i)
@@ -76,9 +76,7 @@ public class AudioPlayer : MonoBehaviour {
             AudioSource channel = sfx_channels[i];
             if (!channel_reserved[i] && !channel.isPlaying)
             {
-                channel.volume = volume;
-                channel.clip = sfx_bundle.LoadAsset<AudioClip>(name);
-                channel.Play();
+                channel.PlayOneShot(sfx_bundle.LoadAsset<AudioClip>(name), volume);
                 break;
             }
         }
