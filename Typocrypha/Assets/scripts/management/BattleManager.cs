@@ -103,7 +103,7 @@ public class BattleManager : MonoBehaviour {
 
         pause = false;
 		target_ind = 0;
-		AudioPlayer.main.playMusic (MusicType.BATTLE, scene.music_tracks[0]);
+		AudioPlayer.main.playMusic (scene.music_tracks[0]);
 	}
 
 	// creates the enemy specified at 'i' (0-left, 1-mid, 2-right) by the 'scene'
@@ -153,7 +153,7 @@ public class BattleManager : MonoBehaviour {
 		// move target reticule
 		target_ret.localPosition = new Vector3 (target_ind * enemy_spacing, reticule_y_offset, 0);
 		// play effect sound if target was moved
-		if (old_ind != target_ind) AudioPlayer.main.playSFX(0, SFXType.UI, "sfx_enemy_select");
+		if (old_ind != target_ind) AudioPlayer.main.playSFX("sfx_enemy_select");
 
         //SPELLBOOK CODE
 
@@ -162,7 +162,7 @@ public class BattleManager : MonoBehaviour {
         {
             bool pg = spellDict.pageDown();
             if (pg)
-                AudioPlayer.main.playSFX("sfx_spellbook_scroll", 0.1F);
+                AudioPlayer.main.playSFX("sfx_spellbook_scroll", 0.3F);
             //else {play sfx_thud (player is on the last page this direction)}
         }
         // go to last page if down is pressed
@@ -170,7 +170,7 @@ public class BattleManager : MonoBehaviour {
         {
             bool pg = spellDict.pageUp();
             if (pg)
-                AudioPlayer.main.playSFX("sfx_spellbook_scroll", 0.1F);
+                AudioPlayer.main.playSFX("sfx_spellbook_scroll", 0.3F);
             //else {play sfx_thud (player is on the last page this direction)}
         }
     }
@@ -285,7 +285,7 @@ public class BattleManager : MonoBehaviour {
     public void enemyCast(SpellDictionary dict, SpellData s, int position, int target)
     {
         pause = true; // pause battle for attack
-        AudioPlayer.main.playSFX(1, SFXType.SPELL, "magic_sound");
+        AudioPlayer.main.playSFX("magic_sound");
         StartCoroutine(enemy_pause_cast(dict, s, position, target));
 
     }
@@ -378,12 +378,12 @@ public class BattleManager : MonoBehaviour {
                 else//Spell hits
                 {
                     //Process hit graphics
-					AudioPlayer.main.playSFX(1, SFXType.SPELL, "Cutting_SFX");
+					AudioPlayer.main.playSFX("Cutting_SFX");
 
                     if (d.isCrit)//Spell is crit
                     {
                         Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
-						AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_party_weakcrit_dmg");
+						AudioPlayer.main.playSFX("sfx_party_weakcrit_dmg");
                         //process crit graphics
                     }
                     Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement(d.Target.BuffDebuff, d.element));
@@ -396,7 +396,7 @@ public class BattleManager : MonoBehaviour {
             {
                 Ally a = (Ally)d.Target;
                 //Process hit graphics
-                AudioPlayer.main.playSFX(1, SFXType.SPELL, "Cutting_SFX");
+                AudioPlayer.main.playSFX("Cutting_SFX");
                 AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", a.transform.position, 1);
                 if (d.isHit == false)//Spell misses
                 {
@@ -406,13 +406,13 @@ public class BattleManager : MonoBehaviour {
                 else//Spell hits
                 {
                     //Process hit graphics
-                    AudioPlayer.main.playSFX(1, SFXType.SPELL, "Cutting_SFX");
+                    AudioPlayer.main.playSFX("Cutting_SFX");
                     AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", a.transform.position, 1);
 
                     if (d.isCrit)//Spell is crit
                     {
                         Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
-                        AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_enemy_weakcrit_dmg");
+                        AudioPlayer.main.playSFX("sfx_enemy_weakcrit_dmg");
                         //process crit graphics
                         popp.spawnSprite("sprites/critical", POP_TIMER, a.transform.position + UNDER_OFFSET);
                     }
@@ -420,7 +420,7 @@ public class BattleManager : MonoBehaviour {
                     {
                         //Process stun graphics
                         Debug.Log(d.Caster.Stats.name + " stuns " + d.Target.Stats.name);
-                        AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_stagger");
+                        AudioPlayer.main.playSFX("sfx_stagger");
                     }
 
                     Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement(d.Target.BuffDebuff, d.element));
@@ -458,13 +458,13 @@ public class BattleManager : MonoBehaviour {
                 else//Spell hits
                 {
                     //Process hit graphics
-					AudioPlayer.main.playSFX(1, SFXType.SPELL, "Cutting_SFX");
+					AudioPlayer.main.playSFX("Cutting_SFX");
 					AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", e.transform.position, 1);
 
                     if (d.isCrit)//Spell is crit
                     {
                         Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
-						AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_enemy_weakcrit_dmg");
+						AudioPlayer.main.playSFX("sfx_enemy_weakcrit_dmg");
 						//process crit graphics
 						popp.spawnSprite ("sprites/critical", POP_TIMER, e.transform.position + UNDER_OFFSET);
                     }
@@ -472,7 +472,7 @@ public class BattleManager : MonoBehaviour {
                     {
                         //Process stun graphics
                         Debug.Log(d.Caster.Stats.name + " stuns " + d.Target.Stats.name);
-                        AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_stagger");
+                        AudioPlayer.main.playSFX("sfx_stagger");
                         charge_bars.Charge_bars[e.position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 0.5F, 0);
                     }
 

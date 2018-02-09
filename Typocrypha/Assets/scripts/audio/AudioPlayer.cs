@@ -121,28 +121,28 @@ public class AudioPlayer : MonoBehaviour {
 
 /**************** DEPRECATED AUDIO SYSTEM *********************/
 
-	// sets specified sfx channel (DEPRECATED)
-	public void setSFX(int channel, SFXType type, string name) {
-		name = name.Trim ();
-		if (name.CompareTo ("null") == 0) return;
-		sfx_channels [channel].clip = sfx_bundle.LoadAsset<AudioClip> (name);
-	}
+	//// sets specified sfx channel (DEPRECATED)
+	//public void setSFX(int channel, SFXType type, string name) {
+	//	name = name.Trim ();
+	//	if (name.CompareTo ("null") == 0) return;
+	//	sfx_channels [channel].clip = sfx_bundle.LoadAsset<AudioClip> (name);
+	//}
 
-	// load and play sfx directly (DEPRECATED)
-	public void playSFX(int channel, SFXType type, string name) {
-		setSFX (channel, type, name);
-		sfx_channels [channel].Play ();
-	}
+	//// load and play sfx directly (DEPRECATED)
+	//public void playSFX(int channel, SFXType type, string name) {
+	//	setSFX (channel, type, name);
+	//	sfx_channels [channel].Play ();
+	//}
 
-	// play music from specified type (DEPRECATED)
-	public void playMusic(MusicType type, string name) {
-		if (name.CompareTo ("_") == 0 || name.CompareTo ("") == 0) return; // skip if null song
-        else if (name.CompareTo ("STOP") == 0)
-        {
-            stopAll();
-            return;
-        } // stop if stop flag
-		music.clip = music_bundle.LoadAsset<AudioClip> (name);
-		music.Play ();
-	}
+	//// play music from specified type (DEPRECATED)
+	//public void playMusic(MusicType type, string name) {
+	//	if (name.CompareTo ("_") == 0 || name.CompareTo ("") == 0) return; // skip if null song
+ //       else if (name.CompareTo ("STOP") == 0)
+ //       {
+ //           stopAll();
+ //           return;
+ //       } // stop if stop flag
+	//	music.clip = music_bundle.LoadAsset<AudioClip> (name);
+	//	music.Play ();
+	//}
 }
