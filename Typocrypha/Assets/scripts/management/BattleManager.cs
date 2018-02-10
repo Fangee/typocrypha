@@ -38,9 +38,10 @@ public class BattleManager : MonoBehaviour {
 	public GameObject popper; //object that handles pop-up graphics (GraphicsPopper)
 	Popper popp; //holds popper script component
 	const float POP_TIMER = 2f; //pop-ups last this many seconds long
-	Vector3 DMGNUM_OFFSET = new Vector3 (-1,0,0); //where the damage number should be
-	Vector3 UNDER_OFFSET = new Vector3 (-1,-1,0); //where something under the damage num should be
-	Vector3 OVER_OFFSET = new Vector3 (-1,1,0); //where something over the damage num should be
+	Vector3 DMGNUM_OFFSET = new Vector3 (0,0.375f,0); //where the damage number should be
+	Vector3 UNDER_OFFSET = new Vector3 (0,-0.75f,0); //where something under the damage num should be
+	Vector3 OVER_OFFSET = new Vector3 (0,1.5f,0); //where something over the damage num should be
+    Vector3 ELEM_OFFSET = new Vector3 (-0.75f, 1.6f, 0);
 
 	const float enemy_y_offset = 0.5f; // offset of enemy from y axis
 	const float reticule_y_offset = 1f; // offset of target reticule
@@ -457,6 +458,7 @@ public class BattleManager : MonoBehaviour {
                 {
                     Debug.Log(d.Caster.Stats.name + " missed " + d.Target.Stats.name + "!");
                     //Process miss graphics
+                    popp.spawnSprite ("popup_miss", POP_TIMER, e.transform.position + UNDER_OFFSET);
                 }
                 else//Spell hits
                 {
@@ -497,6 +499,26 @@ public class BattleManager : MonoBehaviour {
 							popp.spawnSprite ("popup_weak", POP_TIMER, e.transform.position + OVER_OFFSET);
 							break;
 					}
+
+                    if (d.elementalData != Elements.vsElement.NEUTERAL)
+                    {
+                        switch (d.element)
+                        {
+                            case 0:
+                                popp.spawnSprite ("popup_slash", POP_TIMER, e.transform.position + ELEM_OFFSET);
+                                break;
+                            case 1:
+                                popp.spawnSprite ("popup_fire", POP_TIMER, e.transform.position + ELEM_OFFSET);
+                                break;
+                            case 2:
+                                popp.spawnSprite ("popup_ice", POP_TIMER, e.transform.position + ELEM_OFFSET);
+                                break;
+                            case 3:
+                                popp.spawnSprite("popup_bolt", POP_TIMER, e.transform.position + ELEM_OFFSET);
+                                break;
+                        }
+                    }
+
 					//Process damage graphics
 					popp.spawnText (d.damageInflicted.ToString(), POP_TIMER, e.transform.position + DMGNUM_OFFSET);
 					if (d.damageInflicted > 0) BattleEffects.main.spriteShake (e.gameObject.transform, 0.5f, 0.1f);

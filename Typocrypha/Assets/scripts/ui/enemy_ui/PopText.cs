@@ -10,11 +10,12 @@ public class PopText : MonoBehaviour {
 
 	void Awake () {
 		txt = GetComponent<Text> ();
+        txt.alignment = TextAnchor.MiddleCenter;
 	}
 
 	//print message lasting for the specified time
 	public void display (string message, float delay) {
-		StartCoroutine (ShowMessage (message, delay));
+		StartCoroutine (Bleh (message, delay));
 	}
 
 	//ShowMessage coroutine
@@ -23,5 +24,18 @@ public class PopText : MonoBehaviour {
 		yield return new WaitForSeconds (delay);
 		Destroy (gameObject);
 	}
+
+    IEnumerator Bleh (string message, float delay) {
+        txt.text = message;
+        Vector3 beef = transform.position;
+        for (int i = 0; i < 6; i++)
+        {
+            transform.position = beef + new Vector3 (Random.value/3, Random.value/3, 0);
+            yield return new WaitForEndOfFrame();
+        }
+        transform.position = beef;
+        yield return new WaitForSeconds (delay);
+        Destroy (gameObject);
+    }
 
 }
