@@ -12,14 +12,18 @@ public class BattleManager : MonoBehaviour {
     public DisplayAlly ally_left; // left ally UI
     public DisplayAlly ally_right; // right ally UI
     public ChatDatabase chat; //Database containing chat lines
+    public Color playerColor;
+    public Color enemyColor;
+    public Color allyColor;
+    public Color clarkeColor;
     public GameObject battleLogCast; //Casting log object and Associated reference to store
-    public TextMesh logCastText;
-    public TextMesh logCastInfo;
+    private Image castBox;
+    public Text logCastText;
+    public Text logCastInfo;
     public GameObject battleLogTalk; //talk log object and Associated reference to store
-    public TextMesh logTalkText;
-    public TextMesh logTalkInfo;
-    private MeshRenderer[] battleLogMeshes = new MeshRenderer[4];
-    private SpriteRenderer[] battleLogSprites = new SpriteRenderer[4];
+    private Image talkBox;
+    public Text logTalkText;
+    public Text logTalkInfo;
 	public EnemyChargeBars charge_bars; // creates and mananges charge bars
 	public EnemyStaggerBars stagger_bars; // creates and manages stagger bars
 	public CooldownList cooldown_list; // creates and manages player's cooldowns
@@ -91,13 +95,10 @@ public class BattleManager : MonoBehaviour {
             player_arr[i] = a;
         }
 
-        //INITIALIZE BATTLELOG STUFF//
+        //INITIALIZE BATTLE LOG STUFF//
 
-        const int numElements = 2;
-        System.Array.Copy(battleLogCast.GetComponentsInChildren<MeshRenderer>(true), 0, battleLogMeshes, 0, numElements);
-        System.Array.Copy(battleLogCast.GetComponentsInChildren<SpriteRenderer>(true), 0, battleLogSprites, 0, numElements);
-        System.Array.Copy(battleLogTalk.GetComponentsInChildren<MeshRenderer>(true), 0, battleLogMeshes, numElements, numElements);
-        System.Array.Copy(battleLogTalk.GetComponentsInChildren<SpriteRenderer>(true), 0, battleLogSprites, numElements, numElements);
+        castBox = battleLogCast.GetComponent<Image>();
+        talkBox = battleLogTalk.GetComponent<Image>();
 
         //FINISH//
 
@@ -197,38 +198,38 @@ public class BattleManager : MonoBehaviour {
         {
             if(allyPos != -1)
             {
-                battleLog(spell.ToUpper().Replace(' ', '-'), "ALLY", chat.getLine(player_arr[allyPos].Stats.ChatDatabaseID), Utility.String.FirstLetterToUpperCase(s.root));
+                battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.NPC_ALLY, chat.getLine(player_arr[allyPos].Stats.ChatDatabaseID), Utility.String.FirstLetterToUpperCase(s.root));
                 targetPattern = spellDict.getTargetPattern(s, enemy_arr, target_ind, player_arr, allyPos);
             }
             else
             {
-                battleLog(spell.ToUpper().Replace(' ', '-'), "ALLY", "...", "Not here");
+                battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.INVALID, s.root + " isn't here right now!", "Clarke");
             }
         }          
         else if (status == CastStatus.SUCCESS)
         {
-            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine(player_arr[player_ind].Stats.ChatDatabaseID), player_arr[player_ind].Stats.name);
+            battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.PLAYER, chat.getLine(player_arr[player_ind].Stats.ChatDatabaseID), player_arr[player_ind].Stats.name);
             targetPattern = spellDict.getTargetPattern(s, enemy_arr, target_ind, player_arr, player_ind);
         }
         else if (status == CastStatus.BOTCH)
         {
-            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("botch"), player_arr[player_ind].Stats.name);
+            battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.INVALID, chat.getLine("botch"), "Clarke");
         }
         else if (status == CastStatus.FIZZLE)
         {
-            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("fizzle"), player_arr[player_ind].Stats.name);
+            battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.INVALID, chat.getLine("fizzle"), "Clarke");
         }
         else if (status == CastStatus.ONCOOLDOWN)
         {
-            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("oncooldown"), player_arr[player_ind].Stats.name);
+            battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.INVALID, chat.getLine("oncooldown"), "Clarke");
         }
         else if (status == CastStatus.COOLDOWNFULL)
         {
-            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("cooldownlistfull"), player_arr[player_ind].Stats.name);
+            battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.INVALID, chat.getLine("cooldownlistfull"), "Clarke");
         }
         else
         {
-            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", "SOMETHING HAS GONE HORRIBLY WRONG", player_arr[player_ind].Stats.name);
+            battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.INVALID, "SOMETHING HAS GONE HORRIBLY WRONG", "GOD");
         }
         if(targetPattern != null)
             raiseTargets(targetPattern.first, targetPattern.second);
@@ -290,7 +291,7 @@ public class BattleManager : MonoBehaviour {
         Pair<bool[], bool[]>  targetPattern = spellDict.getTargetPattern(s, player_arr, target, enemy_arr, position);
         BattleEffects.main.setDim(true, enemy_arr[position].GetComponent<SpriteRenderer>());
         raiseTargets(targetPattern.second, targetPattern.first);
-        battleLog(s.ToString(), "ENEMY", chat.getLine(enemy_arr[position].Stats.ChatDatabaseID), enemy_arr[position].Stats.name);
+        battleLog(s.ToString(), ICasterType.ENEMY, chat.getLine(enemy_arr[position].Stats.ChatDatabaseID), enemy_arr[position].Stats.name);
 
         yield return new WaitForSeconds(1.5f);
 
@@ -539,18 +540,36 @@ public class BattleManager : MonoBehaviour {
         return -1;
     }
     //Enable battle log UI state (call anywhere that the battlemanager pauses to cast)
-    private void battleLog(string cast, string caster, string talk, string speaker)
+    private void battleLog(string cast, ICasterType caster, string talk, string speaker)
     {
         battleLogCast.SetActive(true);
         battleLogTalk.SetActive(true);
-        logCastText.text = cast;
-        logCastInfo.text = caster;
+        logCastText.text = "> " + cast;
         logTalkText.text = talk;
         logTalkInfo.text = speaker;
-        for(int i = 0; i < battleLogSprites.Length; ++i)
+        if(caster == ICasterType.ENEMY)
         {
-            battleLogSprites[i].sortingOrder = 10;
-            battleLogMeshes[i].sortingOrder = 10;
+            castBox.color = enemyColor;
+            talkBox.color = enemyColor;
+            logCastInfo.text = "ENEMY  CAST";
+        }
+        else if(caster == ICasterType.PLAYER)
+        {
+            castBox.color = playerColor;
+            talkBox.color = playerColor;
+            logCastInfo.text = "PLAYER CAST";
+        }
+        else if(caster == ICasterType.NPC_ALLY)
+        {
+            castBox.color = allyColor;
+            talkBox.color = allyColor;
+            logCastInfo.text = "ALLY   CAST";
+        }
+        else //caster == IcasterType.INVALID (clarke is speaking)
+        {
+            castBox.color = clarkeColor;
+            talkBox.color = clarkeColor;
+            logCastInfo.text = "ERROR  CAST";
         }
     }
 
@@ -559,11 +578,6 @@ public class BattleManager : MonoBehaviour {
     {
         battleLogCast.SetActive(false);
         battleLogTalk.SetActive(false);
-        for (int i = 0; i < battleLogSprites.Length; ++i)
-        {
-            battleLogSprites[i].sortingOrder = 0;
-            battleLogMeshes[i].sortingOrder = 0;
-        }
     }
 
     //Updates death and opacity of enemies after pause in puaseAttackCurrent
