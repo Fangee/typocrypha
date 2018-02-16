@@ -380,6 +380,17 @@ public class BattleManager : MonoBehaviour {
                     //Process hit graphics
 					AudioPlayer.main.playSFX("Cutting_SFX");
 
+                    //Process repel
+                    if(d.repel)
+                    {
+                        if(d.Caster.CasterType == ICasterType.ENEMY)
+                            spawnElementPopup(d.element, Elements.vsElement.REPEL, ((Enemy)d.Caster).transform);
+                        else if(d.Caster.CasterType == ICasterType.NPC_ALLY)
+                            spawnElementPopup(d.element, Elements.vsElement.REPEL, ((Ally)d.Caster).transform);
+                        //else what happens if a player casts a spell that reflects on themselves?
+                    }
+ 
+
                     if (d.isCrit)//Spell is crit
                     {
                         Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
@@ -387,7 +398,7 @@ public class BattleManager : MonoBehaviour {
                         //process crit graphics
                     }
                     Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement(d.Target.BuffDebuff, d.element));
-                    //Process elemental wk/resist/absorb/reflect graphics
+                    //Process elemental wk/resist/drain/repel graphics
                     //Process damage graphics
 					BattleEffects.main.screenShake(0.5f, 0.1f);
                 }
@@ -406,6 +417,16 @@ public class BattleManager : MonoBehaviour {
                     AudioPlayer.main.playSFX("Cutting_SFX");
                     AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", a.transform.position, 1);
 
+                    //Process repel
+                    if (d.repel)
+                    {
+                        if (d.Caster.CasterType == ICasterType.ENEMY)
+                            spawnElementPopup(d.element, Elements.vsElement.REPEL, ((Enemy)d.Caster).transform);
+                        else if (d.Caster.CasterType == ICasterType.NPC_ALLY && d.Caster != d.Target)
+                            spawnElementPopup(d.element, Elements.vsElement.REPEL, ((Ally)d.Caster).transform);
+                        //else what happens if a ally casts a spell that reflects on themselves or a player casts a spell that reflects off an ally?
+                    }
+
                     if (d.isCrit)//Spell is crit
                     {
                         Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
@@ -422,31 +443,9 @@ public class BattleManager : MonoBehaviour {
 
                     Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement(d.Target.BuffDebuff, d.element));
 
-                    //Process elemental wk/resist/absorb/reflect graphics
-                    switch (d.elementalData)
-                    {
-                        case Elements.vsElement.REFLECT:
-                            popp.spawnSprite("popup_reflect", POP_TIMER, a.transform.position + OVER_OFFSET);
-                            break;
-                        case Elements.vsElement.ABSORB:
-                            popp.spawnSprite("popup_absorb", POP_TIMER, a.transform.position + OVER_OFFSET);
-                            break;
-                        case Elements.vsElement.NULLIFY:
-                            popp.spawnSprite("popup_nullify", POP_TIMER, a.transform.position + OVER_OFFSET);
-                            break;
-                        case Elements.vsElement.RESISTANT:
-                            popp.spawnSprite("popup_resistant", POP_TIMER, a.transform.position + OVER_OFFSET);
-                            break;
-                        case Elements.vsElement.NEUTRAL:
-                            popp.spawnSprite("popup_neutral", POP_TIMER, a.transform.position + OVER_OFFSET);
-                            break;
-                        case Elements.vsElement.WEAK:
-                            popp.spawnSprite("popup_weak", POP_TIMER, a.transform.position + OVER_OFFSET);
-                            break;
-                        case Elements.vsElement.SUPERWEAK:
-                            popp.spawnSprite("popup_superweak", POP_TIMER, a.transform.position + OVER_OFFSET);
-                            break;
-                    }
+                    //Spawn element popup
+                    spawnElementPopup(d.element, d.elementalData, a.transform);
+
                     //Process damage graphics
                     popp.spawnText(d.damageInflicted.ToString(), POP_TIMER, a.transform.position + DMGNUM_OFFSET);
                     if (d.damageInflicted > 0) BattleEffects.main.spriteShake(a.gameObject.transform, 0.5f, 0.1f);
@@ -468,6 +467,16 @@ public class BattleManager : MonoBehaviour {
 					AudioPlayer.main.playSFX("Cutting_SFX");
 					AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", e.transform.position, 1);
 
+                    //Process repel
+                    if (d.repel)
+                    {
+                        if (d.Caster.CasterType == ICasterType.ENEMY && d.Caster != d.Target)
+                            spawnElementPopup(d.element, Elements.vsElement.REPEL, ((Enemy)d.Caster).transform);
+                        else if (d.Caster.CasterType == ICasterType.NPC_ALLY)
+                            spawnElementPopup(d.element, Elements.vsElement.REPEL, ((Ally)d.Caster).transform);
+                        //else what happens if an enemy casts a spell that reflects off the player?
+                    }
+
                     if (d.isCrit)//Spell is crit
                     {
                         Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
@@ -484,42 +493,9 @@ public class BattleManager : MonoBehaviour {
                     }
 
 					Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement (d.Target.BuffDebuff, d.element));
-                    
-					//Process elemental wk/resist/absorb/reflect graphics
-					switch (d.elementalData)
-					{
-						case Elements.vsElement.REFLECT:
-							popp.spawnSprite ("popup_reflect", POP_TIMER, e.transform.position + OVER_OFFSET);
-							break;
-						case Elements.vsElement.ABSORB:
-							popp.spawnSprite ("popup_absorb", POP_TIMER, e.transform.position + OVER_OFFSET);
-							break;
-						case Elements.vsElement.RESISTANT:
-							popp.spawnSprite ("popup_resistant", POP_TIMER, e.transform.position + OVER_OFFSET);
-							break;
-						case Elements.vsElement.WEAK:
-							popp.spawnSprite ("popup_weak", POP_TIMER, e.transform.position + OVER_OFFSET);
-							break;
-					}
 
-                    if (d.elementalData != Elements.vsElement.NEUTRAL)
-                    {
-                        switch (d.element)
-                        {
-                            case 0:
-                                popp.spawnSprite ("popup_slash", POP_TIMER, e.transform.position + ELEM_OFFSET);
-                                break;
-                            case 1:
-                                popp.spawnSprite ("popup_fire", POP_TIMER, e.transform.position + ELEM_OFFSET);
-                                break;
-                            case 2:
-                                popp.spawnSprite ("popup_ice", POP_TIMER, e.transform.position + ELEM_OFFSET);
-                                break;
-                            case 3:
-                                popp.spawnSprite("popup_bolt", POP_TIMER, e.transform.position + ELEM_OFFSET);
-                                break;
-                        }
-                    }
+                    //Process elemental wk/resist/drain/repel graphics
+                    spawnElementPopup(d.element, d.elementalData, e.transform);
 
 					//Process damage graphics
 					popp.spawnText (d.damageInflicted.ToString(), POP_TIMER, e.transform.position + DMGNUM_OFFSET);
@@ -534,6 +510,50 @@ public class BattleManager : MonoBehaviour {
         //Process regData (for register graphics) here. 
         //format is bool [3], where regData[0] is true if s.element is new, regData[1] is true if s.root is new, and regData[2] is true if s.style is new
 
+    }
+
+    //Spawns elemental popup with proper icon
+    private void spawnElementPopup(int element, Elements.vsElement vElem, Transform pos)
+    {
+        switch (vElem)
+        {
+            case Elements.vsElement.REPEL:
+                popp.spawnSprite("popup_reflect", POP_TIMER, pos.position + OVER_OFFSET);
+                break;
+            case Elements.vsElement.DRAIN:
+                popp.spawnSprite("popup_absorb", POP_TIMER, pos.position + OVER_OFFSET);
+                break;
+            case Elements.vsElement.BLOCK:
+                popp.spawnSprite("popup_nullify", POP_TIMER, pos.position + OVER_OFFSET);
+                break;
+            case Elements.vsElement.RESIST:
+                popp.spawnSprite("popup_resistant", POP_TIMER, pos.position + OVER_OFFSET);
+                break;
+            case Elements.vsElement.WEAK:
+                popp.spawnSprite("popup_weak", POP_TIMER, pos.position + OVER_OFFSET);
+                break;
+            case Elements.vsElement.SUPERWEAK:
+                popp.spawnSprite("popup_superweak", POP_TIMER, pos.position + OVER_OFFSET);
+                break;
+        }
+        if (vElem != Elements.vsElement.NEUTRAL)
+        {
+            switch (element)
+            {
+                case 0:
+                    popp.spawnSprite("popup_slash", POP_TIMER, pos.position + ELEM_OFFSET);
+                    break;
+                case 1:
+                    popp.spawnSprite("popup_fire", POP_TIMER, pos.position + ELEM_OFFSET);
+                    break;
+                case 2:
+                    popp.spawnSprite("popup_ice", POP_TIMER, pos.position + ELEM_OFFSET);
+                    break;
+                case 3:
+                    popp.spawnSprite("popup_bolt", POP_TIMER, pos.position + ELEM_OFFSET);
+                    break;
+            }
+        }
     }
 
     private IEnumerator learnSFX()

@@ -123,8 +123,8 @@ public class Player : ICaster
     //Damage player
     public void damage(CastData data, int d, int element, ICaster caster, bool crit, bool reflect = false)
     {
-        //Apply reflect and return if applicable
-        if (CasterOps.calcReflect(data, d, element, caster, this, crit, reflect))
+        //Apply repel and return if applicable
+        if (CasterOps.calcRepel(data, d, element, caster, this, crit, reflect))
             return;
         bool damaged = CasterOps.calcDamage(data, d, element, caster, this, crit);
 

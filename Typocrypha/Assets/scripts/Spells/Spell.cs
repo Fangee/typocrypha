@@ -243,15 +243,15 @@ public class BuffSpell : Spell
         Elements.vsElement vs = target.Stats.getModVsElement(target.BuffDebuff, element);
         switch (vs)
         {
-            case Elements.vsElement.REFLECT:
-                data.reflect = true;
+            case Elements.vsElement.REPEL:
+                data.repel = true;
                 inflictBuff(caster, target, powerMod);
                 break;
-            case Elements.vsElement.ABSORB:
+            case Elements.vsElement.DRAIN:
                 buff.makeBuff();
                 inflictBuff(target, caster, powerMod);
                 break;
-            case Elements.vsElement.RESISTANT:
+            case Elements.vsElement.RESIST:
                 if ((Random.Range(0.0F, 1F) * 100) > 50)
                 {
                     data.isHit = false;
@@ -259,7 +259,7 @@ public class BuffSpell : Spell
                 }
                 inflictBuff(target, caster, powerMod);
                 break;
-            case Elements.vsElement.NULLIFY:
+            case Elements.vsElement.BLOCK:
                 data.isHit = false;
                 return false;
             case Elements.vsElement.NEUTRAL:

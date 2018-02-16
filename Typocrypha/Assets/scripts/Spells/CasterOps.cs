@@ -5,16 +5,16 @@ using UnityEngine;
 //Defines static operations for ICaster children
 public static class CasterOps
 {
-    //Applies reflect and prints appropriate debug log
+    //Applies repel and prints appropriate debug log
     //Returns true if reflected, false if not.
     //MAY need fixing for targeting
-    public static bool calcReflect(CastData data, int d, int element, ICaster caster, ICaster target, bool crit, bool reflect)
+    public static bool calcRepel(CastData data, int d, int element, ICaster caster, ICaster target, bool crit, bool repel)
     {
-        //Reflect damage to caster if enemy reflects this element (FIX for targeting)
-        if (target.Stats.vsElement[element] == Elements.reflect && reflect == false)
+        //repel damage to caster if enemy reflects this element (FIX for targeting)
+        if (target.Stats.vsElement[element] == Elements.repel && repel == false)
         {
             Debug.Log(target.Stats.name + " reflects " + d + " " + Elements.toString(element) + " damage back at " + caster.Stats.name);
-            data.reflect = true;
+            data.repel = true;
             caster.damage(data, d, element, caster, crit, true);
             return true;
         }
@@ -22,7 +22,7 @@ public static class CasterOps
     }
     //Applies damage formula base on base_power (spell strength) and stats of caster and target)
     //damages ref stats appropriately (will not go below zero)
-    //Precondition: target.Stats.vsElement[element] != Elements.reflect
+    //Precondition: target.Stats.vsElement[element] != Elements.repel
     public static bool calcDamage(CastData data, int base_power, int element, ICaster caster, ICaster target, bool crit, bool is_stunned = false)
     {
         float dMod = base_power;
@@ -36,7 +36,7 @@ public static class CasterOps
         dMod *= casterMod.attack;
 
         //Absorb damage if enemy absorbs this type
-        if (targetMod.vsElement[element] == Elements.absorb)
+        if (targetMod.vsElement[element] == Elements.drain)
         {
             Debug.Log(target.Stats.name + " absorbs " + dMod + " " + Elements.toString(element) + " damage");
             if (target.Curr_hp + Mathf.CeilToInt(dMod) > target.Stats.max_hp)
@@ -45,7 +45,7 @@ public static class CasterOps
                 target.Curr_hp += Mathf.CeilToInt(dMod);
 
             data.damageInflicted = Mathf.CeilToInt(-1 * dMod);
-            data.elementalData = Elements.vsElement.ABSORB;
+            data.elementalData = Elements.vsElement.DRAIN;
             return false;
         }
 
@@ -62,7 +62,7 @@ public static class CasterOps
         //Apply elemental weakness/resistances
         dMod *= targetMod.vsElement[element];
         if (targetMod.vsElement[element] == 0.0F)
-            data.elementalData = Elements.vsElement.NULLIFY;
+            data.elementalData = Elements.vsElement.BLOCK;
         else if (targetMod.vsElement[element] > 1)//If enemy is weak
         {
             if (targetMod.vsElement[element] > 2)
@@ -72,7 +72,7 @@ public static class CasterOps
             staggerDamage++;
         }
         else if (targetMod.vsElement[element] < 1)
-            data.elementalData = Elements.vsElement.RESISTANT;
+            data.elementalData = Elements.vsElement.RESIST;
         else
             data.elementalData = Elements.vsElement.NEUTRAL;
 

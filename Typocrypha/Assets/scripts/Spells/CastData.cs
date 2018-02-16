@@ -33,8 +33,8 @@ public class CastData
     ICaster target;
     ICaster caster;
 
-    //Just used in cast INNACURATE
-    public bool reflect = false;
+    //Accurate now, but don't use this when you don't have to (may still be a little wonky)
+    public bool repel = false;
 
     //Used to set location data
     public void setLocationData(ICaster target, ICaster caster)

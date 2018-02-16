@@ -174,7 +174,7 @@ public class BuffData
     public int accuracyMod = 0;
     public int evasionMod = 0;
     public int[] vsElemMod = new int[Elements.count];
-    //Makes all debuffs into buff (for absorb)
+    //Makes all debuffs into buff (for drain)
     public void makeBuff()
     {
         if(attackMod < 0)

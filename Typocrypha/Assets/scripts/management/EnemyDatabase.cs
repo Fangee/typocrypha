@@ -72,7 +72,6 @@ public class EnemyDatabase
             string key = "";
             for (int j = ind + Elements.count; ; j++)
             {
-				Debug.Log (cols [j] + " " + j);
                 if (cols[j].Trim().CompareTo("END") == 0)
                 {
                     if (spells != null)
@@ -101,7 +100,6 @@ public class EnemyDatabase
                 if (style.CompareTo("null") == 0)
                     style = null;
                 SpellData s = new SpellData(root, elem, style);
-				Debug.Log (spells);
                 spells.Add(s);
             }
             EnemySpellList spellList = new EnemySpellList(spellGroups);

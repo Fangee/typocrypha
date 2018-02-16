@@ -10,10 +10,10 @@ public static class Elements
     public enum vsElement
     {
         INVALID,
-        REFLECT,
-        ABSORB,
-        NULLIFY,
-        RESISTANT,
+        REPEL,
+        DRAIN,
+        BLOCK,
+        RESIST,
         NEUTRAL,
         WEAK,
         SUPERWEAK,
@@ -25,10 +25,10 @@ public static class Elements
     public const int @null = 0;
     public const int fire = 1;
     public const int ice = 2;
-    public const int bolt = 3;
+    public const int volt = 3;
     //Constants used in calcdamage, don't use elsewhere
-    public const int absorb = -1;
-    public const int reflect = -2;
+    public const int drain = -1;
+    public const int repel = -2;
 
     //Returns integer form of element for equivalent elementName string
     public static int fromString(string elementName)
@@ -41,8 +41,8 @@ public static class Elements
                 return fire;
             case "ice":
                 return ice;
-            case "bolt":
-                return bolt;
+            case "volt":
+                return volt;
             default:
                 return notAnElement;
         }
@@ -59,7 +59,7 @@ public static class Elements
             case 2:
                 return "ice";
             case 3:
-                return "bolt";
+                return "volt";
             default:
                 return "not an element";
         }
@@ -76,15 +76,15 @@ public static class Elements
     public static vsElement getLevel(float value)
     {
         if (value == -2F)
-            return vsElement.REFLECT;
+            return vsElement.REPEL;
         else if (value == -1F)
-            return vsElement.ABSORB;
+            return vsElement.DRAIN;
         else if (value == 1F)
             return vsElement.NEUTRAL;
         else if (value == 0F)
-            return vsElement.NULLIFY;
+            return vsElement.BLOCK;
         else if (value < 1)
-            return vsElement.RESISTANT;
+            return vsElement.RESIST;
         else if (value > 2)
             return vsElement.SUPERWEAK;
         else if (value > 1)
@@ -98,13 +98,13 @@ public static class Elements
         {
             case vsElement.NEUTRAL:
                 return 1;
-            case vsElement.NULLIFY:
+            case vsElement.BLOCK:
                 return 0;
-            case vsElement.REFLECT:
-                return reflect;
-            case vsElement.ABSORB:
-                return absorb;
-            case vsElement.RESISTANT:
+            case vsElement.REPEL:
+                return repel;
+            case vsElement.DRAIN:
+                return drain;
+            case vsElement.RESIST:
                 return 0.5F;
             case vsElement.WEAK:
                 return 1.5F;

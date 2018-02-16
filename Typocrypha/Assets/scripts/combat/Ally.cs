@@ -50,8 +50,8 @@ public class Ally : MonoBehaviour, ICaster {
 
     public void damage(CastData data, int d, int element, ICaster caster, bool crit, bool reflect = false)
     {
-        //Apply reflect and return if applicable
-        if (CasterOps.calcReflect(data, d, element, caster, this, crit, reflect))
+        //Apply repel and return if applicable
+        if (CasterOps.calcRepel(data, d, element, caster, this, crit, reflect))
             return;
         CasterOps.calcDamage(data, d, element, caster, this, crit);
         //Apply stun if applicable

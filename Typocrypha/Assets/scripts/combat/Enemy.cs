@@ -213,8 +213,8 @@ public class Enemy : MonoBehaviour, ICaster {
 
 	// be attacked by the player
 	public void damage(CastData data, int d, int element, ICaster caster, bool crit, bool reflect = false) {
-        //Apply reflect and return if applicable
-        if (CasterOps.calcReflect(data,d,element,caster,this,crit,reflect))
+        //Apply repel and return if applicable
+        if (CasterOps.calcRepel(data,d,element,caster,this,crit,reflect))
             return;
         CasterOps.calcDamage(data, d, element, caster, this, crit, Is_stunned);
         //Apply stun if applicable

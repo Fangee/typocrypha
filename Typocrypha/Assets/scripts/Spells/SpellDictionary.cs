@@ -128,9 +128,9 @@ public class SpellDictionary : MonoBehaviour
                 else if (buff.Contains("i"))
                     s.buff.vsElemMod[Elements.ice] = level;
                 if (buff.Contains("B"))
-                    s.buff.vsElemMod[Elements.bolt] = -1 * level;
+                    s.buff.vsElemMod[Elements.volt] = -1 * level;
                 else if (buff.Contains("b"))
-                    s.buff.vsElemMod[Elements.bolt] = level;
+                    s.buff.vsElemMod[Elements.volt] = level;
             }
             int.TryParse(cols[++ind].Trim(), out s.buffPercentage);
             switch (cols[++ind].Trim().ToLower())
@@ -403,7 +403,7 @@ public class SpellDictionary : MonoBehaviour
             CastData castData = c.cast(target, caster);
             castData.animData = animData;
             castData.sfxData = sfxData;
-            if(castData.reflect == true)
+            if(castData.repel == true)
                 castData.setLocationData(caster, target);
             else
                 castData.setLocationData(target, caster);
