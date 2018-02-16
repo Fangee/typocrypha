@@ -437,7 +437,7 @@ public class BattleManager : MonoBehaviour {
                         case Elements.vsElement.RESISTANT:
                             popp.spawnSprite("popup_resistant", POP_TIMER, a.transform.position + OVER_OFFSET);
                             break;
-                        case Elements.vsElement.NEUTERAL:
+                        case Elements.vsElement.NEUTRAL:
                             popp.spawnSprite("popup_neutral", POP_TIMER, a.transform.position + OVER_OFFSET);
                             break;
                         case Elements.vsElement.WEAK:
@@ -502,7 +502,7 @@ public class BattleManager : MonoBehaviour {
 							break;
 					}
 
-                    if (d.elementalData != Elements.vsElement.NEUTERAL)
+                    if (d.elementalData != Elements.vsElement.NEUTRAL)
                     {
                         switch (d.element)
                         {
