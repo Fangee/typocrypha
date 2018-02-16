@@ -165,6 +165,8 @@ public abstract class Spell
 
     public string name;
     public string description;          //Spell's description (in spellbook)
+    public string animationID;          //Spell's animation ID 
+    public string sfxID;                //Spell's sfx ID
     public int power;                   //Spell's intensity (not necessarily just damage)
     public float cooldown;              //Spell's base cooldown
     public int hitPercentage;           //Spell's base hit chance (1 = 1%)
@@ -300,6 +302,8 @@ public class ElementMod
 {
     public string name;
     public string description;
+    public string animationID;        
+    public string sfxID;               
     public int element;      //Elemental modifier to apply
     public float cooldownMod;
     public float cooldownModM;
@@ -310,6 +314,8 @@ public class StyleMod
 {
     public string name;
     public string description;
+    public string animationID;
+    public string sfxID;
     public int powerMod;
     public float powerModM = 0;
     public float cooldownMod;

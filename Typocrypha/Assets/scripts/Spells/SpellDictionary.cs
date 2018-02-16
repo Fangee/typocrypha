@@ -40,23 +40,26 @@ public class SpellDictionary : MonoBehaviour
         while(true)
         {
             cols = lines[i].Split(col_delim);
-            string key = cols[0].Trim(); 
+            int ind = 0;
+            string key = cols[ind].Trim(); 
             if (key.CompareTo("END") == 0) //At end of root keywords
             {
                 i += 2;//Skip example line
                 break;
             }
-            string type = cols[1].Trim();
+            string type = cols[++ind].Trim();
             Spell s = createSpellFromType(type);
             s.name = key;
             s.type = type;
-            s.description = cols[2].Trim().Replace("\"", string.Empty);
-            int.TryParse(cols[3].Trim(), out s.power);
-            float.TryParse(cols[4].Trim(), out s.cooldown);
-            int.TryParse(cols[5].Trim(), out s.hitPercentage);
-            int.TryParse(cols[6].Trim(), out s.critPercentage);
-            int.TryParse(cols[7].Trim(), out s.elementEffectMod);
-            string pattern = cols[8].Trim();
+            s.description = cols[++ind].Trim().Replace("\"", string.Empty);
+            s.animationID = cols[++ind].Trim();
+            s.sfxID = cols[++ind].Trim();
+            int.TryParse(cols[++ind].Trim(), out s.power);
+            float.TryParse(cols[++ind].Trim(), out s.cooldown);
+            int.TryParse(cols[++ind].Trim(), out s.hitPercentage);
+            int.TryParse(cols[++ind].Trim(), out s.critPercentage);
+            int.TryParse(cols[++ind].Trim(), out s.elementEffectMod);
+            string pattern = cols[++ind].Trim();
             if (pattern.Contains("A"))
             {
                 s.targetData = new TargetData(true);
@@ -83,7 +86,7 @@ public class SpellDictionary : MonoBehaviour
                 if (pattern.Contains("T"))
                     s.targetData.targeted = true;
             }
-            string buff = cols[9].Trim();
+            string buff = cols[++ind].Trim();
             if(!buff.Contains("N"))
             {
                 s.buff = new BuffData();
@@ -129,8 +132,8 @@ public class SpellDictionary : MonoBehaviour
                 else if (buff.Contains("b"))
                     s.buff.vsElemMod[Elements.bolt] = level;
             }
-            int.TryParse(cols[10].Trim(), out s.buffPercentage);
-            switch (cols[11].Trim().ToLower())
+            int.TryParse(cols[++ind].Trim(), out s.buffPercentage);
+            switch (cols[++ind].Trim().ToLower())
             {
                 case "no_mods":
                     s.modFlag = Spell.ModFlags.NO_MODIFICATION;
@@ -155,7 +158,8 @@ public class SpellDictionary : MonoBehaviour
         while (true)
         {
             cols = lines[i].Split(col_delim);
-            string key = cols[0].Trim();
+            int ind = 0;
+            string key = cols[ind].Trim();
             if (key.CompareTo("END") == 0)
             {
                 i += 2;//Skip example line
@@ -163,10 +167,12 @@ public class SpellDictionary : MonoBehaviour
             }
             ElementMod e = new ElementMod();
             e.name = key;
-            e.element = Elements.fromString(cols[1].Trim());
-            e.description = cols[2].Trim().Replace("\"", string.Empty);
-            float.TryParse(cols[3].Trim(), out e.cooldownMod);
-            float.TryParse(cols[4].Trim(), out e.cooldownModM);
+            e.element = Elements.fromString(cols[++ind].Trim());
+            e.description = cols[++ind].Trim().Replace("\"", string.Empty);
+            e.animationID = cols[++ind].Trim();
+            e.sfxID = cols[++ind].Trim();
+            float.TryParse(cols[++ind].Trim(), out e.cooldownMod);
+            float.TryParse(cols[++ind].Trim(), out e.cooldownModM);
             elements.Add(key, e);
             i++;
         }
@@ -174,25 +180,28 @@ public class SpellDictionary : MonoBehaviour
         while (true)
         {
             cols = lines[i].Split(col_delim);
-            string key = cols[0].Trim();
+            int ind = 0;
+            string key = cols[ind].Trim();
             if (key.CompareTo("END") == 0)
             {
                 return;
             }
             StyleMod s = new StyleMod();
             s.name = key;
-            int.TryParse(cols[1].Trim(), out s.powerMod);
-            s.description = cols[2].Trim().Replace("\"", string.Empty);
-            float.TryParse(cols[3].Trim(), out s.powerModM);
-            float.TryParse(cols[4].Trim(), out s.cooldownMod);
-            float.TryParse(cols[5].Trim(), out s.cooldownModM);
-            int.TryParse(cols[6].Trim(), out s.accMod);
-            float.TryParse(cols[7].Trim(), out s.accModM);
-            int.TryParse(cols[8].Trim(), out s.critMod);
-            float.TryParse(cols[9].Trim(), out s.critModM);
-            int.TryParse(cols[10].Trim(), out s.statusEffectChanceMod);
-            float.TryParse(cols[11].Trim(), out s.statusEffectChanceModM);
-            string pattern = cols[12].Trim();
+            int.TryParse(cols[++ind].Trim(), out s.powerMod);
+            s.description = cols[++ind].Trim().Replace("\"", string.Empty);
+            s.animationID = cols[++ind].Trim();
+            s.sfxID = cols[++ind].Trim();
+            float.TryParse(cols[++ind].Trim(), out s.powerModM);
+            float.TryParse(cols[++ind].Trim(), out s.cooldownMod);
+            float.TryParse(cols[++ind].Trim(), out s.cooldownModM);
+            int.TryParse(cols[++ind].Trim(), out s.accMod);
+            float.TryParse(cols[++ind].Trim(), out s.accModM);
+            int.TryParse(cols[++ind].Trim(), out s.critMod);
+            float.TryParse(cols[++ind].Trim(), out s.critModM);
+            int.TryParse(cols[++ind].Trim(), out s.statusEffectChanceMod);
+            float.TryParse(cols[++ind].Trim(), out s.statusEffectChanceModM);
+            string pattern = cols[++ind].Trim();
             if (pattern.Contains("N"))
                 s.isTarget = false;
             else if (pattern.Contains("A"))
