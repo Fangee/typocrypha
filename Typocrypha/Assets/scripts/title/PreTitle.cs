@@ -38,7 +38,7 @@ public class PreTitle : MonoBehaviour {
 		if (!input_ready) return;
 		// check key presses
 		if (Input.GetKeyDown (KeyCode.Return)) {
-			AudioPlayer.main.playSFX (0, SFXType.UI, "sfx_enter");
+			AudioPlayer.main.playSFX ("sfx_enter");
 			buffer = buffer.Trim().ToUpper();
 			if (buffer.CompareTo (target_input) == 0) { // check correct input
 				input_ready = false;

@@ -30,7 +30,7 @@ public class RegisterSpellEvent : CutsceneEvent
         {
             dict.safeRegister(s.ToLower());
         }
-        AudioPlayer.main.playSFX(0, SFXType.SPELL, "magic_sound");
+        AudioPlayer.main.playSFX("sfx_learn_spell_cutscene");
     }
 }
 

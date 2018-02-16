@@ -12,14 +12,18 @@ public class BattleManager : MonoBehaviour {
     public DisplayAlly ally_left; // left ally UI
     public DisplayAlly ally_right; // right ally UI
     public ChatDatabase chat; //Database containing chat lines
+    public Color playerColor;
+    public Color enemyColor;
+    public Color allyColor;
+    public Color clarkeColor;
     public GameObject battleLogCast; //Casting log object and Associated reference to store
-    public TextMesh logCastText;
-    public TextMesh logCastInfo;
+    private Image castBox;
+    public Text logCastText;
+    public Text logCastInfo;
     public GameObject battleLogTalk; //talk log object and Associated reference to store
-    public TextMesh logTalkText;
-    public TextMesh logTalkInfo;
-    private MeshRenderer[] battleLogMeshes = new MeshRenderer[4];
-    private SpriteRenderer[] battleLogSprites = new SpriteRenderer[4];
+    private Image talkBox;
+    public Text logTalkText;
+    public Text logTalkInfo;
 	public EnemyChargeBars charge_bars; // creates and mananges charge bars
 	public EnemyStaggerBars stagger_bars; // creates and manages stagger bars
 	public CooldownList cooldown_list; // creates and manages player's cooldowns
@@ -92,19 +96,16 @@ public class BattleManager : MonoBehaviour {
             player_arr[i] = a;
         }
 
-        //INITIALIZE BATTLELOG STUFF//
+        //INITIALIZE BATTLE LOG STUFF//
 
-        const int numElements = 2;
-        System.Array.Copy(battleLogCast.GetComponentsInChildren<MeshRenderer>(true), 0, battleLogMeshes, 0, numElements);
-        System.Array.Copy(battleLogCast.GetComponentsInChildren<SpriteRenderer>(true), 0, battleLogSprites, 0, numElements);
-        System.Array.Copy(battleLogTalk.GetComponentsInChildren<MeshRenderer>(true), 0, battleLogMeshes, numElements, numElements);
-        System.Array.Copy(battleLogTalk.GetComponentsInChildren<SpriteRenderer>(true), 0, battleLogSprites, numElements, numElements);
+        castBox = battleLogCast.GetComponent<Image>();
+        talkBox = battleLogTalk.GetComponent<Image>();
 
         //FINISH//
 
         pause = false;
 		target_ind = 0;
-		AudioPlayer.main.playMusic (MusicType.BATTLE, scene.music_tracks[0]);
+		AudioPlayer.main.playMusic (scene.music_tracks[0]);
 	}
 
 	// creates the enemy specified at 'i' (0-left, 1-mid, 2-right) by the 'scene'
@@ -154,26 +155,30 @@ public class BattleManager : MonoBehaviour {
 		// move target reticule
 		target_ret.localPosition = new Vector3 (target_ind * enemy_spacing, reticule_y_offset, 0);
 		// play effect sound if target was moved
-		if (old_ind != target_ind) AudioPlayer.main.playSFX(0, SFXType.UI, "sfx_enemy_select");
+		if (old_ind != target_ind) AudioPlayer.main.playSFX("sfx_enemy_select");
 
         //SPELLBOOK CODE
 
         // go to next page if down is pressed
-        if (Input.GetKeyDown(KeyCode.DownArrow) && spellDict.pageDown())
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            //play page change SFX here
+            if (spellDict.pageDown())
+                AudioPlayer.main.playSFX("sfx_spellbook_scroll", 0.3F);
+            //else {play sfx_thud (player is on the last page this direction)}
         }
         // go to last page if down is pressed
-        if (Input.GetKeyDown(KeyCode.UpArrow) && spellDict.pageUp())
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            //play page change SFX here
+            if (spellDict.pageUp())
+                AudioPlayer.main.playSFX("sfx_spellbook_scroll", 0.3F);
+            //else {play sfx_thud (player is on the last page this direction)}
         }
     }
 
     //CASTING CODE//---------------------------------------------------------------------------------------------------------------------------------------//
 
-	// attack currently targeted enemy with spell
-	public void attackCurrent(string spell) {
+    // attack currently targeted enemy with spell
+    public void attackCurrent(string spell) {
         //Can attack dead enemies now, just wont cast spell at them
 		StartCoroutine (pauseAttackCurrent (spell));
     }
@@ -198,38 +203,38 @@ public class BattleManager : MonoBehaviour {
         {
             if(allyPos != -1)
             {
-                battleLog(spell.ToUpper().Replace(' ', '-'), "ALLY", chat.getLine(player_arr[allyPos].Stats.ChatDatabaseID), Utility.String.FirstLetterToUpperCase(s.root));
+                battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.NPC_ALLY, chat.getLine(player_arr[allyPos].Stats.ChatDatabaseID), Utility.String.FirstLetterToUpperCase(s.root));
                 targetPattern = spellDict.getTargetPattern(s, enemy_arr, target_ind, player_arr, allyPos);
             }
             else
             {
-                battleLog(spell.ToUpper().Replace(' ', '-'), "ALLY", "...", "Not here");
+                battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.INVALID, s.root + " isn't here right now!", "Clarke");
             }
         }          
         else if (status == CastStatus.SUCCESS)
         {
-            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine(player_arr[player_ind].Stats.ChatDatabaseID), player_arr[player_ind].Stats.name);
+            battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.PLAYER, chat.getLine(player_arr[player_ind].Stats.ChatDatabaseID), player_arr[player_ind].Stats.name);
             targetPattern = spellDict.getTargetPattern(s, enemy_arr, target_ind, player_arr, player_ind);
         }
         else if (status == CastStatus.BOTCH)
         {
-            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("botch"), player_arr[player_ind].Stats.name);
+            battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.INVALID, chat.getLine("botch"), "Clarke");
         }
         else if (status == CastStatus.FIZZLE)
         {
-            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("fizzle"), player_arr[player_ind].Stats.name);
+            battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.INVALID, chat.getLine("fizzle"), "Clarke");
         }
         else if (status == CastStatus.ONCOOLDOWN)
         {
-            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("oncooldown"), player_arr[player_ind].Stats.name);
+            battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.INVALID, chat.getLine("oncooldown"), "Clarke");
         }
         else if (status == CastStatus.COOLDOWNFULL)
         {
-            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", chat.getLine("cooldownlistfull"), player_arr[player_ind].Stats.name);
+            battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.INVALID, chat.getLine("cooldownlistfull"), "Clarke");
         }
         else
         {
-            battleLog(spell.ToUpper().Replace(' ', '-'), "PLAYER", "SOMETHING HAS GONE HORRIBLY WRONG", player_arr[player_ind].Stats.name);
+            battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.INVALID, "SOMETHING HAS GONE HORRIBLY WRONG", "GOD");
         }
         if(targetPattern != null)
             raiseTargets(targetPattern.first, targetPattern.second);
@@ -280,7 +285,7 @@ public class BattleManager : MonoBehaviour {
     public void enemyCast(SpellDictionary dict, SpellData s, int position, int target)
     {
         pause = true; // pause battle for attack
-        AudioPlayer.main.playSFX(1, SFXType.SPELL, "magic_sound");
+        AudioPlayer.main.playSFX("magic_sound");
         StartCoroutine(enemy_pause_cast(dict, s, position, target));
 
     }
@@ -291,7 +296,7 @@ public class BattleManager : MonoBehaviour {
         Pair<bool[], bool[]>  targetPattern = spellDict.getTargetPattern(s, player_arr, target, enemy_arr, position);
         BattleEffects.main.setDim(true, enemy_arr[position].GetComponent<SpriteRenderer>());
         raiseTargets(targetPattern.second, targetPattern.first);
-        battleLog(s.ToString(), "ENEMY", chat.getLine(enemy_arr[position].Stats.ChatDatabaseID), enemy_arr[position].Stats.name);
+        battleLog(s.ToString(), ICasterType.ENEMY, chat.getLine(enemy_arr[position].Stats.ChatDatabaseID), enemy_arr[position].Stats.name);
 
         yield return new WaitForSeconds(1.5f);
 
@@ -373,12 +378,12 @@ public class BattleManager : MonoBehaviour {
                 else//Spell hits
                 {
                     //Process hit graphics
-					AudioPlayer.main.playSFX(1, SFXType.SPELL, "Cutting_SFX");
+					AudioPlayer.main.playSFX("Cutting_SFX");
 
                     if (d.isCrit)//Spell is crit
                     {
                         Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
-						AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_party_weakcrit_dmg");
+						AudioPlayer.main.playSFX("sfx_party_weakcrit_dmg");
                         //process crit graphics
                     }
                     Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement(d.Target.BuffDebuff, d.element));
@@ -390,9 +395,6 @@ public class BattleManager : MonoBehaviour {
             else if (d.Target.CasterType == ICasterType.NPC_ALLY)
             {
                 Ally a = (Ally)d.Target;
-                //Process hit graphics
-                AudioPlayer.main.playSFX(1, SFXType.SPELL, "Cutting_SFX");
-                AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", a.transform.position, 1);
                 if (d.isHit == false)//Spell misses
                 {
                     Debug.Log(d.Caster.Stats.name + " missed " + d.Target.Stats.name + "!");
@@ -401,13 +403,13 @@ public class BattleManager : MonoBehaviour {
                 else//Spell hits
                 {
                     //Process hit graphics
-                    AudioPlayer.main.playSFX(1, SFXType.SPELL, "Cutting_SFX");
+                    AudioPlayer.main.playSFX("Cutting_SFX");
                     AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", a.transform.position, 1);
 
                     if (d.isCrit)//Spell is crit
                     {
                         Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
-                        AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_enemy_weakcrit_dmg");
+                        AudioPlayer.main.playSFX("sfx_party_weakcrit_dmg");
                         //process crit graphics
                         popp.spawnSprite("popup_critical", POP_TIMER, a.transform.position + UNDER_OFFSET);
                     }
@@ -415,7 +417,7 @@ public class BattleManager : MonoBehaviour {
                     {
                         //Process stun graphics
                         Debug.Log(d.Caster.Stats.name + " stuns " + d.Target.Stats.name);
-                        AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_stagger");
+                        AudioPlayer.main.playSFX("sfx_stagger");
                     }
 
                     Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement(d.Target.BuffDebuff, d.element));
@@ -463,13 +465,13 @@ public class BattleManager : MonoBehaviour {
                 else//Spell hits
                 {
                     //Process hit graphics
-					AudioPlayer.main.playSFX(1, SFXType.SPELL, "Cutting_SFX");
+					AudioPlayer.main.playSFX("Cutting_SFX");
 					AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", e.transform.position, 1);
 
                     if (d.isCrit)//Spell is crit
                     {
                         Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
-						AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_enemy_weakcrit_dmg");
+						AudioPlayer.main.playSFX("sfx_enemy_weakcrit_dmg");
 						//process crit graphics
 						popp.spawnSprite ("popup_critical", POP_TIMER, e.transform.position + UNDER_OFFSET);
                     }
@@ -477,7 +479,7 @@ public class BattleManager : MonoBehaviour {
                     {
                         //Process stun graphics
                         Debug.Log(d.Caster.Stats.name + " stuns " + d.Target.Stats.name);
-                        AudioPlayer.main.playSFX(2, SFXType.BATTLE, "sfx_stagger");
+                        AudioPlayer.main.playSFX("sfx_stagger");
                         charge_bars.Charge_bars[e.position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 0.5F, 0);
                     }
 
@@ -527,9 +529,17 @@ public class BattleManager : MonoBehaviour {
         }
         //Register unregistered keywords here
         bool [] regData = spellDict.safeRegister(s);
+        if (regData[0] || regData[1] || regData[2])
+            StartCoroutine(learnSFX());
         //Process regData (for register graphics) here. 
         //format is bool [3], where regData[0] is true if s.element is new, regData[1] is true if s.root is new, and regData[2] is true if s.style is new
 
+    }
+
+    private IEnumerator learnSFX()
+    {
+        yield return new WaitWhile(() => BattleManager.main.pause);
+        AudioPlayer.main.playSFX("sfx_learn_spell_battle");
     }
 
     //Raises the targets (array val = true) above the dimmer level
@@ -570,18 +580,36 @@ public class BattleManager : MonoBehaviour {
         return -1;
     }
     //Enable battle log UI state (call anywhere that the battlemanager pauses to cast)
-    private void battleLog(string cast, string caster, string talk, string speaker)
+    private void battleLog(string cast, ICasterType caster, string talk, string speaker)
     {
         battleLogCast.SetActive(true);
         battleLogTalk.SetActive(true);
-        logCastText.text = cast;
-        logCastInfo.text = caster;
+        logCastText.text = "> " + cast;
         logTalkText.text = talk;
         logTalkInfo.text = speaker;
-        for(int i = 0; i < battleLogSprites.Length; ++i)
+        if(caster == ICasterType.ENEMY)
         {
-            battleLogSprites[i].sortingOrder = 10;
-            battleLogMeshes[i].sortingOrder = 10;
+            castBox.color = enemyColor;
+            talkBox.color = enemyColor;
+            logCastInfo.text = "ENEMY  CAST";
+        }
+        else if(caster == ICasterType.PLAYER)
+        {
+            castBox.color = playerColor;
+            talkBox.color = playerColor;
+            logCastInfo.text = "PLAYER CAST";
+        }
+        else if(caster == ICasterType.NPC_ALLY)
+        {
+            castBox.color = allyColor;
+            talkBox.color = allyColor;
+            logCastInfo.text = "ALLY   CAST";
+        }
+        else //caster == IcasterType.INVALID (clarke is speaking)
+        {
+            castBox.color = clarkeColor;
+            talkBox.color = clarkeColor;
+            logCastInfo.text = "ERROR  CAST";
         }
     }
 
@@ -590,11 +618,6 @@ public class BattleManager : MonoBehaviour {
     {
         battleLogCast.SetActive(false);
         battleLogTalk.SetActive(false);
-        for (int i = 0; i < battleLogSprites.Length; ++i)
-        {
-            battleLogSprites[i].sortingOrder = 0;
-            battleLogMeshes[i].sortingOrder = 0;
-        }
     }
 
     //Updates death and opacity of enemies after pause in puaseAttackCurrent

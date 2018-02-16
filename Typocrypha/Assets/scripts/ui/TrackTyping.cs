@@ -37,7 +37,7 @@ public class TrackTyping : MonoBehaviour {
 		// check key presses
 		if (Input.GetKeyDown (KeyCode.Return)) {
 			Debug.Log ("Player casts " + buffer.ToUpper().Replace(' ', '-'));
-			AudioPlayer.main.playSFX (0, SFXType.UI, "sfx_enter");
+			AudioPlayer.main.playSFX ("sfx_enter");
 			if (TextEvents.main.is_prompt) {
 				TextEvents.main.prompt_input = buffer;
 				TextEvents.main.is_prompt = false;

@@ -40,23 +40,26 @@ public class SpellDictionary : MonoBehaviour
         while(true)
         {
             cols = lines[i].Split(col_delim);
-            string key = cols[0].Trim(); 
+            int ind = 0;
+            string key = cols[ind].Trim(); 
             if (key.CompareTo("END") == 0) //At end of root keywords
             {
                 i += 2;//Skip example line
                 break;
             }
-            string type = cols[1].Trim();
+            string type = cols[++ind].Trim();
             Spell s = createSpellFromType(type);
             s.name = key;
             s.type = type;
-            s.description = cols[2].Trim().Replace("\"", string.Empty);
-            int.TryParse(cols[3].Trim(), out s.power);
-            float.TryParse(cols[4].Trim(), out s.cooldown);
-            int.TryParse(cols[5].Trim(), out s.hitPercentage);
-            int.TryParse(cols[6].Trim(), out s.critPercentage);
-            int.TryParse(cols[7].Trim(), out s.elementEffectMod);
-            string pattern = cols[8].Trim();
+            s.description = cols[++ind].Trim().Replace("\"", string.Empty);
+            s.animationID = cols[++ind].Trim();
+            s.sfxID = cols[++ind].Trim();
+            int.TryParse(cols[++ind].Trim(), out s.power);
+            float.TryParse(cols[++ind].Trim(), out s.cooldown);
+            int.TryParse(cols[++ind].Trim(), out s.hitPercentage);
+            int.TryParse(cols[++ind].Trim(), out s.critPercentage);
+            int.TryParse(cols[++ind].Trim(), out s.elementEffectMod);
+            string pattern = cols[++ind].Trim();
             if (pattern.Contains("A"))
             {
                 s.targetData = new TargetData(true);
@@ -83,7 +86,7 @@ public class SpellDictionary : MonoBehaviour
                 if (pattern.Contains("T"))
                     s.targetData.targeted = true;
             }
-            string buff = cols[9].Trim();
+            string buff = cols[++ind].Trim();
             if(!buff.Contains("N"))
             {
                 s.buff = new BuffData();
@@ -129,8 +132,8 @@ public class SpellDictionary : MonoBehaviour
                 else if (buff.Contains("b"))
                     s.buff.vsElemMod[Elements.bolt] = level;
             }
-            int.TryParse(cols[10].Trim(), out s.buffPercentage);
-            switch (cols[11].Trim().ToLower())
+            int.TryParse(cols[++ind].Trim(), out s.buffPercentage);
+            switch (cols[++ind].Trim().ToLower())
             {
                 case "no_mods":
                     s.modFlag = Spell.ModFlags.NO_MODIFICATION;
@@ -155,7 +158,8 @@ public class SpellDictionary : MonoBehaviour
         while (true)
         {
             cols = lines[i].Split(col_delim);
-            string key = cols[0].Trim();
+            int ind = 0;
+            string key = cols[ind].Trim();
             if (key.CompareTo("END") == 0)
             {
                 i += 2;//Skip example line
@@ -163,10 +167,12 @@ public class SpellDictionary : MonoBehaviour
             }
             ElementMod e = new ElementMod();
             e.name = key;
-            e.element = Elements.fromString(cols[1].Trim());
-            e.description = cols[2].Trim().Replace("\"", string.Empty);
-            float.TryParse(cols[3].Trim(), out e.cooldownMod);
-            float.TryParse(cols[4].Trim(), out e.cooldownModM);
+            e.element = Elements.fromString(cols[++ind].Trim());
+            e.description = cols[++ind].Trim().Replace("\"", string.Empty);
+            e.animationID = cols[++ind].Trim();
+            e.sfxID = cols[++ind].Trim();
+            float.TryParse(cols[++ind].Trim(), out e.cooldownMod);
+            float.TryParse(cols[++ind].Trim(), out e.cooldownModM);
             elements.Add(key, e);
             i++;
         }
@@ -174,25 +180,28 @@ public class SpellDictionary : MonoBehaviour
         while (true)
         {
             cols = lines[i].Split(col_delim);
-            string key = cols[0].Trim();
+            int ind = 0;
+            string key = cols[ind].Trim();
             if (key.CompareTo("END") == 0)
             {
                 return;
             }
             StyleMod s = new StyleMod();
             s.name = key;
-            int.TryParse(cols[1].Trim(), out s.powerMod);
-            s.description = cols[2].Trim().Replace("\"", string.Empty);
-            float.TryParse(cols[3].Trim(), out s.powerModM);
-            float.TryParse(cols[4].Trim(), out s.cooldownMod);
-            float.TryParse(cols[5].Trim(), out s.cooldownModM);
-            int.TryParse(cols[6].Trim(), out s.accMod);
-            float.TryParse(cols[7].Trim(), out s.accModM);
-            int.TryParse(cols[8].Trim(), out s.critMod);
-            float.TryParse(cols[9].Trim(), out s.critModM);
-            int.TryParse(cols[10].Trim(), out s.statusEffectChanceMod);
-            float.TryParse(cols[11].Trim(), out s.statusEffectChanceModM);
-            string pattern = cols[12].Trim();
+            int.TryParse(cols[++ind].Trim(), out s.powerMod);
+            s.description = cols[++ind].Trim().Replace("\"", string.Empty);
+            s.animationID = cols[++ind].Trim();
+            s.sfxID = cols[++ind].Trim();
+            float.TryParse(cols[++ind].Trim(), out s.powerModM);
+            float.TryParse(cols[++ind].Trim(), out s.cooldownMod);
+            float.TryParse(cols[++ind].Trim(), out s.cooldownModM);
+            int.TryParse(cols[++ind].Trim(), out s.accMod);
+            float.TryParse(cols[++ind].Trim(), out s.accModM);
+            int.TryParse(cols[++ind].Trim(), out s.critMod);
+            float.TryParse(cols[++ind].Trim(), out s.critModM);
+            int.TryParse(cols[++ind].Trim(), out s.statusEffectChanceMod);
+            float.TryParse(cols[++ind].Trim(), out s.statusEffectChanceModM);
+            string pattern = cols[++ind].Trim();
             if (pattern.Contains("N"))
                 s.isTarget = false;
             else if (pattern.Contains("A"))
@@ -370,22 +379,30 @@ public class SpellDictionary : MonoBehaviour
         Spell s = spells[spell.root];
         Spell c = createSpellFromType(s.type);
         s.copyInto(c);
-        ElementMod e;
-        StyleMod st;
-        if (spell.element == null)
-            e = null;
-        else
+        string[] animData = { null, c.animationID, null };
+        string[] sfxData = { null, c.sfxID, null };
+        ElementMod e = null;
+        StyleMod st = null;
+        if (spell.element != null)
+        {
             e = elements[spell.element];
-        if (spell.style == null)
-            st = null;
-        else
+            sfxData[2] = e.sfxID;
+            animData[2] = e.animationID;
+        }
+        if (spell.style != null)
+        {
             st = styles[spell.style];
+            sfxData[0] = st.sfxID;
+            animData[0] = st.animationID;
+        }
         c.Modify(e, st);
         List<ICaster> toCastAt = c.target(targets, selected, allies, position);
         List<CastData> data = new List<CastData>();
         foreach(ICaster target in toCastAt)
         {
             CastData castData = c.cast(target, caster);
+            castData.animData = animData;
+            castData.sfxData = sfxData;
             if(castData.reflect == true)
                 castData.setLocationData(caster, target);
             else
@@ -607,162 +624,6 @@ public class SpellData
             result += ("-" + style);
         return result.ToUpper();
     }
-}
-//A class containing the result data from a casted spell (which can be used to generate animations an effects)
-//Contains hit/miss, crit, stun, elemental weakness/resistance status, damage inflicted, etc.
-//Does not contain cast status data (Botch, Fizzle)
-public class CastData
-{
-    //Data fields
-    public bool isHit = false;
-    public bool isCrit = false;
-    public bool isStun = false;
-    public bool isBuff = false;
-    public int damageInflicted = 0;
-    public int element = Elements.notAnElement;
-    public Elements.vsElement elementalData = Elements.vsElement.INVALID;
-    public BuffData buffInflicted = null;
-
-    public ICaster Target
-    {
-        get { return target; }
-    }
-    public ICaster Caster
-    {
-        get { return caster; }
-    }
-
-    //Location data (used for targeting)
-    ICaster target;
-    ICaster caster;
-
-    //Just used in cast INNACURATE
-    public bool reflect = false;
-
-    //Used to set location data
-    public void setLocationData(ICaster target, ICaster caster)
-    {
-        this.target = target;
-        this.caster = caster;
-    }
-  
-}
-//Class containing element constants and associated methods.
-//Essentially a glorified int enum
-public static class Elements
-{
-    //Elemental vs status
-    public enum vsElement
-    {
-        INVALID,
-        REFLECT,
-        ABSORB,
-        NULLIFY,
-        RESISTANT,
-        NEUTERAL,
-        WEAK,
-        SUPERWEAK,
-    }
-
-    public const int count = 4;
-
-    public const int notAnElement = -1;
-    public const int @null = 0;
-    public const int fire = 1;
-    public const int ice = 2;
-    public const int bolt = 3;
-
-    public const int absorb = -1;
-    public const int reflect = -2;
-    public const int weak = -3;
-    public const int reflect_mod = 1;
-
-    //Returns integer form of element for equivalent elementName string
-    public static int fromString(string elementName)
-    {
-        switch (elementName)
-        {
-            case "null":
-                return @null;
-            case "fire":
-                return fire;
-            case "ice":
-                return ice;
-            case "bolt":
-                return bolt;
-            default:
-                return notAnElement;
-        }
-    }
-
-    public static string toString(int elementNum)
-    {
-        switch (elementNum)
-        {
-            case 0:
-                return "null";
-            case 1:
-                return "fire";
-            case 2:
-                return "ice";
-            case 3:
-                return "bolt";
-            default:
-                return "not an element";
-        }
-    }
-
-    public static vsElement modLevel(vsElement level, int amount)
-    {
-        if(level != vsElement.INVALID)
-            return (vsElement)(Utility.Math.Clamp((int)level + amount, 1, 7));
-        return vsElement.INVALID;
-    }
-
-    public static vsElement getLevel(float value)
-    {
-        if (value == -2F)
-            return vsElement.REFLECT;
-        else if (value == -1F)
-            return vsElement.ABSORB;
-        else if (value == 1F)
-            return vsElement.NEUTERAL;
-        else if (value == 0F)
-            return vsElement.NULLIFY;
-        else if (value < 1)
-            return vsElement.RESISTANT;
-        else if (value > 2)
-            return vsElement.SUPERWEAK;
-        else if (value > 1)
-            return vsElement.WEAK;
-        else
-            return vsElement.INVALID;
-    }
-    public static float getFloat(vsElement level)
-    {
-        switch (level)
-        {
-            case vsElement.NEUTERAL:
-                return 1;
-            case vsElement.NULLIFY:
-                return 0;
-            case vsElement.REFLECT:
-                return reflect;
-            case vsElement.ABSORB:
-                return absorb;
-            case vsElement.RESISTANT:
-                return 0.5F;
-            case vsElement.WEAK:
-                return 1.5F;
-            case vsElement.SUPERWEAK:
-                return 2;
-            case vsElement.INVALID:
-                throw new System.NotImplementedException();
-            default:
-                throw new System.NotImplementedException();
-        }
-    }
-
 }
 
 
