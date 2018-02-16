@@ -8,11 +8,11 @@ using UnityEngine;
 //   Currently reserved channels:
 //     3: talking effects
 
-// different types of music (DEPRECATED)
-public enum MusicType { CUTSCENE, BATTLE };
+//// different types of music (DEPRECATED)
+//public enum MusicType { CUTSCENE, BATTLE };
 
-// different types of sfx (DEPRECATED)
-public enum SFXType { UI, SPELL, BATTLE, SPEAKING, OTHER, size };
+//// different types of sfx (DEPRECATED)
+//public enum SFXType { UI, SPELL, BATTLE, SPEAKING, OTHER, size };
 
 // manages playing music and sfx
 public class AudioPlayer : MonoBehaviour {
@@ -25,7 +25,28 @@ public class AudioPlayer : MonoBehaviour {
 	AssetBundle sfx_bundle;
 	AssetBundle music_bundle;
 
-	void Awake() {
+    public const int voice_channel = 3;
+
+    // music volume (0 to 1)
+    public float MusicVolume {
+        get { return music.volume; }
+        set { music.volume = Mathf.Clamp01(value); }
+    }
+
+    //SFX volume (-1 to 0.0) 
+    private float sfx_volume = 1.0F;
+    public float SfxVolume {
+        get { return sfx_volume; }
+        set { sfx_volume = Mathf.Clamp01(value); }
+    }
+
+    //Speech Volume (0 to 1)
+    public float VoiceVolume {
+        get { return sfx_channels[voice_channel].volume; }
+        set { sfx_channels[voice_channel].volume = Mathf.Clamp01(value); }
+    }
+
+    void Awake() {
 		DontDestroyOnLoad(transform.gameObject);
 		if (main == null) main = this;
 		else GameObject.Destroy (gameObject); // avoid multiple copies
@@ -43,11 +64,27 @@ public class AudioPlayer : MonoBehaviour {
 		ready = true;
 		Debug.Log ("finished loading audio");
 	}
+    //Currently has the Audio-adjustment keybinds (will remove when we get a settings GUI)
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Keypad8))
+            MusicVolume += 0.1F;
+        else if (Input.GetKeyDown(KeyCode.Keypad2))
+            MusicVolume -= 0.1F;
+        if (Input.GetKeyDown(KeyCode.Keypad9))
+            SfxVolume += 0.1F;
+        else if (Input.GetKeyDown(KeyCode.Keypad3))
+            SfxVolume -= 0.1F;
+        if (Input.GetKeyDown(KeyCode.Keypad7))
+            VoiceVolume += 0.1F;
+        else if (Input.GetKeyDown(KeyCode.Keypad1))
+            VoiceVolume -= 0.1F;
+    }
 
-	// sets preset reservations
-	void initReservations() {
-		channel_reserved [3] = true; // reserved for talking sfx
-		AudioPlayer.main.setSFX (3, "speak_boop"); // put default talk sfx in channel 3
+    // sets preset reservations
+    void initReservations() {
+		channel_reserved [voice_channel] = true; // reserved for talking sfx
+		AudioPlayer.main.setSFX (voice_channel, "speak_boop"); // put default talk sfx in channel 3
 	}
 
 	// sets specified sfx channel
@@ -68,20 +105,22 @@ public class AudioPlayer : MonoBehaviour {
 		sfx_channels [channel].Play ();
 	}
 
-	// play sfx from name (finds first open channel)
-	public void playSFX(string name) {
-		for (int i = 0; i < sfx_channels.Length; ++i) {
-			AudioSource channel = sfx_channels [i];
-			if (!channel_reserved[i] && !channel.isPlaying) {
-				channel.clip = sfx_bundle.LoadAsset<AudioClip> (name);
-				channel.Play ();
-				break;
-			}
-		}
-	}
+    // play sfx from name with specified volume modifier (finds first open channel)
+    public void playSFX(string name, float volume = 1.0F)
+    {
+        for (int i = 0; i < sfx_channels.Length; ++i)
+        {
+            AudioSource channel = sfx_channels[i];
+            if (!channel_reserved[i] && !channel.isPlaying)
+            {
+                channel.PlayOneShot(sfx_bundle.LoadAsset<AudioClip>(name), volume * SfxVolume);
+                break;
+            }
+        }
+    }
 
-	// play music from name
-	public void playMusic(string name) {
+    // play music from name
+    public void playMusic(string name) {
 		name = name.Trim ();
 		if (name.CompareTo ("_") == 0) // skip if null song
 			return; 
@@ -117,28 +156,28 @@ public class AudioPlayer : MonoBehaviour {
 
 /**************** DEPRECATED AUDIO SYSTEM *********************/
 
-	// sets specified sfx channel (DEPRECATED)
-	public void setSFX(int channel, SFXType type, string name) {
-		name = name.Trim ();
-		if (name.CompareTo ("null") == 0) return;
-		sfx_channels [channel].clip = sfx_bundle.LoadAsset<AudioClip> (name);
-	}
+	//// sets specified sfx channel (DEPRECATED)
+	//public void setSFX(int channel, SFXType type, string name) {
+	//	name = name.Trim ();
+	//	if (name.CompareTo ("null") == 0) return;
+	//	sfx_channels [channel].clip = sfx_bundle.LoadAsset<AudioClip> (name);
+	//}
 
-	// load and play sfx directly (DEPRECATED)
-	public void playSFX(int channel, SFXType type, string name) {
-		setSFX (channel, type, name);
-		sfx_channels [channel].Play ();
-	}
+	//// load and play sfx directly (DEPRECATED)
+	//public void playSFX(int channel, SFXType type, string name) {
+	//	setSFX (channel, type, name);
+	//	sfx_channels [channel].Play ();
+	//}
 
-	// play music from specified type (DEPRECATED)
-	public void playMusic(MusicType type, string name) {
-		if (name.CompareTo ("_") == 0 || name.CompareTo ("") == 0) return; // skip if null song
-        else if (name.CompareTo ("STOP") == 0)
-        {
-            stopAll();
-            return;
-        } // stop if stop flag
-		music.clip = music_bundle.LoadAsset<AudioClip> (name);
-		music.Play ();
-	}
+	//// play music from specified type (DEPRECATED)
+	//public void playMusic(MusicType type, string name) {
+	//	if (name.CompareTo ("_") == 0 || name.CompareTo ("") == 0) return; // skip if null song
+ //       else if (name.CompareTo ("STOP") == 0)
+ //       {
+ //           stopAll();
+ //           return;
+ //       } // stop if stop flag
+	//	music.clip = music_bundle.LoadAsset<AudioClip> (name);
+	//	music.Play ();
+	//}
 }

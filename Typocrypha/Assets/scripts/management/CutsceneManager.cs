@@ -52,8 +52,8 @@ public class CutsceneManager : MonoBehaviour {
 				displayNPCSprite (npc_sprite, scene.npc_pos[curr_line][i]);
 			}
 			if (curr_line != 0) // play advance dialogue sfx
-				AudioPlayer.main.playSFX(0, SFXType.UI, "sfx_next_textbox"); 
-			AudioPlayer.main.playMusic(MusicType.CUTSCENE, scene.music_tracks[curr_line]);
+				AudioPlayer.main.playSFX("sfx_next_textbox"); 
+			AudioPlayer.main.playMusic(scene.music_tracks[curr_line]);
             if(scene.events[curr_line] != null) //Call special event if applicable
                 scene.events[curr_line].call();
 			text_scroll.startPrint (scene.dialogue [curr_line], display_text);
