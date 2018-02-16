@@ -374,6 +374,7 @@ public class BattleManager : MonoBehaviour {
                 {
                     Debug.Log(d.Caster.Stats.name + " missed " + d.Target.Stats.name + "!");
                     //Process miss graphics
+					AudioPlayer.main.playSFX("sfx_miss");
                 }
                 else//Spell hits
                 {
@@ -410,6 +411,7 @@ public class BattleManager : MonoBehaviour {
                 {
                     Debug.Log(d.Caster.Stats.name + " missed " + d.Target.Stats.name + "!");
                     //Process miss graphics
+					AudioPlayer.main.playSFX("sfx_miss");
                 }
                 else//Spell hits
                 {
@@ -460,6 +462,8 @@ public class BattleManager : MonoBehaviour {
                     Debug.Log(d.Caster.Stats.name + " missed " + d.Target.Stats.name + "!");
                     //Process miss graphics
                     popp.spawnSprite ("popup_miss", POP_TIMER, e.transform.position + UNDER_OFFSET);
+					AudioPlayer.main.playSFX("sfx_miss");
+					BattleEffects.main.spriteShift (e.gameObject.transform, 0.5f, 0.1f); // sprite moves to the right as a dodge
                 }
                 else//Spell hits
                 {
@@ -631,6 +635,7 @@ public class BattleManager : MonoBehaviour {
             talkBox.color = clarkeColor;
             logCastInfo.text = "ERROR  CAST";
         }
+		target_ret.GetComponent<SpriteRenderer>().enabled = false; // disable / make target reticule disappear on a cast
     }
 
     //Stop battle log UI (call after every pause to cast
@@ -638,6 +643,7 @@ public class BattleManager : MonoBehaviour {
     {
         battleLogCast.SetActive(false);
         battleLogTalk.SetActive(false);
+		target_ret.GetComponent<SpriteRenderer>().enabled = true; // enable / make target reticule appear after a cast
     }
 
     //Updates death and opacity of enemies after pause in puaseAttackCurrent

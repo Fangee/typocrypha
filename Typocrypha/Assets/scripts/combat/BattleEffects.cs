@@ -97,4 +97,39 @@ public class BattleEffects : MonoBehaviour {
 		}
 		pos.position = old_pos;
 	}
+
+	// shift a sprite to the right for sec seconds and amt intensity
+	public void spriteShift(Transform pos, float sec, float amt) {
+		StartCoroutine(spriteShiftCR (pos, sec, amt));
+	}
+
+	// coroutine that shifts sprite over time
+	IEnumerator spriteShiftCR(Transform pos, float sec, float amt) {
+		Vector3 old_pos = pos.position;
+		Vector3 shift_pos = new Vector3 (0.15f, 0.0f, 0.0f);
+		Vector3 check_pos;
+		float curr_time = 0;
+		while (curr_time < (sec*2)) {
+			if (curr_time >= sec) {
+				shift_pos.x -= 0.04f;
+			} else {
+				if ((shift_pos.x - 0.02f) > 0.0f) {
+					shift_pos.x -= 0.02f;
+				} else {
+					shift_pos.x = 0.0f;
+				}
+			}
+			check_pos = (pos.position += (Vector3)shift_pos);
+			if (check_pos.x < old_pos.x) {
+				pos.position = old_pos;
+			} else {
+				pos.position += (Vector3)shift_pos;
+			}
+			for (int i = 0; i < 4; ++i) {
+				yield return new WaitForEndOfFrame ();
+				curr_time += Time.deltaTime;
+			}
+		}
+		pos.position = old_pos;
+	}
 }
