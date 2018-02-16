@@ -74,7 +74,7 @@ public static class CasterOps
         else if (targetMod.vsElement[element] < 1)
             data.elementalData = Elements.vsElement.RESISTANT;
         else
-            data.elementalData = Elements.vsElement.NEUTERAL;
+            data.elementalData = Elements.vsElement.NEUTRAL;
 
         //Apply stun damage mod (if stunned)
         if (is_stunned)

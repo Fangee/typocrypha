@@ -262,7 +262,7 @@ public class BuffSpell : Spell
             case Elements.vsElement.NULLIFY:
                 data.isHit = false;
                 return false;
-            case Elements.vsElement.NEUTERAL:
+            case Elements.vsElement.NEUTRAL:
                 inflictBuff(target, caster, powerMod);
                 break;
             case Elements.vsElement.WEAK:
@@ -329,7 +329,7 @@ public class StyleMod
     public bool isTarget = true;
     public TargetData targets;
 }
-//Unfinished (CREATE A BETTER VERSION FOR TARGET MOD MODULATION)
+//Contains targeting data and associated targeting modification methods
 public class TargetData
 {
     public TargetData(bool b)

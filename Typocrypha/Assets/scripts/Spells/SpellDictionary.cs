@@ -379,22 +379,30 @@ public class SpellDictionary : MonoBehaviour
         Spell s = spells[spell.root];
         Spell c = createSpellFromType(s.type);
         s.copyInto(c);
-        ElementMod e;
-        StyleMod st;
-        if (spell.element == null)
-            e = null;
-        else
+        string[] animData = { null, c.animationID, null };
+        string[] sfxData = { null, c.sfxID, null };
+        ElementMod e = null;
+        StyleMod st = null;
+        if (spell.element != null)
+        {
             e = elements[spell.element];
-        if (spell.style == null)
-            st = null;
-        else
+            sfxData[2] = e.sfxID;
+            animData[2] = e.animationID;
+        }
+        if (spell.style != null)
+        {
             st = styles[spell.style];
+            sfxData[0] = st.sfxID;
+            animData[0] = st.animationID;
+        }
         c.Modify(e, st);
         List<ICaster> toCastAt = c.target(targets, selected, allies, position);
         List<CastData> data = new List<CastData>();
         foreach(ICaster target in toCastAt)
         {
             CastData castData = c.cast(target, caster);
+            castData.animData = animData;
+            castData.sfxData = sfxData;
             if(castData.reflect == true)
                 castData.setLocationData(caster, target);
             else
@@ -616,162 +624,6 @@ public class SpellData
             result += ("-" + style);
         return result.ToUpper();
     }
-}
-//A class containing the result data from a casted spell (which can be used to generate animations an effects)
-//Contains hit/miss, crit, stun, elemental weakness/resistance status, damage inflicted, etc.
-//Does not contain cast status data (Botch, Fizzle)
-public class CastData
-{
-    //Data fields
-    public bool isHit = false;
-    public bool isCrit = false;
-    public bool isStun = false;
-    public bool isBuff = false;
-    public int damageInflicted = 0;
-    public int element = Elements.notAnElement;
-    public Elements.vsElement elementalData = Elements.vsElement.INVALID;
-    public BuffData buffInflicted = null;
-
-    public ICaster Target
-    {
-        get { return target; }
-    }
-    public ICaster Caster
-    {
-        get { return caster; }
-    }
-
-    //Location data (used for targeting)
-    ICaster target;
-    ICaster caster;
-
-    //Just used in cast INNACURATE
-    public bool reflect = false;
-
-    //Used to set location data
-    public void setLocationData(ICaster target, ICaster caster)
-    {
-        this.target = target;
-        this.caster = caster;
-    }
-  
-}
-//Class containing element constants and associated methods.
-//Essentially a glorified int enum
-public static class Elements
-{
-    //Elemental vs status
-    public enum vsElement
-    {
-        INVALID,
-        REFLECT,
-        ABSORB,
-        NULLIFY,
-        RESISTANT,
-        NEUTERAL,
-        WEAK,
-        SUPERWEAK,
-    }
-
-    public const int count = 4;
-
-    public const int notAnElement = -1;
-    public const int @null = 0;
-    public const int fire = 1;
-    public const int ice = 2;
-    public const int bolt = 3;
-
-    public const int absorb = -1;
-    public const int reflect = -2;
-    public const int weak = -3;
-    public const int reflect_mod = 1;
-
-    //Returns integer form of element for equivalent elementName string
-    public static int fromString(string elementName)
-    {
-        switch (elementName)
-        {
-            case "null":
-                return @null;
-            case "fire":
-                return fire;
-            case "ice":
-                return ice;
-            case "bolt":
-                return bolt;
-            default:
-                return notAnElement;
-        }
-    }
-
-    public static string toString(int elementNum)
-    {
-        switch (elementNum)
-        {
-            case 0:
-                return "null";
-            case 1:
-                return "fire";
-            case 2:
-                return "ice";
-            case 3:
-                return "bolt";
-            default:
-                return "not an element";
-        }
-    }
-
-    public static vsElement modLevel(vsElement level, int amount)
-    {
-        if(level != vsElement.INVALID)
-            return (vsElement)(Utility.Math.Clamp((int)level + amount, 1, 7));
-        return vsElement.INVALID;
-    }
-
-    public static vsElement getLevel(float value)
-    {
-        if (value == -2F)
-            return vsElement.REFLECT;
-        else if (value == -1F)
-            return vsElement.ABSORB;
-        else if (value == 1F)
-            return vsElement.NEUTERAL;
-        else if (value == 0F)
-            return vsElement.NULLIFY;
-        else if (value < 1)
-            return vsElement.RESISTANT;
-        else if (value > 2)
-            return vsElement.SUPERWEAK;
-        else if (value > 1)
-            return vsElement.WEAK;
-        else
-            return vsElement.INVALID;
-    }
-    public static float getFloat(vsElement level)
-    {
-        switch (level)
-        {
-            case vsElement.NEUTERAL:
-                return 1;
-            case vsElement.NULLIFY:
-                return 0;
-            case vsElement.REFLECT:
-                return reflect;
-            case vsElement.ABSORB:
-                return absorb;
-            case vsElement.RESISTANT:
-                return 0.5F;
-            case vsElement.WEAK:
-                return 1.5F;
-            case vsElement.SUPERWEAK:
-                return 2;
-            case vsElement.INVALID:
-                throw new System.NotImplementedException();
-            default:
-                throw new System.NotImplementedException();
-        }
-    }
-
 }
 
 
