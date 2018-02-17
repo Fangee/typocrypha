@@ -27,7 +27,8 @@ public class BattleManager : MonoBehaviour {
 	public EnemyChargeBars charge_bars; // creates and mananges charge bars
 	public EnemyStaggerBars stagger_bars; // creates and manages stagger bars
 	public CooldownList cooldown_list; // creates and manages player's cooldowns
-	public Transform target_ret; // shows where target is
+	public Transform target_ret; // transform of target ret
+	public Vector2 target_pos; // position of target ret
 	public GameObject dialogue_box; // text box for dialogue
 	public float enemy_spacing; // space between enemies
 
@@ -105,6 +106,8 @@ public class BattleManager : MonoBehaviour {
 
         pause = false;
 		target_ind = 0;
+		target_pos = new Vector2 (target_ind * enemy_spacing, reticule_y_offset);
+		target_ret.localPosition = target_pos;
 		AudioPlayer.main.playMusic (scene.music_tracks[0]);
 	}
 
@@ -153,7 +156,7 @@ public class BattleManager : MonoBehaviour {
 		if (target_ind < 0) target_ind = 0;
 		if (target_ind > 2) target_ind = 2;
 		// move target reticule
-		target_ret.localPosition = new Vector3 (target_ind * enemy_spacing, reticule_y_offset, 0);
+		target_pos = new Vector2 (target_ind * enemy_spacing, reticule_y_offset);
 		// play effect sound if target was moved
 		if (old_ind != target_ind) AudioPlayer.main.playSFX("sfx_enemy_select");
 
