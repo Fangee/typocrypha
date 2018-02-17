@@ -7,17 +7,17 @@ ALLY	Dahlia
 ENEMY	Slime					
 ENEMY	The Evil Eye					
 ENEMY	Tanuki					
-INTERRUPT	MIDDLE_HEALTH	0.5	L			
+INTERRUPT	"check-health,1,0.5"	L				
 DIALOGUE	Tanuki	"Ribbit! (Wow, you're actually killing the Evil Eye!)"	_	frog_mario	CENTER	END_DIALOGUE
 END_INTERRUPT						
-INTERRUPT	MIDDLE_HEALTH	0	R			
+INTERRUPT	"check-health,1,0"	R				
 DIALOGUE	Tanuki	Did you just kill the Evil Eye? Did- Did you win?	_	tanuki_mario	CENTER	END_DIALOGUE
 DIALOGUE	Tanuki	Holy crap.	_	tanuki_mario	CENTER	END_DIALOGUE
 INTERRUPT_END						
-INTERRUPT	RIGHT_HEALTH	0	R			
+INTERRUPT	"check-health,2,0"	R				
 DIALOGUE	Tanuki	Ah! You have defeated me!	_	tanuki_mario	CENTER	END_DIALOGUE
 END_INTERRUPT						
-INTERRUPT	PLAYER_HEALTH	0.75	LR			
+INTERRUPT	"check-health,3,0.75"	LR				
 DIALOGUE	Tanuki	Ha! Feel the wrath of Tanuki and Frog!	_	tanuki_mario	CENTER	END_DIALOGUE
 DIALOGUE	Frog	Ribbit Ribbit Rrrrrrribbit! (Frog is actually just making frog sounds right now)	_	tanuki_mario	CENTER	END_DIALOGUE
 END_INTERRUPT						

@@ -675,35 +675,17 @@ public class BattleManager : MonoBehaviour {
 		for (int i = 0; i < curr_battle.interrupts.Length; ++i) {
 			if (curr_battle.interrupts [i] == null) continue;
 			BattleInterrupt binter = curr_battle.interrupts [i];
-			// make sure all speaking members are still alive
-			bool dead_speaker = false;
-			for (int j = 0; j < 3; j++) {
-				if (binter.who_speak [j] && enemy_arr [j].Is_dead) {
-					curr_battle.interrupts [i] = null;
-					dead_speaker = true;
-				}
-			}
-			if (dead_speaker) continue;
-			// check if condition is fulfilled
-			if (binter.who_cond < 3) { // for enemy health
-				Enemy curr_enemy = enemy_arr [binter.who_cond];
-				if ((float)curr_enemy.Curr_hp / (float)curr_enemy.Stats.max_hp <= binter.health_cond) {
-					Debug.Log ("enemy health condition fulfilled " + binter.who_cond + ":" + binter.health_cond);
-					interrupted = true;
-					curr_battle.interrupts [i] = null;
-					StartCoroutine (playInterrupt (binter.scene));
-				}
-			} else { // for player health
-				if ((float)Player.main.Curr_hp / (float)Player.main.Stats.max_hp <= binter.health_cond) {
-					Debug.Log ("player health condition fulfilled:" + (float)Player.main.Curr_hp / (float)Player.main.Stats.max_hp);
-					interrupted = true;
-					curr_battle.interrupts [i] = null;
-					StartCoroutine (playInterrupt (binter.scene));
-				}
+			// check if condition is fulfilled, and play interrupt if true
+			if (binter.checkCondition ()) {
+				Debug.Log ("battle interrupt!");
+				interrupted = true;
+				curr_battle.interrupts [i] = null;
+				StartCoroutine (playInterrupt (binter.scene));
 			}
 		}
 		return interrupted;
 	}
+
 	// plays a battle interrupt
 	IEnumerator playInterrupt(CutScene scene) {
 		pause = true;

@@ -22,7 +22,7 @@ public class TextEvents : MonoBehaviour {
 	public GameObject dialogue_box; // dialogue box object
 	public TrackTyping track_typing; // tracks keyboard input
 
-	void Start() {
+	void Awake() {
 		if (main == null) main = this;
 		text_event_map = new Dictionary<string, TextEventDel> {
 			{"screen-shake", screenShake},

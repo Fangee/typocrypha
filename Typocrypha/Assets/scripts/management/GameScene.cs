@@ -37,16 +37,6 @@ public class CutScene : GameScene {
 
 }
 
-// represents a cutscene that happens in the middle of a battle
-public class BattleInterrupt {
-	public CutScene scene; // scene to play
-	// array of size 4 describing who is in scene (true if in scene, and must be alive for scene to play)
-	// 0-3, left, middle right, player
-	public bool[] who_speak;
-	public int who_cond; // whose health we track (0-3)
-	public float health_cond; // how low health must be to trigger cutscene
-}
-
 // represents a battle scene
 public class BattleScene : GameScene {
 	public EnemyStats[] enemy_stats; // stats for all enemies

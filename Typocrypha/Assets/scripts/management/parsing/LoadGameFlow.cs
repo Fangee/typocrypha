@@ -221,29 +221,20 @@ public class LoadGameFlow : MonoBehaviour {
 	// parses battlescene interruption
 	// returns line number at end of interrupt
 	int parseInterrupt(string[] lines, int pos, List<BattleInterrupt> interrupts) {
-		bool[] who_speak = { false, false, false, false };
-		int who_cond = -1;
-		float health_cond = -1;
 		// parse first line, which contains the interrupt condition
-		string[] first = lines[pos].Split (col_delim);
-		// get who condition tracks
-		switch (first [1].Trim()) { 
-			case "LEFT_HEALTH": who_cond = 0; break;
-			case "MIDDLE_HEALTH": who_cond = 1; break;
-			case "RIGHT_HEALTH": who_cond = 2; break;
-			case "PLAYER_HEALTH": who_cond = 3; break;
-		}
-		// get percent health condition
-		float.TryParse(first[2], out health_cond);
+		string[] first = lines[pos].Replace("\"", "").Split (col_delim); 
+		string[] opts = first [1].Split (coord_delim); 
 		// get who's talking in scene
-		foreach (char c in first[3]) {
+		bool[] who_speak = new bool[4];
+		foreach (char c in first[2]) {
 			switch (c) {
-				case 'L': who_speak [0] = true; break;
-				case 'M': who_speak [1] = true; break;
-				case 'R': who_speak [2] = true; break;
-				case 'P': who_speak [3] = true; break;
+			case 'L': who_speak [0] = true; break;
+			case 'M': who_speak [1] = true; break;
+			case 'R': who_speak [2] = true; break;
+			case 'P': who_speak [3] = true; break;
 			}
 		}
+
 		// parse dialogue
 		List<string> whos_talking = new List<string> ();
 		List<string> dialogue = new List<string> ();
@@ -316,11 +307,7 @@ public class LoadGameFlow : MonoBehaviour {
 		Vector2[][] npc_pos_arr = npc_pos.Select (a => a.ToArray ()).ToArray ();
 		CutScene battle_cutscene = new CutScene (whos_talking.ToArray(), dialogue.ToArray (), 
 			npc_sprites_arr, npc_pos_arr, music_tracks.ToArray(), events.ToArray());
-		BattleInterrupt battle_interrupt = new BattleInterrupt ();
-		battle_interrupt.scene = battle_cutscene;
-		battle_interrupt.who_speak = who_speak;
-		battle_interrupt.who_cond = who_cond;
-		battle_interrupt.health_cond = health_cond;
+		BattleInterrupt battle_interrupt = new BattleInterrupt (battle_cutscene, opts, who_speak);
 		interrupts.Add (battle_interrupt);
 		return i;
 	}
