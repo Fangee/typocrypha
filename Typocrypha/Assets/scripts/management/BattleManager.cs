@@ -638,7 +638,7 @@ public class BattleManager : MonoBehaviour {
             talkBox.color = clarkeColor;
             logCastInfo.text = "ERROR  CAST";
         }
-		target_ret.GetComponent<SpriteRenderer>().enabled = false; // disable / make target reticule disappear on a cast
+		target_ret.gameObject.SetActive (false); // disable / make target reticule disappear on a cast
     }
 
     //Stop battle log UI (call after every pause to cast
@@ -646,7 +646,7 @@ public class BattleManager : MonoBehaviour {
     {
         battleLogCast.SetActive(false);
         battleLogTalk.SetActive(false);
-		target_ret.GetComponent<SpriteRenderer>().enabled = true; // enable / make target reticule appear after a cast
+		target_ret.gameObject.SetActive (true); // enable / make target reticule appear after a cast
     }
 
     //Updates death and opacity of enemies after pause in puaseAttackCurrent
