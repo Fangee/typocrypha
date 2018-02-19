@@ -192,10 +192,10 @@ public class TextEvents : MonoBehaviour {
 		yield return true;
 	}
 
-	// sets background image 
+	// sets background image from sprite name
 	// input: [0]: string, name of image file
 	IEnumerator setBG(string[] opt) {
-		BackgroundEffects.main.setBG (opt [0]);
+		BackgroundEffects.main.setSpriteBG (opt [0]);
 		yield return true;
 	}
 

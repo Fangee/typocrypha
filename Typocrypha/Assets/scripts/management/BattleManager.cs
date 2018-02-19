@@ -32,6 +32,7 @@ public class BattleManager : MonoBehaviour {
 	public GameObject target_ret; // contains targetting sprites
 	public GameObject target_floor; // holds the enemy floor panels
 	public GameObject dialogue_box; // text box for dialogue
+	public GameObject battle_bg_prefab; // prefab of battle background
 
 	// publically accessible fields
 	[HideInInspector] public bool pause; // is battle paused?
@@ -137,6 +138,7 @@ public class BattleManager : MonoBehaviour {
         //FINISH//
 
         pause = false;
+		BackgroundEffects.main.setPrefabBG (battle_bg_prefab);
 		AudioPlayer.main.playMusic (scene.music_tracks[0]);
 		checkInterrupts ();
 	}
@@ -170,6 +172,7 @@ public class BattleManager : MonoBehaviour {
         stagger_bars.removeAll();
 		target_ret.SetActive (false);
 		target_floor.SetActive (false);
+		BackgroundEffects.main.removePrefabBG (2.0f);
     }
 
     // check if player switches targets or attacks
@@ -706,7 +709,7 @@ public class BattleManager : MonoBehaviour {
         if (curr_dead == enemy_count) // end battle if all enemies dead
         {
             Debug.Log("you win!");
-            stopBattle();
+			stopBattle ();
             StartCoroutine(StateManager.main.nextSceneDelayed(2.0f));
         }
     }

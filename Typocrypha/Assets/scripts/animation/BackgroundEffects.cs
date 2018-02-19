@@ -5,20 +5,37 @@ using UnityEngine;
 // performs various background effects
 public class BackgroundEffects : MonoBehaviour {
 	public static BackgroundEffects main;
-	public SRWavySprite wavy_sprite;
+	public WavySprite wavy_sprite;
 	public SpriteRenderer bg_dimmer;
+
+	GameObject prefab_bg; // background object if loaded from prefab
 
 	const int bg_layer = -10;
 
 	void Start() {
 		if (main == null) main = this;
-		wavy_sprite.waveForce = 0f; // initially, no waving
 		wavy_sprite.orderInLayer = bg_layer;
 	}
 
 	// sets sprite of background image
-	public void setBG(string sprite_name) {
+	public void setSpriteBG(string sprite_name) {
 		wavy_sprite.texture = Resources.Load<Texture2D> ("sprites/backgrounds/" + sprite_name);
+	}
+
+	// sets prefab background object as background
+	public void setPrefabBG(string prefab_name) {
+		prefab_bg = Instantiate (Resources.Load<GameObject> ("prefabs/" + prefab_name), this.transform);
+	}
+
+	// sets prefab background object as background with direct reference
+	public void setPrefabBG(GameObject prefab) {
+		prefab_bg = Instantiate (prefab, this.transform);
+	}
+
+	// removes current prefab background after delay
+	public void removePrefabBG(float delay) {
+		Destroy (prefab_bg, delay);
+		prefab_bg = null;
 	}
 
 	// fades current background image in/out over 'fade_time' seconds into color 'fade_color'

@@ -54,11 +54,13 @@ public class WavySprite:MonoBehaviour{
 
 	[HideInInspector]
 	public int sortingLayer=0;
-	private int _sortingLayer;
+	private int _sortingLayer=0;
 
 	[HideInInspector]
 	public int orderInLayer=0;
 	private int _orderInLayer=0;
+
+	public int trueOrder;
 
 	void OnEnable(){
 		mr=GetComponent<MeshRenderer>();
@@ -66,7 +68,7 @@ public class WavySprite:MonoBehaviour{
 		SetMeshAndMaterial();
 		GenerateMesh();
 		sortingLayer=mr.sortingLayerID;
-		orderInLayer=mr.sortingOrder;
+		orderInLayer=mr.sortingOrder=trueOrder;
 	}
 
 	void Update(){
@@ -126,9 +128,9 @@ public class WavySprite:MonoBehaviour{
 
 			if(_sortingLayer!=sortingLayer || _orderInLayer!=orderInLayer){
 				mr.sortingLayerID=sortingLayer;
-				mr.sortingOrder=orderInLayer;
+				mr.sortingOrder=orderInLayer=trueOrder;
 				_sortingLayer=sortingLayer;
-				_orderInLayer=orderInLayer;
+				_orderInLayer=orderInLayer=trueOrder;
 			}
 			GenerateMesh();
 		}
