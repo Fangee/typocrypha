@@ -7,9 +7,6 @@ using UnityEngine;
 using UnityEngine.UI;
 // edits by James Iwamasa
 
-// represents a macro substitution function
-public delegate string MacroSubDel(string macro);
-
 // displays text character by character
 public class TextScroll : MonoBehaviour {
 	const float default_delay = 0.05f; // default delay
@@ -24,7 +21,6 @@ public class TextScroll : MonoBehaviour {
 	Stack<Pair<string, string>> tag_stack; // stores currently used tags
 	Text out_text; // where text gets outputted
 	Coroutine curr; // current printing coroutine
-	Dictionary<string, MacroSubDel> macro_map; // for substituting macros
 
 	Regex tag_cutoff = new Regex ("<|>|=.*");
 	Regex evt_cutout = new Regex (Regex.Escape("[") + ".*?" + Regex.Escape("]")); // matches events
@@ -33,9 +29,6 @@ public class TextScroll : MonoBehaviour {
 	void Start() {
 		is_print = false;
 		tag_stack = new Stack<Pair<string, string>> ();
-		macro_map = new Dictionary<string, MacroSubDel> {
-			{"name", macroNameSub}
-		};
 	}
 
 	// start printing string to Text display
@@ -140,8 +133,11 @@ public class TextScroll : MonoBehaviour {
 			if (in_text [i].CompareTo ('{') == 0) {
 				int start_pos = i + 1;
 				int end_pos = in_text.IndexOf ('}', start_pos);
-				string macro = in_text.Substring (start_pos, end_pos - start_pos);
-				string sub = macro_map [macro] (macro);
+				string[] macro = in_text.Substring (start_pos, end_pos - start_pos).Split(opt_delim);
+				Debug.Log ("macro:" + macro.Aggregate("", (acc, next) => acc + "," + next));
+				string[] opt = macro.Skip (1).Take (macro.Length - 1).ToArray ();
+				string sub = TextMacros.main.macro_map [macro[0]] (opt);
+				Debug.Log (sub);
 				true_str.Append (sub);
 				i = end_pos + 1;
 			} else {
@@ -151,10 +147,6 @@ public class TextScroll : MonoBehaviour {
 		in_text = true_str.ToString ();
 	}
 
-	// substitutes name macro
-	string macroNameSub(string macro) {
-		return PlayerDialogueInfo.main.player_name;
-	}
 
 	// deletes characters currently in buffer one by one (doesnt check for tags)
 	IEnumerator deleteScrollText() {

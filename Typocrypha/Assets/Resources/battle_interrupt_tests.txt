@@ -1,0 +1,23 @@
+4						
+START_SCENE	CUTSCENE	jazzy_retro_battle_theme				
+DIALOGUE	Tanuki	[set-bg=bg_battle_2]Battle!	jazzy_retro_battle_theme	tanuki	CENTER	END_DIALOGUE
+REGISTER	sword	spear	END			
+END_SCENE						
+START_SCENE	BATTLE					
+MUSIC	bgm_battle_a1					
+ALLY	Illyia					
+ALLY	Dahlia					
+ENEMY	Tanuki					
+ENEMY	Ladon					
+ENEMY	Lilim					
+INTERRUPT	check-register-elem					
+DIALOGUE	Clarke	"You registered the element {last-cast,elem}. How exciting!"	_	tanuki	CENTER	END_DIALOGUE
+END_INTERRUPT						
+INTERRUPT	check-register-root					
+DIALOGUE	Clarke	"You registered the root {last-cast,root}. Amazing!"	_	tanuki	CENTER	END_DIALOGUE
+END_INTERRUPT						
+END_SCENE						
+START_SCENE	CUTSCENE					
+DIALOGUE	Tanuki	Dead!	second_hand	tanuki	CENTER	END_DIALOGUE
+END_SCENE						
+END_GAME						

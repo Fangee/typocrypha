@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 // manages battle sequences
 public class BattleManager : MonoBehaviour {
+	// statically linked fields
 	public static BattleManager main = null; // static instance accessible globally (try not to use this)
 	public SpellDictionary spellDict; // spell dictionary object
 	public GameObject enemy_prefab; // prefab for enemy object
@@ -28,17 +30,22 @@ public class BattleManager : MonoBehaviour {
 	public EnemyStaggerBars stagger_bars; // creates and manages stagger bars
 	public CooldownList cooldown_list; // creates and manages player's cooldowns
 	public GameObject target_ret; // contains targetting sprites
-	public Vector2 target_pos; // position of target ret
 	public GameObject target_floor; // holds the enemy floor panels
 	public GameObject dialogue_box; // text box for dialogue
 
-	public bool pause; // is battle paused?
-	public Enemy[] enemy_arr; // array of Enemy components (size 3)
-    public int target_ind; // index of currently targeted enemy
-    public ICaster[] player_arr = { null, Player.main, null }; // array of Player and allies (size 3)
-    public int player_ind = 1;
-	public int enemy_count; // number of enemies in battle
-	BattleScene curr_battle; // current battle scene
+	// publically accessible fields
+	[HideInInspector] public bool pause; // is battle paused?
+	[HideInInspector] public Enemy[] enemy_arr; // array of Enemy components (size 3)
+	[HideInInspector] public int target_ind; // index of currently targeted enemy
+	[HideInInspector] public ICaster[] player_arr = { null, Player.main, null }; // array of Player and allies (size 3)
+	[HideInInspector] public int player_ind = 1;
+	[HideInInspector] public int enemy_count; // number of enemies in battle
+	[HideInInspector] public Vector2 target_pos; // position of target ret
+	[HideInInspector] public DateTime time_started; // time battle started
+	[HideInInspector] public List<CastData> last_cast; // last performed cast action
+	[HideInInspector] public SpellData last_spell; // last performed spell
+	[HideInInspector] public bool[] last_register; // last spell register status
+	[HideInInspector] public int num_player_attacks; // number of player attacks from beginning of battle
 
 	public GameObject popper; //object that handles pop-up graphics (GraphicsPopper)
 	Popper popp; //holds popper script component
@@ -50,6 +57,7 @@ public class BattleManager : MonoBehaviour {
 
 	TargetReticule target_ret_scr; // TargetReticule script ref
 	TargetFloor target_floor_scr;  // TargetFloor script ref
+	BattleScene curr_battle; // current battle scene
 
 	const float enemy_spacing = 6f; // horizontal space between enemies
 	const float enemy_y_offset = 0.5f; // offset of enemy from y axis
@@ -108,9 +116,8 @@ public class BattleManager : MonoBehaviour {
         castBox = battleLogCast.GetComponent<Image>();
         talkBox = battleLogTalk.GetComponent<Image>();
 
-        //FINISH//
+		//INITIALIZE TARGET UI//
 
-        pause = false;
 		target_ret.SetActive (true);
 		target_ind = 0;
 		target_pos = new Vector2 (target_ind * enemy_spacing, reticule_y_offset);
@@ -118,7 +125,20 @@ public class BattleManager : MonoBehaviour {
 		target_ret_scr.updateTarget ();
 		target_floor.SetActive (true);
 		target_floor_scr.updateFloor ();
+
+		//INITIALIZE OTHER TRACKING VARIABLES//
+
+		time_started = DateTime.Now;
+		num_player_attacks = 0;
+		last_cast = new List<CastData> ();
+		last_spell = null;
+		last_register = new bool[3];
+
+        //FINISH//
+
+        pause = false;
 		AudioPlayer.main.playMusic (scene.music_tracks[0]);
+		checkInterrupts ();
 	}
 
 	// creates the enemy specified at 'i' (0-left, 1-mid, 2-right) by the 'scene'
@@ -198,6 +218,7 @@ public class BattleManager : MonoBehaviour {
 
     // attack currently targeted enemy with spell
     public void attackCurrent(string spell) {
+		++num_player_attacks;
         //Can attack dead enemies now, just wont cast spell at them
 		StartCoroutine (pauseAttackCurrent (spell));
     }
@@ -383,6 +404,8 @@ public class BattleManager : MonoBehaviour {
     //Can be used to process the cast of an enemy or ally, if implemented (put the AI loop in battlemanager)
     private void processCast(List<CastData> data, SpellData s)
     {
+		last_cast = data;
+		last_spell = s;
         //Process the data here
         foreach (CastData d in data)
         {
@@ -530,6 +553,7 @@ public class BattleManager : MonoBehaviour {
         bool [] regData = spellDict.safeRegister(s);
         if (regData[0] || regData[1] || regData[2])
             StartCoroutine(learnSFX());
+		last_register = regData;
         //Process regData (for register graphics) here. 
         //format is bool [3], where regData[0] is true if s.element is new, regData[1] is true if s.root is new, and regData[2] is true if s.style is new
     }

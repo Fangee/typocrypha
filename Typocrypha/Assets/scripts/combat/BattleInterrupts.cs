@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -48,7 +49,13 @@ public class BattleInterrupts : MonoBehaviour {
 	void Awake() {
 		if (main == null) main = this;
 		battle_interrupt_map = new Dictionary<string, BattleInterruptDel> {
-			{"check-health",checkHealth}
+			{"check-health",checkHealth},
+			{"timed",timed},
+			{"check-stun",checkStun},
+			{"check-register-elem",checkRegisterElem},
+			{"check-register-root",checkRegisterRoot},
+			{"check-register-style",checkRegisterStyle},
+			{"count-player-attacks",countPlayerAttacks}
 		};
 	}
 
@@ -68,5 +75,56 @@ public class BattleInterrupts : MonoBehaviour {
 				return true;
 		}
 		return false;
+	}
+
+	// checks if past a certain time
+	// NOTE: since interrupts aren't checked at every frame, interrupt will occur on next checkInterrupt call
+	// input: [0]: float : time in seconds from start of battle
+	bool timed(string[] opt) {
+		float time = float.Parse (opt [0]);
+		if (DateTime.Compare (DateTime.Now, BattleManager.main.time_started.AddSeconds(time)) >= 0)
+			 return true;
+		else return false;
+	}
+
+	// checks if last spell cast caused a stun
+	// input: NONE
+	bool checkStun(string[] opt) {
+		foreach (CastData d in BattleManager.main.last_cast)
+			if (d.isStun) return true;
+		return false;
+	}
+
+	// checks if new element was registered
+	// to get what was actually registered, need to check BattleManager's 'last_register' and 'last_spell' fields
+	// if you want to show what was registered in dialogue, use macro "{last-cast,elem}"
+	// input: NONE
+	bool checkRegisterElem(string[] opt) {
+		return BattleManager.main.last_register [0];
+	}
+
+	// checks if new root was registered
+	// to get what was actually registered, need to check BattleManager's 'last_register' and 'last_spell' fields
+	// if you want to show what was registered in dialogue, use macro "{last-cast,root}"
+	// input: NONE
+	bool checkRegisterRoot(string[] opt) {
+		return BattleManager.main.last_register [1];
+	}
+
+	// checks if new style was registered
+	// to get what was actually registered, need to check BattleManager's 'last_register' and 'last_spell' fields
+	// if you want to show what was registered in dialogue, use macro "{last-cast,style}"
+	// input: NONE
+	bool checkRegisterStyle(string[] opt) {
+		return BattleManager.main.last_register [2];
+	}
+
+	// checks number of player attacks
+	// input: [0]: int : number of attacks when interrupt should occur
+	bool countPlayerAttacks(string[] opt) {
+		int count = int.Parse (opt [0]);
+		if (BattleManager.main.num_player_attacks >= count)
+			 return true;
+		else return false;
 	}
 }
