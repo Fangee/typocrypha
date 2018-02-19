@@ -11,15 +11,18 @@ public class TargetReticule : MonoBehaviour {
 	public SpriteRenderer right_arrow; // right arrow key sprite
 	public SpriteRenderer no_target;   // displayed when no active target
 
-	float r_speed; // speed of rotation
+	float base_r_speed; // base rotation speed
+	float r_speed; // actual speed of rotation
 	Vector2 vel; // velocity of target
 
-	public float base_r_speed = 0.1f; // default speed of rotation
+	public float def_r_speed = 0.15f; // default speed of rotation
+	public float slow_r_speed = 0.01f; // default slow rotation speed 
 	public float max_h_speed = 100f; // maximum horizontal speed
 	public float smooth_time = 0.15f; // time it takes for target to reach position
 	public float h_r_scale = 8f; // scaling factor from horizontal speed to rotation speed
 
 	void Start () {
+		base_r_speed = def_r_speed;
 		r_speed = base_r_speed;
 	}
 	
@@ -32,23 +35,34 @@ public class TargetReticule : MonoBehaviour {
 		outer_tr.RotateAround (outer_tr.position, -1 * Vector3.back, r_speed);
 		// scale rotation with velocity
 		r_speed = base_r_speed + vel.magnitude / h_r_scale;
+	}
+
+	// updates target based on targetted enemy
+	public void updateTarget() {
+		// don't update if battle not set up yet
+		if (BattleManager.main.target_ind >= BattleManager.main.enemy_arr.Length) return;
 		// show/hide left/right arrow key indicators based on position
 		switch (BattleManager.main.target_ind) {
-		case 0:
-			left_arrow.enabled = false;
-			right_arrow.enabled = true;
-			break;
-		case 1:
-			left_arrow.enabled = true;
-			right_arrow.enabled = true;
-			break;
-		case 2:
-			left_arrow.enabled = true;
-			right_arrow.enabled = false;
-			break;
+			case 0:
+				left_arrow.enabled = false;
+				right_arrow.enabled = true;
+				break;
+			case 1:
+				left_arrow.enabled = true;
+				right_arrow.enabled = true;
+				break;
+			case 2:
+				left_arrow.enabled = true;
+				right_arrow.enabled = false;
+				break;
 		}
-		// show/hide no_target symbol if no enemy targeted
-		if (BattleManager.main.target_ind >= BattleManager.main.enemy_arr.Length) return;
-		no_target.enabled = (BattleManager.main.enemy_arr [BattleManager.main.target_ind].Is_dead);
+		// check if no enemy targeted
+		if (BattleManager.main.enemy_arr [BattleManager.main.target_ind].Is_dead) {
+			no_target.enabled = true;
+			base_r_speed = 0f;
+		} else {
+			no_target.enabled = false;
+			base_r_speed = def_r_speed;
+		}
 	}
 }

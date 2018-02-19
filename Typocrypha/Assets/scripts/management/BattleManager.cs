@@ -27,10 +27,10 @@ public class BattleManager : MonoBehaviour {
 	public EnemyChargeBars charge_bars; // creates and mananges charge bars
 	public EnemyStaggerBars stagger_bars; // creates and manages stagger bars
 	public CooldownList cooldown_list; // creates and manages player's cooldowns
-	public Transform target_ret; // transform of target ret
+	public GameObject target_ret; // contains targetting sprites
 	public Vector2 target_pos; // position of target ret
+	public GameObject target_floor; // holds the enemy floor panels
 	public GameObject dialogue_box; // text box for dialogue
-	public float enemy_spacing; // space between enemies
 
 	public bool pause; // is battle paused?
 	public Enemy[] enemy_arr; // array of Enemy components (size 3)
@@ -48,6 +48,10 @@ public class BattleManager : MonoBehaviour {
 	Vector3 OVER_OFFSET = new Vector3 (0,1.5f,0); //where something over the damage num should be
     Vector3 ELEM_OFFSET = new Vector3 (-0.75f, 1.6f, 0);
 
+	TargetReticule target_ret_scr; // TargetReticule script ref
+	TargetFloor target_floor_scr;  // TargetFloor script ref
+
+	const float enemy_spacing = 6f; // horizontal space between enemies
 	const float enemy_y_offset = 0.5f; // offset of enemy from y axis
 	const float reticule_y_offset = 1f; // offset of target reticule
 	const int undim_layer = -1; // layer of enemy when enemy sprite is shown
@@ -58,6 +62,8 @@ public class BattleManager : MonoBehaviour {
 		pause = false;
 
 		popp = popper.GetComponent<Popper>();
+		target_ret_scr = target_ret.GetComponent<TargetReticule> ();
+		target_floor_scr = target_floor.GetComponent<TargetFloor> ();
 	}
 
 	// start battle scene
@@ -105,9 +111,13 @@ public class BattleManager : MonoBehaviour {
         //FINISH//
 
         pause = false;
+		target_ret.SetActive (true);
 		target_ind = 0;
 		target_pos = new Vector2 (target_ind * enemy_spacing, reticule_y_offset);
-		target_ret.localPosition = target_pos;
+		target_ret.transform.localPosition = target_pos;
+		target_ret_scr.updateTarget ();
+		target_floor.SetActive (true);
+		target_floor_scr.updateFloor ();
 		AudioPlayer.main.playMusic (scene.music_tracks[0]);
 	}
 
@@ -138,6 +148,8 @@ public class BattleManager : MonoBehaviour {
         cooldown_list.removeAll();
         charge_bars.removeAll();
         stagger_bars.removeAll();
+		target_ret.SetActive (false);
+		target_floor.SetActive (false);
     }
 
     // check if player switches targets or attacks
@@ -155,11 +167,15 @@ public class BattleManager : MonoBehaviour {
 		// fix if target is out of bounds
 		if (target_ind < 0) target_ind = 0;
 		if (target_ind > 2) target_ind = 2;
-		// move target reticule
-		target_pos = new Vector2 (target_ind * enemy_spacing, reticule_y_offset);
-		// play effect sound if target was moved
-		if (old_ind != target_ind) AudioPlayer.main.playSFX("sfx_enemy_select");
-
+		// check if target was actually moved
+		if (old_ind != target_ind) {
+			// move and update target reticule and update floor panels
+			target_pos = new Vector2 (target_ind * enemy_spacing, reticule_y_offset);
+			target_ret_scr.updateTarget ();
+			target_floor_scr.updateFloor ();
+			// play sfx
+			AudioPlayer.main.playSFX ("sfx_enemy_select");
+		}
         //SPELLBOOK CODE
 
         // go to next page if down is pressed
@@ -516,7 +532,6 @@ public class BattleManager : MonoBehaviour {
             StartCoroutine(learnSFX());
         //Process regData (for register graphics) here. 
         //format is bool [3], where regData[0] is true if s.element is new, regData[1] is true if s.root is new, and regData[2] is true if s.style is new
-
     }
 
     //Spawns elemental popup with proper icon
@@ -638,7 +653,7 @@ public class BattleManager : MonoBehaviour {
             talkBox.color = clarkeColor;
             logCastInfo.text = "ERROR  CAST";
         }
-		target_ret.gameObject.SetActive (false); // disable / make target reticule disappear on a cast
+		target_ret.SetActive (false); // disable / make target reticule disappear on a cast
     }
 
     //Stop battle log UI (call after every pause to cast
@@ -646,7 +661,7 @@ public class BattleManager : MonoBehaviour {
     {
         battleLogCast.SetActive(false);
         battleLogTalk.SetActive(false);
-		target_ret.gameObject.SetActive (true); // enable / make target reticule appear after a cast
+		target_ret.SetActive (true); // enable / make target reticule appear after a cast
     }
 
     //Updates death and opacity of enemies after pause in puaseAttackCurrent
@@ -661,6 +676,9 @@ public class BattleManager : MonoBehaviour {
                 enemy_arr[i].updateCondition();
             if (enemy_arr[i].Is_dead) ++curr_dead;
         }
+		//Update target and floor effects
+		target_ret_scr.updateTarget ();
+		target_floor_scr.updateFloor ();
         if (curr_dead == enemy_count) // end battle if all enemies dead
         {
             Debug.Log("you win!");
