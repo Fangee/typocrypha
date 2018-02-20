@@ -41,6 +41,7 @@ public class CutsceneManager : MonoBehaviour {
 		
 	// displays next line of text; returns false if at end
 	bool nextLine() {
+		Debug.Log ("nextline:" + curr_line);
 		// check if dialogue is being printed
 		if (!text_scroll.is_print) {
 			if (curr_line >= scene.dialogue.Length) return false;
