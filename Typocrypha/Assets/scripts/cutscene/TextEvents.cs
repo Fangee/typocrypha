@@ -253,15 +253,13 @@ public class TextEvents : MonoBehaviour {
 				}
 				break;
 			case "pronoun": // set pronoun (options go from 1-4)
-				int choice_i;
-				if (!int.TryParse (choice, out choice_i)) {
+				if (choice.CompareTo("a") == 0) { PlayerDialogueInfo.main.setPronoun (0); }
+				else if (choice.CompareTo("b") == 0) { PlayerDialogueInfo.main.setPronoun (1); }
+				else if (choice.CompareTo("c") == 0) { PlayerDialogueInfo.main.setPronoun (2); }
+				else if (choice.CompareTo("d") == 0) { PlayerDialogueInfo.main.setPronoun (3); }
+				else {
 					// INDICATE BAD INPUT
-					is_prompt = true;
-				} else if (choice_i > 4 || choice_i < 1) {
-					// INDICATE BAD INPUT
-					is_prompt = true;
-				} else {
-					PlayerDialogueInfo.main.setPronoun (choice_i - 1);
+					is_prompt = true; // keep asking for input
 				}
 				break;
 			}
