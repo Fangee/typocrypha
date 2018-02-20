@@ -221,15 +221,53 @@ public class TextEvents : MonoBehaviour {
 		dialogue_box.SetActive (false);
 		track_typing.enabled = true;
 		is_prompt = true;
+		GameObject display = null; // visual display for prompt (instructions, usually)
+		string type = opt [0].Trim ().ToLower ();
 
-		while (is_prompt)
-			yield return new WaitForEndOfFrame ();
-
-		switch (opt[0]) {
-		case "name":
-			PlayerDialogueInfo.main.player_name = prompt_input;
+		// initialize prompt
+		switch (type) {
+		case "sprite":
+			display = Instantiate (Resources.Load<GameObject> ("prefabs/PlayerSpriteChoice"));
+			break;
+		case "pronoun":
+			display = Instantiate (Resources.Load<GameObject> ("prefabs/PlayerPronounChoice"));
 			break;
 		}
+
+		while (is_prompt) {
+			// wait for uder to press ENTER
+			yield return new WaitWhile (() => is_prompt);
+			// check result
+			string choice = prompt_input.Trim ().ToLower ();
+			switch (type) {
+			case "name": // set name
+				// CHECK NAME PARAMETERS
+				PlayerDialogueInfo.main.player_name = prompt_input;
+				break;
+			case "sprite": // set sprite (choice between 'a' and 'b')
+				if (choice.CompareTo ("a") == 0) { PlayerDialogueInfo.main.setSprite (0); } 
+				else if (choice.CompareTo ("b") == 0) { PlayerDialogueInfo.main.setSprite (1); } 
+				else { 
+					// INDICATE BAD INPUT
+					is_prompt = true; // keep asking for input
+				}
+				break;
+			case "pronoun": // set pronoun (options go from 1-4)
+				int choice_i;
+				if (!int.TryParse (choice, out choice_i)) {
+					// INDICATE BAD INPUT
+					is_prompt = true;
+				} else if (choice_i > 4 || choice_i < 1) {
+					// INDICATE BAD INPUT
+					is_prompt = true;
+				} else {
+					PlayerDialogueInfo.main.setPronoun (choice_i - 1);
+				}
+				break;
+			}
+		}
+
+		if (display != null) Destroy (display);
 		prompt_input = "";
 		track_typing.enabled = false;
 		dialogue_box.SetActive (true);

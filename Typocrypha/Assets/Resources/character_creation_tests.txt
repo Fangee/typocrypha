@@ -1,0 +1,15 @@
+1						
+START_SCENE	CUTSCENE	jazzy_retro_battle_theme				
+DIALOGUE	Tanuki	enter your name.	jazzy_retro_battle_theme	tanuki_mario	CENTER	END_DIALOGUE
+DIALOGUE		[prompt=name].	_	END_DIALOGUE		
+DIALOGUE	Tanuki	{name}? good name.	_	tanuki_mario	CENTER	END_DIALOGUE
+DIALOGUE	Tanuki	"Also, I am completely blind. What do you look like?"	_	tanuki_mario	CENTER	END_DIALOGUE
+DIALOGUE		[prompt=sprite].	_	END_DIALOGUE		
+DIALOGUE	Tanuki	"Ah, so that is what you look like."	_	tanuki_mario	CENTER	END_DIALOGUE
+DIALOGUE	Tanuki	"Also, what pronouns do you use? I use she/her/hers pronouns, by the way."	_	tanuki_mario	CENTER	END_DIALOGUE
+DIALOGUE	Tanuki	[prompt=pronoun].	_	tanuki_mario	CENTER	END_DIALOGUE
+DIALOGUE	Tanuki	Got it. 	_	tanuki_mario	CENTER	END_DIALOGUE
+DIALOGUE	Tanuki	Now I know everything about you. Mwahaha!	_	tanuki_mario	CENTER	END_DIALOGUE
+DIALOGUE		BAD END (why did you tell a random tanuki all of your personal info?)	_	END_DIALOGUE		
+END_SCENE						
+END_GAME						
