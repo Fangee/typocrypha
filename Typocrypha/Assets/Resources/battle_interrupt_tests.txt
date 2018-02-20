@@ -16,6 +16,9 @@ END_INTERRUPT
 INTERRUPT	check-register-root					
 DIALOGUE	Clarke	"You registered the root {last-cast,root}. Amazing!"	_	tanuki	CENTER	END_DIALOGUE
 END_INTERRUPT						
+INTERRUPT	check-register-style					
+DIALOGUE	Clarke	"You registered the root {last-cast,style}. Stylish!"	_	tanuki	CENTER	END_DIALOGUE
+END_INTERRUPT						
 END_SCENE						
 START_SCENE	CUTSCENE					
 DIALOGUE	Tanuki	Dead!	second_hand	tanuki	CENTER	END_DIALOGUE

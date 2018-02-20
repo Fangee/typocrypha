@@ -557,6 +557,8 @@ public class BattleManager : MonoBehaviour {
         if (regData[0] || regData[1] || regData[2])
             StartCoroutine(learnSFX());
 		last_register = regData;
+		foreach (bool b in regData)
+			Debug.Log ("  regdata:" + b);
         //Process regData (for register graphics) here. 
         //format is bool [3], where regData[0] is true if s.element is new, regData[1] is true if s.root is new, and regData[2] is true if s.style is new
     }
@@ -723,11 +725,14 @@ public class BattleManager : MonoBehaviour {
 		for (int i = 0; i < curr_battle.interrupts.Length; ++i) {
 			if (curr_battle.interrupts [i] == null) continue;
 			BattleInterrupt binter = curr_battle.interrupts [i];
+			BattleInterruptStatus status = binter.checkCondition ();
 			// check if condition is fulfilled, and play interrupt if true
-			if (binter.checkCondition ()) {
+			if (status != BattleInterruptStatus.FALSE) {
 				Debug.Log ("battle interrupt!");
 				interrupted = true;
-				curr_battle.interrupts [i] = null;
+				// remove battle interrupt if non-repeatable
+				if (status != BattleInterruptStatus.REPEAT)
+					curr_battle.interrupts [i] = null;
 				StartCoroutine (playInterrupt (binter.scene));
 			}
 		}
