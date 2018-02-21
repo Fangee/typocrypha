@@ -4873,6 +4873,7 @@ GameObject:
   - component: {fileID: 1149999591}
   - component: {fileID: 1149999595}
   - component: {fileID: 1149999596}
+  - component: {fileID: 1149999597}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4977,6 +4978,18 @@ MonoBehaviour:
   cam_pos: {fileID: 1149999594}
   dimmer: {fileID: 1608672956}
   canvas: {fileID: 1668480232}
+--- !u!114 &1149999597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1149999589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91784fb04b55ab34b8f65361e38f19e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frameRate: 30
 --- !u!1 &1187835793
 GameObject:
   m_ObjectHideFlags: 0
@@ -7016,7 +7029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ready: 0
-  anim_frames: 6
+  anim_framelen: 0
 --- !u!4 &1815578414
 Transform:
   m_ObjectHideFlags: 0

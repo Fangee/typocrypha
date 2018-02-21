@@ -508,7 +508,7 @@ public class BattleManager : MonoBehaviour {
                     //Process miss graphics
                     popp.spawnSprite ("popup_miss", POP_TIMER, e.transform.position + UNDER_OFFSET);
 					AudioPlayer.main.playSFX("sfx_miss");
-					BattleEffects.main.spriteShift (e.gameObject.transform, 0.5f, 0.1f); // sprite moves to the right as a dodge
+					BattleEffects.main.spriteShift (e.gameObject.transform, 0.3f, 0.1f); // sprite moves to the right as a dodge
                 }
                 else//Spell hits
                 {
@@ -548,7 +548,7 @@ public class BattleManager : MonoBehaviour {
 
 					//Process damage graphics
 					popp.spawnText (d.damageInflicted.ToString(), POP_TIMER, e.transform.position + DMGNUM_OFFSET);
-					if (d.damageInflicted > 0) BattleEffects.main.spriteShake (e.gameObject.transform, 0.5f, 0.1f);
+					if (d.damageInflicted > 0) BattleEffects.main.spriteShake (e.gameObject.transform, 0.3f, 0.1f);
                 }
             }
         }

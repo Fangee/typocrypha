@@ -147,7 +147,7 @@ public class Enemy : MonoBehaviour, ICaster {
             while(is_stunned)//Stop attack loop from continuing while the enemy is stunned
             {
 				yield return new WaitForEndOfFrame();
-				BattleEffects.main.spriteShake(gameObject.transform, Time.deltaTime * 2, 0.05f);
+				transform.position = (Vector3)original_pos + (Vector3)(Random.insideUnitCircle * 0.05f);
 				yield return new WaitWhile (() => BattleManager.main.pause);
 				curr_stagger_time += Time.deltaTime;
                 if (curr_stagger_time >= stagger_time)//End stun if time up
@@ -156,6 +156,7 @@ public class Enemy : MonoBehaviour, ICaster {
                     curr_stagger_time = 0F;
                 }
             }
+			transform.position = original_pos;
 			curr_time += Time.deltaTime;
 			if (curr_time >= atk_time) {
                 attack_in_progress = true;

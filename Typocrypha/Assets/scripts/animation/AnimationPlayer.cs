@@ -19,7 +19,7 @@ public enum AnimationType { SPELL };
 public class AnimationPlayer : MonoBehaviour {
 	public static AnimationPlayer main = null; // global static ref
 	public bool ready; // are all of the assets loaded?
-	public int anim_frames; // number of game frames per animation frame
+	public float anim_framelen; // length of an animation frame
 	SpriteComparer sprite_comparer; // compares sprites
 	AssetBundle anim; // spell animations bundle
 
@@ -56,8 +56,7 @@ public class AnimationPlayer : MonoBehaviour {
 		do {
 			foreach (Sprite sprite in sprites) {
 				display_sprite.sprite = sprite;
-				for (int i = 0; i < anim_frames; ++i)
-					yield return new WaitForEndOfFrame();
+				yield return new WaitForSeconds(anim_framelen);
 			}
 		} while(--loop > 0);
 		GameObject.Destroy (display_sprite.gameObject);
