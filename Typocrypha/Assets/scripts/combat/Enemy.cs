@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour, ICaster {
 
     //ICaster Properties//
 
+    public Transform Transform { get { return transform; } }
     public CasterStats Stats
     {
         get
@@ -62,7 +63,6 @@ public class Enemy : MonoBehaviour, ICaster {
             return ICasterType.ENEMY;
         }
     }
-
 
     //Public fields//
 
@@ -229,6 +229,7 @@ public class Enemy : MonoBehaviour, ICaster {
     private void stun()
     {
         is_stunned = true;
+        field.charge_bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 0.5F, 0);
     }
     //Un-stun enemy
     private void unStun()

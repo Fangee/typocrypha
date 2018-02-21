@@ -20,10 +20,16 @@ public class PlayerStats : CasterStats
 }
 
 //Contains Static referrence to global Player (Player.main)
-public class Player : ICaster
+public class Player : MonoBehaviour, ICaster
 {
     //Main player character (Static Global Basically)
-    public static Player main = new Player();
+    public static Player main = null;
+
+    void Awake()
+    {
+        if (main == null)
+            main = this;
+    }
 
     //Constructors
 
@@ -39,7 +45,7 @@ public class Player : ICaster
     }
 
     //ICaster Poroperties
-
+    public Transform Transform { get { return transform; } }
     PlayerStats stats;
     public CasterStats Stats { get { return stats; } }
     BuffDebuff buffDebuff = new BuffDebuff();
@@ -110,6 +116,7 @@ public class Player : ICaster
     }
 
     //Public Methods
+
 
     //Restores player's HP and Shields to Maximum
     public void restoreToFull()
