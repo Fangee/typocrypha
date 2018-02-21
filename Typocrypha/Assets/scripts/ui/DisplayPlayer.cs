@@ -11,9 +11,9 @@ public class DisplayPlayer : MonoBehaviour {
 	public BarMeter shield_bar; // shield bar
 
 	void Update () {
-		health_text.text = Player.main.Curr_hp.ToString ();
+		health_text.text = (Player.main.Curr_hp+Player.main.Curr_shield).ToString ();
 		shield_text.text = Player.main.Curr_shield.ToString ();
-		health_bar.setValue ((float)Player.main.Curr_hp/Player.main.Stats.max_hp);
-		shield_bar.setValue ((float)Player.main.Curr_shield/Player.main.Stats.max_shield);
+		health_bar.setValue ((float)(Player.main.Curr_hp)/(Player.main.Stats.max_hp+Player.main.Stats.max_shield));
+		shield_bar.setValue ((float)(Player.main.Curr_shield+Player.main.Curr_hp)/(Player.main.Stats.max_shield+Player.main.Stats.max_hp));
 	}
 }

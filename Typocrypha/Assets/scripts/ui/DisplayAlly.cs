@@ -13,6 +13,8 @@ public class DisplayAlly : MonoBehaviour {
     private bool hurt = false;
     public Text ready_text;
     public Text name_text;
+	private Color ready_color = new Color (13.0f/255.0f, 207.0f/255.0f, 223.0f/255.0f);
+	private Color not_ready_color = new Color (210.0f/255.0f, 37.0f/255.0f, 37.0f/255.0f);
 
     public void setAlly(Ally a)
     {
@@ -23,7 +25,7 @@ public class DisplayAlly : MonoBehaviour {
             new_bar.transform.localScale = new Vector3(1, 1, 1);
             new_bar.transform.position = transform.position;
             gauge = new_bar.GetComponent<BarMeter>();
-            name_text.text = a.Stats.name; 
+			name_text.text = ("> " + a.Stats.name.ToUpper()); 
         }
 
     }
@@ -36,13 +38,13 @@ public class DisplayAlly : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-
         if (ally != null)
         {
             float percent = ally.getPercent();
             if(ally.Is_stunned == true)
             {
                 ready_text.text = "STUNNED";
+				name_text.color = not_ready_color;
                 if(stun == false)
                 {
                     gauge.gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 0.5F, 0);
@@ -53,6 +55,7 @@ public class DisplayAlly : MonoBehaviour {
             else if(percent < 0.5F)
             {
                 ready_text.text = "";
+				name_text.color = not_ready_color;
                 if(!hurt || stun)
                 {
                     gauge.gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(0.9F, 0, 0);
@@ -64,6 +67,7 @@ public class DisplayAlly : MonoBehaviour {
             else if (percent >= 1F)
             {
                 ready_text.text = "SUPER READY";
+				name_text.color = ready_color;
                 if(hurt || stun)
                 {
                     gauge.gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0.9F, 0);
@@ -73,6 +77,7 @@ public class DisplayAlly : MonoBehaviour {
             else if (percent >= 0.75F)
             {
                 ready_text.text = "ASSIST READY";
+				name_text.color = ready_color;
                 if (hurt || stun)
                 {
                     gauge.gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0.9F, 0);
@@ -82,6 +87,7 @@ public class DisplayAlly : MonoBehaviour {
             else
             {
                 ready_text.text = "";
+				name_text.color = not_ready_color;
                 if (hurt || stun)
                 {
                     gauge.gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0.9F, 0);
