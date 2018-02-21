@@ -7,8 +7,8 @@ public class CooldownList : MonoBehaviour {
     public GameObject bar_prefab;
 
     List<CooldownBar> spells = new List<CooldownBar>();
-    const int capacity = 6;
-    const float bar_distance = 0.39F;
+    const int capacity = 5;
+	const float bar_distance = 0.525F; //0.39F;
 
     //Returns if the list is full
     public bool isFull()
