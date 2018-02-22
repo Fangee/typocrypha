@@ -8709,8 +8709,8 @@ MonoBehaviour:
     type: 2}
   ally_prefab: {fileID: 1461920454972364, guid: b700f5c81a138af4188caad4d00adda9,
     type: 2}
-  ally_left: {fileID: 70941750}
-  ally_right: {fileID: 1565503319}
+  ally_left: {fileID: 467503968}
+  ally_right: {fileID: 350357323}
   chat: {fileID: 112887974}
   playerColor: {r: 0, g: 0.60784316, b: 1, a: 1}
   enemyColor: {r: 1, g: 0, b: 0, a: 1}
@@ -8736,6 +8736,7 @@ MonoBehaviour:
   target_ind: 0
   player_ind: 1
   enemy_count: 0
+  curr_dead: 0
   target_pos: {x: 0, y: 0}
   last_register: 
   num_player_attacks: 0

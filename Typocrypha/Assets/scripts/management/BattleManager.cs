@@ -12,8 +12,10 @@ public class BattleManager : MonoBehaviour {
 	public SpellDictionary spellDict; // spell dictionary object
 	public GameObject enemy_prefab; // prefab for enemy object
     public GameObject ally_prefab; //prefab for ally object
-    public DisplayAlly ally_left; // left ally UI
-    public DisplayAlly ally_right; // right ally UI
+    public GameObject ally_left; // left ally UI
+    public GameObject ally_right; // right ally UI
+    private DisplayAlly ally_display_left;
+    private DisplayAlly ally_display_right;
     public ChatDatabase chat; //Database containing chat lines
     public Color playerColor;
     public Color enemyColor;
@@ -96,6 +98,12 @@ public class BattleManager : MonoBehaviour {
 
         //CREATE ALLIES//
 
+        if (scene.ally_stats.Length == 0)
+        {
+            ally_left.SetActive(false);
+            ally_right.SetActive(false);
+        }
+
         for(int i = 0; i < scene.ally_stats.Length; ++i)
         {
             GameObject new_ally = GameObject.Instantiate(ally_prefab, transform);
@@ -105,14 +113,18 @@ public class BattleManager : MonoBehaviour {
             a.setStats(scene.ally_stats[i]);
             if (i == 1)
             {
-                ally_right.setAlly(a);
-                a.transform.position = ally_right.transform.position;
+                ally_display_right = ally_right.GetComponentInChildren<DisplayAlly>();
+                ally_display_right.setAlly(a);
+                a.transform.position = ally_display_right.transform.position;
+                ally_right.SetActive(true);
                 ++i;
             }
             else
             {
-                ally_left.setAlly(a);
-                a.transform.position = ally_left.transform.position;
+                ally_display_left = ally_left.GetComponentInChildren<DisplayAlly>();
+                ally_display_left.setAlly(a);
+                a.transform.position = ally_display_left.transform.position;
+                ally_left.SetActive(true);
             }
             a.position = i;
             player_arr[i] = a;
@@ -443,7 +455,7 @@ public class BattleManager : MonoBehaviour {
                     spawnElementPopup(d.element, Elements.vsElement.REPEL, d.Caster.Transform);
                 }
 
-                if (d.isCrit)//Spell is crit
+                if (d.isCrit && d.elementalData != Elements.vsElement.BLOCK)//Spell is crit
                 {
                     Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
                     if (d.Target.CasterType == ICasterType.ENEMY)
