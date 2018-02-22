@@ -9,6 +9,7 @@ public class BattleEffects : MonoBehaviour {
 	public Transform cam_pos; // main camera
 	public SpriteRenderer dimmer; // dimmer image
 	public Canvas canvas; // canvas component
+	public Animator camera_animator; // animator for camera object
 
 	private int old_dim_layer;
 
@@ -134,5 +135,11 @@ public class BattleEffects : MonoBehaviour {
 			curr_time += fps60;
 		}
 		pos.position = old_pos;
+	}
+
+	// spins camera with speed SPEED
+	public void spinCamera(float speed) {
+		camera_animator.speed = speed;
+		camera_animator.Play ("spin");
 	}
 }
