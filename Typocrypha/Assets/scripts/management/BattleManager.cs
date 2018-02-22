@@ -126,7 +126,7 @@ public class BattleManager : MonoBehaviour {
 		//INITIALIZE TARGET UI//
 
 		target_ret.SetActive (true);
-		target_ind = 0;
+		target_ind = 1;
 		target_pos = new Vector2 (target_ind * enemy_spacing, reticule_y_offset);
 		target_ret.transform.localPosition = target_pos;
 		target_ret_scr.updateTarget ();
