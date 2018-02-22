@@ -16,6 +16,9 @@ public class BattleEffects : MonoBehaviour {
 	const int undim_layer = -1; // layer of enemy when enemy sprite is shown
 	const int dim_layer = -5;   // layer of enemy when enemy sprite is dimmed
 
+	const float fps30 = 0.0333f; // length of frame at 30fps
+	const float fps60 = 0.0166f; // length of frame at 60fps
+
 	void Awake() {
 		if (main == null) main = this;
 	}
@@ -86,14 +89,14 @@ public class BattleEffects : MonoBehaviour {
 
 	// coroutine that shakes sprite over time
 	IEnumerator spriteShakeCR(Transform pos, float sec, float amt) {
-		Vector3 old_pos = pos.position;
+		Vector3 old_pos = new Vector3(pos.position.x, pos.position.y, pos.position.z);
 		float curr_time = 0;
 		while (curr_time < sec) {
 			pos.position = (Vector3)old_pos + (Vector3)(Random.insideUnitCircle * amt);
-			for (int i = 0; i < 4; ++i) {
-				yield return new WaitForEndOfFrame ();
-				curr_time += Time.deltaTime;
-			}
+			//yield return new WaitForEndOfFrame ();
+			//curr_time += Time.deltaTime;
+			yield return new WaitForSeconds(fps60);
+			curr_time += fps60;
 		}
 		pos.position = old_pos;
 	}
@@ -125,10 +128,10 @@ public class BattleEffects : MonoBehaviour {
 			} else {
 				pos.position += (Vector3)shift_pos;
 			}
-			for (int i = 0; i < 4; ++i) {
-				yield return new WaitForEndOfFrame ();
-				curr_time += Time.deltaTime;
-			}
+			//yield return new WaitForEndOfFrame ();
+			//curr_time += Time.deltaTime;
+			yield return new WaitForSeconds(fps60);
+			curr_time += fps60;
 		}
 		pos.position = old_pos;
 	}
