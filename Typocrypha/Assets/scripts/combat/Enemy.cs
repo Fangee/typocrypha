@@ -192,11 +192,11 @@ public class Enemy : MonoBehaviour, ICaster {
 
     IEnumerator barFlash()
     {
-        for (int i = 0; i < 60; i++)
+        for (int i = 0; i < 30; i++)
         {
-            bars.Charge_bars[position].setColor(Random.value, Random.value, 0.1F);
+			bars.Charge_bars[position].setColor(Random.value, 0.3f, Random.value);
 
-            yield return new WaitForEndOfFrame();
+			yield return new WaitForSeconds(0.0166f); // the framerate for 60fps; see Battle Effects cs
         }
         bars.Charge_bars[position].setColor(1F, 0.1F, 0.1F);
 
@@ -208,7 +208,7 @@ public class Enemy : MonoBehaviour, ICaster {
     // terminate effects started by fullBarFX()
     void resetBarFX()
     {
-        bars.Charge_bars[position].setColor(0, 0.9F, 0);
+		bars.Charge_bars[position].setColor(13.0f/255.0f, 207.0f/255.0f, 223.0f/255.0f);
     }
 
     // pause battle, attack player with specified spell
@@ -240,7 +240,7 @@ public class Enemy : MonoBehaviour, ICaster {
     //Un-stun enemy
     private void unStun()
     {
-        bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0.9F, 0);
+		bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(13.0f/255.0f, 207.0f/255.0f, 223.0f/255.0f);
         is_stunned = false;
         Curr_stagger = stats.max_stagger;
     }

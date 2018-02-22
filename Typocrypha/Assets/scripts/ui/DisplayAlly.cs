@@ -47,7 +47,7 @@ public class DisplayAlly : MonoBehaviour {
 				name_text.color = not_ready_color;
                 if(stun == false)
                 {
-                    gauge.gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 0.5F, 0);
+					gauge.gameObject.transform.GetChild(0).GetComponent<Image>().color = ready_color;
                     stun = true;
                 }
 
@@ -64,13 +64,14 @@ public class DisplayAlly : MonoBehaviour {
                 }
 
             }
-            else if (percent >= 1F)
+            else if (percent >= 1.0F)
             {
                 ready_text.text = "SUPER READY";
 				name_text.color = ready_color;
+				gauge.gameObject.transform.GetChild(0).GetComponent<Image>().color = Color.yellow;
                 if(hurt || stun)
                 {
-                    gauge.gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0.9F, 0);
+					gauge.gameObject.transform.GetChild(0).GetComponent<Image>().color = not_ready_color;
                     hurt = false;
                 }
             }
@@ -80,7 +81,7 @@ public class DisplayAlly : MonoBehaviour {
 				name_text.color = ready_color;
                 if (hurt || stun)
                 {
-                    gauge.gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0.9F, 0);
+					gauge.gameObject.transform.GetChild(0).GetComponent<Image>().color = ready_color;
                     hurt = false;
                 }
             }
@@ -90,7 +91,7 @@ public class DisplayAlly : MonoBehaviour {
 				name_text.color = not_ready_color;
                 if (hurt || stun)
                 {
-                    gauge.gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(0, 0.9F, 0);
+					gauge.gameObject.transform.GetChild(0).GetComponent<Image>().color = ready_color;
                     hurt = false;
                 }
             }
