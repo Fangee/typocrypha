@@ -242,11 +242,12 @@ public class Enemy : MonoBehaviour, ICaster {
     public void updateCondition()
     {
         // make enemy sprite fade as damaged (lazy health rep)
-        enemy_sprite.color = new Color(1, 1, 1, (float)curr_hp / stats.max_hp);
+        //enemy_sprite.color = new Color(1, 1, 1, (float)curr_hp / stats.max_hp);
         if (curr_hp <= 0)
         { // check if killed
             Debug.Log(stats.name + " has been slain!");
             is_dead = true;
+			enemy_sprite.color = new Color(1, 1, 1, 0);
 			StopAllCoroutines ();
         }
 
