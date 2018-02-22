@@ -58,6 +58,11 @@ public class EnemyStaggerBars : MonoBehaviour {
 				Enemy enemy = BattleManager.main.enemy_arr [i];
 				if (!enemy.Is_dead) {
 					stagger_bars [i].setValue (enemy.getStagger ());
+					if (enemy.Is_stunned) {
+						stagger_bars[i].gameObject.SetActive(true);
+					} else {
+						stagger_bars[i].gameObject.SetActive(false);
+					}
 				} else { // if enemy has died, remove bar
 					stagger_bars[i].gameObject.SetActive(false);
 				}

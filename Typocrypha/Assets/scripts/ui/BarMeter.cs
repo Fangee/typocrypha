@@ -19,6 +19,11 @@ public class BarMeter : MonoBehaviour {
 		bar_text.text = new_txt;
 	}
 
+	// set bat text's color
+	public void setTextColor(Color new_color){
+		bar_text.color = new_color;
+	}
+
 	// set bar length
 	public void setValue(float new_percent) {
 		percent = new_percent >= 0 ? new_percent : 0; // don't go past 0

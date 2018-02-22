@@ -4046,6 +4046,7 @@ GameObject:
   - component: {fileID: 898547072}
   - component: {fileID: 898547073}
   - component: {fileID: 898547074}
+  - component: {fileID: 898547075}
   m_Layer: 5
   m_Name: EnemyUI
   m_TagString: Untagged
@@ -4097,6 +4098,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   staggerbar_prefab: {fileID: 1229448191033684, guid: c18738abfe5726643b4aacdfc8a24be9,
+    type: 2}
+  bar_width: 72
+--- !u!114 &898547075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 898547071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee66e03bf5d5c404abe4f7bbc16563a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthbar_prefab: {fileID: 1314706796157826, guid: 6e64541e496404944b7bc1fb241c00d1,
     type: 2}
   bar_width: 72
 --- !u!1 &910055479
@@ -8571,6 +8586,7 @@ MonoBehaviour:
   logTalkInfo: {fileID: 1457128346}
   charge_bars: {fileID: 898547073}
   stagger_bars: {fileID: 898547074}
+  health_bars: {fileID: 898547075}
   cooldown_list: {fileID: 910055481}
   target_ret: {fileID: 1886895013}
   target_floor: {fileID: 1416234253}

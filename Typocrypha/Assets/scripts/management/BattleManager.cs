@@ -29,6 +29,7 @@ public class BattleManager : MonoBehaviour {
     public Text logTalkInfo;
 	public EnemyChargeBars charge_bars; // creates and mananges charge bars
 	public EnemyStaggerBars stagger_bars; // creates and manages stagger bars
+	public EnemyHealthBars health_bars; // creates and manages enemy health bars
 	public CooldownList cooldown_list; // creates and manages player's cooldowns
 	public GameObject target_ret; // contains targetting sprites
 	public GameObject target_floor; // holds the enemy floor panels
@@ -88,6 +89,7 @@ public class BattleManager : MonoBehaviour {
 		enemy_count = scene.enemy_stats.Length;
 		charge_bars.initChargeBars ();
 		stagger_bars.initStaggerBars ();
+		health_bars.initHealthBars ();
 		for (int i = 0; i < scene.enemy_stats.Length; i++) createEnemy (i, scene);
 
         //CREATE ALLIES//
@@ -157,9 +159,10 @@ public class BattleManager : MonoBehaviour {
 		enemy_arr [i].initialize (scene.enemy_stats [i]); //sets enemy stats (AND INITITIALIZES ATTACKING AND AI)
 		enemy_arr [i].position = i;      //Log enemy position in field
 		enemy_arr[i].bars = charge_bars; //Give enemy access to charge_bars
-		Vector3 bar_pos = new_enemy.transform.position;
+		Vector3 bar_pos = new_enemy.transform.position + new Vector3(0, -0.5f, 0);
 		charge_bars.makeChargeMeter(i, bar_pos);
 		stagger_bars.makeStaggerMeter (i, bar_pos);
+		health_bars.makeHealthMeter (i, bar_pos);
 	}
 
     //removes all enemies and charge bars

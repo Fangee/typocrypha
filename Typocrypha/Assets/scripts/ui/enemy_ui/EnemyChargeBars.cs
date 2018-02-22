@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // displays enemies' charge bars for attacks
 public class EnemyChargeBars : MonoBehaviour {
@@ -56,9 +57,34 @@ public class EnemyChargeBars : MonoBehaviour {
 		for (int i = 0; i < 3; i++) {
 			if (charge_bars [i] != null) {
 				Enemy enemy = BattleManager.main.enemy_arr [i];
+				Text stagger_value = charge_bars [i].transform.GetChild (4).GetComponent<Text> ();
+				Color color_not_stunned = new Color (13.0f / 255.0f, 207.0f / 255.0f, 223.0f / 255.0f);
+				Color color_stunned = new Color (242.0f / 255.0f, 48.0f / 255.0f, 32.0f / 255.0f);
+				charge_bars [i].transform.GetChild (5).GetComponent<Text> ().text = enemy.Stats.name;
 				if (!enemy.Is_dead) {
 					charge_bars [i].setValue (enemy.getAtkProgress ());
-					charge_bars [i].setText (enemy.getCurrSpell ().ToString ());
+					stagger_value.text = (enemy.Curr_stagger.ToString());
+					if (enemy.Is_stunned) {
+						charge_bars[i].setText ("STAGGERED!");
+						charge_bars [i].setTextColor (color_stunned);
+						charge_bars[i].transform.GetChild (2).GetComponent<Image> ().enabled = false;
+						charge_bars[i].transform.GetChild (3).GetComponent<Image> ().enabled = true;
+						stagger_value.color = color_stunned;
+					} else {
+						charge_bars [i].setText ("> " + enemy.getCurrSpell ().ToString ());
+						charge_bars [i].setTextColor (color_not_stunned);
+						charge_bars[i].transform.GetChild (2).GetComponent<Image> ().enabled = true;
+						charge_bars[i].transform.GetChild (3).GetComponent<Image> ().enabled = false;
+						if ((float)enemy.Curr_stagger / (float)enemy.Stats.max_stagger < 0.5f) {
+							stagger_value.color = Color.yellow;
+						}
+						else if ((float)enemy.Curr_stagger / (float)enemy.Stats.max_stagger < 1.0f){
+							stagger_value.color = Color.white;
+						} 
+						else {
+							stagger_value.color = color_not_stunned;
+						}
+					}
 				} else { // if enemy has died, remove bar
 					charge_bars[i].gameObject.SetActive(false);
 				}
