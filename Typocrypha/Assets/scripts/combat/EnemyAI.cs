@@ -39,6 +39,8 @@ public abstract class EnemyAI
                 return new AttackerAI1();
             case "HealthLow1":
                 return new HealthLowAI1(parameters);
+            case "Doppleganger1":
+                return new DopplegangerAI1();
             default:
                 throw new System.NotImplementedException(key + " is not an AI type!");
         }
@@ -124,5 +126,9 @@ public class HealthLowAI1 : EnemyAI
             state = AI_State.NORMAL;
     }
 }
+//Doppleganger Unique AI (does nothing right now)
+public class DopplegangerAI1 : AttackerAI1
+{ }
+
 
 

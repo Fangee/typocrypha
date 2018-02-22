@@ -57,7 +57,7 @@ public class TargetReticule : MonoBehaviour {
 				break;
 		}
 		// check if no enemy targeted
-		if (BattleManager.main.enemy_arr [BattleManager.main.target_ind].Is_dead) {
+		if (BattleManager.main.enemy_arr[BattleManager.main.target_ind] == null || BattleManager.main.enemy_arr [BattleManager.main.target_ind].Is_dead) {
 			no_target.enabled = true;
 			base_r_speed = 0f;
 		} else {

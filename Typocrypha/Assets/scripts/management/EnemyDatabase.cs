@@ -109,6 +109,8 @@ public class EnemyDatabase
     }
     public EnemyStats getData(string id)
     {
-        return database[id];
+        if(database.ContainsKey(id))
+            return database[id];
+        throw new KeyNotFoundException(id + " is not in the EnemyDatabase");
     }
 }
