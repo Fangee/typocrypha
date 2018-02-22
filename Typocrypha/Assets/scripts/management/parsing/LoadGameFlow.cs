@@ -202,8 +202,12 @@ public class LoadGameFlow : MonoBehaviour {
 					}
 				}
 			} else if (cols [0].CompareTo ("ENEMY") == 0) { // read in enemy
-				EnemyStats new_stats = enemy_data.getData (cols [1]);
-				enemies.Add (new_stats);
+                if (cols[1].ToLower().Trim() == "EMPTY")
+                    enemies.Add(null);
+                else {
+                    EnemyStats new_stats = enemy_data.getData(cols[1]);
+                    enemies.Add(new_stats);
+                }
 			} else if(cols [0].CompareTo ("ALLY") == 0) {
                 AllyStats new_stats = ally_data.getData(cols[1]);
                 allies.Add(new_stats);

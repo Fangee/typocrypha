@@ -147,6 +147,8 @@ public class BattleManager : MonoBehaviour {
 
 	// creates the enemy specified at 'i' (0-left, 1-mid, 2-right) by the 'scene'
 	void createEnemy(int i, BattleScene scene) {
+        if (scene.enemy_stats[i] == null)
+            return;
 		GameObject new_enemy = GameObject.Instantiate (enemy_prefab, transform);
 		new_enemy.transform.localScale = new Vector3 (1, 1, 1);
 		new_enemy.transform.localPosition = new Vector3 (i * enemy_spacing, enemy_y_offset, 0);
