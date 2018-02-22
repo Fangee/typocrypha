@@ -662,7 +662,7 @@ public class BattleManager : MonoBehaviour {
 		yield return new WaitUntil (() => CutsceneManager.main.at_end);
 		CutsceneManager.main.enabled = false;
 		dialogue_box.SetActive (false);
-		updateEnemies ();
 		pause = false;
+		updateEnemies ();
 	}
 }
