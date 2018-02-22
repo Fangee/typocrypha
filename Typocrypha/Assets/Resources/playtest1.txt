@@ -17,26 +17,37 @@ MUSIC	bgm_battle_a1
 ENEMY	EMPTY					
 ENEMY	Changeling					
 END_SCENE						
+START_SCENE	CUTSCENE					
+DIALOGUE	Clarke	Next Wave incoming!	_	END_DIALOGUE		
+END_SCENE						
 START_SCENE	BATTLE					
+MUSIC	_					
 ENEMY	Changeling					
 ENEMY	EMPTY					
 ENEMY	Tanuki					
 END_SCENE						
+START_SCENE	CUTSCENE					
+DIALOGUE	Clarke	Notha wave comin yo way	_	END_DIALOGUE		
+END_SCENE						
 START_SCENE	BATTLE					
+MUSIC	_					
 ENEMY	Changeling					
 ENEMY	Tanuki2					
 ENEMY	Changeling					
 END_SCENE						
 START_SCENE	BATTLE					
+MUSIC	_					
 ENEMY	EMPTY					
 ENEMY	Ijiraq					
 END_SCENE						
 START_SCENE	BATTLE					
+MUSIC	_					
 ENEMY	Ijiraq2					
 ENEMY	EMPTY					
 ENEMY	Tanuki					
 END_SCENE						
 START_SCENE	BATTLE					
+MUSIC	_					
 ENEMY	Tanuki					
 ENEMY	Ijiraq2					
 ENEMY	Changeling					
@@ -44,6 +55,6 @@ END_SCENE
 START_SCENE	BATTLE					
 MUSIC	bgm_battle_b1					
 ENEMY	EMPTY					
-ENEMY	Doppleganger (BLUE)					
+ENEMY	Doppelganger (BLUE)					
 END_SCENE						
 END_GAME						

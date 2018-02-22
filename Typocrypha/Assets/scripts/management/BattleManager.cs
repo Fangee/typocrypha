@@ -43,6 +43,7 @@ public class BattleManager : MonoBehaviour {
 	[HideInInspector] public ICaster[] player_arr = { null, null, null }; // array of Player and allies (size 3)
 	[HideInInspector] public int player_ind = 1;
 	[HideInInspector] public int enemy_count; // number of enemies in battle
+    [HideInInspector] public int curr_dead;
 	[HideInInspector] public Vector2 target_pos; // position of target ret
 	[HideInInspector] public DateTime time_started; // time battle started
 	[HideInInspector] public List<CastData> last_cast; // last performed cast action
@@ -86,7 +87,8 @@ public class BattleManager : MonoBehaviour {
         //CREATE ENEMIES//
 
 		enemy_arr = new Enemy[3];
-		enemy_count = scene.enemy_stats.Length;
+		enemy_count = 0;
+        curr_dead = 0;
 		charge_bars.initChargeBars ();
 		stagger_bars.initStaggerBars ();
 		health_bars.initHealthBars ();
@@ -151,6 +153,7 @@ public class BattleManager : MonoBehaviour {
 	void createEnemy(int i, BattleScene scene) {
         if (scene.enemy_stats[i] == null)
             return;
+        ++enemy_count;
 		GameObject new_enemy = GameObject.Instantiate (enemy_prefab, transform);
 		new_enemy.transform.localScale = new Vector3 (1, 1, 1);
 		new_enemy.transform.localPosition = new Vector3 (i * enemy_spacing, enemy_y_offset, 0);
@@ -177,6 +180,7 @@ public class BattleManager : MonoBehaviour {
         cooldown_list.removeAll();
         charge_bars.removeAll();
         stagger_bars.removeAll();
+        health_bars.removeAll();
 		target_ret.SetActive (false);
 		target_floor.SetActive (false);
 		BackgroundEffects.main.removePrefabBG (2.0f);
@@ -610,12 +614,17 @@ public class BattleManager : MonoBehaviour {
     {
         bool interrupted = checkInterrupts(); // check for interrupts
         if (interrupted) return;
-        int curr_dead = 0;
         for (int i = 0; i < enemy_arr.Length; i++)
         {
-            if (!enemy_arr[i].Is_dead)
-                enemy_arr[i].updateCondition();
-            if (enemy_arr[i].Is_dead) ++curr_dead;
+            if (enemy_arr[i] != null)
+            {
+                if (!enemy_arr[i].Is_dead)
+                {
+                    enemy_arr[i].updateCondition();
+                    if (enemy_arr[i].Is_dead)
+                        ++curr_dead;
+                }
+            }
         }
 		//Update target and floor effects
 		target_ret_scr.updateTarget ();

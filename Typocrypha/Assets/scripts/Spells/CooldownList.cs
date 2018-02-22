@@ -7,6 +7,7 @@ public class CooldownList : MonoBehaviour {
     public GameObject bar_prefab;
 
     List<CooldownBar> spells = new List<CooldownBar>();
+    List<Ref<bool>> refs = new List<Ref<bool>>();
     const int capacity = 5;
 	const float bar_distance = 0.525F; //0.39F;
 
@@ -22,6 +23,7 @@ public class CooldownList : MonoBehaviour {
         CooldownBar c = new CooldownBar(bar_prefab, transform, root, transform.position, curr_time, cooldown);
         c.bar.transform.Translate(Vector3.down * spells.Count * bar_distance, 0);
         spells.Add(c);
+        refs.Add(is_finished);
         StartCoroutine(timer(cooldown, curr_time, is_finished, c));
         return true;
     }
@@ -65,6 +67,9 @@ public class CooldownList : MonoBehaviour {
 		foreach (CooldownBar c in spells) {
 			GameObject.Destroy (c.bar.gameObject);
 		}
+        foreach(Ref<bool> b in refs) {
+            b.Obj = true;
+        }
 		spells.Clear ();
 	}
 

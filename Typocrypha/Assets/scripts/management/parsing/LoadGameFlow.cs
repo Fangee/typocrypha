@@ -202,7 +202,7 @@ public class LoadGameFlow : MonoBehaviour {
 					}
 				}
 			} else if (cols [0].CompareTo ("ENEMY") == 0) { // read in enemy
-                if (cols[1].ToLower().Trim() == "EMPTY")
+                if (cols[1].ToLower().Trim() == "empty")
                     enemies.Add(null);
                 else {
                     EnemyStats new_stats = enemy_data.getData(cols[1]);

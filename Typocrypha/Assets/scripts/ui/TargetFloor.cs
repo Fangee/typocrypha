@@ -13,7 +13,7 @@ public class TargetFloor : MonoBehaviour {
 			// highlight selected enemy
 			highlights [i].enabled = (i == BattleManager.main.target_ind);
 			// show/hide floors depending on target
-			floor_panels[i].SetActive(!BattleManager.main.enemy_arr[i].Is_dead);
+			floor_panels[i].SetActive(BattleManager.main.enemy_arr[i] != null && !BattleManager.main.enemy_arr[i].Is_dead);
 		}
 	}
 }
