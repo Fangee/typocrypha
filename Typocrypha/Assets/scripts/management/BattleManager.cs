@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class BattleManager : MonoBehaviour {
 	// statically linked fields
 	public static BattleManager main = null; // static instance accessible globally (try not to use this)
+    public Player player;
 	public SpellDictionary spellDict; // spell dictionary object
 	public GameObject enemy_prefab; // prefab for enemy object
     public GameObject ally_prefab; //prefab for ally object
@@ -38,7 +39,7 @@ public class BattleManager : MonoBehaviour {
 	[HideInInspector] public bool pause; // is battle paused?
 	[HideInInspector] public Enemy[] enemy_arr; // array of Enemy components (size 3)
 	[HideInInspector] public int target_ind; // index of currently targeted enemy
-	[HideInInspector] public ICaster[] player_arr = { null, Player.main, null }; // array of Player and allies (size 3)
+	[HideInInspector] public ICaster[] player_arr = { null, null, null }; // array of Player and allies (size 3)
 	[HideInInspector] public int player_ind = 1;
 	[HideInInspector] public int enemy_count; // number of enemies in battle
 	[HideInInspector] public Vector2 target_pos; // position of target ret
@@ -73,6 +74,7 @@ public class BattleManager : MonoBehaviour {
 		popp = popper.GetComponent<Popper>();
 		target_ret_scr = target_ret.GetComponent<TargetReticule> ();
 		target_floor_scr = target_floor.GetComponent<TargetFloor> ();
+        player_arr[player_ind] = player;
 	}
 
 	// start battle scene
@@ -145,6 +147,8 @@ public class BattleManager : MonoBehaviour {
 
 	// creates the enemy specified at 'i' (0-left, 1-mid, 2-right) by the 'scene'
 	void createEnemy(int i, BattleScene scene) {
+        if (scene.enemy_stats[i] == null)
+            return;
 		GameObject new_enemy = GameObject.Instantiate (enemy_prefab, transform);
 		new_enemy.transform.localScale = new Vector3 (1, 1, 1);
 		new_enemy.transform.localPosition = new Vector3 (i * enemy_spacing, enemy_y_offset, 0);
@@ -412,144 +416,51 @@ public class BattleManager : MonoBehaviour {
         //Process the data here
         foreach (CastData d in data)
         {
-            if (d.Target.CasterType == ICasterType.PLAYER)
+            if (d.isHit == false)//Spell misses
             {
-                //Implement stuff for when player hits themselves
-                if (d.isHit == false)//Spell misses
-                {
-                    Debug.Log(d.Caster.Stats.name + " missed " + d.Target.Stats.name + "!");
-                    //Process miss graphics
-					AudioPlayer.main.playSFX("sfx_miss");
-                }
-                else//Spell hits
-                {
-                    //Process hit graphics
-					AudioPlayer.main.playSFX("Cutting_SFX");
-
-                    //Process repel
-                    if(d.repel)
-                    {
-                        if(d.Caster.CasterType == ICasterType.ENEMY)
-                            spawnElementPopup(d.element, Elements.vsElement.REPEL, ((Enemy)d.Caster).transform);
-                        else if(d.Caster.CasterType == ICasterType.NPC_ALLY)
-                            spawnElementPopup(d.element, Elements.vsElement.REPEL, ((Ally)d.Caster).transform);
-                        //else what happens if a player casts a spell that reflects on themselves?
-                    }
- 
-
-                    if (d.isCrit)//Spell is crit
-                    {
-                        Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
-						AudioPlayer.main.playSFX("sfx_party_weakcrit_dmg");
-                        //process crit graphics
-                    }
-                    Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement(d.Target.BuffDebuff, d.element));
-                    //Process elemental wk/resist/drain/repel graphics
-                    //Process damage graphics
-					BattleEffects.main.screenShake(0.5f, 0.1f);
-                }
+                Debug.Log(d.Caster.Stats.name + " missed " + d.Target.Stats.name + "!");
+                //Process miss graphics
+                popp.spawnSprite("popup_miss", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET);
+                AudioPlayer.main.playSFX("sfx_miss");
+                BattleEffects.main.spriteShift(d.Target.Transform, 0.3f, 0.1f); // sprite moves to the right as a dodge
             }
-            else if (d.Target.CasterType == ICasterType.NPC_ALLY)
+            else//Spell hits
             {
-                Ally a = (Ally)d.Target;
-                if (d.isHit == false)//Spell misses
+                //Process hit graphics
+                AudioPlayer.main.playSFX("Cutting_SFX");
+                AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", d.Target.Transform.position, 1);
+
+                //Process repel
+                if (d.repel)
                 {
-                    Debug.Log(d.Caster.Stats.name + " missed " + d.Target.Stats.name + "!");
-                    //Process miss graphics
-					AudioPlayer.main.playSFX("sfx_miss");
+                    spawnElementPopup(d.element, Elements.vsElement.REPEL, d.Caster.Transform);
                 }
-                else//Spell hits
+
+                if (d.isCrit)//Spell is crit
                 {
-                    //Process hit graphics
-                    AudioPlayer.main.playSFX("Cutting_SFX");
-                    AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", a.transform.position, 1);
-
-                    //Process repel
-                    if (d.repel)
-                    {
-                        if (d.Caster.CasterType == ICasterType.ENEMY)
-                            spawnElementPopup(d.element, Elements.vsElement.REPEL, ((Enemy)d.Caster).transform);
-                        else if (d.Caster.CasterType == ICasterType.NPC_ALLY && d.Caster != d.Target)
-                            spawnElementPopup(d.element, Elements.vsElement.REPEL, ((Ally)d.Caster).transform);
-                        //else what happens if a ally casts a spell that reflects on themselves or a player casts a spell that reflects off an ally?
-                    }
-
-                    if (d.isCrit)//Spell is crit
-                    {
-                        Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
+                    Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
+                    if (d.Target.CasterType == ICasterType.ENEMY)
+                        AudioPlayer.main.playSFX("sfx_enemy_weakcrit_dmg");
+                    else if (d.Target.CasterType == ICasterType.PLAYER || d.Target.CasterType == ICasterType.NPC_ALLY)
                         AudioPlayer.main.playSFX("sfx_party_weakcrit_dmg");
-                        //process crit graphics
-                        popp.spawnSprite("popup_critical", POP_TIMER, a.transform.position + UNDER_OFFSET);
-                    }
-                    if (d.isStun)
-                    {
-                        //Process stun graphics
-                        Debug.Log(d.Caster.Stats.name + " stuns " + d.Target.Stats.name);
-                        AudioPlayer.main.playSFX("sfx_stagger");
-                    }
-
-                    Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement(d.Target.BuffDebuff, d.element));
-
-                    //Spawn element popup
-                    spawnElementPopup(d.element, d.elementalData, a.transform);
-
-                    //Process damage graphics
-                    popp.spawnText(d.damageInflicted.ToString(), POP_TIMER, a.transform.position + DMGNUM_OFFSET);
-                    if (d.damageInflicted > 0) BattleEffects.main.spriteShake(a.gameObject.transform, 0.5f, 0.1f);
+                    //process crit graphics
+                    popp.spawnSprite("popup_critical", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET);
                 }
-
-            }
-            else//Target is an ENEMY
-            {
-                Enemy e = (Enemy)d.Target;
-                if (d.isHit == false)//Spell misses
+                if (d.isStun)
                 {
-                    Debug.Log(d.Caster.Stats.name + " missed " + d.Target.Stats.name + "!");
-                    //Process miss graphics
-                    popp.spawnSprite ("popup_miss", POP_TIMER, e.transform.position + UNDER_OFFSET);
-					AudioPlayer.main.playSFX("sfx_miss");
-					BattleEffects.main.spriteShift (e.gameObject.transform, 0.3f, 0.1f); // sprite moves to the right as a dodge
+                    //Process stun graphics
+                    Debug.Log(d.Caster.Stats.name + " stuns " + d.Target.Stats.name);
+                    AudioPlayer.main.playSFX("sfx_stagger");
                 }
-                else//Spell hits
-                {
-                    //Process hit graphics
-					AudioPlayer.main.playSFX("Cutting_SFX");
-					AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", e.transform.position, 1);
 
-                    //Process repel
-                    if (d.repel)
-                    {
-                        if (d.Caster.CasterType == ICasterType.ENEMY && d.Caster != d.Target)
-                            spawnElementPopup(d.element, Elements.vsElement.REPEL, ((Enemy)d.Caster).transform);
-                        else if (d.Caster.CasterType == ICasterType.NPC_ALLY)
-                            spawnElementPopup(d.element, Elements.vsElement.REPEL, ((Ally)d.Caster).transform);
-                        //else what happens if an enemy casts a spell that reflects off the player?
-                    }
+                Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement(d.Target.BuffDebuff, d.element));
 
-                    if (d.isCrit)//Spell is crit
-                    {
-                        Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
-						AudioPlayer.main.playSFX("sfx_enemy_weakcrit_dmg");
-						//process crit graphics
-						popp.spawnSprite ("popup_critical", POP_TIMER, e.transform.position + UNDER_OFFSET);
-                    }
-                    if (d.isStun)
-                    {
-                        //Process stun graphics
-                        Debug.Log(d.Caster.Stats.name + " stuns " + d.Target.Stats.name);
-                        AudioPlayer.main.playSFX("sfx_stagger");
-                        charge_bars.Charge_bars[e.position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 0.5F, 0);
-                    }
+                //Process elemental wk/resist/drain/repel graphics
+                spawnElementPopup(d.element, d.elementalData, d.Target.Transform);
 
-					Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement (d.Target.BuffDebuff, d.element));
-
-                    //Process elemental wk/resist/drain/repel graphics
-                    spawnElementPopup(d.element, d.elementalData, e.transform);
-
-					//Process damage graphics
-					popp.spawnText (d.damageInflicted.ToString(), POP_TIMER, e.transform.position + DMGNUM_OFFSET);
-					if (d.damageInflicted > 0) BattleEffects.main.spriteShake (e.gameObject.transform, 0.3f, 0.1f);
-                }
+                //Process damage graphics
+                popp.spawnText(d.damageInflicted.ToString(), POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET);
+                if (d.damageInflicted > 0) BattleEffects.main.spriteShake(d.Target.Transform, 0.3f, 0.1f);
             }
         }
         //Register unregistered keywords here

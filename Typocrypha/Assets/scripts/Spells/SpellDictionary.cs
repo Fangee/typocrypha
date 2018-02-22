@@ -438,7 +438,7 @@ public class SpellDictionary : MonoBehaviour
             time *= styles[s.style].cooldownModM;
             time += styles[s.style].cooldownMod;
         }
-        return time * speed;
+        return time / speed;
     }
     //Starts cooldown of spell
     public void startCooldown(SpellData data, Player caster)
@@ -469,7 +469,7 @@ public class SpellDictionary : MonoBehaviour
             cooldownTime *= s.cooldownModM;
             cooldownTime += s.cooldownMod;
         }
-        spell.startCooldown(cooldown, data.root, caster.Stats.speed * cooldownTime);
+        spell.startCooldown(cooldown, data.root, cooldownTime / caster.Stats.speed);
     }
     //Return cooldown of spell
     //Pre: spell is on cooldown

@@ -9,8 +9,6 @@ public class EnemyDatabase
 	public bool is_loaded = false; // is enemy database loaded?
     Dictionary<string, EnemyStats> database = new Dictionary<string, EnemyStats>();
 
-    private const string assetPath = "sprites/";
-
     TextAsset text_file; // original text asset
     public string file_name; // name of database file
     char[] line_delim = { '\n' };
@@ -103,7 +101,7 @@ public class EnemyDatabase
                 spells.Add(s);
             }
             EnemySpellList spellList = new EnemySpellList(spellGroups);
-            EnemyStats stats = new EnemyStats(name, chat_id, assetPath + sprite_path, max_hp, max_shield, max_stagger, atk, def, speed, acc, evade, vsElem, spellList, ai_type, ai_params);
+            EnemyStats stats = new EnemyStats(name, chat_id, sprite_path, max_hp, max_shield, max_stagger, atk, def, speed, acc, evade, vsElem, spellList, ai_type, ai_params);
             database.Add(stats.name, stats);
         }
         Debug.Log("Enemy Database Loaded");

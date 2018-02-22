@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour, ICaster {
 
     //ICaster Properties//
 
+    public Transform Transform { get { return transform; } }
     public CasterStats Stats
     {
         get
@@ -63,7 +64,6 @@ public class Enemy : MonoBehaviour, ICaster {
         }
     }
 
-
     //Public fields//
 
     public bool attack_in_progress = false;
@@ -73,6 +73,7 @@ public class Enemy : MonoBehaviour, ICaster {
     public EnemyChargeBars bars;
 	public SpriteRenderer enemy_sprite; // this enemy's sprite
     public EnemyAI AI = null;
+    public static AssetBundle sprite_bundle = null; 
 
     //Private fields//
 
@@ -93,7 +94,11 @@ public class Enemy : MonoBehaviour, ICaster {
     private SpellDictionary dict; //Dictionary to refer to (set in setStats)
 
     //Methods//
-
+    void Awake()
+    {
+        if(sprite_bundle == null)
+            sprite_bundle = AssetBundle.LoadFromFile(System.IO.Path.Combine(Application.streamingAssetsPath, "enemy_sprites"));
+    }
     void Start() {
 		is_dead = false;
     }
@@ -111,7 +116,7 @@ public class Enemy : MonoBehaviour, ICaster {
         dict = field.spellDict;
         //Get sprite components
 		enemy_sprite = GetComponent<SpriteRenderer> ();
-        enemy_sprite.sprite = Resources.Load<Sprite>(stats.sprite_path);
+        enemy_sprite.sprite = sprite_bundle.LoadAsset<Sprite>(stats.sprite_path);
 		enemy_sprite.sortingOrder = enemy_sprite_layer;
         //Get AI module
         AI = EnemyAI.GetAIFromString(stats.ai_type, stats.ai_params);
@@ -230,6 +235,7 @@ public class Enemy : MonoBehaviour, ICaster {
     private void stun()
     {
         is_stunned = true;
+        field.charge_bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 0.5F, 0);
     }
     //Un-stun enemy
     private void unStun()

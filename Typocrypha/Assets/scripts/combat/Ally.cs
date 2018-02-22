@@ -20,6 +20,7 @@ public class Ally : MonoBehaviour, ICaster {
     private const float stagger_add_constant = 5F;//Amount to add when calculating stagger time
 
     //ICASTER STUFF//
+    public Transform Transform { get { return transform; } }
 
     private AllyStats stats;
     public CasterStats Stats
@@ -45,7 +46,6 @@ public class Ally : MonoBehaviour, ICaster {
     public bool Is_dead { get { return is_dead; } }
 
     public ICasterType CasterType { get { return ICasterType.NPC_ALLY; } }
-
 
 
     public void damage(CastData data, int d, int element, ICaster caster, bool crit, bool reflect = false)
