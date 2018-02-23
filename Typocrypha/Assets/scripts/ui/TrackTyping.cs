@@ -11,6 +11,7 @@ public class TrackTyping : MonoBehaviour {
 	public Dictionary<char, Image> key_map; // map from characters to key images
 	public Transform keyboard; // keyboard transform (holds key images)
 	public GameObject key_prefab; // prefab for key image object
+	public GameObject spacebar_prefab; // prefab for spacebar image object
 
 	string buffer; // contains typed text
 	int count; // number of characters typed
@@ -64,17 +65,30 @@ public class TrackTyping : MonoBehaviour {
 		}
 		// update display
 		typed_text.text = buffer.Replace(" ", "-").ToUpper();
+		for (int i = 26 - typed_text.text.Length; i > 0; --i) {
+			typed_text.text = typed_text.text + "_";
+		}
+		typed_text.text = "> " + typed_text.text;
 	}
 
 	// create visual keyboard keys
 	void createKeyboard() {
 		for (int i = 0; i < rows.Length; i++) {
 			for (int j = 0; j < rows[i].Length; j++) {
-				GameObject new_key = GameObject.Instantiate (key_prefab);
+				GameObject new_key;
+				if (i == 3) {
+					new_key = GameObject.Instantiate (spacebar_prefab);
+				} else {
+					new_key = GameObject.Instantiate (key_prefab);
+				}
 				new_key.transform.SetParent (keyboard);
 				new_key.transform.localScale = new Vector3 (1, 1, 1);
 				new_key.transform.localPosition = new Vector3 (row_offsets[i] + j*48, i*-48, 0);
-				new_key.GetComponentInChildren<Text> ().text = rows [i] [j].ToString();
+				if (rows [i] [j].ToString () == " ") {
+					new_key.GetComponentInChildren<Text> ().text = "SPACE [ - ]";
+				} else {
+					new_key.GetComponentInChildren<Text> ().text = rows [i] [j].ToString().ToUpper();
+				}
 				key_map.Add (rows [i] [j], new_key.GetComponent<Image> ());
 			}
 		}

@@ -1,7 +1,7 @@
 name (root)	spell type	spellbook description	anim ID	sfx ID	power	cooldown	hit %	crit %	status%	pattern	buff/debuffs	buff %	modFlag	
-sword	attack	a basic attack	none	none	10	4	100	0	0	MT	None	0		
-spear	attack	a basic long cool atk	none	none	20	10	95	15	0	MT	None	0		
-falchion	attack	a basic super long atk	none	none	30	15	100	10	0	MT	None	0		
+sword	attack	Basic Phys ATK	none	none	10	4	100	0	0	MT	None	0		
+lance	attack	Medium Phys ATK	none	none	20	10	95	15	0	MT	None	0		
+hammer	attack	Heavy Phys ATK	none	none	30	15	100	10	0	MT	None	0		
 selfcare	attack	heal self	none	none	-30	15	9999	999	0	mS	None	0		
 cleaver	attack	a targeted wide atk	none	none	10	10	75	10	0	LMRT	None	0		
 sacrifice	attack	"hurts self, does big ds"	none	none	40	10	95	10	0	LRmS	None	0		
@@ -22,9 +22,9 @@ dahlia	friend/buff	Super Buff!	none	none	1	25	100	10	0	m	adsheufib	100	no_mods
 illyia	friend/attack	the ultimate sword	none	none	999	30	100	75	0	MT	ADSHEUFIB	100	no_styles	
 END														
 name (elem)	element	spellbook description	anim ID	sfx ID	cooldown+	cooldown*								
-fire	fire	adds fire element to spell	none	none	0	1								
-ice	ice	adds ice element to spell	none	none	0	1								
-volt	volt	adds volt element to spell	none	none	0	1								
+agni	fire	Override ATK type to Fire	none	none	0	1								
+cryo	ice	Override ATK type to Ice	none	none	0	1								
+veld	volt	Override ATK type to Volt	none	none	0	1								
 END														
 name (style)	powerMod+	spellbook description	anim ID	sfx ID	power mod*	cooldown+	cooldown*	hit% mod+	hit% *	crit % mod+	crit % mod*	status% +	status% *	pattern
 aimed	0	"+acc, -power"	none	none	0.75	0	1	10	1.2	0	1	0	1	None

@@ -11,11 +11,11 @@ DIALOGUE	Clarke	"Understood. Now, how about a picture?"	_	spr_vn_clarke_display	
 DIALOGUE		[prompt=sprite].	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
 DIALOGUE	Clarke	Looking great.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
 DIALOGUE	Doppleganger?	Haha! I'm the Doppleganger? You are cursed now! Fight these demons!	_	spr_vn_doppelganger_g_placeholder	CENTER	END_DIALOGUE
-DIALOGUE	Clarke	WARNING. WARNING. MALICIOUS MAGIC SOURCE DETECTED.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
-DIALOGUE	Clarke	UNLOCKING SELF-DEFENSE CAPABILITIES.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
-DIALOGUE	Clarke	YOU MAY NOW ENTER SPELLS INTO THE TYPOCRYPHA KEYBOARD. PRESS ENTER TO CAST	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
-DIALOGUE	Clarke	SPELLS CAST BY YOU OR AN ENEMY WILL BE AUTOMATICALL REGISTED TO YOUR SPELLBOOK.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
-DIALOGUE	Clarke	"HOWEVER, THIS TYPOCRYPHA IS OUTFITTED TO CAST SPELLS THAT HAVE NOT BEEN REGISTERED"	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	WARNING: MALICIOUS MAGIC SOURCE DETECTED.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	UNLOCKING SELF-DEFENSE FUNCTIONALITY.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	You may now enter Spells into the TYPOCRYPHA keyboard. Press the ENTER key to cast.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	Spells cast by you and the enemy will be registered to the Spellbook automatically.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	"However, this TYPOCRYPHA has been outfitted to cast non-registered spells."	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
 REGISTER	sword	END				
 END_SCENE						
 START_SCENE	BATTLE					
@@ -24,12 +24,13 @@ ENEMY	EMPTY
 ENEMY	Changeling					
 END_SCENE						
 START_SCENE	CUTSCENE	_				
-DIALOGUE	Clarke	MULTIPLE NEW THREATS DETECTED! USE OF REAL_TIME TARGETING ADVISED	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	ALERT: MULTIPLE NEW THREATS DETECTED. USE OF REALTIME TARGETING ADVISED.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
 END_SCENE						
 START_SCENE	BATTLE					
 MUSIC	bgm_battle_a1					
 INTERRUPT	"count-player-attacks,1"					
-DIALOGUE	Clarke	WARNING! THREAT STILL DETECTED! SPELL MUST COOL DOWN BEFORE YOU CAN CAST IT AGAIN	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	WARNING: THREAT STILL DETECTED.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	Spells must recharge in cooldowns before being cast again. Proceed with extreme caution.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
 END_INTERRUPT						
 ENEMY	Changeling					
 ENEMY	EMPTY					
@@ -44,10 +45,12 @@ END_SCENE
 START_SCENE	BATTLE					
 MUSIC	bgm_battle_a1					
 INTERRUPT	"count-player-attacks,1"					
-DIALOGUE	Clarke	ENTITIES WITH PHYSICAL RESISTANCE DETECTED. USE OF ELEMENTAL ATTRIBUTES SUGGESTED	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
-DIALOGUE	Clarke	"FIRE-SWORD RECOMMENDED. USE THE SPACEBAR TO ENTER A ""-"" SEPERATOR INTO THE TYPOCRYPHA"	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
-REGISTER	fire	END				
-DIALOGUE	Clarke	Have fun!	bgm_battle_a1	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	ANALYSIS: ENTITIES WITH PHYSICAL RESISTANCE DETECTED. USE OF ELEMENTAL ATTRIBUTES SUGGESTED.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	ADVICE: UTILIZE ELEMENTAL SPELL PREFIXES.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	"I recommend casting AGNI-SWORD. Press SPACEBAR to insert a dash ""-"" between words to connect them."	_	spr_vn_diagram_1	CLARKE	END_DIALOGUE
+REGISTER	agni	END				
+DIALOGUE	Clarke	AGNI is the official TYPOCRYPHA prefix for Fire type Spells. There exists other element prefixes like it. . .	bgm_battle_a1	spr_vn_diagram_1	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	Be sure to search for more elemental prefixes!	_	spr_vn_diagram_1	CLARKE	END_DIALOGUE
 END_INTERRUPT						
 ENEMY	EMPTY					
 ENEMY	Ijiraq					
@@ -71,8 +74,8 @@ ENEMY	Ijiraq2
 ENEMY	Changeling					
 END_SCENE						
 START_SCENE	CUTSCENE	_				
-DIALOGUE	Clarke	POWERFUL ENEMY DETECTED. CANNOT COMPREHEND TRUE FORM	STOP	spr_vn_clarke_display	CLARKE	END_DIALOGUE
-DIALOGUE	Clarke	Good luck.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	EMERGENCY: POWERFUL ENEMY DETECTED. CANNOT COMPREHEND TRUE FORM.	STOP	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	. . . Be careful.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
 END_SCENE						
 START_SCENE	BATTLE					
 MUSIC	bgm_battle_b1					

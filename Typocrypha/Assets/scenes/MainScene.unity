@@ -2306,6 +2306,8 @@ MonoBehaviour:
   entry_ok: {fileID: 719457457}
   keyboard: {fileID: 1344030231}
   key_prefab: {fileID: 1888857165769182, guid: f827390bd1b568145ac0d82feacd5268, type: 2}
+  spacebar_prefab: {fileID: 1735266892291008, guid: 2d08f3f27c0957e4f8ea088dca4754a0,
+    type: 2}
 --- !u!114 &585812796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2998,7 +3000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 4, y: -4}
+  m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
 --- !u!1 &726879962
 GameObject:
@@ -3782,7 +3784,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -12, y: 100}
-  m_SizeDelta: {x: 402.6, y: 48}
+  m_SizeDelta: {x: 418, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &839903227
 MonoBehaviour:
@@ -3796,7 +3798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.050980393, g: 0.8117647, b: 0.8745098, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3808,7 +3810,7 @@ MonoBehaviour:
     m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 1
     m_MaxSize: 64
     m_Alignment: 3
     m_AlignByGeometry: 0
@@ -3834,7 +3836,7 @@ MonoBehaviour:
   m_Script: {fileID: 1573420865, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 1, g: 0, b: 0, a: 1}
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
 --- !u!1 &846874626
