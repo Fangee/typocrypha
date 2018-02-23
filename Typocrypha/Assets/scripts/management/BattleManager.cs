@@ -93,6 +93,7 @@ public class BattleManager : MonoBehaviour {
 		charge_bars.initChargeBars ();
 		stagger_bars.initStaggerBars ();
 		health_bars.initHealthBars ();
+		//for (int i = 0; i < scene.enemy_stats.Length; i++) createEnemy (i, scene);
 
         //CREATE ALLIES//
 
@@ -148,9 +149,15 @@ public class BattleManager : MonoBehaviour {
 		BattleEffects.main.pixelateIn (1f);
 		yield return new WaitForSeconds (1f);
 		BackgroundEffects.main.setPrefabBG (battle_bg_prefab); // set background
+		for (int i = 0; i < scene.enemy_stats.Length; i++) createEnemy (i, scene); // create enemies
+		// unpause for a split second to allow enemy to initialize
+		pause = false;
+		yield return new WaitForSeconds (0.1f);
+		pause = true;
 		BattleEffects.main.pixelateOut (1f);
 		yield return new WaitForSeconds (1f);
 
+		/*
 		// spawn in enemies one by one
 		for (int i = 0; i < scene.enemy_stats.Length; i++) {
 			createEnemy (i, scene);
@@ -160,6 +167,8 @@ public class BattleManager : MonoBehaviour {
 			pause = true;
 			yield return new WaitForSeconds (0.5f);
 		}
+		*/
+
 		pause = true;
 		yield return new WaitForSeconds (1f);
 		// show targeting ui
