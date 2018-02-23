@@ -82,6 +82,7 @@ public class Enemy : MonoBehaviour, ICaster {
 
     bool is_dead; // is enemy dead?
     bool is_stunned; // is the enemy stunned?
+    bool was_hit = false; //the enemy was hit in the pause and needs state update
     int target; //Position in player_arr (BattleManager.cs) that this enemy is currently targeting
     SpellData curr_spell = null; //A reference to the current spell
 	int curr_hp; // current amount of health
@@ -123,6 +124,39 @@ public class Enemy : MonoBehaviour, ICaster {
         //Start Attacking
         StartCoroutine (attackRoutine ()); 
 	}
+    //Changes enemy stats without messing with AI and current values
+    public void changeForm(EnemyStats i_stats, bool resetCurrent)
+    {
+        //Set stats
+        stats = i_stats;
+        //Get sprite components
+        enemy_sprite = GetComponent<SpriteRenderer>();
+        enemy_sprite.sprite = sprite_bundle.LoadAsset<Sprite>(stats.sprite_path);
+        enemy_sprite.sortingOrder = enemy_sprite_layer;
+        //Initialize combat values
+        if (resetCurrent)
+        {
+            Curr_hp = stats.max_hp;
+            Curr_shield = stats.max_shield;
+            Curr_stagger = stats.max_stagger;
+            stagger_time = (stats.max_stagger * stagger_mult_constant) + stagger_add_constant;
+        }
+    }
+    public void resetAttack()
+    {
+        curr_time = 0;
+        StopAllCoroutines();
+        StartCoroutine(attackRoutine());
+    }
+    public void resetAI()
+    {
+        AI = EnemyAI.GetAIFromString(stats.ai_type, stats.ai_params);
+    }
+
+    public void change_spell(string elem, string root, string style)
+    {
+
+    }
 
 	// returns curr_time/atk_time
 	public float getAtkProgress() {
@@ -144,7 +178,7 @@ public class Enemy : MonoBehaviour, ICaster {
 	IEnumerator attackRoutine() {
 		Vector3 original_pos = transform.position;
         curr_stagger_time = 0F;
-        curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target);   //Initialize with current spell
+        curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target).clone();   //Initialize with current spell
         atk_time = dict.getCastingTime(curr_spell, stats.speed);   //Get casting time
 		while (!is_dead) {
 			yield return new WaitForEndOfFrame ();
@@ -171,9 +205,9 @@ public class Enemy : MonoBehaviour, ICaster {
                 if(!is_stunned)
                     attackPlayer (curr_spell);
                 //Update state (will move to make it so that state change can interrupt cast)
-                AI.updateState(field.enemy_arr, position, field.player_arr);
+                AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.AFTER_CAST);
                 //Get next spell from AI
-                curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target);
+                curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target).clone();
                 atk_time = dict.getCastingTime(curr_spell, stats.speed);//get new casting time
                 curr_time = 0;
                 //resetBarFX(); // stop full bar effects (now in barFlash)
@@ -228,8 +262,9 @@ public class Enemy : MonoBehaviour, ICaster {
         {
             data.isStun = true;
             stun();
-        }   
+        }
         //opacity and death are now updated in updateCondition()
+        was_hit = true;
     }
     //Apply stun condition to enemy
     private void stun()
@@ -240,24 +275,30 @@ public class Enemy : MonoBehaviour, ICaster {
     //Un-stun enemy
     private void unStun()
     {
-		bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(13.0f/255.0f, 207.0f/255.0f, 223.0f/255.0f);
+        bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(13.0f/255.0f, 207.0f/255.0f, 223.0f/255.0f);
         is_stunned = false;
         Curr_stagger = stats.max_stagger;
+        AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.UNSTUN);
     }
 
     //Updates opacity and death (after pause in battlemanager)
     public void updateCondition()
     {
+        //Update AI if hit (may drop hp to zero)
+        if (was_hit)
+        {
+            AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.WAS_HIT);
+            was_hit = false;
+        }
         // make enemy sprite fade as damaged (lazy health rep)
         //enemy_sprite.color = new Color(1, 1, 1, (float)curr_hp / stats.max_hp);
         if (curr_hp <= 0)
         { // check if killed
             Debug.Log(stats.name + " has been slain!");
             is_dead = true;
-			enemy_sprite.color = new Color(1, 1, 1, 0);
-			StopAllCoroutines ();
+            enemy_sprite.color = new Color(1, 1, 1, 0);
+            StopAllCoroutines();
         }
-
     }
 
     //Starts swell from outside class (used in battlemanager.cs)
@@ -282,7 +323,7 @@ public class EnemySpellList
         groups = spells;
     }
     private Dictionary<string, SpellData[]> groups;
-    public SpellData[] getSpells(string group)
+    public SpellData[] getSpells(string group = "DEFAULT")
     {
         return groups[group];
     }

@@ -206,7 +206,7 @@ public class LoadGameFlow : MonoBehaviour {
                 if (cols[1].ToLower().Trim() == "empty")
                     enemies.Add(null);
                 else {
-                    EnemyStats new_stats = enemy_data.getData(cols[1]);
+                    EnemyStats new_stats = enemy_data.getData(cols[1].Trim());
                     enemies.Add(new_stats);
                 }
 			} else if(cols [0].CompareTo ("ALLY") == 0) {

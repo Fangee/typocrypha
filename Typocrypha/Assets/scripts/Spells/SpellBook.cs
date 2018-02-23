@@ -150,7 +150,10 @@ public class SpellBook : MonoBehaviour {
                 descritptions[i].text = current[j].description;
             }
             else
+            {
                 entryNames[i].text = emptyEntryText;
+                descritptions[i].text = emptyEntryText;
+            }
             ++j;
         }
         downArrow.enabled = checkNext();

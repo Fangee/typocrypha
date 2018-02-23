@@ -624,6 +624,11 @@ public class SpellData
             result += ("-" + style);
         return result.ToUpper();
     }
+    //Returns a copy of this spellData
+    public SpellData clone()
+    {
+        return new SpellData(root, element, style);
+    }
 }
 
 
