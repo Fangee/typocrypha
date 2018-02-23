@@ -15,6 +15,9 @@ public class PostProcess : MonoBehaviour {
 
 	void Update() {
 		mat.SetFloat ("_PixelSize", pixel_size);
+		mat.SetFloat ("_Width", 1280);
+		mat.SetFloat ("_Height", 720);
+
 	}
 
 	void OnRenderImage(RenderTexture src, RenderTexture dest) {
