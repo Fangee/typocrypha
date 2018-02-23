@@ -1,15 +1,21 @@
 1						
 START_SCENE	CUTSCENE	jazzy_retro_battle_theme				
-DIALOGUE	Tanuki	enter your name.	jazzy_retro_battle_theme	tanuki_mario	CENTER	END_DIALOGUE
+DIALOGUE	???	Thank you for purchasing this TYPOCRYPHA unit. I will be your AI operating assistant.	jazzy_retro_battle_theme	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	You can call me Clarke!	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	Please enter your name into the keyboard:	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
 DIALOGUE		[prompt=name].	_	END_DIALOGUE		
-DIALOGUE	Tanuki	{name}? good name.	_	tanuki_mario	CENTER	END_DIALOGUE
-DIALOGUE	Tanuki	"Also, I am completely blind. What do you look like?"	_	tanuki_mario	CENTER	END_DIALOGUE
-DIALOGUE		[prompt=sprite].	_	END_DIALOGUE		
-DIALOGUE	Tanuki	"Ah, so that is what you look like."	_	tanuki_mario	CENTER	END_DIALOGUE
-DIALOGUE	Tanuki	"Also, what pronouns do you use? I use she/her/hers pronouns, by the way."	_	tanuki_mario	CENTER	END_DIALOGUE
-DIALOGUE	Tanuki	[prompt=pronoun].	_	tanuki_mario	CENTER	END_DIALOGUE
-DIALOGUE	Tanuki	Got it. 	_	tanuki_mario	CENTER	END_DIALOGUE
-DIALOGUE	Tanuki	Now I know everything about you. Mwahaha!	_	tanuki_mario	CENTER	END_DIALOGUE
+DIALOGUE	Clarke	{name}? good name.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	"OK {name}, how would you like me to address you?"	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE		[prompt=pronoun].	_	END_DIALOGUE		
+DIALOGUE	Clarke	"Understood. Now, how about a picture?"	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE		[prompt=sprite].	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	Looking great.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Doppleganger?	Haha! I'm the Doppleganger? You are cursed now! Fight these demons!	_	spr_vn_doppelganger_g_placeholder	CENTER	END_DIALOGUE
+DIALOGUE	Clarke	WARNING. WARNING. MALICIOUS MAGIC SOURCE DETECTED.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	UNLOCKING SELF-DEFENSE CAPABILITIES.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	YOU MAY NOW ENTER SPELLS INTO THE TYPOCRYPHA KEYBOARD. PRESS ENTER TO CAST	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	SPELLS CAST BY YOU OR AN ENEMY WILL BE AUTOMATICALL REGISTED TO YOUR SPELLBOOK.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	"HOWEVER, THIS TYPOCRYPHA IS OUTFITTED TO CAST SPELLS THAT HAVE NOT BEEN REGISTERED"	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
 REGISTER	sword	END				
 END_SCENE						
 START_SCENE	BATTLE					
@@ -17,17 +23,17 @@ MUSIC	bgm_battle_a1
 ENEMY	EMPTY					
 ENEMY	Changeling					
 END_SCENE						
-START_SCENE	CUTSCENE					
-DIALOGUE	Clarke	Next Wave incoming!	_	END_DIALOGUE		
+START_SCENE	CUTSCENE	_				
+DIALOGUE	Clarke	MULTIPLE NEW THREATS DETECTED! USE OF REAL_TIME TARGETING ADVISED	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
 END_SCENE						
 START_SCENE	BATTLE					
 MUSIC	bgm_battle_a1					
+INTERRUPT	"count-player-attacks,1"					
+DIALOGUE	Clarke	WARNING! THREAT STILL DETECTED! SPELL MUST COOL DOWN BEFORE YOU CAN CAST IT AGAIN	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+END_INTERRUPT						
 ENEMY	Changeling					
 ENEMY	EMPTY					
 ENEMY	Tanuki					
-END_SCENE						
-START_SCENE	CUTSCENE					
-DIALOGUE	Clarke	Notha wave comin yo way	_	END_DIALOGUE		
 END_SCENE						
 START_SCENE	BATTLE					
 MUSIC	bgm_battle_a1					
@@ -37,12 +43,24 @@ ENEMY	Changeling
 END_SCENE						
 START_SCENE	BATTLE					
 MUSIC	bgm_battle_a1					
+INTERRUPT	"count-player-attacks,1"					
+DIALOGUE	Clarke	ENTITIES WITH PHYSICAL RESISTANCE DETECTED. USE OF ELEMENTAL ATTRIBUTES SUGGESTED	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	"FIRE-SWORD RECOMMENDED. USE THE SPACEBAR TO ENTER A ""-"" SEPERATOR INTO THE TYPOCRYPHA"	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+REGISTER	fire	END				
+DIALOGUE	Clarke	Have fun!	bgm_battle_a1	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+END_INTERRUPT						
 ENEMY	EMPTY					
 ENEMY	Ijiraq					
 END_SCENE						
 START_SCENE	BATTLE					
 MUSIC	bgm_battle_a1					
-ENEMY	Ijiraq2					
+INTERRUPT	check-stun					
+DIALOGUE	Clarke	Looks like you've staggered an enemy!	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	Staggered enemies have their casting paused and take more damage	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	You can stagger enemies by hitting then with an element they are weak to or a critical hit!	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	The shield Icon displays how many effective hits it will take before an enemy is staggered	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+END_INTERRUPT						
+ENEMY	Ijiraq3					
 ENEMY	EMPTY					
 ENEMY	Tanuki					
 END_SCENE						
@@ -52,9 +70,16 @@ ENEMY	Tanuki
 ENEMY	Ijiraq2					
 ENEMY	Changeling					
 END_SCENE						
+START_SCENE	CUTSCENE	_				
+DIALOGUE	Clarke	POWERFUL ENEMY DETECTED. CANNOT COMPREHEND TRUE FORM	STOP	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	Good luck.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+END_SCENE						
 START_SCENE	BATTLE					
 MUSIC	bgm_battle_b1					
 ENEMY	EMPTY					
 ENEMY	Doppelganger (BLUE)					
+END_SCENE						
+START_SCENE	CUTSCENE	_				
+DIALOGUE	The Devs	A winner is you! (Thanks for playtesting our game) 	STOP	spr_vn_clarke_display	CLARKE	END_DIALOGUE
 END_SCENE						
 END_GAME						
