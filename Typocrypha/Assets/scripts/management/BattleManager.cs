@@ -154,8 +154,13 @@ public class BattleManager : MonoBehaviour {
 		// spawn in enemies one by one
 		for (int i = 0; i < scene.enemy_stats.Length; i++) {
 			createEnemy (i, scene);
+			// unpause for a split second to allow enemy to initialize
+			pause = false;
+			yield return new WaitForSeconds (0.1f);
+			pause = true;
 			yield return new WaitForSeconds (0.5f);
 		}
+		pause = true;
 		yield return new WaitForSeconds (1f);
 		// show targeting ui
 		target_ret.SetActive (true);
