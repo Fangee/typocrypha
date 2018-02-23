@@ -10,6 +10,7 @@ public class BattleEffects : MonoBehaviour {
 	public SpriteRenderer dimmer; // dimmer image
 	public Canvas canvas; // canvas component
 	public Animator camera_animator; // animator for camera object
+	public PostProcess post_process; // post process script
 
 	private int old_dim_layer;
 
@@ -140,6 +141,20 @@ public class BattleEffects : MonoBehaviour {
 	// spins camera with speed SPEED
 	public void spinCamera(float speed) {
 		camera_animator.speed = speed;
-		camera_animator.Play ("spin");
+		camera_animator.Play ("spin",0,0f);
+	}
+
+	// pixelates screen with speed SPEED
+	public void pixelateIn(float speed) {
+		post_process.enabled = true;
+		camera_animator.speed = speed;
+		camera_animator.Play ("pixelate_in",0,0f);
+	}
+
+	// unpixelates screen with speed SPEED
+	public void pixelateOut(float speed) {
+		post_process.enabled = true;
+		camera_animator.speed = speed;
+		camera_animator.Play ("pixelate_out",0,0f);
 	}
 }

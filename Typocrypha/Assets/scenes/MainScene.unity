@@ -5061,6 +5061,7 @@ GameObject:
   - component: {fileID: 1149999595}
   - component: {fileID: 1149999596}
   - component: {fileID: 1149999597}
+  - component: {fileID: 1149999599}
   - component: {fileID: 1149999598}
   m_Layer: 0
   m_Name: Main Camera
@@ -5167,6 +5168,7 @@ MonoBehaviour:
   dimmer: {fileID: 1608672956}
   canvas: {fileID: 1668480232}
   camera_animator: {fileID: 1149999598}
+  post_process: {fileID: 1149999599}
 --- !u!114 &1149999597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5196,6 +5198,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &1149999599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1149999589}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 569f734da9ef4aa478c9c643a9f41193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mat: {fileID: 2100000, guid: 0d3e6c454f84ba34490134016846f91f, type: 2}
+  pixel_size: 1
 --- !u!1 &1187835793
 GameObject:
   m_ObjectHideFlags: 0

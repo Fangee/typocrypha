@@ -82,9 +82,10 @@ public class BattleManager : MonoBehaviour {
 	// start battle scene
 	public void startBattle(BattleScene scene) {
 		Debug.Log ("Battle!");
+		pause = true;
 		curr_battle = scene;
 
-        //CREATE ENEMIES//
+        //INITIALIZE ENEMIES//
 
 		enemy_arr = new Enemy[3];
 		enemy_count = 0;
@@ -92,7 +93,6 @@ public class BattleManager : MonoBehaviour {
 		charge_bars.initChargeBars ();
 		stagger_bars.initStaggerBars ();
 		health_bars.initHealthBars ();
-		for (int i = 0; i < scene.enemy_stats.Length; i++) createEnemy (i, scene);
 
         //CREATE ALLIES//
 
@@ -125,13 +125,9 @@ public class BattleManager : MonoBehaviour {
 
 		//INITIALIZE TARGET UI//
 
-		target_ret.SetActive (true);
 		target_ind = 1;
 		target_pos = new Vector2 (target_ind * enemy_spacing, reticule_y_offset);
 		target_ret.transform.localPosition = target_pos;
-		target_ret_scr.updateTarget ();
-		target_floor.SetActive (true);
-		target_floor_scr.updateFloor ();
 
 		//INITIALIZE OTHER TRACKING VARIABLES//
 
@@ -143,8 +139,32 @@ public class BattleManager : MonoBehaviour {
 
         //FINISH//
 
-        pause = false;
-		BackgroundEffects.main.setPrefabBG (battle_bg_prefab);
+		StartCoroutine (finishBattlePrep (scene));
+	}
+
+	// finishes up battle start and effects
+	IEnumerator finishBattlePrep(BattleScene scene) {
+		// pixelate in background
+		BattleEffects.main.pixelateIn (1f);
+		yield return new WaitForSeconds (1f);
+		BackgroundEffects.main.setPrefabBG (battle_bg_prefab); // set background
+		BattleEffects.main.pixelateOut (1f);
+		yield return new WaitForSeconds (1f);
+
+		// spawn in enemies one by one
+		for (int i = 0; i < scene.enemy_stats.Length; i++) {
+			createEnemy (i, scene);
+			yield return new WaitForSeconds (0.5f);
+		}
+		yield return new WaitForSeconds (1f);
+		// show targeting ui
+		target_ret.SetActive (true);
+		target_floor.SetActive (true);
+		target_ret_scr.updateTarget ();
+		target_floor_scr.updateFloor ();
+
+		// start battle
+		pause = false;
 		AudioPlayer.main.playMusic (scene.music_tracks[0]);
 		checkInterrupts ();
 	}
@@ -158,7 +178,7 @@ public class BattleManager : MonoBehaviour {
 		new_enemy.transform.localScale = new Vector3 (1, 1, 1);
 		new_enemy.transform.localPosition = new Vector3 (i * enemy_spacing, enemy_y_offset, 0);
 		enemy_arr [i] = new_enemy.GetComponent<Enemy> ();
-		enemy_arr[i].field = this; //Give enemey access to field (for calling spellcasts)
+		enemy_arr[i].field = this; //Give enemy access to field (for calling spellcasts)
 		enemy_arr [i].initialize (scene.enemy_stats [i]); //sets enemy stats (AND INITITIALIZES ATTACKING AND AI)
 		enemy_arr [i].position = i;      //Log enemy position in field
 		enemy_arr[i].bars = charge_bars; //Give enemy access to charge_bars
