@@ -21,6 +21,7 @@ public class TextEvents : MonoBehaviour {
 	public Camera main_camera; // main camera object
 	public GameObject dialogue_box; // dialogue box object
 	public TrackTyping track_typing; // tracks keyboard input
+	public GameObject glitch_effect; // sprite used for glitch effect
 
 	void Awake() {
 		if (main == null) main = this;
@@ -38,7 +39,8 @@ public class TextEvents : MonoBehaviour {
 			{"hide-text-box", hideTextBox},
 			{"set-talk-sfx", setTalkSFX},
             {"evil-eye", evilEye},
-            {"prompt", prompt}
+            {"prompt", prompt},
+			{"glitch", glitch}
 		};
 		is_prompt = false;
 	}
@@ -279,5 +281,21 @@ public class TextEvents : MonoBehaviour {
         AnimationPlayer.main.playAnimation("Evil_Eye", new Vector3(-5, 0, 0), 1);
         yield return true;
     }
+	
+	IEnumerator glitch(string[] opt)
+	{
+		for(int i = 0; i < 5; i++)
+		{
+			glitch_effect.SetActive(true);
+			yield return new WaitForSeconds (0.05f);
+			glitch_effect.SetActive(false);
+			yield return new WaitForSeconds (0.05f);
+		}
+		glitch_effect.SetActive(true);
+		yield return new WaitForSeconds (0.15f);
+		glitch_effect.SetActive(false);
+		
+		yield return true;
+	}
 }
 
