@@ -5204,13 +5204,14 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1149999589}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 569f734da9ef4aa478c9c643a9f41193, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 0d3e6c454f84ba34490134016846f91f, type: 2}
   pixel_size: 1
+  glitch_amt: 0.01
 --- !u!1 &1187835793
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ Shader "Custom/PixelateScreen"
 	{
 		_MainTex ("Texture", 2D) = "white" {}
 		_Color("Tint",Color)=(1,1,1,1)
-		_PixelSize("Pixel Size",float)=4
+		_PixelSize("Pixel Size",float)=1
 		_Width("Width",float)=1
 		_Height("Height",float)=1
 	}
