@@ -5061,8 +5061,10 @@ GameObject:
   - component: {fileID: 1149999595}
   - component: {fileID: 1149999596}
   - component: {fileID: 1149999597}
-  - component: {fileID: 1149999599}
   - component: {fileID: 1149999598}
+  - component: {fileID: 1149999599}
+  - component: {fileID: 1149999600}
+  - component: {fileID: 1149999601}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5210,8 +5212,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 0d3e6c454f84ba34490134016846f91f, type: 2}
-  pixel_size: 1
-  glitch_amt: 0.01
+  shader_props:
+  - _PixelSize
+  - _Width
+  - _Height
+  shader_params:
+  - 1
+  - 1280
+  - 720
+--- !u!114 &1149999600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1149999589}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 569f734da9ef4aa478c9c643a9f41193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mat: {fileID: 2100000, guid: a0dbb43928b1c19408eada74882b8622, type: 2}
+  shader_props:
+  - _GlitchAmount
+  - _Width
+  - _Height
+  shader_params:
+  - 0.01
+  - 1280
+  - 720
+--- !u!114 &1149999601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1149999589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 569f734da9ef4aa478c9c643a9f41193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mat: {fileID: 2100000, guid: 5f7666ce6d9027c46957b026dd0ea8a2, type: 2}
+  shader_props:
+  - _WaveAmount
+  - _WaveSpeed
+  shader_params:
+  - 0.01
+  - 0.01
 --- !u!1 &1187835793
 GameObject:
   m_ObjectHideFlags: 0

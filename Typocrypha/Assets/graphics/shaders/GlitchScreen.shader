@@ -67,7 +67,9 @@ Shader "Custom/GlitchScreen"
 			fixed4 frag (v2f i, UNITY_VPOS_TYPE screenPos : VPOS) : SV_Target
 			{
 				float2 screenSize = float2(_Width, _Height);
-				float bound = floor(screenPos.y - (screenPos.y % 10));
+				// separate screen into horizontal bands
+				float bound = floor(screenPos.y - (screenPos.y % 11)) + 11;
+				// shift bands
 				i.uv.x += sin(bound * _Time.g) * _GlitchAmount * ((bound % 31)/11);
 				fixed4 c = tex2D (_MainTex, i.uv);
 				return c;
