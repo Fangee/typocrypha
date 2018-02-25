@@ -18,6 +18,11 @@ public class PopText : MonoBehaviour {
 		StartCoroutine (Bleh (message, delay));
 	}
 
+	//change text color
+	public void setColor(Color color){
+		txt.color = color;
+	}
+
 	//ShowMessage coroutine
 	IEnumerator ShowMessage (string message, float delay) {
 		txt.text = message;

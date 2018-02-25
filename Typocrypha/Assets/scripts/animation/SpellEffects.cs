@@ -44,16 +44,20 @@ public class SpellEffects : MonoBehaviour {
             spawnElementPopup(d.element, Elements.vsElement.REPEL, d.Caster.Transform);
         }
 
-        if (d.isCrit && d.elementalData != Elements.vsElement.BLOCK)//Spell is crit
-        {
-            Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
-            if (d.Target.CasterType == ICasterType.ENEMY)
-                AudioPlayer.main.playSFX("sfx_enemy_weakcrit_dmg");
-            else if (d.Target.CasterType == ICasterType.PLAYER || d.Target.CasterType == ICasterType.NPC_ALLY)
-                AudioPlayer.main.playSFX("sfx_party_weakcrit_dmg");
-            //process crit graphics
-            popp.spawnSprite("popup_critical", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET);
-        }
+		if (d.isCrit && d.elementalData != Elements.vsElement.BLOCK) {//Spell is crit
+			Debug.Log (d.Caster.Stats.name + " scores a critical with " + s.ToString () + " on " + d.Target.Stats.name);
+			if (d.Target.CasterType == ICasterType.ENEMY)
+				AudioPlayer.main.playSFX ("sfx_enemy_weakcrit_dmg");
+			else if (d.Target.CasterType == ICasterType.PLAYER || d.Target.CasterType == ICasterType.NPC_ALLY)
+				AudioPlayer.main.playSFX ("sfx_party_weakcrit_dmg");
+			//process crit graphics
+			popp.spawnSprite ("popup_critical", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET);
+		} else if (d.elementalData == Elements.vsElement.WEAK || d.elementalData == Elements.vsElement.SUPERWEAK){
+			if (d.Target.CasterType == ICasterType.ENEMY)
+				AudioPlayer.main.playSFX ("sfx_enemy_weakcrit_dmg");
+			else if (d.Target.CasterType == ICasterType.PLAYER || d.Target.CasterType == ICasterType.NPC_ALLY)
+				AudioPlayer.main.playSFX ("sfx_party_weakcrit_dmg");
+		}
         if (d.isStun)
         {
             //Process stun graphics
@@ -67,8 +71,20 @@ public class SpellEffects : MonoBehaviour {
         spawnElementPopup(d.element, d.elementalData, d.Target.Transform);
 
         //Process damage graphics
-        popp.spawnText(d.damageInflicted.ToString(), POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET);
-        if (d.damageInflicted > 0) BattleEffects.main.spriteShake(d.Target.Transform, 0.3f, 0.1f);
+		if (d.damageInflicted > 0) {
+			BattleEffects.main.spriteShake (d.Target.Transform, 0.3f, 0.1f);
+			AudioPlayer.main.playSFX ("sfx_damage_number");
+			popp.spawnText (d.damageInflicted.ToString (), POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET);
+		} else if (d.damageInflicted < 0) {
+			string heal = "+" + (-1 * (d.damageInflicted)).ToString ();
+			popp.spawnText (heal, POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET, new Color(27f/255f, 195f/255f, 43f/255f));
+		} else {
+			if (d.elementalData == Elements.vsElement.BLOCK) {
+				popp.spawnText ("NULL", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET, Color.gray);
+			} else {
+				popp.spawnText (d.damageInflicted.ToString (), POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET);
+			}
+		}
     }
 
     //Spawns elemental popup with proper icon
