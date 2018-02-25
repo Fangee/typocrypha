@@ -341,7 +341,7 @@ public class BattleManager : MonoBehaviour {
 
         //BEGIN PAUSE//
 
-        yield return new WaitForSeconds (1.5f);
+        yield return new WaitForSeconds (1f);
 
         //CASTING//
 
@@ -385,9 +385,8 @@ public class BattleManager : MonoBehaviour {
     public void enemyCast(SpellDictionary dict, SpellData s, int position, int target)
     {
         pause = true; // pause battle for attack
-        AudioPlayer.main.playSFX("magic_sound");
         StartCoroutine(enemy_pause_cast(dict, s, position, target));
-
+        AudioPlayer.main.playSFX("sfx_enemy_cast");
     }
 
     //Does the pausing for enemyCast (also does the actual cast calling)
@@ -398,7 +397,7 @@ public class BattleManager : MonoBehaviour {
         raiseTargets(targetPattern.second, targetPattern.first);
         battleLog(s.ToString(), ICasterType.ENEMY, chat.getLine(enemy_arr[position].Stats.ChatDatabaseID), enemy_arr[position].Stats.name);
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
         enemy_arr[position].startSwell();
         List<CastData> data = dict.cast(s, player_arr, target, enemy_arr, position);
@@ -480,8 +479,8 @@ public class BattleManager : MonoBehaviour {
             else//Spell hits
             {
                 //Process hit graphics
-                AudioPlayer.main.playSFX("Cutting_SFX");
-                AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", d.Target.Transform.position, 1);
+                AudioPlayer.main.playSFX("sfx_slash");
+                AnimationPlayer.main.playAnimation("anim_spell_slash", d.Target.Transform.position, 1);
 
                 //Process repel
                 if (d.repel)
