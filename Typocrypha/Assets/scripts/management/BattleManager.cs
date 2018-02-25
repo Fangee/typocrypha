@@ -10,6 +10,7 @@ public class BattleManager : MonoBehaviour {
 	public static BattleManager main = null; // static instance accessible globally (try not to use this)
     public Player player;
 	public SpellDictionary spellDict; // spell dictionary object
+    public SpellEffects spellEffects;
 	public GameObject enemy_prefab; // prefab for enemy object
     public GameObject ally_prefab; //prefab for ally object
     public GameObject ally_left; // left ally UI
@@ -479,8 +480,7 @@ public class BattleManager : MonoBehaviour {
             else//Spell hits
             {
                 //Process hit graphics
-                AudioPlayer.main.playSFX("sfx_slash");
-                AnimationPlayer.main.playAnimation("anim_spell_slash", d.Target.Transform.position, 1);
+                spellEffects.StartCoroutine(spellEffects.playEffects(d, d.Target.Transform));
 
                 //Process repel
                 if (d.repel)

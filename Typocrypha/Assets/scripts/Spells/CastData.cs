@@ -17,8 +17,10 @@ public class CastData
     public Elements.vsElement elementalData = Elements.vsElement.INVALID;
     public BuffData buffInflicted = null;
 
-    public string[] animData;
-    public string[] sfxData;
+    //number of keywords in the spell
+    public int wordCount;
+    public string[] animData = new string[3];
+    public string[] sfxData = new string[3];
 
     public ICaster Target
     {
