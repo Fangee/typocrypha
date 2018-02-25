@@ -1,15 +1,21 @@
 1						
 START_SCENE	CUTSCENE	jazzy_retro_battle_theme				
-DIALOGUE	Tanuki	enter your name.	jazzy_retro_battle_theme	tanuki_mario	CENTER	END_DIALOGUE
+DIALOGUE	???	Thank you for purchasing this TYPOCRYPHA unit. I will be your AI operating assistant.	jazzy_retro_battle_theme	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	You can call me Clarke!	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	Please enter your name into the keyboard:	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
 DIALOGUE		[prompt=name].	_	END_DIALOGUE		
-DIALOGUE	Tanuki	{name}? good name.	_	tanuki_mario	CENTER	END_DIALOGUE
-DIALOGUE	Tanuki	"Also, I am completely blind. What do you look like?"	_	tanuki_mario	CENTER	END_DIALOGUE
-DIALOGUE		[prompt=sprite].	_	END_DIALOGUE		
-DIALOGUE	Tanuki	"Ah, so that is what you look like."	_	tanuki_mario	CENTER	END_DIALOGUE
-DIALOGUE	Tanuki	"Also, what pronouns do you use? I use she/her/hers pronouns, by the way."	_	tanuki_mario	CENTER	END_DIALOGUE
-DIALOGUE	Tanuki	[prompt=pronoun].	_	tanuki_mario	CENTER	END_DIALOGUE
-DIALOGUE	Tanuki	Got it. 	_	tanuki_mario	CENTER	END_DIALOGUE
-DIALOGUE	Tanuki	Now I know everything about you. Mwahaha!	_	tanuki_mario	CENTER	END_DIALOGUE
+DIALOGUE	Clarke	{name}? good name.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	"OK {name}, how would you like me to address you?"	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE		[prompt=pronoun].	_	END_DIALOGUE		
+DIALOGUE	Clarke	"Understood. Now, how about a picture?"	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE		[prompt=sprite].	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	Looking great.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Doppleganger?	Haha! I'm the Doppleganger? You are cursed now! Fight these demons!	_	spr_vn_doppelganger_g_placeholder	CENTER	END_DIALOGUE
+DIALOGUE	Clarke	WARNING: MALICIOUS MAGIC SOURCE DETECTED.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	UNLOCKING SELF-DEFENSE FUNCTIONALITY.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	You may now enter Spells into the TYPOCRYPHA keyboard. Press the ENTER key to cast.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	Spells cast by you and the enemy will be registered to the Spellbook automatically.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	"However, this TYPOCRYPHA has been outfitted to cast non-registered spells."	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
 REGISTER	sword	END				
 END_SCENE						
 START_SCENE	BATTLE					
@@ -17,44 +23,66 @@ MUSIC	bgm_battle_a1
 ENEMY	EMPTY					
 ENEMY	Changeling					
 END_SCENE						
-START_SCENE	CUTSCENE					
-DIALOGUE	Clarke	Next Wave incoming!	_	END_DIALOGUE		
+START_SCENE	CUTSCENE	_				
+DIALOGUE	Clarke	ALERT: MULTIPLE NEW THREATS DETECTED. USE OF REALTIME TARGETING ADVISED.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
 END_SCENE						
 START_SCENE	BATTLE					
-MUSIC	_					
+MUSIC	bgm_battle_a1					
+INTERRUPT	"count-player-attacks,1"					
+DIALOGUE	Clarke	WARNING: THREAT STILL DETECTED.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	Spells must recharge in cooldowns before being cast again. Proceed with extreme caution.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+END_INTERRUPT						
 ENEMY	Changeling					
 ENEMY	EMPTY					
 ENEMY	Tanuki					
 END_SCENE						
-START_SCENE	CUTSCENE					
-DIALOGUE	Clarke	Notha wave comin yo way	_	END_DIALOGUE		
-END_SCENE						
 START_SCENE	BATTLE					
-MUSIC	_					
+MUSIC	bgm_battle_a1					
 ENEMY	Changeling					
 ENEMY	Tanuki2					
 ENEMY	Changeling					
 END_SCENE						
 START_SCENE	BATTLE					
-MUSIC	_					
+MUSIC	bgm_battle_a1					
+INTERRUPT	"count-player-attacks,1"					
+DIALOGUE	Clarke	ANALYSIS: ENTITIES WITH PHYSICAL RESISTANCE DETECTED. USE OF ELEMENTAL ATTRIBUTES SUGGESTED.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	ADVICE: UTILIZE ELEMENTAL SPELL PREFIXES.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	"I recommend casting AGNI-SWORD. Press SPACEBAR to insert a dash ""-"" between words to connect them."	_	spr_vn_diagram_1	CLARKE	END_DIALOGUE
+REGISTER	agni	END				
+DIALOGUE	Clarke	AGNI is the official TYPOCRYPHA prefix for Fire type Spells. There exists other element prefixes like it. . .	bgm_battle_a1	spr_vn_diagram_1	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	Be sure to search for more elemental prefixes!	_	spr_vn_diagram_1	CLARKE	END_DIALOGUE
+END_INTERRUPT						
 ENEMY	EMPTY					
 ENEMY	Ijiraq					
 END_SCENE						
 START_SCENE	BATTLE					
-MUSIC	_					
-ENEMY	Ijiraq2					
+MUSIC	bgm_battle_a1					
+INTERRUPT	check-stun					
+DIALOGUE	Clarke	Looks like you've staggered an enemy!	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	Staggered enemies have their casting paused and take more damage	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	You can stagger enemies by hitting then with an element they are weak to or a critical hit!	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	The shield Icon displays how many effective hits it will take before an enemy is staggered	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+END_INTERRUPT						
+ENEMY	Ijiraq3					
 ENEMY	EMPTY					
 ENEMY	Tanuki					
 END_SCENE						
 START_SCENE	BATTLE					
-MUSIC	_					
+MUSIC	bgm_battle_a1					
 ENEMY	Tanuki					
 ENEMY	Ijiraq2					
 ENEMY	Changeling					
+END_SCENE						
+START_SCENE	CUTSCENE	_				
+DIALOGUE	Clarke	EMERGENCY: POWERFUL ENEMY DETECTED. CANNOT COMPREHEND TRUE FORM.	STOP	spr_vn_clarke_display	CLARKE	END_DIALOGUE
+DIALOGUE	Clarke	. . . Be careful.	_	spr_vn_clarke_display	CLARKE	END_DIALOGUE
 END_SCENE						
 START_SCENE	BATTLE					
 MUSIC	bgm_battle_b1					
 ENEMY	EMPTY					
 ENEMY	Doppelganger (BLUE)					
+END_SCENE						
+START_SCENE	CUTSCENE	_				
+DIALOGUE	The Devs	A winner is you! (Thanks for playtesting our game) 	STOP	spr_vn_clarke_display	CLARKE	END_DIALOGUE
 END_SCENE						
 END_GAME						

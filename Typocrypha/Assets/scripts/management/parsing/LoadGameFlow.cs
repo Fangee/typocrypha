@@ -23,12 +23,13 @@ public class LoadGameFlow : MonoBehaviour {
 		npc_sprite_pos = new Dictionary<string, Vector2> { 
 			{"LEFT", new Vector2(-5, 1) }, 
 			{"CENTER", new Vector2(0, 1) },
-			{"RIGHT", new Vector2(5, 1) } 
+			{"RIGHT", new Vector2(5, 1) },
+            {"CLARKE", new Vector2(0,0) }
 		};
 	}
 
     private const string system_name = "CLARKE";
-    private const string system_sprite = "system";
+    private const string system_sprite = "spr_vn_clarke_display";
     private const string register_track = "STOP";
 
 	void Start () {
@@ -122,7 +123,7 @@ public class LoadGameFlow : MonoBehaviour {
                 NPC.Add(system_sprite);
                 npc_sprites.Add(NPC);
                 List<Vector2> NPC_POS = new List<Vector2>();
-                NPC_POS.Add(new Vector2(0, 1));
+                NPC_POS.Add(new Vector2(0, 0));
                 npc_pos.Add(NPC_POS);
                 //generate text and bake registration event
                 List<string> words = new List<string>();
@@ -205,7 +206,7 @@ public class LoadGameFlow : MonoBehaviour {
                 if (cols[1].ToLower().Trim() == "empty")
                     enemies.Add(null);
                 else {
-                    EnemyStats new_stats = enemy_data.getData(cols[1]);
+                    EnemyStats new_stats = enemy_data.getData(cols[1].Trim());
                     enemies.Add(new_stats);
                 }
 			} else if(cols [0].CompareTo ("ALLY") == 0) {
@@ -266,7 +267,7 @@ public class LoadGameFlow : MonoBehaviour {
                 NPC.Add(system_sprite);
                 npc_sprites.Add(NPC);
                 List<Vector2> NPC_POS = new List<Vector2>();
-                NPC_POS.Add(new Vector2(0, 1));
+                NPC_POS.Add(new Vector2(0, 0));
                 npc_pos.Add(NPC_POS);
                 //generate text and bake registration event
                 List<string> words = new List<string>();

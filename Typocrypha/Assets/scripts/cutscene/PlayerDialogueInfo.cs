@@ -16,6 +16,7 @@ public class PlayerDialogueInfo : MonoBehaviour {
 
 	void Start() {
 		if (main == null) main = this;
+		player_name = "???";
 	}
 
 	// set player's sprite and update image in dialogue box

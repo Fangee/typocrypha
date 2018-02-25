@@ -530,12 +530,12 @@ public class SpellDictionary : MonoBehaviour
                 spellBook.register(word, regType(word), spells[word].description);
                 return true;
             }
-            else if (styles.ContainsKey(word))
+            else if (elements.ContainsKey(word))
             {
                 spellBook.register(word, "element", elements[word].description);
                 return true;
             }
-            else if (elements.ContainsKey(word))
+            else if (styles.ContainsKey(word))
             {
                 spellBook.register(word, "style", styles[word].description);
             }
@@ -623,6 +623,11 @@ public class SpellData
         if (style != null)
             result += ("-" + style);
         return result.ToUpper();
+    }
+    //Returns a copy of this spellData
+    public SpellData clone()
+    {
+        return new SpellData(root, element, style);
     }
 }
 

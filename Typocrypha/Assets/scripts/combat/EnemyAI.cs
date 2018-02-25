@@ -14,19 +14,25 @@ public abstract class EnemyAI
     {
         INVALID = -1,
         NORMAL,
-        STAGE_1,
-        STAGE_2,
-        STAGE_3,
+        CHARGE_MAX,
         HEALTH_LOW,
         HEALTH_CRITICAL,
+        ATTACK_SPECIAL,
+    }
+    //Condition in which AI is being updated
+    public enum Update_Case
+    {
+        AFTER_CAST,
+        UNSTUN,
+        WAS_HIT,
     }
     //Current state of this (with associated property)
     protected AI_State state = AI_State.NORMAL;
     public AI_State State { get { return state; } set { state = value; } }
     //Returns the next spell for the enemy to cast and sets the target in out int target
     public abstract SpellData getNextSpell(EnemySpellList spells, Enemy[] allies, int position, ICaster[] player_arr, out int target);
-    //Updates the state of this AI module based on field data
-    public abstract void updateState(Enemy[] allies, int position, ICaster[] player_arr);
+    //Updates the state of this AI module based on field data (returns true if new form (and attack needs to change)
+    public abstract void updateState(Enemy[] allies, int position, ICaster[] player_arr, Update_Case flag);
 
     //Public static methods
 
@@ -57,13 +63,20 @@ public abstract class EnemyAI
             current = 0;
         return ret;
     }
+    //Gets a random spell from the array (non-weighted)
+    protected static SpellData getSpellRandom(SpellData[] spells)
+    {
+        var randomIndex = Random.Range(0, spells.Length);
+        return spells[randomIndex];
+    }
     //Throw when code tries to access a non-existant spell group
     protected class SpellGroupException : System.Exception
     {
-        public SpellGroupException(string message) : base(message)
-        {
-
-        }
+        public SpellGroupException(string message) : base(message) { }
+    }
+    protected class AiStateException : System.Exception
+    {
+        public AiStateException(string message) : base(message) { }
     }
 }
 //Enemy AI for basic attackers (might be legacy)
@@ -76,7 +89,7 @@ public class AttackerAI1 : EnemyAI
         return getSpellSequential(spells.getSpells("DEFAULT"), ref currentSpell);
     }
 
-    public override void updateState(Enemy[] allies, int position, ICaster[] player_arr) { return; }
+    public override void updateState(Enemy[] allies, int position, ICaster[] player_arr, Update_Case flag) { return; }
 }
 //Enemy AI that switches to a new spell group when health is low and/or critical
 //Uses AttackerAI1 as a backend
@@ -114,7 +127,7 @@ public class HealthLowAI1 : EnemyAI
 
     }
 
-    public override void updateState(Enemy[] allies, int position, ICaster[] player_arr)
+    public override void updateState(Enemy[] allies, int position, ICaster[] player_arr, Update_Case flag)
     {
         Enemy self = allies[position];
         int curr_hp = Mathf.CeilToInt(((float)self.Curr_hp / self.Stats.max_hp) * 100);
@@ -127,8 +140,119 @@ public class HealthLowAI1 : EnemyAI
     }
 }
 //Doppleganger Unique AI (does nothing right now)
-public class DopplegangerAI1 : AttackerAI1
-{ }
+public class DopplegangerAI1 : EnemyAI
+{
+    int numAttacks = 0;
+    int form = 1;
+    string color = "NONE";
+    readonly string[] colors = { "RED", "YELLOW", "BLUE" };
+    public DopplegangerAI1()
+    {
+        state = AI_State.NORMAL;
+    }
+    public override SpellData getNextSpell(EnemySpellList spells, Enemy[] allies, int position, ICaster[] player_arr, out int target)
+    {
+        target = 1;
+        if (state == AI_State.NORMAL)
+            return getSpellRandom(spells.getSpells());
+        else if (state == AI_State.CHARGE_MAX)
+            return spells.getSpells("TOO_LONG")[0];
+        else if (state == AI_State.ATTACK_SPECIAL)
+        {
+            //return spells.getSpells("SPECIAL")[0]; //(TODO)
+            //state == AI_State.NORMAL;
+            return spells.getSpells()[0];
+        }
+        else
+            throw new AiStateException("invalid AI state in Doppelganger AI");
+    }
+
+    public override void updateState(Enemy[] allies, int position, ICaster[] player_arr, Update_Case flag)
+    {
+        if(form <= 3)
+        {
+            if (flag == Update_Case.AFTER_CAST)
+            {
+                numAttacks++;
+                if (numAttacks > 3)
+                    state = AI_State.CHARGE_MAX;
+                else
+                    state = AI_State.NORMAL;
+            }
+            else if(flag == Update_Case.UNSTUN)
+            {
+                if(form == 1)
+                {
+                    state = AI_State.NORMAL;
+                    allies[position].changeForm(EnemyDatabase.main.getData("Doppelganger (YELLOW)"), true);
+                    allies[position].resetAttack();
+                }
+                else if(form == 2)
+                {
+                    state = AI_State.NORMAL;
+                    allies[position].changeForm(EnemyDatabase.main.getData("Doppelganger (RED)"), true);
+                    allies[position].resetAttack();
+                }
+                else if(form == 3)
+                {
+                    state = AI_State.ATTACK_SPECIAL;
+                    allies[position].changeForm(EnemyDatabase.main.getData("Doppelganger (???)"), true);
+                    changeToRandomColor(allies[position]);
+                    allies[position].resetAttack();
+                }
+                ++form;
+            }
+        }
+        else if(form == 4)
+        {
+            if (flag == Update_Case.UNSTUN)
+            {
+                allies[position].changeForm(EnemyDatabase.main.getData("Doppelganger (GRAY)"), true);
+                state = AI_State.NORMAL;
+                allies[position].resetAttack();
+                ++form;
+            }
+            else if (flag == Update_Case.AFTER_CAST)
+            {
+                changeToRandomColor(allies[position]);
+            }
+            else
+            {
+                changeToRandomColor(allies[position]);
+                switch (color)
+                {
+                    case "RED":
+                        allies[position].getCurrSpell().element = "agni";
+                        break;
+                    case "BLUE":
+                        allies[position].getCurrSpell().element = "cryo";
+                        break;
+                    case "YELLOW":
+                        allies[position].getCurrSpell().element = "veld";
+                        break;
+                    default:
+                        throw new System.Exception("Doppleganger is invalid color");
+                }
+            }
+        }
+        else if(form == 5)
+        {
+            //if(flag == Update_Case.UNSTUN)
+            //{
+            //    allies[position].Curr_hp = 0;
+            //}
+        }
+    }
+
+    private void changeToRandomColor(Enemy self)
+    {
+        var randomIndex = Random.Range(0, colors.Length);
+        while(colors[randomIndex] == color)
+            randomIndex = Random.Range(0, colors.Length);
+        self.changeForm(EnemyDatabase.main.getData("Doppelganger (" + colors[randomIndex] + ")"), false);
+        color = colors[randomIndex];
+    }
+}
 
 
 

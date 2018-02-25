@@ -11,12 +11,13 @@ public class SpellBook : MonoBehaviour {
     //UI text objects
 
     public Text pageTitle;
-    private Text[] entries = new Text[pageSize];
-    private SpriteRenderer upArrow;
-    private SpriteRenderer downArrow;
+    private Text[] entryNames = new Text[pageSize];
+    private Text[] descritptions = new Text[pageSize];
+    private Image upArrow;
+    private Image downArrow;
 
     //Private constants
-    private const int pageSize = 6;     //Number of entries per page
+    private const int pageSize = 5;     //Number of entries per page
     private const int entryLength = 2;  //Data fields per entry
     private const string titleString = "SPELLBOOK - ";
     private const string emptyEntryText = "";
@@ -26,11 +27,13 @@ public class SpellBook : MonoBehaviour {
         //Build() or build in loadgameflow or load_file or something
 		for(int i = 0; i < pageSize; i++)
         {
-            entries[i] = gameObject.transform.GetChild(i).GetComponent<Text>();
-            entries[i].text = emptyEntryText;
+            entryNames[i] = gameObject.transform.GetChild(i).GetComponent<Text>();
+            descritptions[i] = gameObject.transform.GetChild(i).GetChild(0).GetComponent<Text>();
+            entryNames[i].text = emptyEntryText;
+            descritptions[i].text = emptyEntryText;
         }
-        upArrow = gameObject.transform.GetChild(pageSize).GetComponent<SpriteRenderer>();
-        downArrow = gameObject.transform.GetChild(pageSize + 1).GetComponent<SpriteRenderer>();
+        upArrow = gameObject.transform.GetChild(pageSize).GetComponent<Image>();
+        downArrow = gameObject.transform.GetChild(pageSize + 1).GetComponent<Image>();
         updatePage();
 	}
 	
@@ -51,11 +54,20 @@ public class SpellBook : MonoBehaviour {
     //Pre: this.isRegistered(word) has been called
     public void register(string word, string type, string description)
     {
+        string add = word;
+        //if (type == "element")
+        //    add = word + "-";
+        //else if (type == "style")
+        //    add = "-" + word;
+        //else if (type == "friend")
+        //    add = word;
+        //else
+        //    add = "-" + word + "-";
         if (typeLog.ContainsKey(type))
         {
-            SpellbookList l = typeLog[type];
-            l.Add(new SpellbookEntry(word, description));
-            wordLog.Add(word, true);
+            SpellbookList l = typeLog[type]; 
+            l.Add(new SpellbookEntry(add, description));
+            wordLog.Add(add, true);
             l.Sort();
         }
         else
@@ -64,7 +76,7 @@ public class SpellBook : MonoBehaviour {
             l.type = type;
             data.Add(l);
             typeLog.Add(type, l);
-            l.Add(new SpellbookEntry(word, description));
+            l.Add(new SpellbookEntry(add, description));
             wordLog.Add(word, true);
             l.Sort();
             data.Sort();
@@ -130,12 +142,18 @@ public class SpellBook : MonoBehaviour {
         SpellbookList current = data[typeIndex];
         pageTitle.text = titleString + current.type.ToUpper() + " " + (pageIndex / pageSize + 1);
         int j = pageIndex;
-        for(int i = 0; i < entries.Length; i++)
+        for(int i = 0; i < pageSize; i++)
         {
             if (j < current.Count)
-                entries[i].text = current[j].word.ToUpper() + ": " + current[j].description;
+            {
+                entryNames[i].text = current[j].word.ToUpper();
+                descritptions[i].text = current[j].description;
+            }
             else
-                entries[i].text = emptyEntryText;
+            {
+                entryNames[i].text = emptyEntryText;
+                descritptions[i].text = emptyEntryText;
+            }
             ++j;
         }
         downArrow.enabled = checkNext();
