@@ -54,14 +54,6 @@ public class BattleManager : MonoBehaviour {
 	[HideInInspector] public bool[] last_register; // last spell register status
 	[HideInInspector] public int num_player_attacks; // number of player attacks from beginning of battle
 
-	public GameObject popper; //object that handles pop-up graphics (GraphicsPopper)
-	Popper popp; //holds popper script component
-	const float POP_TIMER = 2f; //pop-ups last this many seconds long
-	Vector3 DMGNUM_OFFSET = new Vector3 (0,0.375f,0); //where the damage number should be
-	Vector3 UNDER_OFFSET = new Vector3 (0,-0.75f,0); //where something under the damage num should be
-	Vector3 OVER_OFFSET = new Vector3 (0,1.5f,0); //where something over the damage num should be
-    Vector3 ELEM_OFFSET = new Vector3 (-0.75f, 1.6f, 0);
-
 	TargetReticule target_ret_scr; // TargetReticule script ref
 	TargetFloor target_floor_scr;  // TargetFloor script ref
 	BattleScene curr_battle; // current battle scene
@@ -75,8 +67,6 @@ public class BattleManager : MonoBehaviour {
 	void Awake() {
 		if (main == null) main = this;
 		pause = false;
-
-		popp = popper.GetComponent<Popper>();
 		target_ret_scr = target_ret.GetComponent<TargetReticule> ();
 		target_floor_scr = target_floor.GetComponent<TargetFloor> ();
         player_arr[player_ind] = player;
@@ -459,62 +449,15 @@ public class BattleManager : MonoBehaviour {
         }
     }
 
-    //Method for processing CastData (where all the effects happen)
+    //Method for processing CastData (most effects now happen in SpellEffects.cs)
     //Called by Cast in the SUCCESS CastStatus case, possibly on BOTCH in the future
-    //Can be used to process the cast of an enemy or ally, if implemented (put the AI loop in battlemanager)
     private void processCast(List<CastData> data, SpellData s)
     {
 		last_cast = data;
 		last_spell = s;
         //Process the data here
         foreach (CastData d in data)
-        {
-            if (d.isHit == false)//Spell misses
-            {
-                Debug.Log(d.Caster.Stats.name + " missed " + d.Target.Stats.name + "!");
-                //Process miss graphics
-                popp.spawnSprite("popup_miss", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET);
-                AudioPlayer.main.playSFX("sfx_miss");
-                BattleEffects.main.spriteShift(d.Target.Transform, 0.3f, 0.1f); // sprite moves to the right as a dodge
-            }
-            else//Spell hits
-            {
-                //Process hit graphics
-                spellEffects.StartCoroutine(spellEffects.playEffects(d, d.Target.Transform));
-
-                //Process repel
-                if (d.repel)
-                {
-                    spawnElementPopup(d.element, Elements.vsElement.REPEL, d.Caster.Transform);
-                }
-
-                if (d.isCrit && d.elementalData != Elements.vsElement.BLOCK)//Spell is crit
-                {
-                    Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
-                    if (d.Target.CasterType == ICasterType.ENEMY)
-                        AudioPlayer.main.playSFX("sfx_enemy_weakcrit_dmg");
-                    else if (d.Target.CasterType == ICasterType.PLAYER || d.Target.CasterType == ICasterType.NPC_ALLY)
-                        AudioPlayer.main.playSFX("sfx_party_weakcrit_dmg");
-                    //process crit graphics
-                    popp.spawnSprite("popup_critical", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET);
-                }
-                if (d.isStun)
-                {
-                    //Process stun graphics
-                    Debug.Log(d.Caster.Stats.name + " stuns " + d.Target.Stats.name);
-                    AudioPlayer.main.playSFX("sfx_stagger");
-                }
-
-                Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement(d.Target.BuffDebuff, d.element));
-
-                //Process elemental wk/resist/drain/repel graphics
-                spawnElementPopup(d.element, d.elementalData, d.Target.Transform);
-
-                //Process damage graphics
-                popp.spawnText(d.damageInflicted.ToString(), POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET);
-                if (d.damageInflicted > 0) BattleEffects.main.spriteShake(d.Target.Transform, 0.3f, 0.1f);
-            }
-        }
+            spellEffects.StartCoroutine(spellEffects.playEffects(d, s));
         //Register unregistered keywords here
         bool [] regData = spellDict.safeRegister(s);
         if (regData[0] || regData[1] || regData[2])
@@ -522,50 +465,6 @@ public class BattleManager : MonoBehaviour {
 		last_register = regData;
         //Process regData (for register graphics) here. 
         //format is bool [3], where regData[0] is true if s.element is new, regData[1] is true if s.root is new, and regData[2] is true if s.style is new
-    }
-
-    //Spawns elemental popup with proper icon
-    private void spawnElementPopup(int element, Elements.vsElement vElem, Transform pos)
-    {
-        switch (vElem)
-        {
-            case Elements.vsElement.REPEL:
-                popp.spawnSprite("popup_reflect", POP_TIMER, pos.position + OVER_OFFSET);
-                break;
-            case Elements.vsElement.DRAIN:
-                popp.spawnSprite("popup_absorb", POP_TIMER, pos.position + OVER_OFFSET);
-                break;
-            case Elements.vsElement.BLOCK:
-                popp.spawnSprite("popup_nullify", POP_TIMER, pos.position + OVER_OFFSET);
-                break;
-            case Elements.vsElement.RESIST:
-                popp.spawnSprite("popup_resistant", POP_TIMER, pos.position + OVER_OFFSET);
-                break;
-            case Elements.vsElement.WEAK:
-                popp.spawnSprite("popup_weak", POP_TIMER, pos.position + OVER_OFFSET);
-                break;
-            case Elements.vsElement.SUPERWEAK:
-                popp.spawnSprite("popup_superweak", POP_TIMER, pos.position + OVER_OFFSET);
-                break;
-        }
-        if (vElem != Elements.vsElement.NEUTRAL)
-        {
-            switch (element)
-            {
-                case 0:
-                    popp.spawnSprite("popup_slash", POP_TIMER, pos.position + ELEM_OFFSET);
-                    break;
-                case 1:
-                    popp.spawnSprite("popup_fire", POP_TIMER, pos.position + ELEM_OFFSET);
-                    break;
-                case 2:
-                    popp.spawnSprite("popup_ice", POP_TIMER, pos.position + ELEM_OFFSET);
-                    break;
-                case 3:
-                    popp.spawnSprite("popup_bolt", POP_TIMER, pos.position + ELEM_OFFSET);
-                    break;
-            }
-        }
     }
 
     private IEnumerator learnSFX()
@@ -645,7 +544,6 @@ public class BattleManager : MonoBehaviour {
         }
 		target_ret.SetActive (false); // disable / make target reticule disappear on a cast
     }
-
     //Stop battle log UI (call after every pause to cast
     private void stopBattleLog()
     {
