@@ -14,12 +14,15 @@ public abstract class StatusEffect {
 
 public class StatusNormal : StatusEffect
 {
-    public StatusNormal()
+	Sprite normal_key;
+	public StatusNormal(Sprite sp)
     {
+		normal_key = sp;
         isNormal = true;
     }
     public override IEnumerator keyGraphics(char key, Image image)
     {
+		image.sprite = normal_key;
         image.color = Color.white;
         yield return new WaitForSeconds(0.1f);
         image.color = Color.gray;
@@ -27,16 +30,35 @@ public class StatusNormal : StatusEffect
 
     public override string processKey(char key)
     {
+		AudioPlayer.main.playSFX ("sfx_type_key");
         return key.ToString();
     }
 }
 
 public class StatusFreeze : StatusEffect
 {
-    int freezeNum = 5;
+	int freezeNum = 1 + Random.Range(1,4);
+	Sprite[] frozen_keys;
+	public StatusFreeze(Sprite[] sp){
+		this.frozen_keys = sp;
+	}
     public override IEnumerator keyGraphics(char key, Image image)
     {
-        image.color = Color.blue;
+        image.color = Color.white;
+		switch (freezeNum) {
+		case 1:
+			image.sprite = frozen_keys[3]; 
+			break;
+		case 2:
+			image.sprite = frozen_keys[2]; 
+			break;
+		case 3:
+			image.sprite = frozen_keys[1]; 
+			break;
+		case 4:
+			image.sprite = frozen_keys[0]; 
+			break;
+		}
         yield break;
     }
 
@@ -47,6 +69,20 @@ public class StatusFreeze : StatusEffect
     public override bool update()
     {
         --freezeNum;
+		switch (freezeNum) {
+		case 0:
+			AudioPlayer.main.playSFX ("sfx_status_frozen_key_break");
+			break;
+		case 1:
+			AudioPlayer.main.playSFX ("sfx_status_frozen_key_hit");
+			break;
+		case 2:
+			AudioPlayer.main.playSFX ("sfx_status_frozen_key_hit");
+			break;
+		case 3:
+			AudioPlayer.main.playSFX ("sfx_status_frozen_key_hit");
+			break;
+		}
         return freezeNum <= 0;
     }
 }

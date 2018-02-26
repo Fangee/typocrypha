@@ -99,11 +99,7 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 38d48324510254f4073ac67f93478190 Assembly-CSharp.dll:.StateManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BattleInterrupts
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TextMacros
-<<<<<<< HEAD
-30ca9fbab798071e3590d6edc42363d3 Assembly-CSharp.dll:.BattleManager
-=======
-0eac7ffe789a4381d30b5656d1345cd5 Assembly-CSharp.dll:.BattleManager
->>>>>>> 913d2ca5e06ecd42b9666323d4dc52f8aebcb099
+40a05f581c7f4e9316a84b7e7fed656f Assembly-CSharp.dll:.BattleManager
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -122,6 +118,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 6cd02167b0811d9e79c95b6253621129 Assembly-CSharp.dll:.Enemy
 322cb40e1e282f28af980cbef7922a90 UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsEventTracker
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
+7ddcb63ac930a1332e04b9ef56c55638 Assembly-CSharp.dll:.SpellEffects
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
@@ -129,9 +126,10 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 649ecd43832be4123f0abc7844b5b808 Assembly-CSharp.dll:.TargetReticule
 c7de2fb8a08d18fc7ac80bdec1f3c94d Assembly-CSharp.dll:.CutsceneManager
-5a351ba516554f1afa08a48c8850a420 Assembly-CSharp.dll:.TextEvents
+1a09382bcff46b67147a7b9f64087825 Assembly-CSharp.dll:.TextEvents
 3a277006097971561e046190aecc7714 Assembly-CSharp.dll:.WavySprite
 a833fd9ac880bba25f57244af1585153 Assembly-CSharp.dll:.AnimationPlayer
+f78fad66be86eae9440de5d93ea76fb2 Assembly-CSharp.dll:.PixelateScreen
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.StopPostProcessing
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
@@ -157,6 +155,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 8b5b3ee913eb9bea6526b08750fe4c4a Assembly-CSharp.dll:.IntroSequence
 9374f91e73845407b1b33642bcc28bfe Assembly-CSharp.dll:.BattleEffects
+62d4e80061bc90d0e34437e469e9f8d9 Assembly-CSharp.dll:.BattleKeyboard
 582ba20038c60d9ef36de8bf8ce828d3 Assembly-CSharp.dll:.SetResolution
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 96d0fbde9fd209878a0a291f82c9bcdd UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
@@ -174,13 +173,13 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 a1f75122f35321fd248f612f0c14dc5b Assembly-CSharp.dll:.TextScroll
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Player
+faba6f8202914ac179156ba210c543b0 Assembly-CSharp.dll:.Player
 2bc05c57f7f3c60ee6b4f4e5dfe0d3ac Assembly-CSharp.dll:.PixelPerfectPosition
-b0f2daf67b676ae3036322bc9e2f9fb9 Assembly-CSharp.dll:.PostProcess
+7f09f8f189dbb053e806932cb03eb5c7 Assembly-CSharp.dll:.PostProcess
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BarMeter
 be38b12be655bc5778299408768155e0 Assembly-CSharp.dll:.PreTitle
 c6d43981762dbfee5ed20f15bc81bb99 Assembly-CSharp.dll:.TargetFloor
-c4af616e7ceea4a3e7d58f5c1a9e5d04 Assembly-CSharp.dll:.TrackTyping
+21005be6d0e306b9c4db5c00c5c85422 Assembly-CSharp.dll:.TrackTyping
 d5251882c4ce5bf0689c5850babe9d68 Assembly-CSharp.dll:.CooldownList
 58711b9d427e67fa9046a7ceba197417 Assembly-CSharp.dll:.AudioPlayer
 5151c876d535c98e14767c526c3782ef Assembly-CSharp.dll:.BackgroundEffects

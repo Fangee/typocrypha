@@ -5,6 +5,12 @@ using UnityEngine.UI;
 //Manages special conditions
 public class BattleKeyboard : MonoBehaviour {
     public Dictionary<char, Image> image_map; // map from characters to key images (set from trackTyping)
+	public Sprite key_default; // default key image
+	public Sprite key_frozen_1; // fully frozen key image
+	public Sprite key_frozen_2; // slightly broken frozen key image
+	public Sprite key_frozen_3; // very broken frozen key image
+	public Sprite key_frozen_4; // almost broken frozen key image
+	Sprite[] frozen_keys = new Sprite[5]; // frozen key images
 
     Dictionary<char, StatusEffect> status_map = new Dictionary<char, StatusEffect>();
     char[] keys = { 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ' ' };
@@ -27,8 +33,12 @@ public class BattleKeyboard : MonoBehaviour {
                     StartCoroutine(keyTimer(c, 10f));
                     ++numKeysAffected;
                     break;
-                case Elements.ice:
-                    status_map[c] = new StatusFreeze();
+				case Elements.ice:
+					frozen_keys [0] = key_frozen_1;
+					frozen_keys [1] = key_frozen_2;
+					frozen_keys [2] = key_frozen_3;
+					frozen_keys [3] = key_frozen_4;
+					status_map[c] = new StatusFreeze(frozen_keys);
                     ++numKeysAffected;
                     break;
                 case Elements.volt:
@@ -54,7 +64,7 @@ public class BattleKeyboard : MonoBehaviour {
         if (status_map[c].update())
         {
             --numKeysAffected;
-            status_map[c] = new StatusNormal();
+			status_map[c] = new StatusNormal(key_default);
             image_map[c].color = Color.gray;
         }
         return ret;
@@ -72,7 +82,7 @@ public class BattleKeyboard : MonoBehaviour {
             yield return new WaitForEndOfFrame();
             time += Time.deltaTime;
         }
-        status_map[c] = new StatusNormal();
+		status_map[c] = new StatusNormal(key_default);
         --numKeysAffected;
         image_map[c].color = Color.gray;
         yield break;
@@ -80,7 +90,7 @@ public class BattleKeyboard : MonoBehaviour {
     private void Start()
     {
         foreach (char c in keys)
-            status_map.Add(c, new StatusNormal());
+			status_map.Add(c, new StatusNormal(key_default));
     }
 
     //Calculates number of keys to inflict condition on from intensity of attack
