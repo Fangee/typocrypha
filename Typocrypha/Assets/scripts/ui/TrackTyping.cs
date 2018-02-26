@@ -9,6 +9,7 @@ public class TrackTyping : MonoBehaviour {
 	public Text typed_text; // shows typed text
 	public Text entry_ok; // displays 'OK' or 'NO' if player can type or not
 	public Dictionary<char, Image> key_map; // map from characters to key images
+    public BattleKeyboard battleKeyboard;
 	public Transform keyboard; // keyboard transform (holds key images)
 	public GameObject key_prefab; // prefab for key image object
 	public GameObject spacebar_prefab; // prefab for spacebar image object
@@ -27,6 +28,7 @@ public class TrackTyping : MonoBehaviour {
 		// initialize key colors to gray
 		foreach (KeyValuePair<char, Image> pair in key_map)
 			pair.Value.color = Color.gray;
+        battleKeyboard.image_map = key_map;
 	}
 
 	void Update () {
@@ -37,15 +39,14 @@ public class TrackTyping : MonoBehaviour {
 		} else entry_ok.text = "OK";
 		// check key presses
 		if (Input.GetKeyDown (KeyCode.Return)) {
-			Debug.Log ("Player casts " + buffer.ToUpper().Replace(' ', '-'));
-			AudioPlayer.main.playSFX ("sfx_enter"); // MIGHT WANT TO BE MOVED
-			if (TextEvents.main.is_prompt) {
+            AudioPlayer.main.playSFX("sfx_enter"); // MIGHT WANT TO BE MOVED
+            if (TextEvents.main.is_prompt) {
 				TextEvents.main.prompt_input = buffer;
 				TextEvents.main.is_prompt = false;
 			} else {
-				BattleManager.main.attackCurrent (buffer); // attack currently targeted enemy
-			}
-				
+                Debug.Log("Player casts " + buffer.ToUpper().Replace(' ', '-'));
+                BattleManager.main.attackCurrent (buffer); // attack currently targeted enemy
+			}				
 			buffer = "";
 			count = 0;
 		} else if (Input.GetKey (KeyCode.Backspace)) {
@@ -56,13 +57,30 @@ public class TrackTyping : MonoBehaviour {
 				}
 			}
 		} else {
-			string in_str = Input.inputString;
-			buffer += in_str;
-			count += in_str.Length;
-			// highlight pressed keys
-			foreach (char c in in_str) 
-				StartCoroutine(colorKey(c));
-		}
+            string in_str = Input.inputString;
+            if (TextEvents.main.is_prompt) {
+                buffer += in_str;
+                count += in_str.Length;
+                // highlight pressed keys
+                foreach (char c in in_str)
+                    StartCoroutine(colorKey(c));
+            } else {
+                // process status conditions on keys and apply appropriate graphical effects
+                foreach (char c in in_str) {
+                    if (key_map.ContainsKey(c)) {
+                        if (c == ' ' && count == 0) {//Dont put space in if cast is empty
+                            StartCoroutine(battleKeyboard.keyGraphics(c, key_map[c]));
+                            continue;
+                        } //Returns a string so it can return an empty string or multiple letters
+                        string add = battleKeyboard.processKey(c); 
+                        buffer += add;
+                        count += add.Length;
+                        StartCoroutine(battleKeyboard.keyGraphics(c, key_map[c]));
+                    }
+                }
+            }
+
+        }
 		// update display
 		typed_text.text = buffer.Replace(" ", "-").ToUpper();
 		for (int i = 26 - typed_text.text.Length; i > 0; --i) {
