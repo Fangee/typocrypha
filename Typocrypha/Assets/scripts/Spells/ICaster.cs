@@ -15,6 +15,7 @@ public enum ICasterType
 public interface ICaster
 {
     Transform Transform { get; }
+    int Position { get; set; }
     CasterStats Stats { get; }
     BuffDebuff BuffDebuff { get; }
     int Curr_hp { get; set; }

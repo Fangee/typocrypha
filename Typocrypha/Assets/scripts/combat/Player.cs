@@ -46,6 +46,8 @@ public class Player : MonoBehaviour, ICaster
 
     //ICaster Poroperties
     public Transform Transform { get { return transform; } }
+    private int position = 1; //position in battle field
+    public int Position { get { return position; } set { position = value; } }
     PlayerStats stats;
     public CasterStats Stats { get { return stats; } }
     BuffDebuff buffDebuff = new BuffDebuff();
