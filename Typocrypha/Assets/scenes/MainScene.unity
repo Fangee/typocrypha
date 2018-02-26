@@ -4217,10 +4217,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key_default: {fileID: 21300000, guid: 721b34a9be4aa1340abd7b95a9063402, type: 3}
-  key_frozen_1: {fileID: 21300000, guid: b899a7a54755c6d4ca5d71626576d4bc, type: 3}
-  key_frozen_2: {fileID: 21300000, guid: fa7cf51cf6fe25b42a9f1daa7db3a64d, type: 3}
-  key_frozen_3: {fileID: 21300000, guid: cd2ae0228f6f7454d922e473426ccd90, type: 3}
-  key_frozen_4: {fileID: 21300000, guid: 40b7598b2b71534418b12418b31dfc90, type: 3}
+  frozen_keys:
+  - {fileID: 21300000, guid: b899a7a54755c6d4ca5d71626576d4bc, type: 3}
+  - {fileID: 21300000, guid: fa7cf51cf6fe25b42a9f1daa7db3a64d, type: 3}
+  - {fileID: 21300000, guid: cd2ae0228f6f7454d922e473426ccd90, type: 3}
+  - {fileID: 21300000, guid: 40b7598b2b71534418b12418b31dfc90, type: 3}
 --- !u!4 &883077547
 Transform:
   m_ObjectHideFlags: 0

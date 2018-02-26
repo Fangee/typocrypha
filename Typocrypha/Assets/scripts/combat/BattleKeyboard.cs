@@ -6,14 +6,10 @@ using UnityEngine.UI;
 public class BattleKeyboard : MonoBehaviour {
     public Dictionary<char, Image> image_map; // map from characters to key images (set from trackTyping)
 	public Sprite key_default; // default key image
-	public Sprite key_frozen_1; // fully frozen key image
-	public Sprite key_frozen_2; // slightly broken frozen key image
-	public Sprite key_frozen_3; // very broken frozen key image
-	public Sprite key_frozen_4; // almost broken frozen key image
-	Sprite[] frozen_keys = new Sprite[5]; // frozen key images
+	public Sprite[] frozen_keys = new Sprite[4]; // frozen key images
 
     Dictionary<char, StatusEffect> status_map = new Dictionary<char, StatusEffect>();
-    char[] keys = { 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ' ' };
+    char[] keys = { 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'};
     int numKeysAffected = 0;
 
     public void inflictCondition(Player player, int element, int intensity)
@@ -34,10 +30,6 @@ public class BattleKeyboard : MonoBehaviour {
                     ++numKeysAffected;
                     break;
 				case Elements.ice:
-					frozen_keys [0] = key_frozen_1;
-					frozen_keys [1] = key_frozen_2;
-					frozen_keys [2] = key_frozen_3;
-					frozen_keys [3] = key_frozen_4;
 					status_map[c] = new StatusFreeze(frozen_keys);
                     ++numKeysAffected;
                     break;
@@ -96,17 +88,17 @@ public class BattleKeyboard : MonoBehaviour {
     //Calculates number of keys to inflict condition on from intensity of attack
     private int getNumKeysFromIntensity(int intensity)
     {
-        return 1 + intensity/25;
+        return 1 + intensity/25 ;
     }
     //Gets a char with no status effect (returns '?' if all keys are affected)
     private char getRandomValidChar()
     {
         if (numKeysAffected >= keys.Length)
             return '?';
-        int randomInd = Random.Range(0, keys.Length - 1);
+        int randomInd = Random.Range(0, keys.Length);
         while (!status_map[keys[randomInd]].isNormal)
         {
-            randomInd = Random.Range(0, keys.Length - 1);
+            randomInd = Random.Range(0, keys.Length);
         }
         return keys[randomInd];
     }

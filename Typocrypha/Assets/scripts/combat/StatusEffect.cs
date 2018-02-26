@@ -37,7 +37,7 @@ public class StatusNormal : StatusEffect
 
 public class StatusFreeze : StatusEffect
 {
-	int freezeNum = 1 + Random.Range(1,4);
+	int freezeNum = Random.Range(1,5);
 	Sprite[] frozen_keys;
 	public StatusFreeze(Sprite[] sp){
 		this.frozen_keys = sp;
@@ -69,20 +69,10 @@ public class StatusFreeze : StatusEffect
     public override bool update()
     {
         --freezeNum;
-		switch (freezeNum) {
-		case 0:
-			AudioPlayer.main.playSFX ("sfx_status_frozen_key_break");
-			break;
-		case 1:
-			AudioPlayer.main.playSFX ("sfx_status_frozen_key_hit");
-			break;
-		case 2:
-			AudioPlayer.main.playSFX ("sfx_status_frozen_key_hit");
-			break;
-		case 3:
-			AudioPlayer.main.playSFX ("sfx_status_frozen_key_hit");
-			break;
-		}
+        if(freezeNum == 0)
+            AudioPlayer.main.playSFX("sfx_status_frozen_key_break");
+        else
+            AudioPlayer.main.playSFX("sfx_status_frozen_key_hit");
         return freezeNum <= 0;
     }
 }

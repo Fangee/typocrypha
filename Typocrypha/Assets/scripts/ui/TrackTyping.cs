@@ -68,8 +68,13 @@ public class TrackTyping : MonoBehaviour {
                 // process status conditions on keys and apply appropriate graphical effects
                 foreach (char c in in_str) {
                     if (key_map.ContainsKey(c)) {
-                        if (c == ' ' && count == 0) {//Dont put space in if cast is empty
-                            StartCoroutine(battleKeyboard.keyGraphics(c, key_map[c]));
+                        if (c == ' ') {//Dont put space in if cast is empty
+                            if (count != 0) {
+                                buffer += c;
+                                count++;
+                                AudioPlayer.main.playSFX("sfx_type_key");
+                            }
+                            StartCoroutine(colorKey(c));
                             continue;
                         } //Returns a string so it can return an empty string or multiple letters
                         string add = battleKeyboard.processKey(c); 
