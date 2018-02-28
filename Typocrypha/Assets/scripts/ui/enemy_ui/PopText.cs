@@ -35,7 +35,7 @@ public class PopText : MonoBehaviour {
         Vector3 beef = transform.position;
         for (int i = 0; i < 6; i++)
         {
-            transform.position = beef + new Vector3 (Random.value/3, Random.value/3, 0);
+            transform.position = beef + Random.insideUnitSphere;
             yield return new WaitForEndOfFrame();
         }
         transform.position = beef;
