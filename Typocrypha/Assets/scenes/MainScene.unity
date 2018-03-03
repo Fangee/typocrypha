@@ -3058,7 +3058,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: [{fileID: 1814759933}]
+  m_Children:
+  - {fileID: 1814759933}
   m_Father: {fileID: 302921484}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3588,7 +3589,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: [{fileID: 180995772}]
+  m_Children:
+  - {fileID: 180995772}
   m_Father: {fileID: 302921484}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4123,7 +4125,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: [{fileID: 680783436}]
+  m_Children:
+  - {fileID: 680783436}
   m_Father: {fileID: 302921484}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5229,8 +5232,8 @@ GameObject:
   - component: {fileID: 1149999592}
   - component: {fileID: 1149999591}
   - component: {fileID: 1149999595}
-  - component: {fileID: 1149999596}
   - component: {fileID: 1149999597}
+  - component: {fileID: 1149999596}
   - component: {fileID: 1149999602}
   - component: {fileID: 1149999600}
   - component: {fileID: 1149999601}
@@ -5381,15 +5384,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 569f734da9ef4aa478c9c643a9f41193, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mat: {fileID: 2100000, guid: a0dbb43928b1c19408eada74882b8622, type: 2}
+  mat: {fileID: 2100000, guid: c051d48919e996146a497da76bdb36b5, type: 2}
   shader_props:
   - _GlitchAmount
   - _Width
   - _Height
+  - _GlitchSpeed
   shader_params:
   - 0.01
   - 1280
   - 720
+  - 30
 --- !u!114 &1149999601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5405,9 +5410,11 @@ MonoBehaviour:
   shader_props:
   - _WaveAmount
   - _WaveSpeed
+  - _WaveLength
   shader_params:
   - 0.01
-  - 0.01
+  - 5
+  - 0.02
 --- !u!114 &1149999602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8142,7 +8149,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: [{fileID: 1554873792}]
+  m_Children:
+  - {fileID: 1554873792}
   m_Father: {fileID: 302921484}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8952,7 +8960,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: [{fileID: 491383773}]
+  m_Children:
+  - {fileID: 491383773}
   m_Father: {fileID: 302921484}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
