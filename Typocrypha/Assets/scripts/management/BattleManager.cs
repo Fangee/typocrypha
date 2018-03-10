@@ -329,25 +329,6 @@ public class BattleManager : MonoBehaviour {
         updateEnemies();
     }
  
-    //Casts from an ally position at target enemy_arr[target]: calls processCast on results
-    public void NPC_Cast(SpellDictionary dict, SpellData s, int position, int target)
-    {
-        if(player_arr[position].Is_stunned)
-        {
-            Debug.Log(s.root + " cannot assist you because they are stunned!");
-        }
-        else if (((Ally)player_arr[position]).tryCast())
-        {
-            dict.startCooldown(s, (Player)player_arr[player_ind]);
-            List<CastData> data = dict.cast(s, enemy_arr, target, player_arr, position);
-            processCast(data, s);
-        }
-        else
-        {
-            Debug.Log(s.root + " is not ready to assist you yet!");
-        }
-    }
-
     //Casts from an enemy position: calls processCast on results
     public void enemyCast(SpellDictionary dict, SpellData s, int position, int target)
     {
