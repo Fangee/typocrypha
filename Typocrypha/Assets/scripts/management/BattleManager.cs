@@ -10,6 +10,7 @@ public class BattleManager : MonoBehaviour {
 	public static BattleManager main = null; // static instance accessible globally (try not to use this)
     public Player player;
 	public SpellDictionary spellDict; // spell dictionary object
+    public SpellEffects spellEffects;
 	public GameObject enemy_prefab; // prefab for enemy object
     public GameObject ally_prefab; //prefab for ally object
     public GameObject ally_left; // left ally UI
@@ -53,14 +54,6 @@ public class BattleManager : MonoBehaviour {
 	[HideInInspector] public bool[] last_register; // last spell register status
 	[HideInInspector] public int num_player_attacks; // number of player attacks from beginning of battle
 
-	public GameObject popper; //object that handles pop-up graphics (GraphicsPopper)
-	Popper popp; //holds popper script component
-	const float POP_TIMER = 2f; //pop-ups last this many seconds long
-	Vector3 DMGNUM_OFFSET = new Vector3 (0,0.375f,0); //where the damage number should be
-	Vector3 UNDER_OFFSET = new Vector3 (0,-0.75f,0); //where something under the damage num should be
-	Vector3 OVER_OFFSET = new Vector3 (0,1.5f,0); //where something over the damage num should be
-    Vector3 ELEM_OFFSET = new Vector3 (-0.75f, 1.6f, 0);
-
 	TargetReticule target_ret_scr; // TargetReticule script ref
 	TargetFloor target_floor_scr;  // TargetFloor script ref
 	BattleScene curr_battle; // current battle scene
@@ -74,8 +67,6 @@ public class BattleManager : MonoBehaviour {
 	void Awake() {
 		if (main == null) main = this;
 		pause = false;
-
-		popp = popper.GetComponent<Popper>();
 		target_ret_scr = target_ret.GetComponent<TargetReticule> ();
 		target_floor_scr = target_floor.GetComponent<TargetFloor> ();
         player_arr[player_ind] = player;
@@ -127,7 +118,7 @@ public class BattleManager : MonoBehaviour {
                 a.transform.position = ally_display_left.transform.position;
                 ally_left.SetActive(true);
             }
-            a.position = i;
+            a.Position = i;
             player_arr[i] = a;
         }
 
@@ -206,7 +197,7 @@ public class BattleManager : MonoBehaviour {
 		enemy_arr [i] = new_enemy.GetComponent<Enemy> ();
 		enemy_arr[i].field = this; //Give enemy access to field (for calling spellcasts)
 		enemy_arr [i].initialize (scene.enemy_stats [i]); //sets enemy stats (AND INITITIALIZES ATTACKING AND AI)
-		enemy_arr [i].position = i;      //Log enemy position in field
+		enemy_arr [i].Position = i;      //Log enemy position in field
 		enemy_arr[i].bars = charge_bars; //Give enemy access to charge_bars
 		Vector3 bar_pos = new_enemy.transform.position + new Vector3(0, -1.0f, 0);
 		charge_bars.makeChargeMeter(i, bar_pos);
@@ -278,127 +269,83 @@ public class BattleManager : MonoBehaviour {
 
     // attack currently targeted enemy with spell
     public void attackCurrent(string spell) {
-		++num_player_attacks;
-        //Can attack dead enemies now, just wont cast spell at them
-		StartCoroutine (pauseAttackCurrent (spell));
-    }
-
-	// pause for player attack, play animations, unpause
-	IEnumerator pauseAttackCurrent(string spell){
-
-        pause = true;
-
-        //SPELL PARSING//
-
         SpellData s;
+        string message = "";
         //Send spell, Enemy state, and target index to parser and caster
         CastStatus status = spellDict.parse(spell.ToLower(), out s);
-        
-        //DIMMING AND BATTLELOG//
-
-        BattleEffects.main.setDim(true);
         Pair<bool[], bool[]> targetPattern = null;
-        int allyPos = getAllyPosition(s.root);
-        if (status == CastStatus.ALLYSPELL)
+        switch (status)
         {
-            if(allyPos != -1)
-            {
-                battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.NPC_ALLY, chat.getLine(player_arr[allyPos].Stats.ChatDatabaseID), Utility.String.FirstLetterToUpperCase(s.root));
+            case CastStatus.SUCCESS:
+                ++num_player_attacks;
+                targetPattern = spellDict.getTargetPattern(s, enemy_arr, target_ind, player_arr, player_ind);
+                message = chat.getLine(player.Stats.ChatDatabaseID);
+                preCastEffects(targetPattern, player, s, message);
+                StartCoroutine(pauseAttackCurrent(s, player));
+                break;
+            case CastStatus.BOTCH:
+                //diplay.playBotchEffects
+                break;
+            case CastStatus.FIZZLE:
+                //diplay.playBotchEffects
+                break;
+            case CastStatus.ONCOOLDOWN:
+                //display.playOnCooldownEffects
+                break;
+            case CastStatus.COOLDOWNFULL:
+                //diplay.playCooldownFullEffects
+                break;
+            case CastStatus.ALLYSPELL:
+                int allyPos = getAllyPosition(s.root);
+                if (allyPos == -1 || player_arr[allyPos].Is_stunned || !((Ally)player_arr[allyPos]).tryCast())//display.playAllyNotHereEffects
+                    break;
                 targetPattern = spellDict.getTargetPattern(s, enemy_arr, target_ind, player_arr, allyPos);
-            }
-            else
-            {
-                battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.INVALID, s.root + " isn't here right now!", "Clarke");
-            }
-        }          
-        else if (status == CastStatus.SUCCESS)
-        {
-            battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.PLAYER, chat.getLine(player_arr[player_ind].Stats.ChatDatabaseID), player_arr[player_ind].Stats.name);
-            targetPattern = spellDict.getTargetPattern(s, enemy_arr, target_ind, player_arr, player_ind);
+                message = chat.getLine(player_arr[allyPos].Stats.ChatDatabaseID);
+                preCastEffects(targetPattern, player_arr[allyPos], s, message);
+                StartCoroutine(pauseAttackCurrent(s, player_arr[allyPos]));
+                break;
         }
-        else if (status == CastStatus.BOTCH)
-        {
-            battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.INVALID, chat.getLine("botch"), "Clarke");
-        }
-        else if (status == CastStatus.FIZZLE)
-        {
-            battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.INVALID, chat.getLine("fizzle"), "Clarke");
-        }
-        else if (status == CastStatus.ONCOOLDOWN)
-        {
-            battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.INVALID, chat.getLine("oncooldown"), "Clarke");
-        }
-        else if (status == CastStatus.COOLDOWNFULL)
-        {
-            battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.INVALID, chat.getLine("cooldownlistfull"), "Clarke");
-        }
-        else
-        {
-            battleLog(spell.ToUpper().Replace(' ', '-'), ICasterType.INVALID, "SOMETHING HAS GONE HORRIBLY WRONG", "GOD");
-        }
-        if(targetPattern != null)
-            raiseTargets(targetPattern.first, targetPattern.second);
+    }
+    IEnumerator pauseAttackCurrent(SpellData s, ICaster caster)
+    {
+        pause = true;
 
         //BEGIN PAUSE//
 
-        yield return new WaitForSeconds (1.5f);
+        yield return new WaitForSeconds(1f);
 
         //CASTING//
+        spellDict.startCooldown(s, player);
+        List<CastData> data;
+        data = spellDict.cast(s, enemy_arr, target_ind, player_arr, caster.Position);
+        processCast(data, s);
 
-        //Set last_cast
-        ((Player)player_arr[player_ind]).Last_cast = s.ToString();
-        //Cast/Botch/Cooldown/Fizzle, with associated effects and processing
-        playerCast(spellDict, s, status);
-
-        yield return new WaitForSeconds (1f);
+        yield return new WaitForSeconds(1f);
 
         //END PAUSE//
 
-        if (targetPattern != null)
-            lowerTargets(targetPattern.first, targetPattern.second);
-        stopBattleLog();
-		BattleEffects.main.setDim (false);
-		pause = false;
-		updateEnemies();
-	}
-
-    //Casts from an ally position at target enemy_arr[target]: calls processCast on results
-    public void NPC_Cast(SpellDictionary dict, SpellData s, int position, int target)
-    {
-        if(player_arr[position].Is_stunned)
-        {
-            Debug.Log(s.root + " cannot assist you because they are stunned!");
-        }
-        else if (((Ally)player_arr[position]).tryCast())
-        {
-            dict.startCooldown(s, (Player)player_arr[player_ind]);
-            List<CastData> data = dict.cast(s, enemy_arr, target, player_arr, position);
-            processCast(data, s);
-        }
-        else
-        {
-            Debug.Log(s.root + " is not ready to assist you yet!");
-        }
+        postCastEffects();
+        pause = false;
+        updateEnemies();
     }
-
+ 
     //Casts from an enemy position: calls processCast on results
     public void enemyCast(SpellDictionary dict, SpellData s, int position, int target)
     {
         pause = true; // pause battle for attack
-        AudioPlayer.main.playSFX("magic_sound");
+        AudioPlayer.main.playSFX("sfx_enemy_cast");
+        Pair<bool[], bool[]> targetPattern = spellDict.getTargetPattern(s, player_arr, target, enemy_arr, position);
+        preCastEffects(targetPattern, enemy_arr[position], s, chat.getLine(enemy_arr[position].Stats.ChatDatabaseID));
+        BattleEffects.main.setDim(true, enemy_arr[position].GetComponent<SpriteRenderer>());
         StartCoroutine(enemy_pause_cast(dict, s, position, target));
-
     }
 
-    //Does the pausing for enemyCast (also does the actual cast calling)
     private IEnumerator enemy_pause_cast(SpellDictionary dict, SpellData s, int position, int target)
     {
-        Pair<bool[], bool[]>  targetPattern = spellDict.getTargetPattern(s, player_arr, target, enemy_arr, position);
-        BattleEffects.main.setDim(true, enemy_arr[position].GetComponent<SpriteRenderer>());
-        raiseTargets(targetPattern.second, targetPattern.first);
-        battleLog(s.ToString(), ICasterType.ENEMY, chat.getLine(enemy_arr[position].Stats.ChatDatabaseID), enemy_arr[position].Stats.name);
 
-        yield return new WaitForSeconds(1.5f);
+        BattleEffects.main.setDim(true, enemy_arr[position].GetComponent<SpriteRenderer>());
+
+        yield return new WaitForSeconds(1f);
 
         enemy_arr[position].startSwell();
         List<CastData> data = dict.cast(s, player_arr, target, enemy_arr, position);
@@ -406,116 +353,22 @@ public class BattleManager : MonoBehaviour {
 
         yield return new WaitForSeconds(1f);
 
-        stopBattleLog();
-        lowerTargets(targetPattern.second, targetPattern.first);
-        BattleEffects.main.setDim(false, enemy_arr[position].GetComponent<SpriteRenderer>());
+        postCastEffects();
+        //BattleEffects.main.setDim(false, enemy_arr[position].GetComponent<SpriteRenderer>());
         pause = false; // unpause
         enemy_arr[position].attack_in_progress = false;
         updateEnemies();
     }
 
-    //Cast/Botch/Cooldown/Fizzle, with associated effects and processing
-    //all animation and attack effects should be processed here
-    //ONLY CALL FOR A PLAYER CAST (NOTE: NPC casts are routed through here as well)
-    //Pre: CastStatus is generated by dict.Parse()
-    private void playerCast(SpellDictionary dict, SpellData s, CastStatus status)
-    {
-        List<CastData> data;
-        switch (status)//Switched based on caststatus
-        {
-            case CastStatus.SUCCESS:
-                //Player Cast
-                dict.startCooldown(s, (Player)player_arr[player_ind]);
-                data = dict.cast(s, enemy_arr, target_ind, player_arr, player_ind);
-                processCast(data, s);
-                break;
-            case CastStatus.BOTCH:
-                data = dict.botch(s, enemy_arr, target_ind, player_arr, player_ind);
-                Debug.Log("Botched cast: " + s.ToString());
-                //Process the data here
-                break;
-            case CastStatus.ALLYSPELL:
-                //NPC cast if appropriate
-                if (player_arr[0].Stats.name.ToLower() == s.root)
-                    NPC_Cast(dict, s, 0, target_ind);
-                else if (player_arr[2].Stats.name.ToLower() == s.root)
-                    NPC_Cast(dict, s, 2, target_ind);
-                else
-                {
-                    Debug.Log(s.root + " isn't here!");
-                }
-                break;
-            case CastStatus.ONCOOLDOWN:
-                //Handle effects
-                Debug.Log("Cast failed: " + s.root.ToUpper() + " is on cooldown for " + dict.getTimeLeft(s) + " seconds");
-                break;
-            case CastStatus.COOLDOWNFULL:
-                //Handle effects
-                Debug.Log("Cast failed: cooldownList is full!");
-                break;
-            case CastStatus.FIZZLE:
-                //Handle effects
-                break;
-        }
-    }
-
-    //Method for processing CastData (where all the effects happen)
+    //Method for processing CastData (most effects now happen in SpellEffects.cs)
     //Called by Cast in the SUCCESS CastStatus case, possibly on BOTCH in the future
-    //Can be used to process the cast of an enemy or ally, if implemented (put the AI loop in battlemanager)
     private void processCast(List<CastData> data, SpellData s)
     {
 		last_cast = data;
 		last_spell = s;
         //Process the data here
         foreach (CastData d in data)
-        {
-            if (d.isHit == false)//Spell misses
-            {
-                Debug.Log(d.Caster.Stats.name + " missed " + d.Target.Stats.name + "!");
-                //Process miss graphics
-                popp.spawnSprite("popup_miss", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET);
-                AudioPlayer.main.playSFX("sfx_miss");
-                BattleEffects.main.spriteShift(d.Target.Transform, 0.3f, 0.1f); // sprite moves to the right as a dodge
-            }
-            else//Spell hits
-            {
-                //Process hit graphics
-                AudioPlayer.main.playSFX("Cutting_SFX");
-                AnimationPlayer.main.playAnimation(AnimationType.SPELL, "cut", d.Target.Transform.position, 1);
-
-                //Process repel
-                if (d.repel)
-                {
-                    spawnElementPopup(d.element, Elements.vsElement.REPEL, d.Caster.Transform);
-                }
-
-                if (d.isCrit && d.elementalData != Elements.vsElement.BLOCK)//Spell is crit
-                {
-                    Debug.Log(d.Caster.Stats.name + " scores a critical with " + s.ToString() + " on " + d.Target.Stats.name);
-                    if (d.Target.CasterType == ICasterType.ENEMY)
-                        AudioPlayer.main.playSFX("sfx_enemy_weakcrit_dmg");
-                    else if (d.Target.CasterType == ICasterType.PLAYER || d.Target.CasterType == ICasterType.NPC_ALLY)
-                        AudioPlayer.main.playSFX("sfx_party_weakcrit_dmg");
-                    //process crit graphics
-                    popp.spawnSprite("popup_critical", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET);
-                }
-                if (d.isStun)
-                {
-                    //Process stun graphics
-                    Debug.Log(d.Caster.Stats.name + " stuns " + d.Target.Stats.name);
-                    AudioPlayer.main.playSFX("sfx_stagger");
-                }
-
-                Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement(d.Target.BuffDebuff, d.element));
-
-                //Process elemental wk/resist/drain/repel graphics
-                spawnElementPopup(d.element, d.elementalData, d.Target.Transform);
-
-                //Process damage graphics
-                popp.spawnText(d.damageInflicted.ToString(), POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET);
-                if (d.damageInflicted > 0) BattleEffects.main.spriteShake(d.Target.Transform, 0.3f, 0.1f);
-            }
-        }
+            spellEffects.StartCoroutine(spellEffects.playEffects(d, s));
         //Register unregistered keywords here
         bool [] regData = spellDict.safeRegister(s);
         if (regData[0] || regData[1] || regData[2])
@@ -525,92 +378,36 @@ public class BattleManager : MonoBehaviour {
         //format is bool [3], where regData[0] is true if s.element is new, regData[1] is true if s.root is new, and regData[2] is true if s.style is new
     }
 
-    //Spawns elemental popup with proper icon
-    private void spawnElementPopup(int element, Elements.vsElement vElem, Transform pos)
-    {
-        switch (vElem)
-        {
-            case Elements.vsElement.REPEL:
-                popp.spawnSprite("popup_reflect", POP_TIMER, pos.position + OVER_OFFSET);
-                break;
-            case Elements.vsElement.DRAIN:
-                popp.spawnSprite("popup_absorb", POP_TIMER, pos.position + OVER_OFFSET);
-                break;
-            case Elements.vsElement.BLOCK:
-                popp.spawnSprite("popup_nullify", POP_TIMER, pos.position + OVER_OFFSET);
-                break;
-            case Elements.vsElement.RESIST:
-                popp.spawnSprite("popup_resistant", POP_TIMER, pos.position + OVER_OFFSET);
-                break;
-            case Elements.vsElement.WEAK:
-                popp.spawnSprite("popup_weak", POP_TIMER, pos.position + OVER_OFFSET);
-                break;
-            case Elements.vsElement.SUPERWEAK:
-                popp.spawnSprite("popup_superweak", POP_TIMER, pos.position + OVER_OFFSET);
-                break;
-        }
-        if (vElem != Elements.vsElement.NEUTRAL)
-        {
-            switch (element)
-            {
-                case 0:
-                    popp.spawnSprite("popup_slash", POP_TIMER, pos.position + ELEM_OFFSET);
-                    break;
-                case 1:
-                    popp.spawnSprite("popup_fire", POP_TIMER, pos.position + ELEM_OFFSET);
-                    break;
-                case 2:
-                    popp.spawnSprite("popup_ice", POP_TIMER, pos.position + ELEM_OFFSET);
-                    break;
-                case 3:
-                    popp.spawnSprite("popup_bolt", POP_TIMER, pos.position + ELEM_OFFSET);
-                    break;
-            }
-        }
-    }
-
     private IEnumerator learnSFX()
     {
         yield return new WaitWhile(() => BattleManager.main.pause);
         AudioPlayer.main.playSFX("sfx_learn_spell_battle");
     }
-
-    //Raises the targets (array val = true) above the dimmer level
-	private void raiseTargets(bool[] enemy_r, bool[] player_r)
+    //Effects that happen before any actor casts
+    private void preCastEffects(Pair<bool[], bool[]> targetPattern, ICaster caster, SpellData cast, string message)
     {
+        BattleEffects.main.setDim(true);
+        battleLog(cast.ToString(), caster.CasterType, message, caster.Stats.name);
+        if (targetPattern != null)
+        {
+            if (caster.CasterType == ICasterType.ENEMY)
+                raiseTargets(targetPattern.second, targetPattern.first);
+            else
+                raiseTargets(targetPattern.first, targetPattern.second);
+        }
+        target_ret.SetActive(false); // disable / make target reticule disappear on a cast
+    }
+    //effects that hafter after any actor casts
+    private void postCastEffects()
+    {
+        stopBattleLog();
         for (int i = 0; i < 3; ++i)
         {
-            if (enemy_r[i])
-				enemy_arr[i].enemy_sprite.sortingOrder = undim_layer;
+            if (enemy_arr[i] != null)
+                enemy_arr[i].enemy_sprite.sortingOrder = dim_layer;
         }
-    }
-    //Lowers the targets (array val = true) below the dimmer level
-    private void lowerTargets(bool[] enemy_r, bool[] player_r)
-    {
-        for (int i = 0; i < 3; ++i)
-        {
-            if (enemy_r[i])
-				enemy_arr[i].enemy_sprite.sortingOrder = dim_layer;
-        }
-    }
-
-    //Returns true if ally with specified name is in the battle
-    private bool allyIsPresent(string name)
-    {
-        if (player_arr[0] != null && player_arr[0].Stats.name.ToLower() == name.ToLower())
-            return true;
-        if (player_arr[2] != null && player_arr[2].Stats.name.ToLower() == name.ToLower())
-            return true;
-        return false;
-    }
-    //returns the position of ally with specified name (if in battle)
-    private int getAllyPosition(string name)
-    {
-        if (player_arr[0] != null && player_arr[0].Stats.name.ToLower() == name.ToLower())
-            return 0;
-        if (player_arr[2] != null && player_arr[2].Stats.name.ToLower() == name.ToLower())
-            return 2;
-        return -1;
+        target_ret.SetActive(true); // enable / make target reticule appear after a cast
+        BattleEffects.main.setDim(false);
     }
     //Enable battle log UI state (call anywhere that the battlemanager pauses to cast)
     private void battleLog(string cast, ICasterType caster, string talk, string speaker)
@@ -620,19 +417,19 @@ public class BattleManager : MonoBehaviour {
         logCastText.text = "> " + cast;
         logTalkText.text = talk;
         logTalkInfo.text = speaker;
-        if(caster == ICasterType.ENEMY)
+        if (caster == ICasterType.ENEMY)
         {
             castBox.color = enemyColor;
             talkBox.color = enemyColor;
             logCastInfo.text = "ENEMY  CAST";
         }
-        else if(caster == ICasterType.PLAYER)
+        else if (caster == ICasterType.PLAYER)
         {
             castBox.color = playerColor;
             talkBox.color = playerColor;
             logCastInfo.text = "PLAYER CAST";
         }
-        else if(caster == ICasterType.NPC_ALLY)
+        else if (caster == ICasterType.NPC_ALLY)
         {
             castBox.color = allyColor;
             talkBox.color = allyColor;
@@ -644,16 +441,43 @@ public class BattleManager : MonoBehaviour {
             talkBox.color = clarkeColor;
             logCastInfo.text = "ERROR  CAST";
         }
-		target_ret.SetActive (false); // disable / make target reticule disappear on a cast
     }
-
     //Stop battle log UI (call after every pause to cast
     private void stopBattleLog()
     {
         battleLogCast.SetActive(false);
         battleLogTalk.SetActive(false);
-		target_ret.SetActive (true); // enable / make target reticule appear after a cast
     }
+
+    //Raises the targets (array val = true) above the dimmer level
+    private void raiseTargets(bool[] enemy_r, bool[] player_r)
+    {
+        for (int i = 0; i < 3; ++i)
+        {
+            if (enemy_r[i])
+                enemy_arr[i].enemy_sprite.sortingOrder = undim_layer;
+        }
+    }
+    //Lowers the targets (array val = true) below the dimmer level
+    private void lowerTargets(bool[] enemy_r, bool[] player_r)
+    {
+        for (int i = 0; i < 3; ++i)
+        {
+            if (enemy_r[i])
+                enemy_arr[i].enemy_sprite.sortingOrder = dim_layer;
+        }
+    }
+
+    //returns the position of ally with specified name (if in battle)
+    private int getAllyPosition(string name)
+    {
+        if (player_arr[0] != null && player_arr[0].Stats.name.ToLower() == name.ToLower())
+            return 0;
+        if (player_arr[2] != null && player_arr[2].Stats.name.ToLower() == name.ToLower())
+            return 2;
+        return -1;
+    }
+
 
     //Updates death and opacity of enemies after pause in puaseAttackCurrent
     public void updateEnemies()

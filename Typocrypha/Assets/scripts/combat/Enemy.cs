@@ -32,6 +32,8 @@ public class Enemy : MonoBehaviour, ICaster {
     //ICaster Properties//
 
     public Transform Transform { get { return transform; } }
+    private int position; //position in battle field
+    public int Position { get { return position; } set { position = value; } }
     public CasterStats Stats
     {
         get
@@ -69,7 +71,6 @@ public class Enemy : MonoBehaviour, ICaster {
     public bool attack_in_progress = false;
 
     public BattleManager field; // the field the enemy is located in (battle state)
-    public int position; //index to field (current position)
     public EnemyChargeBars bars;
 	public SpriteRenderer enemy_sprite; // this enemy's sprite
     public EnemyAI AI = null;

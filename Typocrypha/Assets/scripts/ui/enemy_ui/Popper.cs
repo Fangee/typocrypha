@@ -25,6 +25,16 @@ public class Popper : MonoBehaviour {
 		txtObj = GameObject.Instantiate (poptext_prefab, transform);
 		txtObj.transform.position = pos;
 		pt = txtObj.GetComponent<PopText>();
+		pt.setColor (Color.white);
+		pt.display (message, delay);
+	}
+
+	//overloaded with color field
+	public void spawnText (string message, float delay, Vector3 pos, Color color) {
+		txtObj = GameObject.Instantiate (poptext_prefab, transform);
+		txtObj.transform.position = pos;
+		pt = txtObj.GetComponent<PopText>();
+		pt.setColor (color);
 		pt.display (message, delay);
 	}
 

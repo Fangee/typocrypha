@@ -379,8 +379,9 @@ public class SpellDictionary : MonoBehaviour
         Spell s = spells[spell.root];
         Spell c = createSpellFromType(s.type);
         s.copyInto(c);
-        string[] animData = { null, c.animationID, null };
-        string[] sfxData = { null, c.sfxID, null };
+        int wordCount = 1;
+        string[] animData = { null, s.animationID, null };
+        string[] sfxData = { null, s.sfxID, null };
         ElementMod e = null;
         StyleMod st = null;
         if (spell.element != null)
@@ -388,12 +389,14 @@ public class SpellDictionary : MonoBehaviour
             e = elements[spell.element];
             sfxData[2] = e.sfxID;
             animData[2] = e.animationID;
+            ++wordCount;
         }
         if (spell.style != null)
         {
             st = styles[spell.style];
             sfxData[0] = st.sfxID;
             animData[0] = st.animationID;
+            ++wordCount;
         }
         c.Modify(e, st);
         List<ICaster> toCastAt = c.target(targets, selected, allies, position);
@@ -401,8 +404,9 @@ public class SpellDictionary : MonoBehaviour
         foreach(ICaster target in toCastAt)
         {
             CastData castData = c.cast(target, caster);
-            castData.animData = animData;
-            castData.sfxData = sfxData;
+            animData.CopyTo(castData.animData, 0);
+            sfxData.CopyTo(castData.sfxData, 0);
+            castData.wordCount = wordCount;
             if(castData.repel == true)
                 castData.setLocationData(caster, target);
             else

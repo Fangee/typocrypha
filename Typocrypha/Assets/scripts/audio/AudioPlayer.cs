@@ -7,6 +7,7 @@ using UnityEngine;
 //   playSFX(string) will just choose the first one that's available, so for general use, use that
 //   Currently reserved channels:
 //     3: talking effects
+//     4: spell sfx
 
 //// different types of music (DEPRECATED)
 //public enum MusicType { CUTSCENE, BATTLE };
@@ -25,7 +26,8 @@ public class AudioPlayer : MonoBehaviour {
 	AssetBundle sfx_bundle;
 	AssetBundle music_bundle;
 
-    public const int voice_channel = 3;
+    public const int channel_voice = 3;
+    public const int channel_spell_sfx = 4;
 
     // music volume (0 to 1)
     public float MusicVolume {
@@ -42,8 +44,8 @@ public class AudioPlayer : MonoBehaviour {
 
     //Speech Volume (0 to 1)
     public float VoiceVolume {
-        get { return sfx_channels[voice_channel].volume; }
-        set { sfx_channels[voice_channel].volume = Mathf.Clamp01(value); }
+        get { return sfx_channels[channel_voice].volume; }
+        set { sfx_channels[channel_voice].volume = Mathf.Clamp01(value); }
     }
 
     void Awake() {
@@ -83,8 +85,9 @@ public class AudioPlayer : MonoBehaviour {
 
     // sets preset reservations
     void initReservations() {
-		channel_reserved [voice_channel] = true; // reserved for talking sfx
-		AudioPlayer.main.setSFX (voice_channel, "speak_boop"); // put default talk sfx in channel 3
+		channel_reserved [channel_voice] = true; // reserved for talking sfx
+        channel_reserved [channel_spell_sfx] = true;
+		AudioPlayer.main.setSFX (channel_voice, "speak_boop"); // put default talk sfx in channel 3
 	}
 
 	// sets specified sfx channel
