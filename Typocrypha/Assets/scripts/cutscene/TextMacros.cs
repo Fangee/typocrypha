@@ -14,6 +14,7 @@ public class TextMacros : MonoBehaviour {
 		if (main == null) main = this;
 		macro_map = new Dictionary<string, MacroSubDel> {
 			{"name", macroNameSub},
+			{"pronoun",macroPronoun},
 			{"last-cast", macroLastCast}
 		};
 	}
@@ -22,6 +23,23 @@ public class TextMacros : MonoBehaviour {
 	// input: NONE
 	string macroNameSub(string[] opt) {
 		return PlayerDialogueInfo.main.player_name;
+	}
+
+	// substitutes in appropriate pronoun term
+	// choice is made based on 'PlayerDialogueInfo' field
+	// input: [0]: string: appropriate term for FEMININE pronoun
+	// input: [1]: string: appropriate term for INCLUSIVE pronoun
+	// input: [2]: string: appropriate term for FIRSTNAME pronoun
+	//   NOTE: input string is concatenated after player's name
+	// input: [3]: string: appropriate term for MASCULINE pronoun
+	string macroPronoun(string[] opt) {
+		switch (PlayerDialogueInfo.main.player_pronoun) {
+		case Pronoun.FEMININE:  return opt [0];
+		case Pronoun.INCLUSIVE: return opt [1];
+		case Pronoun.FIRSTNAME: return PlayerDialogueInfo.main.player_name + opt [2];
+		case Pronoun.MASCULINE: return opt [3];
+		default: return "pronoun";
+		}
 	}
 
 	// substitutes last cast spell's attributes

@@ -25,6 +25,8 @@ public class Player : MonoBehaviour, ICaster
     //Main player character (Static Global Basically)
     public static Player main = null;
 
+    public BattleKeyboard status_manager;
+
     void Awake()
     {
         if (main == null)
@@ -137,7 +139,8 @@ public class Player : MonoBehaviour, ICaster
             return;
         bool damaged = CasterOps.calcDamage(data, d, element, caster, this, crit);
 
-        if (damaged) {
+        if (damaged && element != Elements.@null) {
+            status_manager.inflictCondition(this, element, data.damageInflicted);
 		}
         if (Curr_hp <= 0)
         { // check if killed
