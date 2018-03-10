@@ -11,7 +11,11 @@ public class AllyStats : CasterStats
     {
         spell = new SpellData(name.ToLower());
     }
-    public readonly SpellData spell; // castable spell
+    public SpellData spell; // castable spell
+    public AllyStats clone()
+    {
+        return new AllyStats(name, ChatDatabaseID, max_hp, max_shield, max_stagger, attack, defense, speed, accuracy, evasion, vsElement);
+    }
 }
 
 public class Ally : MonoBehaviour, ICaster {

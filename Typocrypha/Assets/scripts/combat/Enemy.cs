@@ -14,10 +14,14 @@ public class EnemyStats : CasterStats {
         this.ai_params = ai_params;
         spells = sp;
     }
-    public readonly string sprite_path; //path of sprite/resource to load at creation
-    public readonly string ai_type; //type of enemy AI (will be same as name if unique)
-    public readonly string[] ai_params;
-    public readonly EnemySpellList spells; // castable spells
+    public string sprite_path; //path of sprite/resource to load at creation
+    public string ai_type; //type of enemy AI (will be same as name if unique)
+    public string[] ai_params;
+    public EnemySpellList spells; // castable spells
+    public EnemyStats clone()
+    {
+        return new EnemyStats(name, ChatDatabaseID, sprite_path, max_hp, max_shield, max_stagger, attack, defense, speed, accuracy, evasion, vsElement, spells, ai_type, ai_params);
+    }
 }
 
 // defines enemy behaviour

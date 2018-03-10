@@ -67,6 +67,6 @@ public class AllyDatabase
     }
     public AllyStats getData(string id)
     {
-        return database[id];
+        return database[id].clone();
     }
 }
