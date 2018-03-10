@@ -363,10 +363,11 @@
     <None Include="Assets\Resources\spellDictionary.txt" />
     <None Include="Assets\WavySprite\Shaders\WavySprite.shader" />
     <None Include="Assets\WavySprite\readme.txt" />
-    <None Include="Assets\graphics\shaders\GlitchScreen.shader" />
-    <None Include="Assets\graphics\shaders\PixelateScreen.shader" />
-    <None Include="Assets\graphics\shaders\PixelateSprite.shader" />
-    <None Include="Assets\graphics\shaders\WavyScreen.shader" />
+    <None Include="Assets\graphics\shaders\screen_shading\GlitchScreen.shader" />
+    <None Include="Assets\graphics\shaders\screen_shading\PixelateScreen.shader" />
+    <None Include="Assets\graphics\shaders\screen_shading\WavyScreen.shader" />
+    <None Include="Assets\graphics\shaders\sprite_shaders\CutDeath.shader" />
+    <None Include="Assets\graphics\shaders\sprite_shaders\PixelateSprite.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
