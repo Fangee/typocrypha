@@ -236,6 +236,7 @@ public class BattleManager : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.LeftArrow)) --target_ind;
 		if (Input.GetKeyDown (KeyCode.RightArrow)) ++target_ind;
 
+        //show enemy info on Shift
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
         {
             target_ret_scr.showScouter();
