@@ -561,6 +561,11 @@ public class BattleManager : MonoBehaviour {
         battleLogCast.SetActive(false);
         battleLogTalk.SetActive(false);
 		target_ret.SetActive (true); // enable / make target reticule appear after a cast
+        //hide scouter when pause ends if player not holding shift
+        if (!(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+        {
+            target_ret_scr.hideScouter();
+        }
     }
 
     //Updates death and opacity of enemies after pause in puaseAttackCurrent

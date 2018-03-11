@@ -22,6 +22,7 @@ public class TargetReticule : MonoBehaviour {
 	public float h_r_scale = 8f; // scaling factor from horizontal speed to rotation speed
 
 	Scouter scouter; //script for targeting info
+    bool scoutVisible = false; //for when scouter is shown
 
 	void Start () {
 		base_r_speed = def_r_speed;
@@ -44,11 +45,17 @@ public class TargetReticule : MonoBehaviour {
     //reveals info on enemy
     public void showScouter() {
         scouter.Show();
+        left_arrow.enabled = false;
+        right_arrow.enabled = false;
+        scoutVisible = true;
     }
 
     //hide enemy info
     public void hideScouter() {
         scouter.Hide();
+        left_arrow.enabled = true;
+        right_arrow.enabled = true;
+        scoutVisible = false;
     }
 
 	// updates target based on targetted enemy
@@ -56,20 +63,24 @@ public class TargetReticule : MonoBehaviour {
 		// don't update if battle not set up yet
 		if (BattleManager.main.target_ind >= BattleManager.main.enemy_arr.Length) return;
 		// show/hide left/right arrow key indicators based on position
-		switch (BattleManager.main.target_ind) {
-			case 0:
-				left_arrow.enabled = false;
-				right_arrow.enabled = true;
-				break;
-			case 1:
-				left_arrow.enabled = true;
-				right_arrow.enabled = true;
-				break;
-			case 2:
-				left_arrow.enabled = true;
-				right_arrow.enabled = false;
-				break;
-		}
+        if (!scoutVisible)
+        {
+            switch (BattleManager.main.target_ind)
+            {
+                case 0:
+                    left_arrow.enabled = false;
+                    right_arrow.enabled = true;
+                    break;
+                case 1:
+                    left_arrow.enabled = true;
+                    right_arrow.enabled = true;
+                    break;
+                case 2:
+                    left_arrow.enabled = true;
+                    right_arrow.enabled = false;
+                    break;
+            }
+        }
 		// check if no enemy targeted
 		if (BattleManager.main.enemy_arr[BattleManager.main.target_ind] == null || BattleManager.main.enemy_arr [BattleManager.main.target_ind].Is_dead) {
 			no_target.enabled = true;
