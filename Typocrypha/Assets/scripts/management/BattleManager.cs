@@ -235,6 +235,16 @@ public class BattleManager : MonoBehaviour {
 		// move target left or right
 		if (Input.GetKeyDown (KeyCode.LeftArrow)) --target_ind;
 		if (Input.GetKeyDown (KeyCode.RightArrow)) ++target_ind;
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        {
+            target_ret_scr.showScouter();
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
+        {
+            target_ret_scr.hideScouter();
+        }
+
 		// fix if target is out of bounds
 		if (target_ind < 0) target_ind = 0;
 		if (target_ind > 2) target_ind = 2;

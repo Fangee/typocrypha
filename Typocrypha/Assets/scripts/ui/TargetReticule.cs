@@ -21,6 +21,8 @@ public class TargetReticule : MonoBehaviour {
 	public float smooth_time = 0.15f; // time it takes for target to reach position
 	public float h_r_scale = 8f; // scaling factor from horizontal speed to rotation speed
 
+    public Popper pop;
+
 	void Start () {
 		base_r_speed = def_r_speed;
 		r_speed = base_r_speed;
@@ -36,6 +38,14 @@ public class TargetReticule : MonoBehaviour {
 		// scale rotation with velocity
 		r_speed = base_r_speed + vel.magnitude / h_r_scale;
 	}
+
+    public void showScouter() {
+        transform.GetChild(8).gameObject.SetActive(true);
+    }
+
+    public void hideScouter() {
+        transform.GetChild(8).gameObject.SetActive(false);
+    }
 
 	// updates target based on targetted enemy
 	public void updateTarget() {
