@@ -68,6 +68,7 @@ Shader "Custom/PixelateScreen"
 			{
 				float2 screenSize = float2(_Width, _Height);
 				// divide screen into blocks
+				screenPos.xy += float2(_PixelSize, _PixelSize);
 				screenPos.xy = screenPos.xy - (screenPos.xy % _PixelSize);
 				// set pixel color to color of upper left corner of block
 				if (_PixelSize > 1) 
