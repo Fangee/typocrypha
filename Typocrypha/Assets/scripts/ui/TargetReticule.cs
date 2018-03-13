@@ -53,8 +53,7 @@ public class TargetReticule : MonoBehaviour {
     //hide enemy info
     public void hideScouter() {
         scouter.Hide();
-        left_arrow.enabled = true;
-        right_arrow.enabled = true;
+        updateArrows();
         scoutVisible = false;
     }
 
@@ -65,21 +64,7 @@ public class TargetReticule : MonoBehaviour {
 		// show/hide left/right arrow key indicators based on position
         if (!scoutVisible)
         {
-            switch (BattleManager.main.target_ind)
-            {
-                case 0:
-                    left_arrow.enabled = false;
-                    right_arrow.enabled = true;
-                    break;
-                case 1:
-                    left_arrow.enabled = true;
-                    right_arrow.enabled = true;
-                    break;
-                case 2:
-                    left_arrow.enabled = true;
-                    right_arrow.enabled = false;
-                    break;
-            }
+            updateArrows();
         }
 		// check if no enemy targeted
 		if (BattleManager.main.enemy_arr[BattleManager.main.target_ind] == null || BattleManager.main.enemy_arr [BattleManager.main.target_ind].Is_dead) {
@@ -91,4 +76,22 @@ public class TargetReticule : MonoBehaviour {
 		}
         scouter.updateInfo();
 	}
+
+    private void updateArrows(){
+        switch (BattleManager.main.target_ind)
+        {
+            case 0:
+                left_arrow.enabled = false;
+                right_arrow.enabled = true;
+                break;
+            case 1:
+                left_arrow.enabled = true;
+                right_arrow.enabled = true;
+                break;
+            case 2:
+                left_arrow.enabled = true;
+                right_arrow.enabled = false;
+                break;
+        }
+    }
 }
