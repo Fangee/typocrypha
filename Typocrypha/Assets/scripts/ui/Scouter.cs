@@ -38,56 +38,62 @@ public class Scouter : MonoBehaviour {
         if (foe == null || foe.Is_dead)
         {
             //You're not looking at anything you absolute moron
-            left.text = "??\n??\n??\n??\n??";
-            right.text = "??\n??\n??\n??\n??\n??";
+            left.text = "..\n..\n..\n..\n..";
+            right.text = "..\n..\n..\n..\n.\n..";
         }
         else
         {
             //Get those numbers
             left.text = 
-                stylize(foe.BuffDebuff.attack)      + "\n" +
-                stylize(foe.BuffDebuff.defense)     + "\n" +
-                stylize(foe.BuffDebuff.speed)       + "\n" +
-                stylize(foe.BuffDebuff.accuracy)    + "\n" +
-                stylize(foe.BuffDebuff.evasion);
+                displayBuff(foe.BuffDebuff.attack)      + "\n" +
+                displayBuff(foe.BuffDebuff.defense)     + "\n" +
+                displayBuff(foe.BuffDebuff.speed)       + "\n" +
+                displayBuff(foe.BuffDebuff.accuracy)    + "\n" +
+                displayBuff(foe.BuffDebuff.evasion);
             right.text = 
-                abbreviate(Elements.getLevel(foe.Stats.vsElement[Elements.@null])) + "\n" +
-                abbreviate(Elements.getLevel(foe.Stats.vsElement[Elements.fire])) + "\n" +
-                abbreviate(Elements.getLevel(foe.Stats.vsElement[Elements.ice])) + "\n" +
-                abbreviate(Elements.getLevel(foe.Stats.vsElement[Elements.volt])) + "\n" + "\n";
+                displayMod(foe, Elements.@null)   + "\n" +
+                displayMod(foe, Elements.fire)    + "\n" +
+                displayMod(foe, Elements.ice)     + "\n" +
+                displayMod(foe, Elements.volt)    + "\n" + "\n";
            
         }
     }
 
     //deals with signs
-    private string stylize(float f) {
+    private string displayBuff(float f) {
         if (f == 0) return "--";
         if (f > 0) return "+" + f;
         return f.ToString();
     }
 
     //shorten the modifier strings
-    private string abbreviate(Elements.vsElement modifier) {
-        switch (modifier)
+    private string displayMod(Enemy foe, int element) {
+
+        if (EnemyIntel.main.hasIntel(foe.Stats.name, element))
         {
-            case Elements.vsElement.REPEL:
-                return "RP";
-            case Elements.vsElement.DRAIN:
-                return "DR";
-            case Elements.vsElement.BLOCK:
-                return "BL";
-            case Elements.vsElement.RESIST:
-                return "RS";
-            case Elements.vsElement.NEUTRAL:
-                return "--";
-            case Elements.vsElement.WEAK:
-                return "WK";
-            case Elements.vsElement.SUPERWEAK:
-                return "SW";
+            Elements.vsElement modifier = Elements.getLevel(foe.Stats.vsElement[element]);
+            switch (modifier)
+            {
+                case Elements.vsElement.REPEL:
+                    return "RP";
+                case Elements.vsElement.DRAIN:
+                    return "DR";
+                case Elements.vsElement.BLOCK:
+                    return "BL";
+                case Elements.vsElement.RESIST:
+                    return "RS";
+                case Elements.vsElement.NEUTRAL:
+                    return "--";
+                case Elements.vsElement.WEAK:
+                    return "WK";
+                case Elements.vsElement.SUPERWEAK:
+                    return "SW";
+            }
         }
-        return "UNKNOWN MODIFIER";
+        return "??";
     }
 
+    //makes the scanner gradually visible
     private IEnumerator fadeIn() {
         while (alpha < 1)
         {
@@ -99,6 +105,7 @@ public class Scouter : MonoBehaviour {
         }
     }
 
+    //makes the scanner gradually invisible
     private IEnumerator fadeOut() {
         while (alpha > 0)
         {
