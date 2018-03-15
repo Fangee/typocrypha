@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// post processing effects that makes screen wavy
+// post processing effects
 public class PostProcess : MonoBehaviour {
 	public static PostProcess main = null;
 	public Material mat;

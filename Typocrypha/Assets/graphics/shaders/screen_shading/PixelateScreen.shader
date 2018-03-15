@@ -66,18 +66,15 @@ Shader "Custom/PixelateScreen"
 
 			fixed4 frag (v2f i, UNITY_VPOS_TYPE screenPos : VPOS) : SV_Target
 			{
+				if (_PixelSize <= 1) return tex2D (_MainTex, i.uv);
+
 				float2 screenSize = float2(_Width, _Height);
+				float2 pos = float2(screenPos.x, screenPos.y);
 				// divide screen into blocks
-				screenPos.xy += float2(_PixelSize, _PixelSize);
-				screenPos.xy = screenPos.xy - (screenPos.xy % _PixelSize);
-				// set pixel color to color of upper left corner of block
-				if (_PixelSize > 1) 
-				{
-					i.uv.x = screenPos.x/screenSize.x;
-					i.uv.y = 1 - screenPos.y/screenSize.y;
-				}
-				fixed4 c = tex2D (_MainTex, i.uv);
-				return c;
+				pos.xy += float2(_PixelSize, _PixelSize);
+				pos.xy -= (pos.xy % _PixelSize);
+				// set pixel color to center of block
+				return tex2D (_MainTex, float2(pos.x/screenSize.x, 1-pos.y/screenSize.y));
 			}
 			ENDCG
 		}

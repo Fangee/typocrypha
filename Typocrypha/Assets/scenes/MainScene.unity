@@ -5282,6 +5282,7 @@ GameObject:
   - component: {fileID: 1149999597}
   - component: {fileID: 1149999596}
   - component: {fileID: 1149999602}
+  - component: {fileID: 1149999599}
   - component: {fileID: 1149999600}
   - component: {fileID: 1149999601}
   - component: {fileID: 1149999598}
@@ -5390,7 +5391,6 @@ MonoBehaviour:
   dimmer: {fileID: 1608672956}
   canvas: {fileID: 1668480232}
   camera_animator: {fileID: 1149999598}
-  post_process: {fileID: 1149999602}
 --- !u!114 &1149999597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5420,6 +5420,27 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &1149999599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1149999589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa1bd94293611048adc12f2c7ba86df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mat: {fileID: 2100000, guid: 5460dee3194397340b776ac529586d7d, type: 2}
+  shader_props:
+  - _SwirlAmount
+  - _Width
+  - _Height
+  shader_params:
+  - 0
+  - 1280
+  - 720
+  swirl_amount: 0
 --- !u!114 &1149999600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5513,7 +5534,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: f750b09316c4c664da0a19b899b5cdec, type: 2}
+  - {fileID: 2100000, guid: 76151327b28c7ce419e4675203718dc0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5533,7 +5554,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: acb909c97db531a4c8ceb9e7c3a4db0a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: eb416a3691a496849952474a70a1f306, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

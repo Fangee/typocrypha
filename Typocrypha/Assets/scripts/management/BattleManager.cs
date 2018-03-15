@@ -148,8 +148,9 @@ public class BattleManager : MonoBehaviour {
 
 	// finishes up battle start and effects
 	IEnumerator finishBattlePrep(BattleScene scene) {
-		// pixelate in background
-		BattleEffects.main.pixelateIn (1f);
+		// play battle transition
+		BattleEffects.main.battleTransitionEffect("swirl_in", 1f);
+		//BattleEffects.main.pixelateIn (1f);
 		yield return new WaitForSeconds (1f);
 		BackgroundEffects.main.setPrefabBG (battle_bg_prefab); // set background
 		for (int i = 0; i < scene.enemy_stats.Length; i++) createEnemy (i, scene); // create enemies
@@ -157,7 +158,7 @@ public class BattleManager : MonoBehaviour {
 		pause = false;
 		yield return new WaitForSeconds (0.1f);
 		pause = true;
-		BattleEffects.main.pixelateOut (1f);
+		BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
 		yield return new WaitForSeconds (1f);
 
 		/*

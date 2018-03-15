@@ -67,8 +67,9 @@
 				float2 spriteSize = float2(_Width, _Height);
 				float pixelScale = spriteSize.x/_PixelSize;
 				// set pixel color to color of bottom left corner of block
-				if (_PixelSize > 1)
+				if (_PixelSize > 1) {
 					i.uv = floor(i.uv * pixelScale)/pixelScale;
+				}
 				fixed4 c = tex2D (_MainTex, i.uv);
 				return c;
 			}
