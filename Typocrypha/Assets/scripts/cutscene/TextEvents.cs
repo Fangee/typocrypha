@@ -278,7 +278,7 @@ public class TextEvents : MonoBehaviour {
 
     IEnumerator evilEye(string[] opt) {
         Debug.Log("evil eye lol");
-        AnimationPlayer.main.playAnimation("Evil_Eye", new Vector3(-5, 0, 0), 1);
+        AnimationPlayer.main.playAnimation("Evil_Eye", new Vector3(-5, 0, 0), 2f);
         yield return true;
     }
 	

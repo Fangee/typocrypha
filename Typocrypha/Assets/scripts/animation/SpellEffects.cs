@@ -34,7 +34,8 @@ public class SpellEffects : MonoBehaviour {
             {
                 AudioPlayer.main.setSFX(AudioPlayer.channel_spell_sfx, d.sfxData[i]);
                 AudioPlayer.main.playSFX(AudioPlayer.channel_spell_sfx);
-                AnimationPlayer.main.playAnimation(d.animData[i], d.Target.Transform.position, 1);
+                //AnimationPlayer.main.playAnimation(d.animData[i], d.Target.Transform.position, 1);
+				AnimationPlayer.main.playAnimation(d.animData[i], d.Target.Transform.position, 2f);
                 yield return new WaitForSeconds(0.333F);
             }
         }
