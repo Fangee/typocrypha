@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
 
-// compares sprites by name (for sorting animation frames from atlus)
+// compares sprites by name (for sorting animation frames from atlus) (UNUSED)
 public class SpriteComparer : IComparer {
 	public int Compare(object a, object b) {
 		Sprite sa = (Sprite)a;
