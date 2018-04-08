@@ -1,0 +1,77 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+using UnityEditor.AnimatedValues;
+// Memory problem: deleted lines of dialogue aren't actually deleted
+
+// Custom editor for Dialogue
+[CustomEditor(typeof(Dialogue))]
+public class DialogueEditor : Editor {
+	SerializedProperty count_prop;
+	SerializedProperty lines_prop;
+	List<AnimBool> box_fade = new List<AnimBool> ();
+
+	void OnEnable() {
+		count_prop = serializedObject.FindProperty ("count");
+		lines_prop = serializedObject.FindProperty ("lines");
+	}
+
+	public override void OnInspectorGUI () {
+		serializedObject.Update ();
+		EditorGUILayout.PropertyField (count_prop, new GUIContent("Line Count"));
+		EditorGUILayout.Space ();
+		for (int i = 0; i < count_prop.intValue; ++i) {
+			SerializedProperty sp = lines_prop.GetArrayElementAtIndex (i);
+			if (sp.objectReferenceValue == null) {
+				DialogueItem new_item = ScriptableObject.CreateInstance<DialogueItem> ();
+				AssetDatabase.AddObjectToAsset (new_item, AssetDatabase.GetAssetPath(target));
+				sp.objectReferenceValue = new_item;
+			}
+			if (box_fade.Count <= i) {
+				AnimBool abool = new AnimBool ();
+				abool.valueChanged.AddListener (Repaint);
+				box_fade.Add (abool);
+			}
+			createDialogueItemMenu (sp, i);
+		}
+		serializedObject.ApplyModifiedProperties ();
+	}
+
+	void createDialogueItemMenu(SerializedProperty sp, int i) {
+		GUILayout.BeginHorizontal ();
+		EditorGUILayout.PropertyField (sp, new GUIContent ("Line " + i), GUILayout.ExpandWidth(false));
+		box_fade [i].target = EditorGUILayout.ToggleLeft ("", box_fade[i].target);
+		GUILayout.EndHorizontal ();
+
+		SerializedObject item = new SerializedObject (sp.objectReferenceValue);
+		item.Update ();
+		EditorGUI.indentLevel++;
+		if (EditorGUILayout.BeginFadeGroup (box_fade [i].faded)) {
+			EditorGUILayout.PropertyField (item.FindProperty ("dialogue_mode"), new GUIContent ("Mode"));
+			EditorGUILayout.PropertyField (item.FindProperty ("dialogue_type"), new GUIContent ("Type"));
+			EditorGUILayout.PropertyField (item.FindProperty ("speaker_name"), new GUIContent ("Speaker"));
+			EditorGUILayout.PropertyField (item.FindProperty ("left_icon"), new GUIContent ("Left Icon"));
+			EditorGUILayout.PropertyField (item.FindProperty ("right_icon"), new GUIContent ("Right Icon"));
+			EditorGUILayout.PropertyField (item.FindProperty ("icon_side"), new GUIContent ("Icon Side"));
+			EditorGUILayout.PropertyField (item.FindProperty ("text"), new GUIContent ("Text"));
+			if (item.FindProperty ("dialogue_type").enumValueIndex == (int)DialogueType.INPUT) {
+				EditorGUILayout.Space ();
+				EditorGUILayout.PropertyField (item.FindProperty ("input_display"), new GUIContent ("Input Display"));
+				EditorGUILayout.PropertyField (item.FindProperty ("input_count"), new GUIContent ("Input Count"));
+				EditorGUI.indentLevel++;
+				int c = item.FindProperty ("input_count").intValue;
+				for (int j = 0; j < c; ++j) {
+					EditorGUILayout.PropertyField (item.FindProperty ("input_options").GetArrayElementAtIndex(j), new GUIContent ("Option " + j));
+					EditorGUILayout.PropertyField (item.FindProperty ("input_branches").GetArrayElementAtIndex(j), new GUIContent ("Branch " + j));
+					EditorGUILayout.Space ();
+				}
+				EditorGUI.indentLevel--;
+			}
+			EditorGUILayout.Space ();
+		}
+		EditorGUILayout.EndFadeGroup ();
+		EditorGUI.indentLevel--;
+		item.ApplyModifiedProperties ();
+	}
+}
