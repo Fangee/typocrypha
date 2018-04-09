@@ -30,7 +30,7 @@ public class DialogueParser : MonoBehaviour {
 	// Parses dialogue item, returning updated text and modifying fields
 	public string parse(DialogueItem d_item) {
 		StringBuilder parsed = new StringBuilder(); // Processes string
-		string text = substituteMacros(d_item.speaker_name + ":" + d_item.text);
+		string text = substituteMacros(d_item.speaker_name + ":" + d_item.text); // JUST STICKS NAME AS TEXT: SHOULD BE SEPARATE
 		d_item.fx_text_effects = new List<FXTextEffect> ();
 		d_item.text_events = new List<TextEvent>[text.Length];
 		bool tag = false; // Are we parsing a tag?
@@ -53,6 +53,7 @@ public class DialogueParser : MonoBehaviour {
 	}
 
 	// Parses an effect's starting tag, and adds it to the stack
+	// NEEDS TO ALSO PARSE PARAMETERS
 	void parseEffectStart(int start_pos, string text, StringBuilder parsed) {
 		int end_pos = text.IndexOf ('|', start_pos) - 1;
 		string fx_name = text.Substring (start_pos, end_pos - start_pos + 1);

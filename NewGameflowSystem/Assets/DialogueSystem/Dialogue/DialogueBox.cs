@@ -67,7 +67,7 @@ public class DialogueBox : MonoBehaviour {
 		cr_scroll = null;
 	}
 
-	// checks for text events (square brackets []), and parse and play them. returns end of event
+	// Checks for and plays text events
 	void checkEvents(int start_pos) {
 		if (d_item.text_events [start_pos] != null && d_item.text_events [start_pos].Count > 0)
 			foreach (TextEvent t in d_item.text_events [start_pos])

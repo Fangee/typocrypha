@@ -143,6 +143,7 @@ public class TextEvents : MonoBehaviour {
 		yield return true;
 	}
 
+	// NON_OPERATIONAL
 	// scrolls floating text center aligned in the center of the screen (can also be used to immediately show text)
 	// input: [0]: float, delay time in seconds
 	//        [1]: float, red color
@@ -170,6 +171,7 @@ public class TextEvents : MonoBehaviour {
 		}
 	}
 
+	// NON_OPERATIONAL
 	// fades center text in or out
 	// input: [0]: [in|out], 'in' re-reveals screen, 'out' hides it
 	//        [1]: float, length of fade in seconds
@@ -197,7 +199,8 @@ public class TextEvents : MonoBehaviour {
 			}
 		}
 	}
-		
+
+	// NON_OPERATIONAL
 	// plays the specified sfx
 	// input: [0]: string, sfx filename
 	IEnumerator playSFX(string[] opt) {
@@ -212,6 +215,7 @@ public class TextEvents : MonoBehaviour {
 		yield return true;
 	}
 
+	// NON_OPERATIONAL
 	// sets background image from sprite name
 	// input: [0]: string, name of image file
 	IEnumerator setBG(string[] opt) {
@@ -219,6 +223,7 @@ public class TextEvents : MonoBehaviour {
 		yield return true;
 	}
 
+	// NON_OPERATIONAL
 	// hides/shows dialogue box (NOTE: text is STILL GOING when hidden)
 	// typically, should block when hiding to avoid skipping reshow event
 	// input: [0]: [t|n], hides text box if 't', shows if 'f'
@@ -227,6 +232,7 @@ public class TextEvents : MonoBehaviour {
 		yield return true;
 	}
 
+	// NON_OPERATIONAL
 	// sets the talking sfx
 	// input: [0]: string, name of audio file
 	IEnumerator setTalkSFX(string[] opt) {
@@ -234,6 +240,7 @@ public class TextEvents : MonoBehaviour {
 		yield return true;
 	}
 
+	// DEPRECATED
 	// prompts player to enter something into TYPORCYPHA; resumes on enter
 	// input: [0]: string, type of prompt
 	IEnumerator prompt(string[] opt) {
@@ -296,12 +303,13 @@ public class TextEvents : MonoBehaviour {
 		yield return true;
 	}
 
+	// NON_OPERATIONAL
     IEnumerator evilEye(string[] opt) {
-        Debug.Log("evil eye lol");
         //AnimationPlayer.main.playAnimation("Evil_Eye", new Vector3(-5, 0, 0), 2f);
         yield return true;
     }
-	
+
+	// NON_OPERATIONAL
 	IEnumerator glitch(string[] opt)
 	{
 		for(int i = 0; i < 5; i++)
