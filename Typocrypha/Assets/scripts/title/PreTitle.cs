@@ -74,10 +74,10 @@ public class PreTitle : MonoBehaviour {
 
 	// execute pre-title sequence
 	IEnumerator sequence() {
-		yield return new WaitForSeconds (2.0f);
+		yield return new WaitForSeconds (0.01f);
 		text_scroll.startPrint ("[set-talk-sfx=]Please type in the following phrase.", prompt_text);
 		yield return new WaitWhile(() => text_scroll.is_print);
-		yield return new WaitForSeconds (2.0f);
+		yield return new WaitForSeconds (0.5f);
 		prompt_text.text = target_input;
 		input_ready = true;
 		blink_caret = StartCoroutine (blinkCaret ());
@@ -98,7 +98,7 @@ public class PreTitle : MonoBehaviour {
 			else
 				++num_else;
 		}
-		float new_x = caret_x + (num_thin * 9) + (num_med * 21) + (num_else * 25);
+		float new_x = caret_x + (num_thin * 16) + (num_med * 16) + (num_else * 16); //(num_thin * 9) + (num_med * 21) + (num_else * 25);
 		caret.GetComponent<RectTransform>().localPosition = new Vector2(new_x, caret_y);
 	}
 
