@@ -59,8 +59,8 @@ public class BattleManager : MonoBehaviour {
 	BattleScene curr_battle; // current battle scene
 
 	const float enemy_spacing = 6f; // horizontal space between enemies
-	const float enemy_y_offset = 0.9f; // offset of enemy from y axis
-	const float reticule_y_offset = 1.7f; // offset of target reticule
+	const float enemy_y_offset = 0.5f; // offset of enemy from y axis
+	const float reticule_y_offset = 1.5f; // offset of target reticule
 	const int undim_layer = -1; // layer of enemy when enemy sprite is shown
 	const int dim_layer = -5;   // layer of enemy when enemy sprite is dimmed
 
