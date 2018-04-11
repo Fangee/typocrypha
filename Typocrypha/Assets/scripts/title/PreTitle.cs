@@ -11,6 +11,7 @@ public class PreTitle : MonoBehaviour {
 	public Text input_text; // player's input
 	public string target_input; // what player should enter
 	public SpriteRenderer dimmer; // dims screen
+	public SpriteRenderer screen_dimmer; // dims screen (above everything else)
 	public TitleScreen title_screen; // title screen component
 	public GameObject caret; // caret to show where to type next
 
@@ -59,6 +60,7 @@ public class PreTitle : MonoBehaviour {
 		} else {
 			string in_str = Input.inputString;
 			foreach (char c in in_str) {
+				AudioPlayer.main.playSFX ("sfx_type_key");
 				if (alpha_space.IsMatch(c.ToString())) {
 					buffer += c.ToString();
 					++count;
@@ -74,7 +76,13 @@ public class PreTitle : MonoBehaviour {
 
 	// execute pre-title sequence
 	IEnumerator sequence() {
-		yield return new WaitForSeconds (0.01f);
+		float alpha = 1;
+		while (alpha > 0) {
+			screen_dimmer.color = new Color (0, 0, 0, alpha);
+			alpha -= 0.005f;
+			yield return new WaitForEndOfFrame ();
+		}
+		yield return new WaitForSeconds (0.5f);
 		text_scroll.startPrint ("[set-talk-sfx=]Please type in the following phrase.", prompt_text);
 		yield return new WaitWhile(() => text_scroll.is_print);
 		yield return new WaitForSeconds (0.5f);
@@ -98,7 +106,7 @@ public class PreTitle : MonoBehaviour {
 			else
 				++num_else;
 		}
-		float new_x = caret_x + (num_thin * 16) + (num_med * 16) + (num_else * 16); //(num_thin * 9) + (num_med * 21) + (num_else * 25);
+		float new_x = caret_x + 2 + (num_thin * 16) + (num_med * 16) + (num_else * 16); //(num_thin * 9) + (num_med * 21) + (num_else * 25);
 		caret.GetComponent<RectTransform>().localPosition = new Vector2(new_x, caret_y);
 	}
 

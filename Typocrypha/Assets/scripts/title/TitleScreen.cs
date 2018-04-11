@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 // manages title screen input and animations
 public class TitleScreen : MonoBehaviour {
     public GameObject title_menu; // contains menu sprites
+	public GameObject title_menu_list;
     public SpriteRenderer highlight_sprite;
     public int num_elements;
 	public TextScroll text_scroll; // scrolls text
 	public SpriteRenderer title_sprite; // title screen sprite
+	public Color text_highlight_color;
 
     private bool isActive = false;
     private int index = 0;
@@ -21,8 +23,10 @@ public class TitleScreen : MonoBehaviour {
 
     private void Update()
     {
-        if (!isActive)
-            return;
+		if (!isActive) {
+			title_menu.SetActive (false);
+			return;
+		}  
         // go to next item if down is pressed
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
@@ -69,12 +73,46 @@ public class TitleScreen : MonoBehaviour {
             AudioPlayer.main.playSFX("sfx_enter");
             isActive = false;
         }
+		Text[] title_options = title_menu_list.GetComponentsInChildren<Text> ();
+		string selected_option_text = "";
+		int i = 0;
+		foreach (Text option in title_options) {
+			switch (i) {
+				case 0:
+					selected_option_text = "CONTINUE";
+					break;
+				case 1:
+					selected_option_text = "LOAD GAME";
+					break;
+				case 2:
+					selected_option_text = "NEW GAME";
+					break;
+				case 3:
+					selected_option_text = "SETTINGS";
+					break;
+				case 4:
+					selected_option_text = "QUIT";
+					break;
+				default:
+					selected_option_text = "this text should not be seen";
+					break;
+			}
+			if (option == title_options[index]) {
+				option.text = "> " + selected_option_text + " <";
+				option.color = text_highlight_color;
+			} else {
+				option.text = selected_option_text;
+				option.color = Color.white;
+			}
+			++i;
+		}
     }
 
     // starts title screen music/ui/animations/etc
     public void startTitle() {
 		title_menu.SetActive (true);
         isActive = true;
+		AudioPlayer.main.playMusic ("bgm_title_loop");
 	}
 
 	// called to transition to MainScene (new game) when start is pressed
