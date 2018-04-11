@@ -55,6 +55,7 @@ public class DialogueEditor : Editor {
 			EditorGUILayout.PropertyField (item.FindProperty ("right_icon"), new GUIContent ("Right Icon"));
 			EditorGUILayout.PropertyField (item.FindProperty ("icon_side"), new GUIContent ("Icon Side"));
 			EditorGUILayout.PropertyField (item.FindProperty ("text"), new GUIContent ("Text"));
+			item.FindProperty ("text").stringValue = EditorGUILayout.TextArea (item.FindProperty ("text").stringValue, GUILayout.MinHeight (128));
 			if (item.FindProperty ("dialogue_type").enumValueIndex == (int)DialogueType.INPUT) {
 				EditorGUILayout.Space ();
 				EditorGUILayout.PropertyField (item.FindProperty ("input_display"), new GUIContent ("Input Display"));
