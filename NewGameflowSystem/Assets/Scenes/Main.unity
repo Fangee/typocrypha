@@ -519,6 +519,7 @@ RectTransform:
   - {fileID: 1178502205}
   - {fileID: 1103175963}
   - {fileID: 216610646}
+  - {fileID: 1703001974}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1342,7 +1343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a66e328932553e9409536a97ffac6cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curr_dialogue: {fileID: 11400000, guid: 67d6ee72ccc86214fa1eacb64e29ed99, type: 2}
+  curr_dialogue: {fileID: 11400000, guid: c99b39b0f69c2bd4b906ba157e60fba1, type: 2}
   ChatView: {fileID: 1103175962}
   VNView: {fileID: 216610645}
   ChatContent: {fileID: 717010434}
@@ -1478,6 +1479,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1703001973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1703001974}
+  - component: {fileID: 1703001975}
+  m_Layer: 5
+  m_Name: GameflowManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1703001974
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1703001973}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 383716845}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1703001975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1703001973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07785479efe3f8c40b43ec789486dbbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameflow: {fileID: 11400000, guid: b8d25c3010c1bd543b7a49c901fa829d, type: 2}
 --- !u!1 &1784735662
 GameObject:
   m_ObjectHideFlags: 0

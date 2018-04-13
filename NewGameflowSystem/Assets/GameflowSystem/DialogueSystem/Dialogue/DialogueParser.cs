@@ -105,7 +105,6 @@ public class DialogueParser : MonoBehaviour {
 				Debug.Log ("macro:" + macro.Aggregate("", (acc, next) => acc + "," + next));
 				string[] opt = macro.Skip (1).Take (macro.Length - 1).ToArray ();
 				string sub = TextMacros.main.macro_map [macro[0]] (opt);
-				Debug.Log (sub);
 				true_str.Append (sub);
 				i = end_pos + 1;
 			} else {

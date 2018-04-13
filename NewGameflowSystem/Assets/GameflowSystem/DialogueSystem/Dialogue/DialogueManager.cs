@@ -43,11 +43,16 @@ public class DialogueManager : MonoBehaviour {
 		if (block_input) return;
 		if (!input) {
 			if (Input.GetKeyDown (KeyCode.Space)) {
-				if (!nextLine ()) {
-					// GO TO NEXT DIALOGUE
-				}
+				if (!nextLine ()) GameflowManager.main.next ();
 			}
 		}
+	}
+
+	// Starts a new dialogue scene
+	public void startDialogue(Dialogue new_dialogue) {
+		curr_line = -1;
+		curr_dialogue = new_dialogue;
+		nextLine ();
 	}
 
 	// Displays next line of dialogue. Returns 'false' if there is no next line.
