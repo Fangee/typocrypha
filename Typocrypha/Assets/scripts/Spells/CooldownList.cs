@@ -23,6 +23,7 @@ public class CooldownList : MonoBehaviour {
     {
         CooldownBar c = new CooldownBar(bar_prefab, transform, root, transform.position, curr_time, cooldown);
         c.bar.transform.Translate(Vector3.down * spells.Count * bar_distance, 0);
+		c.bar.transform.Translate(Vector3.left * 0.25F, 0);
         spells.Add(c);
         refs.Add(is_finished);
         flots.Add(curr_time);
@@ -59,7 +60,8 @@ public class CooldownList : MonoBehaviour {
         int i = 0;
         foreach(CooldownBar c in spells)
         {
-            c.bar.transform.position = new Vector3(0, i * bar_distance, 0) + transform.position;
+			c.bar.transform.position = new Vector3 (0, i * bar_distance, 0) + transform.position;
+			c.bar.transform.Translate(Vector3.left * 0.25F, 0);
             i--;
         }
     }

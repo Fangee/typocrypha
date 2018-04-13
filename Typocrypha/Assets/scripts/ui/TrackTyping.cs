@@ -91,7 +91,7 @@ public class TrackTyping : MonoBehaviour {
 		for (int i = 26 - typed_text.text.Length; i > 0; --i) {
 			typed_text.text = typed_text.text + "_";
 		}
-		typed_text.text = "> " + typed_text.text;
+		typed_text.text = ">" + typed_text.text;
 	}
 
 	// create visual keyboard keys

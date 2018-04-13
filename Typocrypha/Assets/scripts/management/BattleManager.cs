@@ -200,7 +200,7 @@ public class BattleManager : MonoBehaviour {
 		enemy_arr [i].initialize (scene.enemy_stats [i]); //sets enemy stats (AND INITITIALIZES ATTACKING AND AI)
 		enemy_arr [i].Position = i;      //Log enemy position in field
 		enemy_arr[i].bars = charge_bars; //Give enemy access to charge_bars
-		Vector3 bar_pos = new_enemy.transform.position + new Vector3(0, -1.0f, 0);
+		Vector3 bar_pos = new_enemy.transform.position + new Vector3(-0.5f, -1.0f, 0);
 		charge_bars.makeChargeMeter(i, bar_pos);
 		stagger_bars.makeStaggerMeter (i, bar_pos);
 		health_bars.makeHealthMeter (i, bar_pos);

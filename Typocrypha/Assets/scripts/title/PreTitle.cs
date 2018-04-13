@@ -14,6 +14,7 @@ public class PreTitle : MonoBehaviour {
 	public SpriteRenderer screen_dimmer; // dims screen (above everything else)
 	public TitleScreen title_screen; // title screen component
 	public GameObject caret; // caret to show where to type next
+	public bool debug_skip_keycheck; // skip to main menu?
 
 	bool input_ready; // can player input?
 	Regex alpha_space; // is character an alphanumeric or a space?
@@ -76,10 +77,16 @@ public class PreTitle : MonoBehaviour {
 
 	// execute pre-title sequence
 	IEnumerator sequence() {
+		if (debug_skip_keycheck) {
+			input_ready = false;
+			//StopCoroutine (blink_caret);
+			caret.SetActive (false);
+			StartCoroutine (transitionToTitle ());
+		}
 		float alpha = 1;
 		while (alpha > 0) {
 			screen_dimmer.color = new Color (0, 0, 0, alpha);
-			alpha -= 0.005f;
+			alpha -= 0.05f;
 			yield return new WaitForEndOfFrame ();
 		}
 		yield return new WaitForSeconds (0.5f);
@@ -141,7 +148,7 @@ public class PreTitle : MonoBehaviour {
 		alpha = 1;
 		while (alpha > 0) {
 			dimmer.color = new Color (0, 0, 0, alpha);
-			alpha -= 0.005f;
+			alpha -= 0.05f;
 			yield return new WaitForEndOfFrame ();
 		}
 		title_screen.startTitle ();
