@@ -11,6 +11,7 @@ public class BattleManager : MonoBehaviour {
     public Player player;
 	public SpellDictionary spellDict; // spell dictionary object
     public SpellEffects spellEffects;
+    public TrackTyping trackTyping;
 	public GameObject enemy_prefab; // prefab for enemy object
     public GameObject ally_prefab; //prefab for ally object
     public GameObject ally_left; // left ally UI
@@ -290,14 +291,17 @@ public class BattleManager : MonoBehaviour {
                 message = chat.getLine(player.Stats.ChatDatabaseID);
                 preCastEffects(targetPattern, player, s, message);
                 StartCoroutine(pauseAttackCurrent(s, player));
+                trackTyping.clearBuffer();//Clear the casting buffer
                 break;
             case CastStatus.BOTCH:
                 //diplay.playBotchEffects
-				spellEffects.popp.spawnSprite("popups_invalid", 1.0F, player.transform.position - new Vector3(0, 0.375f, 0));
+                spellEffects.popp.spawnSprite("popups_invalid", 1.0F, player.transform.position - new Vector3(0, 0.375f, 0));
+                trackTyping.clearBuffer();//Clear the casting buffer
                 break;
             case CastStatus.FIZZLE:
                 //diplay.playBotchEffects
 				spellEffects.popp.spawnSprite("popups_invalid", 1.0F, player.transform.position - new Vector3(0, 0.375f, 0));
+                trackTyping.clearBuffer();//Clear the casting buffer
                 break;
             case CastStatus.ONCOOLDOWN:
                 //display.playOnCooldownEffects
@@ -315,6 +319,7 @@ public class BattleManager : MonoBehaviour {
                 message = chat.getLine(player_arr[allyPos].Stats.ChatDatabaseID);
                 preCastEffects(targetPattern, player_arr[allyPos], s, message);
                 StartCoroutine(pauseAttackCurrent(s, player_arr[allyPos]));
+                trackTyping.clearBuffer();//Clear the casting buffer
                 break;
         }
     }
