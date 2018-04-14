@@ -9461,6 +9461,7 @@ GameObject:
   - component: {fileID: 2052169615}
   - component: {fileID: 2052169614}
   - component: {fileID: 2052169616}
+  - component: {fileID: 2052169617}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -9489,16 +9490,6 @@ MonoBehaviour:
   ally_left: {fileID: 467503968}
   ally_right: {fileID: 350357323}
   chat: {fileID: 112887974}
-  playerColor: {r: 0, g: 0.60784316, b: 1, a: 1}
-  enemyColor: {r: 1, g: 0, b: 0, a: 1}
-  allyColor: {r: 0, g: 1, b: 0, a: 1}
-  clarkeColor: {r: 1, g: 0.766, b: 0, a: 1}
-  battleLogCast: {fileID: 837587309}
-  logCastText: {fileID: 1967725884}
-  logCastInfo: {fileID: 587146705}
-  battleLogTalk: {fileID: 846874626}
-  logTalkText: {fileID: 667754071}
-  logTalkInfo: {fileID: 1457128346}
   charge_bars: {fileID: 898547073}
   stagger_bars: {fileID: 898547074}
   health_bars: {fileID: 898547075}
@@ -9545,6 +9536,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b64ab3a327565834eb4e3aef9396fc46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2052169617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2052169613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b64251b80834cbd499d85133bfb2e9df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battleLogCast: {fileID: 837587309}
+  logCastText: {fileID: 1967725884}
+  logCastInfo: {fileID: 587146705}
+  battleLogTalk: {fileID: 846874626}
+  logTalkText: {fileID: 667754071}
+  logTalkInfo: {fileID: 1457128346}
+  playerColor: {r: 0, g: 0.60784316, b: 1, a: 1}
+  enemyColor: {r: 1, g: 0, b: 0, a: 1}
+  allyColor: {r: 0, g: 1, b: 0, a: 1}
+  clarkeColor: {r: 1, g: 0.7647059, b: 0, a: 1}
 --- !u!1 &2121758902
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,18 +18,6 @@ public class BattleManager : MonoBehaviour {
     private DisplayAlly ally_display_left;
     private DisplayAlly ally_display_right;
     public ChatDatabase chat; //Database containing chat lines
-    public Color playerColor;
-    public Color enemyColor;
-    public Color allyColor;
-    public Color clarkeColor;
-    public GameObject battleLogCast; //Casting log object and Associated reference to store
-    private Image castBox;
-    public Text logCastText;
-    public Text logCastInfo;
-    public GameObject battleLogTalk; //talk log object and Associated reference to store
-    private Image talkBox;
-    public Text logTalkText;
-    public Text logTalkInfo;
 	public EnemyChargeBars charge_bars; // creates and mananges charge bars
 	public EnemyStaggerBars stagger_bars; // creates and manages stagger bars
 	public EnemyHealthBars health_bars; // creates and manages enemy health bars
@@ -124,8 +112,7 @@ public class BattleManager : MonoBehaviour {
 
         //INITIALIZE BATTLE LOG STUFF//
 
-        castBox = battleLogCast.GetComponent<Image>();
-        talkBox = battleLogTalk.GetComponent<Image>();
+
 
 		//INITIALIZE TARGET UI//
 
@@ -388,7 +375,7 @@ public class BattleManager : MonoBehaviour {
     private void preCastEffects(Pair<bool[], bool[]> targetPattern, ICaster caster, SpellData cast, string message)
     {
         BattleEffects.main.setDim(true);
-        battleLog(cast.ToString(), caster.CasterType, message, caster.Stats.name);
+		BattleLog.main.battleLog(cast.ToString(), caster.CasterType, message, caster.Stats.name);
         if (targetPattern != null)
         {
             if (caster.CasterType == ICasterType.ENEMY)
@@ -398,10 +385,11 @@ public class BattleManager : MonoBehaviour {
         }
         target_ret.SetActive(false); // disable / make target reticule disappear on a cast
     }
+
     //effects that hafter after any actor casts
     private void postCastEffects()
     {
-        stopBattleLog();
+		BattleLog.main.stopBattleLog();
         for (int i = 0; i < 3; ++i)
         {
             if (enemy_arr[i] != null)
@@ -409,45 +397,6 @@ public class BattleManager : MonoBehaviour {
         }
         target_ret.SetActive(true); // enable / make target reticule appear after a cast
         BattleEffects.main.setDim(false);
-    }
-    //Enable battle log UI state (call anywhere that the battlemanager pauses to cast)
-    private void battleLog(string cast, ICasterType caster, string talk, string speaker)
-    {
-        battleLogCast.SetActive(true);
-        battleLogTalk.SetActive(true);
-        logCastText.text = "> " + cast;
-        logTalkText.text = talk;
-        logTalkInfo.text = speaker;
-        if (caster == ICasterType.ENEMY)
-        {
-            castBox.color = enemyColor;
-            talkBox.color = enemyColor;
-            logCastInfo.text = "ENEMY  CAST";
-        }
-        else if (caster == ICasterType.PLAYER)
-        {
-            castBox.color = playerColor;
-            talkBox.color = playerColor;
-            logCastInfo.text = "PLAYER CAST";
-        }
-        else if (caster == ICasterType.NPC_ALLY)
-        {
-            castBox.color = allyColor;
-            talkBox.color = allyColor;
-            logCastInfo.text = "ALLY   CAST";
-        }
-        else //caster == IcasterType.INVALID (clarke is speaking)
-        {
-            castBox.color = clarkeColor;
-            talkBox.color = clarkeColor;
-            logCastInfo.text = "ERROR  CAST";
-        }
-    }
-    //Stop battle log UI (call after every pause to cast
-    private void stopBattleLog()
-    {
-        battleLogCast.SetActive(false);
-        battleLogTalk.SetActive(false);
     }
 
     //Raises the targets (array val = true) above the dimmer level
