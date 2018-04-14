@@ -237,14 +237,10 @@ public class BattleManager : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.LeftArrow)) --target_ind;
 		if (Input.GetKeyDown (KeyCode.RightArrow)) ++target_ind;
 
-        //show enemy info on Shift
+        //toggle enemy info on Shift
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
-        {
-            target_ret_scr.showScouter();
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
-        {
-            target_ret_scr.hideScouter();
+        { 
+                target_ret_scr.toggleScouter();
         }
 
 		// fix if target is out of bounds
@@ -341,8 +337,8 @@ public class BattleManager : MonoBehaviour {
         //END PAUSE//
 
         postCastEffects();
-        pause = false;
         updateEnemies();
+        pause = false;
     }
  
     //Casts from an enemy position: calls processCast on results
@@ -370,10 +366,9 @@ public class BattleManager : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         postCastEffects();
-        //BattleEffects.main.setDim(false, enemy_arr[position].GetComponent<SpriteRenderer>());
-        pause = false; // unpause
         enemy_arr[position].attack_in_progress = false;
         updateEnemies();
+        pause = false; // unpause
     }
 
     //Method for processing CastData (most effects now happen in SpellEffects.cs)
@@ -463,11 +458,6 @@ public class BattleManager : MonoBehaviour {
     {
         battleLogCast.SetActive(false);
         battleLogTalk.SetActive(false);
-        //hide scouter when pause ends if player not holding shift
-        if (!(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
-        {
-            target_ret_scr.hideScouter();
-        }
     }
 
     //Raises the targets (array val = true) above the dimmer level

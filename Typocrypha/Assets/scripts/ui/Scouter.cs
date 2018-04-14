@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Scouter : MonoBehaviour {
 
+    public BattleManager field;
+
     TextMesh left; //buff/debuff
     TextMesh right; //damage modifiers
     SpriteRenderer brackets;
     float alpha = 0f;
     float aDelta = .33f;
+    bool isActive = false;
 
 	void Awake () {
         left = transform.GetChild(0).gameObject.GetComponent<TextMesh>();
@@ -17,23 +20,34 @@ public class Scouter : MonoBehaviour {
 	}
 
     //Show scouter
-    public void Show() {
+    public void show() {
         updateInfo();
         StopAllCoroutines();
         StartCoroutine(fadeIn());
+        isActive = true;
     }
 
     //Hide scouter
-    public void Hide() {
+    public void hide() {
         StopAllCoroutines();
         StartCoroutine(fadeOut());
+        isActive = false;
+    }
+
+    public bool toggle()
+    {
+        if (isActive)
+            hide();
+        else
+            show();
+        return isActive;
     }
 
     //Update the info on the enemy
     public void updateInfo() {
         if (left == null) return; //not sure why left/right are null at start of battle, but this stops it from doing garbage
         //Targeted enemy
-        Enemy foe = BattleManager.main.enemy_arr[BattleManager.main.target_ind];
+        Enemy foe = field.enemy_arr[field.target_ind];
         //Check if enemy exists
         if (foe == null || foe.Is_dead)
         {
