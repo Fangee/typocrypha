@@ -41,10 +41,8 @@ public class DialogueManager : MonoBehaviour {
 
 	void Update() {
 		if (block_input) return;
-		if (!input) {
-			if (Input.GetKeyDown (KeyCode.Space)) {
-				if (!nextLine ()) GameflowManager.main.next ();
-			}
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			if (!nextLine ()) GameflowManager.main.next ();
 		}
 	}
 
@@ -60,6 +58,7 @@ public class DialogueManager : MonoBehaviour {
 		if (history.Count > 0 && history [history.Count - 1].cr_scroll != null) {
 			history [history.Count - 1].dumpText ();
 		} else {
+			if (input) return true;
 			if (curr_line >= curr_dialogue.count - 1) return false;
 			DialogueItem d_item = curr_dialogue.lines [++curr_line];
 			GameObject dialogue;
@@ -84,9 +83,7 @@ public class DialogueManager : MonoBehaviour {
 				dialogue_box.fx_text.addEffect (text_effect);
 			if (d_item.dialogue_type == DialogueType.INPUT) {
 				input = true;
-				input_field.gameObject.SetActive (true);
-				input_field.ActivateInputField ();
-				input_display = Instantiate (d_item.input_display, transform);
+				StartCoroutine(showInput(d_item, dialogue_box));
 			} else {
 				input = false;
 			}
@@ -94,9 +91,19 @@ public class DialogueManager : MonoBehaviour {
 		return true;
 	}
 
+	// Show input options when text is done scrolling
+	IEnumerator showInput(DialogueItem d_item, DialogueBox d_box) {
+		yield return new WaitUntil (() => d_box.cr_scroll != null);
+		yield return new WaitUntil (() => d_box.cr_scroll == null);
+		input_field.gameObject.SetActive (true);
+		input_field.ActivateInputField ();
+		input_display = Instantiate (d_item.input_display, transform);
+	}
+
 	// Called when input field is submitted
 	public void submitInput() {
 		answer = input_field.text;
+		Debug.Log ("submit:" + answer);
 		// CHECK IF CORRECT INPUT
 		input_field.gameObject.SetActive (false);
 		input_field.text = "";
@@ -113,6 +120,7 @@ public class DialogueManager : MonoBehaviour {
 				curr_line--;
 			}
 		}
+		input = false;
 		forceNextLine ();
 	}
 
