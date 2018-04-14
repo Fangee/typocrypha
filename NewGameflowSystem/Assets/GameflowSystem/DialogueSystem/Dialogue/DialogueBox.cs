@@ -79,7 +79,7 @@ public class DialogueBox : MonoBehaviour {
 
 	// Sets dialogue box's height based on text. Also updates dialogue window height
 	void setBoxHeight() {
-		rect_tr.sizeDelta = new Vector2 (rect_tr.sizeDelta.x, (2 * text_pad) + fx_text.preferredHeight);
+		rect_tr.sizeDelta = new Vector2 (rect_tr.sizeDelta.x, text_pad + fx_text.preferredHeight);
 		dialogue_manager.expandWindow (rect_tr.sizeDelta.y);
 	}
 }

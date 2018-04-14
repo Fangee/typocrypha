@@ -6,7 +6,7 @@ using UnityEngine.UI;
 // Manages dialogue boxes
 public class DialogueManager : MonoBehaviour {
 	public static DialogueManager main = null; // Global static reference
-	public Dialogue curr_dialogue; // Current dialogue file to be run
+	public GameObject curr_dialogue; // Current dialogue to be run
 	public GameObject ChatView; // Chat view hiearchy
 	public GameObject VNView; // Visual Novel view hiearchy
 	public RectTransform ChatContent; // Content of chat scroll view (contains dialogue boxes)
@@ -47,7 +47,7 @@ public class DialogueManager : MonoBehaviour {
 	}
 
 	// Starts a new dialogue scene
-	public void startDialogue(Dialogue new_dialogue) {
+	public void startDialogue(GameObject new_dialogue) {
 		curr_line = -1;
 		curr_dialogue = new_dialogue;
 		nextLine ();
@@ -59,8 +59,9 @@ public class DialogueManager : MonoBehaviour {
 			history [history.Count - 1].dumpText ();
 		} else {
 			if (input) return true;
-			if (curr_line >= curr_dialogue.count - 1) return false;
-			DialogueItem d_item = curr_dialogue.lines [++curr_line];
+			if (curr_line >= curr_dialogue.GetComponents<DialogueItem>().Length - 1) return false;
+			//DialogueItem d_item = curr_dialogue.lines [++curr_line];
+			DialogueItem d_item = curr_dialogue.GetComponents<DialogueItem>()[++curr_line];
 			GameObject dialogue;
 			if (d_item.dialogue_mode == DialogueMode.VN) {
 				VNView.SetActive (true);
@@ -103,18 +104,17 @@ public class DialogueManager : MonoBehaviour {
 	// Called when input field is submitted
 	public void submitInput() {
 		answer = input_field.text;
-		Debug.Log ("submit:" + answer);
 		// CHECK IF CORRECT INPUT
 		input_field.gameObject.SetActive (false);
 		input_field.text = "";
 		Destroy (input_display);
-		DialogueItem d_item = curr_dialogue.lines [curr_line];
-		if (d_item.input_count > 0) { // If set number of choices
+		DialogueItem d_item = curr_dialogue.GetComponents<DialogueItem>()[curr_line];
+		if (d_item.input_options.Length > 0) { // If set number of choices
 			int i = 0;
-			for (; i < d_item.input_count; ++i)
+			for (; i < d_item.input_options.Length; ++i)
 				if (d_item.input_options [i].CompareTo (answer) == 0) break;
-			if (i < d_item.input_count) { // Option was found, so branch
-				curr_dialogue = d_item.input_branches [i];
+			if (i < d_item.input_options.Length) { // Option was found, so branch
+				curr_dialogue = d_item.input_branches [i].gameObject;
 				curr_line = -1;
 			} else { // If not found, try again
 				curr_line--;

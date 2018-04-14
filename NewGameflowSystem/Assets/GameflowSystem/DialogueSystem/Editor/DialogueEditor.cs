@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEditor.AnimatedValues;
 // Memory problem: deleted lines of dialogue aren't actually deleted
 
+/*
 // Custom editor for Dialogue
 [CustomEditor(typeof(Dialogue))]
 public class DialogueEditor : Editor {
@@ -83,3 +84,4 @@ public class DialogueEditor : Editor {
 		item.ApplyModifiedProperties ();
 	}
 }
+*/

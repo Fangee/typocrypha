@@ -9,24 +9,23 @@ using UnityEditor.UI;
 using UnityEditor.AnimatedValues;
 
 // BROKEN DONT USE
+/*
 // Editor window for implementing dialogue
 public class DialogueEditorBROKEN : Editor {
 	Dialogue curr_dialogue; // Current dialogue being edited
 	List<AnimBool> box_fade = new List<AnimBool>();
 	Vector2 scroll_pos = Vector2.zero;
 
-	/*
 	// Add menu item for the dialogue editor
 	[MenuItem ("Window/Dialogue Editor")]
 	public static void ShowWindow () {
 		EditorWindow.GetWindow(typeof(DialogueEditor));
 	}
-	*/
 
 	public override void OnInspectorGUI() {
 		serializedObject.Update ();
 		scroll_pos = EditorGUILayout.BeginScrollView (scroll_pos, GUILayout.ExpandWidth(true));
-		/*** View for base options ***/
+		// View for base options
 		EditorGUILayout.BeginVertical();
 		curr_dialogue = (Dialogue)EditorGUILayout.ObjectField ("Dialogue", curr_dialogue, typeof(Dialogue), false);
 		curr_dialogue = (Dialogue)target;
@@ -42,7 +41,7 @@ public class DialogueEditorBROKEN : Editor {
 		}
 		EditorGUILayout.EndVertical ();
 		EditorGUILayout.Space ();
-		/*** View for lines of dialogue ***/
+		// View for lines of dialogue 
 		if (curr_dialogue != null) {
 			for (int i = 0; i < curr_dialogue.lines.Count(); ++i)
 				createDialogueItemMenu (i);
@@ -109,3 +108,4 @@ public class DialogueEditorBROKEN : Editor {
 		EditorGUILayout.Space ();
 	}
 }
+*/

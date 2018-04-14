@@ -7,8 +7,7 @@ public enum DialogueMode {VN, CHAT}; // Style of dialogue presentation
 public enum DialogueType {NORMAL, INPUT}; // Type of player interaction with dialouge
 
 // Represents a single line of dialogue, and all it's effects/events/etc
-[CreateAssetMenu]
-public class DialogueItem : ScriptableObject {
+public class DialogueItem : MonoBehaviour {
 	[HideInInspector] public List<FXTextEffect> fx_text_effects; // List of text effects
 	[HideInInspector] public List<TextEvent>[] text_events; // Array of text events at each character index
 	public DialogueMode dialogue_mode; // Display style of dialogue
@@ -22,8 +21,7 @@ public class DialogueItem : ScriptableObject {
 	// Input fields
 	public GameObject input_display; // What to show on screen during choice
 	// These fields are for input sections where the choices are limited
-	// If the input section is free response, count == 0
-	public int input_count; // Number of possible input string choices
-	public string[] input_options = new string[16]; // Possible strings user can type in
-	public Dialogue[] input_branches = new Dialogue[16]; // Dialogue to transition to after choice is made
+	// If the input section is free response, arrays are empty
+	public string[] input_options; // Possible strings user can type in
+	public Dialogue[] input_branches; // Dialogue to transition to after choice is made
 }
