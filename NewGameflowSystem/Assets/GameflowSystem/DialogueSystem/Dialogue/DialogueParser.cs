@@ -30,7 +30,7 @@ public class DialogueParser : MonoBehaviour {
 	// Parses dialogue item, returning updated text and modifying fields
 	public string parse(DialogueItem d_item) {
 		StringBuilder parsed = new StringBuilder(); // Processes string
-		string text = substituteMacros(d_item.speaker_name + ":" + d_item.text); // JUST STICKS NAME AS TEXT: SHOULD BE SEPARATE
+		string text = substituteMacros(d_item.speaker_name + "\n" + d_item.text);
 		d_item.fx_text_effects = new List<FXTextEffect> ();
 		d_item.text_events = new List<TextEvent>[text.Length];
 		bool tag = false; // Are we parsing a tag?

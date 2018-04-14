@@ -69,6 +69,7 @@ public class DialogueManager : MonoBehaviour {
 				// Hide previous dialogue
 				if (VNContent.childCount > 0) VNContent.GetChild (VNContent.childCount - 1).gameObject.SetActive (false);
 				dialogue = Instantiate (dialogue_box_prefab, VNContent);
+				dialogue.GetComponent<Image> ().color = new Color (1, 1, 1, 0);
 			} else {
 				VNView.SetActive (false);
 				ChatView.SetActive (true);
@@ -77,6 +78,7 @@ public class DialogueManager : MonoBehaviour {
 			DialogueBox dialogue_box = dialogue.GetComponent<DialogueBox> ();
 			history.Add (dialogue_box);
 			dialogue_box.d_item = d_item;
+			dialogue_box.speaker = d_item.speaker_name;
 			dialogue_box.text = DialogueParser.main.parse (d_item);
 			foreach(FXTextEffect text_effect in d_item.fx_text_effects)
 				dialogue_box.fx_text.addEffect (text_effect);

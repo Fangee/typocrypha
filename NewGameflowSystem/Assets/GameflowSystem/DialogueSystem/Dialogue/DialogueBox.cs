@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 // Manages a single dialogue box
 public class DialogueBox : MonoBehaviour {
+	public string speaker; // Speaker's name
 	public string text; // Text to be displayed
 	public float scroll_delay; // Time (in seconds) between showing characters
 	public FXText fx_text; // FXText component for displaying text
@@ -33,7 +34,9 @@ public class DialogueBox : MonoBehaviour {
 		set_color.color.a = 0;
 		set_color.chars = new int[2]{0,text.Length};
 		fx_text.addEffect (set_color);
+		// Set text, and unhide speaker name
 		fx_text.text = text;
+		set_color.chars [0] = text.IndexOf ('\n');
 		// Display appropriate icon
 		if (d_item.icon_side == IconSide.LEFT || d_item.icon_side == IconSide.BOTH)
 			left_icon.enabled = true;
@@ -55,12 +58,12 @@ public class DialogueBox : MonoBehaviour {
 
 	// Scrolls text character by character
 	IEnumerator textScrollCR() {
-		int cnt = 0;
+		int cnt = text.IndexOf ('\n');
 		bool tag = false; // Are we scrolling over a tag?
 		while (cnt < text.Length) {
 			yield return new WaitWhile (() => DialogueManager.main.pause_scroll);
 			checkEvents (cnt);
-			tag = tag ? (text [cnt - 1] != '>') || (text[cnt] == '<') : (text [cnt] == '<'); // Skip Unity rich text tags
+			tag = tag ? (text [cnt - 1] != '>') || (text[cnt] == '<') : (text[cnt] == '<'); // Skip Unity rich text tags
 			if (!tag) yield return new WaitForSeconds (scroll_delay);
 			set_color.chars [0] = ++cnt;
 		}
@@ -76,7 +79,7 @@ public class DialogueBox : MonoBehaviour {
 
 	// Sets dialogue box's height based on text. Also updates dialogue window height
 	void setBoxHeight() {
-		rect_tr.sizeDelta = new Vector2 (rect_tr.sizeDelta.x, text_pad + fx_text.preferredHeight);
+		rect_tr.sizeDelta = new Vector2 (rect_tr.sizeDelta.x, (2 * text_pad) + fx_text.preferredHeight);
 		dialogue_manager.expandWindow (rect_tr.sizeDelta.y);
 	}
 }
