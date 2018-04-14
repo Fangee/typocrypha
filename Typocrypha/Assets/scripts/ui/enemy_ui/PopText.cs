@@ -32,13 +32,11 @@ public class PopText : MonoBehaviour {
 
     IEnumerator Bleh (string message, float delay) {
         txt.text = message;
-        Vector3 beef = transform.position;
+        BattleEffects.main.spriteShake(transform, 0.1f, 0.2f);
         for (int i = 0; i < 6; i++)
         {
-            transform.position = beef + new Vector3 (Random.value/3, Random.value/3, 0);
             yield return new WaitForEndOfFrame();
         }
-        transform.position = beef;
         yield return new WaitForSeconds (delay);
         Destroy (gameObject);
     }

@@ -11,7 +11,11 @@ public class AllyStats : CasterStats
     {
         spell = new SpellData(name.ToLower());
     }
-    public readonly SpellData spell; // castable spell
+    public SpellData spell; // castable spell
+    public AllyStats clone()
+    {
+        return new AllyStats(name, ChatDatabaseID, max_hp, max_shield, max_stagger, attack, defense, speed, accuracy, evasion, vsElement);
+    }
 }
 
 public class Ally : MonoBehaviour, ICaster {
@@ -21,7 +25,8 @@ public class Ally : MonoBehaviour, ICaster {
 
     //ICASTER STUFF//
     public Transform Transform { get { return transform; } }
-
+    private int position; //position in battle field
+    public int Position { get { return position; } set { position = value; } }
     private AllyStats stats;
     public CasterStats Stats
     {
@@ -129,7 +134,6 @@ public class Ally : MonoBehaviour, ICaster {
         return Mathf.Clamp01(gauge_value / stats.max_hp); 
     }
 
-    public int position; //position in battle field
     public int target = 1;
 
     // Use this for initialization

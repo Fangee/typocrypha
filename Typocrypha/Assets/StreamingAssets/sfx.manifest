@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2930676235
+CRC: 895218816
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: bd56647e3d9307f56efe953c17ab1f6c
+    Hash: 8afa3c808d5dd906a6ce104d5bbab514
   TypeTreeHash:
     serializedVersion: 2
     Hash: 3f7d0c5e0986ec71841622bcb2f9be1c
@@ -12,6 +12,7 @@ ClassTypes:
 - Class: 83
   Script: {instanceID: 0}
 Assets:
+- Assets/audio/sfx/ui_sfx/status_key_sfx/sfx_status_frozen_key_break.wav
 - Assets/audio/sfx/spell_sfx/sfx_astral_hit.wav
 - Assets/audio/sfx/ui_sfx/menu_boop.ogg
 - Assets/audio/sfx/other/Static_Sound.wav
@@ -21,11 +22,13 @@ Assets:
 - Assets/audio/sfx/spell_sfx/sfx_purity_hit.wav
 - Assets/audio/sfx/battle_sfx/sfx_miss.wav
 - Assets/audio/sfx/spell_sfx/sfx_fire_hit.wav
+- Assets/audio/sfx/ui_sfx/status_key_sfx/sfx_status_frozen.wav
 - Assets/audio/sfx/spell_sfx/sfx_slash.wav
 - Assets/audio/sfx/spell_sfx/sfx_stab.wav
 - Assets/audio/sfx/battle_sfx/sfx_enemy_weakcrit_dmg.wav
 - Assets/audio/sfx/spell_sfx/sfx_volt_hit.wav
 - Assets/audio/sfx/cutscene_sfx/sfx_learn_spell_cutscene.wav
+- Assets/audio/sfx/ui_sfx/status_key_sfx/sfx_status_frozen_key_hit.wav
 - Assets/audio/sfx/battle_sfx/sfx_damage_number.wav
 - Assets/audio/sfx/spell_sfx/sfx_enemy_cast.wav
 - Assets/audio/sfx/battle_sfx/sfx_party_weakcrit_dmg.wav
@@ -39,4 +42,5 @@ Assets:
 - Assets/audio/sfx/battle_sfx/enemy_attack_ready.wav
 - Assets/audio/sfx/spell_sfx/sfx_crush.wav
 - Assets/audio/sfx/ui_sfx/sfx_next_textbox.wav
+- Assets/audio/sfx/ui_sfx/sfx_type_key.wav
 Dependencies: []

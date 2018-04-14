@@ -110,7 +110,7 @@ public class EnemyDatabase
     public EnemyStats getData(string id)
     {
         if(database.ContainsKey(id))
-            return database[id];
+            return database[id].clone();
         throw new KeyNotFoundException(id + " is not in the EnemyDatabase");
     }
 }

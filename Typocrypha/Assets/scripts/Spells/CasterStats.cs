@@ -23,20 +23,20 @@ public class CasterStats
 
     //Readonly fields
 
-    public readonly string name;     //name
-    public readonly int max_hp;      //max health
-    public readonly int max_stagger; //max stagger
-    public readonly int max_shield;  //max shield
+    public string name;     //name
+    public int max_hp;      //max health
+    public int max_stagger; //max stagger
+    public int max_shield;  //max shield
     //Spell modifiers 
-    public readonly float attack;      //numerical damage boost
-    public readonly float defense;     //numerical damage reduction
-    public readonly float speed;       //percentage of casting time reduction
-    public readonly float accuracy;      //numerical hitchance boost
-    public readonly int evasion;       //numerical dodgechance boost
-    public readonly float[] vsElement; //elemental weaknesses/resistances
+    public float attack;      //numerical damage boost
+    public float defense;     //numerical damage reduction
+    public float speed;       //percentage of casting time reduction
+    public float accuracy;      //numerical hitchance boost
+    public int evasion;       //numerical dodgechance boost
+    public float[] vsElement; //elemental weaknesses/resistances
 
     //chat database stuff
-    private readonly string chatDatabaseID;
+    private string chatDatabaseID;
     public virtual string ChatDatabaseID { get{ return chatDatabaseID; } }
 
     //Return the equivalent of this modified by debuff mod

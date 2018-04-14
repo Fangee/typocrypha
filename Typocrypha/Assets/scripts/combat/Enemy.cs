@@ -14,10 +14,14 @@ public class EnemyStats : CasterStats {
         this.ai_params = ai_params;
         spells = sp;
     }
-    public readonly string sprite_path; //path of sprite/resource to load at creation
-    public readonly string ai_type; //type of enemy AI (will be same as name if unique)
-    public readonly string[] ai_params;
-    public readonly EnemySpellList spells; // castable spells
+    public string sprite_path; //path of sprite/resource to load at creation
+    public string ai_type; //type of enemy AI (will be same as name if unique)
+    public string[] ai_params;
+    public EnemySpellList spells; // castable spells
+    public EnemyStats clone()
+    {
+        return new EnemyStats(name, ChatDatabaseID, sprite_path, max_hp, max_shield, max_stagger, attack, defense, speed, accuracy, evasion, vsElement, spells, ai_type, ai_params);
+    }
 }
 
 // defines enemy behaviour
@@ -32,6 +36,8 @@ public class Enemy : MonoBehaviour, ICaster {
     //ICaster Properties//
 
     public Transform Transform { get { return transform; } }
+    private int position; //position in battle field
+    public int Position { get { return position; } set { position = value; } }
     public CasterStats Stats
     {
         get
@@ -69,7 +75,6 @@ public class Enemy : MonoBehaviour, ICaster {
     public bool attack_in_progress = false;
 
     public BattleManager field; // the field the enemy is located in (battle state)
-    public int position; //index to field (current position)
     public EnemyChargeBars bars;
 	public SpriteRenderer enemy_sprite; // this enemy's sprite
     public EnemyAI AI = null;
