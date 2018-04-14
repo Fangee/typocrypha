@@ -290,6 +290,7 @@ public class BattleManager : MonoBehaviour {
                 break;
             case CastStatus.FIZZLE:
                 //diplay.playBotchEffects
+				spellEffects.popp.spawnSprite("popups_invalid", 1.0F, player.transform.position - new Vector3(0, 0.375f, 0));
                 break;
             case CastStatus.ONCOOLDOWN:
                 //display.playOnCooldownEffects
