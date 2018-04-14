@@ -286,15 +286,18 @@ public class BattleManager : MonoBehaviour {
                 break;
             case CastStatus.BOTCH:
                 //diplay.playBotchEffects
+				spellEffects.popp.spawnSprite("popups_invalid", 1.0F, player.transform.position - new Vector3(0, 0.375f, 0));
                 break;
             case CastStatus.FIZZLE:
                 //diplay.playBotchEffects
                 break;
             case CastStatus.ONCOOLDOWN:
                 //display.playOnCooldownEffects
+				spellEffects.popp.spawnSprite("popups_oncooldown", 1.0F, player.transform.position - new Vector3(0, 0.375f, 0));
                 break;
             case CastStatus.COOLDOWNFULL:
                 //diplay.playCooldownFullEffects
+				spellEffects.popp.spawnSprite("popups_cooldownfull", 1.0F, player.transform.position - new Vector3(0, 0.375f, 0));
                 break;
             case CastStatus.ALLYSPELL:
                 int allyPos = getAllyPosition(s.root);
