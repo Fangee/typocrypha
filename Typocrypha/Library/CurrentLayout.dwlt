@@ -40,8 +40,8 @@ MonoBehaviour:
     y: 0
     width: 356
     height: 579
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 71}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -70,7 +70,7 @@ MonoBehaviour:
   m_MinSize: {x: 481, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 64
+  controlID: 29
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_MinSize: {x: 917, y: 392}
   m_MaxSize: {x: 22012, y: 14042}
   vertical: 0
-  controlID: 61
+  controlID: 26
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_MinSize: {x: 917, y: 392}
   m_MaxSize: {x: 22012, y: 14042}
   vertical: 1
-  controlID: 62
+  controlID: 27
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_MinSize: {x: 917, y: 271}
   m_MaxSize: {x: 22012, y: 10021}
   vertical: 0
-  controlID: 63
+  controlID: 28
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -435,7 +435,8 @@ MonoBehaviour:
     m_ScenePaths: []
     m_ShowAllHits: 0
     m_SearchArea: 0
-    m_Folders: []
+    m_Folders:
+    - Assets/scripts/animation
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -446,7 +447,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 1e2d0000
     m_LastClickedID: 11550
-    m_ExpandedIDs: 000000002c06000010280000a2280000b4280000be280000d8280000142900002c2900009e290000d6290000522a0000622a00006c2a00008c2a0000a42a0000dc2a0000462b00004c2b0000622b00008e2b00009e2b0000c62b0000d82b0000ec2b0000f82b0000ac2c0000122d00001a2d00002e2d0000622d0000982d0000b22d0000483300004a330000
+    m_ExpandedIDs: 000000002e06000012280000a4280000b6280000c0280000da280000162900002e290000a0290000d8290000542a0000642a00006e2a00008e2a0000a62a0000de2a0000482b00004e2b0000642b0000902b0000a02b0000c82b0000da2b0000ee2b0000fa2b0000ae2c0000142d00001c2d0000302d0000642d00009a2d0000b42d00004e33000050330000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -471,21 +472,21 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 300}
+    scrollPos: {x: 0, y: 360}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000002c06000010280000a2280000b4280000be280000d8280000142900002c2900009e290000d6290000522a0000622a00006c2a00008c2a0000a42a0000dc2a0000462b00004c2b0000622b00008e2b00009e2b0000c62b0000d82b0000ec2b0000f82b0000ac2c0000122d00001a2d00002e2d0000622d0000982d0000b22d0000483300004a330000
+    m_ExpandedIDs: 000000002e06000012280000a4280000b6280000c0280000da280000162900002e290000a0290000d8290000542a0000642a00006e2a00008e2a0000a62a0000de2a0000482b00004e2b0000642b0000902b0000a02b0000c82b0000da2b0000ee2b0000fa2b0000ae2c0000142d00001c2d0000302d0000642d00009a2d0000b42d00004e33000050330000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: BattleField
-      m_OriginalName: BattleField
+      m_Name: CutsceneEvent
+      m_OriginalName: CutsceneEvent
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 13140
+      m_UserData: 1768
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -556,7 +557,7 @@ MonoBehaviour:
     width: 354
     height: 558
   m_PersistentViewDataDictionary: {fileID: 0}
-  m_ScrollPosition: {x: 0, y: 55.95508}
+  m_ScrollPosition: {x: 0, y: 0}
   m_InspectorMode: 0
   m_PreviewResizer:
     m_CachedPref: 160
@@ -592,9 +593,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c8310000
-    m_LastClickedID: 12744
-    m_ExpandedIDs: 9efbffff00000000742f0000
+    m_SelectedIDs: 68070000
+    m_LastClickedID: 0
+    m_ExpandedIDs: 9efbffff00000000762f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

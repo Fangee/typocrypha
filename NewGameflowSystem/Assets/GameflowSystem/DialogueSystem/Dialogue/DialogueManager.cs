@@ -103,7 +103,7 @@ public class DialogueManager : MonoBehaviour {
 
 	// Called when input field is submitted
 	public void submitInput() {
-		answer = input_field.text;
+		answer = input_field.text.Trim().ToLower();
 		// CHECK IF CORRECT INPUT
 		input_field.gameObject.SetActive (false);
 		input_field.text = "";
@@ -112,7 +112,7 @@ public class DialogueManager : MonoBehaviour {
 		if (d_item.input_options.Length > 0) { // If set number of choices
 			int i = 0;
 			for (; i < d_item.input_options.Length; ++i)
-				if (d_item.input_options [i].CompareTo (answer) == 0) break;
+				if (d_item.input_options [i].Trim().ToLower().CompareTo (answer) == 0) break;
 			if (i < d_item.input_options.Length) { // Option was found, so branch
 				curr_dialogue = d_item.input_branches [i].gameObject;
 				curr_line = -1;
