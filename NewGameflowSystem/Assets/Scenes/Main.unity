@@ -113,6 +113,97 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &64390642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 64390643}
+  - component: {fileID: 64390646}
+  - component: {fileID: 64390645}
+  - component: {fileID: 64390644}
+  m_Layer: 5
+  m_Name: D_Test_Blue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &64390643
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 64390642}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.00032, y: 1.00032, z: 1.00032}
+  m_Children: []
+  m_Father: {fileID: 1018769364}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &64390644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 64390642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9116ef576fcdbd4ca88c9c8cafe1e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_mode: 0
+  dialogue_type: 0
+  speaker_name: Jo
+  left_icon: {fileID: 21300000, guid: aa2be38018207344196cf25365a7dbb1, type: 3}
+  right_icon: {fileID: 0}
+  icon_side: 0
+  text: Uh... Good luck with that.
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+--- !u!114 &64390645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 64390642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9116ef576fcdbd4ca88c9c8cafe1e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_mode: 0
+  dialogue_type: 0
+  speaker_name: Jo
+  left_icon: {fileID: 21300000, guid: aa2be38018207344196cf25365a7dbb1, type: 3}
+  right_icon: {fileID: 0}
+  icon_side: 0
+  text: Blue pill? Woah...
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+--- !u!114 &64390646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 64390642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &67305911
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +460,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 383716845}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -547,7 +638,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &284202617
 RectTransform:
   m_ObjectHideFlags: 0
@@ -582,6 +673,8 @@ MonoBehaviour:
   Enemy1: 
   Enemy2: 
   Enemy3: 
+  Ally1: 
+  Ally2: 
   interrupts: []
 --- !u!114 &284202619
 MonoBehaviour:
@@ -599,6 +692,8 @@ MonoBehaviour:
   Enemy1: 
   Enemy2: 
   Enemy3: 
+  Ally1: 
+  Ally2: 
   interrupts: []
 --- !u!114 &284202620
 MonoBehaviour:
@@ -616,6 +711,8 @@ MonoBehaviour:
   Enemy1: 
   Enemy2: 
   Enemy3: 
+  Ally1: 
+  Ally2: 
   interrupts: []
 --- !u!114 &284202621
 MonoBehaviour:
@@ -714,6 +811,7 @@ RectTransform:
   m_LocalScale: {x: 0.015625, y: 0.015625, z: 0.015625}
   m_Children:
   - {fileID: 1178502205}
+  - {fileID: 551133358}
   - {fileID: 1103175963}
   - {fileID: 216610646}
   - {fileID: 1703001974}
@@ -1149,6 +1247,51 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 502283038}
+--- !u!1 &551133357
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 551133358}
+  - component: {fileID: 551133359}
+  m_Layer: 5
+  m_Name: BattleManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &551133358
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 551133357}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 383716845}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &551133359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 551133357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb79fe2e5f828604d9406e5c1f4f84e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &606195975
 GameObject:
   m_ObjectHideFlags: 0
@@ -1469,6 +1612,99 @@ MonoBehaviour:
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
+--- !u!1 &1018769363
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1018769364}
+  - component: {fileID: 1018769367}
+  - component: {fileID: 1018769366}
+  - component: {fileID: 1018769365}
+  m_Layer: 5
+  m_Name: D_Test2 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1018769364
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1018769363}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.00032, y: 1.00032, z: 1.00032}
+  m_Children:
+  - {fileID: 1413717322}
+  - {fileID: 64390643}
+  m_Father: {fileID: 1703001974}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1018769365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1018769363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9116ef576fcdbd4ca88c9c8cafe1e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_mode: 1
+  dialogue_type: 0
+  speaker_name: Catman
+  left_icon: {fileID: 0}
+  right_icon: {fileID: 21300000, guid: 97261ba39d5127042a148ff04811016e, type: 3}
+  icon_side: 1
+  text: Meow! Meeeooorrrww
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+--- !u!114 &1018769366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1018769363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9116ef576fcdbd4ca88c9c8cafe1e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_mode: 1
+  dialogue_type: 0
+  speaker_name: '|color-cycle|Catman\color-cycle\'
+  left_icon: {fileID: 0}
+  right_icon: {fileID: 21300000, guid: 97261ba39d5127042a148ff04811016e, type: 3}
+  icon_side: 1
+  text: Meow
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+--- !u!114 &1018769367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1018769363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1103175962
 GameObject:
   m_ObjectHideFlags: 0
@@ -1501,7 +1737,7 @@ RectTransform:
   - {fileID: 502283039}
   - {fileID: 425055701}
   m_Father: {fileID: 383716845}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1774,6 +2010,97 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1351898958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1413717321
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1413717322}
+  - component: {fileID: 1413717325}
+  - component: {fileID: 1413717324}
+  - component: {fileID: 1413717323}
+  m_Layer: 5
+  m_Name: D_Test_Red
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1413717322
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1413717321}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1018769364}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1413717323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1413717321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9116ef576fcdbd4ca88c9c8cafe1e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_mode: 0
+  dialogue_type: 0
+  speaker_name: Jo
+  left_icon: {fileID: 21300000, guid: aa2be38018207344196cf25365a7dbb1, type: 3}
+  right_icon: {fileID: 0}
+  icon_side: 0
+  text: I mean, w/e i guess...
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+--- !u!114 &1413717324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1413717321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9116ef576fcdbd4ca88c9c8cafe1e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_mode: 0
+  dialogue_type: 0
+  speaker_name: Jo
+  left_icon: {fileID: 21300000, guid: aa2be38018207344196cf25365a7dbb1, type: 3}
+  right_icon: {fileID: 0}
+  icon_side: 0
+  text: Red pill? Ew.
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+--- !u!114 &1413717325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1413717321}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
@@ -2071,8 +2398,9 @@ RectTransform:
   - {fileID: 247882599}
   - {fileID: 905204077}
   - {fileID: 284202617}
+  - {fileID: 1018769364}
   m_Father: {fileID: 383716845}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
