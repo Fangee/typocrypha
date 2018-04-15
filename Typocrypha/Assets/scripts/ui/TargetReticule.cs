@@ -29,7 +29,7 @@ public class TargetReticule : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// slide target
-		base_tr.localPosition = Vector2.SmoothDamp (base_tr.localPosition, BattleManager.main.target_pos, ref vel, smooth_time, max_h_speed, Time.deltaTime);
+		base_tr.localPosition = Vector2.SmoothDamp (base_tr.localPosition, BattleManager.main.battle_field.target_pos, ref vel, smooth_time, max_h_speed, Time.deltaTime);
 		// rotate target rings
 		inner_tr.RotateAround (inner_tr.position, Vector3.back, r_speed);
 		outer_tr.RotateAround (outer_tr.position, -1 * Vector3.back, r_speed);
@@ -40,9 +40,9 @@ public class TargetReticule : MonoBehaviour {
 	// updates target based on targetted enemy
 	public void updateTarget() {
 		// don't update if battle not set up yet
-		if (BattleManager.main.target_ind >= BattleManager.main.enemy_arr.Length) return;
+		if (BattleManager.main.battle_field.target_ind >= BattleManager.main.battle_field.enemy_arr.Length) return;
 		// show/hide left/right arrow key indicators based on position
-		switch (BattleManager.main.target_ind) {
+		switch (BattleManager.main.battle_field.target_ind) {
 			case 0:
 				left_arrow.enabled = false;
 				right_arrow.enabled = true;
@@ -57,7 +57,7 @@ public class TargetReticule : MonoBehaviour {
 				break;
 		}
 		// check if no enemy targeted
-		if (BattleManager.main.enemy_arr[BattleManager.main.target_ind] == null || BattleManager.main.enemy_arr [BattleManager.main.target_ind].Is_dead) {
+		if (BattleManager.main.battle_field.enemy_arr[BattleManager.main.battle_field.target_ind] == null || BattleManager.main.battle_field.enemy_arr [BattleManager.main.battle_field.target_ind].Is_dead) {
 			no_target.enabled = true;
 			base_r_speed = 0f;
 		} else {

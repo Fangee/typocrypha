@@ -183,7 +183,7 @@ public class Enemy : MonoBehaviour, ICaster {
 	IEnumerator attackRoutine() {
 		Vector3 original_pos = transform.position;
         curr_stagger_time = 0F;
-        curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target).clone();   //Initialize with current spell
+		curr_spell = AI.getNextSpell(stats.spells, field.battle_field.enemy_arr, position, field.battle_field.player_arr, out target).clone();   //Initialize with current spell
         atk_time = dict.getCastingTime(curr_spell, stats.speed);   //Get casting time
 		while (!is_dead) {
 			yield return new WaitForEndOfFrame ();
@@ -210,9 +210,9 @@ public class Enemy : MonoBehaviour, ICaster {
                 if(!is_stunned)
                     attackPlayer (curr_spell);
                 //Update state (will move to make it so that state change can interrupt cast)
-                AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.AFTER_CAST);
+				AI.updateState(field.battle_field.enemy_arr, position, field.battle_field.player_arr, EnemyAI.Update_Case.AFTER_CAST);
                 //Get next spell from AI
-                curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target).clone();
+				curr_spell = AI.getNextSpell(stats.spells, field.battle_field.enemy_arr, position, field.battle_field.player_arr, out target).clone();
                 atk_time = dict.getCastingTime(curr_spell, stats.speed);//get new casting time
                 curr_time = 0;
                 //resetBarFX(); // stop full bar effects (now in barFlash)
@@ -283,7 +283,7 @@ public class Enemy : MonoBehaviour, ICaster {
         bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(13.0f/255.0f, 207.0f/255.0f, 223.0f/255.0f);
         is_stunned = false;
         Curr_stagger = stats.max_stagger;
-        AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.UNSTUN);
+		AI.updateState(field.battle_field.enemy_arr, position, field.battle_field.player_arr, EnemyAI.Update_Case.UNSTUN);
     }
 
     //Updates opacity and death (after pause in battlemanager)
@@ -292,7 +292,7 @@ public class Enemy : MonoBehaviour, ICaster {
         //Update AI if hit (may drop hp to zero)
         if (was_hit)
         {
-            AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.WAS_HIT);
+			AI.updateState(field.battle_field.enemy_arr, position, field.battle_field.player_arr, EnemyAI.Update_Case.WAS_HIT);
             was_hit = false;
         }
         // make enemy sprite fade as damaged (lazy health rep)

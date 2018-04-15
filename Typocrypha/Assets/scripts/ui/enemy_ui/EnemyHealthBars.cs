@@ -55,7 +55,7 @@ public class EnemyHealthBars : MonoBehaviour {
 		if (!BattleManager.main.enabled || BattleManager.main.pause) return;
 		for (int i = 0; i < 3; i++) {
 			if (health_bars [i] != null) {
-				Enemy enemy = BattleManager.main.enemy_arr [i];
+				Enemy enemy = BattleManager.main.battle_field.enemy_arr [i];
 				if (!enemy.Is_dead) {
 					health_bars[i].setValue(((float)enemy.Curr_hp / (float)enemy.Stats.max_hp));
 				} else { // if enemy has died, remove bar

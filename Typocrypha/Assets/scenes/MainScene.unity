@@ -9462,6 +9462,7 @@ GameObject:
   - component: {fileID: 2052169614}
   - component: {fileID: 2052169616}
   - component: {fileID: 2052169617}
+  - component: {fileID: 2052169618}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -9500,14 +9501,6 @@ MonoBehaviour:
   battle_bg_prefab: {fileID: 1903472682430984, guid: 2d6f4b82c4e7cce4eb6a6d8d1147dfbd,
     type: 2}
   pause: 0
-  enemy_arr: []
-  target_ind: 0
-  player_ind: 1
-  enemy_count: 0
-  curr_dead: 0
-  target_pos: {x: 0, y: 0}
-  last_register: 
-  num_player_attacks: 0
 --- !u!4 &2052169615
 Transform:
   m_ObjectHideFlags: 0
@@ -9557,6 +9550,25 @@ MonoBehaviour:
   enemyColor: {r: 1, g: 0, b: 0, a: 1}
   allyColor: {r: 0, g: 1, b: 0, a: 1}
   clarkeColor: {r: 1, g: 0.7647059, b: 0, a: 1}
+--- !u!114 &2052169618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2052169613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d30ee180b281a1544a3ccb7d2f90e98a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy_arr: []
+  target_ind: 0
+  player_ind: 1
+  enemy_count: 0
+  curr_dead: 0
+  target_pos: {x: 0, y: 0}
+  last_register: []
+  num_player_attacks: 0
 --- !u!1 &2121758902
 GameObject:
   m_ObjectHideFlags: 0

@@ -56,7 +56,7 @@ public class EnemyChargeBars : MonoBehaviour {
 		if (!BattleManager.main.enabled || BattleManager.main.pause) return;
 		for (int i = 0; i < 3; i++) {
 			if (charge_bars [i] != null) {
-				Enemy enemy = BattleManager.main.enemy_arr [i];
+				Enemy enemy = BattleManager.main.battle_field.enemy_arr [i];
 				Text stagger_value = charge_bars [i].transform.GetChild (4).GetComponent<Text> ();
 				Color color_not_stunned = new Color (13.0f / 255.0f, 207.0f / 255.0f, 223.0f / 255.0f);
 				Color color_stunned = new Color (242.0f / 255.0f, 48.0f / 255.0f, 32.0f / 255.0f);

@@ -33,7 +33,7 @@ public class BattleInterrupt {
 		// make sure all speaking members are still alive
 		bool dead_speaker = false;
 		for (int j = 0; j < 3; j++) {
-			if (who_speak [j] && BattleManager.main.enemy_arr [j].Is_dead) {
+			if (who_speak [j] && BattleManager.main.battle_field.enemy_arr [j].Is_dead) {
 				dead_speaker = true;
 				break;
 			}
@@ -69,7 +69,7 @@ public class BattleInterrupts : MonoBehaviour {
 		float health_cond = float.Parse (opt [1]);
 		// check if condition is fulfilled
 		if (who_cond < 3) { // for enemy health
-			Enemy curr_enemy = BattleManager.main.enemy_arr [who_cond];
+			Enemy curr_enemy = BattleManager.main.battle_field.enemy_arr [who_cond];
 			if ((float)curr_enemy.Curr_hp / (float)curr_enemy.Stats.max_hp <= health_cond)
 				return BattleInterruptStatus.TRUE;
 		} else { // for player health
@@ -84,7 +84,7 @@ public class BattleInterrupts : MonoBehaviour {
 	// input: [0]: float : time in seconds from start of battle
 	BattleInterruptStatus timed(string[] opt) {
 		float time = float.Parse (opt [0]);
-		if (DateTime.Compare (DateTime.Now, BattleManager.main.time_started.AddSeconds(time)) >= 0)
+		if (DateTime.Compare (DateTime.Now, BattleManager.main.battle_field.time_started.AddSeconds(time)) >= 0)
 			 return BattleInterruptStatus.TRUE;
 		else return BattleInterruptStatus.FALSE;
 	}
@@ -92,7 +92,7 @@ public class BattleInterrupts : MonoBehaviour {
 	// checks if last spell cast caused a stun
 	// input: NONE
 	BattleInterruptStatus checkStun(string[] opt) {
-		foreach (CastData d in BattleManager.main.last_cast)
+		foreach (CastData d in BattleManager.main.battle_field.last_cast)
 			if (d.isStun) return BattleInterruptStatus.TRUE;
 		return BattleInterruptStatus.FALSE;
 	}
@@ -102,8 +102,8 @@ public class BattleInterrupts : MonoBehaviour {
 	// if you want to show what was registered in dialogue, use macro "{last-cast,elem}"
 	// input: NONE
 	BattleInterruptStatus checkRegisterElem(string[] opt) {
-		if (BattleManager.main.last_register [0]) {
-			BattleManager.main.last_register [0] = false;
+		if (BattleManager.main.battle_field.last_register [0]) {
+			BattleManager.main.battle_field.last_register [0] = false;
 			return BattleInterruptStatus.REPEAT;
 		}
 		else return BattleInterruptStatus.FALSE;
@@ -114,8 +114,8 @@ public class BattleInterrupts : MonoBehaviour {
 	// if you want to show what was registered in dialogue, use macro "{last-cast,root}"
 	// input: NONE
 	BattleInterruptStatus checkRegisterRoot(string[] opt) {
-		if (BattleManager.main.last_register [1]) {
-			BattleManager.main.last_register [1] = false;
+		if (BattleManager.main.battle_field.last_register [1]) {
+			BattleManager.main.battle_field.last_register [1] = false;
 			return BattleInterruptStatus.REPEAT;
 		}
 		else return BattleInterruptStatus.FALSE;
@@ -126,8 +126,8 @@ public class BattleInterrupts : MonoBehaviour {
 	// if you want to show what was registered in dialogue, use macro "{last-cast,style}"
 	// input: NONE
 	BattleInterruptStatus checkRegisterStyle(string[] opt) {
-		if (BattleManager.main.last_register [2]) {
-			BattleManager.main.last_register [2] = false;
+		if (BattleManager.main.battle_field.last_register [2]) {
+			BattleManager.main.battle_field.last_register [2] = false;
 			return BattleInterruptStatus.REPEAT;
 		}
 		else return BattleInterruptStatus.FALSE;
@@ -137,7 +137,7 @@ public class BattleInterrupts : MonoBehaviour {
 	// input: [0]: int : number of attacks when interrupt should occur
 	BattleInterruptStatus countPlayerAttacks(string[] opt) {
 		int count = int.Parse (opt [0]);
-		if (BattleManager.main.num_player_attacks >= count)
+		if (BattleManager.main.battle_field.num_player_attacks >= count)
 			 return BattleInterruptStatus.TRUE;
 		else return BattleInterruptStatus.FALSE;
 	}

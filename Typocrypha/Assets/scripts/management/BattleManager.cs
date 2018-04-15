@@ -27,20 +27,8 @@ public class BattleManager : MonoBehaviour {
 	public GameObject dialogue_box; // text box for dialogue
 	public GameObject battle_bg_prefab; // prefab of battle background
 
-	// publically accessible fields
 	[HideInInspector] public bool pause; // is battle paused?
-	[HideInInspector] public Enemy[] enemy_arr; // array of Enemy components (size 3)
-	[HideInInspector] public int target_ind; // index of currently targeted enemy
-	[HideInInspector] public ICaster[] player_arr = { null, null, null }; // array of Player and allies (size 3)
-	[HideInInspector] public int player_ind = 1;
-	[HideInInspector] public int enemy_count; // number of enemies in battle
-    [HideInInspector] public int curr_dead;
-	[HideInInspector] public Vector2 target_pos; // position of target ret
-	[HideInInspector] public DateTime time_started; // time battle started
-	[HideInInspector] public List<CastData> last_cast; // last performed cast action
-	[HideInInspector] public SpellData last_spell; // last performed spell
-	[HideInInspector] public bool[] last_register; // last spell register status
-	[HideInInspector] public int num_player_attacks; // number of player attacks from beginning of battle
+	[HideInInspector] public BattleField battle_field; // Encapsulates battle info
 
 	TargetReticule target_ret_scr; // TargetReticule script ref
 	TargetFloor target_floor_scr;  // TargetFloor script ref
@@ -57,7 +45,8 @@ public class BattleManager : MonoBehaviour {
 		pause = false;
 		target_ret_scr = target_ret.GetComponent<TargetReticule> ();
 		target_floor_scr = target_floor.GetComponent<TargetFloor> ();
-        player_arr[player_ind] = player;
+		battle_field = new BattleField ();
+		battle_field.player_arr[battle_field.player_ind] = player;
 	}
 
 	// start battle scene
@@ -68,9 +57,9 @@ public class BattleManager : MonoBehaviour {
 
         //INITIALIZE ENEMIES//
 
-		enemy_arr = new Enemy[3];
-		enemy_count = 0;
-        curr_dead = 0;
+		battle_field.enemy_arr = new Enemy[3];
+		battle_field.enemy_count = 0;
+		battle_field.curr_dead = 0;
 		charge_bars.initChargeBars ();
 		stagger_bars.initStaggerBars ();
 		health_bars.initHealthBars ();
@@ -107,26 +96,22 @@ public class BattleManager : MonoBehaviour {
                 ally_left.SetActive(true);
             }
             a.Position = i;
-            player_arr[i] = a;
+			battle_field.player_arr[i] = a;
         }
-
-        //INITIALIZE BATTLE LOG STUFF//
-
-
 
 		//INITIALIZE TARGET UI//
 
-		target_ind = 1;
-		target_pos = new Vector2 (target_ind * enemy_spacing, reticule_y_offset);
-		target_ret.transform.localPosition = target_pos;
+		battle_field.target_ind = 1;
+		battle_field.target_pos = new Vector2 (battle_field.target_ind * enemy_spacing, reticule_y_offset);
+		target_ret.transform.localPosition = battle_field.target_pos;
 
 		//INITIALIZE OTHER TRACKING VARIABLES//
 
-		time_started = DateTime.Now;
-		num_player_attacks = 0;
-		last_cast = new List<CastData> ();
-		last_spell = null;
-		last_register = new bool[3];
+		battle_field.time_started = DateTime.Now;
+		battle_field.num_player_attacks = 0;
+		battle_field.last_cast = new List<CastData> ();
+		battle_field.last_spell = null;
+		battle_field.last_register = new bool[3];
 
         //FINISH//
 
@@ -148,18 +133,6 @@ public class BattleManager : MonoBehaviour {
 		BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
 		yield return new WaitForSeconds (1f);
 
-		/*
-		// spawn in enemies one by one
-		for (int i = 0; i < scene.enemy_stats.Length; i++) {
-			createEnemy (i, scene);
-			// unpause for a split second to allow enemy to initialize
-			pause = false;
-			yield return new WaitForSeconds (0.1f);
-			pause = true;
-			yield return new WaitForSeconds (0.5f);
-		}
-		*/
-
 		pause = true;
 		yield return new WaitForSeconds (1f);
 		// show targeting ui
@@ -178,15 +151,15 @@ public class BattleManager : MonoBehaviour {
 	void createEnemy(int i, BattleScene scene) {
         if (scene.enemy_stats[i] == null)
             return;
-        ++enemy_count;
+		++battle_field.enemy_count;
 		GameObject new_enemy = GameObject.Instantiate (enemy_prefab, transform);
 		new_enemy.transform.localScale = new Vector3 (1, 1, 1);
 		new_enemy.transform.localPosition = new Vector3 (i * enemy_spacing, enemy_y_offset, 0);
-		enemy_arr [i] = new_enemy.GetComponent<Enemy> ();
-		enemy_arr[i].field = this; //Give enemy access to field (for calling spellcasts)
-		enemy_arr [i].initialize (scene.enemy_stats [i]); //sets enemy stats (AND INITITIALIZES ATTACKING AND AI)
-		enemy_arr [i].Position = i;      //Log enemy position in field
-		enemy_arr[i].bars = charge_bars; //Give enemy access to charge_bars
+		battle_field.enemy_arr [i] = new_enemy.GetComponent<Enemy> ();
+		battle_field.enemy_arr[i].field = this; //Give enemy access to field (for calling spellcasts)
+		battle_field.enemy_arr [i].initialize (scene.enemy_stats [i]); //sets enemy stats (AND INITITIALIZES ATTACKING AND AI)
+		battle_field.enemy_arr [i].Position = i;      //Log enemy position in field
+		battle_field.enemy_arr[i].bars = charge_bars; //Give enemy access to charge_bars
 		Vector3 bar_pos = new_enemy.transform.position + new Vector3(0, -1.0f, 0);
 		charge_bars.makeChargeMeter(i, bar_pos);
 		stagger_bars.makeStaggerMeter (i, bar_pos);
@@ -197,11 +170,11 @@ public class BattleManager : MonoBehaviour {
     public void stopBattle()
     {
         pause = true;
-        foreach (Enemy enemy in enemy_arr)
+		foreach (Enemy enemy in battle_field.enemy_arr)
         {
             if (enemy != null) GameObject.Destroy(enemy.gameObject);
         }
-        enemy_arr = null;
+		battle_field.enemy_arr = null;
         cooldown_list.removeAll();
         charge_bars.removeAll();
         stagger_bars.removeAll();
@@ -216,20 +189,20 @@ public class BattleManager : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.BackQuote)) // toggle pause
 			pause = !pause;
 		if (pause) return;
-		int old_ind = target_ind;
+		int old_ind = battle_field.target_ind;
 
         //TARGET RETICULE CODE 
 
 		// move target left or right
-		if (Input.GetKeyDown (KeyCode.LeftArrow)) --target_ind;
-		if (Input.GetKeyDown (KeyCode.RightArrow)) ++target_ind;
+		if (Input.GetKeyDown (KeyCode.LeftArrow)) --battle_field.target_ind;
+		if (Input.GetKeyDown (KeyCode.RightArrow)) ++battle_field.target_ind;
 		// fix if target is out of bounds
-		if (target_ind < 0) target_ind = 0;
-		if (target_ind > 2) target_ind = 2;
+		if (battle_field.target_ind < 0) battle_field.target_ind = 0;
+		if (battle_field.target_ind > 2) battle_field.target_ind = 2;
 		// check if target was actually moved
-		if (old_ind != target_ind) {
+		if (old_ind != battle_field.target_ind) {
 			// move and update target reticule and update floor panels
-			target_pos = new Vector2 (target_ind * enemy_spacing, reticule_y_offset);
+			battle_field.target_pos = new Vector2 (battle_field.target_ind * enemy_spacing, reticule_y_offset);
 			target_ret_scr.updateTarget ();
 			target_floor_scr.updateFloor ();
 			// play sfx
@@ -265,8 +238,8 @@ public class BattleManager : MonoBehaviour {
         switch (status)
         {
             case CastStatus.SUCCESS:
-                ++num_player_attacks;
-                targetPattern = spellDict.getTargetPattern(s, enemy_arr, target_ind, player_arr, player_ind);
+			++battle_field.num_player_attacks;
+			targetPattern = spellDict.getTargetPattern(s, battle_field.enemy_arr, battle_field.target_ind, battle_field.player_arr, battle_field.player_ind);
                 message = chat.getLine(player.Stats.ChatDatabaseID);
                 preCastEffects(targetPattern, player, s, message);
                 StartCoroutine(pauseAttackCurrent(s, player));
@@ -285,12 +258,12 @@ public class BattleManager : MonoBehaviour {
                 break;
             case CastStatus.ALLYSPELL:
                 int allyPos = getAllyPosition(s.root);
-                if (allyPos == -1 || player_arr[allyPos].Is_stunned || !((Ally)player_arr[allyPos]).tryCast())//display.playAllyNotHereEffects
+			if (allyPos == -1 || battle_field.player_arr[allyPos].Is_stunned || !((Ally)battle_field.player_arr[allyPos]).tryCast())//display.playAllyNotHereEffects
                     break;
-                targetPattern = spellDict.getTargetPattern(s, enemy_arr, target_ind, player_arr, allyPos);
-                message = chat.getLine(player_arr[allyPos].Stats.ChatDatabaseID);
-                preCastEffects(targetPattern, player_arr[allyPos], s, message);
-                StartCoroutine(pauseAttackCurrent(s, player_arr[allyPos]));
+			targetPattern = spellDict.getTargetPattern(s, battle_field.enemy_arr, battle_field.target_ind, battle_field.player_arr, allyPos);
+			message = chat.getLine(battle_field.player_arr[allyPos].Stats.ChatDatabaseID);
+			preCastEffects(targetPattern, battle_field.player_arr[allyPos], s, message);
+			StartCoroutine(pauseAttackCurrent(s, battle_field.player_arr[allyPos]));
                 break;
         }
     }
@@ -305,7 +278,7 @@ public class BattleManager : MonoBehaviour {
         //CASTING//
         spellDict.startCooldown(s, player);
         List<CastData> data;
-        data = spellDict.cast(s, enemy_arr, target_ind, player_arr, caster.Position);
+		data = spellDict.cast(s, battle_field.enemy_arr, battle_field.target_ind, battle_field.player_arr, caster.Position);
         processCast(data, s);
 
         yield return new WaitForSeconds(1f);
@@ -322,21 +295,21 @@ public class BattleManager : MonoBehaviour {
     {
         pause = true; // pause battle for attack
         AudioPlayer.main.playSFX("sfx_enemy_cast");
-        Pair<bool[], bool[]> targetPattern = spellDict.getTargetPattern(s, player_arr, target, enemy_arr, position);
-        preCastEffects(targetPattern, enemy_arr[position], s, chat.getLine(enemy_arr[position].Stats.ChatDatabaseID));
-        BattleEffects.main.setDim(true, enemy_arr[position].GetComponent<SpriteRenderer>());
+		Pair<bool[], bool[]> targetPattern = spellDict.getTargetPattern(s, battle_field.player_arr, target, battle_field.enemy_arr, position);
+		preCastEffects(targetPattern, battle_field.enemy_arr[position], s, chat.getLine(battle_field.enemy_arr[position].Stats.ChatDatabaseID));
+		BattleEffects.main.setDim(true, battle_field.enemy_arr[position].GetComponent<SpriteRenderer>());
         StartCoroutine(enemy_pause_cast(dict, s, position, target));
     }
 
     private IEnumerator enemy_pause_cast(SpellDictionary dict, SpellData s, int position, int target)
     {
 
-        BattleEffects.main.setDim(true, enemy_arr[position].GetComponent<SpriteRenderer>());
+		BattleEffects.main.setDim(true, battle_field.enemy_arr[position].GetComponent<SpriteRenderer>());
 
         yield return new WaitForSeconds(1f);
 
-        enemy_arr[position].startSwell();
-        List<CastData> data = dict.cast(s, player_arr, target, enemy_arr, position);
+		battle_field.enemy_arr[position].startSwell();
+		List<CastData> data = dict.cast(s, battle_field.player_arr, target, battle_field.enemy_arr, position);
         processCast(data, s);
 
         yield return new WaitForSeconds(1f);
@@ -344,7 +317,7 @@ public class BattleManager : MonoBehaviour {
         postCastEffects();
         //BattleEffects.main.setDim(false, enemy_arr[position].GetComponent<SpriteRenderer>());
         pause = false; // unpause
-        enemy_arr[position].attack_in_progress = false;
+		battle_field.enemy_arr[position].attack_in_progress = false;
         updateEnemies();
     }
 
@@ -352,8 +325,8 @@ public class BattleManager : MonoBehaviour {
     //Called by Cast in the SUCCESS CastStatus case, possibly on BOTCH in the future
     private void processCast(List<CastData> data, SpellData s)
     {
-		last_cast = data;
-		last_spell = s;
+		battle_field.last_cast = data;
+		battle_field.last_spell = s;
         //Process the data here
         foreach (CastData d in data)
             spellEffects.StartCoroutine(spellEffects.playEffects(d, s));
@@ -361,7 +334,7 @@ public class BattleManager : MonoBehaviour {
         bool [] regData = spellDict.safeRegister(s);
         if (regData[0] || regData[1] || regData[2])
             StartCoroutine(learnSFX());
-		last_register = regData;
+		battle_field.last_register = regData;
         //Process regData (for register graphics) here. 
         //format is bool [3], where regData[0] is true if s.element is new, regData[1] is true if s.root is new, and regData[2] is true if s.style is new
     }
@@ -392,8 +365,8 @@ public class BattleManager : MonoBehaviour {
 		BattleLog.main.stopBattleLog();
         for (int i = 0; i < 3; ++i)
         {
-            if (enemy_arr[i] != null)
-                enemy_arr[i].enemy_sprite.sortingOrder = dim_layer;
+			if (battle_field.enemy_arr[i] != null)
+				battle_field.enemy_arr[i].enemy_sprite.sortingOrder = dim_layer;
         }
         target_ret.SetActive(true); // enable / make target reticule appear after a cast
         BattleEffects.main.setDim(false);
@@ -405,7 +378,7 @@ public class BattleManager : MonoBehaviour {
         for (int i = 0; i < 3; ++i)
         {
             if (enemy_r[i])
-                enemy_arr[i].enemy_sprite.sortingOrder = undim_layer;
+				battle_field.enemy_arr[i].enemy_sprite.sortingOrder = undim_layer;
         }
     }
     //Lowers the targets (array val = true) below the dimmer level
@@ -414,16 +387,16 @@ public class BattleManager : MonoBehaviour {
         for (int i = 0; i < 3; ++i)
         {
             if (enemy_r[i])
-                enemy_arr[i].enemy_sprite.sortingOrder = dim_layer;
+				battle_field.enemy_arr[i].enemy_sprite.sortingOrder = dim_layer;
         }
     }
 
     //returns the position of ally with specified name (if in battle)
     private int getAllyPosition(string name)
     {
-        if (player_arr[0] != null && player_arr[0].Stats.name.ToLower() == name.ToLower())
+		if (battle_field.player_arr[0] != null && battle_field.player_arr[0].Stats.name.ToLower() == name.ToLower())
             return 0;
-        if (player_arr[2] != null && player_arr[2].Stats.name.ToLower() == name.ToLower())
+		if (battle_field.player_arr[2] != null && battle_field.player_arr[2].Stats.name.ToLower() == name.ToLower())
             return 2;
         return -1;
     }
@@ -434,22 +407,22 @@ public class BattleManager : MonoBehaviour {
     {
         bool interrupted = checkInterrupts(); // check for interrupts
         if (interrupted) return;
-        for (int i = 0; i < enemy_arr.Length; i++)
+		for (int i = 0; i < battle_field.enemy_arr.Length; i++)
         {
-            if (enemy_arr[i] != null)
+			if (battle_field.enemy_arr[i] != null)
             {
-                if (!enemy_arr[i].Is_dead)
+				if (!battle_field.enemy_arr[i].Is_dead)
                 {
-                    enemy_arr[i].updateCondition();
-                    if (enemy_arr[i].Is_dead)
-                        ++curr_dead;
+					battle_field.enemy_arr[i].updateCondition();
+					if (battle_field.enemy_arr[i].Is_dead)
+						++battle_field.curr_dead;
                 }
             }
         }
 		//Update target and floor effects
 		target_ret_scr.updateTarget ();
 		target_floor_scr.updateFloor ();
-        if (curr_dead == enemy_count) // end battle if all enemies dead
+		if (battle_field.curr_dead == battle_field.enemy_count) // end battle if all enemies dead
         {
             Debug.Log("you win!");
 			stopBattle ();

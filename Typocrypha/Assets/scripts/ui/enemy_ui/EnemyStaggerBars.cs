@@ -55,7 +55,7 @@ public class EnemyStaggerBars : MonoBehaviour {
 		if (!BattleManager.main.enabled || BattleManager.main.pause) return;
 		for (int i = 0; i < 3; i++) {
 			if (stagger_bars [i] != null) {
-				Enemy enemy = BattleManager.main.enemy_arr [i];
+				Enemy enemy = BattleManager.main.battle_field.enemy_arr [i];
 				if (!enemy.Is_dead) {
 					stagger_bars [i].setValue (enemy.getStagger ());
 					if (enemy.Is_stunned) {
