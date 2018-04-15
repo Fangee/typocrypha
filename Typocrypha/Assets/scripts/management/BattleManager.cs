@@ -63,7 +63,6 @@ public class BattleManager : MonoBehaviour {
 		charge_bars.initChargeBars ();
 		stagger_bars.initStaggerBars ();
 		health_bars.initHealthBars ();
-		//for (int i = 0; i < scene.enemy_stats.Length; i++) createEnemy (i, scene);
 
         //CREATE ALLIES//
 
