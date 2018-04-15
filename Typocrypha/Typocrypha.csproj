@@ -282,8 +282,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\EnemyIntel.cs" />
     <Compile Include="Assets\scripts\animation\AnimationPlayer.cs" />
     <Compile Include="Assets\scripts\animation\BackgroundEffects.cs" />
+    <Compile Include="Assets\scripts\animation\DestroyOnEnd.cs" />
     <Compile Include="Assets\scripts\animation\SpellEffects.cs" />
     <Compile Include="Assets\scripts\animation\StopPostProcessing.cs" />
     <Compile Include="Assets\scripts\audio\AudioPlayer.cs" />
@@ -312,6 +314,7 @@
     <Compile Include="Assets\scripts\management\StateManager.cs" />
     <Compile Include="Assets\scripts\PostProcessing\PixelateScreen.cs" />
     <Compile Include="Assets\scripts\PostProcessing\PostProcess.cs" />
+    <Compile Include="Assets\scripts\PostProcessing\SwirlScreen.cs" />
     <Compile Include="Assets\scripts\Spells\BuffDebuff.cs" />
     <Compile Include="Assets\scripts\Spells\CastData.cs" />
     <Compile Include="Assets\scripts\Spells\CasterOps.cs" />
@@ -334,6 +337,7 @@
     <Compile Include="Assets\scripts\ui\enemy_ui\PopImage.cs" />
     <Compile Include="Assets\scripts\ui\enemy_ui\Popper.cs" />
     <Compile Include="Assets\scripts\ui\enemy_ui\PopText.cs" />
+    <Compile Include="Assets\scripts\ui\Scouter.cs" />
     <Compile Include="Assets\scripts\ui\SetResolution.cs" />
     <Compile Include="Assets\scripts\ui\TargetFloor.cs" />
     <Compile Include="Assets\scripts\ui\TargetReticule.cs" />
@@ -365,9 +369,12 @@
     <None Include="Assets\WavySprite\readme.txt" />
     <None Include="Assets\graphics\shaders\screen_shading\GlitchScreen.shader" />
     <None Include="Assets\graphics\shaders\screen_shading\PixelateScreen.shader" />
+    <None Include="Assets\graphics\shaders\screen_shading\SwirlScreen.shader" />
     <None Include="Assets\graphics\shaders\screen_shading\WavyScreen.shader" />
-    <None Include="Assets\graphics\shaders\sprite_shaders\CutDeath.shader" />
+    <None Include="Assets\graphics\shaders\sprite_shaders\HologramSprite.shader" />
+    <None Include="Assets\graphics\shaders\sprite_shaders\OutlineSprite.shader" />
     <None Include="Assets\graphics\shaders\sprite_shaders\PixelateSprite.shader" />
+    <None Include="Assets\graphics\shaders\sprite_shaders\SplitSprite.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

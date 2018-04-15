@@ -11,7 +11,8 @@ using UnityEngine.UI;
 public class TextScroll : MonoBehaviour {
 	const float default_delay = 0.05f; // default delay
 
-	public float delay; // time between displaying characters
+    public TextEvents event_handler;
+    public float delay; // time between displaying characters
 	public bool is_print; // is currently printing
 	public bool pause_print; // is the text scroll paused?
 
@@ -40,7 +41,7 @@ public class TextScroll : MonoBehaviour {
 		pause_print = false; // unpause text
 		substituteMacros();
 		if (curr != null) StopCoroutine (curr);
-		TextEvents.main.StopAllCoroutines (); // stop all previously running events
+		event_handler.StopAllCoroutines (); // stop all previously running events
 		curr = StartCoroutine (scrollText ());
 	}
 
@@ -57,7 +58,7 @@ public class TextScroll : MonoBehaviour {
 	// dump rest of string to output
 	public void dump() {
 		StopCoroutine (curr); // stop current printing
-		TextEvents.main.StopAllCoroutines (); // stop all previously running events
+        event_handler.StopAllCoroutines (); // stop all previously running events
 		is_print = false;
 		out_text.text = evt_cutout.Replace(in_text, ""); // dump all text
 	}
@@ -120,7 +121,7 @@ public class TextScroll : MonoBehaviour {
 			evt = in_text.Substring (start_pos + 1, eq_pos - start_pos - 1);
 			opt = in_text.Substring (eq_pos + 1, end_pos - eq_pos - 1).Split (opt_delim);
 		}
-		TextEvents.main.playEvent (evt, opt);
+        event_handler.playEvent (evt, opt);
 		Debug.Log ("text_event:" + evt + ":" + opt.Aggregate("", (acc, next) => acc + "," + next));
 		if (evt.CompareTo ("next") == 0) return; // forceNextLine will handle rest
 		text_pos = end_pos + 1;

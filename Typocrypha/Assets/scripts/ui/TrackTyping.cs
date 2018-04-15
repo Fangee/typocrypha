@@ -19,11 +19,15 @@ public class TrackTyping : MonoBehaviour {
 	string[] rows = { "qwertyuiop", "asdfghjkl", "zxcvbnm", " " };
 	float[] row_offsets = { 0f, 24f, 72f, 0 };
 
+    public void clearBuffer() {
+        buffer = "";
+        count = 0;
+    }
+
 	void Start () {
 		typed_text.text = "";
 		key_map = new Dictionary<char, Image> ();
-		buffer = "";
-		count = 0;
+        clearBuffer();
 		createKeyboard ();
 		// initialize key colors to gray
 		foreach (KeyValuePair<char, Image> pair in key_map)
@@ -43,12 +47,11 @@ public class TrackTyping : MonoBehaviour {
             if (TextEvents.main.is_prompt) {
 				TextEvents.main.prompt_input = buffer;
 				TextEvents.main.is_prompt = false;
+                clearBuffer();
 			} else {
                 Debug.Log("Player casts " + buffer.ToUpper().Replace(' ', '-'));
                 BattleManager.main.attackCurrent (buffer); // attack currently targeted enemy
 			}				
-			buffer = "";
-			count = 0;
 		} else if (Input.GetKey (KeyCode.Backspace)) {
 			if (Input.GetKeyDown (KeyCode.Backspace)) {
 				if (count > 0) {
@@ -91,7 +94,7 @@ public class TrackTyping : MonoBehaviour {
 		for (int i = 26 - typed_text.text.Length; i > 0; --i) {
 			typed_text.text = typed_text.text + "_";
 		}
-		typed_text.text = "> " + typed_text.text;
+		typed_text.text = ">" + typed_text.text;
 	}
 
 	// create visual keyboard keys

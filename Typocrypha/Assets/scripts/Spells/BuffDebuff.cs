@@ -32,12 +32,12 @@ public class BuffDebuff
     private const float posLevelMod = maxPercent / maxlevel;
     private const float negLevelMod = minPercent / minlevel;
 
-    //private fields
-    int attack = 0;
-    int defense = 0;
-    int speed = 0;
-    int accuracy = 0;
-    int evasion = 0;
+    //private fields //Justin was here, your privates have been made public
+    public int attack = 0;
+    public int defense = 0;
+    public int speed = 0;
+    public int accuracy = 0;
+    public int evasion = 0;
     int[] vsElem = new int[Elements.count];
 
     //get/set properties

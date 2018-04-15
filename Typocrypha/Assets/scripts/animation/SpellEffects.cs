@@ -27,6 +27,11 @@ public class SpellEffects : MonoBehaviour {
             BattleEffects.main.spriteShift(d.Target.Transform, 0.3f, 0.1f); // sprite moves to the right as a dodge
             yield break;
         }
+        else if (d.Target.CasterType == ICasterType.ENEMY)// when enemy is hit
+        {
+            //learn their strength/weaknesses against the element used
+            EnemyIntel.main.learnIntel((d.Target as Enemy).Stats.name, d.element);
+        }
         //Process hit graphics
         for (int i = 0; i < d.animData.Length; ++i)
         {

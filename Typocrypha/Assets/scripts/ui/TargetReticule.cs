@@ -21,9 +21,14 @@ public class TargetReticule : MonoBehaviour {
 	public float smooth_time = 0.15f; // time it takes for target to reach position
 	public float h_r_scale = 8f; // scaling factor from horizontal speed to rotation speed
 
+	Scouter scouter; //script for targeting info
+    bool scoutVisible = false; //for when scouter is shown
+
 	void Start () {
 		base_r_speed = def_r_speed;
 		r_speed = base_r_speed;
+
+        scouter = transform.GetChild(0).gameObject.GetComponent<Scouter>();
 	}
 	
 	// Update is called once per frame
@@ -37,32 +42,65 @@ public class TargetReticule : MonoBehaviour {
 		r_speed = base_r_speed + vel.magnitude / h_r_scale;
 	}
 
+    //reveals info on enemy
+    public void showScouter() {
+        scouter.show();
+        scoutVisible = true;
+        updateArrows();
+    }
+
+    //hide enemy info
+    public void hideScouter() {
+        scouter.hide();
+        scoutVisible = false;
+        updateArrows();
+    }
+
+    public void toggleScouter() {
+        scoutVisible = scouter.toggle();
+        updateArrows();
+    }
+
 	// updates target based on targetted enemy
 	public void updateTarget() {
 		// don't update if battle not set up yet
 		if (BattleManager.main.battle_field.target_ind >= BattleManager.main.battle_field.enemy_arr.Length) return;
-		// show/hide left/right arrow key indicators based on position
+        	// update arrows
+        	updateArrows();
 		switch (BattleManager.main.battle_field.target_ind) {
-			case 0:
-				left_arrow.enabled = false;
-				right_arrow.enabled = true;
-				break;
-			case 1:
-				left_arrow.enabled = true;
-				right_arrow.enabled = true;
-				break;
-			case 2:
-				left_arrow.enabled = true;
-				right_arrow.enabled = false;
-				break;
-		}
 		// check if no enemy targeted
-		if (BattleManager.main.battle_field.enemy_arr[BattleManager.main.battle_field.target_ind] == null || BattleManager.main.battle_field.enemy_arr [BattleManager.main.battle_field.target_ind].Is_dead) {
+		if (BattleManager.main.enemy_arr[BattleManager.main.target_ind] == null || BattleManager.main.enemy_arr [BattleManager.main.target_ind].Is_dead) {
 			no_target.enabled = true;
 			base_r_speed = 0f;
 		} else {
 			no_target.enabled = false;
 			base_r_speed = def_r_speed;
 		}
+        scouter.updateInfo();
 	}
+
+    private void updateArrows(){
+        if(scoutVisible)
+        {
+            left_arrow.enabled = false;
+            right_arrow.enabled = false;
+            return;
+        }
+        switch (BattleManager.main.target_ind)
+        {
+            case 0:
+                left_arrow.enabled = false;
+                right_arrow.enabled = true;
+                break;
+            case 1:
+                left_arrow.enabled = true;
+                right_arrow.enabled = true;
+                break;
+            case 2:
+                left_arrow.enabled = true;
+                right_arrow.enabled = false;
+                break;
+        }
+		if (BattleManager.main.battle_field.enemy_arr[BattleManager.main.battle_field.target_ind] == null || BattleManager.main.battle_field.enemy_arr [BattleManager.main.battle_field.target_ind].Is_dead) {
+    }
 }

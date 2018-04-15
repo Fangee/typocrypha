@@ -11,6 +11,7 @@ public class BattleManager : MonoBehaviour {
     public Player player;
 	public SpellDictionary spellDict; // spell dictionary object
     public SpellEffects spellEffects;
+    public TrackTyping trackTyping;
 	public GameObject enemy_prefab; // prefab for enemy object
     public GameObject ally_prefab; //prefab for ally object
     public GameObject ally_left; // left ally UI
@@ -35,8 +36,8 @@ public class BattleManager : MonoBehaviour {
 	BattleScene curr_battle; // current battle scene
 
 	const float enemy_spacing = 6f; // horizontal space between enemies
-	const float enemy_y_offset = 0.9f; // offset of enemy from y axis
-	const float reticule_y_offset = 1.7f; // offset of target reticule
+	const float enemy_y_offset = 0.5f; // offset of enemy from y axis
+	const float reticule_y_offset = 1.5f; // offset of target reticule
 	const int undim_layer = -1; // layer of enemy when enemy sprite is shown
 	const int dim_layer = -5;   // layer of enemy when enemy sprite is dimmed
 
@@ -159,7 +160,7 @@ public class BattleManager : MonoBehaviour {
 		battle_field.enemy_arr [i].initialize (scene.enemy_stats [i]); //sets enemy stats (AND INITITIALIZES ATTACKING AND AI)
 		battle_field.enemy_arr [i].Position = i;      //Log enemy position in field
 		battle_field.enemy_arr[i].bars = charge_bars; //Give enemy access to charge_bars
-		Vector3 bar_pos = new_enemy.transform.position + new Vector3(0, -1.0f, 0);
+		Vector3 bar_pos = new_enemy.transform.position + new Vector3(-0.5f, -1.0f, 0);
 		charge_bars.makeChargeMeter(i, bar_pos);
 		stagger_bars.makeStaggerMeter (i, bar_pos);
 		health_bars.makeHealthMeter (i, bar_pos);
@@ -195,6 +196,13 @@ public class BattleManager : MonoBehaviour {
 		// move target left or right
 		if (Input.GetKeyDown (KeyCode.LeftArrow)) --battle_field.target_ind;
 		if (Input.GetKeyDown (KeyCode.RightArrow)) ++battle_field.target_ind;
+
+        //toggle enemy info on Shift
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        { 
+                target_ret_scr.toggleScouter();
+        }
+
 		// fix if target is out of bounds
 		if (battle_field.target_ind < 0) battle_field.target_ind = 0;
 		if (battle_field.target_ind > 2) battle_field.target_ind = 2;
@@ -242,18 +250,25 @@ public class BattleManager : MonoBehaviour {
                 message = chat.getLine(player.Stats.ChatDatabaseID);
                 preCastEffects(targetPattern, player, s, message);
                 StartCoroutine(pauseAttackCurrent(s, player));
+                trackTyping.clearBuffer();//Clear the casting buffer
                 break;
             case CastStatus.BOTCH:
                 //diplay.playBotchEffects
+                spellEffects.popp.spawnSprite("popups_invalid", 1.0F, player.transform.position - new Vector3(0, 0.375f, 0));
+                trackTyping.clearBuffer();//Clear the casting buffer
                 break;
             case CastStatus.FIZZLE:
                 //diplay.playBotchEffects
+				spellEffects.popp.spawnSprite("popups_invalid", 1.0F, player.transform.position - new Vector3(0, 0.375f, 0));
+                trackTyping.clearBuffer();//Clear the casting buffer
                 break;
             case CastStatus.ONCOOLDOWN:
                 //display.playOnCooldownEffects
+				spellEffects.popp.spawnSprite("popups_oncooldown", 1.0F, player.transform.position - new Vector3(0, 0.375f, 0));
                 break;
             case CastStatus.COOLDOWNFULL:
                 //diplay.playCooldownFullEffects
+				spellEffects.popp.spawnSprite("popups_cooldownfull", 1.0F, player.transform.position - new Vector3(0, 0.375f, 0));
                 break;
             case CastStatus.ALLYSPELL:
                 int allyPos = getAllyPosition(s.root);
@@ -263,6 +278,7 @@ public class BattleManager : MonoBehaviour {
 			message = chat.getLine(battle_field.player_arr[allyPos].Stats.ChatDatabaseID);
 			preCastEffects(targetPattern, battle_field.player_arr[allyPos], s, message);
 			StartCoroutine(pauseAttackCurrent(s, battle_field.player_arr[allyPos]));
+                trackTyping.clearBuffer();//Clear the casting buffer
                 break;
         }
     }
@@ -285,8 +301,8 @@ public class BattleManager : MonoBehaviour {
         //END PAUSE//
 
         postCastEffects();
-        pause = false;
         updateEnemies();
+        pause = false;
     }
  
     //Casts from an enemy position: calls processCast on results
@@ -314,10 +330,9 @@ public class BattleManager : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         postCastEffects();
-        //BattleEffects.main.setDim(false, enemy_arr[position].GetComponent<SpriteRenderer>());
-        pause = false; // unpause
 		battle_field.enemy_arr[position].attack_in_progress = false;
         updateEnemies();
+        pause = false; // unpause
     }
 
     //Method for processing CastData (most effects now happen in SpellEffects.cs)
