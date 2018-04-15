@@ -53,7 +53,12 @@ public class StateManager : MonoBehaviour {
 	// starts game from first scene
 	public void startFirstScene() {
 		curr_scene = -1;
-		nextScene ();
+		AudioPlayer.main.stopAll (); // stop all playing audio
+		track_typing.enabled = false;
+		BattleManager.main.enabled = false;
+		dialogue_box.SetActive (true);
+		GameflowManager.main.gameflowStart ();
+		//nextScene ();
 	}
 
 	// transition to next scene; returns false if at end

@@ -8,23 +8,31 @@ using UnityEngine.UI;
 // represents an event to be played during text dialogue scrolling
 public delegate IEnumerator TextEventDel(string[] opt);
 
+// struct to contain event text
+public struct TextEvent {
+	public string evt;
+	public string[] opt;
+	public TextEvent(string evt, string[] opt) {
+		this.evt = evt;
+		this.opt = opt;
+	}
+}
+
 // event class for events during text dialogue
 public class TextEvents : MonoBehaviour {
 	public static TextEvents main = null;
 	public Dictionary<string, TextEventDel> text_event_map;
-	public bool is_prompt; // are we prompting input?
-	public string prompt_input; // input from prompt
+	[HideInInspector] public bool is_prompt; // are we prompting input?
+	[HideInInspector] public string prompt_input; // input from prompt
 
 	public SpriteRenderer dimmer; // sprite used to cover screen for fade/dim effects
-	public TextScroll text_scroll; // main text scroller for normal dialogue
 	public GameObject center_text; // for showing floating text in the center
 	public Camera main_camera; // main camera object
 	public GameObject dialogue_box; // dialogue box object
-	public TrackTyping track_typing; // tracks keyboard input
 	public GameObject glitch_effect; // sprite used for glitch effect
 
 	void Awake() {
-		if (main == null) main = this;
+		main = this;
 		text_event_map = new Dictionary<string, TextEventDel> {
 			{"screen-shake", screenShake},
 			{"block", block},
@@ -48,8 +56,16 @@ public class TextEvents : MonoBehaviour {
 	// plays the event 'evt', returning the coroutine created (null if event doesnt exist)
 	public Coroutine playEvent(string evt, string[] opt) {
 		TextEventDel text_event;
-		if (!text_event_map.TryGetValue (evt, out text_event)) return null;
+		if (!text_event_map.TryGetValue (evt, out text_event))
+			Debug.LogException (new System.Exception("Bad text event parameters:" + evt));
 		return StartCoroutine(text_event (opt));
+	}
+
+	// resets all the parameters that might have been changed
+	public void reset() {
+		// FIX CAMERA POS
+		DialogueManager.main.pause_scroll = false;
+		DialogueManager.main.block_input = false;
 	}
 
 /**************************** TEXT EVENTS *****************************/
@@ -63,6 +79,7 @@ public class TextEvents : MonoBehaviour {
 		float[] opts = opt.Select((string str) => float.Parse(str)).ToArray();
 		float curr_time = 0;
 		float wait_time = opts [0] / 4;
+		Debug.Log (wait_time + " " + opts[1]);
 		while (curr_time < wait_time) {
 			cam_tr.position = Random.insideUnitCircle * opts[1];
 			for (int i = 0; i < 4; ++i) yield return new WaitForEndOfFrame();
@@ -70,21 +87,22 @@ public class TextEvents : MonoBehaviour {
 		}
 		cam_tr.position = old_cam_pos;
 	}
-
+		
 	// blocks or unblocks input
 	// input: [t|f], 't' blocks input until 'f' unblocks
 	IEnumerator block(string[] opt) {
-		if (opt[0].CompareTo("t") == 0) CutsceneManager.main.enabled = false;
-		else 		                    CutsceneManager.main.enabled = true;
+		if (opt [0].CompareTo ("t") == 0)
+			 DialogueManager.main.block_input = true;
+		else DialogueManager.main.block_input = false;
 		yield return true;
 	}
 
 	// causes dialogue and cutscene to pause: it is recommended to also block
 	// input: [0]: float, length of pause
 	IEnumerator pause(string[] opt) {
-		text_scroll.pause_print = true; // pause text scroll
+		DialogueManager.main.pause_scroll = true; // pause text scroll
 		yield return new WaitForSeconds (float.Parse (opt [0]));
-		text_scroll.pause_print = false;
+		DialogueManager.main.pause_scroll = false;
 	}
 
 	// fades the screen in or out
@@ -121,10 +139,11 @@ public class TextEvents : MonoBehaviour {
 	// forces next line of dialogue (SHOULD BE PLACED AT END OF LINE)
 	// input: none
 	IEnumerator next(string[] opt) {
-		CutsceneManager.main.forceNextLine ();
+		DialogueManager.main.forceNextLine ();
 		yield return true;
 	}
 
+	// NON_OPERATIONAL
 	// scrolls floating text center aligned in the center of the screen (can also be used to immediately show text)
 	// input: [0]: float, delay time in seconds
 	//        [1]: float, red color
@@ -152,6 +171,7 @@ public class TextEvents : MonoBehaviour {
 		}
 	}
 
+	// NON_OPERATIONAL
 	// fades center text in or out
 	// input: [0]: [in|out], 'in' re-reveals screen, 'out' hides it
 	//        [1]: float, length of fade in seconds
@@ -180,27 +200,30 @@ public class TextEvents : MonoBehaviour {
 		}
 	}
 
+	// NON_OPERATIONAL
 	// plays the specified sfx
 	// input: [0]: string, sfx filename
 	IEnumerator playSFX(string[] opt) {
-		AudioPlayer.main.playSFX (opt[0]);
+		//AudioPlayer.main.playSFX (opt[0]);
 		yield return true;
 	}
 
 	// sets scroll delay of main dialogue text scroll
 	// input: [0]: float, new delay amount in seconds
 	IEnumerator setScrollDelay(string[] opt) {
-		text_scroll.delay = float.Parse (opt [0]);
+		DialogueManager.main.setScrollDelay(float.Parse (opt [0]));
 		yield return true;
 	}
 
+	// NON_OPERATIONAL
 	// sets background image from sprite name
 	// input: [0]: string, name of image file
 	IEnumerator setBG(string[] opt) {
-		BackgroundEffects.main.setSpriteBG (opt [0]);
+		//BackgroundEffects.main.setSpriteBG (opt [0]);
 		yield return true;
 	}
 
+	// NON_OPERATIONAL
 	// hides/shows dialogue box (NOTE: text is STILL GOING when hidden)
 	// typically, should block when hiding to avoid skipping reshow event
 	// input: [0]: [t|n], hides text box if 't', shows if 'f'
@@ -209,16 +232,19 @@ public class TextEvents : MonoBehaviour {
 		yield return true;
 	}
 
+	// NON_OPERATIONAL
 	// sets the talking sfx
 	// input: [0]: string, name of audio file
 	IEnumerator setTalkSFX(string[] opt) {
-		AudioPlayer.main.setSFX (3, opt[0]); // put sfx in channel 3
+		//AudioPlayer.main.setSFX (3, opt[0]); // put sfx in channel 3
 		yield return true;
 	}
 
+	// DEPRECATED
 	// prompts player to enter something into TYPORCYPHA; resumes on enter
 	// input: [0]: string, type of prompt
 	IEnumerator prompt(string[] opt) {
+		/*
 		CutsceneManager.main.enabled = false;
 		dialogue_box.SetActive (false);
 		track_typing.enabled = true;
@@ -273,15 +299,17 @@ public class TextEvents : MonoBehaviour {
 		dialogue_box.SetActive (true);
 		CutsceneManager.main.enabled = true;
 		CutsceneManager.main.forceNextLine ();
+		*/
 		yield return true;
 	}
 
+	// NON_OPERATIONAL
     IEnumerator evilEye(string[] opt) {
-        Debug.Log("evil eye lol");
-        AnimationPlayer.main.playAnimation("Evil_Eye", new Vector3(-5, 0, 0), 2f);
+        //AnimationPlayer.main.playAnimation("Evil_Eye", new Vector3(-5, 0, 0), 2f);
         yield return true;
     }
-	
+
+	// NON_OPERATIONAL
 	IEnumerator glitch(string[] opt)
 	{
 		for(int i = 0; i < 5; i++)
