@@ -42,6 +42,7 @@ public class TextEvents : MonoBehaviour {
 			{"center-text-scroll", centerTextScroll},
 			{"center-text-fade", centerTextFade},
 			{"play-sfx", playSFX},
+			{"play-music", playMusic},
 			{"set-scroll-delay", setScrollDelay},
 			{"set-bg", setBG},
 			{"hide-text-box", hideTextBox},
@@ -79,11 +80,12 @@ public class TextEvents : MonoBehaviour {
 		float[] opts = opt.Select((string str) => float.Parse(str)).ToArray();
 		float curr_time = 0;
 		float wait_time = opts [0] / 4;
-		Debug.Log (wait_time + " " + opts[1]);
 		while (curr_time < wait_time) {
-			cam_tr.position = Random.insideUnitCircle * opts[1];
-			for (int i = 0; i < 4; ++i) yield return new WaitForEndOfFrame();
-			curr_time += Time.deltaTime;
+			Vector3 new_pos = Random.insideUnitCircle * opts [1];
+			new_pos.z = old_cam_pos.z;
+			cam_tr.position = new_pos;
+			yield return new WaitForSeconds (0.06f);
+			curr_time += 0.06f;
 		}
 		cam_tr.position = old_cam_pos;
 	}
@@ -200,11 +202,17 @@ public class TextEvents : MonoBehaviour {
 		}
 	}
 
-	// NON_OPERATIONAL
 	// plays the specified sfx
 	// input: [0]: string, sfx filename
 	IEnumerator playSFX(string[] opt) {
-		//AudioPlayer.main.playSFX (opt[0]);
+		AudioPlayer.main.playSFX (opt[0]);
+		yield return true;
+	}
+
+	// plays specified music
+	// input: [0]: string, music filename
+	IEnumerator playMusic(string[] opt) {
+		AudioPlayer.main.playMusic (opt [0]);
 		yield return true;
 	}
 
@@ -214,16 +222,14 @@ public class TextEvents : MonoBehaviour {
 		DialogueManager.main.setScrollDelay(float.Parse (opt [0]));
 		yield return true;
 	}
-
-	// NON_OPERATIONAL
+		
 	// sets background image from sprite name
 	// input: [0]: string, name of image file
 	IEnumerator setBG(string[] opt) {
-		//BackgroundEffects.main.setSpriteBG (opt [0]);
+		BackgroundEffects.main.setSpriteBG (opt [0]);
 		yield return true;
 	}
-
-	// NON_OPERATIONAL
+		
 	// hides/shows dialogue box (NOTE: text is STILL GOING when hidden)
 	// typically, should block when hiding to avoid skipping reshow event
 	// input: [0]: [t|n], hides text box if 't', shows if 'f'
@@ -231,12 +237,11 @@ public class TextEvents : MonoBehaviour {
 		dialogue_box.SetActive (opt[0].CompareTo("f") == 0);
 		yield return true;
 	}
-
-	// NON_OPERATIONAL
+		
 	// sets the talking sfx
 	// input: [0]: string, name of audio file
 	IEnumerator setTalkSFX(string[] opt) {
-		//AudioPlayer.main.setSFX (3, opt[0]); // put sfx in channel 3
+		AudioPlayer.main.setSFX (3, opt[0]); // put sfx in channel 3
 		yield return true;
 	}
 

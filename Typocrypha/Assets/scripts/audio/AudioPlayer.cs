@@ -124,20 +124,22 @@ public class AudioPlayer : MonoBehaviour {
 
     // play music from name
     public void playMusic(string name) {
+		Debug.Log ("playMusic:" + name.Trim());
 		name = name.Trim ();
-		if (name.CompareTo ("_") == 0) // skip if null song
-			return; 
-		if (name.CompareTo ("") == 0) { // set to no song
-			music.Stop();
-			music.clip = null;
-			return;
-		}
-		if (name.CompareTo ("STOP") == 0) { // stop if stop flag
-			stopAll();
-			return;
-		} 
-		music.clip = music_bundle.LoadAsset<AudioClip> (name);
+		StartCoroutine (loadAndPlay (name));
+	}
+
+	// load sound asynchronously, and play when ready
+	IEnumerator loadAndPlay(string name) {
+		AssetBundleRequest request = music_bundle.LoadAssetAsync<AudioClip> (name);
+		yield return new WaitUntil (() => request.isDone);
+		music.clip = (AudioClip)request.asset;
 		music.Play ();
+	}
+
+	// stop music
+	public void stopMusic() {
+		music.Stop ();
 	}
 
 	// stop all audio clips

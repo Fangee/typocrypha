@@ -43,6 +43,8 @@ public class DialogueBox : MonoBehaviour {
 			right_icon.enabled = true;
 		// Set box height (if chat mode) and start displaying text
 		if (d_item.dialogue_mode == DialogueMode.CHAT) setBoxHeight ();
+		// Set talking sfx
+		AudioPlayer.main.setSFX(AudioPlayer.channel_voice, "speak_boop");
 		cr_scroll = StartCoroutine (textScrollCR ());
 	}
 
@@ -64,6 +66,7 @@ public class DialogueBox : MonoBehaviour {
 			checkEvents (cnt);
 			tag = tag ? (text [cnt - 1] != '>') || (text[cnt] == '<') : (text[cnt] == '<'); // Skip Unity rich text tags
 			if (!tag) yield return new WaitForSeconds (scroll_delay);
+			AudioPlayer.main.playSFX (AudioPlayer.channel_voice);
 			set_color.chars [0] = ++cnt;
 		}
 		cr_scroll = null;

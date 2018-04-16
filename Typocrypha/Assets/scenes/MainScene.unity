@@ -1701,7 +1701,7 @@ MonoBehaviour:
   left_icon: {fileID: 21300000, guid: acb909c97db531a4c8ceb9e7c3a4db0a, type: 3}
   right_icon: {fileID: 0}
   icon_side: 0
-  text: '[screen-shake=1,1,1]bye'
+  text: '[play-sfx=sfx_miss][screen-shake=1,1,1]Bye!'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -1723,7 +1723,8 @@ MonoBehaviour:
   left_icon: {fileID: 21300000, guid: acb909c97db531a4c8ceb9e7c3a4db0a, type: 3}
   right_icon: {fileID: 0}
   icon_side: 0
-  text: hi im bob the |wave|bob\wave\ person.
+  text: '[play-music=Naive Hero]Hi! I''m |color-cycle|bob\color-cycle\ the |wave|bob\wave\
+    person.'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -6950,7 +6951,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1282722192
 GameObject:
@@ -7023,7 +7024,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1297724876
 GameObject:
@@ -8009,7 +8010,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1542349794
 Transform:
   m_ObjectHideFlags: 0
