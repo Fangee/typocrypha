@@ -15,6 +15,7 @@ public class DialogueManager : MonoBehaviour {
 	public GameObject VNView; // Visual Novel view hiearchy
 	public DialogueBox VNDialogueBox; // Visual novel style dialogue box
 	public FXText VNSpeaker; // Text that contains speaker's name for VN style
+	public SpriteRenderer VNMCSprite; // Holds mc's sprite
 
 	public InputField input_field; // Input field for dialogue choices
 	public GameObject dialogue_box_prefab; // Prefab of dialogue box object
@@ -71,6 +72,8 @@ public class DialogueManager : MonoBehaviour {
 			DialogueItem d_item = curr_dialogue.GetComponents<DialogueItem>()[++curr_line];
 			DialogueBox d_box = null;
 			if (d_item.GetType() == typeof(DialogueItemVN)) {
+				Sprite mc_sprite = ((DialogueItemVN)d_item).mc_sprite;
+				if (mc_sprite != null) VNMCSprite.sprite = mc_sprite;
 				VNView.SetActive (true);
 				ChatView.SetActive (false);
 				d_box = VNDialogueBox;
@@ -187,13 +190,33 @@ public class DialogueManager : MonoBehaviour {
 		new_chr.GetComponent<SpriteRenderer> ().sprite = spr;
 	}
 
-	// Finds character with specified sprite, and removes it
+	// Finds first character with specified sprite, and removes it
 	public void removeCharacter(Sprite spr) {
 		foreach(GameObject chr_spr in chr_spr_list) {
 			if (chr_spr.GetComponent<SpriteRenderer> ().sprite == spr) {
 				chr_spr_list.Remove (chr_spr);
 				Destroy (chr_spr);
+				break;
 			}
 		}
+	}
+
+	// Finds first character with specified sprite name, and removes it
+	public void removeCharacter(string spr_name) {
+		foreach(GameObject chr_spr in chr_spr_list) {
+			if (chr_spr.GetComponent<SpriteRenderer> ().sprite.name == spr_name) {
+				chr_spr_list.Remove (chr_spr);
+				Destroy (chr_spr);
+				break;
+			}
+		}
+	}
+
+	// Removes all character from scene
+	public void removeAllCharacter() {
+		foreach (GameObject chr_spr in chr_spr_list) {
+			Destroy (chr_spr);
+		}
+		chr_spr_list.Clear ();
 	}
 }

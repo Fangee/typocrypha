@@ -47,6 +47,8 @@ public class TextEvents : MonoBehaviour {
 			{"set-bg", setBG},
 			{"hide-text-box", hideTextBox},
 			{"set-talk-sfx", setTalkSFX},
+			{"remove-character", removeCharacter},
+			{"remove-all-character", removeAllCharacter},
             {"evil-eye", evilEye},
             {"prompt", prompt},
 			{"glitch", glitch}
@@ -67,6 +69,28 @@ public class TextEvents : MonoBehaviour {
 		// FIX CAMERA POS
 		DialogueManager.main.pause_scroll = false;
 		DialogueManager.main.block_input = false;
+	}
+
+	// finishes up persistent events that might have been skipped (like removing a character)
+	public void finishUp(List<TextEvent>[] text_events) {
+		foreach (List<TextEvent> text_event_pos in text_events) {
+			if (text_event_pos == null) continue;
+			foreach (TextEvent text_event in text_event_pos) {
+				switch (text_event.evt) {
+				case "next":
+				case "play-music":
+				case "set-scroll-delay":
+				case "set-bg":
+				case "remove-character":
+				case "remove-all-character":
+				case "hide-text-box":
+					playEvent (text_event.evt, text_event.opt);
+					break;
+				default:
+					break;
+				}
+			}
+		}
 	}
 
 /**************************** TEXT EVENTS *****************************/
@@ -305,6 +329,20 @@ public class TextEvents : MonoBehaviour {
 		CutsceneManager.main.enabled = true;
 		CutsceneManager.main.forceNextLine ();
 		*/
+		yield return true;
+	}
+
+	// Removes a specific character from the scene
+	// input: [0]: string, name of sprite to remove
+	IEnumerator removeCharacter(string[] opt) {
+		DialogueManager.main.removeCharacter (opt [0]);
+		yield return true;
+	}
+
+	// Removes all characters from a scene
+	// input: NONE
+	IEnumerator removeAllCharacter(string[] opt) {
+		DialogueManager.main.removeAllCharacter ();
 		yield return true;
 	}
 
