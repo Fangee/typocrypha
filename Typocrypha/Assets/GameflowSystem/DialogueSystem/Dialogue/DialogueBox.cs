@@ -17,17 +17,11 @@ public class DialogueBox : MonoBehaviour {
 	[HideInInspector] public Coroutine cr_scroll; // Coroutine that scrolls text
 	[HideInInspector] public DialogueItem d_item; // Dialogue item
 
-	DialogueManager dialogue_manager; // Manages all dialogue boxes
 	FXTextColor set_color; // Effect that hides text for scrolling
 	float text_pad; // Padding between text and dialogue box
 
 	public void dialogueBoxStart() {
-		dialogue_manager = FindObjectOfType<DialogueManager> ();
 		text_pad = fx_text.rectTransform.offsetMin.y - fx_text.rectTransform.offsetMax.y;
-		// Set fields
-		left_icon.sprite = d_item.left_icon;
-		right_icon.sprite = d_item.right_icon;
-		scroll_delay = 0.02f; // DEFAULT TEMP
 		// Initialize color effect to hide text
 		set_color = fx_text.gameObject.AddComponent<FXTextColor> ();
 		set_color.color = fx_text.color;
@@ -35,14 +29,27 @@ public class DialogueBox : MonoBehaviour {
 		set_color.chars = new int[2]{0,text.Length};
 		fx_text.addEffect (set_color);
 		// Set text (with speaker name)
+		scroll_delay = 0.02f; // DEFAULT TEMP
 		fx_text.text = text;
-		// Display appropriate icon
-		if (d_item.icon_side == IconSide.LEFT || d_item.icon_side == IconSide.BOTH)
-			left_icon.enabled = true;
-		if (d_item.icon_side == IconSide.RIGHT || d_item.icon_side == IconSide.BOTH)
-			right_icon.enabled = true;
-		// Set box height (if chat mode) and start displaying text
-		if (d_item.dialogue_mode == DialogueMode.CHAT) setBoxHeight ();
+		// Set sprites
+		if (d_item.GetType () == typeof(DialogueItemChat)) {
+			DialogueItemChat c_item = (DialogueItemChat)d_item;
+			// Set icon
+			left_icon.sprite = c_item.left_icon;
+			right_icon.sprite = c_item.right_icon;
+			// Display appropriate icon
+			if (c_item.icon_side == IconSide.LEFT || c_item.icon_side == IconSide.BOTH)
+				left_icon.enabled = true;
+			if (c_item.icon_side == IconSide.RIGHT || c_item.icon_side == IconSide.BOTH)
+				right_icon.enabled = true;
+			// Set box height
+			setBoxHeight ();
+		} else {
+			DialogueItemVN v_item = (DialogueItemVN)d_item;
+			// Display character sprites
+			for (int i = 0; i < v_item.char_sprites.Length; ++i)
+				DialogueManager.main.displayCharacter (v_item.char_sprites [i], v_item.char_sprite_pos [i]);
+		}
 		// Set talking sfx
 		AudioPlayer.main.setSFX(AudioPlayer.channel_voice, "speak_boop");
 		cr_scroll = StartCoroutine (textScrollCR ());
@@ -82,6 +89,6 @@ public class DialogueBox : MonoBehaviour {
 	// Sets dialogue box's height based on text. Also updates dialogue window height
 	void setBoxHeight() {
 		rect_tr.sizeDelta = new Vector2 (rect_tr.sizeDelta.x, text_pad + fx_text.preferredHeight);
-		dialogue_manager.expandWindow (rect_tr.sizeDelta.y);
+		DialogueManager.main.expandWindow (rect_tr.sizeDelta.y);
 	}
 }

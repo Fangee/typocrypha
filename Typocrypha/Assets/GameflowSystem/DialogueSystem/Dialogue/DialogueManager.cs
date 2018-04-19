@@ -18,6 +18,7 @@ public class DialogueManager : MonoBehaviour {
 
 	public InputField input_field; // Input field for dialogue choices
 	public GameObject dialogue_box_prefab; // Prefab of dialogue box object
+	public GameObject chr_spr_prefab; // Prefab of character sprite display
 	public float scroll_time; // Time it takes to automatically update window
 	public float top_space; // Space between top of window and dialogue
 	[HideInInspector] public bool pause_scroll; // Pause text scroll
@@ -27,6 +28,7 @@ public class DialogueManager : MonoBehaviour {
 	float window_height; // Height of dialogue history
 	Coroutine slide_scroll_cr; // Coroutine that smoothly adjusts window
 	List<DialogueBox> history; // List of all dialogue boxes
+	List<GameObject> chr_spr_list; // List of character sprite holders
 
 	bool input; // Are we waiting for input?
 	string answer; // Player's input
@@ -40,6 +42,7 @@ public class DialogueManager : MonoBehaviour {
 		curr_line = -1;
 		window_height = top_space;
 		history = new List<DialogueBox> ();
+		chr_spr_list = new List<GameObject> ();
 		input = false;
 	}
 
@@ -64,14 +67,15 @@ public class DialogueManager : MonoBehaviour {
 		} else {
 			if (input) return true;
 			if (curr_line >= curr_dialogue.GetComponents<DialogueItem>().Length - 1) return false;
+			// Create dialogue box
 			DialogueItem d_item = curr_dialogue.GetComponents<DialogueItem>()[++curr_line];
 			DialogueBox d_box = null;
-			if (d_item.dialogue_mode == DialogueMode.VN) {
+			if (d_item.GetType() == typeof(DialogueItemVN)) {
 				VNView.SetActive (true);
 				ChatView.SetActive (false);
 				d_box = VNDialogueBox;
 				VNSpeaker.text = d_item.speaker_name;
-			} else if (d_item.dialogue_mode == DialogueMode.CHAT) {
+			} else if (d_item.GetType() == typeof(DialogueItemChat)) {
 				VNView.SetActive (false);
 				ChatView.SetActive (true);
 				GameObject d_obj = Instantiate (dialogue_box_prefab, ChatContent);
@@ -89,7 +93,9 @@ public class DialogueManager : MonoBehaviour {
 			// Add new text effects
 			foreach(FXTextEffect text_effect in d_item.fx_text_effects)
 				d_box.fx_text.addEffect (text_effect);
+			// Add dialogue box to history (only really works for Chat items)
 			history.Add (d_box);
+			// Prompt input if necessary
 			if (d_item.dialogue_type == DialogueType.INPUT) {
 				input = true;
 				StartCoroutine(showInput(d_item, d_box));
@@ -169,6 +175,25 @@ public class DialogueManager : MonoBehaviour {
 		while (scroll_bar.value > Mathf.Epsilon) {
 			scroll_bar.value = Mathf.SmoothDamp (scroll_bar.value, 0, ref vel, scroll_time);
 			yield return null;
+		}
+	}
+
+	// Displays new character
+	public void displayCharacter(Sprite spr, Vector2 pos) {
+		GameObject new_chr = Instantiate (chr_spr_prefab, transform);
+		chr_spr_list.Add (new_chr);
+		new_chr.transform.position = pos;
+		new_chr.transform.localScale = Vector3.one;
+		new_chr.GetComponent<SpriteRenderer> ().sprite = spr;
+	}
+
+	// Finds character with specified sprite, and removes it
+	public void removeCharacter(Sprite spr) {
+		foreach(GameObject chr_spr in chr_spr_list) {
+			if (chr_spr.GetComponent<SpriteRenderer> ().sprite == spr) {
+				chr_spr_list.Remove (chr_spr);
+				Destroy (chr_spr);
+			}
 		}
 	}
 }

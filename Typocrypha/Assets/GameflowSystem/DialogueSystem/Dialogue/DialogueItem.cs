@@ -3,19 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum IconSide {LEFT, RIGHT, BOTH, NONE}; // Side which icon displays
-public enum DialogueMode {VN, CHAT}; // Style of dialogue presentation
 public enum DialogueType {NORMAL, INPUT}; // Type of player interaction with dialouge
 
 // Represents a single line of dialogue, and all it's effects/events/etc
 public class DialogueItem : MonoBehaviour {
 	[HideInInspector] public List<FXTextEffect> fx_text_effects; // List of text effects
 	[HideInInspector] public List<TextEvent>[] text_events; // Array of text events at each character index
-	public DialogueMode dialogue_mode; // Display style of dialogue
 	public DialogueType dialogue_type; // Type of player interaction with dialogue
 	public string speaker_name; // Label of who is speaking
-	public Sprite left_icon; // Icon for left speaker icon
-	public Sprite right_icon; // Icon for right speaker icon
-	public IconSide icon_side; // Side where icon shows
 	public string text; // Dialogue text
 
 	// Input fields
