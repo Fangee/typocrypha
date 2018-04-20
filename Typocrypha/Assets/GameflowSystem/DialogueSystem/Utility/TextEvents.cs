@@ -66,7 +66,7 @@ public class TextEvents : MonoBehaviour {
 
 	// resets all the parameters that might have been changed
 	public void reset() {
-		// FIX CAMERA POS
+		main_camera.transform.position = new Vector3 (0,0,-10);
 		DialogueManager.main.pause_scroll = false;
 		DialogueManager.main.block_input = false;
 	}
@@ -111,7 +111,7 @@ public class TextEvents : MonoBehaviour {
 			yield return new WaitForSeconds (0.06f);
 			curr_time += 0.06f;
 		}
-		cam_tr.position = old_cam_pos;
+		cam_tr.position = new Vector3(0,0,-10);
 	}
 		
 	// blocks or unblocks input
@@ -143,19 +143,19 @@ public class TextEvents : MonoBehaviour {
 		float g = float.Parse (opt [3]);
 		float b = float.Parse (opt [4]);
 		float alpha;
-		float a_step = 1f * 0.017f / fade_time; // amount of change each frame
+		float a_step = 1f * Time.deltaTime / fade_time; // amount of change each frame
 		if (a_step > 1) a_step = 1;
 		if (opt [0].CompareTo ("out") == 0) { // hide screen
 			alpha = 0;
 			while (alpha < 1f) {
-				yield return new WaitForSeconds(0.017f);
+				yield return null;
 				alpha += a_step;
 				dimmer.color = new Color (r, g, b, alpha);
 			}
 		} else { // show screen
 			alpha = 1;
 			while (alpha > 0f) {
-				yield return new WaitForSeconds(0.017f);
+				yield return null;;
 				alpha -= a_step;
 				dimmer.color = new Color (r, g, b, alpha);
 			}
@@ -203,7 +203,6 @@ public class TextEvents : MonoBehaviour {
 	//        [1]: float, length of fade in seconds
 	IEnumerator centerTextFade(string[] opt) {
 		Text txt = center_text.GetComponent<Text> ();
-		Debug.Log ("text fade:" + opt[0] + ":" + txt.color.a);
 		float fade_time = float.Parse (opt [1]);
 		float r = txt.color.r;
 		float g = txt.color.g;

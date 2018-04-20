@@ -46,11 +46,14 @@ public class DialogueBox : MonoBehaviour {
 			set_color.chars [1] += d_item.speaker_name.Length + 1;
 			// Set box height
 			setBoxHeight ();
-		} else {
+		} else if (d_item.GetType () == typeof(DialogueItemVN)) {
 			DialogueItemVN v_item = (DialogueItemVN)d_item;
 			// Display character sprites
 			for (int i = 0; i < v_item.char_sprites.Length; ++i)
 				DialogueManager.main.displayCharacter (v_item.char_sprites [i], v_item.char_sprite_pos [i]);
+			// Set text
+			fx_text.text = text;
+		} else if (d_item.GetType () == typeof(DialogueItemAN)) {
 			// Set text
 			fx_text.text = text;
 		}
@@ -71,24 +74,31 @@ public class DialogueBox : MonoBehaviour {
 
 	// Scrolls text character by character
 	IEnumerator textScrollCR() {
+		int offset = set_color.chars [0];
 		int cnt = set_color.chars[0];
 		bool tag = false; // Are we scrolling over a tag?
 		while (cnt < text.Length) {
 			yield return new WaitWhile (() => DialogueManager.main.pause_scroll);
-			checkEvents (cnt - set_color.chars[0]);
+			checkEvents (cnt - offset);
 			tag = tag ? (text [cnt - 1] != '>') || (text[cnt] == '<') : (text[cnt] == '<'); // Skip Unity rich text tags
 			if (!tag) yield return new WaitForSeconds (scroll_delay);
 			AudioPlayer.main.playSFX (AudioPlayer.channel_voice);
 			set_color.chars [0] = ++cnt;
 		}
+		checkEvents (cnt - offset); // Play events at end of text
 		cr_scroll = null;
 	}
 
 	// Checks for and plays text events
 	void checkEvents(int start_pos) {
-		if (d_item.text_events [start_pos] != null && d_item.text_events [start_pos].Count > 0)
-			foreach (TextEvent t in d_item.text_events [start_pos])
+		if (start_pos >= d_item.text_events.Length)
+			return;
+		List<TextEvent> evt_list = d_item.text_events [start_pos];
+		if (evt_list != null && evt_list.Count > 0) {
+			foreach(TextEvent t in evt_list)
 				TextEvents.main.playEvent (t.evt, t.opt);
+			d_item.text_events [start_pos] = null;
+		}
 	}
 
 	// Sets dialogue box's height based on text. Also updates dialogue window height

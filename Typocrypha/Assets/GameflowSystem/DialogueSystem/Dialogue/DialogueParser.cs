@@ -29,6 +29,7 @@ public class DialogueParser : MonoBehaviour {
 
 	// Parses dialogue item, returning updated text and modifying fields
 	public string parse(DialogueItem d_item, DialogueBox d_box) {
+		Debug.Log ("parse:" + d_item.text);
 		StringBuilder parsed = new StringBuilder(); // Processes string
 		string text = substituteMacros(d_item.text);
 		d_item.fx_text_effects = new List<FXTextEffect> ();
@@ -89,8 +90,8 @@ public class DialogueParser : MonoBehaviour {
 		}
 		if (d_item.text_events [parsed.Length] == null)
 			d_item.text_events [parsed.Length] = new List<TextEvent> ();
-		d_item.text_events [parsed.Length].Add(new TextEvent(evt, opt)); 
-		Debug.Log ("text_event:" + evt + ":" + opt.Aggregate("", (acc, next) => acc + "," + next));
+		d_item.text_events [parsed.Length].Add(new TextEvent(evt, opt));
+		Debug.Log ("  text_event:" + evt + ":" + opt.Aggregate("", (acc, next) => acc + "," + next));
 		return;
 	}
 
@@ -102,7 +103,7 @@ public class DialogueParser : MonoBehaviour {
 				int start_pos = i + 1;
 				int end_pos = text.IndexOf ('}', start_pos);
 				string[] macro = text.Substring (start_pos, end_pos - start_pos).Split(opt_delim);
-				Debug.Log ("macro:" + macro.Aggregate("", (acc, next) => acc + "," + next));
+				Debug.Log ("  macro:" + macro.Aggregate("", (acc, next) => acc + "," + next));
 				string[] opt = macro.Skip (1).Take (macro.Length - 1).ToArray ();
 				string sub = TextMacros.main.macro_map [macro[0]] (opt);
 				true_str.Append (sub);

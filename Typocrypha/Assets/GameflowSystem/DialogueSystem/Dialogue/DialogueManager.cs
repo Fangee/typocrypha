@@ -17,8 +17,12 @@ public class DialogueManager : MonoBehaviour {
 	public FXText VNSpeaker; // Text that contains speaker's name for VN style
 	public SpriteRenderer VNMCSprite; // Holds mc's sprite
 
+	public GameObject ANView; // Audio Novel view hiearchy
+	public RectTransform ANContent; // Content of scroll view
+
 	public InputField input_field; // Input field for dialogue choices
 	public GameObject dialogue_box_prefab; // Prefab of dialogue box object
+	public GameObject an_dialouge_box_prefab; // Prefab of audio novel dialogue 
 	public GameObject chr_spr_prefab; // Prefab of character sprite display
 	public float scroll_time; // Time it takes to automatically update window
 	public float top_space; // Space between top of window and dialogue
@@ -71,17 +75,26 @@ public class DialogueManager : MonoBehaviour {
 			// Create dialogue box
 			DialogueItem d_item = curr_dialogue.GetComponents<DialogueItem>()[++curr_line];
 			DialogueBox d_box = null;
-			if (d_item.GetType() == typeof(DialogueItemVN)) {
+			if (d_item.GetType () == typeof(DialogueItemVN)) {
 				Sprite mc_sprite = ((DialogueItemVN)d_item).mc_sprite;
-				if (mc_sprite != null) VNMCSprite.sprite = mc_sprite;
+				if (mc_sprite != null)
+					VNMCSprite.sprite = mc_sprite;
 				VNView.SetActive (true);
 				ChatView.SetActive (false);
+				ANView.SetActive (false);
 				d_box = VNDialogueBox;
 				VNSpeaker.text = d_item.speaker_name;
-			} else if (d_item.GetType() == typeof(DialogueItemChat)) {
+			} else if (d_item.GetType () == typeof(DialogueItemChat)) {
 				VNView.SetActive (false);
 				ChatView.SetActive (true);
+				ANView.SetActive (false);
 				GameObject d_obj = Instantiate (dialogue_box_prefab, ChatContent);
+				d_box = d_obj.GetComponent<DialogueBox> ();
+			} else if (d_item.GetType () == typeof(DialogueItemAN)) {
+				VNView.SetActive (false);
+				ChatView.SetActive (false);
+				ANView.SetActive (true);
+				GameObject d_obj = Instantiate (an_dialouge_box_prefab, ANContent);
 				d_box = d_obj.GetComponent<DialogueBox> ();
 			}
 			d_box.d_item = d_item;
@@ -144,12 +157,9 @@ public class DialogueManager : MonoBehaviour {
 
 	// Forces next line
 	public void forceNextLine() {
-		if (history.Count > 0 && history [history.Count - 1].cr_scroll != null) {
-			history [history.Count - 1].dumpText ();
-			nextLine ();
-		} else {
-			nextLine ();
-		}
+		history [history.Count - 1].StopAllCoroutines();
+		history [history.Count - 1].cr_scroll = null;
+		nextLine ();
 	}
 
 	// Changes scroll delay of currently scrolling dialogue
