@@ -22,6 +22,10 @@ public class GameflowManager : MonoBehaviour {
 	public void next() {
 		Debug.Log ("gameflow next");
 		GameflowItem item = transform.GetChild(++curr_item).gameObject.GetComponent<GameflowItem>();
+		if (item.gameObject.activeInHierarchy == false) { // Don't read disabled items
+			next ();
+			return;
+		}
 		if (item.GetType() == typeof(Dialogue)) {
 			Debug.Log ("starting dialogue");
 			DialogueManager.main.startDialogue (transform.GetChild(curr_item).gameObject);

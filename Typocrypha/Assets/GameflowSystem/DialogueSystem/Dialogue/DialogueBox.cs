@@ -28,10 +28,7 @@ public class DialogueBox : MonoBehaviour {
 		set_color.color.a = 0;
 		set_color.chars = new int[2]{0,text.Length};
 		fx_text.addEffect (set_color);
-		// Set text (with speaker name)
 		scroll_delay = 0.02f; // DEFAULT TEMP
-		fx_text.text = text;
-		// Set sprites
 		if (d_item.GetType () == typeof(DialogueItemChat)) {
 			DialogueItemChat c_item = (DialogueItemChat)d_item;
 			// Set icon
@@ -42,6 +39,11 @@ public class DialogueBox : MonoBehaviour {
 				left_icon.enabled = true;
 			if (c_item.icon_side == IconSide.RIGHT || c_item.icon_side == IconSide.BOTH)
 				right_icon.enabled = true;
+			// Add text with speaker's name, and offset text display
+			text = d_item.speaker_name + "\n" + text;
+			fx_text.text = text;
+			set_color.chars [0] = d_item.speaker_name.Length + 1;
+			set_color.chars [1] += d_item.speaker_name.Length + 1;
 			// Set box height
 			setBoxHeight ();
 		} else {
@@ -49,6 +51,8 @@ public class DialogueBox : MonoBehaviour {
 			// Display character sprites
 			for (int i = 0; i < v_item.char_sprites.Length; ++i)
 				DialogueManager.main.displayCharacter (v_item.char_sprites [i], v_item.char_sprite_pos [i]);
+			// Set text
+			fx_text.text = text;
 		}
 		// Set talking sfx
 		AudioPlayer.main.setSFX(AudioPlayer.channel_voice, "speak_boop");
@@ -67,11 +71,11 @@ public class DialogueBox : MonoBehaviour {
 
 	// Scrolls text character by character
 	IEnumerator textScrollCR() {
-		int cnt = 0;
+		int cnt = set_color.chars[0];
 		bool tag = false; // Are we scrolling over a tag?
 		while (cnt < text.Length) {
 			yield return new WaitWhile (() => DialogueManager.main.pause_scroll);
-			checkEvents (cnt);
+			checkEvents (cnt - set_color.chars[0]);
 			tag = tag ? (text [cnt - 1] != '>') || (text[cnt] == '<') : (text[cnt] == '<'); // Skip Unity rich text tags
 			if (!tag) yield return new WaitForSeconds (scroll_delay);
 			AudioPlayer.main.playSFX (AudioPlayer.channel_voice);
