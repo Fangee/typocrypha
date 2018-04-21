@@ -32,7 +32,7 @@ public class TargetReticule : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		// slide target
 		base_tr.localPosition = Vector2.SmoothDamp (base_tr.localPosition, BattleManager.main.target_pos, ref vel, smooth_time, max_h_speed, Time.deltaTime);
 		// rotate target rings

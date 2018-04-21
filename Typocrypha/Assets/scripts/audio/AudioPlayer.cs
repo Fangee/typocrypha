@@ -147,6 +147,19 @@ public class AudioPlayer : MonoBehaviour {
 			child.gameObject.GetComponent<AudioSource> ().Stop();
 	}
 
+    // pause sfx
+    public void pauseSFX() {
+        foreach (Transform child in sfx)
+            child.gameObject.GetComponent<AudioSource> ().Pause();
+        music.UnPause();
+    }
+
+    // unpause sfx
+    public void unpauseSFX() {
+        foreach (Transform child in sfx)
+            child.gameObject.GetComponent<AudioSource> ().UnPause();
+    }
+
 	// fade a sound clip to a stop
 	IEnumerator fadeToStop(AudioSource source) {
 		if (source.isPlaying) {
