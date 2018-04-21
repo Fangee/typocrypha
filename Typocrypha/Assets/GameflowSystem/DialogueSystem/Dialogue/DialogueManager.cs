@@ -28,6 +28,7 @@ public class DialogueManager : MonoBehaviour {
 	public float top_space; // Space between top of window and dialogue
 	[HideInInspector] public bool pause_scroll; // Pause text scroll
 	[HideInInspector] public bool block_input; // Blocks user input
+	[HideInInspector] public string answer; // Player's input
 
 	int curr_line; // Current line number of dialogue
 	float window_height; // Height of dialogue history
@@ -36,7 +37,6 @@ public class DialogueManager : MonoBehaviour {
 	List<GameObject> chr_spr_list; // List of character sprite holders
 
 	bool input; // Are we waiting for input?
-	string answer; // Player's input
 	GameObject input_display; // Display image for input
 
 	void Awake() {
@@ -129,12 +129,13 @@ public class DialogueManager : MonoBehaviour {
 		yield return new WaitUntil (() => d_box.cr_scroll == null);
 		input_field.gameObject.SetActive (true);
 		input_field.ActivateInputField ();
-		input_display = Instantiate (d_item.input_display, transform);
+		if (d_item.input_display != null)
+			input_display = Instantiate (d_item.input_display, transform);
 	}
 
 	// Called when input field is submitted
 	public void submitInput() {
-		answer = input_field.text.Trim().ToLower();
+		answer = input_field.text;
 		// CHECK IF CORRECT INPUT
 		input_field.gameObject.SetActive (false);
 		input_field.text = "";
@@ -143,7 +144,7 @@ public class DialogueManager : MonoBehaviour {
 		if (d_item.input_options.Length > 0) { // If set number of choices
 			int i = 0;
 			for (; i < d_item.input_options.Length; ++i)
-				if (d_item.input_options [i].Trim().ToLower().CompareTo (answer) == 0) break;
+				if (d_item.input_options [i].Trim().ToLower().CompareTo (answer.Trim().ToLower()) == 0) break;
 			if (i < d_item.input_options.Length) { // Option was found, so branch
 				curr_dialogue = d_item.input_branches [i].gameObject;
 				curr_line = -1;
@@ -159,7 +160,7 @@ public class DialogueManager : MonoBehaviour {
 	public void forceNextLine() {
 		history [history.Count - 1].StopAllCoroutines();
 		history [history.Count - 1].cr_scroll = null;
-		nextLine ();
+		if (!nextLine ()) GameflowManager.main.next ();
 	}
 
 	// Changes scroll delay of currently scrolling dialogue

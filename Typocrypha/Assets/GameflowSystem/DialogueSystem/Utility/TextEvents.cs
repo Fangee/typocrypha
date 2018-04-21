@@ -51,7 +51,8 @@ public class TextEvents : MonoBehaviour {
 			{"remove-all-character", removeAllCharacter},
             {"evil-eye", evilEye},
             {"prompt", prompt},
-			{"glitch", glitch}
+			{"glitch", glitch},
+			{"set-name", setName}
 		};
 		is_prompt = false;
 	}
@@ -365,6 +366,14 @@ public class TextEvents : MonoBehaviour {
 		yield return new WaitForSeconds (0.15f);
 		glitch_effect.SetActive(false);
 		
+		yield return true;
+	}
+
+	// Sets name from last inputed text
+	// Input: NONE
+	IEnumerator setName(string[] opt) {
+		Debug.Log (DialogueManager.main.answer);
+		PlayerDialogueInfo.main.player_name = DialogueManager.main.answer;
 		yield return true;
 	}
 }
