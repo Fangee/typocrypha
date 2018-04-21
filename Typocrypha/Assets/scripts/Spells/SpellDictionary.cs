@@ -19,7 +19,7 @@ public class SpellDictionary : MonoBehaviour
         is_loaded = false;
         buildDicts(); // load gameflow file
         is_loaded = true;
-        Debug.Log("Dict loaded"); 
+        Debug.Log("Spell Dictionary Loaded"); 
     }
 
     public bool is_loaded; // is the spellDict done loading?
@@ -420,6 +420,10 @@ public class SpellDictionary : MonoBehaviour
     {
         return null;
     }
+    public Spell getSpell(SpellData data)
+    {
+        return spells[data.root];
+    }
     //Gets casting time of input spell
     public float getCastingTime(SpellData s, float speed)
     {
@@ -512,6 +516,29 @@ public class SpellDictionary : MonoBehaviour
             results[1] = true;
         }
         if(s.element != null && spellBook.isNotRegistered(s.element))
+        {
+            spellBook.register(s.element, "element", elements[s.element].description);
+            results[0] = true;
+        }
+        if (s.style != null && spellBook.isNotRegistered(s.style))
+        {
+            spellBook.register(s.style, "style", styles[s.style].description);
+            results[2] = true;
+        }
+        return results;
+    }
+    //Registeres all keywords in Spelldata s if unregistered
+    //Returns bool[elem,root,style] (true if successful register, false if already registered
+    //Pre: s is a valid spell
+    public bool[] safeRegister(SpellBook spellbook, SpellData s)
+    {
+        bool[] results = { false, false, false };
+        if (spellBook.isNotRegistered(s.root))
+        {
+            spellBook.register(s.root, regType(s.root), spells[s.root].description);
+            results[1] = true;
+        }
+        if (s.element != null && spellBook.isNotRegistered(s.element))
         {
             spellBook.register(s.element, "element", elements[s.element].description);
             results[0] = true;

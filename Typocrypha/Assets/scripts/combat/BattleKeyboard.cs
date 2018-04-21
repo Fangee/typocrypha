@@ -70,7 +70,7 @@ public class BattleKeyboard : MonoBehaviour {
         float time = 0;
         while(time < seconds)
         {
-            yield return new WaitWhile(() => BattleManager.main.pause);
+            yield return new WaitWhile(() => BattleManagerS.main.pause);
             yield return new WaitForEndOfFrame();
             time += Time.deltaTime;
         }

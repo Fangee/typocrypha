@@ -24,12 +24,12 @@ public class TargetReticule : MonoBehaviour
 
     Scouter scouter; //script for targeting info
     bool scoutVisible = false; //for when scouter is shown
+    private Vector2 target_destination_pos; // position of target ret
 
     void Start()
     {
         base_r_speed = def_r_speed;
         r_speed = base_r_speed;
-
         scouter = transform.GetChild(0).gameObject.GetComponent<Scouter>();
     }
 
@@ -37,7 +37,7 @@ public class TargetReticule : MonoBehaviour
     void Update()
     {
         // slide target
-        base_tr.localPosition = Vector2.SmoothDamp(base_tr.localPosition, BattleManager.main.battle_field.target_pos, ref vel, smooth_time, max_h_speed, Time.deltaTime);
+        base_tr.localPosition = Vector2.SmoothDamp(base_tr.localPosition, target_destination_pos, ref vel, smooth_time, max_h_speed, Time.deltaTime);
         // rotate target rings
         inner_tr.RotateAround(inner_tr.position, Vector3.back, r_speed);
         outer_tr.RotateAround(outer_tr.position, -1 * Vector3.back, r_speed);
@@ -68,14 +68,37 @@ public class TargetReticule : MonoBehaviour
     }
 
     // updates target based on targetted enemy
-    public void updateTarget()
+    public void updateTarget(Vector2 destination)
     {
         // don't update if battle not set up yet
-        if (BattleManager.main.battle_field.target_ind >= BattleManager.main.battle_field.enemy_arr.Length) return;
+        if (BattleManagerS.main.field.target_ind >= BattleManagerS.main.field.enemy_arr.Length) return;
+        target_destination_pos = destination;
         // update arrows
         updateArrows();
         // check if no enemy targeted
-        if (BattleManager.main.battle_field.enemy_arr[BattleManager.main.battle_field.target_ind] == null || BattleManager.main.battle_field.enemy_arr[BattleManager.main.battle_field.target_ind].Is_dead)
+        if (BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind] == null || BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind].Is_dead)
+        {
+            no_target.enabled = true;
+            base_r_speed = 0f;
+        }
+        else
+        {
+            no_target.enabled = false;
+            base_r_speed = def_r_speed;
+        }
+        scouter.updateInfo();
+    }
+
+    // updates target based on targetted enemy
+    public void updateTarget()
+    {
+        // don't update if battle not set up yet
+        if (BattleManagerS.main.field.target_ind >= BattleManagerS.main.field.enemy_arr.Length) return;
+        //target_destination_pos = destination;
+        // update arrows
+        updateArrows();
+        // check if no enemy targeted
+        if (BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind] == null || BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind].Is_dead)
         {
             no_target.enabled = true;
             base_r_speed = 0f;
@@ -96,7 +119,7 @@ public class TargetReticule : MonoBehaviour
             right_arrow.enabled = false;
             return;
         }
-        switch (BattleManager.main.battle_field.target_ind)
+        switch (BattleManagerS.main.field.target_ind)
         {
             case 0:
                 left_arrow.enabled = false;
@@ -111,7 +134,7 @@ public class TargetReticule : MonoBehaviour
                 right_arrow.enabled = false;
                 break;
         }
-        if (BattleManager.main.battle_field.enemy_arr[BattleManager.main.battle_field.target_ind] == null || BattleManager.main.battle_field.enemy_arr[BattleManager.main.battle_field.target_ind].Is_dead)
+        if (BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind] == null || BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind].Is_dead)
         {
         }
     }

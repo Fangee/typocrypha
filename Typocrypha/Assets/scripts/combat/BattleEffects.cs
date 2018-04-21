@@ -13,9 +13,9 @@ public class BattleEffects : MonoBehaviour {
 
 	private int old_dim_layer;
 
-	const int dimmer_show = -2; // layer of dimmer when showing enemies
-	const int undim_layer = -1; // layer of enemy when enemy sprite is shown
-	const int dim_layer = -5;   // layer of enemy when enemy sprite is dimmed
+	public const int dimmer_show = -2; // layer of dimmer when showing enemies
+	public const int undim_layer = -1; // layer of enemy when enemy sprite is shown
+	public const int dim_layer = -5;   // layer of enemy when enemy sprite is dimmed
 
 	const float fps30 = 0.0333f; // length of frame at 30fps
 	const float fps60 = 0.0166f; // length of frame at 60fps

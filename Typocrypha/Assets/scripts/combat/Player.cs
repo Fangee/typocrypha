@@ -145,11 +145,10 @@ public class Player : MonoBehaviour, ICaster
         if (Curr_hp <= 0)
         { // check if killed
             Debug.Log("Player" + " has been slain!");
-			BattleManager.main.pause = true;
+			BattleManagerS.main.pause = true;
 			BattleEffects.main.setDim (false);
 			restoreToFull ();
-			BattleManager.main.stopBattle ();
-			StateManager.main.revertScene (2f);
+			BattleManagerS.main.playerDeath();
             is_dead = true;
         }
        // return Is_dead;

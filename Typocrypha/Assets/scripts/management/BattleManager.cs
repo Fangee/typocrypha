@@ -101,9 +101,9 @@ public class BattleManager : MonoBehaviour {
 
 		//INITIALIZE TARGET UI//
 
-		battle_field.target_ind = 1;
-		battle_field.target_pos = new Vector2 (battle_field.target_ind * enemy_spacing, reticule_y_offset);
-		target_ret.transform.localPosition = battle_field.target_pos;
+		//battle_field.target_ind = 1;
+		//battle_field.target_pos = new Vector2 (battle_field.target_ind * enemy_spacing, reticule_y_offset);
+		//target_ret.transform.localPosition = battle_field.target_pos;
 
 		//INITIALIZE OTHER TRACKING VARIABLES//
 
@@ -156,7 +156,7 @@ public class BattleManager : MonoBehaviour {
 		new_enemy.transform.localScale = new Vector3 (1, 1, 1);
 		new_enemy.transform.localPosition = new Vector3 (i * enemy_spacing, enemy_y_offset, 0);
 		battle_field.enemy_arr [i] = new_enemy.GetComponent<Enemy> ();
-		battle_field.enemy_arr[i].field = this; //Give enemy access to field (for calling spellcasts)
+		battle_field.enemy_arr[i].field = battle_field; //Give enemy access to field (for calling spellcasts)
 		battle_field.enemy_arr [i].initialize (scene.enemy_stats [i]); //sets enemy stats (AND INITITIALIZES ATTACKING AND AI)
 		battle_field.enemy_arr [i].Position = i;      //Log enemy position in field
 		battle_field.enemy_arr[i].bars = charge_bars; //Give enemy access to charge_bars
@@ -209,8 +209,7 @@ public class BattleManager : MonoBehaviour {
 		// check if target was actually moved
 		if (old_ind != battle_field.target_ind) {
 			// move and update target reticule and update floor panels
-			battle_field.target_pos = new Vector2 (battle_field.target_ind * enemy_spacing, reticule_y_offset);
-			target_ret_scr.updateTarget ();
+			target_ret_scr.updateTarget (new Vector2(battle_field.target_ind * enemy_spacing, reticule_y_offset));
 			target_floor_scr.updateFloor ();
 			// play sfx
 			AudioPlayer.main.playSFX ("sfx_enemy_select");
@@ -355,7 +354,7 @@ public class BattleManager : MonoBehaviour {
 
     private IEnumerator learnSFX()
     {
-        yield return new WaitWhile(() => BattleManager.main.pause);
+        yield return new WaitWhile(() => BattleManagerS.main.pause);
         AudioPlayer.main.playSFX("sfx_learn_spell_battle");
     }
     //Effects that happen before any actor casts

@@ -28,9 +28,13 @@ public class GameflowManager : MonoBehaviour {
 		}
 		if (item.GetType() == typeof(Dialogue)) {
 			Debug.Log ("starting dialogue");
+            BattleManagerS.main.setEnabled(false);
+            DialogueManager.main.setEnabled(true);
 			DialogueManager.main.startDialogue (transform.GetChild(curr_item).gameObject);
 		} else if(item.GetType() == typeof(Battle)) {
             Debug.Log("starting battle");
+            DialogueManager.main.setEnabled(false);
+            BattleManagerS.main.setEnabled(true);
             BattleManagerS.main.startBattle(transform.GetChild(curr_item).gameObject);
         }
 	}

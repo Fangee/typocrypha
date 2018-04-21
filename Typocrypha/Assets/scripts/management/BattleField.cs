@@ -5,6 +5,10 @@ using UnityEngine;
 // Encapsulates battle info
 public class BattleField {
 
+    //Properties
+
+    public ICaster Player { get { return player_arr[player_ind]; } }
+
     //BattleField data
 
 	[HideInInspector] public Enemy[] enemy_arr = new Enemy[3]; // array of Enemy components (size 3)
@@ -13,7 +17,6 @@ public class BattleField {
 	[HideInInspector] public int player_ind = 1;
 	[HideInInspector] public int enemy_count = 0; // number of enemies in battle
 	[HideInInspector] public int curr_dead = 0;
-	[HideInInspector] public Vector2 target_pos; // position of target ret
 
     //Interrupt stuff
 

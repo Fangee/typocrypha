@@ -36,7 +36,7 @@ public class TrackTyping : MonoBehaviour {
 	}
 
 	void Update () {
-		if ((BattleManager.main.pause || BattleManager.main.enabled == false) &&
+		if ((BattleManagerS.main.pause || BattleManagerS.main.enabled == false) &&
 			(!TextEvents.main.is_prompt)) {
 			entry_ok.text = "NO";
 			return;
@@ -50,7 +50,7 @@ public class TrackTyping : MonoBehaviour {
                 clearBuffer();
 			} else {
                 Debug.Log("Player casts " + buffer.ToUpper().Replace(' ', '-'));
-                BattleManager.main.attackCurrent (buffer); // attack currently targeted enemy
+                BattleManagerS.main.handleSpellCast (buffer, this); // attack currently targeted enemy
 			}				
 		} else if (Input.GetKey (KeyCode.Backspace)) {
 			if (Input.GetKeyDown (KeyCode.Backspace)) {

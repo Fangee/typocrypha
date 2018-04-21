@@ -6,7 +6,7 @@ using UnityEngine;
 // loads gameflow file that defines dialgue, battles, etc
 public class LoadGameFlow : MonoBehaviour {
 	public string file_name; // name of gameflow file
-	public bool is_loaded; // is the gameflow done loading?
+	public bool is_loaded = true; // is the gameflow done loading?
 	public GameScene[] scene_arr; // array of gamescenes
     public EnemyDatabase enemy_data;//Enemy database
     public AllyDatabase ally_data;//Ally database
@@ -34,10 +34,10 @@ public class LoadGameFlow : MonoBehaviour {
 
 	void Start () {
 		is_loaded = false;
-		EnemyDatabase.main.build();//Build enemy database (so data is ready for cutscene building)
-        enemy_data = EnemyDatabase.main;
-        AllyDatabase.main.build();
-        ally_data = AllyDatabase.main;
+		//EnemyDatabase.main.build();//Build enemy database (so data is ready for cutscene building)
+  //      enemy_data = EnemyDatabase.main;
+  //      AllyDatabase.main.build();
+  //      ally_data = AllyDatabase.main;
         parseFile (); // load gameflow file
 		is_loaded = true;
 	}

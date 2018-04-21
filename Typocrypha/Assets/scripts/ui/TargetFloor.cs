@@ -9,11 +9,11 @@ public class TargetFloor : MonoBehaviour {
 
 	// update floor panels based on targetted enemy
 	public void updateFloor() {
-		for (int i = 0; i < BattleManager.main.battle_field.enemy_arr.Length; ++i) {
+		for (int i = 0; i < BattleManagerS.main.field.enemy_arr.Length; ++i) {
 			// highlight selected enemy
-			highlights [i].enabled = (i == BattleManager.main.battle_field.target_ind);
+			highlights [i].enabled = (i == BattleManagerS.main.field.target_ind);
 			// show/hide floors depending on target
-			floor_panels[i].SetActive(BattleManager.main.battle_field.enemy_arr[i] != null && !BattleManager.main.battle_field.enemy_arr[i].Is_dead);
+			floor_panels[i].SetActive(BattleManagerS.main.field.enemy_arr[i] != null && !BattleManagerS.main.field.enemy_arr[i].Is_dead);
 		}
 	}
 }

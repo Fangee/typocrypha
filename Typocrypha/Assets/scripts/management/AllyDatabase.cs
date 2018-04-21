@@ -62,7 +62,7 @@ public class AllyDatabase
             AllyStats stats = new AllyStats(name, chat_id, max_hp, max_shield, max_stagger, atk, def, speed, acc, evade, vsElem);
             database.Add(ID, stats);
         }
-        Debug.Log("Enemy Database Loaded");
+        Debug.Log("Ally Database Loaded");
         is_loaded = true;
     }
     public AllyStats getData(string id)

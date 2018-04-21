@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>2017.3.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -288,7 +286,9 @@
     <Compile Include="Assets\GameflowSystem\BattleSystem\Battle\Battle.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\Battle\BattleInterruptTrigger.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\Battle\BattleManagerS.cs" />
+    <Compile Include="Assets\GameflowSystem\BattleSystem\Battle\BattleUI.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\Battle\BattleWave.cs" />
+    <Compile Include="Assets\GameflowSystem\BattleSystem\Battle\CastManager.cs" />
     <Compile Include="Assets\GameflowSystem\DialogueSystem\Dialogue\Dialogue.cs" />
     <Compile Include="Assets\GameflowSystem\DialogueSystem\Dialogue\DialogueBox.cs" />
     <Compile Include="Assets\GameflowSystem\DialogueSystem\Dialogue\DialogueItem.cs" />

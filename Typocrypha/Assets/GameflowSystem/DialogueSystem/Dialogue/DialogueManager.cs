@@ -58,6 +58,10 @@ public class DialogueManager : MonoBehaviour {
 		}
 	}
 
+    public void setEnabled(bool e) {
+        enabled = e;
+    }
+
 	// Starts a new dialogue scene
 	public void startDialogue(GameObject new_dialogue) {
 		curr_line = -1;
