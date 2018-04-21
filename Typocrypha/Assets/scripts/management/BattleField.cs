@@ -4,13 +4,19 @@ using UnityEngine;
 
 // Encapsulates battle info
 public class BattleField {
-	[HideInInspector] public Enemy[] enemy_arr; // array of Enemy components (size 3)
-	[HideInInspector] public int target_ind; // index of currently targeted enemy
+
+    //BattleField data
+
+	[HideInInspector] public Enemy[] enemy_arr = new Enemy[3]; // array of Enemy components (size 3)
+	[HideInInspector] public int target_ind = 1; // index of currently targeted enemy
 	[HideInInspector] public ICaster[] player_arr = { null, null, null }; // array of Player and allies (size 3)
 	[HideInInspector] public int player_ind = 1;
-	[HideInInspector] public int enemy_count; // number of enemies in battle
-	[HideInInspector] public int curr_dead;
+	[HideInInspector] public int enemy_count = 0; // number of enemies in battle
+	[HideInInspector] public int curr_dead = 0;
 	[HideInInspector] public Vector2 target_pos; // position of target ret
+
+    //Interrupt stuff
+
 	[HideInInspector] public System.DateTime time_started; // time battle started
 	[HideInInspector] public List<CastData> last_cast; // last performed cast action
 	[HideInInspector] public SpellData last_spell; // last performed spell
