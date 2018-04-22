@@ -40,10 +40,14 @@ public class DialogueBox : MonoBehaviour {
 			if (c_item.icon_side == IconSide.RIGHT || c_item.icon_side == IconSide.BOTH)
 				right_icon.enabled = true;
 			// Add text with speaker's name, and offset text display
-			text = d_item.speaker_name + "\n" + text;
+			int offset = 0;
+			if (d_item.speaker_name != null && d_item.speaker_name.Length != 0) {
+				text = d_item.speaker_name + "\n" + text;
+				offset += d_item.speaker_name.Length + 1;
+			}
 			fx_text.text = text;
-			set_color.chars [0] = d_item.speaker_name.Length + 1;
-			set_color.chars [1] += d_item.speaker_name.Length + 1;
+			set_color.chars [0] = offset;
+			set_color.chars [1] += offset;
 			// Set box height
 			setBoxHeight ();
 		} else if (d_item.GetType () == typeof(DialogueItemVN)) {

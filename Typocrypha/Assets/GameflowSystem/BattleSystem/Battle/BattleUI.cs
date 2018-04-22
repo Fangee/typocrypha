@@ -18,7 +18,7 @@ public class BattleUI : MonoBehaviour
 
     public const float enemy_spacing = 6f; // horizontal space between enemies
     public const float enemy_y_offset = 0.5f; // offset of enemy from y axis
-    public const float reticule_y_offset = 1.5f; // offset of target reticule
+    public const float reticule_y_offset = 2f; // offset of target reticule
 
     private const int initial_target_ind = 1;
 
@@ -37,7 +37,14 @@ public class BattleUI : MonoBehaviour
 
     public void initialize()
     {
-        BackgroundEffects.main.setPrefabBG(battle_bg_prefab); // set background
+		//Set background
+        BackgroundEffects.main.setPrefabBG(battle_bg_prefab); 
+		//Show targeting UI
+		target_ret.SetActive(true);
+		target_floor.SetActive (true);
+		//Update UI
+		target_ret_scr.updateTarget(new Vector2((initial_target_ind - 1) * enemy_spacing, reticule_y_offset));
+		target_floor_scr.updateFloor();
     }
 
     public void startWave()
@@ -48,12 +55,7 @@ public class BattleUI : MonoBehaviour
         charge_bars.initChargeBars();
         stagger_bars.initStaggerBars();
         health_bars.initHealthBars();
-        // show targeting ui
-        target_ret.SetActive(true);
-        target_floor.SetActive(true);
-        target_ret_scr.updateTarget(new Vector2(initial_target_ind * enemy_spacing, reticule_y_offset));
-        target_ret.transform.localPosition = new Vector2(initial_target_ind * enemy_spacing, reticule_y_offset);
-        target_floor_scr.updateFloor();
+		updateUI ();
     }
 
     public void updateUI()
@@ -65,7 +67,7 @@ public class BattleUI : MonoBehaviour
 
     public void setTarget(int target_ind)
     {
-        target_ret_scr.updateTarget(new Vector2(target_ind * enemy_spacing, reticule_y_offset));
+		target_ret_scr.updateTarget(new Vector2((target_ind - 1) * enemy_spacing, reticule_y_offset));
         target_floor_scr.updateFloor();
         // play sfx
         AudioPlayer.main.playSFX("sfx_enemy_select");

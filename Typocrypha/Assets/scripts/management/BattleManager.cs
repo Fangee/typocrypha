@@ -38,7 +38,7 @@ public class BattleManager : MonoBehaviour
 
     const float enemy_spacing = 6f; // horizontal space between enemies
     const float enemy_y_offset = 0.5f; // offset of enemy from y axis
-    const float reticule_y_offset = 1.5f; // offset of target reticule
+    const float reticule_y_offset = 2f; // offset of target reticule
     const int undim_layer = -1; // layer of enemy when enemy sprite is shown
     const int dim_layer = -5;   // layer of enemy when enemy sprite is dimmed
 
@@ -216,7 +216,7 @@ public class BattleManager : MonoBehaviour
         if (old_ind != battle_field.target_ind)
         {
             // move and update target reticule and update floor panels
-            target_ret_scr.updateTarget(new Vector2(battle_field.target_ind * enemy_spacing, reticule_y_offset));
+			target_ret_scr.updateTarget(new Vector2((battle_field.target_ind - 1) * enemy_spacing, reticule_y_offset));
             target_floor_scr.updateFloor();
             // play sfx
             AudioPlayer.main.playSFX("sfx_enemy_select");
