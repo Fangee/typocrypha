@@ -60,6 +60,9 @@ public class DialogueManager : MonoBehaviour {
 
     public void setEnabled(bool e) {
         enabled = e;
+        ChatView.SetActive(e);
+        VNView.SetActive(e);
+        ANView.SetActive(e);
     }
 
 	// Starts a new dialogue scene

@@ -55,7 +55,7 @@ public class StateManager : MonoBehaviour {
 		curr_scene = -1;
 		AudioPlayer.main.stopAll (); // stop all playing audio
 		track_typing.enabled = false;
-		BattleManager.main.enabled = false;
+		BattleManagerS.main.enabled = false;
 		dialogue_box.SetActive (true);
 		GameflowManager.main.gameflowStart ();
 		//nextScene ();

@@ -10,8 +10,8 @@ public class BattleManagerS : MonoBehaviour {
     public AllyDatabase allyData;
     public GameObject enemy_prefab; // prefab for enemy object
     public GameObject ally_prefab; //prefab for ally object
-    public BattleField field = new BattleField();
-    [HideInInspector] public bool pause;
+    public BattleField field;
+    [HideInInspector] public bool pause = true;
 
     private BattleWave Wave { get { return waves[curr_wave]; } }
     private int curr_wave = -1;
@@ -34,6 +34,58 @@ public class BattleManagerS : MonoBehaviour {
         else Destroy(this);
     }
 
+    private void Start()
+    {
+        field = new BattleField(this);
+        castManager.Field = field;
+    }
+
+    // check if player switches targets or attacks
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.BackQuote)) // toggle pause
+            pause = !pause;
+        if (pause) return;
+        int old_ind = field.target_ind;
+
+        //TARGET RETICULE CODE 
+
+        // move target left or right
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) --field.target_ind;
+        if (Input.GetKeyDown(KeyCode.RightArrow)) ++field.target_ind;
+
+        //toggle enemy info on Shift
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        {
+            uiManager.toggleScouter();
+        }
+
+        // fix if target is out of bounds
+        if (field.target_ind < 0) field.target_ind = 0;
+        if (field.target_ind > 2) field.target_ind = 2;
+        // check if target was actually moved
+        if (old_ind != field.target_ind)
+        {
+            uiManager.setTarget(field.target_ind);
+        }
+        //SPELLBOOK CODE
+
+        // go to next page if down is pressed
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (castManager.pageDown())
+                AudioPlayer.main.playSFX("sfx_spellbook_scroll", 0.3F);
+            //else {play sfx_thud (player is on the last page this direction)}
+        }
+        // go to last page if down is pressed
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (castManager.pageUp())
+                AudioPlayer.main.playSFX("sfx_spellbook_scroll", 0.3F);
+            //else {play sfx_thud (player is on the last page this direction)}
+        }
+    }
+
     public void setEnabled(bool e)
     {
         enabled = e;
@@ -44,7 +96,21 @@ public class BattleManagerS : MonoBehaviour {
     {
         curr_wave = -1;
         waves = new_battle.GetComponents<BattleWave>();
+        StartCoroutine(finishBattlePrep());
+    }
+    // finishes up battle start and effects
+    IEnumerator finishBattlePrep()
+    {
+        // play battle transition
+        BattleEffects.main.battleTransitionEffect("swirl_in", 1f);
+        //BattleEffects.main.pixelateIn (1f);
+        yield return new WaitForSeconds(1f);
+        uiManager.initialize();
+        BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
+        yield return new WaitForSeconds(1f);
+        pause = false;
         nextWave();
+        //checkInterrupts();
     }
     public void nextWave()
     {
@@ -55,9 +121,9 @@ public class BattleManagerS : MonoBehaviour {
             return;
         }
         Debug.Log("starting wave: " + Wave.Title);
-        uiManager.initialize();
         createEnemies(Wave);
         waveTransition(Wave.Title);
+        AudioPlayer.main.playMusic(Wave.Music);
         //nextWave();
         //Initialize next wave and do transition here
     }
@@ -68,7 +134,14 @@ public class BattleManagerS : MonoBehaviour {
     }
     public void endBattle()
     {
+        pause = true;
+        foreach (Enemy enemy in field.enemy_arr)
+        {
+            if (enemy != null) GameObject.Destroy(enemy.gameObject);
+        }
+        uiManager.clear();
         GameflowManager.main.next();
+
     }
 
     public void handleSpellCast(string spell, TrackTyping callback)
@@ -82,6 +155,7 @@ public class BattleManagerS : MonoBehaviour {
 
     private void createEnemies(BattleWave wave)
     {
+        uiManager.clear();
         if (wave.Enemy1 != string.Empty)
             createEnemy(0, wave.Enemy1);
         if (wave.Enemy2 != string.Empty)
@@ -109,6 +183,35 @@ public class BattleManagerS : MonoBehaviour {
     }
     private void waveTransition(string Title)
     {
-        uiManager.clear();
+
     }
+
+    public void updateEnemies()
+    {
+        //CutScene interrupt = interrupter.checkInterrupts(); // check for interrupts
+        //if (interrupt != null)
+        //{
+        //    return;
+        //}
+        for (int i = 0; i < field.enemy_arr.Length; i++)
+        {
+            if (field.enemy_arr[i] != null)
+            {
+                if (!field.enemy_arr[i].Is_dead)
+                {
+                    field.enemy_arr[i].updateCondition();
+                    if (field.enemy_arr[i].Is_dead)
+                        ++field.curr_dead;
+                }
+            }
+        }
+        uiManager.updateUI();
+        if (field.curr_dead == field.enemy_count) // end battle if all enemies dead
+        {
+            Debug.Log("you win!");
+            nextWave();
+            //StartCoroutine(StateManager.main.nextSceneDelayed(2.0f));
+        }
+    }
+
 }

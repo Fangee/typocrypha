@@ -12,8 +12,6 @@ public class CastManager : MonoBehaviour
     public BattleUI uiManager;
     public ChatDatabase chat; //Database containing chat lines
 
-    //[HideInInspector] public BattleManagerS.updateCallback updateEnemies;
-    [HideInInspector] public BattleManager parent;
     [HideInInspector] public BattleField Field { get { return field; } set { field = value; } }
     private BattleField field;
 
@@ -85,7 +83,7 @@ public class CastManager : MonoBehaviour
 
     IEnumerator pauseAttackCurrent(SpellData s, ICaster caster)
     {
-        parent.pause = true;
+        field.Pause = true;
 
         //BEGIN pause//
 
@@ -102,14 +100,14 @@ public class CastManager : MonoBehaviour
         //END pause//
 
         postCastEffects();
-        parent.updateEnemies();
-        parent.pause = false;
+        field.update();
+        field.Pause = false;
     }
 
     //Casts from an enemy position: calls processCast on results
     public void enemyCast(SpellDictionary dict, SpellData s, int position, int target)
     {
-        parent.pause = true; // parent.pause battle for attack
+        field.Pause = true; // parent.pause battle for attack
         AudioPlayer.main.playSFX("sfx_enemy_cast");
         Pair<bool[], bool[]> targetPattern = spellDict.getTargetPattern(s, field.player_arr, target, field.enemy_arr, position);
         preCastEffects(targetPattern, field.enemy_arr[position], s, chat.getLine(field.enemy_arr[position].Stats.ChatDatabaseID));
@@ -132,8 +130,8 @@ public class CastManager : MonoBehaviour
 
         postCastEffects();
         field.enemy_arr[position].attack_in_progress = false;
-        parent.updateEnemies();
-        parent.pause = false; // unparent.pause
+        field.update();
+        field.Pause = false; // unparent.pause
     }
 
     //Method for processing CastData (most effects now happen in SpellEffects.cs)
@@ -156,14 +154,14 @@ public class CastManager : MonoBehaviour
 
     private IEnumerator learnSFX()
     {
-        yield return new WaitWhile(() => parent.pause);
+        yield return new WaitWhile(() => field.Pause);
         AudioPlayer.main.playSFX("sfx_learn_spell_battle");
     }
     //Effects that happen before any actor casts
     private void preCastEffects(Pair<bool[], bool[]> targetPattern, ICaster caster, SpellData cast, string message)
     {
         BattleEffects.main.setDim(true);
-        BattleLog.main.battleLog(cast.ToString(), caster.CasterType, message, caster.Stats.name);
+        uiManager.battle_log.log(cast.ToString(), caster.CasterType, message, caster.Stats.name);
         if (targetPattern != null)
         {
             if (caster.CasterType == ICasterType.ENEMY)
@@ -177,7 +175,7 @@ public class CastManager : MonoBehaviour
     //effects that hafter after any actor casts
     private void postCastEffects()
     {
-        BattleLog.main.stopBattleLog();
+        uiManager.battle_log.stop();
         for (int i = 0; i < 3; ++i)
         {
             if (field.enemy_arr[i] != null)

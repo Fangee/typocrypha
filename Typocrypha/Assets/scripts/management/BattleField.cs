@@ -8,6 +8,7 @@ public class BattleField {
     //Properties
 
     public ICaster Player { get { return player_arr[player_ind]; } }
+    public bool Pause { get { return callback.pause; } set { callback.pause = value; } }
 
     //BattleField data
 
@@ -25,4 +26,15 @@ public class BattleField {
 	[HideInInspector] public SpellData last_spell; // last performed spell
 	[HideInInspector] public bool[] last_register; // last spell register status
 	[HideInInspector] public int num_player_attacks; // number of player attacks from beginning of battle
+
+    private BattleManagerS callback;
+
+    public BattleField(BattleManagerS callback)
+    {
+        this.callback = callback;
+    }
+    public void update()
+    {
+        callback.updateEnemies();
+    }
 }

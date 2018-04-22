@@ -46,8 +46,8 @@ public class BattleManager : MonoBehaviour {
 		pause = false;
 		target_ret_scr = target_ret.GetComponent<TargetReticule> ();
 		target_floor_scr = target_floor.GetComponent<TargetFloor> ();
-		battle_field = new BattleField ();
-		battle_field.player_arr[battle_field.player_ind] = player;
+		//battle_field = new BattleField ();
+		//battle_field.player_arr[battle_field.player_ind] = player;
 	}
 
 	// start battle scene
@@ -361,7 +361,7 @@ public class BattleManager : MonoBehaviour {
     private void preCastEffects(Pair<bool[], bool[]> targetPattern, ICaster caster, SpellData cast, string message)
     {
         BattleEffects.main.setDim(true);
-		BattleLog.main.battleLog(cast.ToString(), caster.CasterType, message, caster.Stats.name);
+		//uiManager.battle_log.log(cast.ToString(), caster.CasterType, message, caster.Stats.name);
         if (targetPattern != null)
         {
             if (caster.CasterType == ICasterType.ENEMY)
@@ -375,7 +375,7 @@ public class BattleManager : MonoBehaviour {
     //effects that hafter after any actor casts
     private void postCastEffects()
     {
-		BattleLog.main.stopBattleLog();
+		//BattleLog.main.stopBattleLog();
         for (int i = 0; i < 3; ++i)
         {
 			if (battle_field.enemy_arr[i] != null)

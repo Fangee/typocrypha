@@ -7,6 +7,7 @@ public class BattleUI : MonoBehaviour
     public EnemyChargeBars charge_bars; // creates and mananges charge bars
     public EnemyStaggerBars stagger_bars; // creates and manages stagger bars
     public EnemyHealthBars health_bars; // creates and manages enemy health bars
+    public BattleLog battle_log;
     public GameObject target_ret; // contains targetting sprites
     public GameObject target_floor; // holds the enemy floor panels
                                     //public GameObject dialogue_box; // text box for dialogue
@@ -37,11 +38,17 @@ public class BattleUI : MonoBehaviour
 
     public void initialize()
     {
+        BackgroundEffects.main.setPrefabBG(battle_bg_prefab); // set background
         charge_bars.initChargeBars();
         stagger_bars.initStaggerBars();
         health_bars.initHealthBars();
+        // show targeting ui
+        target_ret.SetActive(true);
+        target_floor.SetActive(true);
         target_ret_scr.updateTarget(new Vector2(initial_target_ind * enemy_spacing, reticule_y_offset));
         target_ret.transform.localPosition = new Vector2(initial_target_ind * enemy_spacing, reticule_y_offset);
+        target_floor_scr.updateFloor();
+
     }
 
     public void updateUI()

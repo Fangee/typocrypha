@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 // Manages battle log text
 public class BattleLog : MonoBehaviour {
-	public static BattleLog main = null;
 	public GameObject battleLogCast; //Casting log object and Associated reference to store
 	private Image castBox;
 	public Text logCastText;
@@ -20,20 +19,13 @@ public class BattleLog : MonoBehaviour {
 	public Color allyColor;
 	public Color clarkeColor;
 
-	void Awake() {
-		if (main == null)
-			main = this;
-		else
-			Destroy (this);
-	}
-
 	void Start () {
 		castBox = battleLogCast.GetComponent<Image>();
 		talkBox = battleLogTalk.GetComponent<Image>();
 	}
 	
 	//Enable battle log UI state (call anywhere that the battlemanager pauses to cast)
-	public void battleLog(string cast, ICasterType caster, string talk, string speaker)
+	public void log(string cast, ICasterType caster, string talk, string speaker)
 	{
 		battleLogCast.SetActive(true);
 		battleLogTalk.SetActive(true);
@@ -67,7 +59,7 @@ public class BattleLog : MonoBehaviour {
 	}
 
 	//Stop battle log UI (call after every pause to cast)
-	public void stopBattleLog()
+	public void stop()
 	{
 		battleLogCast.SetActive(false);
 		battleLogTalk.SetActive(false);
