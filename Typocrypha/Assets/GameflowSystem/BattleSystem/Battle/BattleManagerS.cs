@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BattleManagerS : MonoBehaviour {
     public static BattleManagerS main = null;
+    public Player player;
+    public TrackTyping trackTyping;
     public BattleUI uiManager;
     public CastManager castManager;
     public EnemyDatabase enemyData;
@@ -38,6 +40,7 @@ public class BattleManagerS : MonoBehaviour {
     {
         field = new BattleField(this);
         castManager.Field = field;
+        field.player_arr[1] = player;
     }
 
     // check if player switches targets or attacks
@@ -89,6 +92,7 @@ public class BattleManagerS : MonoBehaviour {
     public void setEnabled(bool e)
     {
         enabled = e;
+        trackTyping.enabled = e;
     }
 
     // start battle scene
@@ -121,6 +125,7 @@ public class BattleManagerS : MonoBehaviour {
             return;
         }
         Debug.Log("starting wave: " + Wave.Title);
+        uiManager.startWave();
         createEnemies(Wave);
         waveTransition(Wave.Title);
         AudioPlayer.main.playMusic(Wave.Music);
@@ -155,7 +160,6 @@ public class BattleManagerS : MonoBehaviour {
 
     private void createEnemies(BattleWave wave)
     {
-        uiManager.clear();
         if (wave.Enemy1 != string.Empty)
             createEnemy(0, wave.Enemy1);
         if (wave.Enemy2 != string.Empty)
@@ -183,7 +187,7 @@ public class BattleManagerS : MonoBehaviour {
     }
     private void waveTransition(string Title)
     {
-
+        uiManager.initialize();
     }
 
     public void updateEnemies()

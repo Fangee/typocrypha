@@ -39,6 +39,13 @@ public class BattleUI : MonoBehaviour
     public void initialize()
     {
         BackgroundEffects.main.setPrefabBG(battle_bg_prefab); // set background
+    }
+
+    public void startWave()
+    {
+        charge_bars.removeAll();
+        stagger_bars.removeAll();
+        health_bars.removeAll();
         charge_bars.initChargeBars();
         stagger_bars.initStaggerBars();
         health_bars.initHealthBars();
@@ -48,7 +55,6 @@ public class BattleUI : MonoBehaviour
         target_ret_scr.updateTarget(new Vector2(initial_target_ind * enemy_spacing, reticule_y_offset));
         target_ret.transform.localPosition = new Vector2(initial_target_ind * enemy_spacing, reticule_y_offset);
         target_floor_scr.updateFloor();
-
     }
 
     public void updateUI()
