@@ -19,9 +19,6 @@ public class BattleManagerS : MonoBehaviour {
     private int curr_wave = -1;
     private BattleWave[] waves;
 
-    //const int undim_layer = -1; // layer of enemy when enemy sprite is shown
-    //const int dim_layer = -5;   // layer of enemy when enemy sprite is dimmed
-
     private void Awake()
     {
         if (main == null)

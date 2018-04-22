@@ -444,37 +444,6 @@ public class SpellDictionary : MonoBehaviour
         }
         return time / speed;
     }
-    ////Starts cooldown of spell
-    //public void startCooldown(SpellData data, Player caster)
-    //{
-    //    Spell spell = spells[data.root];
-    //    ElementMod e;
-    //    StyleMod s;
-    //    float cooldownTime = spell.cooldown;
-    //    if (data.element != null && data.style != null)
-    //    {
-    //        e = elements[data.element];
-    //        s = styles[data.style];
-    //        float baseTime = cooldownTime;
-    //        cooldownTime *= e.cooldownModM;
-    //        cooldownTime += (baseTime * s.cooldownModM) - baseTime;
-    //        cooldownTime += e.cooldownMod;
-    //        cooldownTime += s.cooldownMod;
-    //    }
-    //    else if (data.element != null)
-    //    {
-    //        e = elements[data.element];
-    //        cooldownTime *= e.cooldownModM;
-    //        cooldownTime += e.cooldownMod;
-    //    }
-    //    else if (data.style != null)
-    //    {
-    //        s = styles[data.style];
-    //        cooldownTime *= s.cooldownModM;
-    //        cooldownTime += s.cooldownMod;
-    //    }
-    //    spell.startCooldown(cooldown, data.root, cooldownTime / caster.Stats.speed);
-    //}
     //Return cooldown of spell
     //Pre: spell is on cooldown
     public float getTimeLeft(SpellData data)
