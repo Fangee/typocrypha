@@ -55,7 +55,6 @@ public class BattleUI : MonoBehaviour
         charge_bars.initChargeBars();
         stagger_bars.initStaggerBars();
         health_bars.initHealthBars();
-		updateUI ();
     }
 
     public void updateUI()
@@ -63,6 +62,7 @@ public class BattleUI : MonoBehaviour
         //Update target and floor effects
         target_ret_scr.updateTarget();
         target_floor_scr.updateFloor();
+		charge_bars.updateChargeBars ();
     }
 
     public void setTarget(int target_ind)

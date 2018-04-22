@@ -93,6 +93,7 @@ public class BattleEffects : MonoBehaviour {
 		Vector3 old_pos = new Vector3(pos.position.x, pos.position.y, pos.position.z);
 		float curr_time = 0;
 		while (curr_time < sec) {
+			if (pos == null) yield break;
 			pos.position = (Vector3)old_pos + (Vector3)(Random.insideUnitCircle * amt);
 			//yield return new WaitForEndOfFrame ();
 			//curr_time += Time.deltaTime;

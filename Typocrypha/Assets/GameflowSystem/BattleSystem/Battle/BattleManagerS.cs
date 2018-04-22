@@ -103,14 +103,14 @@ public class BattleManagerS : MonoBehaviour {
     IEnumerator finishBattlePrep()
     {
         // play battle transition
+		pause = true;
         BattleEffects.main.battleTransitionEffect("swirl_in", 1f);
-        //BattleEffects.main.pixelateIn (1f);
         yield return new WaitForSeconds(1f);
         uiManager.initialize();
-        BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
-        yield return new WaitForSeconds(1f);
-        pause = false;
-        nextWave();
+		nextWave();
+		BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
+        yield return new WaitForSeconds(2f);      
+		pause = false;
         //checkInterrupts();
     }
     public void nextWave()
@@ -124,6 +124,8 @@ public class BattleManagerS : MonoBehaviour {
         Debug.Log("starting wave: " + Wave.Title);
         uiManager.startWave();
         createEnemies(Wave);
+		uiManager.updateUI ();
+
         waveTransition(Wave.Title);
         AudioPlayer.main.playMusic(Wave.Music);
         //nextWave();
@@ -182,9 +184,10 @@ public class BattleManagerS : MonoBehaviour {
         uiManager.health_bars.makeHealthMeter(i, bar_pos);
         field.enemy_arr[i] = enemy;
     }
+
     private void waveTransition(string Title)
     {
-        uiManager.initialize();
+		//uiManager.initialize();
     }
 
     public void updateEnemies()
