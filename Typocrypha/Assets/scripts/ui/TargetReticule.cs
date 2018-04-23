@@ -69,7 +69,6 @@ public class TargetReticule : MonoBehaviour
     // updates target based on targetted enemy
     public void updateTarget(Vector2 destination)
     {
-		Debug.Log ("updateTarget:" + destination);
         // don't update if battle not set up yet
         if (BattleManagerS.main.field.target_ind >= BattleManagerS.main.field.enemy_arr.Length) return;
 		target_destination_pos = destination;

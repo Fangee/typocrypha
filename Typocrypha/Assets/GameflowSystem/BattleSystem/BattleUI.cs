@@ -18,7 +18,7 @@ public class BattleUI : MonoBehaviour
 
     public const float enemy_spacing = 6f; // horizontal space between enemies
     public const float enemy_y_offset = 0.5f; // offset of enemy from y axis
-    public const float reticule_y_offset = 2f; // offset of target reticule
+    public const float reticule_y_offset = 2.5f; // offset of target reticule
 
     private const int initial_target_ind = 1;
 
