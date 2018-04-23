@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 55851405}
   - component: {fileID: 55851404}
   m_Layer: 5
-  m_Name: I_test_1
+  m_Name: I_Gary_test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2238,8 +2238,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1798950428}
   - {fileID: 1600763268}
+  - {fileID: 1798950428}
   - {fileID: 1367704624}
   - {fileID: 582150004}
   - {fileID: 2043237239}
@@ -9817,7 +9817,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11080,9 +11080,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: [{fileID: 55851403}]
+  m_Children:
+  - {fileID: 55851403}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11166,7 +11167,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1798950427}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2658d454a92a2e849b893f32c270fb29, type: 3}
+  m_Script: {fileID: 11500000, guid: 65151f09bc0562f498db93eb9aa25ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interruptScene: {fileID: 55851402}
