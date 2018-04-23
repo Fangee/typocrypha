@@ -284,7 +284,13 @@
   <ItemGroup>
     <Compile Include="Assets\EnemyIntel.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\Battle.cs" />
-    <Compile Include="Assets\GameflowSystem\BattleSystem\BattleInterruptTrigger.cs" />
+    <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BattleEventTrigger.cs" />
+    <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BattleInterruptTrigger.cs" />
+    <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BICheckHealth.cs" />
+    <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BICountPlayerAttacks.cs" />
+    <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BIEnemyIsStunned.cs" />
+    <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BIRegister.cs" />
+    <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BITimed.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleManagerS.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleUI.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleWave.cs" />

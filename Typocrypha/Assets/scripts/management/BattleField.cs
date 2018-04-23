@@ -10,6 +10,16 @@ public class BattleField {
     public ICaster Player { get { return player_arr[player_ind]; } }
     public bool Pause { get { return callback.pause; } set { callback.pause = value; } }
 
+    public enum FieldPosition
+    {
+        LEFT,
+        MIDDLE,
+        RIGHT,
+        ALLYLEFT,
+        PLAYER,
+        ALLYRIGHT,
+    }
+
     //BattleField data
 
 	[HideInInspector] public Enemy[] enemy_arr = new Enemy[3]; // array of Enemy components (size 3)

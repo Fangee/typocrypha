@@ -44,7 +44,7 @@ public class BattleManagerS : MonoBehaviour {
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.BackQuote)) // toggle pause
-            pause = !pause;
+            setPause(!pause);
         if (pause) return;
         int old_ind = field.target_ind;
 
@@ -91,6 +91,12 @@ public class BattleManagerS : MonoBehaviour {
         enabled = e;
         trackTyping.enabled = e;
     }
+    public void setPause(bool p)
+    {
+        pause = p;
+        trackTyping.enabled = !p;
+        Debug.Log("pause is set to: " + pause);
+    }
 
     // start battle scene
     public void startBattle(GameObject new_battle)
@@ -113,6 +119,7 @@ public class BattleManagerS : MonoBehaviour {
 		pause = false;
         //checkInterrupts();
     }
+    // go to next wave (also starts first wave for real)
     public void nextWave()
     {
         if(++curr_wave >= waves.Length)
@@ -128,14 +135,17 @@ public class BattleManagerS : MonoBehaviour {
 
         waveTransition(Wave.Title);
         AudioPlayer.main.playMusic(Wave.Music);
+        checkInterrupts();
         //nextWave();
         //Initialize next wave and do transition here
     }
+    // show victory screen after all waves are done
     public void victoryScreen()
     {
         //Transition to victoryScreen
         endBattle();
     }
+    // end the battle and transition to the next GameflowItem
     public void endBattle()
     {
         pause = true;
@@ -147,16 +157,18 @@ public class BattleManagerS : MonoBehaviour {
         GameflowManager.main.next();
 
     }
-
+    //Handles a spellcast (by calling the castmanager) and clears callback's buffer if necessary
     public void handleSpellCast(string spell, TrackTyping callback)
     {
         castManager.attackCurrent(spell, callback);
     }
+    //Handle player death
     public void playerDeath()
     {
         Debug.Log("The player has died!");
     }
 
+    //Create all enemies for this wave
     private void createEnemies(BattleWave wave)
     {
         if (wave.Enemy1 != string.Empty)
@@ -192,29 +204,30 @@ public class BattleManagerS : MonoBehaviour {
 
     public void updateEnemies()
     {
-        //CutScene interrupt = interrupter.checkInterrupts(); // check for interrupts
-        //if (interrupt != null)
-        //{
-        //    return;
-        //}
+        checkInterrupts();
         for (int i = 0; i < field.enemy_arr.Length; i++)
         {
-            if (field.enemy_arr[i] != null)
+            if (field.enemy_arr[i] != null && !field.enemy_arr[i].Is_dead)
             {
-                if (!field.enemy_arr[i].Is_dead)
-                {
-                    field.enemy_arr[i].updateCondition();
-                    if (field.enemy_arr[i].Is_dead)
-                        ++field.curr_dead;
-                }
+                field.enemy_arr[i].updateCondition();
+                if (field.enemy_arr[i].Is_dead)
+                    ++field.curr_dead;
             }
         }
         uiManager.updateUI();
-        if (field.curr_dead == field.enemy_count) // end battle if all enemies dead
+        if (field.curr_dead == field.enemy_count) // next wave if all enemies dead
         {
-            Debug.Log("you win!");
+            Debug.Log("Wave: " + Wave.Title + " complete!");
             nextWave();
-            //StartCoroutine(StateManager.main.nextSceneDelayed(2.0f));
+        }
+    }
+
+    private void checkInterrupts()
+    {
+        foreach (BattleEventTrigger e in Wave.events)
+        {
+            if (!e.HasTriggered && e.checkTrigger(field) && e.onTrigger(field))
+                setPause(true);
         }
     }
 
