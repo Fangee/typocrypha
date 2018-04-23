@@ -30,6 +30,7 @@ public class TextEvents : MonoBehaviour {
 	public Camera main_camera; // main camera object
 	public GameObject dialogue_box; // dialogue box object
 	public GameObject glitch_effect; // sprite used for glitch effect
+	public GameObject screen_frame; // screenframe object
 
 	void Awake() {
 		main = this;
@@ -43,6 +44,7 @@ public class TextEvents : MonoBehaviour {
 			{"center-text-fade", centerTextFade},
 			{"play-sfx", playSFX},
 			{"play-music", playMusic},
+			{"stop-music", stopMusic},
 			{"set-scroll-delay", setScrollDelay},
 			{"set-bg", setBG},
 			{"hide-text-box", hideTextBox},
@@ -52,7 +54,8 @@ public class TextEvents : MonoBehaviour {
             {"evil-eye", evilEye},
             {"prompt", prompt},
 			{"glitch", glitch},
-			{"set-name", setName}
+			{"set-name", setName},
+			{"frame", frame}
 		};
 		is_prompt = false;
 	}
@@ -240,6 +243,12 @@ public class TextEvents : MonoBehaviour {
 		yield return true;
 	}
 
+	// stops music
+	IEnumerator stopMusic(string[] opt){
+		AudioPlayer.main.stopMusic ();
+		yield return true;
+	}
+
 	// sets scroll delay of main dialogue text scroll
 	// input: [0]: float, new delay amount in seconds
 	IEnumerator setScrollDelay(string[] opt) {
@@ -374,6 +383,17 @@ public class TextEvents : MonoBehaviour {
 	IEnumerator setName(string[] opt) {
 		Debug.Log (DialogueManager.main.answer);
 		PlayerDialogueInfo.main.player_name = DialogueManager.main.answer;
+		yield return true;
+	}
+
+	// makes the screenframe come in/out
+	// input: [0]: [in|out], 'in' re-reveals screenframe, 'out' hides it
+	IEnumerator frame(string[] opt) {
+		if (opt [0].CompareTo ("out") == 0) { // hide screenframe
+			screen_frame.SetActive(false);
+		} else { // show screenframe
+			screen_frame.SetActive(true);
+		}
 		yield return true;
 	}
 }
