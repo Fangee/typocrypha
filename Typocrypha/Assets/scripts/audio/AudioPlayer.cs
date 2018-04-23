@@ -124,7 +124,6 @@ public class AudioPlayer : MonoBehaviour {
 
     // play music from name
     public void playMusic(string name) {
-		Debug.Log ("playMusic:" + name.Trim());
 		name = name.Trim ();
 		StartCoroutine (loadAndPlay (name));
 	}

@@ -3773,7 +3773,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[fade=in,2,0,0,0][set-talk-sfx=vo_evil_eye]Hel[set-talk-sfx=speak_boop]lo.'
+  text: '[block=t][fade=in,2,0,0,0][set-talk-sfx=vo_evil_eye]Hel[set-talk-sfx=speak_boop]lo.
+    [pause=2]  [block=f]'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -3838,7 +3839,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[stop-music][block=t][set-talk-sfx=vo_evil_eye]<color=red>EYE SEE</color>[block=f]'
+  text: '[block=t][stop-music][set-talk-sfx=vo_evil_eye]<color=red>EYE SEE</color>
+    [fade=out,4,0,0,0] [pause=5]  [block=f] [next]'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -7911,7 +7913,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: '{NAME}'
+  speaker_name: '{name}'
   text: '[set-talk-sfx=vo_mc]Ah... crap... you''re totally right... '
   input_display: {fileID: 0}
   input_options: []
@@ -10819,7 +10821,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[set-talk-sfx=vo_illyia]This is a GAME![pause=0.2] A work of [play-sfx=sfx_flash][screen-shake=2.0,0.1]|color-cycle||wave|FICTION\wave\\color-cycle\!'
+  text: '[set-talk-sfx=vo_illyia]This is a <color=yellow>GAME</color>![pause=0.2]
+    A work of [play-sfx=sfx_flash][screen-shake=2.0,0.1]|color-cycle||wave|FICTION\wave\\color-cycle\!'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -10841,7 +10844,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: 
   text: '[set-talk-sfx=vo_evil_eye][block=t][frame=in][play-sfx=sfx_crush][screen-shake=4.0,0.2]<color=red>|shake|NOW
-    LET US START THE GAME.\shake\</color>[block=f][pause=2.0][next]'
+    LET US START THE GAME.\shake\</color> [pause=2]  [fade=out,0,0,0,0][next]'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -14024,7 +14027,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: ???
-  text: '[fade=in,4,0,0,0][pause=4][block=t]...[block=f]'
+  text: '[block=t][fade=in,4,0,0,0][pause=4] ...[block=f]'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []

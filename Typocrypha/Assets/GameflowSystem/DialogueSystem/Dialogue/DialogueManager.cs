@@ -107,7 +107,7 @@ public class DialogueManager : MonoBehaviour {
 				ChatView.SetActive (false);
 				ANView.SetActive (false);
 				d_box = VNDialogueBox;
-				VNSpeaker.text = d_item.speaker_name;
+				VNSpeaker.text = DialogueParser.main.substituteMacros(d_item.speaker_name);
 			} else if (d_item.GetType () == typeof(DialogueItemChat)) {
 				VNView.SetActive (false);
 				ChatView.SetActive (true);
@@ -122,7 +122,7 @@ public class DialogueManager : MonoBehaviour {
 				d_box = d_obj.GetComponent<DialogueBox> ();
 			}
 			d_box.d_item = d_item;
-			d_box.speaker = d_item.speaker_name;
+			d_box.speaker = DialogueParser.main.substituteMacros(d_item.speaker_name);
 			// Remove old text effects
 			FXTextEffect[] fx_arr = d_box.fx_text.gameObject.GetComponents<FXTextEffect>();
 			foreach (FXTextEffect fx in fx_arr) {

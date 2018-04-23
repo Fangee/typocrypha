@@ -80,24 +80,29 @@ public class DialogueBox : MonoBehaviour {
 	IEnumerator textScrollCR() {
 		int offset = set_color.chars [0];
 		int cnt = set_color.chars[0];
-		bool tag = false; // Are we scrolling over a tag?
-		int sfx_interval = 0; // Play voice effect for every Xth char displayed
+		//int sfx_interval = 0; // Play voice effect for every Xth char displayed
 		while (cnt < text.Length) {
 			yield return new WaitWhile (() => DialogueManager.main.pause_scroll);
 			checkEvents (cnt - offset);
-			tag = tag ? (text [cnt - 1] != '>') || (text[cnt] == '<') : (text[cnt] == '<'); // Skip Unity rich text tags
-			if (!tag) yield return new WaitForSeconds (scroll_delay);
-			if (!tag && sfx_interval <= 0 
+			if (text [cnt] == '<') {
+				cnt = text.IndexOf ('>', cnt + 1) + 1;
+				if (cnt >= text.Length) cnt--;
+			}
+			/*
+			if (!tag && sfx_interval <= 0  // SIMPLIFY
 				&& !(text[cnt].CompareTo(' ') >= 0 && text[cnt].CompareTo('/') <= 0) 
-					&& !(text[cnt].CompareTo(':') >= 0 && text[cnt].CompareTo('@') <= 0)
-					&& !(text[cnt].CompareTo('[') >= 0 && text[cnt].CompareTo('`') <= 0)
-					&& !(text[cnt].CompareTo('{') >= 0 && text[cnt].CompareTo('~') <= 0)) {
+				&& !(text[cnt].CompareTo(':') >= 0 && text[cnt].CompareTo('@') <= 0)
+				&& !(text[cnt].CompareTo('[') >= 0 && text[cnt].CompareTo('`') <= 0)
+				&& !(text[cnt].CompareTo('{') >= 0 && text[cnt].CompareTo('~') <= 0)) {
 				AudioPlayer.main.playSFX (AudioPlayer.channel_voice);
 				sfx_interval = 2;
 			} else {
 				--sfx_interval;
 			}
+			*/
+			if (cnt % 2 == 0) AudioPlayer.main.playSFX (AudioPlayer.channel_voice);
 			set_color.chars [0] = ++cnt;
+			yield return new WaitForSeconds (scroll_delay);
 		}
 		checkEvents (cnt - offset); // Play events at end of text
 		cr_scroll = null;

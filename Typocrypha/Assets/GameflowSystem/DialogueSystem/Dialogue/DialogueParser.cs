@@ -29,7 +29,7 @@ public class DialogueParser : MonoBehaviour {
 
 	// Parses dialogue item, returning updated text and modifying fields
 	public string parse(DialogueItem d_item, DialogueBox d_box) {
-		Debug.Log ("parse:" + d_item.text);
+		//Debug.Log ("parse:" + d_item.text);
 		StringBuilder parsed = new StringBuilder(); // Processes string
 		string text = substituteMacros(d_item.text);
 		d_item.fx_text_effects = new List<FXTextEffect> ();
@@ -69,8 +69,8 @@ public class DialogueParser : MonoBehaviour {
 		int end_pos = text.IndexOf ('\\', start_pos) - 1;
 		string fx_name = text.Substring (start_pos, end_pos - start_pos + 1);
 		FXTextEffect top = effect_stack.Pop ();
-		if (text_effect_map [fx_name].GetType () != top.GetType ())
-			Debug.LogException (new System.Exception("Mismatched FXTextEffect tags:" + fx_name));
+		//if (text_effect_map [fx_name].GetType () != top.GetType ())
+		//	Debug.LogException (new System.Exception("Mismatched FXTextEffect tags:" + fx_name));
 		top.chars [1] = parsed.Length;
 		d_item.fx_text_effects.Add (top);
 	}
@@ -91,22 +91,22 @@ public class DialogueParser : MonoBehaviour {
 		if (d_item.text_events [parsed.Length] == null)
 			d_item.text_events [parsed.Length] = new List<TextEvent> ();
 		d_item.text_events [parsed.Length].Add(new TextEvent(evt, opt));
-		Debug.Log ("  text_event:" + evt + ":" + opt.Aggregate("", (acc, next) => acc + "," + next));
+		//Debug.Log ("  text_event:" + evt + ":" + opt.Aggregate("", (acc, next) => acc + "," + next));
 		return;
 	}
 
 	// Substiutes macros in (curly braces)
-	string substituteMacros(string text) {
+	public string substituteMacros(string text) {
 		StringBuilder true_str = new StringBuilder ();
 		for (int i = 0; i < text.Length;) {
 			if (text [i] == '{') {
 				int start_pos = i + 1;
 				int end_pos = text.IndexOf ('}', start_pos);
 				string[] macro = text.Substring (start_pos, end_pos - start_pos).Split(opt_delim);
-				Debug.Log ("  macro:" + macro.Aggregate("", (acc, next) => acc + "," + next));
+				//Debug.Log ("  macro:" + macro.Aggregate("", (acc, next) => acc + "," + next));
 				string[] opt = macro.Skip (1).Take (macro.Length - 1).ToArray ();
 				string sub = TextMacros.main.macro_map [macro[0]] (opt);
-				Debug.Log ("    macro sub:" + sub);
+				//Debug.Log ("    macro sub:" + sub);
 				true_str.Append (sub);
 				i = end_pos + 1;
 			} else {
