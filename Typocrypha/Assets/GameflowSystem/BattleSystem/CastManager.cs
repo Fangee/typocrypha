@@ -100,8 +100,8 @@ public class CastManager : MonoBehaviour
         //END pause//
 
         postCastEffects();
-        field.update();
         field.Pause = false;
+        field.update();
     }
 
     //Casts from an enemy position: calls processCast on results
@@ -130,8 +130,8 @@ public class CastManager : MonoBehaviour
 
         postCastEffects();
         field.enemy_arr[position].attack_in_progress = false;
+        field.Pause = false;
         field.update();
-        field.Pause = false; // unparent.pause
     }
 
     //Method for processing CastData (most effects now happen in SpellEffects.cs)

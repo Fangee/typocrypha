@@ -28,13 +28,13 @@ public class GameflowManager : MonoBehaviour {
 			return;
 		}
 		if (item.GetType() == typeof(Dialogue)) {
-			Debug.Log ("starting dialogue");
+			Debug.Log ("starting dialogue: " + item.name);
 			player_ui.SetActive (false);
             BattleManagerS.main.setEnabled(false);
             DialogueManager.main.setEnabled(true);
 			DialogueManager.main.startDialogue (transform.GetChild(curr_item).gameObject);
 		} else if(item.GetType() == typeof(Battle)) {
-            Debug.Log("starting battle");
+            Debug.Log("starting battle: " + item.name);
 			player_ui.SetActive (true);
             DialogueManager.main.setEnabled(false);
             BattleManagerS.main.setEnabled(true);

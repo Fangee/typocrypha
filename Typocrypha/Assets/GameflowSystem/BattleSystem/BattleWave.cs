@@ -13,5 +13,5 @@ public class BattleWave : MonoBehaviour {
     public string Enemy3;
     public string Ally1;
     public string Ally2;
-    public BattleInterruptTrigger[] interrupts;
+    public BattleEventTrigger[] events;
 }

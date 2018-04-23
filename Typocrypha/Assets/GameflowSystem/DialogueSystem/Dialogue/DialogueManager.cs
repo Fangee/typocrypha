@@ -39,6 +39,8 @@ public class DialogueManager : MonoBehaviour {
 	bool input; // Are we waiting for input?
 	GameObject input_display; // Display image for input
 
+    private bool isInterrupt = false; //is this dialogue event a oneshot (interrupts, etc)
+
 	void Awake() {
 		if (main == null) main = this;
 		else Destroy (this);
@@ -54,7 +56,15 @@ public class DialogueManager : MonoBehaviour {
 	void Update() {
 		if (block_input) return;
 		if (Input.GetKeyDown (KeyCode.Space)) {
-			if (!nextLine ()) GameflowManager.main.next ();
+            if (!nextLine()) {
+                if (isInterrupt) {
+                    BattleManagerS.main.setPause(false);
+                    isInterrupt = false;
+                    setEnabled(false);
+                }
+                else
+                    GameflowManager.main.next();
+            }
 		}
 	}
 
@@ -72,8 +82,15 @@ public class DialogueManager : MonoBehaviour {
 		nextLine ();
 	}
 
-	// Displays next line of dialogue. Returns 'false' if there is no next line.
-	bool nextLine() {
+    // Starts a new dialogue scene
+    public void startInterrupt(GameObject new_dialogue_interrupt)
+    {
+        isInterrupt = true;
+        startDialogue(new_dialogue_interrupt);
+    }
+
+    // Displays next line of dialogue. Returns 'false' if there is no next line.
+    bool nextLine() {
 		if (history.Count > 0 && history [history.Count - 1].cr_scroll != null) {
 			history [history.Count - 1].dumpText ();
 		} else {
