@@ -134,7 +134,8 @@ public class BattleManagerS : MonoBehaviour {
 		uiManager.updateUI ();
 
         waveTransition(Wave.Title);
-        AudioPlayer.main.playMusic(Wave.Music);
+        if(Wave.Music != string.Empty)
+            AudioPlayer.main.playMusic(Wave.Music);
         checkInterrupts();
         //nextWave();
         //Initialize next wave and do transition here

@@ -11061,9 +11061,11 @@ GameObject:
   - component: {fileID: 1798950428}
   - component: {fileID: 1798950432}
   - component: {fileID: 1798950431}
-  - component: {fileID: 1798950430}
-  - component: {fileID: 1798950429}
   - component: {fileID: 1798950433}
+  - component: {fileID: 1798950430}
+  - component: {fileID: 1798950435}
+  - component: {fileID: 1798950434}
+  - component: {fileID: 1798950429}
   m_Layer: 5
   m_Name: B_TEST
   m_TagString: Untagged
@@ -11101,14 +11103,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: 
+  Title: 'Succ 3: We''re All Doomed Now'
   Music: bgm_battle_b1
   Enemy1: 
   Enemy2: ijiraq
   Enemy3: 
   Ally1: 
   Ally2: 
-  events: []
+  events:
+  - {fileID: 1798950434}
 --- !u!114 &1798950430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11120,14 +11123,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: 
+  Title: 'U Succ 2: The Succening'
   Music: 
   Enemy1: 
   Enemy2: tanuki
   Enemy3: 
   Ally1: 
   Ally2: 
-  events: []
+  events:
+  - {fileID: 1798950435}
+  - {fileID: 1798950434}
 --- !u!114 &1798950431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11172,6 +11177,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interruptScene: {fileID: 55851402}
   triggerAfterXAttacks: 2
+--- !u!114 &1798950434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1798950427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0eb10eec0f7ecf4da89b33fc157a240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interruptScene: {fileID: 55851402}
+--- !u!114 &1798950435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1798950427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a6a8c775aac94141aa1eaa0428be588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interruptScene: {fileID: 55851402}
+  seconds: 0
 --- !u!1 &1814759932
 GameObject:
   m_ObjectHideFlags: 0
