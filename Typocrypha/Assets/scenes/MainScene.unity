@@ -144,7 +144,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -4}
+  m_AnchoredPosition: {x: 600, y: -4}
   m_SizeDelta: {x: 0, y: 8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9396650
@@ -327,7 +327,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0.999995}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2043,7 +2043,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
@@ -2195,6 +2195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07785479efe3f8c40b43ec789486dbbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player_ui: {fileID: 1378758522}
 --- !u!1 &328106859
 GameObject:
   m_ObjectHideFlags: 0
@@ -5778,7 +5779,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 300.00003}
+  m_AnchoredPosition: {x: 0, y: 0.000013565538}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &965409675
@@ -7093,7 +7094,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -8669,7 +8670,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 57866461}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0
+  m_Size: 0.999995
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9769,12 +9770,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: Clarke
-  text: 'NOTICE:'
+  speaker_name: 
+  text: '[play-sfx=sfx_crush][screen-shake=2.0,0.1][set-talk-sfx=vo_clarke]<color=red>NOTICE</color>:'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
-  left_icon: {fileID: 0}
+  left_icon: {fileID: 21300000, guid: 95443c70d8aa2804d90b661db67b181d, type: 3}
   right_icon: {fileID: 0}
   icon_side: 0
 --- !u!114 &1600763270
@@ -9802,13 +9803,13 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: 'Thank you for your interest in our project! '
+  text: '[set-talk-sfx=vo_mc]Thank you for your interest in our project! '
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
-  left_icon: {fileID: 0}
-  right_icon: {fileID: 0}
-  icon_side: 0
+  left_icon: {fileID: 21300000, guid: 72e6de431fb17aa48ae608e0ce67606c, type: 3}
+  right_icon: {fileID: 21300000, guid: 7614527d7eb9c7d44afe9f5df519ddb8, type: 3}
+  icon_side: 2
 --- !u!114 &1600763272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9823,12 +9824,12 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: Also, this is a DEMO Build. The content here does not necessarily reflect
-    the final game.
+  text: '[set-talk-sfx=vo_dahlia]Also, this is a |shake|DEMO Build\shake\. The content
+    here does not necessarily reflect the final game.'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
-  left_icon: {fileID: 0}
+  left_icon: {fileID: 21300000, guid: d7a1fb6562d253a49aa57e44759094ea, type: 3}
   right_icon: {fileID: 0}
   icon_side: 0
 --- !u!114 &1600763273
@@ -9845,12 +9846,12 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: "But hey, this is a visual novel typing RPG made by a bunch of nerds, so don\u2019t
-    think about it too hard? Eh..."
+  text: "[set-talk-sfx=vo_illyia]But hey, this is a visual novel typing RPG made by
+    a bunch of nerds, so don\u2019t think about it too hard?[pause=1] Eh..."
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
-  left_icon: {fileID: 0}
+  left_icon: {fileID: 21300000, guid: 63393d0a276169c4c93392e6f32404b1, type: 3}
   right_icon: {fileID: 0}
   icon_side: 0
 --- !u!114 &1600763274
@@ -9867,12 +9868,12 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '...Maybe.'
+  text: '[set-talk-sfx=vo_illyia]...Maybe.'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
-  left_icon: {fileID: 0}
-  right_icon: {fileID: 0}
+  left_icon: {fileID: 21300000, guid: 63393d0a276169c4c93392e6f32404b1, type: 3}
+  right_icon: {fileID: 21300000, guid: d7a1fb6562d253a49aa57e44759094ea, type: 3}
   icon_side: 0
 --- !u!114 &1600763275
 MonoBehaviour:
@@ -9888,12 +9889,12 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: Characters, organizations, storylines, places, and events are, with several
-    key exceptions, unrelated to reality.
+  text: '[set-talk-sfx=vo_dahlia]Characters, organizations, storylines, places, and
+    events are, with several key exceptions, unrelated to reality.'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
-  left_icon: {fileID: 0}
+  left_icon: {fileID: 21300000, guid: d7a1fb6562d253a49aa57e44759094ea, type: 3}
   right_icon: {fileID: 0}
   icon_side: 0
 --- !u!114 &1600763276
@@ -9910,11 +9911,11 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: This is a game! A work of fiction!
+  text: '[set-talk-sfx=vo_illyia]This is a GAME![pause=1] A work of [play-sfx=sfx_flash][screen-shake=2.0,0.1]|color-cycle||wave|FICTION\wave\\color-cycle\!'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
-  left_icon: {fileID: 0}
+  left_icon: {fileID: 21300000, guid: 63393d0a276169c4c93392e6f32404b1, type: 3}
   right_icon: {fileID: 0}
   icon_side: 0
 --- !u!1 &1605901048
@@ -11051,7 +11052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Title: 
-  Music: bgm_battle_a1
+  Music: 
   Enemy1: 
   Enemy2: tanuki
   Enemy3: 
@@ -11594,7 +11595,7 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: 0, y: 0}

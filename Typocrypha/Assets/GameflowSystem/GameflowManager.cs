@@ -6,6 +6,7 @@ using UnityEngine;
 // Different scenes are store as child objects to 'GameflowManager' object
 public class GameflowManager : MonoBehaviour {
 	public static GameflowManager main = null; // Global static ref
+	public GameObject player_ui; // the Typocrypha UI 
 	int curr_item; // Current event number
 
 	void Awake() {
@@ -28,11 +29,13 @@ public class GameflowManager : MonoBehaviour {
 		}
 		if (item.GetType() == typeof(Dialogue)) {
 			Debug.Log ("starting dialogue");
+			player_ui.SetActive (false);
             BattleManagerS.main.setEnabled(false);
             DialogueManager.main.setEnabled(true);
 			DialogueManager.main.startDialogue (transform.GetChild(curr_item).gameObject);
 		} else if(item.GetType() == typeof(Battle)) {
             Debug.Log("starting battle");
+			player_ui.SetActive (true);
             DialogueManager.main.setEnabled(false);
             BattleManagerS.main.setEnabled(true);
             BattleManagerS.main.startBattle(transform.GetChild(curr_item).gameObject);

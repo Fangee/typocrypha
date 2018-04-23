@@ -107,7 +107,7 @@ public class AudioPlayer : MonoBehaviour {
 	public void playSFX(int channel) {
 		sfx_channels [channel].Play ();
 	}
-
+		
     // play sfx from name with specified volume modifier (finds first open channel)
     public void playSFX(string name, float volume = 1.0F)
     {
