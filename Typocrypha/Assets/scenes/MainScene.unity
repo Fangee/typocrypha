@@ -1946,7 +1946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &261958434
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3773,7 +3773,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[block=t][fade=in,2,0,0,0][set-talk-sfx=vo_evil_eye]Hel[set-talk-sfx=speak_boop]lo.
+  text: '[block=t][pause=1][fade=in,2,0,0,0][set-talk-sfx=vo_evil_eye]Hel[set-talk-sfx=speak_boop]lo.
     [pause=2]  [block=f]'
   input_display: {fileID: 0}
   input_options: []
@@ -3839,8 +3839,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[block=t][stop-music][set-talk-sfx=vo_evil_eye]<color=red>EYE SEE</color>
-    [fade=out,4,0,0,0] [pause=5]  [block=f] [next]'
+  text: '[block=t][stop-music][set-talk-sfx=vo_evil_eye]<color=red>EYE SEE</color>[fade=out,4,0,0,0][pause=5][block=f][next]'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8101,7 +8100,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "[set-talk-sfx=vo_illyia][block=t]You can't be [stop-music]that stupid[next]\r\n"
+  text: "[block=t][set-talk-sfx=vo_illyia]You can't be [stop-music]that stupid[next]\r\n"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8407,7 +8406,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '[set-talk-sfx=vo_illyia]you''re being left out[next]'
+  text: '[block=t][set-talk-sfx=vo_illyia]you''re being left out[next]'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8450,9 +8449,9 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '[play-music=bgm_naive][set-talk-sfx=vo_dahlia]Well, in any case, your exams
-    don''t start until next week anyways, {NAME}, so it might be better to just call
-    it quits. I don''t think we''re in the right mood for anything productive.'
+  text: '[block=f][play-music=bgm_naive][set-talk-sfx=vo_dahlia]Well, in any case,
+    your exams don''t start until next week anyways, {NAME}, so it might be better
+    to just call it quits. I don''t think we''re in the right mood for anything productive.'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -10843,8 +10842,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[set-talk-sfx=vo_evil_eye][block=t][frame=in][play-sfx=sfx_crush][screen-shake=4.0,0.2]<color=red>|shake|NOW
-    LET US START THE GAME.\shake\</color> [pause=2]  [fade=out,0,0,0,0][next]'
+  text: '[block=t][set-talk-sfx=vo_evil_eye][frame=in][play-sfx=sfx_crush][screen-shake=4.0,0.2]<color=red>|shake|NOW
+    LET US START THE GAME.\shake\</color>[pause=2][fade=out,0,0,0,0][next]'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -14027,7 +14026,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: ???
-  text: '[block=t][fade=in,4,0,0,0][pause=4] ...[block=f]'
+  text: '[block=t][set-talk-sfx=vo_dahlia][fade=in,4,0,0,0][pause=4]...[block=f]'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -14287,7 +14286,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: INTRODUCTION
   text: "<color=brown>She now works for her sister's advocacy group, EVE-IRIS, as
-    a \u201CMessiah,\u201D whatever the hell that means. Illyia came to {NAME}'s tutoring
+    a \u201CMessiah,\u201D whatever the hell that means. Illyia came to {name}'s tutoring
     session out of boredom.</color>"
   input_display: {fileID: 0}
   input_options: []
@@ -14309,7 +14308,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: INTRODUCTION
-  text: <color=brown>Illyia Xiong:</color> {NAME}<color=brown>'s best friend, and
+  text: <color=brown>Illyia Xiong:</color> {name}<color=brown>'s best friend, and
     Dahlia's girlfriend. Due to an accident, her military aspirations were cut short.</color>
   input_display: {fileID: 0}
   input_options: []

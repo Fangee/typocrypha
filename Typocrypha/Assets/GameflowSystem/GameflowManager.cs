@@ -21,7 +21,6 @@ public class GameflowManager : MonoBehaviour {
 
 	// Go to next item
 	public void next() {
-		Debug.Log ("gameflow next");
 		GameflowItem item = transform.GetChild(++curr_item).gameObject.GetComponent<GameflowItem>();
 		if (item.gameObject.activeInHierarchy == false) { // Don't read disabled items
 			next ();

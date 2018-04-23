@@ -82,14 +82,14 @@ public class DialogueBox : MonoBehaviour {
 		int cnt = set_color.chars[0];
 		//int sfx_interval = 0; // Play voice effect for every Xth char displayed
 		while (cnt < text.Length) {
+			StartCoroutine(checkEvents (cnt - offset));
 			yield return new WaitWhile (() => DialogueManager.main.pause_scroll);
-			checkEvents (cnt - offset);
 			if (text [cnt] == '<') {
 				cnt = text.IndexOf ('>', cnt + 1) + 1;
-				if (cnt >= text.Length) cnt--;
+				if (cnt >= text.Length) break;
 			}
 			/*
-			if (!tag && sfx_interval <= 0  // SIMPLIFY
+			if (!tag && sfx_interval <= 0  
 				&& !(text[cnt].CompareTo(' ') >= 0 && text[cnt].CompareTo('/') <= 0) 
 				&& !(text[cnt].CompareTo(':') >= 0 && text[cnt].CompareTo('@') <= 0)
 				&& !(text[cnt].CompareTo('[') >= 0 && text[cnt].CompareTo('`') <= 0)
@@ -100,22 +100,25 @@ public class DialogueBox : MonoBehaviour {
 				--sfx_interval;
 			}
 			*/
-			if (cnt % 2 == 0) AudioPlayer.main.playSFX (AudioPlayer.channel_voice);
 			set_color.chars [0] = ++cnt;
+			if (cnt % 2 == 0) AudioPlayer.main.playSFX (AudioPlayer.channel_voice);
 			yield return new WaitForSeconds (scroll_delay);
 		}
-		checkEvents (cnt - offset); // Play events at end of text
+		StartCoroutine(checkEvents (cnt - offset)); // Play events at end of text
 		cr_scroll = null;
 	}
 
 	// Checks for and plays text events
-	void checkEvents(int start_pos) {
+	IEnumerator checkEvents(int start_pos) {
 		if (start_pos >= d_item.text_events.Length)
-			return;
+			yield break;
 		List<TextEvent> evt_list = d_item.text_events [start_pos];
 		if (evt_list != null && evt_list.Count > 0) {
-			foreach(TextEvent t in evt_list)
+			foreach (TextEvent t in evt_list) {
 				TextEvents.main.playEvent (t.evt, t.opt);
+				if (t.evt == "pause")
+					yield return new WaitForSeconds (float.Parse(t.opt[0]));
+			}
 			d_item.text_events [start_pos] = null;
 		}
 	}

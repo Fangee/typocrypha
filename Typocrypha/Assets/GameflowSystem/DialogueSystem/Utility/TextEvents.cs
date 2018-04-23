@@ -40,6 +40,7 @@ public class TextEvents : MonoBehaviour {
 			{"pause", pause},
 			{"fade", fade},
 			{"next", next},
+			{"next-delay", nextDelay},
 			{"center-text-scroll", centerTextScroll},
 			{"center-text-fade", centerTextFade},
 			{"play-sfx", playSFX},
@@ -149,15 +150,14 @@ public class TextEvents : MonoBehaviour {
 		float alpha;
 		float a_step = 1f * Time.deltaTime / fade_time; // amount of change each frame
 		if (a_step > 1) a_step = 1;
+		alpha = dimmer.color.a;
 		if (opt [0].CompareTo ("out") == 0) { // hide screen
-			alpha = 0;
 			while (alpha < 1f) {
 				yield return null;
 				alpha += a_step;
 				dimmer.color = new Color (r, g, b, alpha);
 			}
 		} else { // show screen
-			alpha = 1;
 			while (alpha > 0f) {
 				yield return null;;
 				alpha -= a_step;
@@ -171,6 +171,14 @@ public class TextEvents : MonoBehaviour {
 	IEnumerator next(string[] opt) {
 		DialogueManager.main.forceNextLine ();
 		yield return true;
+	}
+
+	// forces next line of dialogue after a delay
+	// input: [0]: float, delay time in seconds
+	IEnumerator nextDelay(string[] opt) {
+		Debug.Log ("nextDelay:" + opt[0]);
+		yield return new WaitForSeconds (float.Parse (opt [0]));
+		DialogueManager.main.forceNextLine ();
 	}
 
 	// NON_OPERATIONAL
@@ -381,7 +389,6 @@ public class TextEvents : MonoBehaviour {
 	// Sets name from last inputed text
 	// Input: NONE
 	IEnumerator setName(string[] opt) {
-		Debug.Log (DialogueManager.main.answer);
 		PlayerDialogueInfo.main.player_name = DialogueManager.main.answer;
 		yield return true;
 	}
