@@ -57,13 +57,13 @@ public class DialogueManager : MonoBehaviour {
 		if (block_input) return;
 		if (Input.GetKeyDown (KeyCode.Space)) {
             if (!nextLine()) {
-                if (isInterrupt) {
-                    BattleManagerS.main.setPause(false);
-                    isInterrupt = false;
-                    setEnabled(false);
-                }
-                else
-                    GameflowManager.main.next();
+				if (isInterrupt) {
+					BattleManagerS.main.setPause (false);
+					isInterrupt = false;
+					setEnabled (false);
+				} else {
+					GameflowManager.main.next ();
+				}
             }
 		}
 	}
@@ -223,6 +223,17 @@ public class DialogueManager : MonoBehaviour {
 		new_chr.transform.position = pos;
 		new_chr.transform.localScale = Vector3.one;
 		new_chr.GetComponent<SpriteRenderer> ().sprite = spr;
+	}
+
+	// Highlight's (on or off) a character
+	public void highlightCharacter(string spr_name, float amt) {
+		foreach(GameObject chr_spr in chr_spr_list) {
+			SpriteRenderer spr_r = chr_spr.GetComponent<SpriteRenderer> ();
+			if (spr_r.sprite.name == spr_name) {
+				spr_r.color = new Color(amt, amt, amt, 1);
+				break;
+			}
+		}
 	}
 
 	// Finds first character with specified sprite, and removes it

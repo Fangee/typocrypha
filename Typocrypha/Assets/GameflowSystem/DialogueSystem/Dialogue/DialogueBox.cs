@@ -78,9 +78,10 @@ public class DialogueBox : MonoBehaviour {
 
 	// Scrolls text character by character
 	IEnumerator textScrollCR() {
+		Debug.Log (text);
 		int offset = set_color.chars [0];
 		int cnt = set_color.chars[0];
-		//int sfx_interval = 0; // Play voice effect for every Xth char displayed
+		int sfx_interval = 2; // Play voice effect for every Xth char displayed
 		while (cnt < text.Length) {
 			StartCoroutine(checkEvents (cnt - offset));
 			yield return new WaitWhile (() => DialogueManager.main.pause_scroll);
@@ -101,7 +102,7 @@ public class DialogueBox : MonoBehaviour {
 			}
 			*/
 			set_color.chars [0] = ++cnt;
-			if (cnt % 2 == 0) AudioPlayer.main.playSFX (AudioPlayer.channel_voice);
+			if (cnt % sfx_interval == 0) AudioPlayer.main.playSFX (AudioPlayer.channel_voice);
 			yield return new WaitForSeconds (scroll_delay);
 		}
 		StartCoroutine(checkEvents (cnt - offset)); // Play events at end of text

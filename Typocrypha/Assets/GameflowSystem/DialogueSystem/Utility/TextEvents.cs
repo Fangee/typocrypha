@@ -50,6 +50,7 @@ public class TextEvents : MonoBehaviour {
 			{"set-bg", setBG},
 			{"hide-text-box", hideTextBox},
 			{"set-talk-sfx", setTalkSFX},
+			{"highlight-character", highlightCharacter},
 			{"remove-character", removeCharacter},
 			{"remove-all-character", removeAllCharacter},
             {"evil-eye", evilEye},
@@ -346,6 +347,14 @@ public class TextEvents : MonoBehaviour {
 		CutsceneManager.main.enabled = true;
 		CutsceneManager.main.forceNextLine ();
 		*/
+		yield return true;
+	}
+
+	// Toggles highlighting a character
+	// input: [0]: string, name of sprite to highlight
+	//        [1]: float, amount to highlight (multiplier to tint)
+	IEnumerator highlightCharacter(string[] opt) {
+		DialogueManager.main.highlightCharacter(opt[0], float.Parse(opt[1]));
 		yield return true;
 	}
 

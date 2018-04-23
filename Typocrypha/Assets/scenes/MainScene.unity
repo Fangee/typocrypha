@@ -1857,7 +1857,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: 
   text: '[set-talk-sfx=vo_evil_eye]<color=red>THE EYES OF TOTALITY / THE WORDS OF
-    INFINITY</color>[block=f][next]'
+    INFINITY</color>'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -1875,8 +1875,10 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: "[set-talk-sfx=vo_evil_eye]<color=red>MAY THE WORLD BE HEALED / IN THOSE WHO
-    SEE</color>[next]\r\n"
+  text: '[set-talk-sfx=vo_evil_eye]<color=red>MAY THE WORLD BE HEALED / IN THOSE WHO
+    SEE</color>
+
+'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -1894,8 +1896,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[block=t][play-music=bgm_curse_arrival][set-talk-sfx=vo_evil_eye]<color=red>THE
-    PACT IS SEALED / THE MAGIC CIRCLE COMES TO BE</color>[next]'
+  text: '[play-music=bgm_curse_arrival][set-talk-sfx=vo_evil_eye]<color=red>THE PACT
+    IS SEALED / THE MAGIC CIRCLE COMES TO BE</color>'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -7967,8 +7969,9 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '[set-talk-sfx=vo_dahlia]...Maybe we need to take a break for now. The cramped
-    space of your apartment is going to make us fight like hounds at this rate.'
+  text: '[highlight-character=spr_vn_dahlia_1,1][highlight-character=spr_vn_illyia_1,0.5][set-talk-sfx=vo_dahlia]...Maybe
+    we need to take a break for now. The cramped space of your apartment is going
+    to make us fight like hounds at this rate.'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8055,8 +8058,9 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '[set-talk-sfx=vo_illyia]I mean, that''s fine. Dali and I practically live
-    in a dumpster! But would it kill for a LITTLE hospitality? A bean bag chair maybe?'
+  text: '[highlight-character=spr_vn_dahlia_1,0.5][highlight-character=spr_vn_illyia_1,1][set-talk-sfx=vo_illyia]I
+    mean, that''s fine. Dali and I practically live in a dumpster! But would it kill
+    for a LITTLE hospitality? A bean bag chair maybe?'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8100,7 +8104,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "[block=t][set-talk-sfx=vo_illyia]You can't be [stop-music]that stupid[next]\r\n"
+  text: "[block=t][highlight-character=spr_vn_dahlia_1,0.5][highlight-character=spr_vn_illyia_1,1][set-talk-sfx=vo_illyia]You
+    can't be [stop-music]that stupid[next]\r\n"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8121,7 +8126,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '[set-talk-sfx=vo_dahlia]This is getting ridiculous...'
+  text: '[highlight-character=spr_vn_dahlia_1,1][highlight-character=spr_vn_illyia_1,0.5][set-talk-sfx=vo_dahlia]This
+    is getting ridiculous...'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8142,8 +8148,9 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "[set-talk-sfx=vo_illyia]Yeah! She stole all my goddamn stars in the game,
-    so, like a normal human being, I threw the controller!\r"
+  text: "[highlight-character=spr_vn_dahlia_1,0.5][highlight-character=spr_vn_illyia_1,1][set-talk-sfx=vo_illyia]Yeah!
+    She stole all my goddamn stars in the game, so, like a normal human being, I threw
+    the controller!\r"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8164,8 +8171,9 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '[set-talk-sfx=vo_dahlia]Oh yeah, wasn''t it that time you got really mad
-    at her while playing W*rio P*rty 11?'
+  text: '[highlight-character=spr_vn_dahlia_1,1][highlight-character=spr_vn_illyia_1,0.5][set-talk-sfx=vo_dahlia]Oh
+    yeah, wasn''t it that time you got really mad at her while playing W*rio P*rty
+    11?'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8210,8 +8218,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: "[set-talk-sfx=vo_dahlia]Uh-huh. And then at 3am I get a call from you just
-    bawling |shake|[set-talk-sfx=vo_illyia]\u201C[play-sfx=sfx_crush][screen-shake=2.0,0.1]daliiiiiii
+  text: "[highlight-character=spr_vn_dahlia_1,1][highlight-character=spr_vn_illyia_1,0.5][set-talk-sfx=vo_dahlia]Uh-huh.
+    And then at 3am I get a call from you just bawling |shake|[set-talk-sfx=vo_illyia]\u201C[play-sfx=sfx_crush][screen-shake=2.0,0.1]daliiiiiii
     please come save me i dont waaaannnaaaa beeeee hereeee [play-sfx=sfx_damage_number][screen-shake=2.0,0.1]waahhhh!!!\u201D\\shake\\ "
   input_display: {fileID: 0}
   input_options: []
@@ -8233,9 +8241,10 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '[set-talk-sfx=vo_illyia]And then, just like that, there you were: my beautiful
-    angel, ready to sweep me away through heaven''s door! Literally just carried me
-    to your car and drove off! Saved from that witch, Iris!'
+  text: '[highlight-character=spr_vn_dahlia_1,0.5][highlight-character=spr_vn_illyia_1,1][set-talk-sfx=vo_illyia]And
+    then, just like that, there you were: my beautiful angel, ready to sweep me away
+    through heaven''s door! Literally just carried me to your car and drove off! Saved
+    from that witch, Iris!'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8256,8 +8265,9 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: "[set-talk-sfx=vo_dahlia]Frankly, I don't know how I was able to hold you
-    like that! Usually my arms are like noodles trying to do that sort of stuff.\r"
+  text: "[highlight-character=spr_vn_dahlia_1,1][highlight-character=spr_vn_illyia_1,0.5][set-talk-sfx=vo_dahlia]Frankly,
+    I don't know how I was able to hold you like that! Usually my arms are like noodles
+    trying to do that sort of stuff.\r"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8278,9 +8288,10 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "[set-talk-sfx=vo_illyia]I mean, it's kinda like that part in Revolving Boy
-    Juuto where Juuto channels all of his love for Keitaku into that one attack?\r\nYou
-    know the one I'm talking about?\r"
+  text: "[highlight-character=spr_vn_dahlia_1,0.5][highlight-character=spr_vn_illyia_1,1][set-talk-sfx=vo_illyia]I
+    mean, it's kinda like that part in Revolving Boy Juuto where Juuto channels all
+    of his love for Keitaku into that one attack?\r\nYou know the one I'm talking
+    about?\r"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8301,7 +8312,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: "[stop-music]...\r"
+  text: "[highlight-character=spr_vn_dahlia_1,1][highlight-character=spr_vn_illyia_1,0.5][stop-music]...\r"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8322,7 +8333,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "[stop-music]...\r"
+  text: "[stop-music][highlight-character=spr_vn_dahlia_1,0.5][highlight-character=spr_vn_illyia_1,1]...\r"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8343,7 +8354,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia & Dahlia
-  text: "[play-sfx=sfx_flash][screen-shake=2.0,0.1]\u201CSHINING REVOLVER!!!!!\u201D\r"
+  text: "[highlight-character=spr_vn_dahlia_1,1][highlight-character=spr_vn_illyia_1,1][play-sfx=sfx_flash][screen-shake=2.0,0.1]\u201CSHINING
+    REVOLVER!!!!!\u201D\r"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8364,7 +8376,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia & Dahlia
-  text: '[play-sfx=sfx_damage_number][screen-shake=2.0,0.1]|shake|Pffffttthahahahahaha!!\shake\'
+  text: '[highlight-character=spr_vn_dahlia_1,1][highlight-character=spr_vn_illyia_1,1][play-sfx=sfx_damage_number][screen-shake=2.0,0.1]|shake|Pffffttthahahahahaha!!\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8385,7 +8397,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '[set-talk-sfx=vo_dahlia]they don''t want you here[next]'
+  text: '[highlight-character=spr_vn_dahlia_1,1][highlight-character=spr_vn_illyia_1,0.5][set-talk-sfx=vo_dahlia]they
+    don''t want you here[next]'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8406,7 +8419,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '[block=t][set-talk-sfx=vo_illyia]you''re being left out[next]'
+  text: '[block=t][highlight-character=spr_vn_dahlia_1,0.5][highlight-character=spr_vn_illyia_1,1][set-talk-sfx=vo_illyia]you''re
+    being left out[next]'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8472,7 +8486,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "[set-talk-sfx=vo_illyia]Damn right we aren't! \r"
+  text: "[highlight-character=spr_vn_dahlia_1,0.5][highlight-character=spr_vn_illyia_1,1][set-talk-sfx=vo_illyia]Damn
+    right we aren't! \r"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -14122,7 +14137,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: ???
   text: '[set-talk-sfx=vo_dahlia][play-sfx=sfx_damage_number][screen-shake=2.0,0.1][set-bg=bg_player_bedroom]Hey,
-    {NAME}, [play-sfx=sfx_flash]focus![pause=0.5] You''ll never pass that midterm
+    {name}, [play-sfx=sfx_flash]focus![pause=0.5] You''ll never pass that midterm
     at this rate!'
   input_display: {fileID: 0}
   input_options: []
@@ -14146,7 +14161,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: "[play-music=bgm_naive][set-talk-sfx=vo_dahlia]You doing alright, {NAME}?
+  text: "[play-music=bgm_naive][set-talk-sfx=vo_dahlia]You doing alright, {name}?
     Don\u2019t pass out on me, I came by as a tutor, not a doctor! Med-students like
     us aren\u2019t supposed to be playing patient at the operating table right now...\r\n"
   input_display: {fileID: 0}
@@ -14237,9 +14252,9 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "[set-talk-sfx=vo_illyia]Are you even listening to Dahlia? Look, I'm a dumbass
-    and even I can tell you're clearly supposed to take the product of pi over on
-    the 4th step when dividing by 3.\r"
+  text: "[highlight-character=spr_vn_dahlia_1,0.5][set-talk-sfx=vo_illyia]Are you
+    even listening to Dahlia? Look, I'm a dumbass and even I can tell you're clearly
+    supposed to take the product of pi over on the 4th step when dividing by 3.\r"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []

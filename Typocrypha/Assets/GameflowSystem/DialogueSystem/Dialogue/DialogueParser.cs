@@ -69,8 +69,8 @@ public class DialogueParser : MonoBehaviour {
 		int end_pos = text.IndexOf ('\\', start_pos) - 1;
 		string fx_name = text.Substring (start_pos, end_pos - start_pos + 1);
 		FXTextEffect top = effect_stack.Pop ();
-		//if (text_effect_map [fx_name].GetType () != top.GetType ())
-		//	Debug.LogException (new System.Exception("Mismatched FXTextEffect tags:" + fx_name));
+		if (text_effect_map [fx_name].GetType () != top.GetType ())
+			Debug.LogException (new System.Exception("Mismatched FXTextEffect tags:" + fx_name));
 		top.chars [1] = parsed.Length;
 		d_item.fx_text_effects.Add (top);
 	}
