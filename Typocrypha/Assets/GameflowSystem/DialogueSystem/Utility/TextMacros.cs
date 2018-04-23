@@ -14,6 +14,7 @@ public class TextMacros : MonoBehaviour {
 		if (main == null) main = this;
 		macro_map = new Dictionary<string, MacroSubDel> {
 			{"name", macroNameSub},
+			{"NAME", macroNameSub},
 			{"pronoun",macroPronoun},
 			{"last-cast", macroLastCast},
 			{"time", macroTime}

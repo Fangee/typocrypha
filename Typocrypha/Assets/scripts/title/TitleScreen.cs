@@ -117,7 +117,7 @@ public class TitleScreen : MonoBehaviour {
 
 	// called to transition to MainScene (new game) when start is pressed
 	void transitionToStart() {
-		AsyncOperation load_op = SceneManager.LoadSceneAsync ("MainScene", LoadSceneMode.Additive);
+		AsyncOperation load_op = SceneManager.LoadSceneAsync ("MainScene", LoadSceneMode.Single);
 		StartCoroutine (loadMainScene (load_op));
 	}
 

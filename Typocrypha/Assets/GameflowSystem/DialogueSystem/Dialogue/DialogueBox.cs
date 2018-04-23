@@ -28,7 +28,7 @@ public class DialogueBox : MonoBehaviour {
 		set_color.color.a = 0;
 		set_color.chars = new int[2]{0,text.Length};
 		fx_text.addEffect (set_color);
-		scroll_delay = 0.02f; // DEFAULT TEMP
+		scroll_delay = 0.01f; // DEFAULT TEMP
 		if (d_item.GetType () == typeof(DialogueItemChat)) {
 			DialogueItemChat c_item = (DialogueItemChat)d_item;
 			// Set icon
@@ -93,7 +93,7 @@ public class DialogueBox : MonoBehaviour {
 					&& !(text[cnt].CompareTo('[') >= 0 && text[cnt].CompareTo('`') <= 0)
 					&& !(text[cnt].CompareTo('{') >= 0 && text[cnt].CompareTo('~') <= 0)) {
 				AudioPlayer.main.playSFX (AudioPlayer.channel_voice);
-				sfx_interval = 1;
+				sfx_interval = 2;
 			} else {
 				--sfx_interval;
 			}
