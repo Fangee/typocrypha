@@ -298,6 +298,7 @@ public class Enemy : MonoBehaviour, ICaster {
         if (curr_hp <= 0)
         { // check if killed
             Debug.Log(stats.name + " has been slain!");
+			AudioPlayer.main.playSFX ("sfx_enemy_death"); // enemy death noise placeholder
             is_dead = true;
             enemy_sprite.color = new Color(1, 1, 1, 0);
             StopAllCoroutines();

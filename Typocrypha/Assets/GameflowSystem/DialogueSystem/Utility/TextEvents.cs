@@ -45,7 +45,9 @@ public class TextEvents : MonoBehaviour {
 			{"center-text-fade", centerTextFade},
 			{"play-sfx", playSFX},
 			{"play-music", playMusic},
+			{"play-bgm", playMusic},
 			{"stop-music", stopMusic},
+			{"stop-bgm", stopMusic},
 			{"set-scroll-delay", setScrollDelay},
 			{"set-bg", setBG},
 			{"hide-text-box", hideTextBox},
@@ -57,7 +59,8 @@ public class TextEvents : MonoBehaviour {
             {"prompt", prompt},
 			{"glitch", glitch},
 			{"set-name", setName},
-			{"frame", frame}
+			{"frame", frame},
+			{"heal-player", healPlayer}
 		};
 		is_prompt = false;
 	}
@@ -85,6 +88,7 @@ public class TextEvents : MonoBehaviour {
 				switch (text_event.evt) {
 				case "next":
 				case "play-music":
+				case "play-bgm":
 				case "set-scroll-delay":
 				case "set-bg":
 				case "remove-character":
@@ -410,6 +414,14 @@ public class TextEvents : MonoBehaviour {
 		} else { // show screenframe
 			screen_frame.SetActive(true);
 		}
+		yield return true;
+	}
+
+	// restore player to full HP
+	// input: N/A
+	IEnumerator healPlayer(string[] opt) {
+		Debug.Log ("[JohnTypocrypha Voice]: i need healing");
+		Player.main.restoreToFull ();
 		yield return true;
 	}
 }

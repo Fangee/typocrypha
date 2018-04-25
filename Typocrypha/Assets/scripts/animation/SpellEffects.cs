@@ -23,7 +23,7 @@ public class SpellEffects : MonoBehaviour {
             Debug.Log(d.Caster.Stats.name + " missed " + d.Target.Stats.name + "!");
             //Process miss graphics
             popp.spawnSprite("popup_miss", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET);
-            AudioPlayer.main.playSFX("sfx_miss");
+            AudioPlayer.main.playSFX("sfx_spell_miss");
             BattleEffects.main.spriteShift(d.Target.Transform, 0.3f, 0.1f); // sprite moves to the right as a dodge
             yield break;
         }
@@ -79,7 +79,7 @@ public class SpellEffects : MonoBehaviour {
         //Process damage graphics
 		if (d.damageInflicted > 0) {
 			BattleEffects.main.spriteShake (d.Target.Transform, 0.3f, 0.1f);
-			AudioPlayer.main.playSFX ("sfx_damage_number");
+			AudioPlayer.main.playSFX ("sfx_spell_hit");
 			popp.spawnText (d.damageInflicted.ToString (), POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET);
 		} else if (d.damageInflicted < 0) {
 			string heal = "+" + (-1 * (d.damageInflicted)).ToString ();
@@ -103,12 +103,14 @@ public class SpellEffects : MonoBehaviour {
                 break;
             case Elements.vsElement.DRAIN:
                 popp.spawnSprite("popup_absorb", POP_TIMER, pos.position + OVER_OFFSET);
+				AudioPlayer.main.playSFX ("sfx_spell_drain");
                 break;
             case Elements.vsElement.BLOCK:
                 popp.spawnSprite("popup_nullify", POP_TIMER, pos.position + OVER_OFFSET);
                 break;
             case Elements.vsElement.RESIST:
                 popp.spawnSprite("popup_resistant", POP_TIMER, pos.position + OVER_OFFSET);
+				AudioPlayer.main.playSFX ("sfx_spell_resist");
                 break;
             case Elements.vsElement.WEAK:
                 popp.spawnSprite("popup_weak", POP_TIMER, pos.position + OVER_OFFSET);
