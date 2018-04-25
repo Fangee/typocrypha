@@ -1157,8 +1157,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 131316902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -511.912, y: -15.98, z: 0}
-  m_LocalScale: {x: 17554.662, y: 20760.615, z: 1}
+  m_LocalPosition: {x: -512.048, y: -15.972, z: 0}
+  m_LocalScale: {x: 23985.568, y: 20762.203, z: 1}
   m_Children: []
   m_Father: {fileID: 261958434}
   m_RootOrder: 3
@@ -2076,8 +2076,8 @@ MonoBehaviour:
   input_branches: []
   mc_sprite: {fileID: 21300000, guid: acb909c97db531a4c8ceb9e7c3a4db0a, type: 3}
   char_sprites:
-  - {fileID: 21300000, guid: acb909c97db531a4c8ceb9e7c3a4db0a, type: 3}
-  - {fileID: 21300000, guid: eb416a3691a496849952474a70a1f306, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   char_sprite_pos:
   - {x: -2, y: 1.5}
   - {x: 2, y: 1.5}
@@ -4049,7 +4049,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 602362909}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 336.64, y: -87.359985, z: -5760}
+  m_LocalPosition: {x: 58, y: 86, z: -5760}
   m_LocalScale: {x: 64, y: 64, z: 64}
   m_Children: []
   m_Father: {fileID: 261958434}
@@ -7055,10 +7055,10 @@ RectTransform:
   m_Father: {fileID: 1898592526}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.5}
-  m_SizeDelta: {x: 704, y: 150}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -60}
+  m_SizeDelta: {x: 704, y: 118}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1062573030
 MonoBehaviour:
@@ -7863,9 +7863,12 @@ GameObject:
   - component: {fileID: 1210724851}
   - component: {fileID: 1210724850}
   - component: {fileID: 1210724853}
+  - component: {fileID: 1210724867}
   - component: {fileID: 1210724852}
+  - component: {fileID: 1210724866}
   - component: {fileID: 1210724863}
   - component: {fileID: 1210724854}
+  - component: {fileID: 1210724868}
   - component: {fileID: 1210724855}
   - component: {fileID: 1210724856}
   - component: {fileID: 1210724859}
@@ -7876,6 +7879,8 @@ GameObject:
   - component: {fileID: 1210724861}
   - component: {fileID: 1210724864}
   - component: {fileID: 1210724865}
+  - component: {fileID: 1210724870}
+  - component: {fileID: 1210724869}
   m_Layer: 5
   m_Name: D_SGDA_Scene1p2
   m_TagString: Untagged
@@ -7915,7 +7920,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: '[set-talk-sfx=vo_mc]Ah... crap... you''re totally right... '
+  text: '[highlight-character=spr_vn_dahlia_1,0.5][highlight-character=spr_vn_illyia_1,0.5][set-talk-sfx=vo_mc]Ah...
+    crap... you''re totally right... '
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -7947,8 +7953,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: "[set-talk-sfx=vo_mc]S-sorry. I couldn't afford much. The Agartha housing
-    crisis hurts...\r"
+  text: "[highlight-character=spr_vn_dahlia_1,0.5][highlight-character=spr_vn_illyia_1,0.5][set-talk-sfx=vo_mc]S-sorry.
+    I couldn't afford much. The Agartha housing crisis hurts...\r"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -7992,7 +7998,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "[set-talk-sfx=vo_illyia]You seriously broke it again?\r"
+  text: "[highlight-character=spr_vn_illyia_1,1][set-talk-sfx=vo_illyia]You seriously
+    broke it again?\r"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8035,9 +8042,9 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: "[set-talk-sfx=vo_mc]Look, I'd totally be down to get your bean bag chair
-    next time, but I kinda broke my TYPOCRYPHA device recently again and I'm really
-    strapped on cash.\r"
+  text: "[highlight-character=spr_vn_dahlia_1,0.5][highlight-character=spr_vn_illyia_1,0.5][set-talk-sfx=vo_mc]Look,
+    I'd totally be down to get your bean bag chair next time, but I kinda broke my
+    TYPOCRYPHA device recently again and I'm really strapped on cash.\r"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8194,10 +8201,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: "[set-talk-sfx=vo_dahlia]I remember the moment I snapped from |shake|\u201Cmmmmgghhhhraaahhhhh-needsleep-rragghhhh\u201D\\shake\\
-    to |shake|\u201C[play-sfx=sfx_flash][screen-shake=2.0,0.1]OH GOD MY GIRL IS IN
-    DANGER DONT WORRY ILL SAVE YOU BABE\u201D\\shake\\ thinking some thug was trying
-    to murder you!\n"
+  text: "[set-talk-sfx=vo_dahlia][set-talk-sfx=vo_dahlia]I remember the moment I snapped
+    from |shake|\u201C<color=gray>mmmmgghhhhraaahhhhh-needsleep-rragghhhh</color>\u201D\\shake\\...\n"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8218,9 +8223,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: "[highlight-character=spr_vn_dahlia_1,1][highlight-character=spr_vn_illyia_1,0.5][set-talk-sfx=vo_dahlia]Uh-huh.
-    And then at 3am I get a call from you just bawling |shake|[set-talk-sfx=vo_illyia]\u201C[play-sfx=sfx_crush][screen-shake=2.0,0.1]daliiiiiii
-    please come save me i dont waaaannnaaaa beeeee hereeee [play-sfx=sfx_damage_number][screen-shake=2.0,0.1]waahhhh!!!\u201D\\shake\\ "
+  text: '[highlight-character=spr_vn_dahlia_1,1][highlight-character=spr_vn_illyia_1,0.5][set-talk-sfx=vo_dahlia]Uh-huh.
+    And then at 3am I get a call from you just bawling,'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8243,8 +8247,7 @@ MonoBehaviour:
   speaker_name: Illyia
   text: '[highlight-character=spr_vn_dahlia_1,0.5][highlight-character=spr_vn_illyia_1,1][set-talk-sfx=vo_illyia]And
     then, just like that, there you were: my beautiful angel, ready to sweep me away
-    through heaven''s door! Literally just carried me to your car and drove off! Saved
-    from that witch, Iris!'
+    through heaven''s door!'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8288,10 +8291,9 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "[highlight-character=spr_vn_dahlia_1,0.5][highlight-character=spr_vn_illyia_1,1][set-talk-sfx=vo_illyia]I
-    mean, it's kinda like that part in Revolving Boy Juuto where Juuto channels all
-    of his love for Keitaku into that one attack?\r\nYou know the one I'm talking
-    about?\r"
+  text: '[highlight-character=spr_vn_dahlia_1,0.5][highlight-character=spr_vn_illyia_1,1][set-talk-sfx=vo_illyia]Power
+    of Love! Like that part in Revolving Boy Juuto where Juuto channels all of his
+    love for Keitaku into his ace in the hole:'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8353,7 +8355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: Illyia & Dahlia
+  speaker_name: Illyia and Dahlia
   text: "[highlight-character=spr_vn_dahlia_1,1][highlight-character=spr_vn_illyia_1,1][play-sfx=sfx_flash][screen-shake=2.0,0.1]\u201CSHINING
     REVOLVER!!!!!\u201D\r"
   input_display: {fileID: 0}
@@ -8375,7 +8377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: Illyia & Dahlia
+  speaker_name: Illyia and Dahlia
   text: '[highlight-character=spr_vn_dahlia_1,1][highlight-character=spr_vn_illyia_1,1][play-sfx=sfx_damage_number][screen-shake=2.0,0.1]|shake|Pffffttthahahahahaha!!\shake\'
   input_display: {fileID: 0}
   input_options: []
@@ -8398,7 +8400,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Dahlia
   text: '[highlight-character=spr_vn_dahlia_1,1][highlight-character=spr_vn_illyia_1,0.5][set-talk-sfx=vo_dahlia]they
-    don''t want you here[next]'
+    don''t want you here[block=f][next]'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8463,9 +8465,9 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '[block=f][play-music=bgm_naive][set-talk-sfx=vo_dahlia]Well, in any case,
-    your exams don''t start until next week anyways, {NAME}, so it might be better
-    to just call it quits. I don''t think we''re in the right mood for anything productive.'
+  text: '[play-music=bgm_naive][set-talk-sfx=vo_dahlia]Ooof. Clearly we''re not in
+    the mood for anything productive right now. Forget breaks, let''s turn in for
+    today.'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8488,6 +8490,118 @@ MonoBehaviour:
   speaker_name: Illyia
   text: "[highlight-character=spr_vn_dahlia_1,0.5][highlight-character=spr_vn_illyia_1,1][set-talk-sfx=vo_illyia]Damn
     right we aren't! \r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1210724866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1210724837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Dahlia
+  text: "[set-talk-sfx=vo_dahlia][set-talk-sfx=vo_dahlia]...to |shake|\u201C[play-sfx=sfx_flash][screen-shake=2.0,0.1]<color=red>OH
+    GOD MY GIRL IS IN DANGER DONT WORRY ILL SAVE YOU BABE</color>\u201D\\shake\\!!"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1210724867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1210724837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Dahlia
+  text: "|shake|[set-talk-sfx=vo_illyia]\u201C[play-sfx=sfx_crush][screen-shake=2.0,0.1]daliiiiiii
+    please come save me i dont waaaannnaaaa beeeee hereeee [play-sfx=sfx_damage_number][screen-shake=2.0,0.1]waahhhh!!!\u201D\\shake\\"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1210724868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1210724837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Illyia
+  text: '[set-talk-sfx=vo_illyia]Literally just carried me to your car and drove off!
+    [pause=0.5]
+
+    [play-sfx=sfx_damage_number][screen-shake=2.0,0.1]Saved from that witch, Iris!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1210724869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1210724837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Dahlia
+  text: '[highlight-character=spr_vn_dahlia_1,1][set-talk-sfx=vo_dahlia][block=t]Good,
+    because helping and idiot like you is a pain in the[block=f][next]'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1210724870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1210724837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{NAME}'
+  text: '[highlight-character=spr_vn_illyia_1,0.5][set-talk-sfx=vo_mc]Midterms are
+    next week still, so I guess that''ll be fine...'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -10770,8 +10884,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: "[set-talk-sfx=vo_illyia]But hey, this is a visual novel typing RPG made by
-    a bunch of nerds, so don\u2019t think about it too hard?[pause=1] Eh..."
+  text: '[set-talk-sfx=vo_illyia]But hey, this is a visual novel typing RPG made by
+    a bunch of nerds, so don''t think about it too hard?[pause=0.5] Eh...'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -11428,7 +11542,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 444, y: -50}
+  m_AnchoredPosition: {x: 476, y: -50}
   m_SizeDelta: {x: 450, y: 36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1701077492
@@ -13194,10 +13308,10 @@ RectTransform:
   m_Father: {fileID: 261958434}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -36, y: -27.5}
-  m_SizeDelta: {x: -512, y: -105}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 636, y: -155.5}
+  m_SizeDelta: {x: 768, y: 151}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1898592527
 MonoBehaviour:
@@ -13995,13 +14109,19 @@ GameObject:
   - component: {fileID: 2043237242}
   - component: {fileID: 2043237245}
   - component: {fileID: 2043237246}
-  - component: {fileID: 2043237247}
-  - component: {fileID: 2043237248}
-  - component: {fileID: 2043237249}
   - component: {fileID: 2043237251}
-  - component: {fileID: 2043237250}
+  - component: {fileID: 2043237247}
   - component: {fileID: 2043237253}
+  - component: {fileID: 2043237248}
   - component: {fileID: 2043237252}
+  - component: {fileID: 2043237249}
+  - component: {fileID: 2043237254}
+  - component: {fileID: 2043237256}
+  - component: {fileID: 2043237255}
+  - component: {fileID: 2043237250}
+  - component: {fileID: 2043237257}
+  - component: {fileID: 2043237259}
+  - component: {fileID: 2043237258}
   m_Layer: 5
   m_Name: D_SGDA_Scene1p1
   m_TagString: Untagged
@@ -14015,7 +14135,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2043237238}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -14161,9 +14281,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: "[play-music=bgm_naive][set-talk-sfx=vo_dahlia]You doing alright, {name}?
-    Don\u2019t pass out on me, I came by as a tutor, not a doctor! Med-students like
-    us aren\u2019t supposed to be playing patient at the operating table right now...\r\n"
+  text: "[play-music=bgm_naive][set-talk-sfx=vo_dahlia]You doing alright, {NAME}?\r
+    I know today's tutoring session is dense this time around, but..."
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -14184,9 +14303,9 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: INTRODUCTION
-  text: "<color=lightblue>Dahlia Bulsara: A graduate student at Agartha Military Academy
-    and a close friend of {NAME}. A popular TA and tutor specialized in Mana-Medic
-    Engineering, much to her chagrin.</color>\r"
+  text: '[highlight-character=spr_vn_dahlia_1,1]<color=lightblue>Dahlia Bulsara
+
+    A graduate student at Agartha Military Academy and a close friend of {NAME}.</color>'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -14229,9 +14348,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: "[set-talk-sfx=vo_mc]...what are you talking about?[play-sfx=sfx_huh] I'm
-    doing fine. OK, but seriously, I'm positive that the antiderivative of 683^290sqrt(999)
-    is 2033! See, look, right here-\r"
+  text: '[highlight-character=spr_vn_dahlia_1,0.5][set-talk-sfx=vo_mc]It''s fine.
+    Er, I''m fine. Really.'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -14252,9 +14370,10 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "[highlight-character=spr_vn_dahlia_1,0.5][set-talk-sfx=vo_illyia]Are you
-    even listening to Dahlia? Look, I'm a dumbass and even I can tell you're clearly
-    supposed to take the product of pi over on the 4th step when dividing by 3.\r"
+  text: '[remove-character=spr_vn_dahlia_1][highlight-character=spr_vn_dahlia_1,0.5][play-sfx=sfx_damage_number][screen-shake=2.0,0.1][set-talk-sfx=vo_illyia]Are
+    you even listening to Dahlia? Look, I''m a dumbass and even I can tell you''re
+    clearly supposed to take the product of pi over on the 4th step when dividing
+    by 3.'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -14278,8 +14397,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: 
-  text: '[remove-all-character][next]'
+  speaker_name: '{NAME}'
+  text: '[highlight-character=spr_vn_dahlia_1,0.5][set-talk-sfx=vo_mc]...what are
+    you talking about, Dahlia?'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -14299,10 +14419,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: INTRODUCTION
-  text: "<color=brown>She now works for her sister's advocacy group, EVE-IRIS, as
-    a \u201CMessiah,\u201D whatever the hell that means. Illyia came to {name}'s tutoring
-    session out of boredom.</color>"
+  speaker_name: Dahlia
+  text: "[set-talk-sfx=vo_dahlia]Well, you had a really pale look on your face a moment
+    ago...\r"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -14323,8 +14442,138 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: INTRODUCTION
-  text: <color=brown>Illyia Xiong:</color> {name}<color=brown>'s best friend, and
-    Dahlia's girlfriend. Due to an accident, her military aspirations were cut short.</color>
+  text: <color=lightblue>A popular TA and tutor specialized in Mana-Medic Engineering,
+    much to her chagrin.</color>
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2043237254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2043237238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Dahlia
+  text: "[highlight-character=spr_vn_dahlia_1,1][set-talk-sfx=vo_dahlia]If you say
+    so\u2026 but don't be afraid to take a break!"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2043237255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2043237238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{name}'
+  text: "[set-talk-sfx=vo_mc][block=t]See, look, right here-[block=f][next]\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2043237256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2043237238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{name}'
+  text: '[highlight-character=spr_vn_dahlia_1,0.5][set-talk-sfx=vo_mc]OK, but seriously,
+    I''m positive that the antiderivative of 683^290sqrt(999) is 2033!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2043237257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2043237238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: INTRODUCTION
+  text: "<color=#ff5f47>Illyia Xiong\r\n{NAME}'s best friend, and Dahlia's girlfriend.
+    \r\nAn accident cut her military aspirations short.</color>\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2043237258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2043237238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: INTRODUCTION
+  text: <color=#ff5f47>Illyia came to {NAME}'s tutoring session out of boredom.</color>
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2043237259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2043237238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: INTRODUCTION
+  text: "<color=#ff5f47>She now works for her sister's advocacy group, <color=yellow>EVE-IRIS</color>,
+    as a \u201CMessiah,\u201D whatever the hell that means.</color> "
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
