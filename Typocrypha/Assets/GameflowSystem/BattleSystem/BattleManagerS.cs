@@ -95,7 +95,6 @@ public class BattleManagerS : MonoBehaviour {
     {
         pause = p;
         trackTyping.enabled = !p;
-        Debug.Log("pause is set to: " + pause);
     }
 
     // start battle scene
@@ -117,7 +116,7 @@ public class BattleManagerS : MonoBehaviour {
 		BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
         yield return new WaitForSeconds(2f);      
 		pause = false;
-        //checkInterrupts();
+        checkInterrupts();
     }
     // go to next wave (also starts first wave for real)
     public void nextWave()
@@ -136,9 +135,8 @@ public class BattleManagerS : MonoBehaviour {
         waveTransition(Wave.Title);
         if(Wave.Music != string.Empty)
             AudioPlayer.main.playMusic(Wave.Music);
-        checkInterrupts();
-        //nextWave();
-        //Initialize next wave and do transition here
+        if(curr_wave != 0)
+            checkInterrupts();
     }
     // show victory screen after all waves are done
     public void victoryScreen()
