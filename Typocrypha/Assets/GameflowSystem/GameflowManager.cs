@@ -35,6 +35,8 @@ public class GameflowManager : MonoBehaviour {
 		} else if(item.GetType() == typeof(Battle)) {
             Debug.Log("starting battle: " + item.name);
 			player_ui.SetActive (true);
+			BattleManagerS.main.player.restoreToFull ();
+			BattleManagerS.main.castManager.cooldown.removeAll ();
             DialogueManager.main.setEnabled(false);
             BattleManagerS.main.setEnabled(true);
             BattleManagerS.main.startBattle(transform.GetChild(curr_item).gameObject);

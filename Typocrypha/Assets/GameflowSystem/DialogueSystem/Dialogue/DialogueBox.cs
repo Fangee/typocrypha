@@ -105,7 +105,7 @@ public class DialogueBox : MonoBehaviour {
 			if (cnt % sfx_interval == 0) AudioPlayer.main.playSFX (AudioPlayer.channel_voice);
 			yield return new WaitForSeconds (scroll_delay);
 		}
-		StartCoroutine(checkEvents (cnt - offset)); // Play events at end of text
+		yield return StartCoroutine(checkEvents (cnt - offset)); // Play events at end of text
 		cr_scroll = null;
 	}
 

@@ -94,6 +94,7 @@ public class StatusBurn : StatusEffect
     public override string processKey(char key)
     {
         p.Curr_hp -= dmg;
+		AudioPlayer.main.playSFX ("sfx_spell_hit");
         return key.ToString();
     }
 }
