@@ -58,7 +58,7 @@ public class SpellEffects : MonoBehaviour {
 				AudioPlayer.main.playSFX ("sfx_party_weakcrit_dmg");
 			//process crit graphics
 			popp.spawnSprite ("popup_critical", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET);
-		} else if (d.elementalData == Elements.vsElement.WEAK || d.elementalData == Elements.vsElement.SUPERWEAK){
+		} else if ((d.elementalData == Elements.vsElement.WEAK || d.elementalData == Elements.vsElement.SUPERWEAK) && d.damageInflicted > 0){
 			if (d.Target.CasterType == ICasterType.ENEMY)
 				AudioPlayer.main.playSFX ("sfx_enemy_weakcrit_dmg");
 			else if (d.Target.CasterType == ICasterType.PLAYER || d.Target.CasterType == ICasterType.NPC_ALLY)
@@ -74,7 +74,9 @@ public class SpellEffects : MonoBehaviour {
         Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement(d.Target.BuffDebuff, d.element));
 
         //Process elemental wk/resist/drain/repel graphics
-        spawnElementPopup(d.element, d.elementalData, d.Target.Transform);
+		if (!((d.elementalData == Elements.vsElement.WEAK || d.elementalData == Elements.vsElement.SUPERWEAK) && d.damageInflicted <= 0)) {
+			spawnElementPopup(d.element, d.elementalData, d.Target.Transform);
+		}
 
         //Process damage graphics
 		if (d.damageInflicted > 0) {
@@ -113,7 +115,7 @@ public class SpellEffects : MonoBehaviour {
 				AudioPlayer.main.playSFX ("sfx_spell_resist");
                 break;
             case Elements.vsElement.WEAK:
-                popp.spawnSprite("popup_weak", POP_TIMER, pos.position + OVER_OFFSET);
+				popp.spawnSprite("popup_weak", POP_TIMER, pos.position + OVER_OFFSET);
                 break;
             case Elements.vsElement.SUPERWEAK:
                 popp.spawnSprite("popup_superweak", POP_TIMER, pos.position + OVER_OFFSET);

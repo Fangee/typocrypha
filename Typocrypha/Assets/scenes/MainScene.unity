@@ -2138,7 +2138,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2775,10 +2775,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 507438986}
   - {fileID: 1600763268}
   - {fileID: 582150004}
   - {fileID: 233566760}
-  - {fileID: 507438986}
   - {fileID: 1160089769}
   - {fileID: 2043237239}
   - {fileID: 1210724838}
@@ -3163,8 +3163,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: 
-  text: 
+  speaker_name: ???
+  text: '[set-talk-sfx=vo_muninn]Hey, that <color=green>TANUKI</color> has <color=#ff6eff>LANCE</color>.
+    You should USE IT'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -3745,7 +3746,12 @@ GameObject:
   - component: {fileID: 507438994}
   - component: {fileID: 507438990}
   - component: {fileID: 507438989}
+  - component: {fileID: 507438998}
   - component: {fileID: 507438987}
+  - component: {fileID: 507438997}
+  - component: {fileID: 507438996}
+  - component: {fileID: 507438995}
+  - component: {fileID: 507438988}
   m_Layer: 5
   m_Name: B_TUTORIAL
   m_TagString: Untagged
@@ -3769,7 +3775,7 @@ RectTransform:
   - {fileID: 103648362}
   - {fileID: 378626217}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3788,10 +3794,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Title: 'Succ 3: We''re All Doomed Now'
-  Music: bgm_battle_b1
-  Enemy1: ijiraq
-  Enemy2: ijiraq
-  Enemy3: ijiraq
+  Music: 
+  Enemy1: Wechselbalg
+  Enemy2: Tanuki
+  Enemy3: Wechselbalg
+  Ally1: 
+  Ally2: 
+  events: []
+--- !u!114 &507438988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 507438985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: 
+  Music: 
+  Enemy1: Tanuki
+  Enemy2: Ijiraq2
+  Enemy3: Wechselbalg
   Ally1: 
   Ally2: 
   events: []
@@ -3820,7 +3845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Title: 'U Succ 2: The Succening'
-  Music: bgm_battle_a1
+  Music: bgm_battle_normal
   Enemy1: tanuki
   Enemy2: 
   Enemy3: changeling
@@ -3828,6 +3853,7 @@ MonoBehaviour:
   Ally2: 
   events:
   - {fileID: 507438989}
+  - {fileID: 507438998}
 --- !u!114 &507438991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3888,6 +3914,76 @@ MonoBehaviour:
   interruptScene: {fileID: 1796133475}
   whoToCheck: 4
   healthRatio: 0.9
+--- !u!114 &507438995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 507438985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: Succ 6
+  Music: 
+  Enemy1: Ijiraq2
+  Enemy2: 
+  Enemy3: Bunbuku
+  Ally1: 
+  Ally2: 
+  events: []
+--- !u!114 &507438996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 507438985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: Succ 5
+  Music: bgm_battle_midboss
+  Enemy1: 
+  Enemy2: Ijiraq
+  Enemy3: 
+  Ally1: 
+  Ally2: 
+  events: []
+--- !u!114 &507438997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 507438985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: 'Succ 4: DEATH'
+  Music: 
+  Enemy1: 
+  Enemy2: Bunbuku
+  Enemy3: 
+  Ally1: 
+  Ally2: 
+  events: []
+--- !u!114 &507438998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 507438985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a6a8c775aac94141aa1eaa0428be588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interruptScene: {fileID: 378626216}
+  seconds: 1
 --- !u!1 &513309488
 GameObject:
   m_ObjectHideFlags: 0
@@ -4282,7 +4378,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11586,7 +11682,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

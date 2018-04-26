@@ -101,6 +101,8 @@ public static class CasterOps
         }
         if (target.Curr_hp < 0)
             target.Curr_hp = 0;
+		if (target.Curr_hp > target.Stats.max_hp)
+			target.Curr_hp = target.Stats.max_hp;
         data.damageInflicted = Mathf.CeilToInt(dMod);
         return dMod > 0;
     }

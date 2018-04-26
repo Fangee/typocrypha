@@ -7,7 +7,7 @@ using UnityEngine.UI;
 //Can also be used as a stat buff/debuff modifier with CasterStats.modify;
 public class PlayerStats : CasterStats
 {
-    public PlayerStats() : base("Player", "ignore this", 100, 0, -1, 1F, 0.1F, 1F, 1F, 4, new float[Elements.count])
+    public PlayerStats() : base("Player", "ignore this", 200, 0, -1, 1F, 0.1F, 1F, 1F, 4, new float[Elements.count])
     {
         for (int i = 0; i < Elements.count; i++)
         {
@@ -96,7 +96,7 @@ public class Player : MonoBehaviour, ICaster
 
     //Fields
 
-    int curr_hp = 100;
+	int curr_hp = 200;
     int curr_shield = 0;
     bool is_dead = false;
 	string last_cast = ""; // last casted spell

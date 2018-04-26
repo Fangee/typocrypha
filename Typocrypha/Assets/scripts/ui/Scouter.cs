@@ -53,7 +53,7 @@ public class Scouter : MonoBehaviour {
         {
             //You're not looking at anything you absolute moron
             left.text = "..\n..\n..\n..\n..";
-            right.text = "..\n..\n..\n..\n.\n..";
+            right.text = "..\n..\n..\n..\n..\n..";
         }
         else
         {
