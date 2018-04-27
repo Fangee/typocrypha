@@ -1051,6 +1051,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: fa7cf51cf6fe25b42a9f1daa7db3a64d, type: 3}
   - {fileID: 21300000, guid: cd2ae0228f6f7454d922e473426ccd90, type: 3}
   - {fileID: 21300000, guid: 40b7598b2b71534418b12418b31dfc90, type: 3}
+  popper_object: {fileID: 779695188}
 --- !u!114 &94137935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3335,8 +3336,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 507438986}
   - {fileID: 1264951112}
+  - {fileID: 507438986}
   - {fileID: 1600763268}
   - {fileID: 582150004}
   - {fileID: 233566760}
@@ -4446,7 +4447,7 @@ RectTransform:
   - {fileID: 103648362}
   - {fileID: 378626217}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8461,7 +8462,8 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Crow Anima, Muninn
   text: "[set-talk-sfx=vo_muninn]The <color=lightblue>Spellbook</color> can be found
-    on the bottom right half of the screen.\r"
+    on the bottom right half of the screen.\r <color=lime>Pages can be navigated using
+    the UP/DOWN Arrow Keys.</color>"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -11591,7 +11593,7 @@ RectTransform:
   - {fileID: 748311217}
   - {fileID: 1089634085}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

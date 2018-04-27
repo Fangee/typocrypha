@@ -7,6 +7,8 @@ public class BattleKeyboard : MonoBehaviour {
     public Dictionary<char, Image> image_map; // map from characters to key images (set from trackTyping)
 	public Sprite key_default; // default key image
 	public Sprite[] frozen_keys = new Sprite[4]; // frozen key images
+	public GameObject popper_object; // popper object for player burn damage
+
 
     Dictionary<char, StatusEffect> status_map = new Dictionary<char, StatusEffect>();
     char[] keys = { 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'};
@@ -22,23 +24,24 @@ public class BattleKeyboard : MonoBehaviour {
             if (c == '?')
                 break;
             Debug.Log("key " + c + "was inflicted with the " + Elements.toString(element) + " condition!");
+			Popper[] player_popper = popper_object.GetComponents<Popper>(); // player popper for burn damage
             switch (element)
             {
                 case Elements.fire:
-                    status_map[c] = new StatusBurn(player);
+					status_map[c] = new StatusBurn(player, player_popper[0], c);
                     StartCoroutine(keyTimer(c, 10f));
                     ++numKeysAffected;
                     break;
 				case Elements.ice:
-					status_map[c] = new StatusFreeze(frozen_keys);
+					status_map[c] = new StatusFreeze(frozen_keys, player_popper[0], c);
                     ++numKeysAffected;
                     break;
                 case Elements.volt:
                     char swap = getRandomValidChar();
                     if (swap == '?')
                         break;
-                    status_map[c] = new StatusShock(swap);
-                    status_map[swap] = new StatusShock(c);
+					status_map[c] = new StatusShock(swap, c, player_popper[0]);
+					status_map[swap] = new StatusShock(c, swap, player_popper[0]);
                     StartCoroutine(keyTimer(c, 10f));
                     StartCoroutine(keyTimer(swap, 10f));
                     StartCoroutine(status_map[swap].keyGraphics(swap, image_map[swap]));
