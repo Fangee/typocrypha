@@ -13,6 +13,7 @@ public class TrackTyping : MonoBehaviour {
 	public Transform keyboard; // keyboard transform (holds key images)
 	public GameObject key_prefab; // prefab for key image object
 	public GameObject spacebar_prefab; // prefab for spacebar image object
+	public GameObject popper; // popper
 
 	string buffer; // contains typed text
 	int count; // number of characters typed
@@ -59,7 +60,12 @@ public class TrackTyping : MonoBehaviour {
 					count = count - 1;
 				}
 			}
-		} else {
+		} else if (Input.GetKey (KeyCode.KeypadMinus) || Input.GetKey (KeyCode.Minus)){
+			Popper[] pop = popper.GetComponents<Popper>();
+			AudioPlayer.main.playSFX ("sfx_botch");
+			pop[0].spawnText ("USE THE SPACEBAR INSTEAD OF THE MINUS/DASH", 1.0f, new Vector3(0.0f,-1.0f,0.0f));
+		}
+		else {
             string in_str = Input.inputString;
             if (TextEvents.main.is_prompt) {
                 buffer += in_str;

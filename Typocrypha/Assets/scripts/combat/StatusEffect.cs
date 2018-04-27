@@ -79,7 +79,7 @@ public class StatusFreeze : StatusEffect
 
 public class StatusBurn : StatusEffect
 {
-    int dmg = 5;
+    int dmg = 2;
     Player p;
     public StatusBurn(Player p)
     {
@@ -93,7 +93,11 @@ public class StatusBurn : StatusEffect
 
     public override string processKey(char key)
     {
-        p.Curr_hp -= dmg;
+		if (p.Curr_hp - dmg <= 0) {
+			p.Curr_hp = 1;
+		} else {
+			p.Curr_hp -= dmg;
+		}
 		AudioPlayer.main.playSFX ("sfx_spell_hit");
         return key.ToString();
     }

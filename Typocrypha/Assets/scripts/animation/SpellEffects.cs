@@ -93,6 +93,7 @@ public class SpellEffects : MonoBehaviour {
 				popp.spawnText (d.damageInflicted.ToString (), POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET);
 			}
 		}
+		//Debug.Log (d.Target.Transform.position);
     }
 
     //Spawns elemental popup with proper icon

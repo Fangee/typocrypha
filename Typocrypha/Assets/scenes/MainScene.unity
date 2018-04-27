@@ -4578,7 +4578,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interruptScene: {fileID: 1796133475}
   whoToCheck: 4
-  healthRatio: 0.9
+  healthRatio: 0.95
 --- !u!1 &513309488
 GameObject:
   m_ObjectHideFlags: 0
@@ -4994,7 +4994,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 1
   speaker_name: 
-  text: What's your name?
+  text: The one who summoned[set-talk-sfx=vo_evil_eye] I, [set-talk-sfx=speak_boop]who
+    desires such strength... <color=lime>speak your name.</color>
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -5012,7 +5013,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[play-music=bgm_ominous]How do you do?'
+  text: '[play-music=bgm_ominous]Do you seek <color=yellow>Magic</color>? That elusive
+    power to <color=yellow>Change the World?</color>'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -5031,7 +5033,8 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: 
   text: '[block=t][pause=1][fade=in,2,0,0,0][set-talk-sfx=vo_evil_eye]Hel[set-talk-sfx=speak_boop]lo.
-    [pause=2]  [block=f]'
+    [pause=2][block=f]I am a God of Magic... invoked by the <color=yellow>TYPOCRYPHA
+    device</color>, to aid the weak... '
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -5141,6 +5144,7 @@ MonoBehaviour:
   key_prefab: {fileID: 1888857165769182, guid: f827390bd1b568145ac0d82feacd5268, type: 2}
   spacebar_prefab: {fileID: 1735266892291008, guid: 2d08f3f27c0957e4f8ea088dca4754a0,
     type: 2}
+  popper: {fileID: 779695188}
 --- !u!114 &585812796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6263,10 +6267,17 @@ GameObject:
   m_Component:
   - component: {fileID: 748311217}
   - component: {fileID: 748311222}
+  - component: {fileID: 748311227}
+  - component: {fileID: 748311228}
+  - component: {fileID: 748311229}
   - component: {fileID: 748311221}
   - component: {fileID: 748311218}
   - component: {fileID: 748311219}
   - component: {fileID: 748311220}
+  - component: {fileID: 748311224}
+  - component: {fileID: 748311225}
+  - component: {fileID: 748311226}
+  - component: {fileID: 748311223}
   m_Layer: 5
   m_Name: BI_ALL_IN
   m_TagString: Untagged
@@ -6307,7 +6318,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: THE EVIL EYE
   text: '[set-talk-sfx=vo_evil_eye]<color=red>ALL THE WORLD''S NARRATIVES, STORIES,
-    MYTHS, ARE ALL MY OWN... OF THE ONE CULTURE OF EYE.</color>'
+    MYTHS, ARE ALL MY OWN... THEIR POWER IS MY OWN!</color>'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -6349,8 +6360,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: 
-  text: '[heal-player][play-sfx=sfx_mystery_effect]> You''ve been healed.'
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]They''ve all been revived... trapped in an eternal
+    pact with Eye, it seems...'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -6371,8 +6383,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: THE EVIL EYE
-  text: '[set-talk-sfx=vo_evil_eye]<color=red>HAHAHAHA. TRY AS YOU MIGHT, MY LEGION
-    IS OF MANY.</color>'
+  text: '[remove-all-character][set-talk-sfx=vo_evil_eye]<color=red>HAHAHAHA. TRY
+    AS YOU MIGHT, MY LEGION IS UNYIELDING.</color>'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -6390,6 +6402,159 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &748311223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 748311216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[heal-player][play-sfx=sfx_mystery_effect]<color=lime>|shake|GO! I BELIEVE
+    IN YOUR DESTINY, {NAME}!!!\shake\</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &748311224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 748311216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]{NAME}! This is it! Use the culmination of all that
+    you''ve learned!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &748311225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 748311216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]THE <color=yellow>SPELLBOOK</color>! ELEMENTAL <color=yellow>PREFIXES</color>!
+    ELEMENTAL <color=yellow>WEAKNESSES</color>! <color=yellow>STAGGER</color>! '
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &748311226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 748311216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]And most importantly: <color=yellow>if you can read
+    the Spell an enemy is using,</color> <color=lime>you can use it against them too!</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &748311227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 748311216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Wechselbalg
+  text: '[set-talk-sfx=vo_demon]|shake|I-it''s not over yet Mx. {NAME}!!\shake\'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &748311228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 748311216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Bunbuku
+  text: '[set-talk-sfx=vo_demon]|wave|We still have one more round of fighting spirit
+    in us!\wave\'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &748311229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 748311216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Ijiraq
+  text: '[set-talk-sfx=vo_demon]CASTER! UNTIL YOUR SOUL IS OURS, WE WON''T STOP UNTIL
+    WE FALL!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &763453156
 GameObject:
   m_ObjectHideFlags: 0
@@ -8318,7 +8483,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Crow Anima, Muninn
   text: "[set-talk-sfx=vo_muninn]Did you know that <color=lime>all of the Spells that
-    You and the Enemy use registered to a <color=lightblue>Spellbook</color>?</color>\r"
+    You and the Enemy use are registered to a <color=lightblue>Spellbook</color>?</color>\r"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -8372,8 +8537,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Crow Anima, Muninn
-  text: '[set-talk-sfx=vo_muninn]It gives a brief description of every Spell that
-    you encounter, so be sure to read it. Like the effects of <color=#ff6eff>STRESS</color>...'
+  text: "[set-talk-sfx=vo_muninn]It gives a brief description of every Spell that
+    you encounter, so be sure to read it. \nLike the effects of <color=#ff6eff>STRESS</color>..."
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -9090,6 +9255,97 @@ Material:
     - _WaveSpeed: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1089634084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1089634085}
+  - component: {fileID: 1089634087}
+  - component: {fileID: 1089634086}
+  - component: {fileID: 1089634088}
+  m_Layer: 5
+  m_Name: BI_W4_CrowHint1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1089634085
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1089634084}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1264951112}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1089634086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1089634084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]Is it cold in here, or...? No, no, it''s just |shake|YOUR
+    TYPOCRYPHA KEYS HAVE BEEN FROZEN\shake\, is all.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1089634087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1089634084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1089634088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1089634084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]<color=aqua>ICE</color> attacks <color=yellow>will
+    disable keys until you mash the keys and break the ice.</color> Get out the icepicks...'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &1091912259
 GameObject:
   m_ObjectHideFlags: 0
@@ -9199,8 +9455,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Wechselbalg
-  text: "[set-talk-sfx=vo_demon]<color=grey>|shake|(M-maybe if I play pretend\u2026
-    Mx. {NAME} will just go away...)\\shake\\</color>\r"
+  text: "[set-talk-sfx=vo_demon]<color=grey>|shake|(M-maybe if I hold out, Mx. {NAME}
+    will just die of old age...)\\shake\\</color>\r"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -9221,8 +9477,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Wechselbalg
-  text: "[set-talk-sfx=vo_demon]<color=grey>|shake|(W-wahhh\u2026!!! I dun't wunna
-    here\u2026 want my mama\u2026!)\\shake\\</color>\r"
+  text: "[set-talk-sfx=vo_demon]<color=grey>|shake|(W-wahhh\u2026!!! I can't fight
+    a monster like them! Their eyes are scary!)\\shake\\</color>\r"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -9265,7 +9521,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Wechselbalg
   text: '[set-talk-sfx=vo_demon]|shake|H-hey! Mx. {NAME}! No holding back! I''M GONNA
-    TEAR YOU APART! *sniff*\shake\'
+    TEAR YOU APART!\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -9678,7 +9934,22 @@ GameObject:
   m_Component:
   - component: {fileID: 1160089769}
   - component: {fileID: 1160089771}
+  - component: {fileID: 1160089773}
+  - component: {fileID: 1160089774}
+  - component: {fileID: 1160089775}
+  - component: {fileID: 1160089776}
   - component: {fileID: 1160089770}
+  - component: {fileID: 1160089777}
+  - component: {fileID: 1160089778}
+  - component: {fileID: 1160089779}
+  - component: {fileID: 1160089780}
+  - component: {fileID: 1160089781}
+  - component: {fileID: 1160089782}
+  - component: {fileID: 1160089785}
+  - component: {fileID: 1160089784}
+  - component: {fileID: 1160089783}
+  - component: {fileID: 1160089787}
+  - component: {fileID: 1160089786}
   - component: {fileID: 1160089772}
   m_Layer: 5
   m_Name: D_SGDA_Weird
@@ -9718,9 +9989,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: ???
-  text: '[set-bg=bg_abyss][play-music=bgm_bird_people][set-talk-sfx=vo_muninn]Excellent
-    performance, {NAME}!'
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]Excellent performance, {NAME}! Truly, the stars have
+    chosen a worthy human to SAVE THE WORLD!'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -9753,8 +10024,340 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: ???
-  text: '[block=t][stop-music][set-talk-sfx=vo_evil_eye]Now here''s a normal scene![fade=out,4,0,0,0][pause=5][block=f][remove-all-character][next]'
+  speaker_name: Crow Anima, Muninn
+  text: '[block=t][set-talk-sfx=vo_muninn]|shake|I suppose there''s no other way...
+    thanks, SGDA deadlines...\shake\[fade=out,4,0,0,0][pause=5][block=f][remove-all-character][next]'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1160089773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160089768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: THE EVIL EYE
+  text: '[play-music=bgm_bird_people][set-talk-sfx=vo_evil_eye]<color=red>...IMPRESSIVE.
+    THERE IS A SPARK IN YOUR EYE THAT SHINES A PECULIAR LIGHT.</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1160089774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160089768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: THE EVIL EYE
+  text: '[set-talk-sfx=vo_evil_eye]<color=red>IT IS CLEAR THAT YOU ARE DIFFERENT,
+    {NAME}. WHETHER IT BE BY YOUR OWN SOUL, OR THE MACHINATIONS OF THE GODS...</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1160089775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160089768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: THE EVIL EYE
+  text: '[set-talk-sfx=vo_evil_eye]<color=red>OUR PACT REMAINS, {NAME}. KNOW THAT
+    I WILL CONTINUE WATCHING OVER YOU, HAUNTING UNTIL YOUR POWER CAN ALSO BECOME ONE
+    WITH I.</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1160089776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160089768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '> Though the Evil Eye remains, the voice has truly become silent.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1160089777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160089768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn][block=t]That being said... [play-sfx=sfx_huh][stop-music]<color=yellow>you''re
+    not very talkative, are you?[block=f]</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1160089778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160089768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]And your form... <color=yellow>is shapeless. Have
+    you forgotten your entire being? Your place in the world?</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1160089779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160089768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn][block=t]Don''t tell me you have... [pause=1][play-sfx=sfx_flash][screen-shake=2.0,0.1]AMNESIA!?[block=f][next]'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1160089780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160089768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{NAME}'
+  text: '[highlight-character=spr_vn_muninn,0.5][set-talk-sfx=vo_mc][play-sfx=sfx_damage_number][screen-shake=2.0,0.1]...what
+    kind of cliche nonsense is this? My head comes up with the cruddiest fantasies...'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 21300000, guid: eb416a3691a496849952474a70a1f306, type: 3}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1160089781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160089768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{NAME}'
+  text: '[play-music=bgm_heart][set-talk-sfx=vo_mc]I''m me... <color=lime>{NAME}</color>...
+    nothing more, nothing less.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1160089782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160089768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[highlight-character=spr_vn_muninn,1][set-talk-sfx=vo_muninn]...[play-sfx=sfx_damage_number][screen-shake=2.0,0.1]|shake|EH?
+    YOU''RE AN ACTUAL CHARACTER?\shake\'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1160089783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160089768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{NAME}'
+  text: '[set-talk-sfx=vo_mc][play-sfx=sfx_flash][screen-shake=2.0,0.1]I was afraid...
+    speechless, really... <color=grey>also because we didn''t put in a proper character
+    creator yet...</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1160089784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160089768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[highlight-character=spr_vn_muninn,1][set-talk-sfx=vo_muninn]T-then why didn''t
+    you... speak... or appear at all...'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1160089785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160089768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{NAME}'
+  text: '[highlight-character=spr_vn_muninn,0.5][set-talk-sfx=vo_mc][play-sfx=sfx_flash][screen-shake=2.0,0.1]Of
+    course I am! '
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1160089786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160089768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{NAME}'
+  text: '[set-talk-sfx=vo_mc][play-sfx=sfx_flash][screen-shake=2.0,0.1]I guess it''s
+    time to return to the waking world, then... <color=yellow>the real world...</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1160089787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160089768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[highlight-character=spr_vn_muninn,1][set-talk-sfx=vo_muninn]Well, u-uh...
+    this is awkward... there''s really no intelligible way to transition between scenes
+    now, huh?'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -10959,6 +11562,7 @@ GameObject:
   - component: {fileID: 1264951123}
   - component: {fileID: 1264951113}
   - component: {fileID: 1264951126}
+  - component: {fileID: 1264951127}
   m_Layer: 5
   m_Name: B_TUTORIAL_BOSS
   m_TagString: Untagged
@@ -10985,6 +11589,7 @@ RectTransform:
   - {fileID: 1462190950}
   - {fileID: 2040540446}
   - {fileID: 748311217}
+  - {fileID: 1089634085}
   m_Father: {fileID: 309855630}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11013,6 +11618,7 @@ MonoBehaviour:
   Ally2: 
   events:
   - {fileID: 1264951126}
+  - {fileID: 1264951127}
 --- !u!114 &1264951114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11218,6 +11824,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interruptScene: {fileID: 748311216}
   seconds: 0
+--- !u!114 &1264951127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1264951111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d67eafccfc8f544a3a87154779a20a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interruptScene: {fileID: 1089634084}
+  target: 4
+  elementMustBe: 2
+  spellMustHit: 1
+  spellMustCrit: 0
+  spellMustStun: 0
+  damageMustBeAtLeast: 0
+  vsElementMustBe: -1
 --- !u!1 &1275802614
 GameObject:
   m_ObjectHideFlags: 0
@@ -12524,7 +13149,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Ijiraq
-  text: '[set-talk-sfx=vo_demon]BRAVE MAGICIAN, YOU ARE. STRONG, LIKE EYE!'
+  text: '[set-talk-sfx=vo_demon]BRAVE MAGICIAN, YOU ARE STRONG, LIKE EYE!'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -12992,7 +13617,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Crow Anima, Muninn
   text: "[set-talk-sfx=vo_muninn]|shake|<color=orange>FIRE</color> attacks will burn
-    your keys and make you take damage if you touch them\u2026 so don't do it!!!\\shake\\"
+    your keys and make you take damage if you touch them\u2026\\shake\\"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -16962,6 +17587,12 @@ GameObject:
   - component: {fileID: 2040540450}
   - component: {fileID: 2040540449}
   - component: {fileID: 2040540448}
+  - component: {fileID: 2040540447}
+  - component: {fileID: 2040540453}
+  - component: {fileID: 2040540452}
+  - component: {fileID: 2040540454}
+  - component: {fileID: 2040540455}
+  - component: {fileID: 2040540456}
   m_Layer: 5
   m_Name: BI_W3_CrowHint1
   m_TagString: Untagged
@@ -16987,6 +17618,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2040540447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2040540445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]Ah! I remembered something useful! Extremely useful!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!114 &2040540448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17001,8 +17653,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Crow Anima, Muninn
-  text: '[set-talk-sfx=vo_muninn]Page down on the <color=lightblue>Spellbook</color>?
-    Our previous flaming Tanuki friend may have left a useful word...'
+  text: '[set-talk-sfx=vo_muninn]This is troublesome...'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -17064,6 +17715,122 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2040540452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2040540445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]That Spell was modified with an official TYPOCRYPHA
+    Elemental <color=yellow>Prefix</color>.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2040540453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2040540445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]Do you recall the Spell <color=lime>Bunbuku</color>
+    was using? <color=#ff6eff>AGNI-SWORD</color>?'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites:
+  - {fileID: 21300000, guid: d6a4494b8ea2ead4897a7a9788307d12, type: 3}
+  - {fileID: 21300000, guid: d6a4494b8ea2ead4897a7a9788307d12, type: 3}
+  char_sprite_pos:
+  - {x: 8, y: 0}
+  - {x: -8, y: 0}
+--- !u!114 &2040540454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2040540445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]The TYPOCRYPHA Elemental <color=yellow>Prefixes change
+    the Element Type of the attached Spell Word</color>.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2040540455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2040540445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]For instance, attaching the Prefix <color=#ff6eff>AGNI-</color>
+    onto the Spells <color=#ff6eff>-SWORD</color> and <color=#ff6eff>-LANCE</color>
+    <color=yellow>change the attack types from</color> <color=lime>PHYSICAL</color>
+    <color=yellow>to</color> <color=orange>FIRE</color>!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2040540456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2040540445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]Use the <color=lime>SPACEBAR</color> to <color=yellow>connect
+    PREFIXES to BASE SPELL WORDS!</color> AGNI-SWORD should be effective!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &2042309531
 GameObject:
   m_ObjectHideFlags: 0
