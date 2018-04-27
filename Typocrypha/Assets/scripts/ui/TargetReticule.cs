@@ -75,7 +75,7 @@ public class TargetReticule : MonoBehaviour
 		// update arrows
         updateArrows();
         // check if no enemy targeted
-        if (BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind] == null || BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind].Is_dead)
+        if (BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind] == null || BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind].Is_done)
         {
             no_target.enabled = true;
             base_r_speed = 0f;
@@ -96,7 +96,7 @@ public class TargetReticule : MonoBehaviour
         // update arrows
         updateArrows();
         // check if no enemy targeted
-        if (BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind] == null || BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind].Is_dead)
+        if (BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind] == null || BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind].Is_done)
         {
             no_target.enabled = true;
             base_r_speed = 0f;
@@ -132,7 +132,7 @@ public class TargetReticule : MonoBehaviour
                 right_arrow.enabled = false;
                 break;
         }
-        if (BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind] == null || BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind].Is_dead)
+        if (BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind] == null || BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind].Is_done)
         {
         }
     }

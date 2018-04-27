@@ -111,14 +111,14 @@ public class CastManager : MonoBehaviour
         AudioPlayer.main.playSFX("sfx_enemy_cast");
         Pair<bool[], bool[]> targetPattern = spellDict.getTargetPattern(s, field.player_arr, target, field.enemy_arr, position);
         preCastEffects(targetPattern, field.enemy_arr[position], s, chat.getLine(field.enemy_arr[position].Stats.ChatDatabaseID));
-        BattleEffects.main.setDim(true, field.enemy_arr[position].GetComponent<SpriteRenderer>());
+		BattleEffects.main.setDim(true, field.enemy_arr[position].enemy_sprite);
         StartCoroutine(enemy_pause_cast(dict, s, position, target));
     }
 
     private IEnumerator enemy_pause_cast(SpellDictionary dict, SpellData s, int position, int target)
     {
 
-        BattleEffects.main.setDim(true, field.enemy_arr[position].GetComponent<SpriteRenderer>());
+		BattleEffects.main.setDim(true, field.enemy_arr[position].enemy_sprite);
 
         yield return new WaitForSeconds(1f);
 

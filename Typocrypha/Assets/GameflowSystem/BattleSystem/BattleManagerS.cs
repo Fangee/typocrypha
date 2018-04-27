@@ -116,7 +116,7 @@ public class BattleManagerS : MonoBehaviour {
         BattleEffects.main.battleTransitionEffect("swirl_in", 1f);
         yield return new WaitForSeconds(1f);
         uiManager.initialize();
-		nextWave();
+		nextWave ();
 		BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
         yield return new WaitForSeconds(2f);      
 		pause = false;
@@ -125,22 +125,22 @@ public class BattleManagerS : MonoBehaviour {
     // go to next wave (also starts first wave for real)
     public void nextWave()
     {
-        resetInterruptData();
-        if (++curr_wave >= waves.Length)
-        {
-            Debug.Log("Encounter over: going to victory screen");
-            victoryScreen();
-            return;
-        }
-        Debug.Log("starting wave: " + Wave.Title);
-        uiManager.startWave();
-        createEnemies(Wave);
+		resetInterruptData();
+		if (++curr_wave >= waves.Length)
+		{
+			Debug.Log("Encounter over: going to victory screen");
+			victoryScreen();
+			return;
+		}
+		Debug.Log("starting wave: " + Wave.Title);
+		uiManager.startWave();
+		createEnemies(Wave);
 		uiManager.updateUI ();
-        waveTransition(Wave.Title);
-        if(Wave.Music != string.Empty)
-            AudioPlayer.main.playMusic(Wave.Music);
-        if(curr_wave != 0)
-            checkInterrupts();
+		waveTransition(Wave.Title);
+		if(Wave.Music != string.Empty)
+			AudioPlayer.main.playMusic(Wave.Music);
+		if(curr_wave != 0)
+			checkInterrupts();
     }
     // show victory screen after all waves are done
     public void victoryScreen()
@@ -207,7 +207,10 @@ public class BattleManagerS : MonoBehaviour {
         ++field.enemy_count;
         Enemy enemy = Instantiate(enemy_prefab, transform).GetComponent<Enemy>(); ;
         enemy.transform.localScale = new Vector3(1, 1, 1);
-        enemy.transform.localPosition = new Vector3(i * BattleUI.enemy_spacing, BattleUI.enemy_y_offset, 0);
+		Vector3 enemy_pos = new Vector3(i * BattleUI.enemy_spacing, BattleUI.enemy_y_offset, 0);
+		enemy.transform.localPosition = enemy_pos;
+		enemy.enemy_animator.rootPosition = enemy_pos;
+		enemy.enemy_animator.bodyPosition = enemy_pos;
         enemy.field = field; 
         enemy.castManager = castManager;
         enemy.initialize(enemyData.getData(name)); //sets enemy stats (AND INITITIALIZES ATTACKING AND AI)
@@ -245,7 +248,6 @@ public class BattleManagerS : MonoBehaviour {
         {
             Debug.Log("Wave: " + Wave.Title + " complete!");
             nextWave();
-            
         }
         else
             checkInterrupts();

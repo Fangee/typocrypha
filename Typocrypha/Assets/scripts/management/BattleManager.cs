@@ -319,14 +319,14 @@ public class BattleManager : MonoBehaviour
         AudioPlayer.main.playSFX("sfx_enemy_cast");
         Pair<bool[], bool[]> targetPattern = spellDict.getTargetPattern(s, battle_field.player_arr, target, battle_field.enemy_arr, position);
         preCastEffects(targetPattern, battle_field.enemy_arr[position], s, chat.getLine(battle_field.enemy_arr[position].Stats.ChatDatabaseID));
-        BattleEffects.main.setDim(true, battle_field.enemy_arr[position].GetComponent<SpriteRenderer>());
+		BattleEffects.main.setDim(true, battle_field.enemy_arr[position].enemy_sprite);
         StartCoroutine(enemy_pause_cast(dict, s, position, target));
     }
 
     private IEnumerator enemy_pause_cast(SpellDictionary dict, SpellData s, int position, int target)
     {
 
-        BattleEffects.main.setDim(true, battle_field.enemy_arr[position].GetComponent<SpriteRenderer>());
+		BattleEffects.main.setDim(true, battle_field.enemy_arr[position].enemy_sprite);
 
         yield return new WaitForSeconds(1f);
 

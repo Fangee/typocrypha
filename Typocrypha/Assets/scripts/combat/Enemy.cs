@@ -62,6 +62,7 @@ public class Enemy : MonoBehaviour, ICaster {
     public int Curr_stagger { get { return curr_stagger; } set { curr_stagger = value; } }
     public bool Is_stunned { get { return is_stunned; } }
     public bool Is_dead { get { return is_dead; } }
+	public bool Is_done { get { return is_done; } set { is_done = value; } }
     public ICasterType CasterType
     {
         get
@@ -78,6 +79,7 @@ public class Enemy : MonoBehaviour, ICaster {
     public CastManager castManager;
     public EnemyChargeBars bars;
 	public SpriteRenderer enemy_sprite; // this enemy's sprite
+	public Animator enemy_animator; // this enemy's animator
     public EnemyAI AI = null;
     public static AssetBundle sprite_bundle = null; 
 
@@ -87,6 +89,7 @@ public class Enemy : MonoBehaviour, ICaster {
     BuffDebuff buffDebuff = new BuffDebuff(); // buff/debuff state
 
     bool is_dead; // is enemy dead?
+	bool is_done; // is enemy done dying (playing death animation)?
     bool is_stunned; // is the enemy stunned?
     bool was_hit = false; //the enemy was hit in the pause and needs state update
     int target; //Position in player_arr (BattleManager.cs) that this enemy is currently targeting
@@ -107,6 +110,7 @@ public class Enemy : MonoBehaviour, ICaster {
     }
     void Start() {
 		is_dead = false;
+		is_done = false;
     }
     //Initializes enemy stats (and starts attacking routing)
 	public void initialize(EnemyStats i_stats) {
@@ -119,7 +123,6 @@ public class Enemy : MonoBehaviour, ICaster {
         Curr_stagger = stats.max_stagger;
 		curr_time = 0;
         //Get sprite components
-		enemy_sprite = GetComponent<SpriteRenderer> ();
         enemy_sprite.sprite = sprite_bundle.LoadAsset<Sprite>(stats.sprite_path);
 		enemy_sprite.sortingOrder = enemy_sprite_layer;
         //Get AI module
@@ -133,7 +136,6 @@ public class Enemy : MonoBehaviour, ICaster {
         //Set stats
         stats = i_stats;
         //Get sprite components
-        enemy_sprite = GetComponent<SpriteRenderer>();
         enemy_sprite.sprite = sprite_bundle.LoadAsset<Sprite>(stats.sprite_path);
         enemy_sprite.sortingOrder = enemy_sprite_layer;
         //Initialize combat values
@@ -293,15 +295,14 @@ public class Enemy : MonoBehaviour, ICaster {
 			AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.WAS_HIT);
             was_hit = false;
         }
-        // make enemy sprite fade as damaged (lazy health rep)
-        //enemy_sprite.color = new Color(1, 1, 1, (float)curr_hp / stats.max_hp);
         if (curr_hp <= 0)
         { // check if killed
             Debug.Log(stats.name + " has been slain!");
 			AudioPlayer.main.playSFX ("sfx_enemy_death"); // enemy death noise placeholder
-            is_dead = true;
-            enemy_sprite.color = new Color(1, 1, 1, 0);
-            StopAllCoroutines();
+			enemy_animator.SetTrigger("death");
+			is_dead = true;
+			StopAllCoroutines();
+			BattleManagerS.main.updateEnemies ();
         }
     }
 
