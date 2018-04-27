@@ -127,6 +127,7 @@ public class Player : MonoBehaviour, ICaster
     {
         curr_hp = Stats.max_hp;
         curr_shield = Stats.max_shield;
+        is_dead = false;
     }
 
     //ICaster interface overrides
@@ -145,10 +146,6 @@ public class Player : MonoBehaviour, ICaster
         if (Curr_hp <= 0)
         { // check if killed
             Debug.Log("Player" + " has been slain!");
-			BattleManagerS.main.pause = true;
-			BattleEffects.main.setDim (false);
-			restoreToFull ();
-			BattleManagerS.main.playerDeath();
             is_dead = true;
         }
        // return Is_dead;

@@ -14,7 +14,6 @@ public class BICheckHealth : BattleInterruptTrigger {
             toCheck = state.enemy_arr[index];
         else
             toCheck = state.player_arr[index - 3];
-			Debug.Log (((float)toCheck.Curr_hp / (float)toCheck.Stats.max_hp));
         if (toCheck == null)
             return false;
 		return ((float)toCheck.Curr_hp / (float)toCheck.Stats.max_hp) < healthRatio;
