@@ -6870,6 +6870,169 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 803011545}
+--- !u!1 &818396694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 818396695}
+  - component: {fileID: 818396699}
+  - component: {fileID: 818396698}
+  - component: {fileID: 818396697}
+  - component: {fileID: 818396696}
+  - component: {fileID: 818396701}
+  - component: {fileID: 818396700}
+  m_Layer: 5
+  m_Name: BI_CLARKE_CAMEO
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &818396695
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 818396694}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1408790983}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &818396696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 818396694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Typo-AI Clarke
+  text: '[set-talk-sfx=vo_clarke]Sure, <color=yellow>VOLT</color> is annoying when
+    used on you... but <color=lime>you should take that element for a spin yourself,
+    baby.</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &818396697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 818396694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Typo-AI Clarke
+  text: '[set-talk-sfx=vo_clarke]<color=yellow>VOLT</color> attacks will <color=yellow>swap
+    pairs of keys around.</color> Personally, I believe <color=red>this is the most
+    annoying Status Ailment out of Fire, Ice and Volt.</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &818396698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 818396694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Typo-AI Clarke
+  text: '[set-talk-sfx=vo_clarke]Oooh! You''ve just been hit by a <color=yellow>VOLT</color>
+    attack! |shake|How shocking!\shake\'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites:
+  - {fileID: 21300000, guid: b94214bcb80777643a41f2ea11bbb2d1, type: 3}
+  char_sprite_pos:
+  - {x: 6, y: -1}
+--- !u!114 &818396699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 818396694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &818396700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 818396694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '[remove-all-character]> The alluring, yet strange man disappeared.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &818396701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 818396694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Typo-AI Clarke
+  text: '[set-talk-sfx=vo_clarke]I hope you enjoyed my 5 seconds in the spotlight
+    unexplained, viewers at home.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &820666616
 GameObject:
   m_ObjectHideFlags: 0
@@ -12429,8 +12592,10 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Your Friends at GDA
-  text: <color=yellow>Who is the Evil Eye? What's up with your friends, Illyia and
-    Dahlia? What's the Magical War with the Demons? WHO ARE YOU? WHAT IS HAPPENING???</color>
+  text: '<color=yellow>Who is the Evil Eye? What''s up with your friends, Illyia and
+    Dahlia? What''s the Magical War with the Demons?
+
+    WHO ARE YOU? WHAT IS HAPPENING???</color>'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -13701,6 +13866,7 @@ GameObject:
   - component: {fileID: 1408790984}
   - component: {fileID: 1408790987}
   - component: {fileID: 1408790986}
+  - component: {fileID: 1408790988}
   m_Layer: 5
   m_Name: B_DOPPELGANGER
   m_TagString: Untagged
@@ -13720,6 +13886,7 @@ RectTransform:
   m_Children:
   - {fileID: 1293330698}
   - {fileID: 2025448597}
+  - {fileID: 818396695}
   m_Father: {fileID: 309855630}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13749,6 +13916,7 @@ MonoBehaviour:
   events:
   - {fileID: 1408790987}
   - {fileID: 1408790986}
+  - {fileID: 1408790988}
 --- !u!114 &1408790985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13785,6 +13953,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interruptScene: {fileID: 1293330697}
   seconds: 0
+--- !u!114 &1408790988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1408790982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d67eafccfc8f544a3a87154779a20a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interruptScene: {fileID: 818396694}
+  target: 4
+  elementMustBe: 3
+  spellMustHit: 1
+  spellMustCrit: 0
+  spellMustStun: 0
+  damageMustBeAtLeast: 0
+  vsElementMustBe: -1
 --- !u!1 &1416234253
 GameObject:
   m_ObjectHideFlags: 0
@@ -15526,8 +15713,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Crow Anima, Muninn
-  text: "[set-talk-sfx=vo_muninn]|shake|<color=orange>FIRE</color> attacks will burn
-    your keys and make you take damage if you touch them\u2026\\shake\\"
+  text: "[set-talk-sfx=vo_muninn]|shake|<color=orange>FIRE</color> attacks will <color=yellow>burn
+    your keys and make you take damage if you touch them\u2026</color>\\shake\\"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -19910,7 +20097,9 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: EVIL EYE AVATAR
   text: '[set-talk-sfx=vo_doppelganger]However, I am the patron of all the world''s
-    Magic! <color=red>My forms are many!</color>'
+    Magic!
+
+    <color=red>My forms are many!</color>'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -20057,6 +20246,7 @@ GameObject:
   - component: {fileID: 2040540454}
   - component: {fileID: 2040540455}
   - component: {fileID: 2040540456}
+  - component: {fileID: 2040540457}
   m_Layer: 5
   m_Name: BI_W3_CrowHint1
   m_TagString: Untagged
@@ -20288,7 +20478,30 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Crow Anima, Muninn
   text: '[set-talk-sfx=vo_muninn]Use the <color=lime>SPACEBAR</color> to <color=yellow>connect
-    PREFIXES to BASE SPELL WORDS!</color> AGNI-SWORD should be effective!'
+    PREFIXES to BASE SPELL WORDS!</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2040540457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2040540445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]<color=#ff6eff>AGNI</color> is <color=yellow>one
+    of many TYPOCRYPHA Prefixes, so keep an eye out for</color><color=lime> new Elemental
+    Prefixes to apply to your spells.</color>'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
