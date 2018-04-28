@@ -672,7 +672,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 99
   m_Sprite: {fileID: 21300000, guid: 6c5405f3dbf75df45b48822b0894d77d, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.972}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3024,6 +3024,7 @@ MonoBehaviour:
   num_elements: 5
   text_scroll: {fileID: 2029628219}
   title_sprite: {fileID: 1345881373}
+  dimmer: {fileID: 1090899707}
   text_highlight_color: {r: 1, g: 0.43137255, b: 1, a: 1}
 --- !u!4 &2029628218
 Transform:
@@ -3072,7 +3073,7 @@ MonoBehaviour:
   screen_dimmer: {fileID: 1090899707}
   title_screen: {fileID: 2029628217}
   caret: {fileID: 44605249}
-  debug_skip_keycheck: 1
+  debug_skip_keycheck: 0
 --- !u!114 &2029628221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3091,6 +3092,7 @@ MonoBehaviour:
   main_camera: {fileID: 989601858}
   dialogue_box: {fileID: 0}
   glitch_effect: {fileID: 0}
+  screen_frame: {fileID: 0}
 --- !u!1 &2039497106
 GameObject:
   m_ObjectHideFlags: 0

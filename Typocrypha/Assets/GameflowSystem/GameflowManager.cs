@@ -15,6 +15,7 @@ public class GameflowManager : MonoBehaviour {
 	}
 
 	public void gameflowStart() {
+		Debug.Log ("gameflowStart");
 		curr_item = -1;
 		if (transform.childCount != 0) next (); // Start immediately
 	}

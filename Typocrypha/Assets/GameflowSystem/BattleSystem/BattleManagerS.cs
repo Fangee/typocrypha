@@ -134,6 +134,10 @@ public class BattleManagerS : MonoBehaviour {
 			return;
 		}
 		Debug.Log("starting wave: " + Wave.Title);
+		foreach (Transform tr in transform) 
+		{
+			Destroy (tr.gameObject);
+		}
 		uiManager.startWave();
 		createEnemies(Wave);
 		uiManager.updateUI ();

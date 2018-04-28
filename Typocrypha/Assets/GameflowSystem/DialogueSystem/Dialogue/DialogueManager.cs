@@ -184,7 +184,7 @@ public class DialogueManager : MonoBehaviour {
 	public void forceNextLine() {
 		history [history.Count - 1].StopAllCoroutines();
 		history [history.Count - 1].cr_scroll = null;
-		if (!nextLine ()) GameflowManager.main.next ();
+		if (!nextLine () && !isInterrupt) GameflowManager.main.next ();
 	}
 
 	// Changes scroll delay of currently scrolling dialogue

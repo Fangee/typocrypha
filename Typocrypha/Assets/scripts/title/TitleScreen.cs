@@ -12,6 +12,7 @@ public class TitleScreen : MonoBehaviour {
     public int num_elements;
 	public TextScroll text_scroll; // scrolls text
 	public SpriteRenderer title_sprite; // title screen sprite
+	public SpriteRenderer dimmer;
 	public Color text_highlight_color;
 
     private bool isActive = false;
@@ -117,7 +118,7 @@ public class TitleScreen : MonoBehaviour {
 
 	// called to transition to MainScene (new game) when start is pressed
 	void transitionToStart() {
-		AsyncOperation load_op = SceneManager.LoadSceneAsync ("MainScene", LoadSceneMode.Single);
+		AsyncOperation load_op = SceneManager.LoadSceneAsync ("MainScene", LoadSceneMode.Additive);
 		StartCoroutine (loadMainScene (load_op));
 	}
 
@@ -133,12 +134,14 @@ public class TitleScreen : MonoBehaviour {
 
 	// fades title screen to transparent and start main scene
 	IEnumerator fadeAndStart() {
-		float alpha = 1;
-		while (alpha > 0) {
-			title_sprite.color = new Color (1, 1, 1, alpha);
-			alpha -= 0.01f;
+		Debug.Log ("fadeAndStart");
+		float alpha = 0;
+		while (alpha <= 1) {
+			dimmer.color = new Color (dimmer.color.r, dimmer.color.g, dimmer.color.b, alpha);
+			alpha += 0.01f;
 			yield return new WaitForEndOfFrame ();
 		}
+		yield return new WaitForSeconds (2f);
 		yield return new WaitUntil (() => StateManager.main.ready);
 		StateManager.main.startFirstScene ();
 		SceneManager.UnloadSceneAsync ("TitleScene");
