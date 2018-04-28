@@ -106,6 +106,7 @@ public class BattleManagerS : MonoBehaviour {
         curr_battle = new_battle;
         curr_wave = -1;
         waves = new_battle.GetComponents<BattleWave>();
+		field.target_ind = 1;
         StartCoroutine(finishBattlePrep());
     }
     // finishes up battle start and effects
@@ -156,6 +157,10 @@ public class BattleManagerS : MonoBehaviour {
         {
             if (enemy != null) GameObject.Destroy(enemy.gameObject);
         }
+		foreach (Transform tr in transform) 
+		{
+			Destroy (tr.gameObject);
+		}
         uiManager.clear();
         GameflowManager.main.next();
 
@@ -209,8 +214,6 @@ public class BattleManagerS : MonoBehaviour {
         enemy.transform.localScale = new Vector3(1, 1, 1);
 		Vector3 enemy_pos = new Vector3(i * BattleUI.enemy_spacing, BattleUI.enemy_y_offset, 0);
 		enemy.transform.localPosition = enemy_pos;
-		enemy.enemy_animator.rootPosition = enemy_pos;
-		enemy.enemy_animator.bodyPosition = enemy_pos;
         enemy.field = field; 
         enemy.castManager = castManager;
         enemy.initialize(enemyData.getData(name)); //sets enemy stats (AND INITITIALIZES ATTACKING AND AI)

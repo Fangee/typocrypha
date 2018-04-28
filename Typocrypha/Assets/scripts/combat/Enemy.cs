@@ -107,10 +107,11 @@ public class Enemy : MonoBehaviour, ICaster {
     {
         if(sprite_bundle == null)
             sprite_bundle = AssetBundle.LoadFromFile(System.IO.Path.Combine(Application.streamingAssetsPath, "enemy_sprites"));
-    }
-    void Start() {
 		is_dead = false;
 		is_done = false;
+    }
+    void Start() {
+		
     }
     //Initializes enemy stats (and starts attacking routing)
 	public void initialize(EnemyStats i_stats) {
