@@ -33,7 +33,7 @@ public class TargetReticule : MonoBehaviour
     }
 
     // Update is called once per frame
-	void FixedUpdate () {
+	void FixedUpdate ()
     {
         // slide target
 		base_tr.position = Vector2.SmoothDamp(base_tr.position, target_destination_pos, ref vel, smooth_time, max_h_speed, Time.deltaTime);

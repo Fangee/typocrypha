@@ -26,7 +26,7 @@ public class Pause : MonoBehaviour {
             if (gamePause)
             {
                 Time.timeScale = 0;
-                BattleManager.main.pause = true;
+                BattleManagerS.main.pause = true;
                 dimCol = BattleEffects.main.dimmer.color;
                 BattleEffects.main.setDim(true);
                 AudioPlayer.main.pauseSFX();
@@ -36,7 +36,7 @@ public class Pause : MonoBehaviour {
             else
             {
                 Time.timeScale = 1;
-                BattleManager.main.pause = false;
+                BattleManagerS.main.pause = false;
                 BattleEffects.main.dimmer.color = dimCol;
                 AudioPlayer.main.unpauseSFX();
                 foreach (GameObject g in children)
