@@ -2,7 +2,8 @@ name (root)	spell type	spellbook description	animation ID	sfx ID	power	cooldown	
 sword	attack	Basic Phys ATK	anim_spell_slash	sfx_slash	10	4	100	0	0	MT	None	0		
 lance	attack	Medium Phys ATK	anim_spell_stab	sfx_stab	20	7	95	15	0	MT	None	0		
 hammer	attack	Heavy Phys ATK	anim_spell_crush	sfx_crush	30	15	100	10	0	MT	None	0		
-selfcare	attack	heal self	anim_spell_heal	sfx_slash	-30	15	9999	999	0	mS	None	0		
+selfcare	attack	Recover User's HP	anim_spell_heal	sfx_mystery_effect	-40	15	9999	50	0	mS	None	0		
+stress	attack	Does Nothing	anim_spell_empower	sfx_spell_resist	0	2	9999	0	0	mS	None	0		
 cleaver	attack	a targeted wide atk	anim_spell_slash	sfx_slash	10	10	75	10	0	LMRT	None	0		
 sacrifice	attack	"hurts self, does big ds"	anim_spell_slash	sfx_slash	40	10	95	10	0	LRmS	None	0		
 crush	attack	applies def- debuff	anim_spell_crush	sfx_crush	10	10	80	10	0	MT	D	100		
@@ -12,6 +13,7 @@ weakpnt	attack	always crits (debug)	anim_spell_slash	sfx_slash	2	1	100	100	0	MT	
 death	attack	kills self (debug)	anim_spell_slash	sfx_slash	999	1	100	0	0	mS	None	0		
 teamcrit	attack	crits own team (debug)	anim_spell_slash	sfx_slash	25	1	100	100	0	lr	None	0		
 stun	attack	deal stagger to all (debug)	anim_spell_slash	sfx_slash	1	1	100	100	0	LMR	None	0		
+stinger	attack	High Dmg Critical Hit	anim_spell_stab	sfx_stab	100	1	9999	9999	0	MT	ADSHE	100		
 quake	attack	hits everyone!	anim_spell_slash	sfx_slash	50	20	85	25	0	A	None	0	no_targeting	
 nullify	attack	can only deal null damage	anim_spell_slash	sfx_slash	50	20	90	5	0	MT	None	0	no_elements	
 debilitate	buff	1 lvl of all non-elem debuffs	anim_spell_slash	sfx_slash	1	20	100	10	0	MT	ADSHE	100		

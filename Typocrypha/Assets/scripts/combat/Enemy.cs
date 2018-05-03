@@ -62,6 +62,7 @@ public class Enemy : MonoBehaviour, ICaster {
     public int Curr_stagger { get { return curr_stagger; } set { curr_stagger = value; } }
     public bool Is_stunned { get { return is_stunned; } }
     public bool Is_dead { get { return is_dead; } }
+	public bool Is_done { get { return is_done; } set { is_done = value; } }
     public ICasterType CasterType
     {
         get
@@ -74,9 +75,11 @@ public class Enemy : MonoBehaviour, ICaster {
 
     public bool attack_in_progress = false;
 
-    public BattleManager field; // the field the enemy is located in (battle state)
+    public BattleField field; // the field the enemy is located in (battle state)
+    public CastManager castManager;
     public EnemyChargeBars bars;
 	public SpriteRenderer enemy_sprite; // this enemy's sprite
+	public Animator enemy_animator; // this enemy's animator
     public EnemyAI AI = null;
     public static AssetBundle sprite_bundle = null; 
 
@@ -86,6 +89,7 @@ public class Enemy : MonoBehaviour, ICaster {
     BuffDebuff buffDebuff = new BuffDebuff(); // buff/debuff state
 
     bool is_dead; // is enemy dead?
+	bool is_done; // is enemy done dying (playing death animation)?
     bool is_stunned; // is the enemy stunned?
     bool was_hit = false; //the enemy was hit in the pause and needs state update
     int target; //Position in player_arr (BattleManager.cs) that this enemy is currently targeting
@@ -97,16 +101,17 @@ public class Enemy : MonoBehaviour, ICaster {
 	float curr_stagger_time; // current time staggered
     float curr_time; // current time (from 0 to atk_time)
     float atk_time; // time it takes to attack
-    private SpellDictionary dict; //Dictionary to refer to (set in setStats)
 
     //Methods//
     void Awake()
     {
         if(sprite_bundle == null)
             sprite_bundle = AssetBundle.LoadFromFile(System.IO.Path.Combine(Application.streamingAssetsPath, "enemy_sprites"));
+		is_dead = false;
+		is_done = false;
     }
     void Start() {
-		is_dead = false;
+		
     }
     //Initializes enemy stats (and starts attacking routing)
 	public void initialize(EnemyStats i_stats) {
@@ -118,10 +123,7 @@ public class Enemy : MonoBehaviour, ICaster {
         stagger_time = (stats.max_stagger * stagger_mult_constant) + stagger_add_constant;
         Curr_stagger = stats.max_stagger;
 		curr_time = 0;
-        //Set dictionary from field
-        dict = field.spellDict;
         //Get sprite components
-		enemy_sprite = GetComponent<SpriteRenderer> ();
         enemy_sprite.sprite = sprite_bundle.LoadAsset<Sprite>(stats.sprite_path);
 		enemy_sprite.sortingOrder = enemy_sprite_layer;
         //Get AI module
@@ -135,7 +137,6 @@ public class Enemy : MonoBehaviour, ICaster {
         //Set stats
         stats = i_stats;
         //Get sprite components
-        enemy_sprite = GetComponent<SpriteRenderer>();
         enemy_sprite.sprite = sprite_bundle.LoadAsset<Sprite>(stats.sprite_path);
         enemy_sprite.sortingOrder = enemy_sprite_layer;
         //Initialize combat values
@@ -183,16 +184,16 @@ public class Enemy : MonoBehaviour, ICaster {
 	IEnumerator attackRoutine() {
 		Vector3 original_pos = transform.position;
         curr_stagger_time = 0F;
-        curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target).clone();   //Initialize with current spell
-        atk_time = dict.getCastingTime(curr_spell, stats.speed);   //Get casting time
+		curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target).clone();   //Initialize with current spell
+        atk_time = castManager.spellDict.getCastingTime(curr_spell, stats.speed);   //Get casting time
 		while (!is_dead) {
 			yield return new WaitForEndOfFrame ();
-			yield return new WaitWhile (() => BattleManager.main.pause);
+			yield return new WaitWhile (() => BattleManagerS.main.pause);
             while(is_stunned)//Stop attack loop from continuing while the enemy is stunned
             {
 				yield return new WaitForEndOfFrame();
 				transform.position = (Vector3)original_pos + (Vector3)(Random.insideUnitCircle * 0.05f);
-				yield return new WaitWhile (() => BattleManager.main.pause);
+				yield return new WaitWhile (() => BattleManagerS.main.pause);
 				curr_stagger_time += Time.deltaTime;
                 if (curr_stagger_time >= stagger_time)//End stun if time up
                 {
@@ -206,14 +207,14 @@ public class Enemy : MonoBehaviour, ICaster {
                 attack_in_progress = true;
                 fullBarFX(); // notify player of full bar
                 yield return new WaitForSeconds(1f);
-                yield return new WaitWhile(() => BattleManager.main.pause);
+                yield return new WaitWhile(() => BattleManagerS.main.pause);
                 if(!is_stunned)
                     attackPlayer (curr_spell);
                 //Update state (will move to make it so that state change can interrupt cast)
-                AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.AFTER_CAST);
+				AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.AFTER_CAST);
                 //Get next spell from AI
-                curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target).clone();
-                atk_time = dict.getCastingTime(curr_spell, stats.speed);//get new casting time
+				curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target).clone();
+                atk_time = castManager.spellDict.getCastingTime(curr_spell, stats.speed);//get new casting time
                 curr_time = 0;
                 //resetBarFX(); // stop full bar effects (now in barFlash)
             }
@@ -253,7 +254,7 @@ public class Enemy : MonoBehaviour, ICaster {
     // pause battle, attack player with specified spell
     void attackPlayer(SpellData s) {
         Debug.Log(stats.name + " casts " + s.ToString());
-        field.enemyCast(dict, s, position, target);
+        castManager.enemyCast(castManager.spellDict, s, position, target);
 	}
 
 	// be attacked by the player
@@ -275,7 +276,7 @@ public class Enemy : MonoBehaviour, ICaster {
     private void stun()
     {
         is_stunned = true;
-        field.charge_bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 0.5F, 0);
+        bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(1, 0.5F, 0);
     }
     //Un-stun enemy
     private void unStun()
@@ -283,7 +284,7 @@ public class Enemy : MonoBehaviour, ICaster {
         bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(13.0f/255.0f, 207.0f/255.0f, 223.0f/255.0f);
         is_stunned = false;
         Curr_stagger = stats.max_stagger;
-        AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.UNSTUN);
+		AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.UNSTUN);
     }
 
     //Updates opacity and death (after pause in battlemanager)
@@ -292,17 +293,17 @@ public class Enemy : MonoBehaviour, ICaster {
         //Update AI if hit (may drop hp to zero)
         if (was_hit)
         {
-            AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.WAS_HIT);
+			AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.WAS_HIT);
             was_hit = false;
         }
-        // make enemy sprite fade as damaged (lazy health rep)
-        //enemy_sprite.color = new Color(1, 1, 1, (float)curr_hp / stats.max_hp);
         if (curr_hp <= 0)
         { // check if killed
             Debug.Log(stats.name + " has been slain!");
-            is_dead = true;
-            enemy_sprite.color = new Color(1, 1, 1, 0);
-            StopAllCoroutines();
+			AudioPlayer.main.playSFX ("sfx_enemy_death"); // enemy death noise placeholder
+			enemy_animator.SetTrigger("death");
+			is_dead = true;
+			StopAllCoroutines();
+			BattleManagerS.main.updateEnemies ();
         }
     }
 

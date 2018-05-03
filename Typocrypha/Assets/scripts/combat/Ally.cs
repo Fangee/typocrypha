@@ -98,12 +98,12 @@ public class Ally : MonoBehaviour, ICaster {
         {
    
             yield return new WaitForEndOfFrame();
-            yield return new WaitWhile(() => BattleManager.main.pause);
+            yield return new WaitWhile(() => BattleManagerS.main.pause);
             while (is_stunned)//Stop attack loop from continuing while the enemy is stunned
             {
                 yield return new WaitForEndOfFrame();
                 //BattleEffects.main.spriteShake(gameObject.transform, Time.deltaTime * 2, 0.05f);
-                yield return new WaitWhile(() => BattleManager.main.pause);
+                yield return new WaitWhile(() => BattleManagerS.main.pause);
                 curr_stagger_time += Time.deltaTime;
                 if (curr_stagger_time >= stagger_time)//End stun if time up
                 {

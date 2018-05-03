@@ -39,8 +39,12 @@ public class StatusFreeze : StatusEffect
 {
 	int freezeNum = Random.Range(1,5);
 	Sprite[] frozen_keys;
-	public StatusFreeze(Sprite[] sp){
+	char key_text;
+	Popper player_popper;
+	public StatusFreeze(Sprite[] sp, Popper popp, char c){
 		this.frozen_keys = sp;
+		this.player_popper = popp;
+		this.key_text = c;
 	}
     public override IEnumerator keyGraphics(char key, Image image)
     {
@@ -69,21 +73,28 @@ public class StatusFreeze : StatusEffect
     public override bool update()
     {
         --freezeNum;
-        if(freezeNum == 0)
-            AudioPlayer.main.playSFX("sfx_status_frozen_key_break");
-        else
-            AudioPlayer.main.playSFX("sfx_status_frozen_key_hit");
+		if (freezeNum == 0) {
+			AudioPlayer.main.playSFX ("sfx_status_frozen_key_break");
+			player_popper.spawnText ("<color=lime>" + this.key_text + "</color> <color=aqua>THAWED</color>", 1.0f, new Vector3 (0.0f, -0.5f, 0.0f));
+		} else {
+			AudioPlayer.main.playSFX("sfx_status_frozen_key_hit");
+			player_popper.spawnText ("<color=red>" + this.key_text + "</color> <color=aqua>FROZEN</color>", 1.0f, new Vector3 (0.0f, -0.5f, 0.0f));
+		}
         return freezeNum <= 0;
     }
 }
 
 public class StatusBurn : StatusEffect
 {
-    int dmg = 5;
+    int dmg = 2;
     Player p;
-    public StatusBurn(Player p)
+	Popper player_popper;
+	char key_text;
+	public StatusBurn(Player p, Popper popp, char c)
     {
         this.p = p;
+		this.player_popper = popp;
+		this.key_text = c;
     }
     public override IEnumerator keyGraphics(char key, Image image)
     {
@@ -93,7 +104,14 @@ public class StatusBurn : StatusEffect
 
     public override string processKey(char key)
     {
-        p.Curr_hp -= dmg;
+		if (p.Curr_hp - dmg <= 0) {
+			p.Curr_hp = 1;
+		} else {
+			p.Curr_hp -= dmg;
+		}
+		player_popper.spawnText ("<color=red>"+this.key_text+"</color> <color=orange>BURN</color>", 1.0f, new Vector3(0.0f,0.0f,0.0f));
+		player_popper.spawnText (dmg+"", 1.0f, new Vector3(0.0f,-1.0f,0.0f));
+		AudioPlayer.main.playSFX ("sfx_spell_hit");
         return key.ToString();
     }
 }
@@ -101,9 +119,13 @@ public class StatusBurn : StatusEffect
 public class StatusShock : StatusEffect
 {
     char swapped;
-    public StatusShock(char swap)
+	char original;
+	Popper player_popper;
+	public StatusShock(char swap, char origin, Popper popp)
     {
         swapped = swap;
+		this.original = origin;
+		this.player_popper = popp;
     }
     public override IEnumerator keyGraphics(char key, Image image)
     {
@@ -113,6 +135,8 @@ public class StatusShock : StatusEffect
 
     public override string processKey(char key)
     {
+		AudioPlayer.main.playSFX("sfx_botch");
+		player_popper.spawnText ("<color=red>" + this.original + "</color> <color=yellow><===></color> <color=lime>" + swapped + "</color>", 1.0f, new Vector3 (0.0f, -0.5f, 0.0f));
         return swapped.ToString();
     }
 }

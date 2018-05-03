@@ -51,9 +51,50 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AnimationPing.cs" />
      <Compile Include="Assets\EnemyIntel.cs" />
+<<<<<<< HEAD
      <Compile Include="Assets\MusicSlider.cs" />
      <Compile Include="Assets\Pause.cs" />
+=======
+     <Compile Include="Assets\FinishEnemyDeath.cs" />
+     <Compile Include="Assets\GameflowSystem\BattleSystem\Battle.cs" />
+     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BattleEventTrigger.cs" />
+     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BattleInterruptTrigger.cs" />
+     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BICheckHealth.cs" />
+     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BICountPlayerAttacks.cs" />
+     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BIEnemyIsStunned.cs" />
+     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BIRegister.cs" />
+     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BISpecificAttack.cs" />
+     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BITimed.cs" />
+     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleManagerS.cs" />
+     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleUI.cs" />
+     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleWave.cs" />
+     <Compile Include="Assets\GameflowSystem\BattleSystem\CastManager.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\Dialogue\Dialogue.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\Dialogue\DialogueBox.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\Dialogue\DialogueItem.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\Dialogue\DialogueItemAN.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\Dialogue\DialogueItemChat.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\Dialogue\DialogueItemVN.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\Dialogue\DialogueManager.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\Dialogue\DialogueParser.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\FXText\Effects\FXTextColor.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\FXText\Effects\FXTextColorCycle.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\FXText\Effects\FXTextPulse.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\FXText\Effects\FXTextScramble.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\FXText\Effects\FXTextShake.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\FXText\Effects\FXTextWave.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\FXText\FXText.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\FXText\FXTextEffect.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\Utility\PlayerDialogueInfo.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\Utility\TextEvents.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\Utility\TextMacros.cs" />
+     <Compile Include="Assets\GameflowSystem\Gameflow.cs" />
+     <Compile Include="Assets\GameflowSystem\GameflowItem.cs" />
+     <Compile Include="Assets\GameflowSystem\GameflowManager.cs" />
+     <Compile Include="Assets\PauseOnAttack.cs" />
+>>>>>>> 8bb427d5ba0ea4e4807630c508b8b5cadd742872
      <Compile Include="Assets\scripts\animation\AnimationPlayer.cs" />
      <Compile Include="Assets\scripts\animation\BackgroundEffects.cs" />
      <Compile Include="Assets\scripts\animation\DestroyOnEnd.cs" />
@@ -69,11 +110,10 @@
      <Compile Include="Assets\scripts\combat\EnemyAI.cs" />
      <Compile Include="Assets\scripts\combat\Player.cs" />
      <Compile Include="Assets\scripts\combat\StatusEffect.cs" />
-     <Compile Include="Assets\scripts\cutscene\PlayerDialogueInfo.cs" />
-     <Compile Include="Assets\scripts\cutscene\TextEvents.cs" />
-     <Compile Include="Assets\scripts\cutscene\TextMacros.cs" />
      <Compile Include="Assets\scripts\cutscene\TextScroll.cs" />
      <Compile Include="Assets\scripts\management\AllyDatabase.cs" />
+     <Compile Include="Assets\scripts\management\BattleField.cs" />
+     <Compile Include="Assets\scripts\management\BattleLog.cs" />
      <Compile Include="Assets\scripts\management\BattleManager.cs" />
      <Compile Include="Assets\scripts\management\CutsceneEvent.cs" />
      <Compile Include="Assets\scripts\management\CutsceneManager.cs" />
@@ -209,6 +249,7 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
+<<<<<<< HEAD
  <HintPath>C:/Users/jlawh/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
@@ -228,6 +269,27 @@
  </Reference>
  <Reference Include="UnityEngine.StandardEvents">
  <HintPath>C:/Users/jlawh/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
+=======
+ <HintPath>C:/Users/Hughe/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Advertisements">
+ <HintPath>C:/Users/Hughe/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/Editor/UnityEditor.Advertisements.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Users/Hughe/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.13/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Analytics">
+ <HintPath>C:/Users/Hughe/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.13/Editor/UnityEditor.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Purchasing">
+ <HintPath>C:/Users/Hughe/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@0.0.19/UnityEngine.Purchasing.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.Purchasing">
+ <HintPath>C:/Users/Hughe/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@0.0.19/Editor/UnityEditor.Purchasing.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.StandardEvents">
+ <HintPath>C:/Users/Hughe/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
+>>>>>>> 8bb427d5ba0ea4e4807630c508b8b5cadd742872
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

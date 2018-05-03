@@ -28,7 +28,7 @@ public class RegisterSpellEvent : CutsceneEvent
             throw new System.ArgumentNullException();
         foreach(string s in keywords)
         {
-            dict.safeRegister(s.ToLower());
+            //dict.safeRegister(s.ToLower());
         }
         AudioPlayer.main.playSFX("sfx_learn_spell_cutscene");
     }

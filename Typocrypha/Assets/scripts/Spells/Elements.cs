@@ -9,6 +9,7 @@ public static class Elements
     //Elemental vs status
     public enum vsElement
     {
+        ANY = -1,
         INVALID,
         REPEL,
         DRAIN,
@@ -18,6 +19,15 @@ public static class Elements
         WEAK,
         SUPERWEAK,
     }
+    public enum Element
+    {
+        ANY = -1,
+        NULL,
+        FIRE,
+        ICE,
+        VOLT,
+    }
+
     //Total number of elements (including null) in the game
     public const int count = 4;
     //Element constants (integers due to being frequently used as array indices)

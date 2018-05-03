@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Scouter : MonoBehaviour {
 
-    public BattleManager field;
+    public BattleManagerS field;
 
     TextMesh left; //buff/debuff
     TextMesh right; //damage modifiers
@@ -47,13 +47,13 @@ public class Scouter : MonoBehaviour {
     public void updateInfo() {
         if (left == null) return; //not sure why left/right are null at start of battle, but this stops it from doing garbage
         //Targeted enemy
-        Enemy foe = field.enemy_arr[field.target_ind];
+        Enemy foe = field.field.enemy_arr[field.field.target_ind];
         //Check if enemy exists
         if (foe == null || foe.Is_dead)
         {
             //You're not looking at anything you absolute moron
             left.text = "..\n..\n..\n..\n..";
-            right.text = "..\n..\n..\n..\n.\n..";
+            right.text = "..\n..\n..\n..\n..\n..";
         }
         else
         {
