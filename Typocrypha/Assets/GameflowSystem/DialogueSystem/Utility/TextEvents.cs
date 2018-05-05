@@ -60,7 +60,8 @@ public class TextEvents : MonoBehaviour {
 			{"glitch", glitch},
 			{"set-name", setName},
 			{"frame", frame},
-			{"heal-player", healPlayer}
+			{"heal-player", healPlayer},
+			{"clear-log", clearTextLog}
 		};
 		is_prompt = false;
 	}
@@ -422,6 +423,20 @@ public class TextEvents : MonoBehaviour {
 	IEnumerator healPlayer(string[] opt) {
 		Debug.Log ("[JohnTypocrypha Voice]: i need healing");
 		Player.main.restoreToFull ();
+		yield return true;
+	}
+
+	// clears the chat and AN text logs
+	// input: [0]: [chat|an], 'chat' clears chat log, 'an' clears AN log
+	IEnumerator clearTextLog(string[] opt){
+		if (opt [0].CompareTo ("chat") == 0) {
+			Debug.Log ("chat log flushed");
+			DialogueManager.main.clearChatLog();
+		}
+		else if (opt [0].CompareTo ("an") == 0){
+			Debug.Log ("an log flushed");
+			DialogueManager.main.clearANLog();
+		}
 		yield return true;
 	}
 }
