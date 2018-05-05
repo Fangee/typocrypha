@@ -99,15 +99,20 @@ public class BattleManagerS : MonoBehaviour {
         trackTyping.enabled = !p;
     }
 
+    //MAIN BATTLE FLOW-----------------------------------------------------------------------//
+
     // start battle scene
     public void startBattle(GameObject new_battle)
     {
+        //Reset player stats and status
         player.restoreToFull();
         battleKeyboard.clearStatus();
         castManager.cooldown.removeAll();
+        //Reset BattleManager curr variables
         curr_battle = new_battle;
         curr_wave = -1;
         waves = new_battle.GetComponents<BattleWave>();
+        //Reset target
 		field.target_ind = 1;
         StartCoroutine(finishBattlePrep());
     }
@@ -118,11 +123,13 @@ public class BattleManagerS : MonoBehaviour {
 		pause = true;
         BattleEffects.main.battleTransitionEffect("swirl_in", 1f);
         yield return new WaitForSeconds(1f);
-        uiManager.initialize();
-		nextWave ();
-		BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
-        yield return new WaitForSeconds(2f);      
-		pause = false;
+        uiManager.initBg();
+        BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
+        yield return new WaitForSeconds(1f);
+        nextWave();
+        uiManager.initTarget();
+        pause = false;
+        resetInterruptData();
         checkInterrupts();
     }
     // go to next wave (also starts first wave for real)
@@ -171,6 +178,9 @@ public class BattleManagerS : MonoBehaviour {
         GameflowManager.main.next();
 
     }
+
+    //END MAIN BATTLE FLOW-------------------------------------------------------------------//
+
     //Handles a spellcast (by calling the castmanager) and clears callback's buffer if necessary
     public void handleSpellCast(string spell, TrackTyping callback)
     {
@@ -201,6 +211,31 @@ public class BattleManagerS : MonoBehaviour {
         resetInterruptData();
         uiManager.clear();
         startBattle(curr_battle);
+    }
+    //Update Enemies and Check for death
+    public void updateEnemies()
+    {
+        for (int i = 0; i < field.enemy_arr.Length; i++)
+        {
+            if (field.enemy_arr[i] != null && !field.enemy_arr[i].Is_dead)
+            {
+                field.enemy_arr[i].updateCondition();
+                if (field.enemy_arr[i].Is_dead)
+                    ++field.curr_dead;
+            }
+        }
+        uiManager.updateUI();
+        if (player.Is_dead)
+        {
+            playerDeath();
+        }
+        else if (field.curr_dead == field.enemy_count) // next wave if all enemies dead
+        {
+            Debug.Log("Wave: " + Wave.Title + " complete!");
+            nextWave();
+        }
+        else
+            checkInterrupts();
     }
 
     //Create all enemies for this wave
@@ -237,31 +272,6 @@ public class BattleManagerS : MonoBehaviour {
     {
 		//uiManager.initialize();
     }
-
-    public void updateEnemies()
-    {
-        for (int i = 0; i < field.enemy_arr.Length; i++)
-        {
-            if (field.enemy_arr[i] != null && !field.enemy_arr[i].Is_dead)
-            {
-                field.enemy_arr[i].updateCondition();
-                if (field.enemy_arr[i].Is_dead)
-                    ++field.curr_dead;
-            }
-        }
-        uiManager.updateUI();
-        if(player.Is_dead)
-        {
-            playerDeath();
-        }
-        else if (field.curr_dead == field.enemy_count) // next wave if all enemies dead
-        {
-            Debug.Log("Wave: " + Wave.Title + " complete!");
-            nextWave();
-        }
-        else
-            checkInterrupts();
-    }   
 
     private void checkInterrupts()
     {
