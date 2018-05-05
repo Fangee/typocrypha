@@ -9,11 +9,14 @@ public class Pause : MonoBehaviour {
     string pauseKey = "escape";
     GameObject[] children;
 
+    bool battlePause; //saves battlemanager pause state
+
     void Start () {
         gamePause = false;
-        children = new GameObject[2];
-        children[0] = transform.GetChild(0).gameObject;
-        children[1] = transform.GetChild(1).gameObject;
+        children = new GameObject[3];
+        children[0] = transform.GetChild(0).gameObject; //music slider
+        children[1] = transform.GetChild(1).gameObject; //sound slider
+        children[2] = transform.GetChild(2).gameObject; //scroll slider
 
     }
 	
@@ -26,6 +29,7 @@ public class Pause : MonoBehaviour {
             if (gamePause)
             {
                 Time.timeScale = 0;
+                battlePause = BattleManagerS.main.pause;
                 BattleManagerS.main.pause = true;
                 dimCol = BattleEffects.main.dimmer.color;
                 BattleEffects.main.setDim(true);
@@ -36,7 +40,7 @@ public class Pause : MonoBehaviour {
             else
             {
                 Time.timeScale = 1;
-                BattleManagerS.main.pause = false;
+                BattleManagerS.main.pause = battlePause;
                 BattleEffects.main.dimmer.color = dimCol;
                 AudioPlayer.main.unpauseSFX();
                 foreach (GameObject g in children)

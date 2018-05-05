@@ -28,7 +28,7 @@ public class DialogueBox : MonoBehaviour {
 		set_color.color.a = 0;
 		set_color.chars = new int[2]{0,text.Length};
 		fx_text.addEffect (set_color);
-		scroll_delay = 0.001f; // DEFAULT TEMP
+		scroll_delay = 0.05f; // DEFAULT TEMP
 		if (d_item.GetType () == typeof(DialogueItemChat)) {
 			DialogueItemChat c_item = (DialogueItemChat)d_item;
 			// Set icon
@@ -104,8 +104,8 @@ public class DialogueBox : MonoBehaviour {
 			*/
 			set_color.chars [0] = ++cnt;
 			if (cnt % sfx_interval == 0) AudioPlayer.main.playSFX (AudioPlayer.channel_voice);
-            if(scroll_delay != 0)
-                yield return new WaitForSeconds (scroll_delay);
+            if (scroll_delay * DialogueManager.main.scroll_scale > 0)
+                yield return new WaitForSeconds(scroll_delay * DialogueManager.main.scroll_scale);
 		}
 		yield return StartCoroutine(checkEvents (cnt - offset)); // Play events at end of text
 		cr_scroll = null;

@@ -25,6 +25,7 @@ public class DialogueManager : MonoBehaviour {
 	public GameObject an_dialouge_box_prefab; // Prefab of audio novel dialogue 
 	public GameObject chr_spr_prefab; // Prefab of character sprite display
 	public float scroll_time; // Time it takes to automatically update window
+    public float scroll_scale; // Scroll delay multiplier
 	public float top_space; // Space between top of window and dialogue
 	[HideInInspector] public bool pause_scroll; // Pause text scroll
 	[HideInInspector] public bool block_input; // Blocks user input
@@ -51,6 +52,7 @@ public class DialogueManager : MonoBehaviour {
 		history = new List<DialogueBox> ();
 		chr_spr_list = new List<GameObject> ();
 		input = false;
+        scroll_scale = 1f;
 	}
 
 	void Update() {
