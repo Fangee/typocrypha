@@ -6,6 +6,7 @@ public class BattleManagerS : MonoBehaviour {
     public static BattleManagerS main = null;
     public Player player;
     public TrackTyping trackTyping;
+    public BattleKeyboard battleKeyboard;
     public BattleUI uiManager;
     public CastManager castManager;
     public EnemyDatabase enemyData;
@@ -102,6 +103,7 @@ public class BattleManagerS : MonoBehaviour {
     public void startBattle(GameObject new_battle)
     {
         player.restoreToFull();
+        battleKeyboard.clearStatus();
         castManager.cooldown.removeAll();
         curr_battle = new_battle;
         curr_wave = -1;
@@ -172,6 +174,7 @@ public class BattleManagerS : MonoBehaviour {
     //Handles a spellcast (by calling the castmanager) and clears callback's buffer if necessary
     public void handleSpellCast(string spell, TrackTyping callback)
     {
+        AudioPlayer.main.playSFX("sfx_enter"); // MIGHT WANT TO BE MOVED
         castManager.attackCurrent(spell, callback);
     }
     //Handle player death

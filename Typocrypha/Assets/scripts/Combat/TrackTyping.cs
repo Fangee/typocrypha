@@ -24,7 +24,6 @@ public class TrackTyping : MonoBehaviour {
         buffer = "";
         count = 0;
     }
-
 	void Start () {
 		typed_text.text = "";
 		key_map = new Dictionary<char, Image> ();
@@ -44,9 +43,9 @@ public class TrackTyping : MonoBehaviour {
 		} else entry_ok.text = "OK";
 		// check key presses
 		if (Input.GetKeyDown (KeyCode.Return)) {
-            AudioPlayer.main.playSFX("sfx_enter"); // MIGHT WANT TO BE MOVED
             if (TextEvents.main.is_prompt) {
-				TextEvents.main.prompt_input = buffer;
+                AudioPlayer.main.playSFX("sfx_enter"); // MIGHT WANT TO BE MOVED
+                TextEvents.main.prompt_input = buffer;
 				TextEvents.main.is_prompt = false;
                 clearBuffer();
 			} else {

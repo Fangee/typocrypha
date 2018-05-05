@@ -14,8 +14,29 @@ public class BattleKeyboard : MonoBehaviour {
     char[] keys = { 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'};
     int numKeysAffected = 0;
 
+    private void Start()
+    {
+        foreach (char c in keys)
+            status_map.Add(c, new StatusNormal(key_default));
+    }
+
+    public void clearStatus()
+    {
+        status_map.Clear();
+        numKeysAffected = 0;
+        foreach (char c in keys)
+        {
+            status_map.Add(c, new StatusNormal(key_default));
+            if(image_map != null)
+            {
+                image_map[c].sprite = key_default;
+                image_map[c].color = Color.gray;
+            }
+        }
+    }
     public void inflictCondition(Player player, int element, int intensity)
     {
+        //Get the number of keys to inflict conditions on from the formula (maybe ,ake per-element)
         int numKeys = getNumKeysFromIntensity(intensity);
         char c = ' ';
         for(int i = 0; i <= numKeys; ++i)
@@ -81,11 +102,6 @@ public class BattleKeyboard : MonoBehaviour {
         --numKeysAffected;
         image_map[c].color = Color.gray;
         yield break;
-    }
-    private void Start()
-    {
-        foreach (char c in keys)
-			status_map.Add(c, new StatusNormal(key_default));
     }
 
     //Calculates number of keys to inflict condition on from intensity of attack
