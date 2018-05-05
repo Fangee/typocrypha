@@ -9,17 +9,22 @@ public class BackgroundEffects : MonoBehaviour {
 	public SpriteRenderer bg_dimmer;
 
 	GameObject prefab_bg; // background object if loaded from prefab
+    AssetBundle backgrounds;
 
 	const int bg_layer = -10;
 
-	void Start() {
+    private void Awake() {
+        backgrounds = AssetBundle.LoadFromFile(System.IO.Path.Combine(Application.streamingAssetsPath, "bg"));
+    }
+
+    void Start() {
 		if (main == null) main = this;
 		wavy_sprite.orderInLayer = bg_layer;
 	}
 
 	// sets sprite of background image
 	public void setSpriteBG(string sprite_name) {
-		wavy_sprite.texture = Resources.Load<Texture2D> ("sprites/backgrounds/" + sprite_name);
+        wavy_sprite.texture = backgrounds.LoadAsset<Texture2D> (sprite_name);
 	}
 
 	// sets prefab background object as background

@@ -14,7 +14,22 @@ public class GameflowManager : MonoBehaviour {
 		else Destroy (this);
 	}
 
-	public void gameflowStart() {
+    private void Start() {
+        StartCoroutine(waitForLoad());
+    }
+
+    // waits for files to load
+    IEnumerator waitForLoad() {
+        yield return new WaitUntil(() => AudioPlayer.main.ready);
+        AudioPlayer.main.stopAll(); 
+        yield return new WaitUntil(() => EnemyDatabase.main.is_loaded);
+        yield return new WaitUntil(() => AllyDatabase.main.is_loaded);
+        yield return new WaitUntil(() => AnimationPlayer.main.ready);
+        Debug.Log("done loading assets");
+        gameflowStart();
+    }
+
+    public void gameflowStart() {
 		Debug.Log ("gameflowStart");
 		curr_item = -1;
 		if (transform.childCount != 0) next (); // Start immediately
