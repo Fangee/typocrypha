@@ -939,6 +939,10 @@ MonoBehaviour:
   battle_log: {fileID: 945826268}
   target_ret: {fileID: 1886895013}
   target_floor: {fileID: 1416234253}
+  wave_transition_title: {fileID: 1892149475}
+  wave_transition_banner: {fileID: 1008986906}
+  wave_title_text: {fileID: 386291581}
+  wave_banner_text: {fileID: 1512057315}
   battle_bg_prefab: {fileID: 1903472682430984, guid: 2d6f4b82c4e7cce4eb6a6d8d1147dfbd,
     type: 2}
 --- !u!114 &94137934
@@ -2501,6 +2505,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 212441381720716690, guid: 601dae665ceb1c845b6091afcc091783,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 212441381720716690, guid: 601dae665ceb1c845b6091afcc091783,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 212441381720716690, guid: 601dae665ceb1c845b6091afcc091783,
+        type: 2}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 601dae665ceb1c845b6091afcc091783, type: 2}
   m_IsPrefabParent: 0
@@ -3918,7 +3937,7 @@ GameObject:
   - component: {fileID: 386291582}
   - component: {fileID: 386291581}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: WaveTitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3954,7 +3973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -8678,8 +8697,8 @@ RectTransform:
   - {fileID: 837587310}
   - {fileID: 846874627}
   - {fileID: 898547072}
-  - {fileID: 1008986905}
   - {fileID: 1892149474}
+  - {fileID: 1008986905}
   m_Father: {fileID: 1668480233}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9362,12 +9381,12 @@ GameObject:
   - component: {fileID: 1008986907}
   - component: {fileID: 1008986906}
   m_Layer: 5
-  m_Name: WaveTransition
+  m_Name: WaveBanner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1008986905
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9380,7 +9399,7 @@ RectTransform:
   m_Children:
   - {fileID: 1512057314}
   m_Father: {fileID: 945826267}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9399,7 +9418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -14992,7 +15011,7 @@ GameObject:
   - component: {fileID: 1512057316}
   - component: {fileID: 1512057315}
   m_Layer: 5
-  m_Name: WaveTransitionText
+  m_Name: WaveBannerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15028,7 +15047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -19389,7 +19408,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1892149474
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19402,11 +19421,11 @@ RectTransform:
   m_Children:
   - {fileID: 386291580}
   m_Father: {fileID: 945826267}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 2228}
+  m_AnchoredPosition: {x: 0, y: 228}
   m_SizeDelta: {x: 1280, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1892149475
@@ -19421,7 +19440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

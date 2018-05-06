@@ -303,7 +303,6 @@ public class Enemy : MonoBehaviour, ICaster {
 			enemy_animator.SetTrigger("death");
 			is_dead = true;
 			StopAllCoroutines();
-			BattleManagerS.main.updateEnemies ();
         }
     }
 

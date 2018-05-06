@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class BattleUI : MonoBehaviour
@@ -10,7 +11,11 @@ public class BattleUI : MonoBehaviour
     public BattleLog battle_log;
     public GameObject target_ret; // contains targetting sprites
     public GameObject target_floor; // holds the enemy floor panels
-                                    //public GameObject dialogue_box; // text box for dialogue
+    public Image wave_transition_title;
+    public Image wave_transition_banner;
+    public Text wave_title_text;
+    public Text wave_banner_text;
+    //public GameObject dialogue_box; // text box for dialogue
     public GameObject battle_bg_prefab; // prefab of battle background
 
     TargetReticule target_ret_scr; // TargetReticule script ref

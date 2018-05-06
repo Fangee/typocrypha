@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleManagerS : MonoBehaviour {
     public static BattleManagerS main = null;
@@ -127,34 +128,76 @@ public class BattleManagerS : MonoBehaviour {
         BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
         yield return new WaitForSeconds(1f);
         nextWave();
+        yield return new WaitForSeconds(3f);
         uiManager.initTarget();
-        pause = false;
-        resetInterruptData();
-        checkInterrupts();
     }
     // go to next wave (also starts first wave for real)
     public void nextWave()
     {
-		resetInterruptData();
-		if (++curr_wave >= waves.Length)
-		{
-			Debug.Log("Encounter over: going to victory screen");
-			victoryScreen();
-			return;
-		}
-		Debug.Log("starting wave: " + Wave.Title);
-		foreach (Transform tr in transform) 
-		{
-			Destroy (tr.gameObject);
-		}
-		uiManager.startWave();
-		createEnemies(Wave);
-		uiManager.updateUI ();
-		waveTransition(Wave.Title);
-		if(Wave.Music != string.Empty)
-			AudioPlayer.main.playMusic(Wave.Music);
-		if(curr_wave != 0)
-			checkInterrupts();
+        if (++curr_wave >= waves.Length)
+        {
+            Debug.Log("Encounter over: going to victory screen");
+            victoryScreen();
+            return;
+        }
+        StartCoroutine(waveTransition());
+    }
+    private IEnumerator waveTransition()
+    {
+        setPause(true);
+        resetInterruptData();
+        Debug.Log("starting wave: " + Wave.Title);
+        foreach (Transform tr in transform)
+        {
+            Destroy(tr.gameObject);
+        }
+        uiManager.startWave();
+
+        //WAVE TRANSITION STANDIN (UNITL ACTUAL GOOD STUFF IS ADDED)
+        uiManager.wave_banner_text.text = Wave.Title;
+        uiManager.wave_title_text.text = "Wave " + (curr_wave + 1) + "/ " + waves.Length.ToString();
+        while (uiManager.wave_transition_banner.color.a < 1)
+        {
+            yield return new WaitForEndOfFrame();
+            float apl = Time.deltaTime;
+            Color tmp = uiManager.wave_transition_banner.color;
+            tmp.a += apl;
+            uiManager.wave_transition_banner.color = tmp;
+            tmp = uiManager.wave_transition_title.color;
+            tmp.a += apl;
+            uiManager.wave_transition_title.color = tmp;
+            tmp = uiManager.wave_banner_text.color;
+            tmp.a += apl;
+            uiManager.wave_banner_text.color = tmp;
+            tmp = uiManager.wave_title_text.color;
+            tmp.a += apl;
+            uiManager.wave_title_text.color = tmp;
+        }
+        yield return new WaitForSeconds(0.5f);
+        while (uiManager.wave_transition_banner.color.a > 0)
+        {
+            yield return new WaitForEndOfFrame();
+            float apl = Time.deltaTime;
+            Color tmp = uiManager.wave_transition_banner.color;
+            tmp.a -= apl;
+            uiManager.wave_transition_banner.color = tmp;
+            tmp = uiManager.wave_transition_title.color;
+            tmp.a -= apl;
+            uiManager.wave_transition_title.color = tmp;
+            tmp = uiManager.wave_banner_text.color;
+            tmp.a -= apl;
+            uiManager.wave_banner_text.color = tmp;
+            tmp = uiManager.wave_title_text.color;
+            tmp.a -= apl;
+            uiManager.wave_title_text.color = tmp;
+        }
+
+        createEnemies(Wave);
+        uiManager.updateUI();
+        if (Wave.Music != string.Empty)
+            AudioPlayer.main.playMusic(Wave.Music);
+        if(checkInterrupts() == false)
+            setPause(false);
     }
     // show victory screen after all waves are done
     public void victoryScreen()
@@ -229,7 +272,7 @@ public class BattleManagerS : MonoBehaviour {
         {
             playerDeath();
         }
-        else if (field.curr_dead == field.enemy_count) // next wave if all enemies dead
+        else if (field.curr_dead >= field.enemy_count) // next wave if all enemies dead
         {
             Debug.Log("Wave: " + Wave.Title + " complete!");
             nextWave();
@@ -268,18 +311,17 @@ public class BattleManagerS : MonoBehaviour {
         field.enemy_arr[i] = enemy;
     }
 
-    private void waveTransition(string Title)
-    {
-		//uiManager.initialize();
-    }
-
-    private void checkInterrupts()
+    private bool checkInterrupts()
     {
         foreach (BattleEventTrigger e in Wave.events)
         {
             if (!e.HasTriggered && e.checkTrigger(field) && e.onTrigger(field))
+            {
                 setPause(true);
+                return true;
+            }
         }
+        return false;
     }
 
     private void resetInterruptData()
