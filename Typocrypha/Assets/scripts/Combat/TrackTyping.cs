@@ -15,6 +15,7 @@ public class TrackTyping : MonoBehaviour {
 	public GameObject spacebar_prefab; // prefab for spacebar image object
 	public GameObject popper; // popper
 
+    string last_buffer;
 	string buffer; // contains typed text
 	int count; // number of characters typed
 	string[] rows = { "qwertyuiop", "asdfghjkl", "zxcvbnm", " " };
@@ -23,6 +24,15 @@ public class TrackTyping : MonoBehaviour {
     public void clearBuffer() {
         buffer = "";
         count = 0;
+    }
+    public void setBuffer(string newBuffer)
+    {
+        buffer = newBuffer;
+        count = buffer.Length;
+    }
+    public void revertBuffer()
+    {
+        setBuffer(last_buffer);
     }
 
 	void Start () {
@@ -44,13 +54,15 @@ public class TrackTyping : MonoBehaviour {
 		} else entry_ok.text = "OK";
 		// check key presses
 		if (Input.GetKeyDown (KeyCode.Return)) {
-            AudioPlayer.main.playSFX("sfx_enter"); // MIGHT WANT TO BE MOVED
             if (TextEvents.main.is_prompt) {
-				TextEvents.main.prompt_input = buffer;
+                AudioPlayer.main.playSFX("sfx_enter"); // MIGHT WANT TO BE MOVED
+                TextEvents.main.prompt_input = buffer;
 				TextEvents.main.is_prompt = false;
                 clearBuffer();
 			} else {
                 Debug.Log("Player casts " + buffer.ToUpper().Replace(' ', '-'));
+                if(buffer != string.Empty)
+                    last_buffer = buffer;
                 BattleManagerS.main.handleSpellCast (buffer, this); // attack currently targeted enemy
 			}				
 		} else if (Input.GetKey (KeyCode.Backspace)) {

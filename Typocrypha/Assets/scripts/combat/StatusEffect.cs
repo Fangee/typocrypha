@@ -68,18 +68,21 @@ public class StatusFreeze : StatusEffect
 
     public override string processKey(char key)
     {
+        --freezeNum;
+        if (freezeNum == 0)
+        {
+            AudioPlayer.main.playSFX("sfx_status_frozen_key_break");
+            player_popper.spawnText("<color=lime>" + this.key_text + "</color> <color=aqua>THAWED</color>", 1.0f, new Vector3(0.0f, -0.5f, 0.0f));
+        }
+        else
+        {
+            AudioPlayer.main.playSFX("sfx_status_frozen_key_hit");
+            player_popper.spawnText("<color=red>" + this.key_text + "</color> <color=aqua>FROZEN</color>", 1.0f, new Vector3(0.0f, -0.5f, 0.0f));
+        }
         return "";
     }
     public override bool update()
     {
-        --freezeNum;
-		if (freezeNum == 0) {
-			AudioPlayer.main.playSFX ("sfx_status_frozen_key_break");
-			player_popper.spawnText ("<color=lime>" + this.key_text + "</color> <color=aqua>THAWED</color>", 1.0f, new Vector3 (0.0f, -0.5f, 0.0f));
-		} else {
-			AudioPlayer.main.playSFX("sfx_status_frozen_key_hit");
-			player_popper.spawnText ("<color=red>" + this.key_text + "</color> <color=aqua>FROZEN</color>", 1.0f, new Vector3 (0.0f, -0.5f, 0.0f));
-		}
         return freezeNum <= 0;
     }
 }
