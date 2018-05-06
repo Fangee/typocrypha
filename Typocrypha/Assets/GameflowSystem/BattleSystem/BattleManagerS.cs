@@ -133,8 +133,6 @@ public class BattleManagerS : MonoBehaviour {
         BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
         yield return new WaitForSeconds(1f);
         nextWave();
-        yield return new WaitForSeconds(3f);
-        uiManager.initTarget();
     }
     // go to next wave (also starts first wave for real)
     public void nextWave()
@@ -160,17 +158,29 @@ public class BattleManagerS : MonoBehaviour {
         uiManager.startWave();
         //Play Wave transition and wait for the animation to finish (plays the SFX too)
         uiManager.waveTransition(Wave.Title, curr_wave + 1, waves.Length);
-		yield return new WaitForSeconds(1.25f);
+        yield return new WaitForSeconds(1.2f);
+        uiManager.wave_banner_text.GetComponent<Animator>().enabled = false;
+        uiManager.wave_transition_banner.GetComponent<Animator>().enabled = false;
+        uiManager.wave_title_text.GetComponent<Animator>().enabled = false;
+        uiManager.wave_transition_title.GetComponent<Animator>().enabled = false;
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+        uiManager.wave_banner_text.GetComponent<Animator>().enabled = true;
+        uiManager.wave_transition_banner.GetComponent<Animator>().enabled = true;
+        uiManager.wave_title_text.GetComponent<Animator>().enabled = true;
+        uiManager.wave_transition_title.GetComponent<Animator>().enabled = true;
+        AudioPlayer.main.playSFX("sfx_enter");
         AudioPlayer.main.playSFX("sfx_enemy_death");
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0.8f);
         //Create enemies and update Typocrypha HUD
         createEnemies(Wave);
+        if (curr_wave == 0)
+            uiManager.initTarget();
         uiManager.updateUI();
         if (Wave.Music != string.Empty)
             AudioPlayer.main.playMusic(Wave.Music);
-        if(checkInterrupts() == false)
+        if (checkInterrupts() == false)
             setPause(false);
-		yield return true;
+        yield return true;
     }
     // show victory screen after all waves are done
     public void victoryScreen()
