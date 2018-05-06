@@ -161,7 +161,7 @@ public class BattleManagerS : MonoBehaviour {
         //WAVE TRANSITION STANDIN (UNITL ACTUAL GOOD STUFF IS ADDED)
         uiManager.wave_banner_text.text = Wave.Title;
         uiManager.wave_title_text.text = "Wave " + (curr_wave + 1) + "/ " + waves.Length.ToString();
-        while (uiManager.wave_transition_banner.color.a < 1)
+        /*while (uiManager.wave_transition_banner.color.a < 1)
         {
             yield return new WaitForEndOfFrame();
             float apl = Time.deltaTime;
@@ -195,7 +195,18 @@ public class BattleManagerS : MonoBehaviour {
             tmp = uiManager.wave_title_text.color;
             tmp.a -= apl;
             uiManager.wave_title_text.color = tmp;
-        }
+        }*/
+		Animator banner_text_animator = uiManager.wave_banner_text.GetComponent<Animator>();
+		Animator banner_img_animator = uiManager.wave_transition_banner.GetComponent<Animator>();
+		Animator title_text_animator = uiManager.wave_title_text.GetComponent<Animator>();
+		Animator title_img_animator = uiManager.wave_transition_title.GetComponent<Animator>();
+		//text_animator.Play ("anim_wave_banner_image");
+		banner_text_animator.Play ("anim_wave_banner_text");
+		banner_img_animator.Play ("anim_wave_banner_image");
+		title_text_animator.Play ("anim_wave_title_text");
+		title_img_animator.Play ("anim_wave_title_image");
+		AudioPlayer.main.playSFX ("sfx_spell_miss");
+		yield return new WaitForSeconds(2);
 
         createEnemies(Wave);
         uiManager.updateUI();
@@ -203,6 +214,7 @@ public class BattleManagerS : MonoBehaviour {
             AudioPlayer.main.playMusic(Wave.Music);
         if(checkInterrupts() == false)
             setPause(false);
+		yield return true;
     }
     // show victory screen after all waves are done
     public void victoryScreen()
