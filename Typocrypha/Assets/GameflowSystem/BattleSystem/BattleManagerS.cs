@@ -156,58 +156,14 @@ public class BattleManagerS : MonoBehaviour {
         {
             Destroy(tr.gameObject);
         }
+        //Clear UI for new wave
         uiManager.startWave();
-
-        //WAVE TRANSITION STANDIN (UNITL ACTUAL GOOD STUFF IS ADDED)
-        uiManager.wave_banner_text.text = Wave.Title;
-        uiManager.wave_title_text.text = "Wave " + (curr_wave + 1) + "/ " + waves.Length.ToString();
-        /*while (uiManager.wave_transition_banner.color.a < 1)
-        {
-            yield return new WaitForEndOfFrame();
-            float apl = Time.deltaTime;
-            Color tmp = uiManager.wave_transition_banner.color;
-            tmp.a += apl;
-            uiManager.wave_transition_banner.color = tmp;
-            tmp = uiManager.wave_transition_title.color;
-            tmp.a += apl;
-            uiManager.wave_transition_title.color = tmp;
-            tmp = uiManager.wave_banner_text.color;
-            tmp.a += apl;
-            uiManager.wave_banner_text.color = tmp;
-            tmp = uiManager.wave_title_text.color;
-            tmp.a += apl;
-            uiManager.wave_title_text.color = tmp;
-        }
-        yield return new WaitForSeconds(0.5f);
-        while (uiManager.wave_transition_banner.color.a > 0)
-        {
-            yield return new WaitForEndOfFrame();
-            float apl = Time.deltaTime;
-            Color tmp = uiManager.wave_transition_banner.color;
-            tmp.a -= apl;
-            uiManager.wave_transition_banner.color = tmp;
-            tmp = uiManager.wave_transition_title.color;
-            tmp.a -= apl;
-            uiManager.wave_transition_title.color = tmp;
-            tmp = uiManager.wave_banner_text.color;
-            tmp.a -= apl;
-            uiManager.wave_banner_text.color = tmp;
-            tmp = uiManager.wave_title_text.color;
-            tmp.a -= apl;
-            uiManager.wave_title_text.color = tmp;
-        }*/
-		Animator banner_text_animator = uiManager.wave_banner_text.GetComponent<Animator>();
-		Animator banner_img_animator = uiManager.wave_transition_banner.GetComponent<Animator>();
-		Animator title_text_animator = uiManager.wave_title_text.GetComponent<Animator>();
-		Animator title_img_animator = uiManager.wave_transition_title.GetComponent<Animator>();
-		//text_animator.Play ("anim_wave_banner_image");
-		banner_text_animator.Play ("anim_wave_banner_text");
-		banner_img_animator.Play ("anim_wave_banner_image");
-		title_text_animator.Play ("anim_wave_title_text");
-		title_img_animator.Play ("anim_wave_title_image");
-		AudioPlayer.main.playSFX ("sfx_spell_miss");
-		yield return new WaitForSeconds(2);
-
+        //Play Wave transition and wait for the animation to finish (plays the SFX too)
+        uiManager.waveTransition(Wave.Title, curr_wave + 1, waves.Length);
+		yield return new WaitForSeconds(1.25f);
+        AudioPlayer.main.playSFX("sfx_enemy_death");
+        yield return new WaitForSeconds(0.75f);
+        //Create enemies and update Typocrypha HUD
         createEnemies(Wave);
         uiManager.updateUI();
         if (Wave.Music != string.Empty)

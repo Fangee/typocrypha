@@ -90,4 +90,19 @@ public class BattleUI : MonoBehaviour
         target_floor.SetActive(false);
         BackgroundEffects.main.removePrefabBG(2.0f);
     }
+    //Play the wave transition animations
+    public void waveTransition(string title, int curr_wave, int max_wave)
+    {
+        AudioPlayer.main.playSFX("sfx_spell_miss");
+        wave_banner_text.text = title;
+        wave_title_text.text = "Wave " + curr_wave + "/ " + max_wave;
+        Animator banner_text_animator = wave_banner_text.GetComponent<Animator>();
+        Animator banner_img_animator = wave_transition_banner.GetComponent<Animator>();
+        Animator title_text_animator = wave_title_text.GetComponent<Animator>();
+        Animator title_img_animator = wave_transition_title.GetComponent<Animator>();
+        banner_text_animator.Play("anim_wave_banner_text");
+        banner_img_animator.Play("anim_wave_banner_image");
+        title_text_animator.Play("anim_wave_title_text");
+        title_img_animator.Play("anim_wave_title_image");
+    }
 }
