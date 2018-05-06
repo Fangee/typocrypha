@@ -15,6 +15,7 @@ public class TrackTyping : MonoBehaviour {
 	public GameObject spacebar_prefab; // prefab for spacebar image object
 	public GameObject popper; // popper
 
+    string last_buffer;
 	string buffer; // contains typed text
 	int count; // number of characters typed
 	string[] rows = { "qwertyuiop", "asdfghjkl", "zxcvbnm", " " };
@@ -24,6 +25,16 @@ public class TrackTyping : MonoBehaviour {
         buffer = "";
         count = 0;
     }
+    public void setBuffer(string newBuffer)
+    {
+        buffer = newBuffer;
+        count = buffer.Length;
+    }
+    public void revertBuffer()
+    {
+        setBuffer(last_buffer);
+    }
+
 	void Start () {
 		typed_text.text = "";
 		key_map = new Dictionary<char, Image> ();
@@ -50,6 +61,8 @@ public class TrackTyping : MonoBehaviour {
                 clearBuffer();
 			} else {
                 Debug.Log("Player casts " + buffer.ToUpper().Replace(' ', '-'));
+                if(buffer != string.Empty)
+                    last_buffer = buffer;
                 BattleManagerS.main.handleSpellCast (buffer, this); // attack currently targeted enemy
 			}				
 		} else if (Input.GetKey (KeyCode.Backspace)) {

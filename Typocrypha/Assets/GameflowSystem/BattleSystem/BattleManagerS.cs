@@ -87,6 +87,11 @@ public class BattleManagerS : MonoBehaviour {
                 AudioPlayer.main.playSFX("sfx_spellbook_scroll", 0.3F);
             //else {play sfx_thud (player is on the last page this direction)}
         }
+
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            trackTyping.revertBuffer();
+        }
     }
 
     public void setEnabled(bool e)
