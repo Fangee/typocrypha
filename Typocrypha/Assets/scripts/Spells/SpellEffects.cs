@@ -32,23 +32,27 @@ public class SpellEffects : MonoBehaviour {
             //learn their strength/weaknesses against the element used
             EnemyIntel.main.learnIntel((d.Target as Enemy).Stats.name, d.element);
         }
-        //Process hit graphics
-        for (int i = 0; i < d.animData.Length; ++i)
-        {
-            if (d.animData[i] != null)
-            {
-                AudioPlayer.main.setSFX(AudioPlayer.channel_spell_sfx, d.sfxData[i]);
-                AudioPlayer.main.playSFX(AudioPlayer.channel_spell_sfx);
-                //AnimationPlayer.main.playAnimation(d.animData[i], d.Target.Transform.position, 1);
+
+		//Process repel
+		if (d.repel)
+		{
+			spawnElementPopup(d.element, Elements.vsElement.REPEL, d.Caster.Transform);
+			AnimationPlayer.main.playAnimation("anim_element_reflect", d.Caster.Transform.position, 2f);
+			yield return new WaitForSeconds(0.333F);
+		}
+
+		//Process hit graphics (if not a repelled attack)
+		for (int i = 0; i < d.animData.Length; ++i)
+		{
+			if (d.animData[i] != null)
+			{
+				AudioPlayer.main.setSFX(AudioPlayer.channel_spell_sfx, d.sfxData[i]);
+				AudioPlayer.main.playSFX(AudioPlayer.channel_spell_sfx);
+				//AnimationPlayer.main.playAnimation(d.animData[i], d.Target.Transform.position, 1);
 				AnimationPlayer.main.playAnimation(d.animData[i], d.Target.Transform.position, 2f);
-                yield return new WaitForSeconds(0.333F);
-            }
-        }
-        //Process repel
-        if (d.repel)
-        {
-            spawnElementPopup(d.element, Elements.vsElement.REPEL, d.Caster.Transform);
-        }
+				yield return new WaitForSeconds(0.333F);
+			}
+		}
 
 		if (d.isCrit && d.elementalData != Elements.vsElement.BLOCK) {//Spell is crit
 			Debug.Log (d.Caster.Stats.name + " scores a critical with " + s.ToString () + " on " + d.Target.Stats.name);
@@ -78,6 +82,16 @@ public class SpellEffects : MonoBehaviour {
 			spawnElementPopup(d.element, d.elementalData, d.Target.Transform);
 		}
 
+		//Play block/reflect/drain animations if necessary
+		if (d.elementalData == Elements.vsElement.BLOCK) {
+			AnimationPlayer.main.playAnimation("anim_element_block", d.Target.Transform.position, 2f);
+			yield return new WaitForSeconds(0.333F);
+		}
+		else if (d.elementalData == Elements.vsElement.DRAIN) {
+			AnimationPlayer.main.playAnimation("anim_element_drain", d.Target.Transform.position, 2f);
+			yield return new WaitForSeconds(0.333F);
+		}
+
         //Process damage graphics
 		if (d.damageInflicted > 0) {
 			BattleEffects.main.spriteShake (d.Target.Transform, 0.3f, 0.1f);
@@ -85,6 +99,7 @@ public class SpellEffects : MonoBehaviour {
 			popp.spawnText (d.damageInflicted.ToString (), POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET);
 		} else if (d.damageInflicted < 0) {
 			string heal = "+" + (-1 * (d.damageInflicted)).ToString ();
+			AudioPlayer.main.playSFX ("sfx_heal");
 			popp.spawnText (heal, POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET, new Color(27f/255f, 195f/255f, 43f/255f));
 		} else {
 			if (d.elementalData == Elements.vsElement.BLOCK) {
@@ -103,6 +118,7 @@ public class SpellEffects : MonoBehaviour {
         {
             case Elements.vsElement.REPEL:
                 popp.spawnSprite("popup_reflect", POP_TIMER, pos.position + OVER_OFFSET);
+				AudioPlayer.main.playSFX ("sfx_spell_reflect");
                 break;
             case Elements.vsElement.DRAIN:
                 popp.spawnSprite("popup_absorb", POP_TIMER, pos.position + OVER_OFFSET);
@@ -110,6 +126,7 @@ public class SpellEffects : MonoBehaviour {
                 break;
             case Elements.vsElement.BLOCK:
                 popp.spawnSprite("popup_nullify", POP_TIMER, pos.position + OVER_OFFSET);
+				AudioPlayer.main.playSFX ("sfx_spell_block");
                 break;
             case Elements.vsElement.RESIST:
                 popp.spawnSprite("popup_resistant", POP_TIMER, pos.position + OVER_OFFSET);
