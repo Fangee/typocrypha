@@ -12,12 +12,26 @@ public class BattleField {
 
     public enum FieldPosition
     {
+        ANY = -1,
         LEFT,
         MIDDLE,
         RIGHT,
         ALLYLEFT,
         PLAYER,
         ALLYRIGHT,
+    }
+    public ICaster getCasterFromFieldPosition(FieldPosition pos)
+    {
+        int index = (int)pos;
+        ICaster target = null;
+        if (index > 0)
+        {
+            if (index < 3)
+                target = enemy_arr[index];
+            else
+                target = player_arr[index - 3];
+        }
+        return target;
     }
 
     //BattleField data

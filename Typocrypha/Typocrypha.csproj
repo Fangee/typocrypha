@@ -286,8 +286,10 @@
     <Compile Include="Assets\EnemyIntel.cs" />
     <Compile Include="Assets\FinishEnemyDeath.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\Battle.cs" />
+    <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BattleEventManager.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BattleEventTrigger.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BattleInterruptTrigger.cs" />
+    <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BELogicTrigger.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BICheckHealth.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BICountPlayerAttacks.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BIEnemyIsStunned.cs" />
@@ -375,6 +377,7 @@
     <Compile Include="Assets\scripts\UI\TargetFloor.cs" />
     <Compile Include="Assets\scripts\UI\TargetReticule.cs" />
     <Compile Include="Assets\scripts\Utility\DelayedDestroy.cs" />
+    <Compile Include="Assets\scripts\Utility\Operators.cs" />
     <Compile Include="Assets\scripts\Utility\Pair.cs" />
     <Compile Include="Assets\scripts\Utility\PixelPerfectPosition.cs" />
     <Compile Include="Assets\scripts\Utility\SetFramerate.cs" />

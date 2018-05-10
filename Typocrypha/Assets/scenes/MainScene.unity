@@ -887,6 +887,7 @@ MonoBehaviour:
   battleKeyboard: {fileID: 94137934}
   uiManager: {fileID: 94137933}
   castManager: {fileID: 94137932}
+  globalEvents: {fileID: 1288384071}
   enemy_prefab: {fileID: 1098793274380212, guid: f9e4b00cf8630ca45b5c6629b1b21335,
     type: 2}
   ally_prefab: {fileID: 1461920454972364, guid: b700f5c81a138af4188caad4d00adda9,
@@ -998,7 +999,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1288384070}
   m_Father: {fileID: 763453157}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2969,12 +2971,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interruptScene: {fileID: 1885889532}
+  caster: -1
   target: 4
+  rootKeywordIs: 
+  elementKeywordIs: 
+  styleKeywordIs: 
   elementMustBe: 2
   spellMustHit: 1
   spellMustCrit: 0
   spellMustStun: 0
-  damageMustBeAtLeast: 0
+  damageIsAtLeast: 0
   vsElementMustBe: -1
 --- !u!114 &224366122
 MonoBehaviour:
@@ -3022,12 +3028,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interruptScene: {fileID: 429626606}
+  caster: -1
   target: 1
+  rootKeywordIs: 
+  elementKeywordIs: 
+  styleKeywordIs: 
   elementMustBe: 0
   spellMustHit: 1
   spellMustCrit: 0
   spellMustStun: 0
-  damageMustBeAtLeast: 0
+  damageIsAtLeast: 0
   vsElementMustBe: 3
 --- !u!114 &224366125
 MonoBehaviour:
@@ -3075,12 +3085,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interruptScene: {fileID: 1910542410}
+  caster: -1
   target: 4
+  rootKeywordIs: 
+  elementKeywordIs: 
+  styleKeywordIs: 
   elementMustBe: 1
   spellMustHit: 1
   spellMustCrit: 0
   spellMustStun: 0
-  damageMustBeAtLeast: 0
+  damageIsAtLeast: 0
   vsElementMustBe: -1
 --- !u!114 &224366128
 MonoBehaviour:
@@ -5777,7 +5791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &507438986
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8968,7 +8982,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &844973635
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9530,7 +9544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &852345559
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14331,7 +14345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1210724838
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15817,12 +15831,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interruptScene: {fileID: 2040540445}
+  caster: -1
   target: 1
+  rootKeywordIs: 
+  elementKeywordIs: 
+  styleKeywordIs: 
   elementMustBe: 0
   spellMustHit: 1
   spellMustCrit: 0
   spellMustStun: 0
-  damageMustBeAtLeast: 0
+  damageIsAtLeast: 0
   vsElementMustBe: 3
 --- !u!114 &1264951124
 MonoBehaviour:
@@ -15849,12 +15867,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interruptScene: {fileID: 1555427643}
+  caster: -1
   target: 4
+  rootKeywordIs: 
+  elementKeywordIs: 
+  styleKeywordIs: 
   elementMustBe: 1
   spellMustHit: 1
   spellMustCrit: 0
   spellMustStun: 0
-  damageMustBeAtLeast: 0
+  damageIsAtLeast: 0
   vsElementMustBe: -1
 --- !u!114 &1264951126
 MonoBehaviour:
@@ -15881,12 +15903,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interruptScene: {fileID: 1089634084}
+  caster: -1
   target: 4
+  rootKeywordIs: 
+  elementKeywordIs: 
+  styleKeywordIs: 
   elementMustBe: 2
   spellMustHit: 1
   spellMustCrit: 0
   spellMustStun: 0
-  damageMustBeAtLeast: 0
+  damageIsAtLeast: 0
   vsElementMustBe: -1
 --- !u!114 &1264951128
 MonoBehaviour:
@@ -16089,6 +16115,47 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1288384069
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1288384070}
+  - component: {fileID: 1288384071}
+  m_Layer: 5
+  m_Name: GlobalEvents
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1288384070
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1288384069}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 94137937}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1288384071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1288384069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 404e95e01d444044f94bb364ae6831ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BattleEvents: []
 --- !u!1 &1293330697
 GameObject:
   m_ObjectHideFlags: 0
@@ -16885,12 +16952,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interruptScene: {fileID: 818396694}
+  caster: -1
   target: 4
+  rootKeywordIs: 
+  elementKeywordIs: 
+  styleKeywordIs: 
   elementMustBe: 3
   spellMustHit: 1
   spellMustCrit: 0
   spellMustStun: 0
-  damageMustBeAtLeast: 0
+  damageIsAtLeast: 0
   vsElementMustBe: -1
 --- !u!1 &1416234253
 GameObject:
@@ -18368,7 +18439,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1511834515
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18845,7 +18916,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1551729105
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21220,7 +21291,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1774758369
 RectTransform:
   m_ObjectHideFlags: 0

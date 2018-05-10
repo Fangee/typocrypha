@@ -10,6 +10,7 @@ public class BattleManagerS : MonoBehaviour {
     public BattleKeyboard battleKeyboard;
     public BattleUI uiManager;
     public CastManager castManager;
+    public BattleEventManager globalEvents;
     public EnemyDatabase enemyData;
     public AllyDatabase allyData;
     public GameObject enemy_prefab; // prefab for enemy object
@@ -303,6 +304,11 @@ public class BattleManagerS : MonoBehaviour {
                 setPause(true);
                 return true;
             }
+        }
+        if (!globalEvents.HasTriggered && globalEvents.checkTrigger(field) && globalEvents.onTrigger(field))
+        {
+            setPause(true);
+            return true;
         }
         return false;
     }
