@@ -9,6 +9,7 @@ public delegate string MacroSubDel(string[] opt);
 public class TextMacros : MonoBehaviour {
 	public static TextMacros main = null; // global static ref
 	public Dictionary<string, MacroSubDel> macro_map; // for substituting macros
+	public Dictionary<string, string> color_map; // for color presets (hex representation)
 
 	void Awake () {
 		if (main == null) main = this;
@@ -17,7 +18,11 @@ public class TextMacros : MonoBehaviour {
 			{"NAME", macroNameSub},
 			{"pronoun",macroPronoun},
 			{"last-cast", macroLastCast},
-			{"time", macroTime}
+			{"time", macroTime},
+			{"c", macroColor}
+		};
+		color_map = new Dictionary<string, string> {
+			{ "spell", "#ff6eff" }
 		};
 	}
 
@@ -62,5 +67,18 @@ public class TextMacros : MonoBehaviour {
 	// input: NONE
 	string macroTime(string[] opt) {
 		return System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute;
+	}
+
+	// substitutes in appropriate color tag
+	// input: [0]: string, color name (must be implemented in Unity rich tags)
+	//             if argument is empty, subsitutes the closing tag '</color>'
+	string macroColor(string[] opt) {
+		if (opt [0] != null && opt[0] != "") {
+			if (color_map.ContainsKey(opt[0]))
+				return "<color=" + color_map[opt[0]] + ">";
+			else return "<color=" + opt [0] + ">";
+		} else {
+			return "</color>";
+		}
 	}
 }

@@ -103,7 +103,7 @@ public class DialogueParser : MonoBehaviour {
 				int start_pos = i + 1;
 				int end_pos = text.IndexOf ('}', start_pos);
 				string[] macro = text.Substring (start_pos, end_pos - start_pos).Split(opt_delim);
-				//Debug.Log ("  macro:" + macro.Aggregate("", (acc, next) => acc + "," + next));
+				Debug.Log ("  macro:" + macro.Aggregate("", (acc, next) => acc + "," + next));
 				string[] opt = macro.Skip (1).Take (macro.Length - 1).ToArray ();
 				string sub = TextMacros.main.macro_map [macro[0]] (opt);
 				//Debug.Log ("    macro sub:" + sub);
