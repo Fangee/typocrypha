@@ -530,7 +530,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.999995}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -884,6 +884,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1213398747}
   trackTyping: {fileID: 585812795}
+  battleKeyboard: {fileID: 94137934}
   uiManager: {fileID: 94137933}
   castManager: {fileID: 94137932}
   enemy_prefab: {fileID: 1098793274380212, guid: f9e4b00cf8630ca45b5c6629b1b21335,
@@ -938,6 +939,10 @@ MonoBehaviour:
   battle_log: {fileID: 945826268}
   target_ret: {fileID: 1886895013}
   target_floor: {fileID: 1416234253}
+  wave_transition_title: {fileID: 1892149475}
+  wave_transition_banner: {fileID: 1008986906}
+  wave_title_text: {fileID: 386291581}
+  wave_banner_text: {fileID: 1512057315}
   battle_bg_prefab: {fileID: 1903472682430984, guid: 2d6f4b82c4e7cce4eb6a6d8d1147dfbd,
     type: 2}
 --- !u!114 &94137934
@@ -1375,6 +1380,211 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &112855682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 112855683}
+  - component: {fileID: 112855691}
+  - component: {fileID: 112855690}
+  - component: {fileID: 112855689}
+  - component: {fileID: 112855688}
+  - component: {fileID: 112855687}
+  - component: {fileID: 112855686}
+  - component: {fileID: 112855685}
+  - component: {fileID: 112855684}
+  m_Layer: 5
+  m_Name: BI_W1_CrowHint1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &112855683
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 112855682}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224366120}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.0000009536743, y: -0.00000071525574}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &112855684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 112855682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: "[set-talk-sfx=vo_muninn]Use <color=lime>Physical</color> Spells to reduce
+    <color=yellow>Wech's Shield</color> to <color=orange>0</color>! \nHurry, before
+    they heal!"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &112855685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 112855682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]Your <color=#ff6eff>SWORD</color> and <color=#ff6eff>LANCE</color>;
+    <color=lime>Physical</color>-type attacks, hit Wech''s <color=red>Weakness</color>,
+    lowering their <color=yellow>Shield</color>.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &112855686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 112855682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]Do you see that <color=yellow>Shield Icon</color>?
+    With the number?'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &112855687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 112855682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: "[set-talk-sfx=vo_muninn]As much as I sympathize, we cannot get trapped in
+    an infinite battle with this fiend\u2026"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &112855688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 112855682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]Oh dear. Poor Wech is about to <color=lime>heal themself</color>.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &112855689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 112855682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Wechselbalg
+  text: "[set-talk-sfx=vo_demon]|shake|Rrrgh\u2026 *sniff* gotta cast <color=#ff6eff>SELFCARE</color>...\\shake\\\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &112855690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 112855682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Wechselbalg
+  text: "[set-talk-sfx=vo_demon]|shake|O-oww! *sniff* *sob* Y-you big meanie!!\\shake\\\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &112855691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 112855682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &125752890
 GameObject:
   m_ObjectHideFlags: 0
@@ -2500,6 +2710,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 212441381720716690, guid: 601dae665ceb1c845b6091afcc091783,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 212441381720716690, guid: 601dae665ceb1c845b6091afcc091783,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 212441381720716690, guid: 601dae665ceb1c845b6091afcc091783,
+        type: 2}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 601dae665ceb1c845b6091afcc091783, type: 2}
   m_IsPrefabParent: 0
@@ -2674,6 +2899,309 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &224366119
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224366120}
+  - component: {fileID: 224366135}
+  - component: {fileID: 224366134}
+  - component: {fileID: 224366133}
+  - component: {fileID: 224366132}
+  - component: {fileID: 224366131}
+  - component: {fileID: 224366130}
+  - component: {fileID: 224366129}
+  - component: {fileID: 224366128}
+  - component: {fileID: 224366127}
+  - component: {fileID: 224366126}
+  - component: {fileID: 224366125}
+  - component: {fileID: 224366124}
+  - component: {fileID: 224366123}
+  - component: {fileID: 224366122}
+  - component: {fileID: 224366121}
+  m_Layer: 5
+  m_Name: B_TUTORIAL_BOSS (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &224366120
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 224366119}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1193769782}
+  - {fileID: 112855683}
+  - {fileID: 1940760190}
+  - {fileID: 302712634}
+  - {fileID: 1475528142}
+  - {fileID: 1910542411}
+  - {fileID: 1118071906}
+  - {fileID: 429626607}
+  - {fileID: 1422806869}
+  - {fileID: 1885889533}
+  m_Father: {fileID: 1367704624}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &224366121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 224366119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d67eafccfc8f544a3a87154779a20a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interruptScene: {fileID: 1885889532}
+  target: 4
+  elementMustBe: 2
+  spellMustHit: 1
+  spellMustCrit: 0
+  spellMustStun: 0
+  damageMustBeAtLeast: 0
+  vsElementMustBe: -1
+--- !u!114 &224366122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 224366119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a6a8c775aac94141aa1eaa0428be588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interruptScene: {fileID: 1422806868}
+  seconds: 0
+--- !u!114 &224366123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 224366119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: The Fighter
+  Music: 
+  Enemy1: Wechselbalg
+  Enemy2: Ijiraq2
+  Enemy3: Bunbuku
+  Ally1: 
+  Ally2: 
+  events:
+  - {fileID: 224366122}
+  - {fileID: 224366121}
+--- !u!114 &224366124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 224366119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d67eafccfc8f544a3a87154779a20a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interruptScene: {fileID: 429626606}
+  target: 1
+  elementMustBe: 0
+  spellMustHit: 1
+  spellMustCrit: 0
+  spellMustStun: 0
+  damageMustBeAtLeast: 0
+  vsElementMustBe: 3
+--- !u!114 &224366125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 224366119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a6a8c775aac94141aa1eaa0428be588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interruptScene: {fileID: 1118071905}
+  seconds: 0
+--- !u!114 &224366126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 224366119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: Apyr
+  Music: 
+  Enemy1: 
+  Enemy2: Ijiraq
+  Enemy3: 
+  Ally1: 
+  Ally2: 
+  events:
+  - {fileID: 224366125}
+  - {fileID: 224366124}
+--- !u!114 &224366127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 224366119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d67eafccfc8f544a3a87154779a20a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interruptScene: {fileID: 1910542410}
+  target: 4
+  elementMustBe: 1
+  spellMustHit: 1
+  spellMustCrit: 0
+  spellMustStun: 0
+  damageMustBeAtLeast: 0
+  vsElementMustBe: -1
+--- !u!114 &224366128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 224366119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ceb155677720b641b33aef65f7438ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interruptScene: {fileID: 1475528141}
+--- !u!114 &224366129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 224366119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a6a8c775aac94141aa1eaa0428be588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interruptScene: {fileID: 302712633}
+  seconds: 0
+--- !u!114 &224366130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 224366119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: Crazy Ass
+  Music: 
+  Enemy1: 
+  Enemy2: Bunbuku
+  Enemy3: 
+  Ally1: 
+  Ally2: 
+  events:
+  - {fileID: 224366129}
+  - {fileID: 224366128}
+  - {fileID: 224366127}
+--- !u!114 &224366131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 224366119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0eb10eec0f7ecf4da89b33fc157a240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interruptScene: {fileID: 1940760189}
+--- !u!114 &224366132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 224366119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: decfadfcb3f890843b1cb235cc31835c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interruptScene: {fileID: 112855682}
+  whoToCheck: 1
+  healthRatio: 0.99
+--- !u!114 &224366133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 224366119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a6a8c775aac94141aa1eaa0428be588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interruptScene: {fileID: 1193769781}
+  seconds: 0
+--- !u!114 &224366134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 224366119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: Truck Freak
+  Music: bgm_battle_midboss
+  Enemy1: Lilim
+  Enemy2: Wechselbalg
+  Enemy3: 
+  Ally1: 
+  Ally2: 
+  events:
+  - {fileID: 224366133}
+  - {fileID: 224366132}
+  - {fileID: 224366131}
+  - {fileID: 224366131}
+--- !u!114 &224366135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 224366119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78f747d39ad2cb14a8b9e343e0f6bdc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &233566759
 GameObject:
   m_ObjectHideFlags: 0
@@ -2707,7 +3235,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2728,7 +3256,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[set-talk-sfx=vo_evil_eye]<color=red>YOU SEE... "|shake|I\shake\" AM "|shake|EYE\shake\".</color>'
+  text: '[clear-log=an][set-talk-sfx=vo_evil_eye]<color=red>YOU SEE... "|shake|I\shake\"
+    AM "|shake|EYE\shake\".</color>'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -2956,7 +3485,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1367704624}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3183,6 +3712,110 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!1 &285443320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 285443321}
+  - component: {fileID: 285443324}
+  - component: {fileID: 285443323}
+  - component: {fileID: 285443322}
+  m_Layer: 0
+  m_Name: SpaceBarIcon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &285443321
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 285443320}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -5760}
+  m_LocalScale: {x: 64, y: 64, z: 64}
+  m_Children:
+  - {fileID: 1045739264}
+  m_Father: {fileID: 2120598030}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 540, y: -284}
+  m_SizeDelta: {x: 1.78125, y: 0.8125}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &285443322
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 285443320}
+--- !u!95 &285443323
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 285443320}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c5521376893552642b89e8b7a5d62961, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!212 &285443324
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 285443320}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 93d6bfe95b83a9f4da365469daf085de, type: 3}
+  m_Color: {r: 0.891, g: 0.891, b: 0.903, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 0.5}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &293991026
 GameObject:
   m_ObjectHideFlags: 0
@@ -3265,6 +3898,143 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!1 &302712633
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 302712634}
+  - component: {fileID: 302712639}
+  - component: {fileID: 302712638}
+  - component: {fileID: 302712637}
+  - component: {fileID: 302712636}
+  - component: {fileID: 302712635}
+  m_Layer: 5
+  m_Name: BI_BUNBUKU_IN
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &302712634
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 302712633}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224366120}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &302712635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 302712633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Bunbuku
+  text: "[set-talk-sfx=vo_demon]<color=grey>|shake|(Just gotta <color=orange>Burn
+    their keys and let them singe themself to death\u2026</color>)\\shake\\</color>"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &302712636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 302712633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Bunbuku
+  text: '[set-talk-sfx=vo_demon]<color=grey>|shake|(Shit! This one ain''t playing
+    around! OK Bun Bun, you can do this...)\shake\</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &302712637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 302712633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Bunbuku
+  text: '[set-talk-sfx=vo_demon]|wave|Hehahahah! Wech''s a wimp! A chump like you
+    can''t beat the HEAT that I''m packing!\wave\'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &302712638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 302712633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: THE EVIL EYE
+  text: '[set-talk-sfx=vo_evil_eye]<color=red>THE SECOND OF THE ELITE: <color=yellow>BUNBUKU
+    THE WICKED</color>, OF THE <color=yellow>TANUKI</color>!</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &302712639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 302712633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &302921483
 GameObject:
   m_ObjectHideFlags: 0
@@ -3318,6 +4088,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pageTitle: {fileID: 285101383}
+  upArrow: {fileID: 563437036}
+  downArrow: {fileID: 983073164}
 --- !u!1 &309855629
 GameObject:
   m_ObjectHideFlags: 0
@@ -3344,11 +4116,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1264951112}
-  - {fileID: 507438986}
   - {fileID: 1600763268}
   - {fileID: 582150004}
   - {fileID: 233566760}
+  - {fileID: 507438986}
+  - {fileID: 1264951112}
   - {fileID: 143155700}
   - {fileID: 1160089769}
   - {fileID: 2043237239}
@@ -3434,6 +4206,188 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!1 &333406143
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 333406144}
+  - component: {fileID: 333406151}
+  - component: {fileID: 333406150}
+  - component: {fileID: 333406149}
+  - component: {fileID: 333406148}
+  - component: {fileID: 333406147}
+  - component: {fileID: 333406146}
+  - component: {fileID: 333406145}
+  m_Layer: 5
+  m_Name: BI_W2_CrowHint1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &333406144
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 333406143}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1495560080}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.0000009536743, y: -0.00000071525574}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &333406145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 333406143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: ???
+  text: '[set-talk-sfx=vo_muninn]You could probably use <color=#ff6eff>LANCE</color>
+    while <color=#ff6eff>SWORD</color> recharges and cycle between the two...'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &333406146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 333406143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: ???
+  text: '[set-talk-sfx=vo_muninn]Say, have you noticed that <color=green>TANUKI</color>''s
+    spell? <color=#ff6eff>LANCE</color>?'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &333406147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 333406143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: ???
+  text: "[set-talk-sfx=vo_muninn]Be careful not to leave yourself defenseless while
+    your Spells cooldown!\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &333406148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 333406143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: ???
+  text: "[set-talk-sfx=vo_muninn]<color=yellow>Cooldowns</color> are shown at the
+    bottom left of the screen.\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &333406149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 333406143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: ???
+  text: "[set-talk-sfx=vo_muninn]You may have noticed, but your spells must recharge
+    in <color=yellow>Cooldowns</color> before being cast again.\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &333406150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 333406143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: ???
+  text: "[set-talk-sfx=vo_muninn]Ah. The enemy forces continue to stand. Troublesome...\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &333406151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 333406143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &340179477
 GameObject:
   m_ObjectHideFlags: 0
@@ -3916,8 +4870,11 @@ GameObject:
   - component: {fileID: 386291580}
   - component: {fileID: 386291582}
   - component: {fileID: 386291581}
+  - component: {fileID: 386291584}
+  - component: {fileID: 386291583}
+  - component: {fileID: 386291585}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: WaveTitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3953,7 +4910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3980,6 +4937,51 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 386291579}
+--- !u!114 &386291583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 386291579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
+--- !u!114 &386291584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 386291579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1573420865, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
+--- !u!95 &386291585
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 386291579}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c63de6df3114c4247b9e6e55002b3ee6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &386865279
 GameObject:
   m_ObjectHideFlags: 0
@@ -4148,6 +5150,286 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &429626606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 429626607}
+  - component: {fileID: 429626618}
+  - component: {fileID: 429626617}
+  - component: {fileID: 429626616}
+  - component: {fileID: 429626615}
+  - component: {fileID: 429626614}
+  - component: {fileID: 429626613}
+  - component: {fileID: 429626612}
+  - component: {fileID: 429626611}
+  - component: {fileID: 429626610}
+  - component: {fileID: 429626609}
+  - component: {fileID: 429626608}
+  m_Layer: 5
+  m_Name: BI_W3_CrowHint1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &429626607
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 429626606}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224366120}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &429626608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 429626606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]<color=#ff6eff>AGNI</color> is <color=yellow>one
+    of many TYPOCRYPHA Prefixes, so keep an eye out for</color><color=lime> new Elemental
+    Prefixes to apply to your spells.</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &429626609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 429626606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]Use the <color=lime>SPACEBAR</color> to <color=yellow>connect
+    PREFIXES to BASE SPELL WORDS!</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &429626610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 429626606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]For instance, attaching the Prefix <color=#ff6eff>AGNI-</color>
+    onto the Spells <color=#ff6eff>-SWORD</color> and <color=#ff6eff>-LANCE</color>
+    <color=yellow>change the attack types from</color> <color=lime>PHYSICAL</color>
+    <color=yellow>to</color> <color=orange>FIRE</color>!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &429626611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 429626606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]The TYPOCRYPHA Elemental <color=yellow>Prefixes change
+    the Element Type of the attached Spell Word</color>.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &429626612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 429626606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]That Spell was modified with an official TYPOCRYPHA
+    Elemental <color=yellow>Prefix</color>.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &429626613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 429626606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]Do you recall the Spell <color=lime>Bunbuku</color>
+    was using? <color=#ff6eff>AGNI-SWORD</color>?'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites:
+  - {fileID: 21300000, guid: d6a4494b8ea2ead4897a7a9788307d12, type: 3}
+  - {fileID: 21300000, guid: d6a4494b8ea2ead4897a7a9788307d12, type: 3}
+  char_sprite_pos:
+  - {x: 8, y: 0}
+  - {x: -8, y: 0}
+--- !u!114 &429626614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 429626606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]Ah! I remembered something useful! Extremely useful!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &429626615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 429626606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]This is troublesome...'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &429626616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 429626606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: "[set-talk-sfx=vo_muninn]It appears <color=lime>Physical-type</color>\r Spells
+    won't do us any good, {NAME}."
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &429626617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 429626606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Ijiraq
+  text: '[set-talk-sfx=vo_demon]HA! FOOLISH HUMAN. I AM A PHANTOM. MAN''S WEAPONS
+    HURT ME NOT.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &429626618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 429626606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &454910323
 GameObject:
   m_ObjectHideFlags: 0
@@ -4421,7 +5703,7 @@ RectTransform:
   - {fileID: 103648362}
   - {fileID: 378626217}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4711,6 +5993,73 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 554071714}
+--- !u!1 &561094580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 561094581}
+  - component: {fileID: 561094583}
+  - component: {fileID: 561094582}
+  m_Layer: 5
+  m_Name: I_Gary_test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &561094581
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 561094580}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1495560080}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0.0000013113022}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &561094582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 561094580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Gary
+  text: Hi my name is Gary
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &561094583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 561094580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &563437036
 GameObject:
   m_ObjectHideFlags: 0
@@ -4720,7 +6069,8 @@ GameObject:
   m_Component:
   - component: {fileID: 563437037}
   - component: {fileID: 563437039}
-  - component: {fileID: 563437038}
+  - component: {fileID: 563437041}
+  - component: {fileID: 563437040}
   m_Layer: 5
   m_Name: UpArrow
   m_TagString: Untagged
@@ -4736,7 +6086,7 @@ RectTransform:
   m_GameObject: {fileID: 563437036}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 0}
+  m_LocalScale: {x: 64, y: 64, z: 0}
   m_Children: []
   m_Father: {fileID: 302921484}
   m_RootOrder: 5
@@ -4746,39 +6096,73 @@ RectTransform:
   m_AnchoredPosition: {x: 225, y: 2}
   m_SizeDelta: {x: 16, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &563437038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 563437036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 1976e747eb1a5d8468fc2c464c932418, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
 --- !u!222 &563437039
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 563437036}
+--- !u!212 &563437040
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 563437036}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 1895be05a28d5a04aacc0f026b792df5, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.5, y: 0.5}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+--- !u!95 &563437041
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 563437036}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9304f3a9a2e5c6444a0bd4c8acbfcec4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &564451696
 GameObject:
   m_ObjectHideFlags: 0
@@ -4885,7 +6269,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5188,6 +6572,7 @@ GameObject:
   m_Component:
   - component: {fileID: 602362910}
   - component: {fileID: 602362911}
+  - component: {fileID: 602362912}
   m_Layer: 0
   m_Name: SpaceBarIcon
   m_TagString: Untagged
@@ -5202,7 +6587,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 602362909}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 58.8, y: 85.6, z: -5760}
+  m_LocalPosition: {x: 64, y: 86.4, z: -5760}
   m_LocalScale: {x: 64, y: 64, z: 64}
   m_Children: []
   m_Father: {fileID: 261958434}
@@ -5252,6 +6637,23 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!95 &602362912
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 602362909}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c5521376893552642b89e8b7a5d62961, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &637485614
 GameObject:
   m_ObjectHideFlags: 0
@@ -7269,6 +8671,7 @@ GameObject:
   m_Component:
   - component: {fileID: 839056114}
   - component: {fileID: 839056115}
+  - component: {fileID: 839056116}
   m_Layer: 0
   m_Name: LeftArrow
   m_TagString: Untagged
@@ -7283,7 +8686,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 839056113}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1886895014}
@@ -7323,7 +8726,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -4
-  m_Sprite: {fileID: 21300000, guid: 59c126ab25a591140a5b42a98bcc3de5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d012f321ccf3bd14f961bcce8e2293a7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -7333,6 +8736,23 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!95 &839056116
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 839056113}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4dc6c780d20e0ca41956867cf7bbaca9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &839903225
 GameObject:
   m_ObjectHideFlags: 0
@@ -8677,8 +10097,8 @@ RectTransform:
   - {fileID: 837587310}
   - {fileID: 846874627}
   - {fileID: 898547072}
-  - {fileID: 1008986905}
   - {fileID: 1892149474}
+  - {fileID: 1008986905}
   m_Father: {fileID: 1668480233}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8799,6 +10219,189 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 0
+--- !u!1 &962960390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 962960391}
+  - component: {fileID: 962960398}
+  - component: {fileID: 962960397}
+  - component: {fileID: 962960396}
+  - component: {fileID: 962960395}
+  - component: {fileID: 962960394}
+  - component: {fileID: 962960393}
+  - component: {fileID: 962960392}
+  m_Layer: 5
+  m_Name: BI_W1_CrowHint1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &962960391
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 962960390}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1495560080}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.0000009536743, y: -0.00000071525574}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &962960392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 962960390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: ???
+  text: "[set-talk-sfx=vo_muninn]Type in <color=#ff6eff>SWORD</color> and hit the
+    ENTER key to cast the attack!\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &962960393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 962960390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: ???
+  text: '[set-talk-sfx=vo_muninn]Take the enemy''s <color=green>Spell Word</color>
+    for yourself!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &962960394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 962960390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: ???
+  text: "[set-talk-sfx=vo_muninn]Surely you see the word <color=#ff6eff>SWORD</color>,
+    yes? That is a <color=green>Spell Word</color>!\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &962960395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 962960390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: ???
+  text: '[set-talk-sfx=vo_muninn]You there! The one reading this! Look at the bottom
+    of the enemy''s <color=orange>Status Bars</color>!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &962960396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 962960390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: ???
+  text: "[set-talk-sfx=vo_muninn]Agh\u2026 it's against the rules for us to interfere,
+    but\u2026 "
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &962960397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 962960390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: ???
+  text: "[set-talk-sfx=vo_muninn]Oh, dear\u2026 it seems our story has not started
+    as planned!"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &962960398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 962960390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &965409673
 GameObject:
   m_ObjectHideFlags: 0
@@ -8889,7 +10492,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1367704624}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9049,7 +10652,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1367704624}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9202,7 +10805,8 @@ GameObject:
   m_Component:
   - component: {fileID: 983073165}
   - component: {fileID: 983073167}
-  - component: {fileID: 983073166}
+  - component: {fileID: 983073169}
+  - component: {fileID: 983073168}
   m_Layer: 5
   m_Name: DownArrow
   m_TagString: Untagged
@@ -9218,49 +10822,83 @@ RectTransform:
   m_GameObject: {fileID: 983073164}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 0}
+  m_LocalScale: {x: 64, y: 64, z: 0}
   m_Children: []
   m_Father: {fileID: 302921484}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 225, y: -212}
+  m_AnchoredPosition: {x: 225, y: -207}
   m_SizeDelta: {x: 16, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &983073166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 983073164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: ab535f9979597bb47840c74f3388251c, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
 --- !u!222 &983073167
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 983073164}
+--- !u!212 &983073168
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 983073164}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: d0664fdc17edde148a991ce09c676fbd, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 3, y: 0.5}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+--- !u!95 &983073169
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 983073164}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cd7d1ceb083d69143817b0d58be347f0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &986750323
 GameObject:
   m_ObjectHideFlags: 0
@@ -9360,13 +10998,14 @@ GameObject:
   - component: {fileID: 1008986905}
   - component: {fileID: 1008986907}
   - component: {fileID: 1008986906}
+  - component: {fileID: 1008986908}
   m_Layer: 5
-  m_Name: WaveTransition
+  m_Name: WaveBanner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1008986905
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9379,7 +11018,7 @@ RectTransform:
   m_Children:
   - {fileID: 1512057314}
   m_Father: {fileID: 945826267}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9398,7 +11037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -9419,6 +11058,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1008986904}
+--- !u!95 &1008986908
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1008986904}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9cef471cad594b6499d08a2fb0458ffa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1032457116
 GameObject:
   m_ObjectHideFlags: 0
@@ -9792,6 +11448,80 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1045739263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1045739264}
+  - component: {fileID: 1045739266}
+  - component: {fileID: 1045739265}
+  m_Layer: 0
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1045739264
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1045739263}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 1}
+  m_Children: []
+  m_Father: {fileID: 285443321}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 96, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1045739265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1045739263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: bafe4edddbfbcb34ca432fc1f3b48929, type: 3}
+    m_FontSize: 16
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 40
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: NEXT
+--- !u!222 &1045739266
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1045739263}
 --- !u!1 &1051860411
 GameObject:
   m_ObjectHideFlags: 0
@@ -10061,6 +11791,80 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!1 &1074766384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1074766385}
+  - component: {fileID: 1074766387}
+  - component: {fileID: 1074766386}
+  m_Layer: 0
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1074766385
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1074766384}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1076786474}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 96, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1074766386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1074766384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: bafe4edddbfbcb34ca432fc1f3b48929, type: 3}
+    m_FontSize: 16
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 40
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: NEXT
+--- !u!222 &1074766387
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1074766384}
 --- !u!1 &1076574518
 GameObject:
   m_ObjectHideFlags: 0
@@ -10177,6 +11981,110 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1076574518}
+--- !u!1 &1076786473
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1076786474}
+  - component: {fileID: 1076786477}
+  - component: {fileID: 1076786476}
+  - component: {fileID: 1076786475}
+  m_Layer: 0
+  m_Name: SpaceBarIcon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1076786474
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1076786473}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -5758.1577}
+  m_LocalScale: {x: 63.97953, y: 63.97953, z: 63.97953}
+  m_Children:
+  - {fileID: 1074766385}
+  m_Father: {fileID: 1576722629}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 539.8273, y: -293.90594}
+  m_SizeDelta: {x: 1.78125, y: 0.8125}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1076786475
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1076786473}
+--- !u!95 &1076786476
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1076786473}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c5521376893552642b89e8b7a5d62961, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!212 &1076786477
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1076786473}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 385345845
+  m_SortingLayer: 1
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 93d6bfe95b83a9f4da365469daf085de, type: 3}
+  m_Color: {r: 0.891, g: 0.891, b: 0.903, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 0.5}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &1077380234
 GameObject:
   m_ObjectHideFlags: 0
@@ -10514,6 +12422,141 @@ MonoBehaviour:
   mc_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
+--- !u!1 &1118071905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1118071906}
+  - component: {fileID: 1118071911}
+  - component: {fileID: 1118071910}
+  - component: {fileID: 1118071909}
+  - component: {fileID: 1118071908}
+  - component: {fileID: 1118071907}
+  m_Layer: 5
+  m_Name: BI_IJIRAQ_IN
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1118071906
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1118071905}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224366120}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1118071907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1118071905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Ijiraq
+  text: '[set-talk-sfx=vo_demon]I ONLY RESPECT EYE! EYE ALONE! THAT MEANS YOU DIE!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1118071908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1118071905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Ijiraq
+  text: '[set-talk-sfx=vo_demon]BUT HUMAN. YOU NOT LIVE FOREVER. UNLIKE EYE! PUNY
+    MORTAL.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1118071909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1118071905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Ijiraq
+  text: '[set-talk-sfx=vo_demon]BRAVE MAGICIAN, YOU ARE STRONG, LIKE EYE!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1118071910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1118071905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: THE EVIL EYE
+  text: '[set-talk-sfx=vo_evil_eye]<color=red>THE LAST OF THE ELITE: <color=yellow>THE
+    IJIRAQ</color>, <color=yellow>PHANTOM OF THE ARCTIC WINDS</color>!</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1118071911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1118071905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1132079680
 GameObject:
   m_ObjectHideFlags: 0
@@ -11259,6 +13302,209 @@ MonoBehaviour:
   mc_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
+--- !u!1 &1172810076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1172810077}
+  - component: {fileID: 1172810085}
+  - component: {fileID: 1172810084}
+  - component: {fileID: 1172810083}
+  - component: {fileID: 1172810082}
+  - component: {fileID: 1172810081}
+  - component: {fileID: 1172810080}
+  - component: {fileID: 1172810079}
+  - component: {fileID: 1172810078}
+  m_Layer: 5
+  m_Name: BI_W2_Eye1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1172810077
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1172810076}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1495560080}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.0000009536743, y: -0.00000071525574}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1172810078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1172810076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: ???
+  text: '[set-talk-sfx=vo_muninn][heal-player][heal-player][play-sfx=sfx_mystery_effect]Fear
+    not! I''ve healed your wounds! Now go, defeat that accursed stare!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1172810079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1172810076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: ???
+  text: "[set-talk-sfx=vo_muninn]Multiple foes come! Make haste! \nUse the <color=green>LEFT/RIGHT
+    ARROW KEYS</color> to change targets!\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1172810080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1172810076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: ???
+  text: '[set-talk-sfx=vo_muninn]...what? Who am I, you ask? [pause=0.5][play-sfx=sfx_damage_number][screen-shake=2.0,0.1]|shake|That''s
+    the least of your worries right now, {NAME}!\shake\'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1172810081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1172810076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: ???
+  text: "[set-talk-sfx=vo_muninn]|shake|Yes! Yes!\\shake\\ I knew you could do it!\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1172810082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1172810076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: THE EVIL EYE
+  text: '[set-talk-sfx=vo_evil_eye]<color=red>YOU ONLY DELAY THE INEVITABLE...</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1172810083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1172810076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: THE EVIL EYE
+  text: '[set-talk-sfx=vo_evil_eye]<color=red>HOW AMUSING. BUT IT MATTERS NOT.</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1172810084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1172810076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: THE EVIL EYE
+  text: "[set-talk-sfx=vo_evil_eye]<color=red>...SO IT SEEMS YOU ARE LESS OF A FOOL
+    THAN I HAD IMAGINED.</color>\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1172810085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1172810076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1187835793
 GameObject:
   m_ObjectHideFlags: 0
@@ -11370,6 +13616,188 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wavy_sprite: {fileID: 1187835794}
   bg_dimmer: {fileID: 454910325}
+--- !u!1 &1193769781
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1193769782}
+  - component: {fileID: 1193769789}
+  - component: {fileID: 1193769788}
+  - component: {fileID: 1193769787}
+  - component: {fileID: 1193769786}
+  - component: {fileID: 1193769785}
+  - component: {fileID: 1193769784}
+  - component: {fileID: 1193769783}
+  m_Layer: 5
+  m_Name: BI_WECHSELBALG_IN
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1193769782
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1193769781}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224366120}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.0000009536743, y: -0.00000071525574}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1193769783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1193769781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Wechselbalg
+  text: '[set-talk-sfx=vo_demon]|shake|H-hey! Mx. {NAME}! No holding back! I''M GONNA
+    TEAR YOU APART!\shake\'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1193769784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1193769781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Wechselbalg
+  text: "[set-talk-sfx=vo_demon]<color=grey>|shake|(Scary Eye\u2026 Scary Eye!! N-noooo!!!)\\shake\\</color>\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1193769785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1193769781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: THE EVIL EYE
+  text: '[set-talk-sfx=vo_evil_eye]<color=red>INSOLENT FOOL! <color=yellow>WECH</color>!
+    ENOUGH! KILL {NAME}, ELSE I WILL HAVE YOUR HEAD!</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1193769786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1193769781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Wechselbalg
+  text: "[set-talk-sfx=vo_demon]<color=grey>|shake|(M-maybe if I hold out, Mx. {NAME}
+    will just die of old age...)\\shake\\</color>\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1193769787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1193769781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Wechselbalg
+  text: "[set-talk-sfx=vo_demon]<color=grey>|shake|(W-wahhh\u2026!!! I can't fight
+    a monster like them! Their eyes are scary!)\\shake\\</color>\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1193769788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1193769781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: THE EVIL EYE
+  text: '[set-talk-sfx=vo_evil_eye]<color=red>THE FIRST OF THE ELITE: <color=yellow>WECHSELBALG
+    THE BLESSED</color>, OF THE <color=yellow>CHANGELINGS</color>!</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1193769789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1193769781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1202342159
 GameObject:
   m_ObjectHideFlags: 0
@@ -12531,6 +14959,142 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1220154299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1220154300}
+  - component: {fileID: 1220154305}
+  - component: {fileID: 1220154304}
+  - component: {fileID: 1220154303}
+  - component: {fileID: 1220154302}
+  - component: {fileID: 1220154301}
+  m_Layer: 5
+  m_Name: BI_W1_Eye1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1220154300
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1220154299}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1495560080}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.0000009536743, y: -0.00000071525574}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1220154301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1220154299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: THE EVIL EYE
+  text: "[set-talk-sfx=vo_evil_eye]<color=red>MY <color=yellow>DEMONS</color> SHALL
+    ESCORT YOU TO THE OTHER SIDE\u2026 COME. THERE IS NO OTHER WAY.</color>\r\n"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1220154302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1220154299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: THE EVIL EYE
+  text: "[set-talk-sfx=vo_evil_eye]<color=red>|shake|PERHAPS IF YOU ACTUALLY KNEW
+    HOW TO CHANNEL THE DARK ARTS\u2026 HAHAHAHA. FOOL.\\shake\\</color>"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1220154303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1220154299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: THE EVIL EYE
+  text: '[set-talk-sfx=vo_evil_eye]<color=red>YOU WILL CARRY OUR CURSE TO THE GRAVE...</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1220154304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1220154299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: THE EVIL EYE
+  text: '[set-talk-sfx=vo_evil_eye]<color=red>SURRENDER, {NAME}. YOU CANNOT ESCAPE
+    YOUR INEVITABLE FATE.</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1220154305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1220154299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1236017523
 GameObject:
   m_ObjectHideFlags: 0
@@ -12949,6 +15513,7 @@ GameObject:
   - component: {fileID: 1264951114}
   - component: {fileID: 1264951124}
   - component: {fileID: 1264951123}
+  - component: {fileID: 1264951128}
   - component: {fileID: 1264951113}
   - component: {fileID: 1264951126}
   - component: {fileID: 1264951127}
@@ -12980,7 +15545,7 @@ RectTransform:
   - {fileID: 748311217}
   - {fileID: 1089634085}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13000,9 +15565,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title: The Fighter
   Music: 
-  Enemy1: Wechselbalg
-  Enemy2: Ijiraq2
-  Enemy3: Bunbuku
+  Enemy1: Tanooki
+  Enemy2: Tanuki
+  Enemy3: Tater Totnuki
   Ally1: 
   Ally2: 
   events:
@@ -13021,9 +15586,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title: Apyr
   Music: 
-  Enemy1: 
-  Enemy2: Ijiraq
-  Enemy3: 
+  Enemy1: Ala
+  Enemy2: 
+  Enemy3: Ijiraq
   Ally1: 
   Ally2: 
   events:
@@ -13062,10 +15627,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: Truck Freak
+  Title: Element Casting
   Music: bgm_battle_midboss
   Enemy1: 
-  Enemy2: Wechselbalg
+  Enemy2: Lilim
   Enemy3: 
   Ally1: 
   Ally2: 
@@ -13232,6 +15797,25 @@ MonoBehaviour:
   spellMustStun: 0
   damageMustBeAtLeast: 0
   vsElementMustBe: -1
+--- !u!114 &1264951128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1264951111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: 
+  Music: 
+  Enemy1: 
+  Enemy2: Wechselbalg
+  Enemy3: 
+  Ally1: 
+  Ally2: 
+  events: []
 --- !u!1 &1275802614
 GameObject:
   m_ObjectHideFlags: 0
@@ -13933,6 +16517,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1495560080}
+  - {fileID: 224366120}
   - {fileID: 1202342160}
   - {fileID: 1798950428}
   - {fileID: 1605901049}
@@ -14266,6 +16852,304 @@ MonoBehaviour:
   - {fileID: 1866936994}
   - {fileID: 268400755}
   - {fileID: 1924691108}
+--- !u!1 &1422806868
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1422806869}
+  - component: {fileID: 1422806881}
+  - component: {fileID: 1422806880}
+  - component: {fileID: 1422806879}
+  - component: {fileID: 1422806878}
+  - component: {fileID: 1422806877}
+  - component: {fileID: 1422806876}
+  - component: {fileID: 1422806875}
+  - component: {fileID: 1422806874}
+  - component: {fileID: 1422806873}
+  - component: {fileID: 1422806872}
+  - component: {fileID: 1422806871}
+  - component: {fileID: 1422806870}
+  m_Layer: 5
+  m_Name: BI_ALL_IN
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1422806869
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1422806868}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224366120}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1422806870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1422806868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[heal-player][play-sfx=sfx_mystery_effect]<color=lime>|shake|GO! I BELIEVE
+    IN YOUR DESTINY, {NAME}!!!\shake\</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1422806871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1422806868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]And most importantly: <color=yellow>if you can read
+    the Spell an enemy is using,</color> <color=lime>you can use it against them too!</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1422806872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1422806868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]THE <color=yellow>SPELLBOOK</color>! ELEMENTAL <color=yellow>PREFIXES</color>!
+    ELEMENTAL <color=yellow>WEAKNESSES</color>! <color=yellow>STAGGER</color>! '
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1422806873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1422806868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]{NAME}! This is it! Use the culmination of all that
+    you''ve learned!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1422806874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1422806868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]They''ve all been revived... trapped in an eternal
+    pact with Eye, it seems...'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1422806875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1422806868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: THE EVIL EYE
+  text: "[set-talk-sfx=vo_evil_eye]<color=red>DO NOT STRUGGLE ANY FURTHER, {NAME}!
+    \nEMBRACE OUR INFINITE TOTALITY!</color>"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1422806876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1422806868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: THE EVIL EYE
+  text: '[set-talk-sfx=vo_evil_eye]<color=red>ALL THE WORLD''S NARRATIVES, STORIES,
+    MYTHS, ARE ALL MY OWN... UNDER ONE CULTURE OF EYE!</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1422806877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1422806868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: THE EVIL EYE
+  text: '[set-talk-sfx=vo_evil_eye]<color=red>HAHAHAHA. TRY AS YOU MIGHT, MY LEGION
+    IS UNYIELDING.</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1422806878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1422806868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Ijiraq
+  text: '[set-talk-sfx=vo_demon]CASTER! UNTIL YOUR SOUL IS OURS, WE WON''T STOP UNTIL
+    WE FALL!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1422806879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1422806868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Bunbuku
+  text: '[set-talk-sfx=vo_demon]|wave|We still have one more round of fighting spirit
+    in us!\wave\'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1422806880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1422806868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Wechselbalg
+  text: '[remove-all-character][set-talk-sfx=vo_demon]|shake|I-it''s not over yet
+    Mx. {NAME}!!\shake\'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1422806881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1422806868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1426907829
 GameObject:
   m_ObjectHideFlags: 0
@@ -14505,7 +17389,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 57866461}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.999995
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -14838,6 +17722,316 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1475528141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1475528142}
+  - component: {fileID: 1475528147}
+  - component: {fileID: 1475528146}
+  - component: {fileID: 1475528145}
+  - component: {fileID: 1475528144}
+  - component: {fileID: 1475528143}
+  m_Layer: 5
+  m_Name: BI_W2_CrowHint1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1475528142
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1475528141}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224366120}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.0000009536743, y: -0.00000071525574}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1475528143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1475528141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: "[set-talk-sfx=vo_muninn]It gives a brief description of every Spell that
+    you encounter, so be sure to read it. \nLike the effects of <color=#ff6eff>STRESS</color>..."
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1475528144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1475528141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: "[set-talk-sfx=vo_muninn]The <color=lightblue>Spellbook</color> can be found
+    on the bottom right half of the screen.\r <color=lime>Pages can be navigated using
+    the UP/DOWN Arrow Keys.</color>"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1475528145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1475528141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: "[set-talk-sfx=vo_muninn]Did you know that <color=lime>all of the Spells that
+    You and the Enemy use are registered to a <color=lightblue>Spellbook</color>?</color>\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1475528146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1475528141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: "[set-talk-sfx=vo_muninn]...Oh. Did you just register <color=#ff6eff>STRESS</color>??
+    That's\u2026 not a useful Spell at all\u2026"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1475528147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1475528141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1495560079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1495560080}
+  - component: {fileID: 1495560088}
+  - component: {fileID: 1495560087}
+  - component: {fileID: 1495560086}
+  - component: {fileID: 1495560085}
+  - component: {fileID: 1495560084}
+  - component: {fileID: 1495560083}
+  - component: {fileID: 1495560082}
+  - component: {fileID: 1495560081}
+  m_Layer: 5
+  m_Name: B_TUTORIAL (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1495560080
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1495560079}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 561094581}
+  - {fileID: 1220154300}
+  - {fileID: 962960391}
+  - {fileID: 1172810077}
+  - {fileID: 333406144}
+  m_Father: {fileID: 1367704624}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1495560081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1495560079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: 'Succ 3: We''re All Doomed Now'
+  Music: 
+  Enemy1: Changeling
+  Enemy2: Tanuki
+  Enemy3: Changeling
+  Ally1: 
+  Ally2: 
+  events: []
+--- !u!114 &1495560082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1495560079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65151f09bc0562f498db93eb9aa25ee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interruptScene: {fileID: 333406143}
+  triggerAfterXAttacks: 1
+--- !u!114 &1495560083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1495560079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a6a8c775aac94141aa1eaa0428be588, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interruptScene: {fileID: 1172810076}
+  seconds: 0
+--- !u!114 &1495560084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1495560079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: 'U Succ 2: The Succening'
+  Music: bgm_battle_normal
+  Enemy1: tanuki
+  Enemy2: 
+  Enemy3: changeling
+  Ally1: 
+  Ally2: 
+  events:
+  - {fileID: 1495560083}
+  - {fileID: 1495560082}
+--- !u!114 &1495560085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1495560079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: decfadfcb3f890843b1cb235cc31835c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interruptScene: {fileID: 962960390}
+  whoToCheck: 4
+  healthRatio: 0.95
+--- !u!114 &1495560086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1495560079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: decfadfcb3f890843b1cb235cc31835c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interruptScene: {fileID: 1220154299}
+  whoToCheck: 4
+  healthRatio: 1
+--- !u!114 &1495560087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1495560079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: U Succ
+  Music: 
+  Enemy1: 
+  Enemy2: changeling
+  Enemy3: 
+  Ally1: 
+  Ally2: 
+  events:
+  - {fileID: 1495560086}
+  - {fileID: 1495560085}
+--- !u!114 &1495560088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1495560079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78f747d39ad2cb14a8b9e343e0f6bdc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1500259168
@@ -15344,8 +18538,11 @@ GameObject:
   - component: {fileID: 1512057314}
   - component: {fileID: 1512057316}
   - component: {fileID: 1512057315}
+  - component: {fileID: 1512057318}
+  - component: {fileID: 1512057317}
+  - component: {fileID: 1512057319}
   m_Layer: 5
-  m_Name: WaveTransitionText
+  m_Name: WaveBannerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15381,7 +18578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -15408,6 +18605,51 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1512057313}
+--- !u!114 &1512057317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1512057313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
+--- !u!114 &1512057318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1512057313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1573420865, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
+--- !u!95 &1512057319
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1512057313}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 02596e56ffe82894f87d0655b3d7f739, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1528927273
 GameObject:
   m_ObjectHideFlags: 0
@@ -16432,6 +19674,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1569867576}
   - component: {fileID: 1569867577}
+  - component: {fileID: 1569867578}
   m_Layer: 0
   m_Name: RightArrow
   m_TagString: Untagged
@@ -16446,7 +19689,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1569867575}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1886895014}
@@ -16486,7 +19729,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -4
-  m_Sprite: {fileID: 21300000, guid: 005bd1509503ede4fb79f91e18a5dbc9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2c5d4121541a2b740aec6c25fd5368a9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -16496,6 +19739,23 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!95 &1569867578
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1569867575}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6356f823551db5d48aada6f7a273e285, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1576722628
 GameObject:
   m_ObjectHideFlags: 0
@@ -16527,6 +19787,7 @@ RectTransform:
   - {fileID: 2019979132}
   - {fileID: 175503771}
   - {fileID: 1076574519}
+  - {fileID: 1076786474}
   m_Father: {fileID: 2042309535}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16670,7 +19931,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16766,8 +20027,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[set-talk-sfx=vo_illyia]But hey, this is a visual novel typing RPG made by
-    a bunch of nerds, so don''t think about it too hard?[pause=0.5] Eh...'
+  text: '[clear-log=chat][set-talk-sfx=vo_illyia]But hey, this is a visual novel typing
+    RPG made by a bunch of nerds, so don''t think about it too hard?[pause=0.5] Eh...'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -16893,7 +20154,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1367704624}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17727,7 +20988,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1367704624}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18603,7 +21864,7 @@ RectTransform:
   m_Children:
   - {fileID: 55851403}
   m_Father: {fileID: 1367704624}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -19540,6 +22801,97 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &1885889532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1885889533}
+  - component: {fileID: 1885889536}
+  - component: {fileID: 1885889535}
+  - component: {fileID: 1885889534}
+  m_Layer: 5
+  m_Name: BI_W4_CrowHint1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1885889533
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1885889532}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224366120}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1885889534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1885889532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]<color=aqua>ICE</color> attacks <color=yellow>will
+    disable keys until you mash the keys and break the ice.</color> Get out the icepicks...'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1885889535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1885889532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]Is it cold in here, or...? No, no, it''s just |shake|YOUR
+    TYPOCRYPHA KEYS HAVE BEEN FROZEN\shake\, is all.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1885889536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1885889532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1886895013
 GameObject:
   m_ObjectHideFlags: 0
@@ -19740,30 +23092,31 @@ GameObject:
   - component: {fileID: 1892149474}
   - component: {fileID: 1892149476}
   - component: {fileID: 1892149475}
+  - component: {fileID: 1892149477}
   m_Layer: 5
   m_Name: WaveTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1892149474
 RectTransform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1892149473}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 386291580}
   m_Father: {fileID: 945826267}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 2228}
+  m_AnchoredPosition: {x: 0, y: 228}
   m_SizeDelta: {x: 1280, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1892149475
@@ -19778,7 +23131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -19799,6 +23152,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1892149473}
+--- !u!95 &1892149477
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1892149473}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 41a63555509ff904696e97e2a1d7129e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1893323172
 GameObject:
   m_ObjectHideFlags: 0
@@ -19957,6 +23327,120 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1898592525}
+--- !u!1 &1910542410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1910542411}
+  - component: {fileID: 1910542415}
+  - component: {fileID: 1910542414}
+  - component: {fileID: 1910542413}
+  - component: {fileID: 1910542412}
+  m_Layer: 5
+  m_Name: BI_W2_CrowHint2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1910542411
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1910542410}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224366120}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1910542412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1910542410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: "[set-talk-sfx=vo_muninn]|shake|<color=orange>FIRE</color> attacks will <color=yellow>burn
+    your keys and make you take damage if you touch them\u2026</color>\\shake\\"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1910542413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1910542410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]|shake|Getting hit by <color=yellow>Elemental Attacks</color>
+    causes <color=orange>Status Conditions to your TYPOCRYPHA Keys!!</color>\shake\'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1910542414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1910542410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]A-ah! |shake|<color=orange>YOUR TYPOCRYPHA IS ON
+    FIRE!!</color>\shake\'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1910542415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1910542410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1922726210
 GameObject:
   m_ObjectHideFlags: 0
@@ -20152,6 +23636,166 @@ MonoBehaviour:
   name_text: {fileID: 542575122}
   health_bar: {fileID: 2052168731}
   shield_bar: {fileID: 1297724878}
+--- !u!1 &1940760189
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1940760190}
+  - component: {fileID: 1940760196}
+  - component: {fileID: 1940760195}
+  - component: {fileID: 1940760194}
+  - component: {fileID: 1940760193}
+  - component: {fileID: 1940760192}
+  - component: {fileID: 1940760191}
+  m_Layer: 5
+  m_Name: BI_W1_CrowHint2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1940760190
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1940760189}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224366120}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1940760191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1940760189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]|shake|Now strike while the iron''s hot!\shake\'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1940760192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1940760189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]You can check an enemy''s <color=red>Elemental Weaknesses</color>
+    by pressing the <color=green>SHIFT Key</color>!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1940760193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1940760189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]You can <color=orange>STAGGER</color> enemies by
+    <color=yellow>hitting their</color> <color=red>Elemental Weaknesses</color> <color=yellow>or
+    landing a</color> <color=red>Critical Hit</color>!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1940760194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1940760189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]<color=orange>STAGGERED</color> enemies have their
+    casting paused and take more damage! <color=lime>Wech cannot heal in this state!</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1940760195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1940760189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Crow Anima, Muninn
+  text: '[set-talk-sfx=vo_muninn]Excellent! By reducing their Shield to Zero, you''ve
+    <color=orange>|wave|STAGGERED\wave\</color> the enemy!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1940760196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1940760189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1960792548
 GameObject:
   m_ObjectHideFlags: 0
@@ -21813,6 +25457,7 @@ RectTransform:
   - {fileID: 293991027}
   - {fileID: 1860185587}
   - {fileID: 1434939591}
+  - {fileID: 285443321}
   m_Father: {fileID: 1668480233}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

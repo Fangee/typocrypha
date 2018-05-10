@@ -37,6 +37,7 @@ public class CastManager : MonoBehaviour
         //Send spell, Enemy state, and target index to parser and caster
         CastStatus status = spellDict.parse(spell.ToLower(), out s);
         Pair<bool[], bool[]> targetPattern = null;
+        callback.clearBuffer();
         switch (status)
         {
             case CastStatus.SUCCESS:
@@ -45,17 +46,14 @@ public class CastManager : MonoBehaviour
                 message = chat.getLine(field.Player.Stats.ChatDatabaseID);
                 preCastEffects(targetPattern, field.Player, s, message);
                 StartCoroutine(pauseAttackCurrent(s, field.Player));
-                callback.clearBuffer();
                 return true; //Clear the casting buffer
             case CastStatus.BOTCH:
                 //diplay.playBotchEffects
                 spellEffects.popp.spawnSprite("popups_invalid", 1.0F, field.Player.Transform.position - new Vector3(0, 0.375f, 0));
-                callback.clearBuffer();
                 return true; //Clear the casting buffer
             case CastStatus.FIZZLE:
                 //diplay.playBotchEffects
                 spellEffects.popp.spawnSprite("popups_invalid", 1.0F, field.Player.Transform.transform.position - new Vector3(0, 0.375f, 0));
-                callback.clearBuffer();
                 return true; //Clear the casting buffer
             case CastStatus.ONCOOLDOWN:
                 //display.playOnCooldownEffects
@@ -73,7 +71,6 @@ public class CastManager : MonoBehaviour
                 message = chat.getLine(field.player_arr[allyPos].Stats.ChatDatabaseID);
                 preCastEffects(targetPattern, field.player_arr[allyPos], s, message);
                 StartCoroutine(pauseAttackCurrent(s, field.player_arr[allyPos]));
-                callback.clearBuffer();
                 return true; //Clear the casting buffer
             default:
                 return false;

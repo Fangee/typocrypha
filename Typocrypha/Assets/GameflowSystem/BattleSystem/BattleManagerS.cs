@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleManagerS : MonoBehaviour {
     public static BattleManagerS main = null;
     public Player player;
     public TrackTyping trackTyping;
+    public BattleKeyboard battleKeyboard;
     public BattleUI uiManager;
     public CastManager castManager;
     public EnemyDatabase enemyData;
@@ -85,6 +87,11 @@ public class BattleManagerS : MonoBehaviour {
                 AudioPlayer.main.playSFX("sfx_spellbook_scroll", 0.3F);
             //else {play sfx_thud (player is on the last page this direction)}
         }
+
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            trackTyping.revertBuffer();
+        }
     }
 
     public void setEnabled(bool e)
@@ -98,14 +105,20 @@ public class BattleManagerS : MonoBehaviour {
         trackTyping.enabled = !p;
     }
 
+    //MAIN BATTLE FLOW-----------------------------------------------------------------------//
+
     // start battle scene
     public void startBattle(GameObject new_battle)
     {
+        //Reset player stats and status
         player.restoreToFull();
+        battleKeyboard.clearStatus();
         castManager.cooldown.removeAll();
+        //Reset BattleManager curr variables
         curr_battle = new_battle;
         curr_wave = -1;
         waves = new_battle.GetComponents<BattleWave>();
+        //Reset target
 		field.target_ind = 1;
         StartCoroutine(finishBattlePrep());
     }
@@ -116,36 +129,58 @@ public class BattleManagerS : MonoBehaviour {
 		pause = true;
         BattleEffects.main.battleTransitionEffect("swirl_in", 1f);
         yield return new WaitForSeconds(1f);
-        uiManager.initialize();
-		nextWave ();
-		BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
-        yield return new WaitForSeconds(2f);      
-		pause = false;
-        checkInterrupts();
+        uiManager.initBg();
+        BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
+        yield return new WaitForSeconds(1f);
+        nextWave();
     }
     // go to next wave (also starts first wave for real)
     public void nextWave()
     {
-		resetInterruptData();
-		if (++curr_wave >= waves.Length)
-		{
-			Debug.Log("Encounter over: going to victory screen");
-			victoryScreen();
-			return;
-		}
-		Debug.Log("starting wave: " + Wave.Title);
-		foreach (Transform tr in transform) 
-		{
-			Destroy (tr.gameObject);
-		}
-		uiManager.startWave();
-		createEnemies(Wave);
-		uiManager.updateUI ();
-		waveTransition(Wave.Title);
-		if(Wave.Music != string.Empty)
-			AudioPlayer.main.playMusic(Wave.Music);
-		if(curr_wave != 0)
-			checkInterrupts();
+        if (++curr_wave >= waves.Length)
+        {
+            Debug.Log("Encounter over: going to victory screen");
+            victoryScreen();
+            return;
+        }
+        StartCoroutine(waveTransition());
+    }
+    private IEnumerator waveTransition()
+    {
+        setPause(true);
+        resetInterruptData();
+        Debug.Log("starting wave: " + Wave.Title);
+        foreach (Transform tr in transform)
+        {
+            Destroy(tr.gameObject);
+        }
+        //Clear UI for new wave
+        uiManager.startWave();
+        //Play Wave transition and wait for the animation to finish (plays the SFX too)
+        uiManager.waveTransition(Wave.Title, curr_wave + 1, waves.Length);
+        yield return new WaitForSeconds(1.2f);
+        uiManager.wave_banner_text.GetComponent<Animator>().enabled = false;
+        uiManager.wave_transition_banner.GetComponent<Animator>().enabled = false;
+        uiManager.wave_title_text.GetComponent<Animator>().enabled = false;
+        uiManager.wave_transition_title.GetComponent<Animator>().enabled = false;
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+        uiManager.wave_banner_text.GetComponent<Animator>().enabled = true;
+        uiManager.wave_transition_banner.GetComponent<Animator>().enabled = true;
+        uiManager.wave_title_text.GetComponent<Animator>().enabled = true;
+        uiManager.wave_transition_title.GetComponent<Animator>().enabled = true;
+        AudioPlayer.main.playSFX("sfx_enter");
+        AudioPlayer.main.playSFX("sfx_enemy_death");
+        yield return new WaitForSeconds(0.8f);
+        //Create enemies and update Typocrypha HUD
+        createEnemies(Wave);
+        if (curr_wave == 0)
+            uiManager.initTarget();
+        uiManager.updateUI();
+        if (Wave.Music != string.Empty)
+            AudioPlayer.main.playMusic(Wave.Music);
+        if (checkInterrupts() == false)
+            setPause(false);
+        yield return true;
     }
     // show victory screen after all waves are done
     public void victoryScreen()
@@ -169,9 +204,13 @@ public class BattleManagerS : MonoBehaviour {
         GameflowManager.main.next();
 
     }
+
+    //END MAIN BATTLE FLOW-------------------------------------------------------------------//
+
     //Handles a spellcast (by calling the castmanager) and clears callback's buffer if necessary
     public void handleSpellCast(string spell, TrackTyping callback)
     {
+        AudioPlayer.main.playSFX("sfx_enter"); // MIGHT WANT TO BE MOVED
         castManager.attackCurrent(spell, callback);
     }
     //Handle player death
@@ -198,6 +237,31 @@ public class BattleManagerS : MonoBehaviour {
         resetInterruptData();
         uiManager.clear();
         startBattle(curr_battle);
+    }
+    //Update Enemies and Check for death
+    public void updateEnemies()
+    {
+        for (int i = 0; i < field.enemy_arr.Length; i++)
+        {
+            if (field.enemy_arr[i] != null && !field.enemy_arr[i].Is_dead)
+            {
+                field.enemy_arr[i].updateCondition();
+                if (field.enemy_arr[i].Is_dead)
+                    ++field.curr_dead;
+            }
+        }
+        uiManager.updateUI();
+        if (player.Is_dead)
+        {
+            playerDeath();
+        }
+        else if (field.curr_dead >= field.enemy_count) // next wave if all enemies dead
+        {
+            Debug.Log("Wave: " + Wave.Title + " complete!");
+            nextWave();
+        }
+        else
+            checkInterrupts();
     }
 
     //Create all enemies for this wave
@@ -230,43 +294,17 @@ public class BattleManagerS : MonoBehaviour {
         field.enemy_arr[i] = enemy;
     }
 
-    private void waveTransition(string Title)
-    {
-		//uiManager.initialize();
-    }
-
-    public void updateEnemies()
-    {
-        for (int i = 0; i < field.enemy_arr.Length; i++)
-        {
-            if (field.enemy_arr[i] != null && !field.enemy_arr[i].Is_dead)
-            {
-                field.enemy_arr[i].updateCondition();
-                if (field.enemy_arr[i].Is_dead)
-                    ++field.curr_dead;
-            }
-        }
-        uiManager.updateUI();
-        if(player.Is_dead)
-        {
-            playerDeath();
-        }
-        else if (field.curr_dead == field.enemy_count) // next wave if all enemies dead
-        {
-            Debug.Log("Wave: " + Wave.Title + " complete!");
-            nextWave();
-        }
-        else
-            checkInterrupts();
-    }   
-
-    private void checkInterrupts()
+    private bool checkInterrupts()
     {
         foreach (BattleEventTrigger e in Wave.events)
         {
             if (!e.HasTriggered && e.checkTrigger(field) && e.onTrigger(field))
+            {
                 setPause(true);
+                return true;
+            }
         }
+        return false;
     }
 
     private void resetInterruptData()

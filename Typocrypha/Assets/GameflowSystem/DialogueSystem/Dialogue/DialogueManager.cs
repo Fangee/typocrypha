@@ -32,6 +32,7 @@ public class DialogueManager : MonoBehaviour {
 
 	int curr_line; // Current line number of dialogue
 	float window_height; // Height of dialogue history
+	float default_window_height; // Default Height of dialogue history (to reset)
 	Coroutine slide_scroll_cr; // Coroutine that smoothly adjusts window
 	List<DialogueBox> history; // List of all dialogue boxes
 	List<GameObject> chr_spr_list; // List of character sprite holders
@@ -48,6 +49,7 @@ public class DialogueManager : MonoBehaviour {
 		block_input = false;
 		curr_line = -1;
 		window_height = top_space;
+		default_window_height = top_space;
 		history = new List<DialogueBox> ();
 		chr_spr_list = new List<GameObject> ();
 		input = false;
@@ -112,12 +114,14 @@ public class DialogueManager : MonoBehaviour {
 				VNView.SetActive (false);
 				ChatView.SetActive (true);
 				ANView.SetActive (false);
+				//clearLog (ChatView);
 				GameObject d_obj = Instantiate (dialogue_box_prefab, ChatContent);
 				d_box = d_obj.GetComponent<DialogueBox> ();
 			} else if (d_item.GetType () == typeof(DialogueItemAN)) {
 				VNView.SetActive (false);
 				ChatView.SetActive (false);
 				ANView.SetActive (true);
+				//clearLog (ANView);
 				GameObject d_obj = Instantiate (an_dialouge_box_prefab, ANContent);
 				d_box = d_obj.GetComponent<DialogueBox> ();
 			}
@@ -202,6 +206,13 @@ public class DialogueManager : MonoBehaviour {
 		slide_scroll_cr = StartCoroutine (slideScrollCR());
 	}
 
+	// Resets height of chat window
+	public void resetWindowSize(){
+		window_height = default_window_height;
+		ChatContent.sizeDelta = new Vector2 (ChatContent.sizeDelta.x, window_height);
+		stopSlideScroll ();
+	}
+
 	// Stops slide adjustment of window
 	public void stopSlideScroll() {
 		if (slide_scroll_cr != null) StopCoroutine (slide_scroll_cr);
@@ -265,5 +276,38 @@ public class DialogueManager : MonoBehaviour {
 			Destroy (chr_spr);
 		}
 		chr_spr_list.Clear ();
+	}
+
+	// Clears the given chat log of all objects in its hierarchy (general function)
+	public void clearLog(GameObject textView, int offset){
+		resetWindowSize();
+		Transform content = textView.transform.GetChild(0).GetChild(0);
+		int skipSpacer = 0; // skip the Spacer object in the content hierarchy
+		//VerticalLayoutGroup layout = content.GetComponents<VerticalLayoutGroup>();
+		Transform[] contentArray = content.GetComponentsInChildren<Transform>();
+		int skipCurrentBox = 0; // tracks when to stop going through log as to not delete current textbox
+		int currentBoxPosition = contentArray.Length - (offset*2); // when to stop deleting items
+		Debug.Log ("current box position = " + currentBoxPosition);
+		foreach (Transform tr in content.transform) {
+			if (skipSpacer > 0 && skipCurrentBox < currentBoxPosition) {
+				Destroy (tr.gameObject);
+				skipCurrentBox += offset;
+			}
+			else {
+				++skipSpacer;
+				++skipCurrentBox;
+			}
+			Debug.Log ("skip current box = " + skipCurrentBox);
+		}
+	}
+
+	// Clears the Chat view log
+	public void clearChatLog(){
+		clearLog (ChatView, 4); // A chatview dialogue box has 4 items (the parent and 3 children (text, L/R icons))
+	}
+
+	// Clears the AN view log
+	public void clearANLog(){
+		clearLog (ANView, 2); // An AN view dialogue box has 2 items (the parent and 1 child (text))
 	}
 }

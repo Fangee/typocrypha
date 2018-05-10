@@ -295,6 +295,7 @@
     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BISpecificAttack.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BITimed.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleField.cs" />
+    <Compile Include="Assets\GameflowSystem\BattleSystem\BattleKeyboard.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleManagerS.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleUI.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleWave.cs" />
@@ -331,12 +332,12 @@
     <Compile Include="Assets\scripts\Audio\AudioPlayer.cs" />
     <Compile Include="Assets\scripts\Combat\Ally.cs" />
     <Compile Include="Assets\scripts\Combat\BattleEffects.cs" />
-    <Compile Include="Assets\scripts\Combat\BattleKeyboard.cs" />
     <Compile Include="Assets\scripts\Combat\ChatDatabase.cs" />
     <Compile Include="Assets\scripts\Combat\Enemy.cs" />
     <Compile Include="Assets\scripts\Combat\EnemyAI.cs" />
     <Compile Include="Assets\scripts\Combat\Player.cs" />
     <Compile Include="Assets\scripts\Combat\StatusEffect.cs" />
+    <Compile Include="Assets\scripts\Combat\TrackTyping.cs" />
     <Compile Include="Assets\scripts\Cutscene\TextScroll.cs" />
     <Compile Include="Assets\scripts\Database\AllyDatabase.cs" />
     <Compile Include="Assets\scripts\Database\EnemyDatabase.cs" />
@@ -372,7 +373,6 @@
     <Compile Include="Assets\scripts\UI\SetResolution.cs" />
     <Compile Include="Assets\scripts\UI\TargetFloor.cs" />
     <Compile Include="Assets\scripts\UI\TargetReticule.cs" />
-    <Compile Include="Assets\scripts\UI\TrackTyping.cs" />
     <Compile Include="Assets\scripts\Utility\Pair.cs" />
     <Compile Include="Assets\scripts\Utility\PixelPerfectPosition.cs" />
     <Compile Include="Assets\scripts\Utility\SetFramerate.cs" />
