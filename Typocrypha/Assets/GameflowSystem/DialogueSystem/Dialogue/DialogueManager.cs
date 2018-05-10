@@ -237,13 +237,25 @@ public class DialogueManager : MonoBehaviour {
 		new_chr.GetComponent<SpriteRenderer> ().sprite = spr;
 	}
 
-	// Highlight's (on or off) a character
+	// Highlight's a character
 	public void highlightCharacter(string spr_name, float amt) {
 		foreach(GameObject chr_spr in chr_spr_list) {
 			SpriteRenderer spr_r = chr_spr.GetComponent<SpriteRenderer> ();
-			if (spr_r.sprite.name == spr_name) {
+			if (spr_r.sprite.name.Contains(spr_name)) {
 				spr_r.color = new Color(amt, amt, amt, 1);
 				break;
+			}
+		}
+	}
+
+	// Highlights given character, and dims rest (0.5 greyscale)
+	public void soleHighlight(string spr_name) {
+		foreach(GameObject chr_spr in chr_spr_list) {
+			SpriteRenderer spr_r = chr_spr.GetComponent<SpriteRenderer> ();
+			if (spr_r.sprite.name.Contains (spr_name)) {
+				spr_r.color = new Color (1, 1, 1, 1);
+			} else {
+				spr_r.color = new Color (0.5f, 0.5f, 0.5f, 1);
 			}
 		}
 	}
@@ -262,7 +274,7 @@ public class DialogueManager : MonoBehaviour {
 	// Finds first character with specified sprite name, and removes it
 	public void removeCharacter(string spr_name) {
 		foreach(GameObject chr_spr in chr_spr_list) {
-			if (chr_spr.GetComponent<SpriteRenderer> ().sprite.name == spr_name) {
+			if (chr_spr.GetComponent<SpriteRenderer> ().sprite.name.Contains(spr_name)) {
 				chr_spr_list.Remove (chr_spr);
 				Destroy (chr_spr);
 				break;

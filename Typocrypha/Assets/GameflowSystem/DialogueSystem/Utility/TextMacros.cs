@@ -10,6 +10,7 @@ public class TextMacros : MonoBehaviour {
 	public static TextMacros main = null; // global static ref
 	public Dictionary<string, MacroSubDel> macro_map; // for substituting macros
 	public Dictionary<string, string> color_map; // for color presets (hex representation)
+	public Dictionary<string, Pair<string, string>> character_map; // for character dialogue presets
 
 	void Awake () {
 		if (main == null) main = this;
@@ -19,10 +20,18 @@ public class TextMacros : MonoBehaviour {
 			{"pronoun",macroPronoun},
 			{"last-cast", macroLastCast},
 			{"time", macroTime},
-			{"c", macroColor}
+			{"c", macroColor},
+			{"t", macroSetTalkSfx},
+			{"h", macroHighlightCharacter},
+			{"speak", macroSpeaker}
 		};
 		color_map = new Dictionary<string, string> {
 			{ "spell", "#ff6eff" }
+		};
+		character_map = new Dictionary<string, Pair<string, string>> {
+			{"dahlia", new Pair<string, string>("dahlia", "vo_dahlia") },
+			{"illyia", new Pair<string, string>("illyia", "vo_illyia") },
+			{"mc", new Pair<string, string>("_mc_", "vo_mc")}
 		};
 	}
 
@@ -80,5 +89,28 @@ public class TextMacros : MonoBehaviour {
 		} else {
 			return "</color>";
 		}
+	}
+
+	// substitues in 'set-talk-sfx' TextEvent
+	// input: [0]: string, name of audio file
+	string macroSetTalkSfx(string[] opt) {
+		return "[set-talk-sfx=" + opt[0] + "]";
+	}
+
+	// substitutes in 'highlight-character' TextEvent.
+	// input: [0]: string, name of sprite to highlight
+	//        [1]: float, amount to highlight (multiplier to tint)
+	string macroHighlightCharacter(string[] opt) {
+		return "[highlight-character=" + opt[0] + "," + opt[1] + "]";
+	}
+
+	// substitutes combined 'set-talk-sfx' and 'highlight-character'
+	// solely highlights given character, and switches to their talk sfx
+	// input: [0]: string, name of character (see character map)
+	string macroSpeaker(string[] opt) {
+		string macro = 
+			"[set-talk-sfx=" + character_map[opt[0]].second + "]" +
+			"[sole-highlight=" + character_map[opt[0]].first + "]";
+		return macro;
 	}
 }

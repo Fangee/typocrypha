@@ -24791,7 +24791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2043237239
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24824,7 +24824,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: ???
-  text: '[block=t][set-talk-sfx=vo_dahlia][fade=in,4,0,0,0][pause=4]...[block=f]'
+  text: '[block=t]{t,vo_dahlia}[fade=in,4,0,0,0][pause=4]...[block=f]'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -24856,7 +24856,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: ???
-  text: '[stop-music][set-talk-sfx=vo_dahlia]...[play-sfx=sfx_huh]Eh?'
+  text: '[stop-music]{t,vo_dahlia}...[play-sfx=sfx_huh]Eh?'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -24877,7 +24877,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: ???
-  text: '[set-talk-sfx=vo_dahlia]...so here... we get the total produc... '
+  text: '{t,vo_dahlia}...so here... we get the total produc... '
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -24898,7 +24898,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: ???
-  text: "[set-talk-sfx=vo_dahlia]...th.... add... infinite... \r\n"
+  text: "{t,vo_dahlia}...th.... add... infinite... \r\n"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -24919,7 +24919,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: ???
-  text: '[set-talk-sfx=vo_dahlia][play-sfx=sfx_damage_number][screen-shake=2.0,0.1][set-bg=bg_player_bedroom]Hey,
+  text: '{t,vo_dahlia}[play-sfx=sfx_damage_number][screen-shake=2.0,0.1][set-bg=bg_player_bedroom]Hey,
     {name}, [play-sfx=sfx_flash]focus![pause=0.5] You''ll never pass that midterm
     at this rate!'
   input_display: {fileID: 0}
@@ -24944,8 +24944,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: "[play-music=bgm_naive][set-talk-sfx=vo_dahlia]You doing alright, {NAME}?\r
-    I know today's tutoring session is dense this time around, but..."
+  text: "[play-music=bgm_naive]{speak,dahlia}You doing alright, {NAME}?\r I know today's
+    tutoring session is dense this time around, but..."
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -24966,7 +24966,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: INTRODUCTION
-  text: '[highlight-character=spr_vn_dahlia_1,1]<color=lightblue>Dahlia Bulsara
+  text: '{h,dahlia,1}<color=lightblue>Dahlia Bulsara
 
     A graduate student at Agartha Military Academy and a close friend of {NAME}.</color>'
   input_display: {fileID: 0}
@@ -25011,8 +25011,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: '[highlight-character=spr_vn_dahlia_1,0.5][set-talk-sfx=vo_mc]It''s fine.
-    Er, I''m fine. Really.'
+  text: '{speak,mc}It''s fine. Er, I''m fine. Really.'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -25061,8 +25060,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{NAME}'
-  text: '[highlight-character=spr_vn_dahlia_1,0.5][set-talk-sfx=vo_mc]...what are
-    you talking about, Dahlia?'
+  text: '{speak,mc}...what are you talking about, Dahlia?'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -25083,8 +25081,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: "[set-talk-sfx=vo_dahlia]Well, you had a really pale look on your face a moment
-    ago...\r"
+  text: "{speak,dahlia}Well, you had a really pale look on your face a moment ago...\r"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -25127,8 +25124,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: "[highlight-character=spr_vn_dahlia_1,1][set-talk-sfx=vo_dahlia]If you say
-    so\u2026 but don't be afraid to take a break!"
+  text: "{speak,dahlia}If you say so\u2026 but don't be afraid to take a break!"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -25149,7 +25145,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: "[set-talk-sfx=vo_mc][block=t]See, look, right here-[block=f][next]\r"
+  text: "{t,mc}[block=t]See, look, right here-[block=f][next]\r"
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
@@ -25170,8 +25166,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: '[highlight-character=spr_vn_dahlia_1,0.5][set-talk-sfx=vo_mc]OK, but seriously,
-    I''m positive that the antiderivative of 683^290sqrt(999) is 2033!'
+  text: '{speak,mc}OK, but seriously, I''m positive that the antiderivative of 683^290sqrt(999)
+    is 2033!'
   input_display: {fileID: 0}
   input_options: []
   input_branches: []
