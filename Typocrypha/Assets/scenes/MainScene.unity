@@ -1767,7 +1767,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2707,7 +2707,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3344,6 +3344,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1202342160}
   - {fileID: 1264951112}
   - {fileID: 507438986}
   - {fileID: 1600763268}
@@ -4421,7 +4422,7 @@ RectTransform:
   - {fileID: 103648362}
   - {fileID: 378626217}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4885,7 +4886,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6730,7 +6731,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1668480233}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6792,7 +6793,7 @@ Transform:
   - {fileID: 1399568607}
   - {fileID: 1500259169}
   m_Father: {fileID: 1668480233}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &794216637
 GameObject:
@@ -7469,7 +7470,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8031,7 +8032,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10864,7 +10865,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11370,6 +11371,404 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wavy_sprite: {fileID: 1187835794}
   bg_dimmer: {fileID: 454910325}
+--- !u!1 &1202342159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1202342160}
+  - component: {fileID: 1202342176}
+  - component: {fileID: 1202342175}
+  - component: {fileID: 1202342174}
+  - component: {fileID: 1202342173}
+  - component: {fileID: 1202342172}
+  - component: {fileID: 1202342171}
+  - component: {fileID: 1202342170}
+  - component: {fileID: 1202342169}
+  - component: {fileID: 1202342168}
+  - component: {fileID: 1202342167}
+  - component: {fileID: 1202342166}
+  - component: {fileID: 1202342165}
+  - component: {fileID: 1202342164}
+  - component: {fileID: 1202342163}
+  - component: {fileID: 1202342162}
+  - component: {fileID: 1202342161}
+  m_Layer: 5
+  m_Name: D_FloatingTextTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1202342160
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1202342159}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 309855630}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1202342161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1202342159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: INTRODUCTION
+  text: <color=#ff5f47>Illyia came to {NAME}'s tutoring session out of boredom.</color>
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1202342162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1202342159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: INTRODUCTION
+  text: "<color=#ff5f47>She now works for her sister's advocacy group, <color=yellow>EVE-IRIS</color>,
+    as a \u201CMessiah,\u201D whatever the hell that means.</color> "
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1202342163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1202342159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: INTRODUCTION
+  text: "<color=#ff5f47>Illyia Xiong\r\n{NAME}'s best friend, and Dahlia's girlfriend.
+    \r\nAn accident cut her military aspirations short.</color>\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1202342164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1202342159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Illyia
+  text: '[remove-character=spr_vn_dahlia_1][highlight-character=spr_vn_dahlia_1,0.5][play-sfx=sfx_damage_number][screen-shake=2.0,0.1][set-talk-sfx=vo_illyia]Are
+    you even listening to Dahlia? Look, I''m a dumbass and even I can tell you''re
+    clearly supposed to take the product of pi over on the 4th step when dividing
+    by 3.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites:
+  - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
+  - {fileID: 21300000, guid: ace760d0494bd6744abd6c165e5a26cd, type: 3}
+  char_sprite_pos:
+  - {x: 4, y: -1}
+  - {x: -4, y: -1}
+--- !u!114 &1202342165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1202342159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{name}'
+  text: "[set-talk-sfx=vo_mc][block=t]See, look, right here-[block=f][next]\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1202342166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1202342159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{name}'
+  text: '[highlight-character=spr_vn_dahlia_1,0.5][set-talk-sfx=vo_mc]OK, but seriously,
+    I''m positive that the antiderivative of 683^290sqrt(999) is 2033!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1202342167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1202342159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Dahlia
+  text: "[highlight-character=spr_vn_dahlia_1,1][set-talk-sfx=vo_dahlia]If you say
+    so\u2026 but don't be afraid to take a break!"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1202342168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1202342159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{name}'
+  text: '[highlight-character=spr_vn_dahlia_1,0.5][set-talk-sfx=vo_mc]It''s fine.
+    Er, I''m fine. Really.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1202342169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1202342159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Dahlia
+  text: "[set-talk-sfx=vo_dahlia]Well, you had a really pale look on your face a moment
+    ago...\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1202342170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1202342159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: INTRODUCTION
+  text: "<color=lightblue>Dahlia's true passion is in the arts, but the facade of
+    a \u201Cnormal\u201D job said otherwise.</color>"
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1202342171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1202342159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: INTRODUCTION
+  text: <color=lightblue>A popular TA and tutor specialized in Mana-Medic Engineering,
+    much to her chagrin.</color>
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1202342172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1202342159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: INTRODUCTION
+  text: '[highlight-character=spr_vn_dahlia_1,1]<color=lightblue>Dahlia Bulsara
+
+    A graduate student at Agartha Military Academy and a close friend of {NAME}.</color>'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1202342173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1202342159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{NAME}'
+  text: '[highlight-character=spr_vn_dahlia_1,0.5][set-talk-sfx=vo_mc]...what are
+    you talking about, Dahlia?'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1202342174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1202342159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Dahlia
+  text: "[play-music=bgm_naive][set-talk-sfx=vo_dahlia]You doing alright, {NAME}?\r
+    I know today's tutoring session is dense[float-text=1,1,You're stupid] this time
+    around, but..."
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1202342175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1202342159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: ???
+  text: '[set-talk-sfx=vo_dahlia][set-bg=bg_player_bedroom]Hey, {name}, [play-sfx=sfx_flash]focus![pause=0.5]
+    You''ll never pass that midterm at this rate!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  char_sprites:
+  - {fileID: 21300000, guid: ace760d0494bd6744abd6c165e5a26cd, type: 3}
+  char_sprite_pos:
+  - {x: 0, y: -1}
+--- !u!114 &1202342176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1202342159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1210724837
 GameObject:
   m_ObjectHideFlags: 0
@@ -11428,7 +11827,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12320,7 +12719,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12627,7 +13026,7 @@ RectTransform:
   - {fileID: 748311217}
   - {fileID: 1089634085}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13587,7 +13986,7 @@ RectTransform:
   - {fileID: 1766702793}
   - {fileID: 967478602}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13777,7 +14176,7 @@ RectTransform:
   - {fileID: 2025448597}
   - {fileID: 818396695}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14741,7 +15140,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15170,7 +15569,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16316,7 +16715,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16917,6 +17316,9 @@ MonoBehaviour:
   dialogue_box: {fileID: 0}
   glitch_effect: {fileID: 0}
   screen_frame: {fileID: 1528927273}
+  float_text_view: {fileID: 1922726211}
+  float_d_box_prefab: {fileID: 1013436170662780, guid: 7b3cd4178bb378042aabd0fd693e818a,
+    type: 2}
 --- !u!114 &1663170421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17044,6 +17446,7 @@ RectTransform:
   - {fileID: 945826267}
   - {fileID: 2120598030}
   - {fileID: 261958434}
+  - {fileID: 1922726211}
   - {fileID: 779695189}
   - {fileID: 780874136}
   m_Father: {fileID: 0}
@@ -17522,7 +17925,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -19560,6 +19963,7 @@ MonoBehaviour:
   speaker: 
   text: 
   scroll_delay: 0.1
+  talk_sfx: 1
   fx_text: {fileID: 1062573030}
   left_icon: {fileID: 0}
   right_icon: {fileID: 0}
@@ -19598,6 +20002,39 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1898592525}
+--- !u!1 &1922726210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1922726211}
+  m_Layer: 5
+  m_Name: FloatingTextView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1922726211
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1922726210}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1668480233}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1924691106
 GameObject:
   m_ObjectHideFlags: 0
@@ -20767,7 +21204,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

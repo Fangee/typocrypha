@@ -10,6 +10,7 @@ public class DialogueBox : MonoBehaviour {
 	public string speaker; // Speaker's name
 	public string text; // Text to be displayed
 	public float scroll_delay; // Time (in seconds) between showing characters
+	public bool talk_sfx = true; // Should talking sfx play?
 	public FXText fx_text; // FXText component for displaying text
 	public Image left_icon; // Left dialogue speaker's icon
 	public Image right_icon; // Light dialogue speaker's icon
@@ -55,14 +56,14 @@ public class DialogueBox : MonoBehaviour {
 			// Display character sprites
 			for (int i = 0; i < v_item.char_sprites.Length; ++i)
 				DialogueManager.main.displayCharacter (v_item.char_sprites [i], v_item.char_sprite_pos [i]);
-			// Set text
 			fx_text.text = text;
 		} else if (d_item.GetType () == typeof(DialogueItemAN)) {
-			// Set text
+			fx_text.text = text;
+		} else {
 			fx_text.text = text;
 		}
 		// Set talking sfx
-		AudioPlayer.main.setSFX(AudioPlayer.channel_voice, "speak_boop");
+		if (talk_sfx) AudioPlayer.main.setSFX(AudioPlayer.channel_voice, "speak_boop");
 		cr_scroll = StartCoroutine (textScrollCR ());
 	}
 
@@ -102,7 +103,7 @@ public class DialogueBox : MonoBehaviour {
 			}
 			*/
 			set_color.chars [0] = ++cnt;
-			if (cnt % sfx_interval == 0) AudioPlayer.main.playSFX (AudioPlayer.channel_voice);
+			if (talk_sfx && cnt % sfx_interval == 0) AudioPlayer.main.playSFX (AudioPlayer.channel_voice);
 			yield return new WaitForSeconds (scroll_delay);
 		}
 		yield return StartCoroutine(checkEvents (cnt - offset)); // Play events at end of text

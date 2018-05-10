@@ -31,6 +31,8 @@ public class TextEvents : MonoBehaviour {
 	public GameObject dialogue_box; // dialogue box object
 	public GameObject glitch_effect; // sprite used for glitch effect
 	public GameObject screen_frame; // screenframe object
+	public Transform float_text_view; // view for floating text
+	public GameObject float_d_box_prefab; // floating text dialogue box prefab
 
 	void Awake() {
 		main = this;
@@ -60,7 +62,8 @@ public class TextEvents : MonoBehaviour {
 			{"glitch", glitch},
 			{"set-name", setName},
 			{"frame", frame},
-			{"heal-player", healPlayer}
+			{"heal-player", healPlayer},
+			{"float-text", floatText}
 		};
 		is_prompt = false;
 	}
@@ -423,6 +426,33 @@ public class TextEvents : MonoBehaviour {
 		Debug.Log ("[JohnTypocrypha Voice]: i need healing");
 		Player.main.restoreToFull ();
 		yield return true;
+	}
+
+	// scrolls floating text at a specific location
+	// input: [0]: float, x-position in world coordinates (bottom left corner)
+	//        [1]: float, y-position in world coordinates
+	//        [2]: string, text to be displayed
+	IEnumerator floatText(string[] opt) {
+		// setup dialogue item and dialogue box
+		GameObject d_box_obj = Instantiate (float_d_box_prefab, float_text_view);
+		DialogueItem d_item = d_box_obj.AddComponent<DialogueItemAN>();
+		d_box_obj.transform.position = new Vector2 (float.Parse (opt [0]), float.Parse (opt [1]));
+		DialogueBox d_box = d_box_obj.GetComponent<DialogueBox> ();
+		d_box.talk_sfx = false;
+		d_item.text = opt [2];
+		d_box.d_item = d_item;
+		// parse effects and macros
+		d_box.text = DialogueParser.main.parse (d_item, d_box);
+		foreach(FXTextEffect text_effect in d_item.fx_text_effects)
+			d_box.fx_text.addEffect (text_effect);
+		// start text scroll
+		d_box.dialogueBoxStart ();
+		// wait for dialogue to finish scrolling
+		yield return new WaitUntil (() => d_box.cr_scroll != null);
+		yield return new WaitWhile (() => d_box.cr_scroll != null);
+		// wait for a little more and then disappear
+		yield return new WaitForSeconds (0.5f);
+		Destroy (d_box_obj);
 	}
 }
 
