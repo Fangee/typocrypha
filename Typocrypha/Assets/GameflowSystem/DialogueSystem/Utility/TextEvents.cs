@@ -81,6 +81,8 @@ public class TextEvents : MonoBehaviour {
 		main_camera.transform.position = new Vector3 (0,0,-10);
 		DialogueManager.main.pause_scroll = false;
 		DialogueManager.main.block_input = false;
+		foreach (Transform tr in float_text_view)
+			Destroy (tr.gameObject);
 	}
 
 	// finishes up persistent events that might have been skipped (like removing a character)
@@ -439,6 +441,7 @@ public class TextEvents : MonoBehaviour {
 		d_box_obj.transform.position = new Vector2 (float.Parse (opt [0]), float.Parse (opt [1]));
 		DialogueBox d_box = d_box_obj.GetComponent<DialogueBox> ();
 		d_box.talk_sfx = false;
+		d_box.scroll_delay = 0.03f;
 		d_item.text = opt [2];
 		d_box.d_item = d_item;
 		// parse effects and macros
@@ -450,8 +453,11 @@ public class TextEvents : MonoBehaviour {
 		// wait for dialogue to finish scrolling
 		yield return new WaitUntil (() => d_box.cr_scroll != null);
 		yield return new WaitWhile (() => d_box.cr_scroll != null);
-		// wait for a little more and then disappear
-		yield return new WaitForSeconds (0.5f);
+		// wait for a little more and then fade out
+		while (d_box.fx_text.color.a > 0) {
+			d_box.fx_text.color = new Color (1, 1, 1, d_box.fx_text.color.a - 0.03f);
+			yield return null;
+		}
 		Destroy (d_box_obj);
 	}
 }

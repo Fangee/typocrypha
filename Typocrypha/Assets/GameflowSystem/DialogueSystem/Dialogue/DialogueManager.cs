@@ -142,6 +142,7 @@ public class DialogueManager : MonoBehaviour {
 			} else {
 				input = false;
 			}
+			d_box.scroll_delay = 0.01f;
 			d_box.dialogueBoxStart ();
 		}
 		return true;

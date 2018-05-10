@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class DialogueBox : MonoBehaviour {
 	public string speaker; // Speaker's name
 	public string text; // Text to be displayed
-	public float scroll_delay; // Time (in seconds) between showing characters
+	public float scroll_delay = 0.01f; // Time (in seconds) between showing characters
 	public bool talk_sfx = true; // Should talking sfx play?
 	public FXText fx_text; // FXText component for displaying text
 	public Image left_icon; // Left dialogue speaker's icon
@@ -29,7 +29,6 @@ public class DialogueBox : MonoBehaviour {
 		set_color.color.a = 0;
 		set_color.chars = new int[2]{0,text.Length};
 		fx_text.addEffect (set_color);
-		scroll_delay = 0.01f; // DEFAULT TEMP
 		if (d_item.GetType () == typeof(DialogueItemChat)) {
 			DialogueItemChat c_item = (DialogueItemChat)d_item;
 			// Set icon
