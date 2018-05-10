@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222696770335972532}
   - component: {fileID: 114894473642786556}
   - component: {fileID: 114152188233643770}
+  - component: {fileID: 114802220801225064}
   m_Layer: 5
   m_Name: FloatingDialogueBox
   m_TagString: Untagged
@@ -66,6 +67,17 @@ MonoBehaviour:
   right_icon: {fileID: 0}
   rect_tr: {fileID: 224739220177175012}
   d_item: {fileID: 0}
+--- !u!114 &114802220801225064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1013436170662780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f955115e2a01f3c41943d7036029659a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114890911971278544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -98,7 +110,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: test
+  m_Text: 
   is_rendered: 1
 --- !u!114 &114894473642786556
 MonoBehaviour:

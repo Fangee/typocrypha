@@ -64,10 +64,7 @@
      <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BISpecificAttack.cs" />
      <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BITimed.cs" />
      <Compile Include="Assets\GameflowSystem\BattleSystem\BattleField.cs" />
-<<<<<<< HEAD
-=======
      <Compile Include="Assets\GameflowSystem\BattleSystem\BattleKeyboard.cs" />
->>>>>>> de4c777f785840e2f51ed6513d530078d107f5fd
      <Compile Include="Assets\GameflowSystem\BattleSystem\BattleManagerS.cs" />
      <Compile Include="Assets\GameflowSystem\BattleSystem\BattleUI.cs" />
      <Compile Include="Assets\GameflowSystem\BattleSystem\BattleWave.cs" />
@@ -88,6 +85,7 @@
      <Compile Include="Assets\GameflowSystem\DialogueSystem\FXText\Effects\FXTextWave.cs" />
      <Compile Include="Assets\GameflowSystem\DialogueSystem\FXText\FXText.cs" />
      <Compile Include="Assets\GameflowSystem\DialogueSystem\FXText\FXTextEffect.cs" />
+     <Compile Include="Assets\GameflowSystem\DialogueSystem\Utility\FloatText.cs" />
      <Compile Include="Assets\GameflowSystem\DialogueSystem\Utility\PlayerDialogueInfo.cs" />
      <Compile Include="Assets\GameflowSystem\DialogueSystem\Utility\TextEvents.cs" />
      <Compile Include="Assets\GameflowSystem\DialogueSystem\Utility\TextMacros.cs" />
@@ -104,10 +102,6 @@
      <Compile Include="Assets\scripts\audio\AudioPlayer.cs" />
      <Compile Include="Assets\scripts\combat\Ally.cs" />
      <Compile Include="Assets\scripts\combat\BattleEffects.cs" />
-<<<<<<< HEAD
-     <Compile Include="Assets\scripts\combat\BattleKeyboard.cs" />
-=======
->>>>>>> de4c777f785840e2f51ed6513d530078d107f5fd
      <Compile Include="Assets\scripts\combat\ChatDatabase.cs" />
      <Compile Include="Assets\scripts\combat\Enemy.cs" />
      <Compile Include="Assets\scripts\combat\EnemyAI.cs" />
@@ -134,7 +128,6 @@
      <Compile Include="Assets\scripts\Spells\SpellEffects.cs" />
      <Compile Include="Assets\scripts\TitleScreen\PreTitle.cs" />
      <Compile Include="Assets\scripts\TitleScreen\TitleScreen.cs" />
-<<<<<<< HEAD
      <Compile Include="Assets\scripts\UI\BarMeter.cs" />
      <Compile Include="Assets\scripts\UI\BattleLog.cs" />
      <Compile Include="Assets\scripts\UI\DialogueBoxEffects.cs" />
@@ -150,24 +143,7 @@
      <Compile Include="Assets\scripts\UI\SetResolution.cs" />
      <Compile Include="Assets\scripts\UI\TargetFloor.cs" />
      <Compile Include="Assets\scripts\UI\TargetReticule.cs" />
-     <Compile Include="Assets\scripts\UI\TrackTyping.cs" />
-=======
-     <Compile Include="Assets\scripts\ui\BarMeter.cs" />
-     <Compile Include="Assets\scripts\ui\BattleLog.cs" />
-     <Compile Include="Assets\scripts\ui\DialogueBoxEffects.cs" />
-     <Compile Include="Assets\scripts\ui\DisplayAlly.cs" />
-     <Compile Include="Assets\scripts\ui\DisplayPlayer.cs" />
-     <Compile Include="Assets\scripts\ui\enemy_ui\EnemyChargeBars.cs" />
-     <Compile Include="Assets\scripts\ui\enemy_ui\EnemyHealthBars.cs" />
-     <Compile Include="Assets\scripts\ui\enemy_ui\EnemyStaggerBars.cs" />
-     <Compile Include="Assets\scripts\ui\enemy_ui\PopImage.cs" />
-     <Compile Include="Assets\scripts\ui\enemy_ui\Popper.cs" />
-     <Compile Include="Assets\scripts\ui\enemy_ui\PopText.cs" />
-     <Compile Include="Assets\scripts\ui\Scouter.cs" />
-     <Compile Include="Assets\scripts\ui\SetResolution.cs" />
-     <Compile Include="Assets\scripts\ui\TargetFloor.cs" />
-     <Compile Include="Assets\scripts\ui\TargetReticule.cs" />
->>>>>>> de4c777f785840e2f51ed6513d530078d107f5fd
+     <Compile Include="Assets\scripts\Utility\DelayedDestroy.cs" />
      <Compile Include="Assets\scripts\Utility\Pair.cs" />
      <Compile Include="Assets\scripts\Utility\PixelPerfectPosition.cs" />
      <Compile Include="Assets\scripts\Utility\SetFramerate.cs" />
@@ -264,11 +240,7 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
-<<<<<<< HEAD
  <HintPath>C:/Users/JTI-PC/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
-=======
- <HintPath>C:/Users/Hughe/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
->>>>>>> de4c777f785840e2f51ed6513d530078d107f5fd
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>C:/Users/JTI-PC/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/Editor/UnityEditor.Advertisements.dll</HintPath>
@@ -286,11 +258,7 @@
  <HintPath>C:/Users/JTI-PC/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.purchasing@0.0.19/Editor/UnityEditor.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.StandardEvents">
-<<<<<<< HEAD
  <HintPath>C:/Users/JTI-PC/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
-=======
- <HintPath>C:/Users/Hughe/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
->>>>>>> de4c777f785840e2f51ed6513d530078d107f5fd
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
