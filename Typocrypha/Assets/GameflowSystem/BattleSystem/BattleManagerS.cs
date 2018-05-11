@@ -22,6 +22,7 @@ public class BattleManagerS : MonoBehaviour {
     private int curr_wave = -1;
     private BattleWave[] waves;
     private GameObject curr_battle;
+    private List<GameObject> sceneQueue = new List<GameObject>();
 
     private void Awake()
     {
@@ -264,6 +265,24 @@ public class BattleManagerS : MonoBehaviour {
         else
             checkInterrupts();
     }
+    //Add Scene to trigger queue
+    public void addSceneToQueue(GameObject interruptScene)
+    {
+        sceneQueue.Add(interruptScene);
+    }
+    //Play Dialogue scene from queue
+    public bool playSceneFromQueue()
+    {
+        if (sceneQueue.Count > 0)
+        {
+            setPause(true);
+            DialogueManager.main.setEnabled(true);
+            DialogueManager.main.startInterrupt(sceneQueue[0]);
+            sceneQueue.RemoveAt(0);
+            return true;
+        }
+        return false;
+    }
 
     //Create all enemies for this wave
     private void createEnemies(BattleWave wave)
@@ -301,16 +320,14 @@ public class BattleManagerS : MonoBehaviour {
         {
             if (!e.HasTriggered && e.checkTrigger(field) && e.onTrigger(field))
             {
-                setPause(true);
-                return true;
+
             }
         }
         if (!globalEvents.HasTriggered && globalEvents.checkTrigger(field) && globalEvents.onTrigger(field))
         {
-            setPause(true);
-            return true;
         }
-        return false;
+        //Play a scene if any are in the queue
+        return playSceneFromQueue();
     }
 
     private void resetInterruptData()

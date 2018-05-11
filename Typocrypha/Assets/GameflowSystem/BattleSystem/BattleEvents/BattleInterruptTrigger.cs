@@ -10,8 +10,7 @@ public abstract class BattleInterruptTrigger : BattleEventTrigger {
     public override bool onTrigger(BattleField state)
     {
         Debug.Log("Interrupt triggered: " + interruptScene.name);
-        DialogueManager.main.enabled = true;
-        DialogueManager.main.startInterrupt(interruptScene);
+        state.addSceneToQueue(interruptScene);
         triggered = true;
         return true;
     }

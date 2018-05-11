@@ -6,9 +6,9 @@ public class BISpecificAttack : BattleInterruptTrigger
 {
     public BattleField.FieldPosition caster = BattleField.FieldPosition.ANY;
     public BattleField.FieldPosition target = BattleField.FieldPosition.ANY;
-    public string rootKeywordIs = "";
-    public string elementKeywordIs = "";
-    public string styleKeywordIs = "";
+    public string rootKeywordIs = string.Empty;
+    public string elementKeywordIs = string.Empty;
+    public string styleKeywordIs = string.Empty;
     public Elements.Element elementMustBe = Elements.Element.ANY;
     public bool spellMustHit = true;
     public bool spellMustCrit = false;
@@ -19,9 +19,9 @@ public class BISpecificAttack : BattleInterruptTrigger
     public override bool checkTrigger(BattleField state)
     {
         if(state.last_spell == null || 
-          (rootKeywordIs != "" && rootKeywordIs != state.last_spell.root) || 
-          (elementKeywordIs != "" && elementKeywordIs != state.last_spell.element) ||
-          (styleKeywordIs != "" && styleKeywordIs != state.last_spell.style))
+          (!string.IsNullOrEmpty(rootKeywordIs) && rootKeywordIs != state.last_spell.root) || 
+          (!string.IsNullOrEmpty(elementKeywordIs) && elementKeywordIs != state.last_spell.element) ||
+          (!string.IsNullOrEmpty(styleKeywordIs) && styleKeywordIs != state.last_spell.style))
             return false;
         if (state.last_cast == null || state.last_cast.Count <= 0)
             return false;

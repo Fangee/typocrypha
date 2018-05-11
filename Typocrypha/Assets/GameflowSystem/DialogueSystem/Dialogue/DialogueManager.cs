@@ -60,9 +60,11 @@ public class DialogueManager : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Space)) {
             if (!nextLine()) {
 				if (isInterrupt) {
-					BattleManagerS.main.setPause (false);
-					isInterrupt = false;
-					setEnabled (false);
+                    if(!BattleManagerS.main.playSceneFromQueue()) {
+                        BattleManagerS.main.setPause(false);
+                        isInterrupt = false;
+                        setEnabled(false);
+                    }
 				} else {
 					GameflowManager.main.next ();
 				}

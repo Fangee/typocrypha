@@ -57,6 +57,10 @@ public class BattleField {
     {
         this.callback = callback;
     }
+    public void addSceneToQueue(GameObject interruptScene)
+    {
+        callback.addSceneToQueue(interruptScene);
+    }
     public void update()
     {
         callback.updateEnemies();

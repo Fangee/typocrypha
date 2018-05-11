@@ -7,7 +7,7 @@ public class BattleEventManager : BattleEventTrigger
 {
     public BattleEventTrigger[] BattleEvents;
     List<BattleEventTrigger> nonTriggeredEvents = new List<BattleEventTrigger>();
-    BattleEventTrigger toTrigger = null;
+    List<BattleEventTrigger> toTrigger = new List<BattleEventTrigger>();
 
     private void Start()
     {
@@ -16,21 +16,30 @@ public class BattleEventManager : BattleEventTrigger
 
     public override bool checkTrigger(BattleField state)
     {
+        bool ret = false;
         foreach (BattleEventTrigger e in nonTriggeredEvents)
         {
             if (!e.HasTriggered && e.checkTrigger(state))
             {
-                toTrigger = e;
-                return true;
+                toTrigger.Add(e);
+                ret = true;
             }
         }
-        return false;
+        return ret;
     }
     public override bool onTrigger(BattleField state)
     {
-        bool ret = toTrigger.onTrigger(state);
-        if(toTrigger.HasTriggered)
-            nonTriggeredEvents.Remove(toTrigger);
-        return ret;
+        foreach(BattleEventTrigger e in toTrigger)
+        {
+            e.onTrigger(state);
+            if (e.HasTriggered)
+                nonTriggeredEvents.Remove(e);
+        }
+        if(toTrigger.Count > 0)
+        {
+            toTrigger.Clear();
+            return true;
+        }
+        return false;
     }
 }
