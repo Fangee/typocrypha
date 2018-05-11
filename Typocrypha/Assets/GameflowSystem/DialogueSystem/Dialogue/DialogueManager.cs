@@ -26,6 +26,9 @@ public class DialogueManager : MonoBehaviour {
 	public GameObject chr_spr_prefab; // Prefab of character sprite display
 	public float scroll_time; // Time it takes to automatically update window
 	public float top_space; // Space between top of window and dialogue
+
+	public GameObject input_display_choices; // Game object displaying dialogue choices
+
 	[HideInInspector] public bool pause_scroll; // Pause text scroll
 	[HideInInspector] public bool block_input; // Blocks user input
 	[HideInInspector] public string answer; // Player's input
@@ -39,6 +42,7 @@ public class DialogueManager : MonoBehaviour {
 
 	bool input; // Are we waiting for input?
 	GameObject input_display; // Display image for input
+
 
     private bool isInterrupt = false; //is this dialogue event a oneshot (interrupts, etc)
 
@@ -161,6 +165,10 @@ public class DialogueManager : MonoBehaviour {
 		input_field.ActivateInputField ();
 		if (d_item.input_display != null)
 			input_display = Instantiate (d_item.input_display, transform);
+		if (d_item.input_options.Length > 0) {
+			populateChoices ();
+			input_display_choices.SetActive (true);
+		}
 	}
 
 	// Called when input field is submitted
@@ -174,8 +182,21 @@ public class DialogueManager : MonoBehaviour {
 		if (d_item.input_options.Length > 0) { // If set number of choices
 			int i = 0;
 			for (; i < d_item.input_options.Length; ++i)
-				if (d_item.input_options [i].Trim ().ToLower ().CompareTo (answer.Trim ().ToLower ()) == 0)
+				if (d_item.input_options [i].Trim ().ToLower ().CompareTo (answer.Trim ().ToLower ()) == 0) {
 					break;
+				} else {
+					string comparisonLetter = "";
+					switch (i) {
+						case 0:
+							comparisonLetter = "A";
+							break;
+						case 1:
+							comparisonLetter = "B";
+							break;
+					}
+					if (comparisonLetter.Trim ().ToLower ().CompareTo (answer.Trim ().ToLower ()) == 0)
+						break;
+				}
 			if (i < d_item.input_options.Length) { // Option was found, so branch
 				curr_dialogue = d_item.input_branches [i].gameObject;
 				curr_line = -1;
@@ -195,6 +216,7 @@ public class DialogueManager : MonoBehaviour {
 				AudioPlayer.main.playSFX ("sfx_enter");
 			}
 		}
+		input_display_choices.SetActive (false);
 		input = false;
 		forceNextLine ();
 	}
@@ -359,5 +381,16 @@ public class DialogueManager : MonoBehaviour {
 	// Clears the AN view log
 	public void clearANLog(){
 		clearLog (ANView, 2); // An AN view dialogue box has 2 items (the parent and 1 child (text))
+	}
+
+	// Fill the choice display boxes with current options text
+	public void populateChoices(){
+		Text[] choiceText = input_display_choices.GetComponentsInChildren<Text>();
+		DialogueItem d_item = curr_dialogue.GetComponents<DialogueItem> () [curr_line];
+		int j = 0;
+		for (int i = 1; (i < choiceText.Length) && (j < d_item.input_options.Length); i = i + 2) {
+			choiceText [i].text = d_item.input_options[j];
+			++j;
+		}
 	}
 }
