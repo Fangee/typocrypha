@@ -139,7 +139,7 @@ public class HealthLowAI1 : EnemyAI
             state = AI_State.NORMAL;
     }
 }
-//Doppleganger Unique AI (does nothing right now)
+//Doppleganger Unique AI
 public class DopplegangerAI1 : EnemyAI
 {
     int numAttacks = 0;

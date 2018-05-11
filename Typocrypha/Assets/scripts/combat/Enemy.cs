@@ -136,9 +136,7 @@ public class Enemy : MonoBehaviour, ICaster {
     {
         //Set stats
         stats = i_stats;
-        //Get sprite components
-        enemy_sprite.sprite = sprite_bundle.LoadAsset<Sprite>(stats.sprite_path);
-        enemy_sprite.sortingOrder = enemy_sprite_layer;
+        StartCoroutine(formChangeGraphics());
         //Initialize combat values
         if (resetCurrent)
         {
@@ -147,6 +145,16 @@ public class Enemy : MonoBehaviour, ICaster {
             Curr_stagger = stats.max_stagger;
             stagger_time = (stats.max_stagger * stagger_mult_constant) + stagger_add_constant;
         }
+    }
+    IEnumerator formChangeGraphics()
+    {
+        enemy_animator.Play("enemy_pixelate_in");
+        yield return new WaitForSeconds(0.5f);
+        enemy_animator.StopPlayback();
+        //Get sprite components
+        enemy_sprite.sprite = sprite_bundle.LoadAsset<Sprite>(stats.sprite_path);
+        enemy_sprite.sortingOrder = enemy_sprite_layer;
+        enemy_animator.StartPlayback();
     }
     public void resetAttack()
     {

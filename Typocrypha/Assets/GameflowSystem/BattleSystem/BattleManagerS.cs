@@ -334,8 +334,10 @@ public class BattleManagerS : MonoBehaviour {
     {
 
         field.time_started = System.DateTime.Now; // time battle started
-        if(field.last_cast != null)
+        if (field.last_cast != null)
             field.last_cast.Clear(); // last performed cast action
+        else
+            field.last_cast = new List<CastData>();
         field.last_spell = new SpellData(""); // last performed spell
         field.last_register = new bool[3] { false, false, false }; // last spell register status
         field.num_player_attacks = 0; // number of player attacks from beginning of battle
