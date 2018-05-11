@@ -79,6 +79,7 @@ public class Enemy : MonoBehaviour, ICaster {
     public CastManager castManager;
     public EnemyChargeBars bars;
 	public SpriteRenderer enemy_sprite; // this enemy's sprite
+	public ChangeAnimatedSprite change_sprite; // for changing the sprite
 	public Animator enemy_animator; // this enemy's animator
     public EnemyAI AI = null;
     public static AssetBundle sprite_bundle = null; 
@@ -101,6 +102,7 @@ public class Enemy : MonoBehaviour, ICaster {
 	float curr_stagger_time; // current time staggered
     float curr_time; // current time (from 0 to atk_time)
     float atk_time; // time it takes to attack
+	Coroutine attack_cr;
 
     //Methods//
     void Awake()
@@ -129,7 +131,7 @@ public class Enemy : MonoBehaviour, ICaster {
         //Get AI module
         AI = EnemyAI.GetAIFromString(stats.ai_type, stats.ai_params);
         //Start Attacking
-        StartCoroutine (attackRoutine ()); 
+        attack_cr = StartCoroutine (attackRoutine ()); 
 	}
     //Changes enemy stats without messing with AI and current values
     public void changeForm(EnemyStats i_stats, bool resetCurrent)
@@ -148,19 +150,17 @@ public class Enemy : MonoBehaviour, ICaster {
     }
     IEnumerator formChangeGraphics()
     {
-        enemy_animator.Play("enemy_pixelate_in");
-        yield return new WaitForSeconds(0.5f);
-        enemy_animator.StopPlayback();
-        //Get sprite components
-        enemy_sprite.sprite = sprite_bundle.LoadAsset<Sprite>(stats.sprite_path);
-        enemy_sprite.sortingOrder = enemy_sprite_layer;
-        enemy_animator.StartPlayback();
+		enemy_animator.Play("enemy_pixelate_in");
+		yield return new WaitForSeconds (1f);
+		change_sprite.changeSprite(sprite_bundle.LoadAsset<Sprite>(stats.sprite_path));
+		enemy_sprite.sortingOrder = enemy_sprite_layer;
     }
     public void resetAttack()
     {
         curr_time = 0;
-        StopAllCoroutines();
-        StartCoroutine(attackRoutine());
+        //StopAllCoroutines();
+		StopCoroutine(attack_cr);
+        attack_cr = StartCoroutine(attackRoutine());
     }
     public void resetAI()
     {

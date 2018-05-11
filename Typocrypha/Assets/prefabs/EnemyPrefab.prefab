@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4612390865703364}
   - component: {fileID: 114221197549758360}
+  - component: {fileID: 114702082726753058}
   m_Layer: 0
   m_Name: EnemyPrefab
   m_TagString: Untagged
@@ -103,7 +104,21 @@ MonoBehaviour:
   castManager: {fileID: 0}
   bars: {fileID: 0}
   enemy_sprite: {fileID: 212812289498732830}
+  change_sprite: {fileID: 114702082726753058}
   enemy_animator: {fileID: 95400925875637304}
+--- !u!114 &114702082726753058
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1098793274380212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a7f79255396cf41b5df0c002005d24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spr: {fileID: 0}
+  spr_rend: {fileID: 212812289498732830}
 --- !u!212 &212812289498732830
 SpriteRenderer:
   m_ObjectHideFlags: 1
