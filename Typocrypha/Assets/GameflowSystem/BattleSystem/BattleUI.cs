@@ -79,6 +79,11 @@ public class BattleUI : MonoBehaviour
     public void toggleScouter()
     {
         target_ret_scr.toggleScouter();
+		if (target_ret_scr.isScouterVisible()) {
+			AudioPlayer.main.playSFX("sfx_scanner_open");
+		} else {
+			AudioPlayer.main.playSFX("sfx_scanner_close");
+		}
     }
     //Clears all enemy UI and battle bg
     public void clear()
