@@ -86,7 +86,7 @@ public class Enemy : MonoBehaviour, ICaster {
 
     //Private fields//
 
-    EnemyStats stats; // stats of enemy DO NOT MUTATE
+    EnemyStats stats; // stats of enemy
     BuffDebuff buffDebuff = new BuffDebuff(); // buff/debuff state
 
     bool is_dead; // is enemy dead?
@@ -103,6 +103,7 @@ public class Enemy : MonoBehaviour, ICaster {
     float curr_time; // current time (from 0 to atk_time)
     float atk_time; // time it takes to attack
 	Coroutine attack_cr;
+    Coroutine form_change_cr = null;
 
     //Methods//
     void Awake()
@@ -133,12 +134,14 @@ public class Enemy : MonoBehaviour, ICaster {
         //Start Attacking
         attack_cr = StartCoroutine (attackRoutine ()); 
 	}
-    //Changes enemy stats without messing with AI and current values
-    public void changeForm(EnemyStats i_stats, bool resetCurrent)
+
+    //AI Helper/Utility functions
+
+    //Sets enemy stats without change
+    public void setStats(EnemyStats i_stats, bool resetCurrent = false)
     {
         //Set stats
         stats = i_stats;
-        StartCoroutine(formChangeGraphics());
         //Initialize combat values
         if (resetCurrent)
         {
@@ -148,28 +151,33 @@ public class Enemy : MonoBehaviour, ICaster {
             stagger_time = (stats.max_stagger * stagger_mult_constant) + stagger_add_constant;
         }
     }
+    //Changes plays the form change animation
+    public void changeForm()
+    {
+        if(form_change_cr != null)
+            StopCoroutine(form_change_cr);
+        form_change_cr = StartCoroutine(formChangeGraphics());
+
+    }
     IEnumerator formChangeGraphics()
     {
+        yield return new WaitWhile(() => BattleManagerS.main.pause);
 		enemy_animator.Play("enemy_pixelate_in");
 		yield return new WaitForSeconds (1f);
 		change_sprite.changeSprite(sprite_bundle.LoadAsset<Sprite>(stats.sprite_path));
 		enemy_sprite.sortingOrder = enemy_sprite_layer;
     }
+    //Ends and restarts the attacking Coroutine
     public void resetAttack()
     {
         curr_time = 0;
-        //StopAllCoroutines();
 		StopCoroutine(attack_cr);
         attack_cr = StartCoroutine(attackRoutine());
     }
+    //Resets the AI object
     public void resetAI()
     {
         AI = EnemyAI.GetAIFromString(stats.ai_type, stats.ai_params);
-    }
-
-    public void change_spell(string elem, string root, string style)
-    {
-
     }
 
 	// returns curr_time/atk_time

@@ -184,19 +184,21 @@ public class DopplegangerAI1 : EnemyAI
                 if(form == 1)
                 {
                     state = AI_State.NORMAL;
-                    allies[position].changeForm(EnemyDatabase.main.getData("Doppelganger (YELLOW)"), true);
+                    allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (YELLOW)"), true);
+                    allies[position].changeForm();
                     allies[position].resetAttack();
                 }
                 else if(form == 2)
                 {
                     state = AI_State.NORMAL;
-                    allies[position].changeForm(EnemyDatabase.main.getData("Doppelganger (RED)"), true);
+                    allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (RED)"), true);
+                    allies[position].changeForm();
                     allies[position].resetAttack();
                 }
                 else if(form == 3)
                 {
                     state = AI_State.ATTACK_SPECIAL;
-                    allies[position].changeForm(EnemyDatabase.main.getData("Doppelganger (???)"), true);
+                    allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (???)"), true);
                     changeToRandomColor(allies[position]);
                     allies[position].resetAttack();
                 }
@@ -207,8 +209,9 @@ public class DopplegangerAI1 : EnemyAI
         {
             if (flag == Update_Case.UNSTUN)
             {
-                allies[position].changeForm(EnemyDatabase.main.getData("Doppelganger (GRAY)"), true);
                 state = AI_State.NORMAL;
+                allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (GRAY)"), true);
+                allies[position].changeForm();
                 allies[position].resetAttack();
                 ++form;
             }
@@ -249,8 +252,9 @@ public class DopplegangerAI1 : EnemyAI
         var randomIndex = Random.Range(0, colors.Length);
         while(colors[randomIndex] == color)
             randomIndex = Random.Range(0, colors.Length);
-        self.changeForm(EnemyDatabase.main.getData("Doppelganger (" + colors[randomIndex] + ")"), false);
         color = colors[randomIndex];
+        ((EnemyStats)self.Stats).sprite_path = EnemyDatabase.main.getData("Doppelganger (" + color + ")").sprite_path;
+        self.changeForm();
     }
 }
 
