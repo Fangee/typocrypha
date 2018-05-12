@@ -281,6 +281,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &31083270
@@ -302,6 +303,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &31083271
@@ -324,6 +326,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &31083272
@@ -357,6 +360,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &33249688
@@ -432,6 +436,97 @@ Transform:
   m_Father: {fileID: 1886895014}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &40086625
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 40086626}
+  - component: {fileID: 40086628}
+  - component: {fileID: 40086627}
+  - component: {fileID: 40086629}
+  m_Layer: 5
+  m_Name: D_SLUGCON_CODEC
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &40086626
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 40086625}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 394775086}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0.0000019073486}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &40086627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 40086625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '[play-sfx=sfx_phone_calling]> Someone''s calling you.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &40086628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 40086625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &40086629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 40086625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: General Mackey
+  text: Snake!
+  input_display: {fileID: 0}
+  input_options: []
+  input_branches: []
+  mc_sprite: {fileID: 21300000, guid: eb416a3691a496849952474a70a1f306, type: 3}
+  codec_sprite: {fileID: 21300000, guid: b1c187b112cd2fc4f9fc1bf45026c771, type: 3}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &50502091
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,6 +670,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &55851405
@@ -1152,6 +1248,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &103648364
@@ -1174,6 +1271,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &103648365
@@ -1206,6 +1304,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &103648367
@@ -1228,6 +1327,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &103648368
@@ -1249,6 +1349,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &103648369
@@ -1271,6 +1372,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &103648370
@@ -1293,6 +1395,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &105074727
@@ -1532,6 +1635,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &112855685
@@ -1555,6 +1659,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &112855686
@@ -1577,6 +1682,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &112855687
@@ -1599,6 +1705,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &112855688
@@ -1620,6 +1727,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &112855689
@@ -1641,6 +1749,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &112855690
@@ -1662,6 +1771,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &112855691
@@ -1882,6 +1992,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &138375127
@@ -1904,6 +2015,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &138375128
@@ -1926,6 +2038,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &138375129
@@ -1947,6 +2060,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &138375130
@@ -1968,6 +2082,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &138375131
@@ -1989,6 +2104,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &138375132
@@ -2023,6 +2139,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &143155699
@@ -2066,8 +2183,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 309855630}
-  m_RootOrder: 6
+  m_Father: {fileID: 394775086}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2094,6 +2211,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &143155702
@@ -2116,6 +2234,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: 62e76f62678c48345a6b7a2918eaf67e, type: 3}
   char_sprite_pos:
@@ -2139,6 +2258,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &143155704
@@ -2160,6 +2280,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &143155705
@@ -2182,6 +2303,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &143155706
@@ -2203,6 +2325,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &143155707
@@ -2236,6 +2359,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &143155709
@@ -2258,6 +2382,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &143155710
@@ -2280,6 +2405,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &143155711
@@ -2302,6 +2428,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &143155712
@@ -2324,6 +2451,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &143155713
@@ -2346,6 +2474,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &143155714
@@ -2368,6 +2497,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &143155715
@@ -2390,6 +2520,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &143155716
@@ -2411,6 +2542,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &145013051
@@ -3551,8 +3683,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 309855630}
-  m_RootOrder: 3
+  m_Father: {fileID: 394775086}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3792,7 +3924,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &261958434
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3809,6 +3941,8 @@ RectTransform:
   - {fileID: 131316903}
   - {fileID: 125752891}
   - {fileID: 602362910}
+  - {fileID: 375218128}
+  - {fileID: 1349083130}
   m_Father: {fileID: 1668480233}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3919,6 +4053,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 21300000, guid: acb909c97db531a4c8ceb9e7c3a4db0a, type: 3}
+  codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 0}
   - {fileID: 0}
@@ -3945,6 +4080,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 21300000, guid: cce4b952d53d5ab40b999c0c43bea052, type: 3}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &261967423
@@ -4364,6 +4500,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &302712636
@@ -4386,6 +4523,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &302712637
@@ -4408,6 +4546,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &302712638
@@ -4430,6 +4569,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &302712639
@@ -4524,23 +4664,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1600763268}
-  - {fileID: 1672751580}
-  - {fileID: 582150004}
-  - {fileID: 233566760}
-  - {fileID: 507438986}
-  - {fileID: 1264951112}
-  - {fileID: 143155700}
-  - {fileID: 1160089769}
-  - {fileID: 2043237239}
-  - {fileID: 1210724838}
-  - {fileID: 1551729105}
-  - {fileID: 1774758369}
-  - {fileID: 1511834515}
-  - {fileID: 852345559}
-  - {fileID: 844973635}
-  - {fileID: 1408790983}
-  - {fileID: 1242723618}
+  - {fileID: 377721406}
   - {fileID: 1367704624}
   m_Father: {fileID: 763453157}
   m_RootOrder: 2
@@ -4675,6 +4799,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &333406146
@@ -4697,6 +4822,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &333406147
@@ -4719,6 +4845,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &333406148
@@ -4741,6 +4868,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &333406149
@@ -4763,6 +4891,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &333406150
@@ -4784,6 +4913,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &333406151
@@ -4978,6 +5108,132 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 350357323}
+--- !u!1 &375218124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 375218128}
+  - component: {fileID: 375218127}
+  - component: {fileID: 375218125}
+  - component: {fileID: 375218126}
+  m_Layer: 5
+  m_Name: CodecSprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &375218125
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 375218124}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 10
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 6.25, y: 6.25}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 1
+--- !u!114 &375218126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 375218124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8047914dd99243543a9337d2d5586912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  update: 0
+--- !u!222 &375218127
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 375218124}
+--- !u!4 &375218128
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 375218124}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 523.3, y: -58.100006, z: 0}
+  m_LocalScale: {x: 50, y: 50, z: 1.00032}
+  m_Children: []
+  m_Father: {fileID: 261958434}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &377721405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 377721406}
+  m_Layer: 5
+  m_Name: D_SGDA_Intro
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &377721406
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 377721405}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 309855630}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0.0000019073486}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &378488912
 GameObject:
   m_ObjectHideFlags: 0
@@ -5146,6 +5402,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &378626219
@@ -5179,6 +5436,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &378626221
@@ -5201,6 +5459,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &378626222
@@ -5223,6 +5482,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &378626223
@@ -5245,6 +5505,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &378626224
@@ -5267,6 +5528,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &386291579
@@ -5559,6 +5821,57 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &394775085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 394775086}
+  m_Layer: 5
+  m_Name: SGDA_Content
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &394775086
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 394775085}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1600763268}
+  - {fileID: 40086626}
+  - {fileID: 1672751580}
+  - {fileID: 582150004}
+  - {fileID: 233566760}
+  - {fileID: 507438986}
+  - {fileID: 1264951112}
+  - {fileID: 143155700}
+  - {fileID: 1160089769}
+  - {fileID: 2043237239}
+  - {fileID: 1210724838}
+  - {fileID: 1551729105}
+  - {fileID: 1774758369}
+  - {fileID: 1511834515}
+  - {fileID: 852345559}
+  - {fileID: 844973635}
+  - {fileID: 1408790983}
+  - {fileID: 1242723618}
+  m_Father: {fileID: 1367704624}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0.0000019073486}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &429626606
 GameObject:
   m_ObjectHideFlags: 0
@@ -5624,6 +5937,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &429626609
@@ -5646,6 +5960,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &429626610
@@ -5670,6 +5985,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &429626611
@@ -5692,6 +6008,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &429626612
@@ -5714,6 +6031,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &429626613
@@ -5736,6 +6054,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: d6a4494b8ea2ead4897a7a9788307d12, type: 3}
   - {fileID: 21300000, guid: d6a4494b8ea2ead4897a7a9788307d12, type: 3}
@@ -5761,6 +6080,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &429626615
@@ -5782,6 +6102,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &429626616
@@ -5804,6 +6125,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &429626617
@@ -5826,6 +6148,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &429626618
@@ -6179,8 +6502,8 @@ RectTransform:
   - {fileID: 1796133476}
   - {fileID: 103648362}
   - {fileID: 378626217}
-  m_Father: {fileID: 309855630}
-  m_RootOrder: 4
+  m_Father: {fileID: 394775086}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6524,6 +6847,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &561094583
@@ -6745,8 +7069,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 309855630}
-  m_RootOrder: 2
+  m_Father: {fileID: 394775086}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8331,6 +8655,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &743448205
@@ -8353,6 +8678,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &743448206
@@ -8376,6 +8702,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &743448207
@@ -8398,6 +8725,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &743448208
@@ -8420,6 +8748,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &743448209
@@ -8498,6 +8827,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &748311219
@@ -8520,6 +8850,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &748311220
@@ -8542,6 +8873,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &748311221
@@ -8564,6 +8896,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &748311222
@@ -8597,6 +8930,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &748311224
@@ -8619,6 +8953,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &748311225
@@ -8641,6 +8976,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &748311226
@@ -8663,6 +8999,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &748311227
@@ -8685,6 +9022,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &748311228
@@ -8707,6 +9045,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &748311229
@@ -8729,6 +9068,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &763453156
@@ -9207,6 +9547,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &818396697
@@ -9230,6 +9571,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &818396698
@@ -9252,6 +9594,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: b94214bcb80777643a41f2ea11bbb2d1, type: 3}
   char_sprite_pos:
@@ -9286,6 +9629,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &818396701
@@ -9308,6 +9652,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &820666616
@@ -9857,12 +10202,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 844973634}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 309855630}
-  m_RootOrder: 14
+  m_Father: {fileID: 394775086}
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9888,6 +10233,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &844973637
@@ -9920,6 +10266,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &844973639
@@ -9941,6 +10288,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &844973640
@@ -9962,6 +10310,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &844973641
@@ -9984,6 +10333,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &844973642
@@ -10005,6 +10355,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &844973643
@@ -10027,6 +10378,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: f0ae0f51f5be8fa4291836338d282184, type: 3}
   char_sprite_pos:
@@ -10051,6 +10403,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &844973645
@@ -10072,6 +10425,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &844973646
@@ -10094,6 +10448,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &844973647
@@ -10116,6 +10471,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &844973648
@@ -10138,6 +10494,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &844973649
@@ -10159,6 +10516,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &844973650
@@ -10181,6 +10539,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &844973651
@@ -10204,6 +10563,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &844973652
@@ -10226,6 +10586,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &844973653
@@ -10248,6 +10609,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &844973654
@@ -10270,6 +10632,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &844973655
@@ -10292,6 +10655,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &844973656
@@ -10313,6 +10677,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &846874626
@@ -10419,12 +10784,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 852345558}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 309855630}
-  m_RootOrder: 13
+  m_Father: {fileID: 394775086}
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10451,6 +10816,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &852345561
@@ -10484,6 +10850,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &852345563
@@ -10506,6 +10873,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &852345564
@@ -10527,6 +10895,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &852345565
@@ -10549,6 +10918,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &852345566
@@ -10570,6 +10940,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &852345567
@@ -10592,6 +10963,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &852345568
@@ -10614,6 +10986,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &852345569
@@ -10636,6 +11009,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &852345570
@@ -10658,6 +11032,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &852345571
@@ -10680,6 +11055,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: dd33a1cee59d9484489dd30e049dd7c2, type: 3}
   char_sprite_pos:
@@ -11252,6 +11628,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &962960393
@@ -11274,6 +11651,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &962960394
@@ -11296,6 +11674,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &962960395
@@ -11318,6 +11697,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &962960396
@@ -11340,6 +11720,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &962960397
@@ -11362,6 +11743,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &962960398
@@ -12107,6 +12489,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1032457119
@@ -12129,6 +12512,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1032457120
@@ -12151,6 +12535,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1032457121
@@ -12184,6 +12569,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &1036015172
@@ -13405,6 +13791,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1089634087
@@ -13438,6 +13825,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &1091912259
@@ -13500,6 +13888,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1091912262
@@ -13533,6 +13922,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1091912264
@@ -13555,6 +13945,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1091912265
@@ -13577,6 +13968,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1091912266
@@ -13598,6 +13990,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1091912267
@@ -13620,6 +14013,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &1118071905
@@ -13679,6 +14073,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1118071908
@@ -13701,6 +14096,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1118071909
@@ -13722,6 +14118,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1118071910
@@ -13744,6 +14141,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1118071911
@@ -14102,12 +14500,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1160089768}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 309855630}
-  m_RootOrder: 7
+  m_Father: {fileID: 394775086}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14134,6 +14532,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: 62e76f62678c48345a6b7a2918eaf67e, type: 3}
   char_sprite_pos:
@@ -14169,6 +14568,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1160089773
@@ -14191,6 +14591,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1160089774
@@ -14213,6 +14614,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1160089775
@@ -14236,6 +14638,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1160089776
@@ -14257,6 +14660,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1160089777
@@ -14279,6 +14683,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1160089778
@@ -14301,6 +14706,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1160089779
@@ -14322,6 +14728,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1160089780
@@ -14344,6 +14751,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 21300000, guid: eb416a3691a496849952474a70a1f306, type: 3}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1160089781
@@ -14366,6 +14774,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1160089782
@@ -14388,6 +14797,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1160089783
@@ -14411,6 +14821,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1160089784
@@ -14433,6 +14844,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1160089785
@@ -14455,6 +14867,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1160089786
@@ -14477,6 +14890,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1160089787
@@ -14500,6 +14914,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &1165152586
@@ -14597,6 +15012,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1172810079
@@ -14619,6 +15035,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1172810080
@@ -14641,6 +15058,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1172810081
@@ -14662,6 +15080,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1172810082
@@ -14683,6 +15102,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1172810083
@@ -14704,6 +15124,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1172810084
@@ -14726,6 +15147,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1172810085
@@ -14910,6 +15332,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1193769784
@@ -14931,6 +15354,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1193769785
@@ -14953,6 +15377,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1193769786
@@ -14975,6 +15400,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1193769787
@@ -14997,6 +15423,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1193769788
@@ -15019,6 +15446,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1193769789
@@ -15100,6 +15528,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1202342162
@@ -15122,6 +15551,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1202342163
@@ -15144,6 +15574,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1202342164
@@ -15168,6 +15599,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
   - {fileID: 21300000, guid: ace760d0494bd6744abd6c165e5a26cd, type: 3}
@@ -15193,6 +15625,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1202342166
@@ -15215,6 +15648,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1202342167
@@ -15237,6 +15671,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1202342168
@@ -15259,6 +15694,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1202342169
@@ -15281,6 +15717,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1202342170
@@ -15303,6 +15740,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1202342171
@@ -15325,6 +15763,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1202342172
@@ -15348,6 +15787,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1202342173
@@ -15370,6 +15810,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1202342174
@@ -15393,6 +15834,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1202342175
@@ -15415,6 +15857,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: ace760d0494bd6744abd6c165e5a26cd, type: 3}
   char_sprite_pos:
@@ -15485,8 +15928,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 309855630}
-  m_RootOrder: 9
+  m_Father: {fileID: 394775086}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15513,6 +15956,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724840
@@ -15546,6 +15990,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724842
@@ -15569,6 +16014,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724843
@@ -15591,6 +16037,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724844
@@ -15613,6 +16060,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724845
@@ -15636,6 +16084,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724846
@@ -15659,6 +16108,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724847
@@ -15681,6 +16131,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724848
@@ -15705,6 +16156,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724849
@@ -15727,6 +16179,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724850
@@ -15750,6 +16203,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724851
@@ -15773,6 +16227,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724852
@@ -15795,6 +16250,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724853
@@ -15817,6 +16273,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724854
@@ -15840,6 +16297,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724855
@@ -15863,6 +16321,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724856
@@ -15886,6 +16345,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724857
@@ -15907,6 +16367,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724858
@@ -15928,6 +16389,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724859
@@ -15950,6 +16412,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724860
@@ -15972,6 +16435,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724863
@@ -15994,6 +16458,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724864
@@ -16016,6 +16481,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724865
@@ -16038,6 +16504,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724866
@@ -16060,6 +16527,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724867
@@ -16082,6 +16550,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724868
@@ -16106,6 +16575,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724869
@@ -16128,6 +16598,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1210724870
@@ -16150,6 +16621,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &1213398746
@@ -16251,6 +16723,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1220154302
@@ -16273,6 +16746,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1220154303
@@ -16294,6 +16768,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1220154304
@@ -16316,6 +16791,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1220154305
@@ -16470,8 +16946,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 309855630}
-  m_RootOrder: 16
+  m_Father: {fileID: 394775086}
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16498,6 +16974,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: f0ae0f51f5be8fa4291836338d282184, type: 3}
   char_sprite_pos:
@@ -16534,6 +17011,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1242723622
@@ -16556,6 +17034,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1242723623
@@ -16578,6 +17057,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: dd33a1cee59d9484489dd30e049dd7c2, type: 3}
   char_sprite_pos:
@@ -16604,6 +17084,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1242723625
@@ -16626,6 +17107,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1242723626
@@ -16649,6 +17131,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &1262238771
@@ -16764,7 +17247,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1264951111}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -16778,8 +17261,8 @@ RectTransform:
   - {fileID: 2040540446}
   - {fileID: 748311217}
   - {fileID: 1089634085}
-  m_Father: {fileID: 309855630}
-  m_RootOrder: 5
+  m_Father: {fileID: 394775086}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17291,6 +17774,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1293330700
@@ -17324,6 +17808,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1293330702
@@ -17346,6 +17831,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1293330703
@@ -17369,6 +17855,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &1295158891
@@ -17379,6 +17866,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1295158892}
+  - component: {fileID: 1295158893}
   m_Layer: 5
   m_Name: ScreenFrame_Elements
   m_TagString: Untagged
@@ -17410,6 +17898,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1295158893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1295158891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ab9ce0db95c4ae489aa60827632c72e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  username: {fileID: 825567773}
+  currentTime: {fileID: 248634810}
 --- !u!1 &1297724876
 GameObject:
   m_ObjectHideFlags: 0
@@ -17717,6 +18218,78 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1344030230}
+--- !u!1 &1349083129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1349083130}
+  - component: {fileID: 1349083131}
+  m_Layer: 5
+  m_Name: CodecSpriteMask
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1349083130
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1349083129}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 512.048, y: -15.972, z: 0}
+  m_LocalScale: {x: 23985.568, y: 20762.203, z: 1.00032}
+  m_Children: []
+  m_Father: {fileID: 261958434}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!331 &1349083131
+SpriteMask:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1349083129}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10758, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 6c5405f3dbf75df45b48822b0894d77d, type: 3}
+  m_MaskAlphaCutoff: 0.2
+  m_FrontSortingLayerID: 0
+  m_BackSortingLayerID: 0
+  m_FrontSortingLayer: 0
+  m_BackSortingLayer: 0
+  m_FrontSortingOrder: 0
+  m_BackSortingOrder: 0
+  m_IsCustomRangeActive: 0
 --- !u!1 &1359454579
 GameObject:
   m_ObjectHideFlags: 0
@@ -17775,6 +18348,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1359454584
@@ -17797,6 +18371,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1359454585
@@ -17819,6 +18394,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1359454586
@@ -17841,6 +18417,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1359454587
@@ -17888,8 +18465,9 @@ RectTransform:
   - {fileID: 980007245}
   - {fileID: 1766702793}
   - {fileID: 967478602}
+  - {fileID: 394775086}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 17
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18160,15 +18738,15 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1408790982}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1293330698}
   - {fileID: 2025448597}
   - {fileID: 818396695}
-  m_Father: {fileID: 309855630}
-  m_RootOrder: 15
+  m_Father: {fileID: 394775086}
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18368,6 +18946,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1422806871
@@ -18390,6 +18969,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1422806872
@@ -18412,6 +18992,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1422806873
@@ -18434,6 +19015,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1422806874
@@ -18456,6 +19038,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1422806875
@@ -18478,6 +19061,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1422806876
@@ -18500,6 +19084,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1422806877
@@ -18522,6 +19107,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1422806878
@@ -18544,6 +19130,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1422806879
@@ -18566,6 +19153,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1422806880
@@ -18588,6 +19176,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1422806881
@@ -19112,6 +19701,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1462190952
@@ -19134,6 +19724,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1462190953
@@ -19155,6 +19746,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1462190954
@@ -19177,6 +19769,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1462190955
@@ -19248,6 +19841,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1475528144
@@ -19271,6 +19865,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1475528145
@@ -19293,6 +19888,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1475528146
@@ -19315,6 +19911,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1475528147
@@ -19750,12 +20347,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1511834514}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 309855630}
-  m_RootOrder: 12
+  m_Father: {fileID: 394775086}
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -19782,6 +20379,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1511834517
@@ -19814,6 +20412,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1511834519
@@ -19836,6 +20435,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1511834520
@@ -19859,6 +20459,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1511834521
@@ -19882,6 +20483,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1511834522
@@ -19905,6 +20507,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1511834523
@@ -19927,6 +20530,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1511834524
@@ -19949,6 +20553,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1511834525
@@ -19970,6 +20575,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1511834526
@@ -19992,6 +20598,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &1512057313
@@ -20227,12 +20834,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1551729104}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 309855630}
-  m_RootOrder: 10
+  m_Father: {fileID: 394775086}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -20259,6 +20866,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1551729107
@@ -20281,6 +20889,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1551729108
@@ -20302,6 +20911,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1551729109
@@ -20323,6 +20933,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1551729110
@@ -20345,6 +20956,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1551729111
@@ -20367,6 +20979,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1551729112
@@ -20401,6 +21014,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1551729114
@@ -20423,6 +21037,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1551729115
@@ -20445,6 +21060,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1551729116
@@ -20467,6 +21083,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1551729117
@@ -20490,6 +21107,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1551729118
@@ -20512,6 +21130,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1551729119
@@ -20535,6 +21154,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1551729120
@@ -20557,6 +21177,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1551729121
@@ -20578,6 +21199,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1551729122
@@ -20600,6 +21222,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &1554873791
@@ -20748,6 +21371,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1555427647
@@ -20770,6 +21394,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1555427648
@@ -20792,6 +21417,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1555427649
@@ -21396,7 +22022,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 309855630}
+  m_Father: {fileID: 394775086}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -21952,6 +22578,7 @@ MonoBehaviour:
   VNDialogueBox: {fileID: 1898592527}
   VNSpeaker: {fileID: 340179479}
   VNMCSprite: {fileID: 202969423}
+  VNCodecSprite: {fileID: 375218125}
   ANView: {fileID: 1576722628}
   ANContent: {fileID: 28611441}
   input_field: {fileID: 86583221}
@@ -22163,14 +22790,14 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1672751579}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1870125721}
   - {fileID: 2064945754}
-  m_Father: {fileID: 309855630}
-  m_RootOrder: 1
+  m_Father: {fileID: 394775086}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -22212,6 +22839,7 @@ MonoBehaviour:
   - {fileID: 1870125723}
   - {fileID: 2064945756}
   mc_sprite: {fileID: 21300000, guid: eb416a3691a496849952474a70a1f306, type: 3}
+  codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
   char_sprite_pos:
@@ -22557,6 +23185,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 21300000, guid: acb909c97db531a4c8ceb9e7c3a4db0a, type: 3}
+  codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: e516a5de6d7b41e488f39ae1e04ee39f, type: 3}
   char_sprite_pos:
@@ -22679,12 +23308,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1774758368}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 309855630}
-  m_RootOrder: 11
+  m_Father: {fileID: 394775086}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -22712,6 +23341,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1774758371
@@ -22734,6 +23364,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1774758372
@@ -22769,6 +23400,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1774758374
@@ -22791,6 +23423,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1774758375
@@ -22814,6 +23447,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1774758376
@@ -22836,6 +23470,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1774758377
@@ -22858,6 +23493,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1774758378
@@ -22881,6 +23517,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1774758379
@@ -22903,6 +23540,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1774758380
@@ -22926,6 +23564,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1774758381
@@ -22948,6 +23587,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1774758382
@@ -22969,6 +23609,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1774758383
@@ -22991,6 +23632,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1774758384
@@ -23013,6 +23655,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1774758385
@@ -23036,6 +23679,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1774758386
@@ -23058,6 +23702,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1774758387
@@ -23080,6 +23725,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &1788456522
@@ -23176,6 +23822,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1796133478
@@ -23209,6 +23856,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1796133480
@@ -23231,6 +23879,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1796133481
@@ -23253,6 +23902,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1796133482
@@ -23275,6 +23925,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1796133483
@@ -23297,6 +23948,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &1797557185
@@ -24448,6 +25100,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1870125723
@@ -24517,6 +25170,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1885889535
@@ -24539,6 +25193,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1885889536
@@ -25044,6 +25699,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1910542413
@@ -25066,6 +25722,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1910542414
@@ -25088,6 +25745,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1910542415
@@ -25443,6 +26101,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1940760192
@@ -25465,6 +26124,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1940760193
@@ -25488,6 +26148,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1940760194
@@ -25510,6 +26171,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1940760195
@@ -25532,6 +26194,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1940760196
@@ -25980,6 +26643,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2025448600
@@ -26004,6 +26668,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2025448601
@@ -26025,6 +26690,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2025448602
@@ -26191,6 +26857,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2040540448
@@ -26212,6 +26879,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2040540449
@@ -26234,6 +26902,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2040540450
@@ -26256,6 +26925,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2040540451
@@ -26289,6 +26959,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2040540453
@@ -26311,6 +26982,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: d6a4494b8ea2ead4897a7a9788307d12, type: 3}
   - {fileID: 21300000, guid: d6a4494b8ea2ead4897a7a9788307d12, type: 3}
@@ -26337,6 +27009,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2040540455
@@ -26361,6 +27034,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2040540456
@@ -26383,6 +27057,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2040540457
@@ -26406,6 +27081,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &2042309531
@@ -26552,8 +27228,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 309855630}
-  m_RootOrder: 8
+  m_Father: {fileID: 394775086}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -26579,6 +27255,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 21300000, guid: eb416a3691a496849952474a70a1f306, type: 3}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2043237241
@@ -26611,6 +27288,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2043237243
@@ -26632,6 +27310,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2043237244
@@ -26653,6 +27332,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2043237245
@@ -26676,6 +27356,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: ace760d0494bd6744abd6c165e5a26cd, type: 3}
   char_sprite_pos:
@@ -26700,6 +27381,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2043237247
@@ -26723,6 +27405,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2043237248
@@ -26745,6 +27428,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2043237249
@@ -26766,6 +27450,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2043237250
@@ -26790,6 +27475,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
   - {fileID: 21300000, guid: ace760d0494bd6744abd6c165e5a26cd, type: 3}
@@ -26815,6 +27501,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2043237252
@@ -26836,6 +27523,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2043237253
@@ -26858,6 +27546,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2043237254
@@ -26879,6 +27568,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2043237255
@@ -26900,6 +27590,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2043237256
@@ -26922,6 +27613,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2043237257
@@ -26944,6 +27636,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2043237258
@@ -26965,6 +27658,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2043237259
@@ -26987,6 +27681,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &2052168727
@@ -27125,6 +27820,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2057192308
@@ -27192,6 +27888,7 @@ MonoBehaviour:
   input_options: []
   input_branches: []
   mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2064945756

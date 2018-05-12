@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour {
 	public DialogueBox VNDialogueBox; // Visual novel style dialogue box
 	public FXText VNSpeaker; // Text that contains speaker's name for VN style
 	public SpriteRenderer VNMCSprite; // Holds mc's sprite
+	public SpriteRenderer VNCodecSprite; // Holds codec call sprites (right side)
 
 	public GameObject ANView; // Audio Novel view hiearchy
 	public RectTransform ANContent; // Content of scroll view
@@ -108,8 +109,11 @@ public class DialogueManager : MonoBehaviour {
 			DialogueBox d_box = null;
 			if (d_item.GetType () == typeof(DialogueItemVN)) {
 				Sprite mc_sprite = ((DialogueItemVN)d_item).mc_sprite;
+				Sprite codec_sprite = ((DialogueItemVN)d_item).codec_sprite;
 				if (mc_sprite != null)
 					VNMCSprite.sprite = mc_sprite;
+				if (codec_sprite != null)
+					VNCodecSprite.sprite = codec_sprite;
 				VNView.SetActive (true);
 				ChatView.SetActive (false);
 				ANView.SetActive (false);
