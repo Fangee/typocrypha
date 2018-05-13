@@ -221,14 +221,36 @@ public class DialogueManager : MonoBehaviour {
 				AudioPlayer.main.playSFX ("sfx_botch");
 			}
 		} 
-		else { // if answer field left blank, we try again
-			if (answer.Trim ().ToLower () == "") {
+		else { 
+			/*if (answer.Trim ().ToLower () == "") { // if answer field left blank, we try again
 				curr_line--;
 				clearANLog ();
 				AudioPlayer.main.playSFX ("sfx_botch");
-			} else {
-				AudioPlayer.main.playSFX ("sfx_enter");
-			}
+			} 
+			else {*/ 
+				// Check/compare with possible free response answers
+				//AudioPlayer.main.playSFX ("sfx_enter");
+				int i = 0;
+				string checkStrings = "";
+				string answerString = "";
+				for (; i < d_item.input_answers.Length; ++i) {
+					checkStrings = d_item.input_answers [i].Trim ().ToLower().Replace (".", string.Empty).Replace ("?", string.Empty).Replace ("!", string.Empty);
+					answerString = answer.Trim ().ToLower ().Replace (".", string.Empty).Replace ("?", string.Empty).Replace ("!", string.Empty);
+					if (checkStrings.CompareTo(answerString) == 0 || checkStrings.CompareTo("") == 0) {
+						break;
+					}
+				}
+				if (i < d_item.input_answers.Length) { // Option was found, so branch
+					curr_dialogue = d_item.input_branches[i].gameObject;
+					GameflowManager.main.curr_item = d_item.input_branches [i].gameObject.transform.GetSiblingIndex ();
+					curr_line = -1;
+					AudioPlayer.main.playSFX ("sfx_enter");
+				} else { // If not found, try again
+					curr_line--;
+					clearANLog ();
+					AudioPlayer.main.playSFX ("sfx_botch");
+				}
+			//}
 		}
 		input_display_choices.SetActive (false);
 		input = false;

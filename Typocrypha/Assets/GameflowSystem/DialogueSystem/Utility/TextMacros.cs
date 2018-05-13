@@ -38,6 +38,7 @@ public class TextMacros : MonoBehaviour {
 		character_map = new Dictionary<string, Pair<string, string>> {
 			{"dahlia", new Pair<string, string>("dahlia", "vo_dahlia") },
 			{"illyia", new Pair<string, string>("illyia", "vo_illyia") },
+			{"mackey", new Pair<string, string>("mackey", "vo_mackey") },
 			{"mc", new Pair<string, string>("_mc_", "vo_mc")}
 		};
 	}
