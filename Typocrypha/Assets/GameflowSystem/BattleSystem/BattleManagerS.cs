@@ -129,7 +129,12 @@ public class BattleManagerS : MonoBehaviour {
 		pause = true;
         BattleEffects.main.battleTransitionEffect("swirl_in", 1f);
         yield return new WaitForSeconds(1f);
-        uiManager.initBg();
+		if (waves[0].Background != string.Empty) {
+			uiManager.initBg(waves[0].Background);
+		} 
+		else {
+			uiManager.initBg();
+		}
         BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
         yield return new WaitForSeconds(1f);
         nextWave();

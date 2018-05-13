@@ -39,6 +39,14 @@ public class BattleUI : MonoBehaviour
         //Set background
         BackgroundEffects.main.setPrefabBG(battle_bg_prefab);
     }
+
+	//Initialize a specific battle bg
+	public void initBg(string prefab_name)
+	{
+		//Set background
+		BackgroundEffects.main.setPrefabBG(prefab_name);
+	}
+
     //Initialize the targeting and target floor UI
     public void initTarget()
     {
