@@ -107,7 +107,11 @@ public class DialogueManager : MonoBehaviour {
 			// Create dialogue box
 			DialogueItem d_item = curr_dialogue.GetComponents<DialogueItem>()[++curr_line];
 			DialogueBox d_box = null;
-			if (d_item.GetType () == typeof(DialogueItemVN)) {
+			if (d_item.GetType () == typeof(DialogueItemJump)) {
+				curr_dialogue = ((DialogueItemJump)d_item).target.gameObject;
+				GameflowManager.main.curr_item = ((DialogueItemJump)d_item).target.gameObject.transform.GetSiblingIndex () - 1;
+				return false;
+			} else if (d_item.GetType () == typeof(DialogueItemVN)) {
 				Sprite mc_sprite = ((DialogueItemVN)d_item).mc_sprite;
 				Sprite codec_sprite = ((DialogueItemVN)d_item).codec_sprite;
 				if (mc_sprite != null)
@@ -208,6 +212,7 @@ public class DialogueManager : MonoBehaviour {
 			}
 			if (i < d_item.input_options.Length) { // Option was found, so branch
 				curr_dialogue = d_item.input_branches [i].gameObject;
+				GameflowManager.main.curr_item = d_item.input_branches [i].gameObject.transform.GetSiblingIndex ();
 				curr_line = -1;
 				AudioPlayer.main.playSFX ("sfx_enter");
 			} else { // If not found, try again
