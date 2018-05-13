@@ -7,7 +7,7 @@ using UnityEngine;
 public class GameflowManager : MonoBehaviour {
 	public static GameflowManager main = null; // Global static ref
 	public GameObject player_ui; // the Typocrypha UI 
-	int curr_item; // Current event number
+	public int curr_item; // Current event number
 
 	void Awake() {
 		if (main == null) main = this;

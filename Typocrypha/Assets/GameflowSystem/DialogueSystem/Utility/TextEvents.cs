@@ -55,6 +55,7 @@ public class TextEvents : MonoBehaviour {
 			{"hide-text-box", hideTextBox},
 			{"set-talk-sfx", setTalkSFX},
 			{"highlight-character", highlightCharacter},
+			{"sole-highlight", soleHighlight},
 			{"remove-character", removeCharacter},
 			{"remove-all-character", removeAllCharacter},
             {"evil-eye", evilEye},
@@ -360,11 +361,18 @@ public class TextEvents : MonoBehaviour {
 		yield return true;
 	}
 
-	// Toggles highlighting a character
+	// Allows for highlighting a character
 	// input: [0]: string, name of sprite to highlight
 	//        [1]: float, amount to highlight (multiplier to tint)
 	IEnumerator highlightCharacter(string[] opt) {
 		DialogueManager.main.highlightCharacter(opt[0], float.Parse(opt[1]));
+		yield return true;
+	}
+
+	// Highlights one character and unhighlights all others (0.5 greyscale)
+	// input: [0]: string, name of sprite to highlight
+	IEnumerator soleHighlight(string[] opt) {
+		DialogueManager.main.soleHighlight (opt [0]);
 		yield return true;
 	}
 

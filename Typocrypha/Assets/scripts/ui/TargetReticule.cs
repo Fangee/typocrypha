@@ -66,6 +66,10 @@ public class TargetReticule : MonoBehaviour
         updateArrows();
     }
 
+	public bool isScouterVisible(){
+		return scoutVisible;
+	}
+
     // updates target based on targetted enemy
     public void updateTarget(Vector2 destination)
     {

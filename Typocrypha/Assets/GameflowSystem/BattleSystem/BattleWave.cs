@@ -8,6 +8,7 @@ public class BattleWave : MonoBehaviour {
 
     public string Title;
     public string Music;
+	public string Background;
     public string Enemy1;
     public string Enemy2;
     public string Enemy3;

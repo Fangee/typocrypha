@@ -39,6 +39,14 @@ public class BattleUI : MonoBehaviour
         //Set background
         BackgroundEffects.main.setPrefabBG(battle_bg_prefab);
     }
+
+	//Initialize a specific battle bg
+	public void initBg(string prefab_name)
+	{
+		//Set background
+		BackgroundEffects.main.setPrefabBG(prefab_name);
+	}
+
     //Initialize the targeting and target floor UI
     public void initTarget()
     {
@@ -79,6 +87,11 @@ public class BattleUI : MonoBehaviour
     public void toggleScouter()
     {
         target_ret_scr.toggleScouter();
+		if (target_ret_scr.isScouterVisible()) {
+			AudioPlayer.main.playSFX("sfx_scanner_open");
+		} else {
+			AudioPlayer.main.playSFX("sfx_scanner_close");
+		}
     }
     //Clears all enemy UI and battle bg
     public void clear()
