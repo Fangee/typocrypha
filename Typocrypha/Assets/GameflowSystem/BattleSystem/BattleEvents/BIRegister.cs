@@ -15,7 +15,7 @@ public class BIRegister : BattleInterruptTrigger
                 {
                     if (string.IsNullOrEmpty(wordMustBe))
                         return true;
-                    return (state.last_spell.root == wordMustBe) || (state.last_spell.element == wordMustBe) || (state.last_spell.style == wordMustBe);
+                    return (state.last_enemy_spell.root == wordMustBe) || (state.last_enemy_spell.element == wordMustBe) || (state.last_enemy_spell.style == wordMustBe) || (state.last_player_spell.root == wordMustBe) || (state.last_player_spell.element == wordMustBe) || (state.last_player_spell.style == wordMustBe);
                 }
                 return false;
             case Spell.WordType.ROOT:
@@ -23,7 +23,7 @@ public class BIRegister : BattleInterruptTrigger
                 {
                     if (string.IsNullOrEmpty(wordMustBe))
                         return true;
-                    return wordMustBe == state.last_spell.root;
+                    return (wordMustBe == state.last_enemy_spell.root) || (wordMustBe == state.last_player_spell.root);
                 }
                 return false;
             case Spell.WordType.ELEMENT:
@@ -31,7 +31,7 @@ public class BIRegister : BattleInterruptTrigger
                 {
                     if (string.IsNullOrEmpty(wordMustBe))
                         return true;
-                    return wordMustBe == state.last_spell.element;
+                    return (wordMustBe == state.last_enemy_spell.element) || (wordMustBe == state.last_player_spell.element);
                 }
                 return false;
             case Spell.WordType.STYLE:
@@ -39,7 +39,7 @@ public class BIRegister : BattleInterruptTrigger
                 {
                     if (string.IsNullOrEmpty(wordMustBe))
                         return true;
-                    return wordMustBe == state.last_spell.style;
+                    return (wordMustBe == state.last_enemy_spell.style) || (wordMustBe == state.last_enemy_spell.style);
                 }
                 return false;
         }

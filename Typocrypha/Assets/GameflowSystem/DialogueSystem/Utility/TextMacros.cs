@@ -19,7 +19,8 @@ public class TextMacros : MonoBehaviour {
 			{"NAME", macroNameSub},
 			{"pronoun",macroPronoun},
 			{"last-cast", macroLastCast},
-			{"time", macroTime},
+            {"last-cast-enemy", macroLastCastEnemy},
+            {"time", macroTime},
 			{"c", macroColor},
 			{"t", macroSetTalkSfx},
 			{"h", macroHighlightCharacter},
@@ -71,17 +72,31 @@ public class TextMacros : MonoBehaviour {
 	// input: [0]: string, "elem","root","style" : specifies which part of spell to display
 	string macroLastCast(string[] opt) {
 		switch (opt [0]) {
-		case "elem":  return BattleManagerS.main.field.last_spell.element.ToUpper();
-		case "root":  return BattleManagerS.main.field.last_spell.root.ToUpper();
-		case "style": return BattleManagerS.main.field.last_spell.style.ToUpper();
+		case "elem":  return BattleManagerS.main.field.last_player_spell.element.ToUpper();
+		case "root":  return BattleManagerS.main.field.last_player_spell.root.ToUpper();
+		case "style": return BattleManagerS.main.field.last_player_spell.style.ToUpper();
 		default:      return "error: bad spell substitute macro argument";	
 		}
 		//return "unimplemented";
 	}
 
-	// substitutes with current time
-	// input: NONE
-	string macroTime(string[] opt) {
+    // substitutes last cast spell's attributes
+    // input: [0]: string, "elem","root","style" : specifies which part of spell to display
+    string macroLastCastEnemy(string[] opt)
+    {
+        switch (opt[0])
+        {
+            case "elem": return BattleManagerS.main.field.last_enemy_spell.element.ToUpper();
+            case "root": return BattleManagerS.main.field.last_enemy_spell.root.ToUpper();
+            case "style": return BattleManagerS.main.field.last_enemy_spell.style.ToUpper();
+            default: return "error: bad spell substitute macro argument";
+        }
+        //return "unimplemented";
+    }
+
+    // substitutes with current time
+    // input: NONE
+    string macroTime(string[] opt) {
 		return System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute;
 	}
 

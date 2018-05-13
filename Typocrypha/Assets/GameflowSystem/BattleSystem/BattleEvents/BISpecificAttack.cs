@@ -18,23 +18,33 @@ public class BISpecificAttack : BattleInterruptTrigger
 
     public override bool checkTrigger(BattleField state)
     {
-        if(state.last_spell == null || 
-          (!string.IsNullOrEmpty(rootKeywordIs) && rootKeywordIs != state.last_spell.root) || 
-          (!string.IsNullOrEmpty(elementKeywordIs) && elementKeywordIs != state.last_spell.element) ||
-          (!string.IsNullOrEmpty(styleKeywordIs) && styleKeywordIs != state.last_spell.style))
+        if (caster == BattleField.FieldPosition.PLAYER)
+            return checkCast(state, state.last_player_cast, state.last_player_spell);
+        else if (caster == BattleField.FieldPosition.LEFT || caster == BattleField.FieldPosition.MIDDLE || caster == BattleField.FieldPosition.RIGHT)
+            return checkCast(state, state.last_enemy_cast, state.last_enemy_spell);
+        else if (caster == BattleField.FieldPosition.ANY)
+            return checkCast(state, state.last_player_cast, state.last_player_spell) || checkCast(state, state.last_enemy_cast, state.last_enemy_spell);
+        return false;
+    }
+    protected bool checkCast(BattleField state, List<CastData> dataToCheck, SpellData spellToCheck)
+    {
+        if (spellToCheck == null ||
+            (!string.IsNullOrEmpty(rootKeywordIs) && rootKeywordIs != spellToCheck.root) ||
+            (!string.IsNullOrEmpty(elementKeywordIs) && elementKeywordIs != spellToCheck.element) ||
+            (!string.IsNullOrEmpty(styleKeywordIs) && styleKeywordIs != spellToCheck.style))
             return false;
-        if (state.last_cast == null || state.last_cast.Count <= 0)
+        if (dataToCheck == null || dataToCheck.Count <= 0)
             return false;
-        if (caster != BattleField.FieldPosition.ANY && state.last_cast[0].Caster != state.getCasterFromFieldPosition(caster))
+        if (caster != BattleField.FieldPosition.ANY && dataToCheck[0].Caster != state.getCasterFromFieldPosition(caster))
             return false;
         ICaster targetToCheck = state.getCasterFromFieldPosition(target);
         if (targetToCheck == null && target != BattleField.FieldPosition.ANY)
             return false;
-        foreach (CastData d in state.last_cast)
+        foreach (CastData d in dataToCheck)
         {
             if (target == BattleField.FieldPosition.ANY || d.Target == targetToCheck)
             {
-                bool element = (elementMustBe == Elements.Element.ANY) || ((int)elementMustBe == d.element);
+                bool element = (elementMustBe == Elements.Element.ANY) || ((int)elementMustBe == d.element || (elementMustBe == Elements.Element.NOTNULL && d.element != Elements.@null));
                 bool hit = (!spellMustHit) || d.isHit;
                 bool crit = (!spellMustCrit) || d.isCrit;
                 bool stun = (!spellMustStun) || d.isStun;

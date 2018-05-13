@@ -139,8 +139,22 @@ public class CastManager : MonoBehaviour
     //Called by Cast in the SUCCESS CastStatus case, possibly on BOTCH in the future
     private void processCast(List<CastData> data, SpellData s)
     {
-        field.last_cast = data;
-        field.last_spell = s;
+        if(data.Count > 0)
+        {
+            ICasterType toCheck = data[0].Caster.CasterType;
+            if (data[0].repel)
+                toCheck = data[0].Target.CasterType;
+            if(toCheck == ICasterType.PLAYER)
+            {
+                field.last_player_cast = data;
+                field.last_player_spell = s;
+            }
+            else if(toCheck == ICasterType.ENEMY)
+            {
+                field.last_enemy_cast = data;
+                field.last_enemy_spell = s;
+            }
+        }
 		uiManager.battle_log.stop ();
         //Process the data here
         foreach (CastData d in data)

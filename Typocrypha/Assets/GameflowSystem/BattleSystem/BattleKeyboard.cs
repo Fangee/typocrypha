@@ -117,7 +117,7 @@ public class BattleKeyboard : MonoBehaviour {
     {
         if (element == Elements.volt)
             return 1 + intensity + Random.Range(0, damage/30);
-        return 2 + Random.Range(0,3 + damage/30) + intensity;
+        return 2 + Random.Range(0,2 + damage/30) + intensity;
     }
     //Gets a char with no status effect (returns '?' if all keys are affected)
     //KeysNeeded (usually one) necessary if effect needs two or more keys (eg volt)
