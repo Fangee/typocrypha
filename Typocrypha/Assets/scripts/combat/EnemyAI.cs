@@ -37,7 +37,7 @@ public abstract class EnemyAI
     //Public static methods
 
     //Returns an appropriate EnemyAI derivitive with specified parameters from ID string (MAYBE IMPROVE)
-    public static EnemyAI GetAIFromString(Enemy self, string key, string[] parameters = null)
+    public static EnemyAI GetAIFromString(string key, string[] parameters = null, Enemy self = null)
     {
         switch (key)
         {
@@ -45,6 +45,8 @@ public abstract class EnemyAI
                 return new AttackerAI1();
             case "HealthLow1":
                 return new HealthLowAI1(parameters);
+            case "FormChange1":
+                return new FormChangeAI1(parameters);
             case "Doppleganger1":
                 return new DopplegangerAI1(self);
             default:
@@ -137,6 +139,42 @@ public class HealthLowAI1 : EnemyAI
             state = AI_State.HEALTH_LOW;
         else
             state = AI_State.NORMAL;
+    }
+}
+//Enemy AI that switches to another enemy when health is below a certain level
+public class FormChangeAI1 : EnemyAI
+{
+    protected EnemyAI baseAI;
+    protected string nextForm;
+    bool resetHealthandStagger;
+    bool resetAttack = true;
+    bool hasChanged = false;
+    //Params: the class name of the base AI to use (string), the name of the enemydatabase entry to change to (string), 
+    //and whether or not to reset health on change (bool)
+    public FormChangeAI1(string[] parameters)
+    {
+        baseAI = GetAIFromString(parameters[0]);
+        nextForm = parameters[1];
+        bool.TryParse(parameters[2], out resetHealthandStagger);
+        if (parameters.Length >= 4)
+            bool.TryParse(parameters[3], out resetAttack);
+    }
+    public override SpellData getNextSpell(EnemySpellList spells, Enemy[] allies, int position, ICaster[] player_arr, out int target)
+    {
+        return baseAI.getNextSpell(spells, allies, position, player_arr, out target);
+    }
+
+    public override void updateState(Enemy[] allies, int position, ICaster[] player_arr, Update_Case flag)
+    {
+        baseAI.updateState(allies, position, player_arr, flag);
+        if(!hasChanged && flag == Update_Case.WAS_HIT)
+        {
+            allies[position].setStats(EnemyDatabase.main.getData(nextForm), resetHealthandStagger);
+            if(resetAttack)
+                allies[position].resetAttack();
+            allies[position].changeForm();
+            hasChanged = true;
+        }
     }
 }
 //Doppleganger Unique AI

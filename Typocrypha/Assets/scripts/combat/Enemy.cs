@@ -130,7 +130,7 @@ public class Enemy : MonoBehaviour, ICaster {
         enemy_sprite.sprite = sprite_bundle.LoadAsset<Sprite>(stats.sprite_path);
 		enemy_sprite.sortingOrder = enemy_sprite_layer;
         //Get AI module
-        AI = EnemyAI.GetAIFromString(this, stats.ai_type, stats.ai_params);
+        AI = EnemyAI.GetAIFromString(stats.ai_type, stats.ai_params, this);
         //Start Attacking
         attack_cr = StartCoroutine (attackRoutine ()); 
 	}
@@ -178,7 +178,7 @@ public class Enemy : MonoBehaviour, ICaster {
     //Resets the AI object
     public void resetAI()
     {
-        AI = EnemyAI.GetAIFromString(this, stats.ai_type, stats.ai_params);
+        AI = EnemyAI.GetAIFromString(stats.ai_type, stats.ai_params, this);
     }
 
 	// returns curr_time/atk_time

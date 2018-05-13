@@ -16359,7 +16359,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1264951112
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16857,10 +16857,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1288384070}
   - component: {fileID: 1288384071}
-  - component: {fileID: 1288384075}
   - component: {fileID: 1288384073}
-  - component: {fileID: 1288384072}
-  - component: {fileID: 1288384076}
   m_Layer: 5
   m_Name: GlobalEvents
   m_TagString: Untagged
@@ -16895,32 +16892,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BattleEvents:
   - {fileID: 1288384073}
-  - {fileID: 1288384072}
-  - {fileID: 1288384075}
-  - {fileID: 1288384076}
---- !u!114 &1288384072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1288384069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35d67eafccfc8f544a3a87154779a20a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interruptScene: {fileID: 839043931}
-  caster: -1
-  target: -1
-  rootKeywordIs: splash
-  elementKeywordIs: 
-  styleKeywordIs: 
-  elementMustBe: -1
-  spellMustHit: 0
-  spellMustCrit: 0
-  spellMustStun: 0
-  damageIsAtLeast: 0
-  vsElementMustBe: -1
 --- !u!114 &1288384073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16935,34 +16906,6 @@ MonoBehaviour:
   interruptScene: {fileID: 839043931}
   wordType: 2
   wordMustBe: 
---- !u!114 &1288384075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1288384069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd6b7728c0ec7ba44be25f8ceaa91729, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EventToTrigger: {fileID: 0}
-  LogicalOperator: 2
-  Operands:
-  - {fileID: 1288384072}
-  - {fileID: 1288384073}
---- !u!114 &1288384076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1288384069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cccb3c8a51d74654784390f573ff3ab6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interruptScene: {fileID: 839043931}
 --- !u!1 &1293330697
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ name (root)	spell type	spellbook description	animation ID	sfx ID	power	cooldown	
 sword	attack	Basic Phys ATK	anim_spell_slash	sfx_slash	10	4	100	5	0	MT	None	0		
 lance	attack	Medium Phys ATK	anim_spell_stab	sfx_stab	20	7	95	5	0	MT	None	0		
 hammer	attack	Heavy Phys ATK	anim_spell_crush	sfx_crush	30	15	100	10	0	MT	None	0		
+halberd	attack	"Inaccurate, But High Dmg"	anim_spell_crush	sfx_slash	40	20	50	3	0	MT	None	0		
 selfcare	attack	Recover User's HP	anim_spell_heal	sfx_mystery_effect	-40	20	9999	5	0	mS	None	0		
 stress	attack	Hurts Caster	anim_spell_empower	sfx_spell_resist	10	4	9999	0	0	mS	None	0		
 gun	attack	High Crit (secret)	anim_spell_crush	sfx_crush	15	15	100	45	0	MT	None	0		
@@ -33,8 +34,9 @@ cryo	ice	Override ATK type to Ice	anim_spell_ice	sfx_ice_hit	0	1
 veld	volt	Override ATK type to Volt	anim_spell_volt	sfx_volt_hit	0	1								
 END														
 name (style)	powerMod+	spellbook description	anim ID	sfx ID	power mod*	cooldown+	cooldown*	hit% mod+	hit% *	crit % mod+	crit % mod*	status% +	status% *	pattern
-aimed	0	"+acc, -power"	anim_spell_empower	sfx_slash	0.75	0	1	10	1.2	0	1	0	1	None
-empowered	10	"+power, +casting time"	anim_spell_empower	sfx_slash	1.25	5	1.25	0	1	0	1.25	0	1	None
+aimed	0	"+ACC, -DMG"	anim_spell_empower	sfx_slash	0.75	0	1	10	1.2	0	1	0	1	None
+empowered	5	"+power, +casting time"	anim_spell_empower	sfx_slash	1.5	5	1.5	0	1	0	1.25	0	1	None
+weakened	-5	"-power, -casting time"	anim_spell_empower	sfx_stab	0.75	0	0.5	0	1	5	1	0	1	None
 widened	0	"-power, +AOE, +casting  time"	anim_spell_empower	sfx_slash	0.75	1	1.15	0	1	0	1	0	1	LMRT
 shank	0	"+crit rate, +casting time"	anim_spell_empower	sfx_slash	1	3	1.5	0	1	10	1.5	0	1	None
 miss	0	"debug, causes player to miss"	anim_spell_empower	sfx_slash	1	0	1	-100	0.25	0	1	0	1	None

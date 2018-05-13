@@ -1,24 +1,24 @@
-Name(ID)	sprite_name	chat_id	max_hp	max_shield	max_stagger	ATK	DEF	SPEED 	ACC (%)	EVADE	AI type	AI parameters	null wk/res	agni wk/res	cryo wk/res	bolt wk/res	SpellGroup 1	Spell1 (root)	Spell1 (elem)	Spell1(style)	Spell x (root)	Spell x (elem)	Spell x (style)	Next Group or END								
-Slime	frog_mario	enemy_general_1	10	0	1	1	0	0.5	1.5	0	Attacker1	none	1	0.5	1.5	1	GROUP/DEFAULT	sword	null	null	hammer	null	null	GROUP/HEALTH_LOW	quake	null	null	END				
-The Evil Eye	frog_mario	enemy_general_1	50	0	2	1.25	0.2	0.75	1	0	HealthLow1	"35,25"	-1	2	0.75	-2	GROUP/DEFAULT	sword	null	null	lance	agni	null	GROUP/HEALTH_LOW	quake	null	null	END				
-Ladon	spr_bt_ladon	enemy_general_1	100	0	3	0.95	-0.2	0.3	1	10	Attacker1	none	1.2	1	1	1	GROUP/DEFAULT	lance	null	null	lance	null	aimed	GROUP/HEALTH_LOW	quake	null	null	END				
-Lilim	spr_bt_lilim	enemy_general_1	35	0	2	1	0.2	0.75	1	0	HealthLow1	"75,25"	0.75	1.5	0.75	1.5	GROUP/DEFAULT	lance	veld	null	sword	veld	null	GROUP/HEALTH_LOW	lance	agni	null	END				
-Changeling	spr_bt_changeling	changeling_1	18	0	1	1	0	0.5	1	0	Attacker1	none	1	1	1	2	GROUP/DEFAULT	sword	null	null	END											
-Wechselbalg	spr_bt_changeling_healer	wech_1	90	0	3	2	0	2.5	1	0	Attacker1	none	2	0.5	0.5	0.5	GROUP/DEFAULT	selfcare	null	null	END											
-Tanuki	spr_bt_tanuki	tanooki_1	28	0	1	1	0	0.75	1	0	Attacker1	none	1	0.5	2	1	GROUP/DEFAULT	lance	null	null	END											
-Tanuki2	spr_bt_tanuki	tanooki_1	30	0	2	1	0	0.85	1	15	Attacker1	none	1	0.5	2	1	GROUP/DEFAULT	sword	null	null	lance	null	null	END								
-Bunbuku	spr_bt_tanuki_fire	bunbuku_1	60	0	2	1	0.2	0.85	1.5	0	Attacker1	none	1	-1	1	2	GROUP/DEFAULT	stress	null	null	sword	agni	null	END								
-Tanooki	spr_bt_tanuki	tanooki_1	30	0	1	1	0	0.75	1	0	Attacker1	none	1	0.5	2	1	GROUP/DEFAULT	lance	null	null	END											
-Tater Totnuki	spr_bt_tanuki	tanooki_1	30	0	1	1	0	0.75	1	0	Attacker1	none	1	0.5	2	1	GROUP/DEFAULT	lance	null	null	END											
-Ijiraq	spr_bt_ijiraq	ijiraq_1	50	0	2	11	0	0.6	1	0	Attacker1	none	0	2	0	1	GROUP/DEFAULT	sword	cryo	null	lance	cryo	null	END								
-Ijiraq2	spr_bt_ijiraq	ijiraq_1	120	0	2	1.3	0	0.5	1	0	Attacker1	none	0	3	-1	1	GROUP/DEFAULT	lance	cryo	null	sword	cryo	null	END								
-Ijiraq3	spr_bt_ijiraq	ijiraq_1	45	0	2	0.75	0	0.3	1	0	Attacker1	none	0	1.1	-1	1	GROUP/DEFAULT	lance 	cryo	null	sword	cryo	null	END								
-Ala	spr_bt_ala	changeling_1	65	0	1	1.25	0	0.8	1	0	Attacker1	none	0.75	1	1.5	-1	GROUP/DEFAULT	lance	veld	null	stress	veld	null	END								
-Kitsunario	spr_bt_kitsune	changeling_1	100	0	1	1	0	0.5	1	0	Attacker1	none	1	1	1	2	GROUP/DEFAULT	sword	null	null	END											
-Kitsunuigi	spr_bt_kitsune_mountain_dew	changeling_1	100	0	1	1	0	0.5	1	0	Attacker1	none	1	1	1	2	GROUP/DEFAULT	sword	null	null	END											
-Doppelganger (BLUE)	spr_bt_doppelganger_b	doppelganger_1	170	0	1	1.25	0	0.8	1	0	Doppleganger1	none	-2	2	-1	0.5	GROUP/DEFAULT	sword	cryo	null	lance	cryo	null	GROUP/TOO_LONG	hammer	cryo	null	GROUP/SPECIAL	magic_circle	null	null	END
-Doppelganger (YELLOW)	spr_bt_doppelganger_y	doppelganger_1	170	0	2	1.25	0	0.8	1	0	Doppleganger1	none	-2	0.5	2	-1	GROUP/DEFAULT	sword	veld	null	lance	veld	null	GROUP/TOO_LONG	hammer	veld	null	GROUP/SPECIAL	magic_circle	null	null	END
-Doppelganger (RED)	spr_bt_doppelganger_r	doppelganger_1	170	0	2	1.25	0	0.8	1	0	Doppleganger1	none	-2	-1	0.5	2	GROUP/DEFAULT	sword	agni	null	lance	agni	null	GROUP/TOO_LONG	hammer	agni	null	GROUP/SPECIAL	magic_circle	null	null	END
-Doppelganger (???)	spr_bt_doppelganger_b	doppelganger_1	170	0	3	1.5	0	0.4	0.9	0	Doppleganger1	none	-2	0	0	0	GROUP/DEFAULT	sword	null	null	END											
-Doppelganger (GRAY)	spr_bt_doppelganger_g	doppelganger_1	75	0	2	2	0	3	1	0	Doppleganger1	none	2	0	0	0	GROUP/DEFAULT	hammer	null	null	END											
-END																																
+Name(ID)	sprite_name	chat_id	max_hp	max_shield	max_stagger	ATK	DEF	SPEED 	ACC (%)	EVADE	AI type	AI parameters	null wk/res	agni wk/res	cryo wk/res	bolt wk/res	SpellGroup 1	Spell1 (root)	Spell1 (elem)	Spell1(style)	Spell x (root)	Spell x (elem)	Spell x (style)	Next Group or END														
+Slime	frog_mario	enemy_general_1	10	0	1	1	0	0.5	1.5	0	Attacker1	none	1	0.5	1.5	1	GROUP/DEFAULT	sword	null	null	hammer	null	null	GROUP/HEALTH_LOW	quake	null	null	END										
+The Evil Eye	frog_mario	enemy_general_1	50	0	2	1.25	0.2	0.75	1	0	HealthLow1	"35,25"	-1	2	0.75	-2	GROUP/DEFAULT	sword	null	null	lance	agni	null	GROUP/HEALTH_LOW	quake	null	null	END										
+Ladon	spr_bt_ladon	enemy_general_1	100	0	3	0.95	-0.2	0.3	1	10	Attacker1	none	1.2	1	1	1	GROUP/DEFAULT	lance	null	null	lance	null	aimed	GROUP/HEALTH_LOW	quake	null	null	END										
+Lilim	spr_bt_lilim	enemy_general_1	35	0	2	1	0.2	0.75	1	0	HealthLow1	"75,25"	0.75	1.5	0.75	1.5	GROUP/DEFAULT	lance	veld	null	sword	veld	null	GROUP/HEALTH_LOW	lance 	veld	null	GROUP/HEALTH_CRITICAL	sword	agni	null	END						
+Changeling	spr_bt_changeling	changeling_1	18	0	1	1	0	0.5	1	0	Attacker1	none	1	1	1	2	GROUP/DEFAULT	sword	null	null	END																	
+Wechselbalg	spr_bt_changeling_healer	wech_1	90	0	3	2	0	2.5	1	0	Attacker1	none	2	0.5	0.5	0.5	GROUP/DEFAULT	selfcare	null	null	END																	
+Tanuki	spr_bt_tanuki	tanooki_1	28	0	1	1	0	0.75	1	0	Attacker1	none	1	0.5	2	1	GROUP/DEFAULT	lance	null	null	END																	
+Tanuki2	spr_bt_tanuki	tanooki_1	30	0	2	1	0	0.85	1	15	Attacker1	none	1	0.5	2	1	GROUP/DEFAULT	sword	null	null	lance	null	null	END														
+Bunbuku	spr_bt_tanuki_fire	bunbuku_1	60	0	2	1	0.2	0.85	1.5	0	Attacker1	none	1	-1	1	2	GROUP/DEFAULT	stress	null	null	sword	agni	null	END														
+Tanooki	spr_bt_tanuki	tanooki_1	100	0	3	1	0	0.75	0.9	10	FormChange1	"HealthLow1,Kitsunario,false"	1	0.5	2	1	GROUP/DEFAULT	sword	null	null	END																	
+Tater Totnuki	spr_bt_tanuki	tanooki_1	150	0	2	1	0	0.75	0.9	10	FormChange1	"HealthLow1,Kitsunuigi,false"	1	0.5	2	1	GROUP/DEFAULT	lance	null	null	END																	
+Ijiraq	spr_bt_ijiraq	ijiraq_1	50	0	2	11	0	0.6	1	0	Attacker1	none	0	2	0	1	GROUP/DEFAULT	sword	cryo	null	lance	cryo	null	END														
+Ijiraq2	spr_bt_ijiraq	ijiraq_1	120	0	2	1.3	0	0.5	1	0	Attacker1	none	0	3	-1	1	GROUP/DEFAULT	lance	cryo	null	sword	cryo	null	END														
+Ijiraq3	spr_bt_ijiraq	ijiraq_1	45	0	2	0.75	0	0.3	1	0	Attacker1	none	0	1.1	-1	1	GROUP/DEFAULT	lance 	cryo	null	sword	cryo	null	END														
+Ala	spr_bt_ala	changeling_1	65	0	1	1.25	0	0.8	1	0	Attacker1	none	0.75	1	1.5	-1	GROUP/DEFAULT	lance	veld	null	stress	veld	null	END														
+Kitsunario	spr_bt_kitsune	changeling_1	100	0	3	1	0	0.75	0.9	10	N/A	none	-2	-2	-2	2	GROUP/DEFAULT	sword	veld	null	lance	cryo	null	sword 	null	null	GROUP/HEALTH_LOW	halberd	null	aimed	sword	null	null	GROUP/HEALTH_CRITICAL	selfcare	agni	empowered	END
+Kitsunuigi	spr_bt_kitsune_mountain_dew	changeling_1	150	0	2	1	0	0.75	0.9	10	N/A	none	-2	2	-2	-2	GROUP/DEFAULT	sword	agni	null	sword	null	null	lance	veld	null	GROUP/HEALTH_LOW	lance	agni	null	sword	null	null	GROUP/HEALTH_CRITICAL	halberd	cryo	weakened	END
+Doppelganger (BLUE)	spr_bt_doppelganger_b	doppelganger_1	170	0	1	1.25	0	0.8	1	0	Doppleganger1	none	-2	2	-1	0.5	GROUP/DEFAULT	sword	cryo	null	lance	cryo	null	GROUP/TOO_LONG	hammer	cryo	null	GROUP/SPECIAL	magic_circle	null	null	END						
+Doppelganger (YELLOW)	spr_bt_doppelganger_y	doppelganger_1	170	0	2	1.25	0	0.8	1	0	Doppleganger1	none	-2	0.5	2	-1	GROUP/DEFAULT	sword	veld	null	lance	veld	null	GROUP/TOO_LONG	hammer	veld	null	GROUP/SPECIAL	magic_circle	null	null	END						
+Doppelganger (RED)	spr_bt_doppelganger_r	doppelganger_1	170	0	2	1.25	0	0.8	1	0	Doppleganger1	none	-2	-1	0.5	2	GROUP/DEFAULT	sword	agni	null	lance	agni	null	GROUP/TOO_LONG	hammer	agni	null	GROUP/SPECIAL	magic_circle	null	null	END						
+Doppelganger (???)	spr_bt_doppelganger_b	doppelganger_1	170	0	3	1.5	0	0.4	0.9	0	Doppleganger1	none	-2	0	0	0	GROUP/DEFAULT	sword	null	null	END																	
+Doppelganger (GRAY)	spr_bt_doppelganger_g	doppelganger_1	75	0	2	2	0	3	1	0	Doppleganger1	none	2	0	0	0	GROUP/DEFAULT	hammer	null	null	END																	
+END																																						
