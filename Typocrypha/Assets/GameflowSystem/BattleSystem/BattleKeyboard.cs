@@ -87,9 +87,9 @@ public class BattleKeyboard : MonoBehaviour {
         string ret = status_map[c].processKey(c);
         if (status_map[c].update())
         {
-            --numKeysAffected;
             status_map[c].reset(c, image_map[c], text_map[c]);
 			status_map[c] = new StatusNormal(key_default, image_map[c], text_map[c]);
+            --numKeysAffected;
         }
         return ret;
     }
@@ -106,9 +106,9 @@ public class BattleKeyboard : MonoBehaviour {
             yield return new WaitForEndOfFrame();
             time += Time.deltaTime;
         }
-		status_map[c] = new StatusNormal(key_default, image_map[c], text_map[c]);
+        status_map[c].reset(c, image_map[c], text_map[c]);
+        status_map[c] = new StatusNormal(key_default, image_map[c], text_map[c]);
         --numKeysAffected;
-        image_map[c].color = Color.gray;
         yield break;
     }
 
