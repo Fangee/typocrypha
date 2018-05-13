@@ -59,6 +59,7 @@ public class DialogueParser : MonoBehaviour {
 		int end_pos = text.IndexOf ('|', start_pos) - 1;
 		string fx_name = text.Substring (start_pos, end_pos - start_pos + 1);
 		FXTextEffect text_effect = text_effect_map[fx_name].clone(d_box.fx_text.gameObject);
+		text_effect.font = d_box.fx_text.font;
 		text_effect.initEffect (); // TEMP; should read options from tag
 		text_effect.chars = new int[2] {parsed.Length, -1};
 		effect_stack.Push(text_effect);
