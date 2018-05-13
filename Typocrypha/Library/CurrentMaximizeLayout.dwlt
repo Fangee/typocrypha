@@ -23,7 +23,7 @@ MonoBehaviour:
   m_MinSize: {x: 917, y: 392}
   m_MaxSize: {x: 22012, y: 14042}
   vertical: 0
-  controlID: 27645
+  controlID: 162
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_MinSize: {x: 640, y: 392}
   m_MaxSize: {x: 18010, y: 14042}
   vertical: 1
-  controlID: 27646
+  controlID: 163
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_MinSize: {x: 640, y: 271}
   m_MaxSize: {x: 18010, y: 10021}
   vertical: 0
-  controlID: 27647
+  controlID: 164
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -204,9 +204,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: dc5ef9ff
-    m_LastClickedID: -434468
-    m_ExpandedIDs: 9efbffff000000008435000004390000
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: 9efbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -293,7 +293,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/scripts/UI
+    - Assets/graphics/sprites/ui/battle_hud/typocrypha_device
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -304,7 +304,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 9a350000
     m_LastClickedID: 13722
-    m_ExpandedIDs: 000000004e0600007a2800007229000074290000fc2900001c2a00002e2a0000cc2a0000e62a00008e2b0000d02b0000e02b0000722c00007c2c0000a82c0000ba2c0000be2c0000c22c00001a2d0000942e0000d82e00002a2f0000742f0000003000002a3d00002c3d00002e3d0000303d0000323d0000343d0000363d0000383d0000
+    m_ExpandedIDs: 000000004e0600007a2800007229000074290000da2900001c2a00002e2a0000cc2a0000e62a00008e2b0000d02b0000e02b00007c2c0000a82c00001a2d0000702e0000722e0000822e0000982e0000dc2e00002e2f0000782f000004300000783d00007a3d00007c3d00007e3d0000803d0000823d0000843d0000863d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -329,10 +329,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 577}
-    m_SelectedIDs: dc5ef9ff
+    scrollPos: {x: 0, y: 360}
+    m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000004e0600007a2800007229000074290000fc2900001c2a00002e2a0000cc2a0000e62a00008e2b0000d02b0000e02b0000722c00007c2c0000a82c0000ba2c0000be2c0000c22c00001a2d0000942e0000d82e00002a2f0000742f0000003000002a3d00002c3d00002e3d0000303d0000323d0000343d0000363d0000383d0000
+    m_ExpandedIDs: 000000004e0600007a2800007229000074290000da2900001c2a00002e2a0000cc2a0000e62a00008e2b0000d02b0000e02b00007c2c0000a82c00001a2d0000702e0000722e0000822e0000982e0000dc2e00002e2f0000782f000004300000783d00007a3d00007c3d00007e3d0000803d0000823d0000843d0000863d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -357,8 +357,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: dc5ef9ff
-    m_LastClickedInstanceID: -434468
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
@@ -415,7 +415,7 @@ MonoBehaviour:
   - {fileID: 12}
   - {fileID: 13}
   m_Selected: 1
-  m_LastSelected: 3
+  m_LastSelected: 4
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -614,12 +614,8 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: f8d20fcc5901ce54494389d6052b3a3b,
-    type: 2}
-  m_BreadCrumbs:
-  - m_Target: {fileID: 1107113273386420592, guid: f8d20fcc5901ce54494389d6052b3a3b,
-      type: 2}
-    m_ScrollPosition: {x: 0, y: 0}
+  m_AnimatorController: {fileID: 0}
+  m_BreadCrumbs: []
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
   blendTreeGraph: {fileID: 0}

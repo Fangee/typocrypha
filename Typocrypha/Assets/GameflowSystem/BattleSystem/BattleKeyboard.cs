@@ -5,9 +5,9 @@ using UnityEngine.UI;
 //Manages special conditions
 public class BattleKeyboard : MonoBehaviour {
     public Dictionary<char, Image> image_map; // map from characters to key images (set from trackTyping)
-    public Dictionary<char, Text> text_map;
-	public Sprite key_default; // default key image
-	public Sprite[] frozen_keys = new Sprite[4]; // frozen key images
+    public Dictionary<char, Text> text_map; // map from characters to text objects (set from trackTyping)
+    public Sprite key_default; // default key image
+    public Sprite[] frozen_keys = new Sprite[4]; // frozen key images
 	public GameObject popper_object; // popper object for player burn damage
 
 
@@ -15,24 +15,26 @@ public class BattleKeyboard : MonoBehaviour {
     char[] keys = { 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'};
     int numKeysAffected = 0;
 
-    private void Start()
+    public void initialize()
     {
         foreach (char c in keys)
-            status_map.Add(c, new StatusNormal(key_default));
+            status_map.Add(c, new StatusNormal(key_default, image_map[c], text_map[c]));
     }
 
     public void clearStatus()
     {
+        if (image_map == null || text_map == null)
+            return;
+        //Undo all status effects and regenerate normal status
+        foreach (char c in keys)
+            status_map[c].reset(c, image_map[c], text_map[c]);
         status_map.Clear();
         numKeysAffected = 0;
         foreach (char c in keys)
         {
-            status_map.Add(c, new StatusNormal(key_default));
+            status_map.Add(c, new StatusNormal(key_default, image_map[c], text_map[c]));
             if(image_map != null)
-            {
                 image_map[c].sprite = key_default;
-                image_map[c].color = Color.gray;
-            }
         }
     }
     public void inflictCondition(Player player, int element, int elementIntensity, int damage)
@@ -45,7 +47,7 @@ public class BattleKeyboard : MonoBehaviour {
             c = getRandomValidChar();
             if (c == '?')
                 break;
-            Debug.Log("key " + c + "was inflicted with the " + Elements.toString(element) + " condition!");
+            Debug.Log("key " + c + " was inflicted with the " + Elements.toString(element) + " condition!");
 			Popper[] player_popper = popper_object.GetComponents<Popper>(); // player popper for burn damage
             switch (element)
             {
@@ -59,7 +61,7 @@ public class BattleKeyboard : MonoBehaviour {
                     ++numKeysAffected;
                     break;
                 case Elements.volt:
-                    char swap = getRandomValidChar();
+                    char swap = getRandomValidChar(2);
                     if (swap == '?')
                         break;
                     int j = 0;
@@ -86,8 +88,8 @@ public class BattleKeyboard : MonoBehaviour {
         if (status_map[c].update())
         {
             --numKeysAffected;
-			status_map[c] = new StatusNormal(key_default);
-            image_map[c].color = Color.gray;
+            status_map[c].reset(c, image_map[c], text_map[c]);
+			status_map[c] = new StatusNormal(key_default, image_map[c], text_map[c]);
         }
         return ret;
     }
@@ -104,7 +106,7 @@ public class BattleKeyboard : MonoBehaviour {
             yield return new WaitForEndOfFrame();
             time += Time.deltaTime;
         }
-		status_map[c] = new StatusNormal(key_default);
+		status_map[c] = new StatusNormal(key_default, image_map[c], text_map[c]);
         --numKeysAffected;
         image_map[c].color = Color.gray;
         yield break;
@@ -118,9 +120,10 @@ public class BattleKeyboard : MonoBehaviour {
         return 2 + Random.Range(0,3 + damage/30) + intensity;
     }
     //Gets a char with no status effect (returns '?' if all keys are affected)
-    private char getRandomValidChar()
+    //KeysNeeded (usually one) necessary if effect needs two or more keys (eg volt)
+    private char getRandomValidChar(int keysNeeded = 1)
     {
-        if (numKeysAffected >= keys.Length)
+        if (numKeysAffected >= keys.Length - (keysNeeded -1))
             return '?';
         int randomInd = Random.Range(0, keys.Length);
         while (!status_map[keys[randomInd]].isNormal)

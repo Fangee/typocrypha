@@ -47,6 +47,7 @@ public class TrackTyping : MonoBehaviour {
 			pair.Value.color = Color.gray;
         battleKeyboard.image_map = key_image_map;
         battleKeyboard.text_map = key_text_map;
+        battleKeyboard.initialize();
     }
 
 	void Update () {
@@ -137,7 +138,7 @@ public class TrackTyping : MonoBehaviour {
 				} else {
 					new_key.GetComponentInChildren<Text> ().text = rows [i] [j].ToString().ToUpper();
 				}
-                key_text_map.Add(rows[i][j], new_key.GetComponent<Text>());
+                key_text_map.Add(rows[i][j], new_key.GetComponentInChildren<Text>());
                 key_image_map.Add (rows [i] [j], new_key.GetComponent<Image> ());
 			}
 		}
