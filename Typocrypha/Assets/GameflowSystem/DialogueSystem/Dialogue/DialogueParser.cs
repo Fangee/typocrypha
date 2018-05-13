@@ -47,7 +47,12 @@ public class DialogueParser : MonoBehaviour {
 			} else if (c == '[' || c == ']') { // Text Event
 				i = parseTextEvent (i, text, d_item, parsed);
 			} else if (!tag) {
-				parsed.Append (c);
+				if(c == '’'){
+					parsed.Append ("'");
+				}
+				else {
+					parsed.Append (c);
+				}
 			}
 		}
 		return parsed.ToString ();

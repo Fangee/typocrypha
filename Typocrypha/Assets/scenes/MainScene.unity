@@ -147,7 +147,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 3
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -216,8 +216,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ace760d0494bd6744abd6c165e5a26cd, type: 3}
   - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
   char_sprite_pos:
-  - {x: -1, y: 0}
-  - {x: 1, y: 0}
+  - {x: -5, y: -1}
+  - {x: 5, y: -1}
 --- !u!114 &3761283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,8 +335,8 @@ MonoBehaviour:
   - NO
   input_answers: []
   input_branches:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 864137756}
+  - {fileID: 1477271038}
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
   char_sprites: []
@@ -2173,7 +2173,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 24
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3661,7 +3661,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 0
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4064,7 +4064,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 21
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5691,15 +5691,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 188000880}
-  - {fileID: 1054616603}
-  - {fileID: 1092987702}
-  - {fileID: 3761279}
-  - {fileID: 864137754}
-  - {fileID: 1477271035}
-  - {fileID: 1623276876}
-  - {fileID: 1371723298}
-  - {fileID: 2018250297}
   - {fileID: 377721406}
   - {fileID: 1776586316}
   - {fileID: 712047768}
@@ -5717,6 +5708,16 @@ RectTransform:
   - {fileID: 1918136871}
   - {fileID: 123715555}
   - {fileID: 1667635918}
+  - {fileID: 188000880}
+  - {fileID: 1054616603}
+  - {fileID: 1092987702}
+  - {fileID: 3761279}
+  - {fileID: 864137754}
+  - {fileID: 1477271035}
+  - {fileID: 1623276876}
+  - {fileID: 1371723298}
+  - {fileID: 2018250297}
+  - {fileID: 1589681572}
   - {fileID: 1264951112}
   - {fileID: 1408790983}
   - {fileID: 1367704624}
@@ -6293,7 +6294,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7776,7 +7777,7 @@ RectTransform:
   - {fileID: 504966145}
   - {fileID: 790983132}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 20
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10090,7 +10091,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 15
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10296,7 +10297,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 11
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13845,7 +13846,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 4
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15233,7 +15234,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 16
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15322,7 +15323,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 18
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16273,7 +16274,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 1
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16400,7 +16401,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: "[remove-character=spr_vn_clarke_display> {NAME}\u2019s TYPOCRYPHA projected
+  text: "[remove-character=spr_vn_clarke_display]> {NAME}\u2019s TYPOCRYPHA projected
     a photo of light in the air."
   input_display: {fileID: 0}
   input_options: []
@@ -16564,7 +16565,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '> You went to the apartment front door and let your friends in.'
+  text: '[remove-character=spr_vn_chatsnap]> You went to the apartment front door
+    and let your friends in.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -17494,7 +17496,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 2
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -19883,7 +19885,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 13
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -21350,7 +21352,7 @@ RectTransform:
   - {fileID: 748311217}
   - {fileID: 1089634085}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 26
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -22640,7 +22642,7 @@ RectTransform:
   - {fileID: 967478602}
   - {fileID: 394775086}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 28
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -22690,7 +22692,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 7
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -23361,7 +23363,7 @@ RectTransform:
   - {fileID: 2025448597}
   - {fileID: 818396695}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 27
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -24448,7 +24450,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 12
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -24687,6 +24689,7 @@ GameObject:
   - component: {fileID: 1477271042}
   - component: {fileID: 1477271043}
   - component: {fileID: 1477271044}
+  - component: {fileID: 1477271045}
   m_Layer: 5
   m_Name: D_SCON_NO_FORGIVE
   m_TagString: Untagged
@@ -24705,7 +24708,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 5
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -24912,6 +24915,26 @@ MonoBehaviour:
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
+--- !u!114 &1477271045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1477271034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1a15f803fd2d1a498799d4498c39efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: 
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  target: {fileID: 2018250299}
 --- !u!1 &1495560079
 GameObject:
   m_ObjectHideFlags: 0
@@ -27015,6 +27038,158 @@ Transform:
   m_Father: {fileID: 1003318565}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1589681571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1589681572}
+  - component: {fileID: 1589681574}
+  - component: {fileID: 1589681573}
+  - component: {fileID: 1589681575}
+  - component: {fileID: 1589681576}
+  - component: {fileID: 1589681577}
+  - component: {fileID: 1589681578}
+  m_Layer: 5
+  m_Name: B_SCON_MIDBOSS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1589681572
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1589681571}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 309855630}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.0000014305115, y: 0.00000023841858}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1589681573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1589681571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: Lunar Dance
+  Music: bgm_battle_midboss
+  Background: BattleBGAbyss
+  Enemy1: 
+  Enemy2: Lilim
+  Enemy3: 
+  Ally1: 
+  Ally2: 
+  events: []
+--- !u!114 &1589681574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1589681571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78f747d39ad2cb14a8b9e343e0f6bdc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1589681575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1589681571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: In Hot Water
+  Music: 
+  Background: 
+  Enemy1: 
+  Enemy2: Bunbuku
+  Enemy3: 
+  Ally1: 
+  Ally2: 
+  events: []
+--- !u!114 &1589681576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1589681571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: A Cold Spell
+  Music: 
+  Background: 
+  Enemy1: Ala
+  Enemy2: 
+  Enemy3: Ijiraq
+  Ally1: 
+  Ally2: 
+  events: []
+--- !u!114 &1589681577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1589681571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: Childhood's End
+  Music: 
+  Background: 
+  Enemy1: 
+  Enemy2: Wechselbalg
+  Enemy3: 
+  Ally1: 
+  Ally2: 
+  events: []
+--- !u!114 &1589681578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1589681571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: Illusory Brothers
+  Music: 
+  Background: 
+  Enemy1: Tanooki
+  Enemy2: Tanuki
+  Enemy3: Tater Totnuki
+  Ally1: 
+  Ally2: 
+  events:
+  - {fileID: 1264951126}
+  - {fileID: 1264951127}
 --- !u!1 &1600763267
 GameObject:
   m_ObjectHideFlags: 0
@@ -27506,7 +27681,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 6
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -27794,7 +27969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fx_text_effects: []
-  dialogue_type: 0
+  dialogue_type: 1
   speaker_name: Dahlia
   text: "{speak,dahlia}After all, half the battle of exams is being mentally, spiritually
     healthy.\r\nMost people neglect that part too often\u2026\r"
@@ -27804,8 +27979,8 @@ MonoBehaviour:
   - School sucks, let's do it.
   input_answers: []
   input_branches:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1371723300}
+  - {fileID: 1371723300}
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
   char_sprites: []
@@ -28082,7 +28257,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 25
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -29327,7 +29502,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 10
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -31275,7 +31450,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 22
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -31588,7 +31763,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 19
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -31849,7 +32024,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 23
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -32692,6 +32867,19 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2018250297}
+  - component: {fileID: 2018250299}
+  - component: {fileID: 2018250298}
+  - component: {fileID: 2018250300}
+  - component: {fileID: 2018250311}
+  - component: {fileID: 2018250301}
+  - component: {fileID: 2018250303}
+  - component: {fileID: 2018250302}
+  - component: {fileID: 2018250304}
+  - component: {fileID: 2018250305}
+  - component: {fileID: 2018250307}
+  - component: {fileID: 2018250308}
+  - component: {fileID: 2018250309}
+  - component: {fileID: 2018250310}
   m_Layer: 5
   m_Name: D_SCON_ENTER_EYE
   m_TagString: Untagged
@@ -32710,13 +32898,307 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 8
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.0000014305115, y: 0.00000023841858}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2018250298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2018250296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: "[stop-music]{speak,evil_eye}{c,evil-eye}I TOLD YOU, DIDN'T I?{c,}\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2018250299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2018250296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2018250300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2018250296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '[block=t]{t,evil_eye}{c,evil-eye}YOUR SOUL IS FORFEIT TO I.{c,}[stop-music][play-sfx=sfx_vr_bootup][fade=out,2,1,1,1][pause=2][next]'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2018250301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2018250296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '[play-music=bgm_intro_curse][play-sfx=sfx_evil_laugh][multi-float-text=20,THE
+    EVIL EYE AWAKENS][multi-float-text=20,IT''S HERE][block=t]{c,evil-eye}|scramble|HAHAhahaHahAhahAHAHahAhahahahAHa\scramble\{c,}[pause=4][next]'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2018250302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2018250296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Illyia
+  text: "{speak,illyia}{NAME}!? Oh no, Dahlia, {NAME}\u2019s passed out! I think the
+    {c,evil-eye}Evil Eye Curse{c,} is beginning to flare up!"
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2018250303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2018250296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{NAME}'
+  text: '[block=f]{speak,mc}|shake|Huh? Illyia? Dahlia? Where did you all go?\shake\'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2018250304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2018250296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Dahlia
+  text: "{speak,dahlia}{NAME}, can you hear me? Hang in there! We\u2019re going to
+    get help!"
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 0e5673948cf85044d95bf7e1054c93fb, type: 3}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2018250305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2018250296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{NAME}'
+  text: "{speak,mc}|shake|Oh no\u2026 nononononono\u2026. I can\u2019t die like this...\\shake\\"
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 93a24b5b8440cf5479b4df884abb69b3, type: 3}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2018250307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2018250296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '[block=f]{speak,evil_eye}{c,evil-eye}BEHOLD: THE HOLY SEA OF |scramble|IMMANENCE\scramble\.
+    BASK IN MY IMAGE, THE TESTIMONY TO DARKNESS, AND ITS KING.{c,}'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2018250308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2018250296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '[block=f]{speak,evil_eye}{c,evil-eye}YOUR THIRD EYE HAS AWAKENED. THE GAZE
+    THAT SHALL TOTALIZE THE WORLD.{c,}'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2018250309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2018250296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: "{speak,evil_eye}{c,evil-eye}LET THE POWERS OF THE DARK CONSUME YOU WHOLE.
+    DROWN AND BECOME ONE IN THE OCEAN OF \u201CI\u201D.{c,}"
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2018250310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2018250296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '[play-sfx=sfx_evil_laugh]{speak,evil_eye}{c,evil-eye}FOR I AM THE MASTER
+    OF ALL: |scramble|THE\scramble\ EVIL EYE!{c,}'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2018250311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2018250296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '[remove-all-character][set-bg=bg_abyss_eye][block=t][fade=in,2,1,1,1][pause=2][next]'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &2019979131
 GameObject:
   m_ObjectHideFlags: 0
@@ -33105,7 +33587,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 14
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -34453,7 +34935,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 17
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

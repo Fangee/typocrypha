@@ -39,7 +39,8 @@ public class TextMacros : MonoBehaviour {
 			{"dahlia", new Pair<string, string>("dahlia", "vo_dahlia") },
 			{"illyia", new Pair<string, string>("illyia", "vo_illyia") },
 			{"mackey", new Pair<string, string>("mackey", "vo_mackey") },
-			{"mc", new Pair<string, string>("_mc_", "vo_mc")}
+			{"mc", new Pair<string, string>("_mc_", "vo_mc")},
+			{"evil_eye", new Pair<string, string>("evil_eye", "vo_evil_eye")}
 		};
 	}
 
