@@ -232,18 +232,19 @@ public class DialogueManager : MonoBehaviour {
 			else {*/ 
 				// Check/compare with possible free response answers
 				//AudioPlayer.main.playSFX ("sfx_enter");
+			if (d_item.input_answers.Length > 0) {
 				int i = 0;
 				string checkStrings = "";
 				string answerString = "";
 				for (; i < d_item.input_answers.Length; ++i) {
-					checkStrings = d_item.input_answers [i].Trim ().ToLower().Replace (".", string.Empty).Replace ("?", string.Empty).Replace ("!", string.Empty);
+					checkStrings = d_item.input_answers [i].Trim ().ToLower ().Replace (".", string.Empty).Replace ("?", string.Empty).Replace ("!", string.Empty);
 					answerString = answer.Trim ().ToLower ().Replace (".", string.Empty).Replace ("?", string.Empty).Replace ("!", string.Empty);
-					if (checkStrings.CompareTo(answerString) == 0 || checkStrings.CompareTo("") == 0) {
+					if (checkStrings.CompareTo (answerString) == 0 || checkStrings.CompareTo ("") == 0) {
 						break;
 					}
 				}
 				if (i < d_item.input_answers.Length) { // Option was found, so branch
-					curr_dialogue = d_item.input_branches[i].gameObject;
+					curr_dialogue = d_item.input_branches [i].gameObject;
 					GameflowManager.main.curr_item = d_item.input_branches [i].gameObject.transform.GetSiblingIndex ();
 					curr_line = -1;
 					AudioPlayer.main.playSFX ("sfx_enter");
@@ -252,6 +253,9 @@ public class DialogueManager : MonoBehaviour {
 					clearANLog ();
 					AudioPlayer.main.playSFX ("sfx_botch");
 				}
+			} else {
+				AudioPlayer.main.playSFX ("sfx_enter");
+			}
 			//}
 		}
 		input_display_choices.SetActive (false);
