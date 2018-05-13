@@ -137,6 +137,7 @@ public class CastManager : MonoBehaviour
     {
         field.last_cast = data;
         field.last_spell = s;
+		uiManager.battle_log.stop ();
         //Process the data here
         foreach (CastData d in data)
             spellEffects.StartCoroutine(spellEffects.playEffects(d, s));
@@ -158,7 +159,7 @@ public class CastManager : MonoBehaviour
     private void preCastEffects(Pair<bool[], bool[]> targetPattern, ICaster caster, SpellData cast, string message)
     {
         BattleEffects.main.setDim(true);
-        uiManager.battle_log.log(cast.ToString(), caster.CasterType, message, caster.Stats.name);
+		uiManager.battle_log.log(cast.ToString(), caster.CasterType, message, caster.Stats.name, caster.Transform.position);
         if (targetPattern != null)
         {
             if (caster.CasterType == ICasterType.ENEMY)
@@ -172,7 +173,7 @@ public class CastManager : MonoBehaviour
     //effects that hafter after any actor casts
     private void postCastEffects()
     {
-        uiManager.battle_log.stop();
+        //uiManager.battle_log.stop();
         for (int i = 0; i < 3; ++i)
         {
             if (field.enemy_arr[i] != null)

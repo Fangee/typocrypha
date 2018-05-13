@@ -25,36 +25,38 @@ public class BattleLog : MonoBehaviour {
 	}
 	
 	//Enable battle log UI state (call anywhere that the battlemanager pauses to cast)
-	public void log(string cast, ICasterType caster, string talk, string speaker)
+	public void log(string cast, ICasterType caster, string talk, string speaker, Vector3 casterPosition)
 	{
 		battleLogCast.SetActive(true);
 		battleLogTalk.SetActive(true);
+		battleLogCast.transform.position = casterPosition;
 		logCastText.text = "> " + cast;
 		logTalkText.text = talk;
-		logTalkInfo.text = speaker;
+		//logTalkInfo.text = speaker;
+		logCastInfo.text = speaker;
 		if (caster == ICasterType.ENEMY)
 		{
 			castBox.color = enemyColor;
 			talkBox.color = enemyColor;
-			logCastInfo.text = "ENEMY  CAST";
+			//logCastInfo.text = "ENEMY  CAST";
 		}
 		else if (caster == ICasterType.PLAYER)
 		{
 			castBox.color = playerColor;
 			talkBox.color = playerColor;
-			logCastInfo.text = "PLAYER CAST";
+			//logCastInfo.text = "PLAYER CAST";
 		}
 		else if (caster == ICasterType.NPC_ALLY)
 		{
 			castBox.color = allyColor;
 			talkBox.color = allyColor;
-			logCastInfo.text = "ALLY   CAST";
+			//logCastInfo.text = "ALLY   CAST";
 		}
 		else //caster == IcasterType.INVALID (clarke is speaking)
 		{
 			castBox.color = clarkeColor;
 			talkBox.color = clarkeColor;
-			logCastInfo.text = "ERROR  CAST";
+			//logCastInfo.text = "ERROR  CAST";
 		}
 	}
 
