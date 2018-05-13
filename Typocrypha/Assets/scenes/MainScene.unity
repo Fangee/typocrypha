@@ -3682,7 +3682,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{NAME}'
-  text: "[set-bg=bg_darkness][block=t]{t,mc}[fade=in,4,0,0,0][pause=4]...[block=f]\r"
+  text: "[multi-float-text=10,Test Test Test Test Test][multi-float-text=10,Blah Blah
+    Blah Blah][set-bg=bg_darkness][block=t]{t,mc}[fade=in,4,0,0,0][pause=4]...[block=f]\r"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []

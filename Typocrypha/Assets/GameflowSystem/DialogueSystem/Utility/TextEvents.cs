@@ -65,7 +65,8 @@ public class TextEvents : MonoBehaviour {
 			{"frame", frame},
 			{"heal-player", healPlayer},
 			{"clear-log", clearTextLog},
-			{"float-text", floatText}
+			{"float-text", floatText},
+			{"multi-float-text", multiFloatText}
 		};
 		is_prompt = false;
 	}
@@ -464,6 +465,23 @@ public class TextEvents : MonoBehaviour {
 		for (int i = 3; i < opt.Length; i++) text += "," + opt [i];
 		d_box_obj.GetComponent<FloatText> ().startFloatText (float.Parse(opt[0]), float.Parse(opt[1]), text);
 		yield return true;
+	}
+
+	// scrolls a bunch of floating text objects at random locations
+	// input: [0]: int, number of floating text objs
+	//        [1]: string, text to be display
+	IEnumerator multiFloatText(string[] opt) {
+		int num = int.Parse (opt [0]);
+		for (int i = 0; i < num; i++) {
+			// setup dialogue item and dialogue box
+			GameObject d_box_obj = Instantiate (float_d_box_prefab, float_text_view);
+			string text = opt [1];
+			for (int j = 3; j < opt.Length; j++) text += "," + opt [j];
+			float x = ((Random.value - 0.5f) * 18) - 2;
+			float y = (Random.value - 0.5f) * 10;
+			d_box_obj.GetComponent<FloatText> ().startFloatText (x, y, text);
+			yield return null;
+		}
 	}
 }
 
