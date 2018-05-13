@@ -58,6 +58,7 @@ public class DialogueBox : MonoBehaviour {
 			fx_text.text = text;
 		} else if (d_item.GetType () == typeof(DialogueItemAN)) {
 			fx_text.text = text;
+			setBoxHeight ();
 		} else {
 			fx_text.text = text;
 		}

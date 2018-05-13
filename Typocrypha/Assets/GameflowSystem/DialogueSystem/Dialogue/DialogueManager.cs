@@ -185,36 +185,41 @@ public class DialogueManager : MonoBehaviour {
 		DialogueItem d_item = curr_dialogue.GetComponents<DialogueItem>()[curr_line];
 		if (d_item.input_options.Length > 0) { // If set number of choices
 			int i = 0;
-			for (; i < d_item.input_options.Length; ++i)
-				if (d_item.input_options [i].Trim ().ToLower ().CompareTo (answer.Trim ().ToLower ()) == 0) {
+			string choiceStrings = "";
+			string answerString = "";
+			for (; i < d_item.input_options.Length; ++i) {
+				choiceStrings = d_item.input_options [i].Trim ().ToLower().Replace (".", string.Empty).Replace ("?", string.Empty).Replace ("!", string.Empty);
+				answerString = answer.Trim ().ToLower ().Replace (".", string.Empty).Replace ("?", string.Empty).Replace ("!", string.Empty);
+				if (choiceStrings.CompareTo(answerString) == 0) {
 					break;
 				} else {
 					string comparisonLetter = "";
 					switch (i) {
-						case 0:
-							comparisonLetter = "A";
-							break;
-						case 1:
-							comparisonLetter = "B";
-							break;
+					case 0:
+						comparisonLetter = "A";
+						break;
+					case 1:
+						comparisonLetter = "B";
+						break;
 					}
 					if (comparisonLetter.Trim ().ToLower ().CompareTo (answer.Trim ().ToLower ()) == 0)
 						break;
 				}
+			}
 			if (i < d_item.input_options.Length) { // Option was found, so branch
 				curr_dialogue = d_item.input_branches [i].gameObject;
 				curr_line = -1;
 				AudioPlayer.main.playSFX ("sfx_enter");
 			} else { // If not found, try again
 				curr_line--;
-				popLog (ANView, 2);
+				clearANLog ();
 				AudioPlayer.main.playSFX ("sfx_botch");
 			}
 		} 
 		else { // if answer field left blank, we try again
 			if (answer.Trim ().ToLower () == "") {
 				curr_line--;
-				popLog (ANView, 2);
+				clearANLog ();
 				AudioPlayer.main.playSFX ("sfx_botch");
 			} else {
 				AudioPlayer.main.playSFX ("sfx_enter");
@@ -354,18 +359,20 @@ public class DialogueManager : MonoBehaviour {
 	}
 
 	// Pops off the latest item in the given chat log of all objects in its hierarchy (general function)
+	// BUGGED
 	public void popLog(GameObject textView, int offset){
+		Debug.Log ("popping log");
 		resetWindowSize();
 		Transform content = textView.transform.GetChild(0).GetChild(0);
 		int skipSpacer = 0; // skip the Spacer object in the content hierarchy
 		//VerticalLayoutGroup layout = content.GetComponents<VerticalLayoutGroup>();
 		Transform[] contentArray = content.GetComponentsInChildren<Transform>();
 		int skipCurrentBox = 0; // tracks when to stop going through log as to not delete current textbox
-		int minBoxPosition = contentArray.Length - (offset*3); // when to stop deleting items
+		int minBoxPosition = contentArray.Length - (offset*3)-1; // when to stop deleting items
 		int maxBoxPosition = contentArray.Length - (offset*2); // when to stop deleting items
 		//Debug.Log ("current box position = " + currentBoxPosition);
 		foreach (Transform tr in content.transform) {
-			if (skipSpacer > 0 && (minBoxPosition < skipCurrentBox) && (skipCurrentBox < maxBoxPosition)) {
+			if ((skipSpacer > 0) || ((minBoxPosition < skipCurrentBox) && (skipCurrentBox < maxBoxPosition))) {
 				Destroy (tr.gameObject);
 				skipCurrentBox += offset;
 			}

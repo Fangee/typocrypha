@@ -26,7 +26,14 @@ public class TextMacros : MonoBehaviour {
 			{"speak", macroSpeaker}
 		};
 		color_map = new Dictionary<string, string> {
-			{ "spell", "#ff6eff" }
+			{ "spell",      "#ff6eff" },
+			{ "ui-terms",   "#05abff" },
+			{ "evil-eye",   "#ff0042" },
+			{ "enemy-talk", "#be2dd4" },
+			{ "enemy-name", "#16e00c" },
+			{ "tips",       "#ffdb16" },
+			{ "whisper",    "#c8c8c8" },
+			{ "highlight",  "#ff840c" }
 		};
 		character_map = new Dictionary<string, Pair<string, string>> {
 			{"dahlia", new Pair<string, string>("dahlia", "vo_dahlia") },
@@ -94,7 +101,7 @@ public class TextMacros : MonoBehaviour {
 	// substitues in 'set-talk-sfx' TextEvent
 	// input: [0]: string, name of audio file
 	string macroSetTalkSfx(string[] opt) {
-		return "[set-talk-sfx=" + opt[0] + "]";
+		return "[set-talk-sfx=vo_" + opt[0] + "]";
 	}
 
 	// substitutes in 'highlight-character' TextEvent.
