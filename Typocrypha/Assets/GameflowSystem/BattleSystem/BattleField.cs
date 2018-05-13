@@ -51,6 +51,8 @@ public class BattleField {
 	[HideInInspector] public bool[] last_register; // last spell register status
 	[HideInInspector] public int num_player_attacks; // number of player attacks from beginning of battle
 
+    //CALLBACK FUNCTIONS
+
     private BattleManagerS callback;
 
     public BattleField(BattleManagerS callback)
@@ -64,5 +66,9 @@ public class BattleField {
     public void update()
     {
         callback.updateEnemies();
+    }
+    public void updateScourterInfo()
+    {
+        callback.uiManager.updateScourterInfo();
     }
 }

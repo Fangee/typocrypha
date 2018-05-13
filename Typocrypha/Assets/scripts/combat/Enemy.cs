@@ -150,6 +150,7 @@ public class Enemy : MonoBehaviour, ICaster {
             Curr_stagger = stats.max_stagger;
             stagger_time = (stats.max_stagger * stagger_mult_constant) + stagger_add_constant;
         }
+        field.updateScourterInfo();
     }
     //Changes plays the form change animation
     public void changeForm()

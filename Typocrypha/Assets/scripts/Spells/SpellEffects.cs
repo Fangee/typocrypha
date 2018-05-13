@@ -11,7 +11,6 @@ public class SpellEffects : MonoBehaviour {
     Vector3 ELEM_OFFSET = new Vector3(-0.75f, 1.6f, 0);
     const float shakeIntensityMod = 0.1f; //The amount to scale each shake by (per keyword)
 
-
     // Use this for initialization
     void Start () {
 		
@@ -31,7 +30,12 @@ public class SpellEffects : MonoBehaviour {
         else if (d.Target.CasterType == ICasterType.ENEMY)// when enemy is hit
         {
             //learn their strength/weaknesses against the element used
-            EnemyIntel.main.learnIntel((d.Target as Enemy).Stats.name, d.element);
+            EnemyIntel.main.learnIntel(d.Target.Stats.name, d.element);
+        }
+        else if(d.Caster.CasterType == ICasterType.ENEMY && d.Target.CasterType == ICasterType.PLAYER && d.repel)
+        {
+            //learn their strength/weaknesses against the element used
+            EnemyIntel.main.learnIntel(d.Caster.Stats.name, d.element);
         }
 
 		//Process repel

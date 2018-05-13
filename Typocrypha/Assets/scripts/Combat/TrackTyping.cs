@@ -16,8 +16,8 @@ public class TrackTyping : MonoBehaviour {
 	public GameObject spacebar_prefab; // prefab for spacebar image object
 	public GameObject popper; // popper
 
-    string last_buffer;
-	string buffer; // contains typed text
+    string last_buffer = "";
+	string buffer = ""; // contains typed text
 	int count; // number of characters typed
 	string[] rows = { "qwertyuiop", "asdfghjkl", "zxcvbnm", " " };
 	float[] row_offsets = { 0f, 24f, 72f, 0 };

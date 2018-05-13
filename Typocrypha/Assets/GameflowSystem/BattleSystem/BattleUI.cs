@@ -93,6 +93,11 @@ public class BattleUI : MonoBehaviour
 			AudioPlayer.main.playSFX("sfx_scanner_close");
 		}
     }
+    //update scouterInfo (refreshes the info for form changes)
+    public void updateScourterInfo()
+    {
+        target_ret_scr.updateScouterInfo();
+    }
     //Clears all enemy UI and battle bg
     public void clear()
     {
