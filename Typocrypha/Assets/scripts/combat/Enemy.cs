@@ -98,7 +98,7 @@ public class Enemy : MonoBehaviour, ICaster {
 	int curr_hp; // current amount of health
     int curr_shield; //current amount of shield
     int curr_stagger; //current amount of stagger
-    float stagger_time; //The time an enemy's stun will last
+    public float stagger_time; //The time an enemy's stun will last
 	float curr_stagger_time; // current time staggered
     float curr_time; // current time (from 0 to atk_time)
     float atk_time; // time it takes to attack
@@ -130,7 +130,7 @@ public class Enemy : MonoBehaviour, ICaster {
         enemy_sprite.sprite = sprite_bundle.LoadAsset<Sprite>(stats.sprite_path);
 		enemy_sprite.sortingOrder = enemy_sprite_layer;
         //Get AI module
-        AI = EnemyAI.GetAIFromString(stats.ai_type, stats.ai_params);
+        AI = EnemyAI.GetAIFromString(this, stats.ai_type, stats.ai_params);
         //Start Attacking
         attack_cr = StartCoroutine (attackRoutine ()); 
 	}
@@ -157,6 +157,7 @@ public class Enemy : MonoBehaviour, ICaster {
         if(form_change_cr != null)
             StopCoroutine(form_change_cr);
         form_change_cr = StartCoroutine(formChangeGraphics());
+        Debug.Log("changing form");
 
     }
     IEnumerator formChangeGraphics()
@@ -177,7 +178,7 @@ public class Enemy : MonoBehaviour, ICaster {
     //Resets the AI object
     public void resetAI()
     {
-        AI = EnemyAI.GetAIFromString(stats.ai_type, stats.ai_params);
+        AI = EnemyAI.GetAIFromString(this, stats.ai_type, stats.ai_params);
     }
 
 	// returns curr_time/atk_time
@@ -224,7 +225,10 @@ public class Enemy : MonoBehaviour, ICaster {
                 fullBarFX(); // notify player of full bar
                 yield return new WaitForSeconds(1f);
                 yield return new WaitWhile(() => BattleManagerS.main.pause);
-                if(!is_stunned)
+                //Only attack if stunned, else perfect stagger
+                if (is_stunned)
+                    attack_in_progress = false;
+                else
                     attackPlayer (curr_spell);
                 //Update state (will move to make it so that state change can interrupt cast)
 				AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.AFTER_CAST);
@@ -232,7 +236,6 @@ public class Enemy : MonoBehaviour, ICaster {
 				curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target).clone();
                 atk_time = castManager.spellDict.getCastingTime(curr_spell, stats.speed);//get new casting time
                 curr_time = 0;
-                //resetBarFX(); // stop full bar effects (now in barFlash)
             }
 		}
 	}
@@ -279,12 +282,8 @@ public class Enemy : MonoBehaviour, ICaster {
         if (CasterOps.calcRepel(data,d,element,caster,this,crit,reflect))
             return;
         CasterOps.calcDamage(data, d, element, caster, this, crit, Is_stunned);
-        //Apply stun if applicable
-        if (curr_stagger <= 0 && is_stunned == false)
-        {
-            data.isStun = true;
-            stun();
-        }
+        //log stun stun actually happens in update condition
+        data.isStun = curr_stagger <= 0 && is_stunned == false;
         //opacity and death are now updated in updateCondition()
         was_hit = true;
     }
@@ -309,7 +308,10 @@ public class Enemy : MonoBehaviour, ICaster {
         //Update AI if hit (may drop hp to zero)
         if (was_hit)
         {
-			AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.WAS_HIT);
+            if(!attack_in_progress)
+			    AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.WAS_HIT);
+            if (curr_stagger <= 0 && is_stunned == false)
+                stun();
             was_hit = false;
         }
         if (curr_hp <= 0)

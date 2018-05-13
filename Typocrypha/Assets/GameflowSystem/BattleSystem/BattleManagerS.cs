@@ -212,7 +212,6 @@ public class BattleManagerS : MonoBehaviour {
     //Handles a spellcast (by calling the castmanager) and clears callback's buffer if necessary
     public void handleSpellCast(string spell, TrackTyping callback)
     {
-        AudioPlayer.main.playSFX("sfx_enter"); // MIGHT WANT TO BE MOVED
         castManager.attackCurrent(spell, callback);
     }
     //Handle player death
@@ -222,7 +221,6 @@ public class BattleManagerS : MonoBehaviour {
         StopAllCoroutines();
         castManager.StopAllCoroutines();
         uiManager.StopAllCoroutines();
-        pause = true;
         foreach (Enemy enemy in field.enemy_arr)
         {
             if (enemy != null) GameObject.Destroy(enemy.gameObject);
@@ -262,8 +260,8 @@ public class BattleManagerS : MonoBehaviour {
             Debug.Log("Wave: " + Wave.Title + " complete!");
             nextWave();
         }
-        else
-            checkInterrupts();
+        else if (!checkInterrupts())
+            setPause(false);
     }
     //Add Scene to trigger queue
     public void addSceneToQueue(GameObject interruptScene)

@@ -31,13 +31,13 @@ public abstract class EnemyAI
     public AI_State State { get { return state; } set { state = value; } }
     //Returns the next spell for the enemy to cast and sets the target in out int target
     public abstract SpellData getNextSpell(EnemySpellList spells, Enemy[] allies, int position, ICaster[] player_arr, out int target);
-    //Updates the state of this AI module based on field data (returns true if new form (and attack needs to change)
+    //Updates the state of this AI module based on field data
     public abstract void updateState(Enemy[] allies, int position, ICaster[] player_arr, Update_Case flag);
 
     //Public static methods
 
     //Returns an appropriate EnemyAI derivitive with specified parameters from ID string (MAYBE IMPROVE)
-    public static EnemyAI GetAIFromString(string key, string[] parameters = null)
+    public static EnemyAI GetAIFromString(Enemy self, string key, string[] parameters = null)
     {
         switch (key)
         {
@@ -46,7 +46,7 @@ public abstract class EnemyAI
             case "HealthLow1":
                 return new HealthLowAI1(parameters);
             case "Doppleganger1":
-                return new DopplegangerAI1();
+                return new DopplegangerAI1(self);
             default:
                 throw new System.NotImplementedException(key + " is not an AI type!");
         }
@@ -145,10 +145,11 @@ public class DopplegangerAI1 : EnemyAI
     int numAttacks = 0;
     int form = 1;
     string color = "NONE";
-    readonly string[] colors = { "RED", "YELLOW", "BLUE" };
-    public DopplegangerAI1()
+    readonly string[] colors = { "RED", "BLUE", "YELLOW" };
+    public DopplegangerAI1(Enemy self)
     {
         state = AI_State.NORMAL;
+        self.stagger_time = 2;
     }
     public override SpellData getNextSpell(EnemySpellList spells, Enemy[] allies, int position, ICaster[] player_arr, out int target)
     {
@@ -159,8 +160,6 @@ public class DopplegangerAI1 : EnemyAI
             return spells.getSpells("TOO_LONG")[0];
         else if (state == AI_State.ATTACK_SPECIAL)
         {
-            //return spells.getSpells("SPECIAL")[0]; //(TODO)
-            //state == AI_State.NORMAL;
             return spells.getSpells()[0];
         }
         else
@@ -169,6 +168,7 @@ public class DopplegangerAI1 : EnemyAI
 
     public override void updateState(Enemy[] allies, int position, ICaster[] player_arr, Update_Case flag)
     {
+        Debug.Log("updating doppel AI state: attack in prog = " + allies[position].attack_in_progress + " " + flag.ToString());
         if(form <= 3)
         {
             if (flag == Update_Case.AFTER_CAST)
@@ -185,6 +185,7 @@ public class DopplegangerAI1 : EnemyAI
                 {
                     state = AI_State.NORMAL;
                     allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (YELLOW)"), true);
+                    allies[position].stagger_time = 2f;
                     allies[position].changeForm();
                     allies[position].resetAttack();
                 }
@@ -192,6 +193,7 @@ public class DopplegangerAI1 : EnemyAI
                 {
                     state = AI_State.NORMAL;
                     allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (RED)"), true);
+                    allies[position].stagger_time = 2f;
                     allies[position].changeForm();
                     allies[position].resetAttack();
                 }
@@ -199,6 +201,7 @@ public class DopplegangerAI1 : EnemyAI
                 {
                     state = AI_State.ATTACK_SPECIAL;
                     allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (???)"), true);
+                    allies[position].stagger_time = 2f;
                     changeToRandomColor(allies[position]);
                     allies[position].resetAttack();
                 }
@@ -211,7 +214,7 @@ public class DopplegangerAI1 : EnemyAI
             {
                 state = AI_State.NORMAL;
                 allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (GRAY)"), true);
-                allies[position].changeForm();
+                allies[position].stagger_time = 10f;
                 allies[position].resetAttack();
                 ++form;
             }
@@ -253,7 +256,11 @@ public class DopplegangerAI1 : EnemyAI
         while(colors[randomIndex] == color)
             randomIndex = Random.Range(0, colors.Length);
         color = colors[randomIndex];
-        ((EnemyStats)self.Stats).sprite_path = EnemyDatabase.main.getData("Doppelganger (" + color + ")").sprite_path;
+        EnemyStats formStats = EnemyDatabase.main.getData("Doppelganger (" + color + ")");
+        ((EnemyStats)self.Stats).sprite_path = formStats.sprite_path;
+        self.Stats.vsElement = formStats.vsElement;
+        self.Stats.vsElement[0] = 0;
+        ((EnemyStats)self.Stats).spells = formStats.spells;
         self.changeForm();
     }
 }

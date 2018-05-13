@@ -133,15 +133,15 @@ public class Player : MonoBehaviour, ICaster
     //ICaster interface overrides
 
     //Damage player
-    public void damage(CastData data, int d, int element, ICaster caster, bool crit, bool reflect = false)
+    public void damage(CastData data, int baseDmg, int element, ICaster caster, bool crit, bool reflect = false)
     {
         //Apply repel and return if applicable
-        if (CasterOps.calcRepel(data, d, element, caster, this, crit, reflect))
+        if (CasterOps.calcRepel(data, baseDmg, element, caster, this, crit, reflect))
             return;
-        bool damaged = CasterOps.calcDamage(data, d, element, caster, this, crit);
+        bool damaged = CasterOps.calcDamage(data, baseDmg, element, caster, this, crit);
 
         if (damaged && element != Elements.@null) {
-            status_manager.inflictCondition(this, element, data.damageInflicted);
+            status_manager.inflictCondition(this, element, 0, data.damageInflicted);
 		}
         if (Curr_hp <= 0)
         { // check if killed

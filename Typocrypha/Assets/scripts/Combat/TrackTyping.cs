@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class TrackTyping : MonoBehaviour {
 	public Text typed_text; // shows typed text
 	public Text entry_ok; // displays 'OK' or 'NO' if player can type or not
-	public Dictionary<char, Image> key_map; // map from characters to key images
+	public Dictionary<char, Image> key_image_map; // map from characters to key images
+    public Dictionary<char, Text> key_text_map; // map from characters to key text
     public BattleKeyboard battleKeyboard;
 	public Transform keyboard; // keyboard transform (holds key images)
 	public GameObject key_prefab; // prefab for key image object
@@ -37,14 +38,16 @@ public class TrackTyping : MonoBehaviour {
 
 	void Start () {
 		typed_text.text = "";
-		key_map = new Dictionary<char, Image> ();
+		key_image_map = new Dictionary<char, Image> ();
+        key_text_map = new Dictionary<char, Text>();
         clearBuffer();
 		createKeyboard ();
 		// initialize key colors to gray
-		foreach (KeyValuePair<char, Image> pair in key_map)
+		foreach (KeyValuePair<char, Image> pair in key_image_map)
 			pair.Value.color = Color.gray;
-        battleKeyboard.image_map = key_map;
-	}
+        battleKeyboard.image_map = key_image_map;
+        battleKeyboard.text_map = key_text_map;
+    }
 
 	void Update () {
 		if ((BattleManagerS.main.pause || BattleManagerS.main.enabled == false) &&
@@ -68,6 +71,7 @@ public class TrackTyping : MonoBehaviour {
 		} else if (Input.GetKey (KeyCode.Backspace)) {
 			if (Input.GetKeyDown (KeyCode.Backspace)) {
 				if (count > 0) {
+                    AudioPlayer.main.playSFX("sfx_backspace", 0.15f);
 					buffer = buffer.Remove (count - 1, 1);
 					count = count - 1;
 				}
@@ -88,7 +92,7 @@ public class TrackTyping : MonoBehaviour {
             } else {
                 // process status conditions on keys and apply appropriate graphical effects
                 foreach (char c in in_str) {
-                    if (key_map.ContainsKey(c)) {
+                    if (key_image_map.ContainsKey(c)) {
                         if (c == ' ') {//Dont put space in if cast is empty
                             if (count != 0) {
                                 buffer += c;
@@ -101,7 +105,7 @@ public class TrackTyping : MonoBehaviour {
                         string add = battleKeyboard.processKey(c); 
                         buffer += add;
                         count += add.Length;
-                        StartCoroutine(battleKeyboard.keyGraphics(c, key_map[c]));
+                        StartCoroutine(battleKeyboard.keyGraphics(c, key_image_map[c], key_text_map[c]));
                     }
                 }
             }
@@ -133,17 +137,18 @@ public class TrackTyping : MonoBehaviour {
 				} else {
 					new_key.GetComponentInChildren<Text> ().text = rows [i] [j].ToString().ToUpper();
 				}
-				key_map.Add (rows [i] [j], new_key.GetComponent<Image> ());
+                key_text_map.Add(rows[i][j], new_key.GetComponent<Text>());
+                key_image_map.Add (rows [i] [j], new_key.GetComponent<Image> ());
 			}
 		}
 	}
 
 	// light up key for a short period of time
 	IEnumerator colorKey(char c) {
-		if (key_map.ContainsKey (c)) {
-			key_map [c].color = Color.white;
+		if (key_image_map.ContainsKey (c)) {
+			key_image_map [c].color = Color.white;
 			yield return new WaitForSeconds (0.1f);
-			key_map [c].color = Color.gray;
+			key_image_map [c].color = Color.gray;
 		}
 	}
 }

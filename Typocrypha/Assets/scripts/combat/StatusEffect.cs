@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public abstract class StatusEffect {
     public bool isNormal = false;
     public abstract string processKey(char key);
-    public abstract IEnumerator keyGraphics(char key, Image image);
+    public abstract IEnumerator keyGraphics(char key, Image image, Text text);
     //return true if status should be reset to normal
     public virtual bool update() { return false; }
 }
@@ -20,9 +20,10 @@ public class StatusNormal : StatusEffect
 		normal_key = sp;
         isNormal = true;
     }
-    public override IEnumerator keyGraphics(char key, Image image)
+    public override IEnumerator keyGraphics(char key, Image image, Text text)
     {
 		image.sprite = normal_key;
+        text.color = Color.white;
         image.color = Color.white;
         yield return new WaitForSeconds(0.1f);
         image.color = Color.gray;
@@ -46,9 +47,10 @@ public class StatusFreeze : StatusEffect
 		this.player_popper = popp;
 		this.key_text = c;
 	}
-    public override IEnumerator keyGraphics(char key, Image image)
+    public override IEnumerator keyGraphics(char key, Image image, Text text)
     {
         image.color = Color.white;
+        text.color = Color.cyan;
 		switch (freezeNum) {
 		case 1:
 			image.sprite = frozen_keys[3]; 
@@ -99,8 +101,9 @@ public class StatusBurn : StatusEffect
 		this.player_popper = popp;
 		this.key_text = c;
     }
-    public override IEnumerator keyGraphics(char key, Image image)
+    public override IEnumerator keyGraphics(char key, Image image, Text text)
     {
+        text.color = Color.red;
         image.color = Color.red;
         yield break;
     }
@@ -130,8 +133,9 @@ public class StatusShock : StatusEffect
 		this.original = origin;
 		this.player_popper = popp;
     }
-    public override IEnumerator keyGraphics(char key, Image image)
+    public override IEnumerator keyGraphics(char key, Image image, Text text)
     {
+        text.color = Color.yellow;
         image.color = Color.yellow;
         yield break;
     }

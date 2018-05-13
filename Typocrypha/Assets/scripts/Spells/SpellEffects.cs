@@ -9,6 +9,7 @@ public class SpellEffects : MonoBehaviour {
     Vector3 UNDER_OFFSET = new Vector3(0, -0.75f, 0); //where something under the damage num should be
     Vector3 OVER_OFFSET = new Vector3(0, 1.5f, 0); //where something over the damage num should be
     Vector3 ELEM_OFFSET = new Vector3(-0.75f, 1.6f, 0);
+    const float shakeIntensityMod = 0.1f; //The amount to scale each shake by (per keyword)
 
 
     // Use this for initialization
@@ -40,7 +41,7 @@ public class SpellEffects : MonoBehaviour {
 			AnimationPlayer.main.playAnimation("anim_element_reflect", d.Caster.Transform.position, 2f);
 			yield return new WaitForSeconds(0.333F);
 		}
-
+        float shakeIntensity = 0;
 		//Process hit graphics (if not a repelled attack)
 		for (int i = 0; i < d.animData.Length; ++i)
 		{
@@ -50,11 +51,13 @@ public class SpellEffects : MonoBehaviour {
 				AudioPlayer.main.playSFX(AudioPlayer.channel_spell_sfx);
 				//AnimationPlayer.main.playAnimation(d.animData[i], d.Target.Transform.position, 1);
 				AnimationPlayer.main.playAnimation(d.animData[i], d.Target.Transform.position, 2f);
-				yield return new WaitForSeconds(0.333F);
+                if(d.Target.CasterType == ICasterType.PLAYER)
+                   BattleEffects.main.screenShake(0.15f + shakeIntensity/8, 0.05f + shakeIntensity);
+                shakeIntensity += shakeIntensityMod;
+                yield return new WaitForSeconds(0.333F);
 			}
 		}
-
-		if (d.isCrit && d.elementalData != Elements.vsElement.BLOCK) {//Spell is crit
+        if (d.isCrit && d.elementalData != Elements.vsElement.BLOCK) {//Spell is crit
 			Debug.Log (d.Caster.Stats.name + " scores a critical with " + s.ToString () + " on " + d.Target.Stats.name);
 			if (d.Target.CasterType == ICasterType.ENEMY)
 				AudioPlayer.main.playSFX ("sfx_enemy_weakcrit_dmg");
@@ -96,7 +99,14 @@ public class SpellEffects : MonoBehaviour {
 		if (d.damageInflicted > 0) {
 			BattleEffects.main.spriteShake (d.Target.Transform, 0.3f, 0.1f);
 			AudioPlayer.main.playSFX ("sfx_spell_hit");
-			popp.spawnText (d.damageInflicted.ToString (), POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET);
+            Color dmgNumColor = Color.white;
+            if(d.Target.CasterType == ICasterType.PLAYER)
+            {
+                if (d.repel)
+                    dmgNumColor = new Color(255, 0, 255);//new Color(220, 86, 249);
+                BattleEffects.main.screenShake(0.15f + shakeIntensity/2, shakeIntensity + 0.3f);
+            }
+            popp.spawnText (d.damageInflicted.ToString (), POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET, dmgNumColor);
 		} else if (d.damageInflicted < 0) {
 			string heal = "+" + (-1 * (d.damageInflicted)).ToString ();
 			AudioPlayer.main.playSFX ("sfx_heal");

@@ -47,15 +47,13 @@ public class TextMacros : MonoBehaviour {
 	// substitutes last cast spell's attributes
 	// input: [0]: string, "elem","root","style" : specifies which part of spell to display
 	string macroLastCast(string[] opt) {
-		/*
 		switch (opt [0]) {
-		case "elem":  return BattleManager.main.last_spell.element;
-		case "root":  return BattleManager.main.last_spell.root;
-		case "style": return BattleManager.main.last_spell.style;
+		case "elem":  return BattleManagerS.main.field.last_spell.element.ToUpper();
+		case "root":  return BattleManagerS.main.field.last_spell.root.ToUpper();
+		case "style": return BattleManagerS.main.field.last_spell.style.ToUpper();
 		default:      return "error: bad spell substitute macro argument";	
 		}
-		*/
-		return "unimplemented";
+		//return "unimplemented";
 	}
 
 	// substitutes with current time

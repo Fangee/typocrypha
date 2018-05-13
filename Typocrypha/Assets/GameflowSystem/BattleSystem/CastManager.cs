@@ -45,23 +45,28 @@ public class CastManager : MonoBehaviour
                 targetPattern = spellDict.getTargetPattern(s, field.enemy_arr, field.target_ind, field.player_arr, field.player_ind);
                 message = chat.getLine(field.Player.Stats.ChatDatabaseID);
                 preCastEffects(targetPattern, field.Player, s, message);
+                AudioPlayer.main.playSFX("sfx_enter");
                 StartCoroutine(pauseAttackCurrent(s, field.Player));
                 return true; //Clear the casting buffer
             case CastStatus.BOTCH:
                 //diplay.playBotchEffects
                 spellEffects.popp.spawnSprite("popups_invalid", 1.0F, field.Player.Transform.position - new Vector3(0, 0.375f, 0));
+                AudioPlayer.main.playSFX("sfx_enter_bad");
                 return true; //Clear the casting buffer
             case CastStatus.FIZZLE:
                 //diplay.playBotchEffects
                 spellEffects.popp.spawnSprite("popups_invalid", 1.0F, field.Player.Transform.transform.position - new Vector3(0, 0.375f, 0));
+                AudioPlayer.main.playSFX("sfx_enter_bad");
                 return true; //Clear the casting buffer
             case CastStatus.ONCOOLDOWN:
                 //display.playOnCooldownEffects
                 spellEffects.popp.spawnSprite("popups_oncooldown", 1.0F, field.Player.Transform.position - new Vector3(0, 0.375f, 0));
+                AudioPlayer.main.playSFX("sfx_enter_bad");
                 return false;
             case CastStatus.COOLDOWNFULL:
                 //diplay.playCooldownFullEffects
                 spellEffects.popp.spawnSprite("popups_cooldownfull", 1.0F, field.Player.Transform.position - new Vector3(0, 0.375f, 0));
+                AudioPlayer.main.playSFX("sfx_enter_bad");
                 return false;
             case CastStatus.ALLYSPELL:
                 int allyPos = getAllyPosition(s.root);
@@ -97,7 +102,7 @@ public class CastManager : MonoBehaviour
         //END pause//
 
         postCastEffects();
-        field.Pause = false;
+        //Updates field.Pause if necessary
         field.update();
     }
 
@@ -127,7 +132,6 @@ public class CastManager : MonoBehaviour
 
         postCastEffects();
         field.enemy_arr[position].attack_in_progress = false;
-        field.Pause = false;
         field.update();
     }
 
