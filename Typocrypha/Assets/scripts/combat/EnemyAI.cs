@@ -254,6 +254,7 @@ public class DopplegangerAI1 : EnemyAI
                 allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (GRAY)"), true);
                 allies[position].stagger_time = 10f;
                 allies[position].resetAttack();
+                allies[position].changeForm();
                 ++form;
             }
             else if (flag == Update_Case.AFTER_CAST)
