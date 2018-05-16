@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpellEffects : MonoBehaviour {
     public Popper popp; //holds popper script component
+	public EnemyHealthBars enemy_hp_bars; // holds enemy HP bars component
     const float POP_TIMER = 1.5f; //pop-ups last this many seconds long
     Vector3 DMGNUM_OFFSET = new Vector3(0, 0.375f, 0); //where the damage number should be
     Vector3 UNDER_OFFSET = new Vector3(0, -0.75f, 0); //where something under the damage num should be
@@ -103,16 +104,38 @@ public class SpellEffects : MonoBehaviour {
 		if (d.damageInflicted > 0) {
 			BattleEffects.main.spriteShake (d.Target.Transform, 0.3f, 0.1f);
 			AudioPlayer.main.playSFX ("sfx_spell_hit");
-            Color dmgNumColor = Color.white;
-            if(d.Target.CasterType == ICasterType.PLAYER)
-            {
-                if (d.repel)
-                    dmgNumColor = new Color(255, 0, 255);//new Color(220, 86, 249);
-                BattleEffects.main.screenShake(0.15f + shakeIntensity/2, shakeIntensity + 0.3f);
-            }
-            popp.spawnText (d.damageInflicted.ToString (), POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET, dmgNumColor);
+			Color dmgNumColor = Color.white;
+			Color dmgNumColorTop = new Color(255f/255f, 0, 25f/255f);
+			Color dmgNumColorBottom = new Color(255f/255f, 85f/255f, 85f/255f);
+			if (d.Target.CasterType == ICasterType.PLAYER) {
+				if (d.repel)
+					dmgNumColor = new Color (255, 0, 255);//new Color(220, 86, 249);
+				BattleEffects.main.screenShake (0.15f + shakeIntensity / 2, shakeIntensity + 0.3f);
+			} else if (d.Target.CasterType == ICasterType.ENEMY) {
+				// Gradually lower enemy HP gauge displays
+				StartCoroutine (enemy_hp_bars.gradualUpdateDamage (d.Target.Position,d.damageInflicted));
+			}
+			// Set damage text size based on amount of damage ratios
+			string sizeTagOpen = "<size=";
+			string sizeTagClose = "</size>";
+			int sizeValueMin = 28;
+			int sizeValueMax = 72;
+			int sizeValueDiff = sizeValueMax - sizeValueMin;
+			float sizeRatio = (float)d.damageInflicted / (float)d.Target.Stats.max_hp;
+			Debug.Log ("damage ratio to max hp: " + sizeRatio);
+			int sizeValueCurr = sizeValueMin + Mathf.RoundToInt (((float)sizeValueDiff)*sizeRatio);
+			string damageText = sizeTagOpen + sizeValueCurr + ">" + d.damageInflicted.ToString () + sizeTagClose;
+			popp.spawnText ("-" + damageText + "<size=24>HP</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET, dmgNumColorTop, dmgNumColorBottom);
+			if (d.damageInflicted > (d.Target.Stats.max_hp + d.Target.Curr_hp)) {
+				Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
+				popp.spawnText ("<size=28>OVERKILL!</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, Color.yellow, Color.white);
+			}
+			else if (d.damageInflicted > d.Target.Curr_hp) {
+				Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
+				popp.spawnText ("<size=28>K.O.</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, dmgNumColorTop, dmgNumColorBottom);
+			}
 		} else if (d.damageInflicted < 0) {
-			string heal = "+" + (-1 * (d.damageInflicted)).ToString ();
+			string heal = "+" + (-1 * (d.damageInflicted)).ToString () + "<size=32>HP</size>";
 			AudioPlayer.main.playSFX ("sfx_heal");
 			popp.spawnText (heal, POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET, new Color(27f/255f, 195f/255f, 43f/255f));
 		} else {

@@ -7,10 +7,12 @@ using UnityEngine.UI;
 public class BarMeter : MonoBehaviour {
 	float percent; // percent full
 	RectTransform bar; // bar's rect transform
+	RectTransform bar_afterimage; // bar's afterimage rect transform
 	Text bar_text; // bar's text label
 
 	void Awake () {
-		bar = transform.GetChild(0).gameObject.GetComponent<RectTransform> ();
+		bar = transform.GetChild(1).gameObject.GetComponent<RectTransform> ();
+		bar_afterimage = transform.GetChild(0).gameObject.GetComponent<RectTransform> ();
 		bar_text = GetComponentInChildren<Text> ();
 	}
 
@@ -30,10 +32,21 @@ public class BarMeter : MonoBehaviour {
 		bar.localScale = new Vector3 (percent, 1, 1);
 	}
 
+	// set bar afterimage length
+	public void setAfterimage(float new_percent) {
+		percent = new_percent >= 0 ? new_percent : 0; // don't go past 0
+		bar_afterimage.localScale = new Vector3 (percent, 1, 1);
+	}
+
+	// get the local scale of the bar as a Vector3
+	public Vector3 getBarLocalScale(){
+		return bar.localScale;
+	}
+
     // set bar color
     public void setColor(float r, float g, float b)
     {
-        gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(r, g, b);
+        gameObject.transform.GetChild(1).GetComponent<Image>().color = new Color(r, g, b);
     }
 
 }

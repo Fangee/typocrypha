@@ -6,10 +6,14 @@ using UnityEngine.UI;
 //script for the PopText prefab
 public class PopText : MonoBehaviour {
 
-	Text txt;
+	public FXText txt;
+	TextGradientFill text_fill;
+	[HideInInspector] public List<FXTextEffect> fx_text_effects; // List of text effects
+	[HideInInspector] public List<TextEvent>[] text_events; // Array of text events at each character index
 
 	void Awake () {
-		txt = GetComponent<Text> ();
+		txt = GetComponent<FXText> ();
+		text_fill = GetComponent<TextGradientFill> ();
         txt.alignment = TextAnchor.MiddleCenter;
 	}
 
@@ -18,9 +22,18 @@ public class PopText : MonoBehaviour {
 		StartCoroutine (Bleh (message, delay));
 	}
 
-	//change text color
+	//change text color (singular)
 	public void setColor(Color color){
 		txt.color = color;
+		text_fill.topColor = color;
+		text_fill.bottomColor = color;
+	}
+
+	//change text color (gradient)
+	public void setColor(Color colorTop, Color colorBottom){
+		txt.color = colorTop;
+		text_fill.topColor = colorTop;
+		text_fill.bottomColor = colorBottom;
 	}
 
 	//ShowMessage coroutine

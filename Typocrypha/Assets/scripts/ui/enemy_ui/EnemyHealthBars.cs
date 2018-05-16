@@ -58,10 +58,33 @@ public class EnemyHealthBars : MonoBehaviour {
 				Enemy enemy = BattleManagerS.main.field.enemy_arr [i];
 				if (!enemy.Is_dead) {
 					health_bars[i].setValue(((float)enemy.Curr_hp / (float)enemy.Stats.max_hp));
+					health_bars[i].setAfterimage(((float)enemy.Curr_hp / (float)enemy.Stats.max_hp));
 				} else { // if enemy has died, remove bar
 					health_bars[i].gameObject.SetActive(false);
 				}
 			}
 		}
+	}
+
+	// function that gradually lowers the HP bar
+	public IEnumerator gradualUpdateDamage(int enemyIndex, float damage){
+		Enemy enemy = BattleManagerS.main.field.enemy_arr [enemyIndex];
+		float old_x = health_bars [enemyIndex].getBarLocalScale().x;
+		health_bars[enemyIndex].setAfterimage(old_x);
+		health_bars[enemyIndex].setValue(((float)enemy.Curr_hp / (float)enemy.Stats.max_hp));
+		float hpCurrRatio = (float)enemy.Curr_hp / (float)enemy.Stats.max_hp; // the ratio of maxhp that currhp is
+		float hpDiffRatio = Mathf.Min(damage / (float)enemy.Stats.max_hp, 1.0f); // the ratio of maxhp that damage is
+		float temp = hpDiffRatio / 10;
+		for (float i = hpDiffRatio; i+hpCurrRatio >= hpCurrRatio;)
+		{
+			yield return new WaitForEndOfFrame();
+			health_bars[enemyIndex].setAfterimage( Mathf.Min(hpCurrRatio + hpDiffRatio, old_x));
+			hpDiffRatio = hpDiffRatio - temp;
+			//if (hpDiff > 0 && itor <= hpDiff) {
+				//health_bars[enemyIndex].setAfterimage(Mathf.Max(((float)enemy.Stats.max_hp - itor / (float)enemy.Stats.max_hp), 0));
+				//++itor;
+			//}
+		}
+		yield return true;
 	}
 }

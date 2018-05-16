@@ -38,6 +38,15 @@ public class Popper : MonoBehaviour {
 		pt.display (message, delay);
 	}
 
+	//overloaded with 2 color fields
+	public void spawnText (string message, float delay, Vector3 pos, Color colorTop, Color colorBottom) {
+		txtObj = GameObject.Instantiate (poptext_prefab, transform);
+		txtObj.transform.position = pos;
+		pt = txtObj.GetComponent<PopText>();
+		pt.setColor (colorTop, colorBottom);
+		pt.display (message, delay);
+	}
+
 	//prints image (picName) for (delay) seconds at (pos) 
 	public void spawnSprite (string picPath, float delay, Vector3 pos) {
 		imgObj = GameObject.Instantiate (popimage_prefab, transform);
