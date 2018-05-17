@@ -5633,7 +5633,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &296170452
 Transform:
   m_ObjectHideFlags: 0
@@ -7839,7 +7839,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &466450761
 Transform:
   m_ObjectHideFlags: 0
@@ -13460,7 +13460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &839043932
 Transform:
   m_ObjectHideFlags: 0
@@ -16637,6 +16637,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &995692021
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4612390865703364, guid: f9e4b00cf8630ca45b5c6629b1b21335, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612390865703364, guid: f9e4b00cf8630ca45b5c6629b1b21335, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612390865703364, guid: f9e4b00cf8630ca45b5c6629b1b21335, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612390865703364, guid: f9e4b00cf8630ca45b5c6629b1b21335, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612390865703364, guid: f9e4b00cf8630ca45b5c6629b1b21335, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612390865703364, guid: f9e4b00cf8630ca45b5c6629b1b21335, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612390865703364, guid: f9e4b00cf8630ca45b5c6629b1b21335, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4612390865703364, guid: f9e4b00cf8630ca45b5c6629b1b21335, type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1098793274380212, guid: f9e4b00cf8630ca45b5c6629b1b21335, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: f9e4b00cf8630ca45b5c6629b1b21335, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1002576035
 GameObject:
   m_ObjectHideFlags: 0
@@ -27126,6 +27172,8 @@ GameObject:
   - component: {fileID: 1498930040}
   - component: {fileID: 1498930042}
   - component: {fileID: 1498930041}
+  - component: {fileID: 1498930044}
+  - component: {fileID: 1498930043}
   m_Layer: 5
   m_Name: B_DEBUG
   m_TagString: Untagged
@@ -27162,12 +27210,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: Text Gradient Test
+  Title: Animation Fixes
   Music: bgm_battle_normal
-  Background: BattleBGAbyss
-  Enemy1: Tanuki
-  Enemy2: Tanuki
-  Enemy3: Tanuki
+  Background: BattleBGArizona
+  Enemy1: 
+  Enemy2: Bunbuku
+  Enemy3: 
   Ally1: 
   Ally2: 
   events: []
@@ -27182,6 +27230,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f747d39ad2cb14a8b9e343e0f6bdc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1498930043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1498930039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: 2 much
+  Music: 
+  Background: 
+  Enemy1: Tanuki
+  Enemy2: Tanooki
+  Enemy3: Tanuki
+  Ally1: 
+  Ally2: 
+  events: []
+--- !u!114 &1498930044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1498930039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Title: wow
+  Music: 
+  Background: 
+  Enemy1: changeling
+  Enemy2: 
+  Enemy3: changeling
+  Ally1: 
+  Ally2: 
+  events: []
 --- !u!1 &1500259168
 GameObject:
   m_ObjectHideFlags: 0

@@ -59,6 +59,11 @@ public class SpellEffects : MonoBehaviour {
                 if(d.Target.CasterType == ICasterType.PLAYER)
                    BattleEffects.main.screenShake(0.15f + shakeIntensity/8, 0.05f + shakeIntensity);
                 shakeIntensity += shakeIntensityMod;
+				if (d.repel) {
+					popp.spawnText (s.root.ToUpper()+"!", POP_TIMER, d.Caster.Transform.position, Color.black, new Color(1,111f/255f,1));
+				} else {
+					popp.spawnText (s.root.ToUpper()+"!", POP_TIMER, d.Caster.Transform.position, new Color(1,111f/255f,1), Color.white);
+				}
                 yield return new WaitForSeconds(0.333F);
 			}
 		}
@@ -126,11 +131,11 @@ public class SpellEffects : MonoBehaviour {
 			int sizeValueCurr = sizeValueMin + Mathf.RoundToInt (((float)sizeValueDiff)*sizeRatio);
 			string damageText = sizeTagOpen + sizeValueCurr + ">" + d.damageInflicted.ToString () + sizeTagClose;
 			popp.spawnText ("-" + damageText + "<size=24>HP</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET, dmgNumColorTop, dmgNumColorBottom);
-			if (d.damageInflicted > (d.Target.Stats.max_hp + d.Target.Curr_hp)) {
+			if ((d.Target.Curr_hp <= 0) && (d.damageInflicted > (d.Target.Stats.max_hp))) {
 				Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
 				popp.spawnText ("<size=28>OVERKILL!</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, Color.yellow, Color.white);
 			}
-			else if (d.damageInflicted > d.Target.Curr_hp) {
+			else if (d.Target.Curr_hp <= 0) {
 				Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
 				popp.spawnText ("<size=28>K.O.</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, dmgNumColorTop, dmgNumColorBottom);
 			}

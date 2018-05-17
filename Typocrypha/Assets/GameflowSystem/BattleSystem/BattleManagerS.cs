@@ -163,6 +163,16 @@ public class BattleManagerS : MonoBehaviour {
         }
         //Clear UI for new wave
         uiManager.startWave();
+		//Create enemies and wait until all enemies spawn in
+		createEnemies(Wave);
+		float entranceTime = 0.2f;
+		if (Wave.Enemy1 != string.Empty)
+			entranceTime += 0.4f;
+		if (Wave.Enemy2 != string.Empty)
+			entranceTime += 0.4f;
+		if (Wave.Enemy3 != string.Empty)
+			entranceTime += 0.4f;
+		yield return new WaitForSeconds(entranceTime);
         //Play Wave transition and wait for the animation to finish (plays the SFX too)
         uiManager.waveTransition(Wave.Title, curr_wave + 1, waves.Length);
         yield return new WaitForSeconds(1.2f);
@@ -178,8 +188,7 @@ public class BattleManagerS : MonoBehaviour {
         AudioPlayer.main.playSFX("sfx_enter");
         AudioPlayer.main.playSFX("sfx_enemy_death");
         yield return new WaitForSeconds(0.8f);
-        //Create enemies and update Typocrypha HUD
-        createEnemies(Wave);
+        //update Typocrypha HUD
         if (curr_wave == 0)
             uiManager.initTarget();
         uiManager.updateUI();
@@ -263,11 +272,16 @@ public class BattleManagerS : MonoBehaviour {
         else if (field.curr_dead >= field.enemy_count) // next wave if all enemies dead
         {
             Debug.Log("Wave: " + Wave.Title + " complete!");
-            nextWave();
+            //nextWave();
+			StartCoroutine(nextWaveIEnum());
         }
         else if (!checkInterrupts())
             setPause(false);
     }
+	private IEnumerator nextWaveIEnum(){
+		yield return new WaitForSeconds(1.0f);
+		nextWave ();
+	}
     //Add Scene to trigger queue
     public void addSceneToQueue(GameObject interruptScene)
     {
@@ -290,13 +304,29 @@ public class BattleManagerS : MonoBehaviour {
     //Create all enemies for this wave
     private void createEnemies(BattleWave wave)
     {
-        if (wave.Enemy1 != string.Empty)
-            createEnemy(0, wave.Enemy1);
-        if (wave.Enemy2 != string.Empty)
-            createEnemy(1, wave.Enemy2);
-        if (wave.Enemy3 != string.Empty)
-            createEnemy(2, wave.Enemy3);
+		StartCoroutine(createEnemiesINum(wave));
     }
+	private IEnumerator createEnemiesINum(BattleWave wave){
+		if (wave.Enemy1 != string.Empty) {
+			createEnemy (0, wave.Enemy1);
+			AudioPlayer.main.playSFX ("sfx_blight_hit");
+			AnimationPlayer.main.playAnimation("anim_element_reflect", field.enemy_arr[0].Transform.position, 2f);
+			yield return new WaitForSeconds(0.4f);
+		}
+		if (wave.Enemy2 != string.Empty) {
+			createEnemy (1, wave.Enemy2);
+			AudioPlayer.main.playSFX ("sfx_blight_hit");
+			AnimationPlayer.main.playAnimation("anim_element_reflect", field.enemy_arr[1].Transform.position, 2f);
+			yield return new WaitForSeconds(0.4f);
+		}
+		if (wave.Enemy3 != string.Empty) {
+			createEnemy (2, wave.Enemy3);
+			AudioPlayer.main.playSFX ("sfx_blight_hit");
+			AnimationPlayer.main.playAnimation("anim_element_reflect", field.enemy_arr[2].Transform.position, 2f);
+			yield return new WaitForSeconds(0.4f);
+		}
+	}
+
     // creates the enemy specified at 'i' (0-left, 1-mid, 2-right) by the 'scene'
     private void createEnemy(int i, string name)
     {
@@ -315,6 +345,7 @@ public class BattleManagerS : MonoBehaviour {
         uiManager.stagger_bars.makeStaggerMeter(i, bar_pos);
         uiManager.health_bars.makeHealthMeter(i, bar_pos);
         field.enemy_arr[i] = enemy;
+		enemy.enemy_animator.Play ("enemy_spawn_in");
     }
 
     private bool checkInterrupts()

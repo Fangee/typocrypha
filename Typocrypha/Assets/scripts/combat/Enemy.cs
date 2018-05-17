@@ -223,6 +223,7 @@ public class Enemy : MonoBehaviour, ICaster {
 			curr_time += Time.deltaTime;
 			if (curr_time >= atk_time) {
                 attack_in_progress = true;
+				enemy_animator.Play("enemy_swell_cast");
                 fullBarFX(); // notify player of full bar
                 yield return new WaitForSeconds(1f);
                 yield return new WaitWhile(() => BattleManagerS.main.pause);
@@ -237,6 +238,7 @@ public class Enemy : MonoBehaviour, ICaster {
 				curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target).clone();
                 atk_time = castManager.spellDict.getCastingTime(curr_spell, stats.speed);//get new casting time
                 curr_time = 0;
+				enemy_animator.Play("enemy_idle");
             }
 		}
 	}
@@ -319,6 +321,7 @@ public class Enemy : MonoBehaviour, ICaster {
         { // check if killed
             Debug.Log(stats.name + " has been slain!");
 			AudioPlayer.main.playSFX ("sfx_enemy_death"); // enemy death noise placeholder
+			enemy_animator.Play("enemy_death");
 			enemy_animator.SetTrigger("death");
 			is_dead = true;
 			StopAllCoroutines();

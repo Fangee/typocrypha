@@ -106,6 +106,7 @@ MonoBehaviour:
   enemy_sprite: {fileID: 212812289498732830}
   change_sprite: {fileID: 114702082726753058}
   enemy_animator: {fileID: 95400925875637304}
+  stagger_time: 0
 --- !u!114 &114702082726753058
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -117,7 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a7f79255396cf41b5df0c002005d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spr: {fileID: 0}
   spr_rend: {fileID: 212812289498732830}
 --- !u!212 &212812289498732830
 SpriteRenderer:
@@ -153,13 +153,13 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: b5b7d3ed083e80e4cb3f765b8d8d2b34, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 4, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
