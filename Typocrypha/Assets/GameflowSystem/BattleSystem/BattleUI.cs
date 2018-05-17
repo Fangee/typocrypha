@@ -123,4 +123,11 @@ public class BattleUI : MonoBehaviour
         title_text_animator.Play("anim_wave_title_text");
         title_img_animator.Play("anim_wave_title_image");
     }
+
+	// Set the active state of the enemy status bars
+	public void setEnabledGauges(bool isActive){
+		health_bars.transform.gameObject.SetActive(isActive);
+		charge_bars.transform.gameObject.SetActive(isActive);
+		stagger_bars.transform.gameObject.SetActive(isActive);
+	}
 }

@@ -126,6 +126,7 @@ public class TrackTyping : MonoBehaviour {
 			for (int j = 0; j < rows[i].Length; j++) {
 				GameObject new_key;
 				if (i == 3) {
+					//return;
 					new_key = GameObject.Instantiate (spacebar_prefab);
 				} else {
 					new_key = GameObject.Instantiate (key_prefab);
@@ -134,7 +135,7 @@ public class TrackTyping : MonoBehaviour {
 				new_key.transform.localScale = new Vector3 (1, 1, 1);
 				new_key.transform.localPosition = new Vector3 (row_offsets[i] + j*48, i*-48, 0);
 				if (rows [i] [j].ToString () == " ") {
-					new_key.GetComponentInChildren<Text> ().text = "SPACE [ - ]";
+					new_key.GetComponentInChildren<Text> ().text = "";//"SPACE [ - ]";
 				} else {
 					new_key.GetComponentInChildren<Text> ().text = rows [i] [j].ToString().ToUpper();
 				}

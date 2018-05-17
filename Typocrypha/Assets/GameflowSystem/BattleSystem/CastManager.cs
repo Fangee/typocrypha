@@ -87,6 +87,8 @@ public class CastManager : MonoBehaviour
     {
         field.Pause = true;
 
+		uiManager.setEnabledGauges (false);
+
         //BEGIN pause//
 
         yield return new WaitForSeconds(1f);
@@ -100,6 +102,8 @@ public class CastManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         //END pause//
+
+		uiManager.setEnabledGauges (true);
 
         postCastEffects();
         //Updates field.Pause if necessary
@@ -119,6 +123,7 @@ public class CastManager : MonoBehaviour
 
     private IEnumerator enemy_pause_cast(SpellDictionary dict, SpellData s, int position, int target)
     {
+		uiManager.setEnabledGauges (false);
 
 		BattleEffects.main.setDim(true, field.enemy_arr[position].enemy_sprite);
 
@@ -129,6 +134,8 @@ public class CastManager : MonoBehaviour
         processCast(data, s);
 
         yield return new WaitForSeconds(1f);
+
+		uiManager.setEnabledGauges (true);
 
         postCastEffects();
         field.enemy_arr[position].attack_in_progress = false;

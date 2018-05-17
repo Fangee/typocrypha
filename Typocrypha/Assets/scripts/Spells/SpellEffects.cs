@@ -118,6 +118,7 @@ public class SpellEffects : MonoBehaviour {
 				BattleEffects.main.screenShake (0.15f + shakeIntensity / 2, shakeIntensity + 0.3f);
 			} else if (d.Target.CasterType == ICasterType.ENEMY) {
 				// Gradually lower enemy HP gauge displays
+				BattleManagerS.main.uiManager.setEnabledGauges(true);
 				StartCoroutine (enemy_hp_bars.gradualUpdateDamage (d.Target.Position,d.damageInflicted));
 			}
 			// Set damage text size based on amount of damage ratios
