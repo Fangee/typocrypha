@@ -124,7 +124,7 @@ public class SpellEffects : MonoBehaviour {
 			// Set damage text size based on amount of damage ratios
 			string sizeTagOpen = "<size=";
 			string sizeTagClose = "</size>";
-			int sizeValueMin = 28;
+			int sizeValueMin = 36;
 			int sizeValueMax = 72;
 			int sizeValueDiff = sizeValueMax - sizeValueMin;
 			float sizeRatio = (float)d.damageInflicted / (float)d.Target.Stats.max_hp;

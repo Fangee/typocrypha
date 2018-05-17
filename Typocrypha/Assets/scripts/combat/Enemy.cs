@@ -83,6 +83,11 @@ public class Enemy : MonoBehaviour, ICaster {
 	public Animator enemy_animator; // this enemy's animator
     public EnemyAI AI = null;
     public static AssetBundle sprite_bundle = null; 
+	public Material material_default; // Sprite default material
+	public Material material_pixelate; // Sprite pixelation material
+	public Material material_glitch; // Sprite glitchout material
+	public Material material_slice; // Sprite slicing material
+	public Material material_wavy; // Sprite waving material
 
     //Private fields//
 
@@ -211,12 +216,14 @@ public class Enemy : MonoBehaviour, ICaster {
             {
 				yield return new WaitForEndOfFrame();
 				transform.position = (Vector3)original_pos + (Vector3)(Random.insideUnitCircle * 0.05f);
+				enemy_sprite.material = material_glitch;
 				yield return new WaitWhile (() => BattleManagerS.main.pause);
 				curr_stagger_time += Time.deltaTime;
                 if (curr_stagger_time >= stagger_time)//End stun if time up
                 {
                     unStun();
                     curr_stagger_time = 0F;
+					enemy_sprite.material = material_pixelate;
                 }
             }
 			transform.position = original_pos;
@@ -321,8 +328,28 @@ public class Enemy : MonoBehaviour, ICaster {
         { // check if killed
             Debug.Log(stats.name + " has been slain!");
 			AudioPlayer.main.playSFX ("sfx_enemy_death"); // enemy death noise placeholder
-			enemy_animator.Play("enemy_death");
-			enemy_animator.SetTrigger("death");
+
+			int chooseDeath = 1; // choose what death animation to play
+			switch(chooseDeath){
+			case 0:
+				enemy_sprite.material = material_default;
+				enemy_animator.Play ("enemy_death");
+				break;
+			case 1:
+				enemy_sprite.material = material_default;
+				enemy_animator.Play ("enemy_death_launcher");
+				break;
+			case 2:
+				enemy_sprite.material = material_slice;
+				enemy_animator.Play ("enemy_death_slice");
+				break;
+			case 3:
+				enemy_sprite.material = material_wavy;
+				enemy_animator.Play ("enemy_death_wavy");
+				break;
+			}
+
+			//enemy_animator.SetTrigger("death");
 			is_dead = true;
 			StopAllCoroutines();
         }

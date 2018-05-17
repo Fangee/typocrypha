@@ -115,6 +115,7 @@ public class CastManager : MonoBehaviour
     {
         field.Pause = true; // parent.pause battle for attack
         AudioPlayer.main.playSFX("sfx_enemy_cast");
+		AnimationPlayer.main.playAnimation("anim_spell_empower", field.enemy_arr[position].Transform.position, 2f);
         Pair<bool[], bool[]> targetPattern = spellDict.getTargetPattern(s, field.player_arr, target, field.enemy_arr, position);
         preCastEffects(targetPattern, field.enemy_arr[position], s, chat.getLine(field.enemy_arr[position].Stats.ChatDatabaseID));
 		BattleEffects.main.setDim(true, field.enemy_arr[position].enemy_sprite);
