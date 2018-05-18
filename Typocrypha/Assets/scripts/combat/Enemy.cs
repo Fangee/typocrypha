@@ -329,7 +329,7 @@ public class Enemy : MonoBehaviour, ICaster {
             Debug.Log(stats.name + " has been slain!");
 			AudioPlayer.main.playSFX ("sfx_enemy_death"); // enemy death noise placeholder
 
-			int chooseDeath = 1; // choose what death animation to play
+			int chooseDeath = 2; // choose what death animation to play
 			switch(chooseDeath){
 			case 0:
 				enemy_sprite.material = material_default;
@@ -340,11 +340,9 @@ public class Enemy : MonoBehaviour, ICaster {
 				enemy_animator.Play ("enemy_death_launcher");
 				break;
 			case 2:
-				enemy_sprite.material = material_slice;
 				enemy_animator.Play ("enemy_death_slice");
 				break;
 			case 3:
-				enemy_sprite.material = material_wavy;
 				enemy_animator.Play ("enemy_death_wavy");
 				break;
 			}
