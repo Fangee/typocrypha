@@ -340,7 +340,7 @@ public class BattleManagerS : MonoBehaviour {
         enemy.initialize(enemyData.getData(name)); //sets enemy stats (AND INITITIALIZES ATTACKING AND AI)
         enemy.Position = i;      //Log enemy position in field
         enemy.bars = uiManager.charge_bars; //Give enemy access to charge_bars
-        Vector3 bar_pos = enemy.transform.position + new Vector3(-0.5f, -1.5f, 0);
+        Vector3 bar_pos = enemy.transform.position + new Vector3(0, -1.75f, 0);
         uiManager.charge_bars.makeChargeMeter(i, bar_pos);
         uiManager.stagger_bars.makeStaggerMeter(i, bar_pos);
         uiManager.health_bars.makeHealthMeter(i, bar_pos);

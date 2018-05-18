@@ -36,7 +36,7 @@ public class AudioPlayer : MonoBehaviour {
     }
 
     //SFX volume (-1 to 0.0) 
-    private float sfx_volume = 1.0F;
+    private float sfx_volume = 0.35F;
     public float SfxVolume {
         get { return sfx_volume; }
         set { sfx_volume = Mathf.Clamp01(value); }
@@ -105,7 +105,8 @@ public class AudioPlayer : MonoBehaviour {
 
 	// play current sfx in channel
 	public void playSFX(int channel) {
-		sfx_channels [channel].Play ();
+		float volume = 1.0F;
+		sfx_channels [channel].PlayOneShot(sfx_channels [channel].clip, volume * SfxVolume);
     }
 		
     // play sfx from name with specified volume modifier (finds first open channel)
