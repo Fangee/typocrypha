@@ -185,7 +185,7 @@ public class CastManager : MonoBehaviour
     private void preCastEffects(Pair<bool[], bool[]> targetPattern, ICaster caster, SpellData cast, string message)
     {
         BattleEffects.main.setDim(true);
-		uiManager.battle_log.log(cast.ToString(), caster.CasterType, message, caster.Stats.name, caster.Transform.position);
+		uiManager.battle_log.log(cast, caster.CasterType, message, caster.Stats.name, caster.Transform.position);
         if (targetPattern != null)
         {
             if (caster.CasterType == ICasterType.ENEMY)

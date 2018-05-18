@@ -13,6 +13,11 @@ public class BattleLog : MonoBehaviour {
 	private Image talkBox;
 	public Text logTalkText;
 	public Text logTalkInfo;
+	public GameObject battleLogSub; // Sub log that displays the name of the spell used
+	public Sprite[] battleLogIcons; // Icons for spell elements (0 - Phys; 1 - Fire; 2 - Ice; 3 - Volt)
+	Image[] battleLogSubSpellIcons;
+	Animator battleLogSubAnimator;
+	Text[] battleLogSubText;
 
 	public Color playerColor;
 	public Color enemyColor;
@@ -22,15 +27,44 @@ public class BattleLog : MonoBehaviour {
 	void Start () {
 		castBox = battleLogCast.GetComponent<Image>();
 		talkBox = battleLogTalk.GetComponent<Image>();
+		battleLogSubAnimator = battleLogSub.GetComponent<Animator> ();
+		battleLogSubText = battleLogSub.GetComponentsInChildren<Text> ();
+		battleLogSubSpellIcons = battleLogSub.GetComponentsInChildren<Image> ();
 	}
 	
 	//Enable battle log UI state (call anywhere that the battlemanager pauses to cast)
-	public void log(string cast, ICasterType caster, string talk, string speaker, Vector3 casterPosition)
+	public void log(SpellData cast, ICasterType caster, string talk, string speaker, Vector3 casterPosition)
 	{
-		battleLogCast.SetActive(true);
-		battleLogTalk.SetActive(true);
+		battleLogCast.SetActive(false);
+		battleLogTalk.SetActive(false);
+		battleLogSub.SetActive (true);
+		string ele = "";
+		switch (cast.element) {
+		case "agni":
+			battleLogSubSpellIcons [1].sprite = battleLogIcons [1];
+			battleLogSubSpellIcons [2].sprite = battleLogIcons [1];
+			ele = "FIRE";
+			break;
+		case "cryo":
+			battleLogSubSpellIcons [1].sprite = battleLogIcons [2];
+			battleLogSubSpellIcons [2].sprite = battleLogIcons [2];
+			ele = "ICE";
+			break;
+		case "veld":
+			battleLogSubSpellIcons [1].sprite = battleLogIcons [3];
+			battleLogSubSpellIcons [2].sprite = battleLogIcons [3];
+			ele = "VOLT";
+			break;
+		default:
+			battleLogSubSpellIcons [1].sprite = battleLogIcons [0];
+			battleLogSubSpellIcons [2].sprite = battleLogIcons [0];
+			ele = "PHYSICAL";
+			break;
+		}
+		battleLogSubAnimator.Play ("anim_sub_battlelog_enter");
 		battleLogCast.transform.position = casterPosition;
-		logCastText.text = "> " + cast;
+		battleLogSubText[0].text = cast.ToString();
+		logCastText.text = "> " + cast.ToString();
 		logTalkText.text = talk;
 		//logTalkInfo.text = speaker;
 		logCastInfo.text = speaker;
@@ -38,25 +72,25 @@ public class BattleLog : MonoBehaviour {
 		{
 			castBox.color = enemyColor;
 			talkBox.color = enemyColor;
-			//logCastInfo.text = "ENEMY  CAST";
+			battleLogSubText[1].text = "ENEMY CASTS " + ele;
 		}
 		else if (caster == ICasterType.PLAYER)
 		{
 			castBox.color = playerColor;
 			talkBox.color = playerColor;
-			//logCastInfo.text = "PLAYER CAST";
+			battleLogSubText[1].text = "PLAYER CASTS " + ele;
 		}
 		else if (caster == ICasterType.NPC_ALLY)
 		{
 			castBox.color = allyColor;
 			talkBox.color = allyColor;
-			//logCastInfo.text = "ALLY   CAST";
+			battleLogSubText[1].text = "ALLY CASTS " + ele;
 		}
 		else //caster == IcasterType.INVALID (clarke is speaking)
 		{
 			castBox.color = clarkeColor;
 			talkBox.color = clarkeColor;
-			//logCastInfo.text = "ERROR  CAST";
+			battleLogSubText[1].text = "ERROR CAST";
 		}
 	}
 
@@ -65,5 +99,6 @@ public class BattleLog : MonoBehaviour {
 	{
 		battleLogCast.SetActive(false);
 		battleLogTalk.SetActive(false);
+		battleLogSubAnimator.Play ("anim_sub_battlelog_exit");
 	}
 }
