@@ -135,20 +135,20 @@ public class StatusShock : StatusEffect
     {
         text.color = Color.yellow;
         image.color = Color.yellow;
-        text.text = swapped.ToString();
+		text.text = swapped.ToString().ToUpper();
         yield break;
     }
     public override string processKey(char key)
     {
 		AudioPlayer.main.playSFX("sfx_botch");
 		player_popper.spawnText ("<color=red>" + this.original + "</color> <color=yellow><===></color> <color=lime>" + swapped + "</color>", 1.0f, new Vector3 (0.0f, -0.5f, 0.0f));
-        return swapped.ToString();
+		return swapped.ToString().ToUpper();
     }
 
     public override void reset(char key, Image image, Text text)
     {
         base.reset(key, image, text);
-        text.text = key.ToString();
+		text.text = key.ToString().ToUpper();
     }
 }
 

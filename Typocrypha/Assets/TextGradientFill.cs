@@ -7,8 +7,8 @@ using UnityEngine.UI;
 [AddComponentMenu("UI/Effects/Gradient")]
 public class TextGradientFill : BaseMeshEffect
 {
-	public Color32 topColor = Color.white;
-	public Color32 bottomColor = Color.black;
+	public Color32 topColor = new Color(0,0,0,0);
+	public Color32 bottomColor = new Color(0,0,0,0);
 
 	public override void ModifyMesh(VertexHelper helper)
 	{

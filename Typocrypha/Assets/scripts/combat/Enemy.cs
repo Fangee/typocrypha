@@ -83,6 +83,7 @@ public class Enemy : MonoBehaviour, ICaster {
 	public Animator enemy_animator; // this enemy's animator
     public EnemyAI AI = null;
     public static AssetBundle sprite_bundle = null; 
+	public ParticleSystem enemy_particle_sys; // Sprite particle system
 	public Material material_default; // Sprite default material
 	public Material material_pixelate; // Sprite pixelation material
 	public Material material_glitch; // Sprite glitchout material
@@ -113,6 +114,7 @@ public class Enemy : MonoBehaviour, ICaster {
     //Methods//
     void Awake()
     {
+		enemy_particle_sys.Stop ();
         if(sprite_bundle == null)
             sprite_bundle = AssetBundle.LoadFromFile(System.IO.Path.Combine(Application.streamingAssetsPath, "enemy_sprites"));
 		is_dead = false;
@@ -338,6 +340,7 @@ public class Enemy : MonoBehaviour, ICaster {
 			case 1:
 				enemy_sprite.material = material_default;
 				enemy_animator.Play ("enemy_death_launcher");
+				AudioPlayer.main.playSFX ("sfx_death_flyaway");
 				break;
 			case 2:
 				enemy_animator.Play ("enemy_death_slice");

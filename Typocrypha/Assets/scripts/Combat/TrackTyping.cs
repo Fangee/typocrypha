@@ -80,7 +80,7 @@ public class TrackTyping : MonoBehaviour {
 		} else if (Input.GetKey (KeyCode.KeypadMinus) || Input.GetKey (KeyCode.Minus)){
 			Popper[] pop = popper.GetComponents<Popper>();
 			AudioPlayer.main.playSFX ("sfx_botch");
-			pop[0].spawnText ("|shake|USE THE SPACEBAR INSTEAD OF THE MINUS/DASH\\shake\\", 1.0f, new Vector3(0.0f,-1.0f,0.0f));
+			pop[0].spawnText ("<color=red>USE THE SPACEBAR INSTEAD OF THE MINUS/DASH</color>", 1.0f, new Vector3(0.0f,-1.0f,0.0f));
 		}
 		else {
             string in_str = Input.inputString;

@@ -27,15 +27,19 @@ public class PopText : MonoBehaviour {
 	//change text color (singular)
 	public void setColor(Color color){
 		txt.color = color;
-		text_fill.topColor = color;
-		text_fill.bottomColor = color;
+		if (text_fill != null) {
+			text_fill.topColor = color;
+			text_fill.bottomColor = color;
+		}
 	}
 
 	//change text color (gradient)
 	public void setColor(Color colorTop, Color colorBottom){
 		txt.color = colorTop;
-		text_fill.topColor = colorTop;
-		text_fill.bottomColor = colorBottom;
+		if (text_fill != null) {
+			text_fill.topColor = colorTop;
+			text_fill.bottomColor = colorBottom;
+		}
 	}
 
 	//ShowMessage coroutine
