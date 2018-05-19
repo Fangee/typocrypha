@@ -36,7 +36,7 @@ public class AudioPlayer : MonoBehaviour {
     }
 
     //SFX volume (-1 to 0.0) 
-    private float sfx_volume = 0.35F;
+    private float sfx_volume = 0.5F;
     public float SfxVolume {
         get { return sfx_volume; }
         set { sfx_volume = Mathf.Clamp01(value); }

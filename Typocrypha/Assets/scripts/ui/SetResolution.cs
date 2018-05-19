@@ -8,7 +8,7 @@ public class SetResolution : MonoBehaviour {
 	public int height;
 
 	void Start () {
-		//Screen.SetResolution (width, height, true);
-		Screen.SetResolution (1280/2, 720/2, false);
+		Screen.SetResolution (width, height, true);
+		//Screen.SetResolution (1280, 720/2, false);
 	}
 }
