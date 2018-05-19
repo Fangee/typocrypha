@@ -320,8 +320,7 @@ public class Enemy : MonoBehaviour, ICaster {
         //Update AI if hit (may drop hp to zero)
         if (was_hit)
         {
-            if(!attack_in_progress)
-			    AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.WAS_HIT);
+			AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.WAS_HIT);
             if (curr_stagger <= 0 && is_stunned == false)
                 stun();
             was_hit = false;
@@ -330,29 +329,32 @@ public class Enemy : MonoBehaviour, ICaster {
         { // check if killed
             Debug.Log(stats.name + " has been slain!");
 			AudioPlayer.main.playSFX ("sfx_enemy_death"); // enemy death noise placeholder
-
-			int chooseDeath = 1; // choose what death animation to play
-			switch(chooseDeath){
-			case 0:
-				enemy_sprite.material = material_default;
-				enemy_animator.Play ("enemy_death");
-				break;
-			case 1:
-				enemy_sprite.material = material_default;
-				enemy_animator.Play ("enemy_death_launcher");
-				AudioPlayer.main.playSFX ("sfx_death_flyaway");
-				break;
-			case 2:
-				enemy_animator.Play ("enemy_death_slice");
-				break;
-			case 3:
-				enemy_animator.Play ("enemy_death_wavy");
-				break;
-			}
-
+            deathAnimation(1);
 			//enemy_animator.SetTrigger("death");
 			is_dead = true;
 			StopAllCoroutines();
+        }
+    }
+
+    private void deathAnimation(int chooseDeath)
+    {
+        switch (chooseDeath)
+        {
+            case 0:
+                enemy_sprite.material = material_default;
+                enemy_animator.Play("enemy_death");
+                break;
+            case 1:
+                enemy_sprite.material = material_default;
+                enemy_animator.Play("enemy_death_launcher");
+                AudioPlayer.main.playSFX("sfx_death_flyaway");
+                break;
+            case 2:
+                enemy_animator.Play("enemy_death_slice");
+                break;
+            case 3:
+                enemy_animator.Play("enemy_death_wavy");
+                break;
         }
     }
 

@@ -261,8 +261,10 @@ public class DopplegangerAI1 : EnemyAI
             {
                 changeToRandomColor(allies[position]);
             }
-            else
+            else // was hit
             {
+                if (allies[position].attack_in_progress)
+                    return;
                 changeToRandomColor(allies[position]);
                 switch (color)
                 {
