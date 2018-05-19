@@ -7,13 +7,14 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{D13C1909-908E-7AF1-0618-D79EF6A9C9DF}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Assembly-CSharp.dll</AssemblyName>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
+    <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.3.0f3</UnityVersion>
@@ -253,8 +254,14 @@
     <Reference Include="UnityEditor.Graphs">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.LinuxStandalone.Extensions">
+      <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.OSXStandalone.Extensions">
+      <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
@@ -327,24 +334,25 @@
     <Compile Include="Assets\GameflowSystem\Gameflow.cs" />
     <Compile Include="Assets\GameflowSystem\GameflowItem.cs" />
     <Compile Include="Assets\GameflowSystem\GameflowManager.cs" />
+    <Compile Include="Assets\MouseDisable.cs" />
     <Compile Include="Assets\MusicSlider.cs" />
     <Compile Include="Assets\Pause.cs" />
     <Compile Include="Assets\PauseOnAttack.cs" />
-    <Compile Include="Assets\scripts\Animation\AnimationPlayer.cs" />
-    <Compile Include="Assets\scripts\Animation\BackgroundEffects.cs" />
-    <Compile Include="Assets\scripts\Animation\ChangeAnimatedSprite.cs" />
-    <Compile Include="Assets\scripts\Animation\DestroyOnEnd.cs" />
-    <Compile Include="Assets\scripts\Animation\StopPostProcessing.cs" />
-    <Compile Include="Assets\scripts\Audio\AudioPlayer.cs" />
-    <Compile Include="Assets\scripts\Combat\Ally.cs" />
-    <Compile Include="Assets\scripts\Combat\BattleEffects.cs" />
-    <Compile Include="Assets\scripts\Combat\ChatDatabase.cs" />
-    <Compile Include="Assets\scripts\Combat\Enemy.cs" />
-    <Compile Include="Assets\scripts\Combat\EnemyAI.cs" />
-    <Compile Include="Assets\scripts\Combat\Player.cs" />
-    <Compile Include="Assets\scripts\Combat\StatusEffect.cs" />
-    <Compile Include="Assets\scripts\Combat\TrackTyping.cs" />
-    <Compile Include="Assets\scripts\Cutscene\TextScroll.cs" />
+    <Compile Include="Assets\scripts\animation\AnimationPlayer.cs" />
+    <Compile Include="Assets\scripts\animation\BackgroundEffects.cs" />
+    <Compile Include="Assets\scripts\animation\ChangeAnimatedSprite.cs" />
+    <Compile Include="Assets\scripts\animation\DestroyOnEnd.cs" />
+    <Compile Include="Assets\scripts\animation\StopPostProcessing.cs" />
+    <Compile Include="Assets\scripts\audio\AudioPlayer.cs" />
+    <Compile Include="Assets\scripts\combat\Ally.cs" />
+    <Compile Include="Assets\scripts\combat\BattleEffects.cs" />
+    <Compile Include="Assets\scripts\combat\ChatDatabase.cs" />
+    <Compile Include="Assets\scripts\combat\Enemy.cs" />
+    <Compile Include="Assets\scripts\combat\EnemyAI.cs" />
+    <Compile Include="Assets\scripts\combat\Player.cs" />
+    <Compile Include="Assets\scripts\combat\StatusEffect.cs" />
+    <Compile Include="Assets\scripts\combat\TrackTyping.cs" />
+    <Compile Include="Assets\scripts\cutscene\TextScroll.cs" />
     <Compile Include="Assets\scripts\Database\AllyDatabase.cs" />
     <Compile Include="Assets\scripts\Database\EnemyDatabase.cs" />
     <Compile Include="Assets\scripts\Database\SaveManager.cs" />
@@ -388,6 +396,7 @@
     <Compile Include="Assets\scripts\Utility\Timer.cs" />
     <Compile Include="Assets\scripts\Utility\UtilityClasses.cs" />
     <Compile Include="Assets\SfxSlider.cs" />
+    <Compile Include="Assets\TextGradientFill.cs" />
     <Compile Include="Assets\WavySprite\Scripts\SRWavySprite.cs" />
     <Compile Include="Assets\WavySprite\Scripts\WavySprite.cs" />
   </ItemGroup>
@@ -417,6 +426,7 @@
     <None Include="Assets\graphics\shaders\sprite_shaders\OutlineSprite.shader" />
     <None Include="Assets\graphics\shaders\sprite_shaders\PixelateSprite.shader" />
     <None Include="Assets\graphics\shaders\sprite_shaders\SplitSprite.shader" />
+    <None Include="Assets\graphics\shaders\sprite_shaders\WavySprite.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

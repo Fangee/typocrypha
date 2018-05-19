@@ -69,6 +69,8 @@ public class EnemyHealthBars : MonoBehaviour {
 	// function that gradually lowers the HP bar
 	public IEnumerator gradualUpdateDamage(int enemyIndex, float damage){
 		Enemy enemy = BattleManagerS.main.field.enemy_arr [enemyIndex];
+        if (enemy == null || enemy.Is_dead)
+            yield break;
 		float old_x = health_bars [enemyIndex].getBarLocalScale().x;
 		health_bars[enemyIndex].setAfterimage(old_x);
 		health_bars[enemyIndex].setValue(((float)enemy.Curr_hp / (float)enemy.Stats.max_hp));
@@ -77,7 +79,9 @@ public class EnemyHealthBars : MonoBehaviour {
 		float temp = hpDiffRatio / 10;
 		for (float i = hpDiffRatio; i+hpCurrRatio >= hpCurrRatio;)
 		{
-			yield return new WaitForEndOfFrame();
+            if (enemy == null || enemy.Is_dead)
+                yield break;
+            yield return new WaitForEndOfFrame();
 			health_bars[enemyIndex].setAfterimage( Mathf.Min(hpCurrRatio + hpDiffRatio, old_x));
 			hpDiffRatio = hpDiffRatio - temp;
 			//if (hpDiff > 0 && itor <= hpDiff) {
