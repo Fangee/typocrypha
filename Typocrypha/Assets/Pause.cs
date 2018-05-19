@@ -8,6 +8,7 @@ public class Pause : MonoBehaviour {
     Color dimCol;
     string pauseKey = "escape";
     GameObject[] children;
+    bool battlePause = false;
 
     void Start () {
         gamePause = false;
@@ -26,7 +27,8 @@ public class Pause : MonoBehaviour {
             if (gamePause)
             {
                 Time.timeScale = 0;
-                BattleManagerS.main.pause = true;
+                battlePause = BattleManagerS.main.pause;
+                BattleManagerS.main.setPause(true);
                 dimCol = BattleEffects.main.dimmer.color;
                 BattleEffects.main.setDim(true);
                 AudioPlayer.main.pauseSFX();
@@ -36,7 +38,7 @@ public class Pause : MonoBehaviour {
             else
             {
                 Time.timeScale = 1;
-                BattleManagerS.main.pause = false;
+                BattleManagerS.main.setPause(battlePause);
                 BattleEffects.main.dimmer.color = dimCol;
                 AudioPlayer.main.unpauseSFX();
                 foreach (GameObject g in children)
