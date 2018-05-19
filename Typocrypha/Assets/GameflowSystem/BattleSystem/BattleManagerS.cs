@@ -20,6 +20,7 @@ public class BattleManagerS : MonoBehaviour {
 
     private BattleWave Wave { get { return waves[curr_wave]; } }
     private int curr_wave = -1;
+    private bool wave_started = false;
     private BattleWave[] waves;
     private GameObject curr_battle;
     private List<GameObject> sceneQueue = new List<GameObject>();
@@ -154,6 +155,8 @@ public class BattleManagerS : MonoBehaviour {
     }
     private IEnumerator waveTransition()
     {
+        //Moved from next wave coroutine
+        yield return new WaitForSeconds(1f);
         setPause(true);
         resetInterruptData();
         Debug.Log("starting wave: " + Wave.Title);
@@ -174,7 +177,7 @@ public class BattleManagerS : MonoBehaviour {
             AudioPlayer.main.playMusic(Wave.Music);
         if (checkInterrupts() == false)
             setPause(false);
-        yield return true;
+        wave_started = true;
     }
     // show victory screen after all waves are done
     public void victoryScreen()
@@ -247,19 +250,15 @@ public class BattleManagerS : MonoBehaviour {
         {
             playerDeath();
         }
-        else if (field.curr_dead >= field.enemy_count) // next wave if all enemies dead
+        else if (field.curr_dead >= field.enemy_count && wave_started) // next wave if all enemies dead
         {
             Debug.Log("Wave: " + Wave.Title + " complete!");
-            //nextWave();
-			StartCoroutine(nextWaveIEnum());
+            wave_started = false;
+            nextWave();
         }
         else if (!checkInterrupts())
             setPause(false);
     }
-	private IEnumerator nextWaveIEnum(){
-		yield return new WaitForSeconds(1.0f);
-		nextWave ();
-	}
     //Add Scene to trigger queue
     public void addSceneToQueue(GameObject interruptScene)
     {
@@ -347,6 +346,11 @@ public class BattleManagerS : MonoBehaviour {
             field.last_enemy_cast.Clear(); // last performed cast action
         else
             field.last_enemy_cast = new List<CastData>();
+        field.last_enemy_spell = new SpellData(""); // last performed spell
+        if (field.last_player_cast != null)
+            field.last_player_cast.Clear(); // last performed cast action
+        else
+            field.last_player_cast = new List<CastData>();
         field.last_enemy_spell = new SpellData(""); // last performed spell
         field.last_register = new bool[3] { false, false, false }; // last spell register status
         field.num_player_attacks = 0; // number of player attacks from beginning of battle
