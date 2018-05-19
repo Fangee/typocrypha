@@ -137,7 +137,7 @@ public class BattleUI : MonoBehaviour
         wave_transition_title.GetComponent<Animator>().enabled = true;
         AudioPlayer.main.playSFX("sfx_enter");
         AudioPlayer.main.playSFX("sfx_enemy_death");
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.7f);
     }
 
 	// Set the active state of the enemy status bars

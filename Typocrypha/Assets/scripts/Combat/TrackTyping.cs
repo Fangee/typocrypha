@@ -118,20 +118,21 @@ public class TrackTyping : MonoBehaviour {
             } else {
                 // process status conditions on keys and apply appropriate graphical effects
                 foreach (char c in in_str) {
-                    if (key_image_map.ContainsKey(c)) {
-                        if (c == ' ') {//Dont put space in if cast is empty
+                    char cLower = char.ToLower(c);
+                    if (key_image_map.ContainsKey(cLower)) {
+                        if (cLower == ' ') {//Dont put space in if cast is empty
                             if (count != 0) {
-                                buffer += c;
+                                buffer += cLower;
                                 count++;
                                 AudioPlayer.main.playSFX("sfx_type_key");
                             }
-                            StartCoroutine(colorKey(c));
+                            StartCoroutine(colorKey(cLower));
                             continue;
                         } //Returns a string so it can return an empty string or multiple letters
-                        string add = battleKeyboard.processKey(c); 
+                        string add = battleKeyboard.processKey(cLower); 
                         buffer += add;
                         count += add.Length;
-                        StartCoroutine(battleKeyboard.keyGraphics(c, key_image_map[c], key_text_map[c]));
+                        StartCoroutine(battleKeyboard.keyGraphics(cLower, key_image_map[cLower], key_text_map[cLower]));
                     }
                 }
             }

@@ -141,7 +141,7 @@ public class BattleManagerS : MonoBehaviour {
 			uiManager.initBg();
 		}
         BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         nextWave();
     }
     // go to next wave (also starts first wave for real)
@@ -162,6 +162,7 @@ public class BattleManagerS : MonoBehaviour {
         setPause(true);
         resetInterruptData();
         Debug.Log("starting wave: " + Wave.Title);
+        //Delete old enemies
         foreach (Transform tr in transform)
         {
             Destroy(tr.gameObject);
@@ -170,11 +171,12 @@ public class BattleManagerS : MonoBehaviour {
         uiManager.startWave();
 		//Create enemies and wait until all enemies spawn in
 		yield return StartCoroutine(createEnemies(Wave));
-        //update Typocrypha HUD
+        //update Target Ret
         if (curr_wave == 0)
             uiManager.initTarget();
         //Play Wave transition and wait for the animation to finish (plays the SFX too)
         yield return StartCoroutine(uiManager.waveTransition(Wave.Title, curr_wave + 1, waves.Length));
+        //Play music if applicable (BUG HERE WHERE LOADING MUSIC CAUSES LAG)
         if (Wave.Music != string.Empty)
             AudioPlayer.main.playMusic(Wave.Music);
         if (checkInterrupts() == false)
