@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpellEffects : MonoBehaviour {
     public Popper popp; //holds popper script component
 	public EnemyHealthBars enemy_hp_bars; // holds enemy HP bars component
+	public Animator caster_cutin_animator; // animates player cut-in
     const float POP_TIMER = 1.5f; //pop-ups last this many seconds long
     Vector3 DMGNUM_OFFSET = new Vector3(0, 0.375f, 0); //where the damage number should be
     Vector3 UNDER_OFFSET = new Vector3(0, -0.75f, 0); //where something under the damage num should be
@@ -19,6 +20,7 @@ public class SpellEffects : MonoBehaviour {
 
     public IEnumerator playEffects(CastData d, SpellData s)
     {
+		//caster_cutin_animator.Play ("anim_wave_banner_image");
         if (d.isHit == false)//Spell misses
         {
             Debug.Log(d.Caster.Stats.name + " missed " + d.Target.Stats.name + "!");
