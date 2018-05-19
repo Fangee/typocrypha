@@ -164,34 +164,12 @@ public class BattleManagerS : MonoBehaviour {
         //Clear UI for new wave
         uiManager.startWave();
 		//Create enemies and wait until all enemies spawn in
-		createEnemies(Wave);
-		float entranceTime = 0.2f;
-		if (Wave.Enemy1 != string.Empty)
-			entranceTime += 0.4f;
-		if (Wave.Enemy2 != string.Empty)
-			entranceTime += 0.4f;
-		if (Wave.Enemy3 != string.Empty)
-			entranceTime += 0.4f;
-		yield return new WaitForSeconds(entranceTime);
-        //Play Wave transition and wait for the animation to finish (plays the SFX too)
-        uiManager.waveTransition(Wave.Title, curr_wave + 1, waves.Length);
-        yield return new WaitForSeconds(1.2f);
-        uiManager.wave_banner_text.GetComponent<Animator>().enabled = false;
-        uiManager.wave_transition_banner.GetComponent<Animator>().enabled = false;
-        uiManager.wave_title_text.GetComponent<Animator>().enabled = false;
-        uiManager.wave_transition_title.GetComponent<Animator>().enabled = false;
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
-        uiManager.wave_banner_text.GetComponent<Animator>().enabled = true;
-        uiManager.wave_transition_banner.GetComponent<Animator>().enabled = true;
-        uiManager.wave_title_text.GetComponent<Animator>().enabled = true;
-        uiManager.wave_transition_title.GetComponent<Animator>().enabled = true;
-        AudioPlayer.main.playSFX("sfx_enter");
-        AudioPlayer.main.playSFX("sfx_enemy_death");
-        yield return new WaitForSeconds(0.8f);
+		yield return StartCoroutine(createEnemies(Wave));
         //update Typocrypha HUD
         if (curr_wave == 0)
             uiManager.initTarget();
-        uiManager.updateUI();
+        //Play Wave transition and wait for the animation to finish (plays the SFX too)
+        yield return StartCoroutine(uiManager.waveTransition(Wave.Title, curr_wave + 1, waves.Length));
         if (Wave.Music != string.Empty)
             AudioPlayer.main.playMusic(Wave.Music);
         if (checkInterrupts() == false)
@@ -302,14 +280,10 @@ public class BattleManagerS : MonoBehaviour {
     }
 
     //Create all enemies for this wave
-    private void createEnemies(BattleWave wave)
-    {
-		StartCoroutine(createEnemiesINum(wave));
-    }
-	private IEnumerator createEnemiesINum(BattleWave wave){
+	private IEnumerator createEnemies(BattleWave wave){
 		if (wave.Enemy1 != string.Empty) {
 			createEnemy (0, wave.Enemy1);
-			AudioPlayer.main.playSFX ("sfx_blight_hit");
+            AudioPlayer.main.playSFX ("sfx_blight_hit");
 			AnimationPlayer.main.playAnimation("anim_element_reflect", field.enemy_arr[0].Transform.position, 2f);
 			yield return new WaitForSeconds(0.4f);
 		}
@@ -346,6 +320,7 @@ public class BattleManagerS : MonoBehaviour {
         uiManager.health_bars.makeHealthMeter(i, bar_pos);
         field.enemy_arr[i] = enemy;
 		enemy.enemy_animator.Play ("enemy_spawn_in");
+        uiManager.updateUI();
     }
 
     private bool checkInterrupts()

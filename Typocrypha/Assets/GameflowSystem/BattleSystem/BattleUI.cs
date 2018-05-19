@@ -112,7 +112,7 @@ public class BattleUI : MonoBehaviour
         BackgroundEffects.main.removePrefabBG(2.0f);
     }
     //Play the wave transition animations
-    public void waveTransition(string title, int curr_wave, int max_wave)
+    public IEnumerator waveTransition(string title, int curr_wave, int max_wave)
     {
         AudioPlayer.main.playSFX("sfx_spell_miss");
         wave_banner_text.text = title;
@@ -125,6 +125,19 @@ public class BattleUI : MonoBehaviour
         banner_img_animator.Play("anim_wave_banner_image");
         title_text_animator.Play("anim_wave_title_text");
         title_img_animator.Play("anim_wave_title_image");
+        yield return new WaitForSeconds(1.2f);
+        wave_banner_text.GetComponent<Animator>().enabled = false;
+        wave_transition_banner.GetComponent<Animator>().enabled = false;
+        wave_title_text.GetComponent<Animator>().enabled = false;
+        wave_transition_title.GetComponent<Animator>().enabled = false;
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+        wave_banner_text.GetComponent<Animator>().enabled = true;
+        wave_transition_banner.GetComponent<Animator>().enabled = true;
+        wave_title_text.GetComponent<Animator>().enabled = true;
+        wave_transition_title.GetComponent<Animator>().enabled = true;
+        AudioPlayer.main.playSFX("sfx_enter");
+        AudioPlayer.main.playSFX("sfx_enemy_death");
+        yield return new WaitForSeconds(0.8f);
     }
 
 	// Set the active state of the enemy status bars
