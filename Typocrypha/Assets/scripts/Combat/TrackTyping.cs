@@ -39,6 +39,16 @@ public class TrackTyping : MonoBehaviour {
 	public string getBuffer(){
 		return last_buffer;
 	}
+    public void updateDisplay()
+    {
+        // update display
+        typed_text.text = buffer.Replace(" ", "-").ToUpper();
+        for (int i = 26 - typed_text.text.Length; i > 0; --i)
+        {
+            typed_text.text = typed_text.text + "_";
+        }
+        typed_text.text = ">" + typed_text.text;
+    }
 
 	void Start () {
 		typed_text.text = "";
@@ -127,12 +137,7 @@ public class TrackTyping : MonoBehaviour {
             }
 
         }
-		// update display
-		typed_text.text = buffer.Replace(" ", "-").ToUpper();
-		for (int i = 26 - typed_text.text.Length; i > 0; --i) {
-			typed_text.text = typed_text.text + "_";
-		}
-		typed_text.text = ">" + typed_text.text;
+        updateDisplay();
 	}
 
 	// create visual keyboard keys

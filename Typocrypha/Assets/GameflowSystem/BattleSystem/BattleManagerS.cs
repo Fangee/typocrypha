@@ -117,6 +117,8 @@ public class BattleManagerS : MonoBehaviour {
         player.restoreToFull();
         battleKeyboard.clearStatus();
         castManager.cooldown.removeAll();
+        trackTyping.clearBuffer();
+        trackTyping.updateDisplay();
         //Reset BattleManager curr variables
         curr_battle = new_battle;
         curr_wave = -1;
