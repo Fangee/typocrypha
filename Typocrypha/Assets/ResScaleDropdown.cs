@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResolutionDropdown : MonoBehaviour {
+public class ResScaleDropdown : MonoBehaviour {
 
     public GameObject cam;
     SetResolution sr;
@@ -19,8 +19,6 @@ public class ResolutionDropdown : MonoBehaviour {
 	}
 
     void DropdownValueChanged(Dropdown d){
-        Debug.Log(resdrop.value);
-
         switch (d.value)
         {
             case 0:
