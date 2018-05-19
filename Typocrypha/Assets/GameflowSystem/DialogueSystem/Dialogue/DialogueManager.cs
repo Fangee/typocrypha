@@ -16,6 +16,7 @@ public class DialogueManager : MonoBehaviour {
 	public DialogueBox VNDialogueBox; // Visual novel style dialogue box
 	public FXText VNSpeaker; // Text that contains speaker's name for VN style
 	public SpriteRenderer VNMCSprite; // Holds mc's sprite
+	public SpriteRenderer VNCodecSprite; // Holds codec call sprites (right side)
 
 	public GameObject ANView; // Audio Novel view hiearchy
 	public RectTransform ANContent; // Content of scroll view
@@ -27,18 +28,23 @@ public class DialogueManager : MonoBehaviour {
 	public float scroll_time; // Time it takes to automatically update window
     public float scroll_scale; // Scroll delay multiplier
 	public float top_space; // Space between top of window and dialogue
+
+	public GameObject input_display_choices; // Game object displaying dialogue choices
+
 	[HideInInspector] public bool pause_scroll; // Pause text scroll
 	[HideInInspector] public bool block_input; // Blocks user input
 	[HideInInspector] public string answer; // Player's input
 
 	int curr_line; // Current line number of dialogue
 	float window_height; // Height of dialogue history
+	float default_window_height; // Default Height of dialogue history (to reset)
 	Coroutine slide_scroll_cr; // Coroutine that smoothly adjusts window
 	List<DialogueBox> history; // List of all dialogue boxes
 	List<GameObject> chr_spr_list; // List of character sprite holders
 
 	bool input; // Are we waiting for input?
 	GameObject input_display; // Display image for input
+
 
     private bool isInterrupt = false; //is this dialogue event a oneshot (interrupts, etc)
 
@@ -49,6 +55,7 @@ public class DialogueManager : MonoBehaviour {
 		block_input = false;
 		curr_line = -1;
 		window_height = top_space;
+		default_window_height = top_space;
 		history = new List<DialogueBox> ();
 		chr_spr_list = new List<GameObject> ();
 		input = false;
@@ -58,15 +65,17 @@ public class DialogueManager : MonoBehaviour {
 	void Update() {
 		if (block_input) return;
 		if (Input.GetKeyDown (KeyCode.Space)) {
-            if (!nextLine()) {
+			if (!nextLine ()) {
 				if (isInterrupt) {
-					BattleManagerS.main.setPause (false);
-					isInterrupt = false;
-					setEnabled (false);
+                    if(!BattleManagerS.main.playSceneFromQueue()) {
+                        BattleManagerS.main.setPause(false);
+                        isInterrupt = false;
+                        setEnabled(false);
+                    }
 				} else {
 					GameflowManager.main.next ();
 				}
-            }
+			}
 		}
 	}
 
@@ -96,15 +105,23 @@ public class DialogueManager : MonoBehaviour {
 		if (history.Count > 0 && history [history.Count - 1].cr_scroll != null) {
 			history [history.Count - 1].dumpText ();
 		} else {
+			//if (!input && Input.GetKeyDown (KeyCode.Space)) AudioPlayer.main.playSFX ("sfx_advance_text");
 			if (input) return true;
 			if (curr_line >= curr_dialogue.GetComponents<DialogueItem>().Length - 1) return false;
 			// Create dialogue box
 			DialogueItem d_item = curr_dialogue.GetComponents<DialogueItem>()[++curr_line];
 			DialogueBox d_box = null;
-			if (d_item.GetType () == typeof(DialogueItemVN)) {
+			if (d_item.GetType () == typeof(DialogueItemJump)) {
+				curr_dialogue = ((DialogueItemJump)d_item).target.gameObject;
+				GameflowManager.main.curr_item = ((DialogueItemJump)d_item).target.gameObject.transform.GetSiblingIndex () - 1;
+				return false;
+			} else if (d_item.GetType () == typeof(DialogueItemVN)) {
 				Sprite mc_sprite = ((DialogueItemVN)d_item).mc_sprite;
+				Sprite codec_sprite = ((DialogueItemVN)d_item).codec_sprite;
 				if (mc_sprite != null)
 					VNMCSprite.sprite = mc_sprite;
+				if (codec_sprite != null)
+					VNCodecSprite.sprite = codec_sprite;
 				VNView.SetActive (true);
 				ChatView.SetActive (false);
 				ANView.SetActive (false);
@@ -114,12 +131,14 @@ public class DialogueManager : MonoBehaviour {
 				VNView.SetActive (false);
 				ChatView.SetActive (true);
 				ANView.SetActive (false);
+				//clearLog (ChatView);
 				GameObject d_obj = Instantiate (dialogue_box_prefab, ChatContent);
 				d_box = d_obj.GetComponent<DialogueBox> ();
 			} else if (d_item.GetType () == typeof(DialogueItemAN)) {
 				VNView.SetActive (false);
 				ChatView.SetActive (false);
 				ANView.SetActive (true);
+				//clearLog (ANView);
 				GameObject d_obj = Instantiate (an_dialouge_box_prefab, ANContent);
 				d_box = d_obj.GetComponent<DialogueBox> ();
 			}
@@ -144,6 +163,7 @@ public class DialogueManager : MonoBehaviour {
 			} else {
 				input = false;
 			}
+			d_box.scroll_delay = 0.01f;
 			d_box.dialogueBoxStart ();
 		}
 		return true;
@@ -157,6 +177,10 @@ public class DialogueManager : MonoBehaviour {
 		input_field.ActivateInputField ();
 		if (d_item.input_display != null)
 			input_display = Instantiate (d_item.input_display, transform);
+		if (d_item.input_options.Length > 0) {
+			populateChoices ();
+			input_display_choices.SetActive (true);
+		}
 	}
 
 	// Called when input field is submitted
@@ -169,15 +193,74 @@ public class DialogueManager : MonoBehaviour {
 		DialogueItem d_item = curr_dialogue.GetComponents<DialogueItem>()[curr_line];
 		if (d_item.input_options.Length > 0) { // If set number of choices
 			int i = 0;
-			for (; i < d_item.input_options.Length; ++i)
-				if (d_item.input_options [i].Trim().ToLower().CompareTo (answer.Trim().ToLower()) == 0) break;
+			string choiceStrings = "";
+			string answerString = "";
+			for (; i < d_item.input_options.Length; ++i) {
+				choiceStrings = d_item.input_options [i].Trim ().ToLower().Replace (".", string.Empty).Replace ("?", string.Empty).Replace ("!", string.Empty);
+				answerString = answer.Trim ().ToLower ().Replace (".", string.Empty).Replace ("?", string.Empty).Replace ("!", string.Empty);
+				if (choiceStrings.CompareTo(answerString) == 0) {
+					break;
+				} else {
+					string comparisonLetter = "";
+					switch (i) {
+					case 0:
+						comparisonLetter = "A";
+						break;
+					case 1:
+						comparisonLetter = "B";
+						break;
+					}
+					if (comparisonLetter.Trim ().ToLower ().CompareTo (answer.Trim ().ToLower ()) == 0)
+						break;
+				}
+			}
 			if (i < d_item.input_options.Length) { // Option was found, so branch
 				curr_dialogue = d_item.input_branches [i].gameObject;
+				GameflowManager.main.curr_item = d_item.input_branches [i].gameObject.transform.GetSiblingIndex ();
 				curr_line = -1;
+				AudioPlayer.main.playSFX ("sfx_enter");
 			} else { // If not found, try again
 				curr_line--;
+				clearANLog ();
+				AudioPlayer.main.playSFX ("sfx_botch");
 			}
+		} 
+		else { 
+			/*if (answer.Trim ().ToLower () == "") { // if answer field left blank, we try again
+				curr_line--;
+				clearANLog ();
+				AudioPlayer.main.playSFX ("sfx_botch");
+			} 
+			else {*/ 
+				// Check/compare with possible free response answers
+				//AudioPlayer.main.playSFX ("sfx_enter");
+			if (d_item.input_answers.Length > 0) {
+				int i = 0;
+				string checkStrings = "";
+				string answerString = "";
+				for (; i < d_item.input_answers.Length; ++i) {
+					checkStrings = d_item.input_answers [i].Trim ().ToLower ().Replace (".", string.Empty).Replace ("?", string.Empty).Replace ("!", string.Empty);
+					answerString = answer.Trim ().ToLower ().Replace (".", string.Empty).Replace ("?", string.Empty).Replace ("!", string.Empty);
+					if (checkStrings.CompareTo (answerString) == 0 || checkStrings.CompareTo ("") == 0) {
+						break;
+					}
+				}
+				if (i < d_item.input_answers.Length) { // Option was found, so branch
+					curr_dialogue = d_item.input_branches [i].gameObject;
+					GameflowManager.main.curr_item = d_item.input_branches [i].gameObject.transform.GetSiblingIndex ();
+					curr_line = -1;
+					AudioPlayer.main.playSFX ("sfx_enter");
+				} else { // If not found, try again
+					curr_line--;
+					clearANLog ();
+					AudioPlayer.main.playSFX ("sfx_botch");
+				}
+			} else {
+				AudioPlayer.main.playSFX ("sfx_enter");
+			}
+			//}
 		}
+		input_display_choices.SetActive (false);
 		input = false;
 		forceNextLine ();
 	}
@@ -201,6 +284,13 @@ public class DialogueManager : MonoBehaviour {
 		ChatContent.sizeDelta = new Vector2 (ChatContent.sizeDelta.x, window_height);
 		stopSlideScroll ();
 		slide_scroll_cr = StartCoroutine (slideScrollCR());
+	}
+
+	// Resets height of chat window
+	public void resetWindowSize(){
+		window_height = default_window_height;
+		ChatContent.sizeDelta = new Vector2 (ChatContent.sizeDelta.x, window_height);
+		stopSlideScroll ();
 	}
 
 	// Stops slide adjustment of window
@@ -227,13 +317,25 @@ public class DialogueManager : MonoBehaviour {
 		new_chr.GetComponent<SpriteRenderer> ().sprite = spr;
 	}
 
-	// Highlight's (on or off) a character
+	// Highlight's a character
 	public void highlightCharacter(string spr_name, float amt) {
 		foreach(GameObject chr_spr in chr_spr_list) {
 			SpriteRenderer spr_r = chr_spr.GetComponent<SpriteRenderer> ();
-			if (spr_r.sprite.name == spr_name) {
+			if (spr_r.sprite.name.Contains(spr_name)) {
 				spr_r.color = new Color(amt, amt, amt, 1);
 				break;
+			}
+		}
+	}
+
+	// Highlights given character, and dims rest (0.5 greyscale)
+	public void soleHighlight(string spr_name) {
+		foreach(GameObject chr_spr in chr_spr_list) {
+			SpriteRenderer spr_r = chr_spr.GetComponent<SpriteRenderer> ();
+			if (spr_r.sprite.name.Contains (spr_name)) {
+				spr_r.color = new Color (1, 1, 1, 1);
+			} else {
+				spr_r.color = new Color (0.5f, 0.5f, 0.5f, 1);
 			}
 		}
 	}
@@ -252,7 +354,7 @@ public class DialogueManager : MonoBehaviour {
 	// Finds first character with specified sprite name, and removes it
 	public void removeCharacter(string spr_name) {
 		foreach(GameObject chr_spr in chr_spr_list) {
-			if (chr_spr.GetComponent<SpriteRenderer> ().sprite.name == spr_name) {
+			if (chr_spr.GetComponent<SpriteRenderer> ().sprite.name.Contains(spr_name)) {
 				chr_spr_list.Remove (chr_spr);
 				Destroy (chr_spr);
 				break;
@@ -266,5 +368,75 @@ public class DialogueManager : MonoBehaviour {
 			Destroy (chr_spr);
 		}
 		chr_spr_list.Clear ();
+	}
+
+	// Clears the given chat log of all objects in its hierarchy (general function)
+	public void clearLog(GameObject textView, int offset){
+		resetWindowSize();
+		Transform content = textView.transform.GetChild(0).GetChild(0);
+		int skipSpacer = 0; // skip the Spacer object in the content hierarchy
+		//VerticalLayoutGroup layout = content.GetComponents<VerticalLayoutGroup>();
+		Transform[] contentArray = content.GetComponentsInChildren<Transform>();
+		int skipCurrentBox = 0; // tracks when to stop going through log as to not delete current textbox
+		int currentBoxPosition = contentArray.Length - (offset*2); // when to stop deleting items
+		Debug.Log ("current box position = " + currentBoxPosition);
+		foreach (Transform tr in content.transform) {
+			if (skipSpacer > 0 && skipCurrentBox < currentBoxPosition) {
+				Destroy (tr.gameObject);
+				skipCurrentBox += offset;
+			}
+			else {
+				++skipSpacer;
+				++skipCurrentBox;
+			}
+			Debug.Log ("skip current box = " + skipCurrentBox);
+		}
+	}
+
+	// Pops off the latest item in the given chat log of all objects in its hierarchy (general function)
+	// BUGGED
+	public void popLog(GameObject textView, int offset){
+		Debug.Log ("popping log");
+		resetWindowSize();
+		Transform content = textView.transform.GetChild(0).GetChild(0);
+		int skipSpacer = 0; // skip the Spacer object in the content hierarchy
+		//VerticalLayoutGroup layout = content.GetComponents<VerticalLayoutGroup>();
+		Transform[] contentArray = content.GetComponentsInChildren<Transform>();
+		int skipCurrentBox = 0; // tracks when to stop going through log as to not delete current textbox
+		int minBoxPosition = contentArray.Length - (offset*3)-1; // when to stop deleting items
+		int maxBoxPosition = contentArray.Length - (offset*2); // when to stop deleting items
+		//Debug.Log ("current box position = " + currentBoxPosition);
+		foreach (Transform tr in content.transform) {
+			if ((skipSpacer > 0) || ((minBoxPosition < skipCurrentBox) && (skipCurrentBox < maxBoxPosition))) {
+				Destroy (tr.gameObject);
+				skipCurrentBox += offset;
+			}
+			else {
+				++skipSpacer;
+				++skipCurrentBox;
+			}
+			//Debug.Log ("skip current box = " + skipCurrentBox);
+		}
+	}
+
+	// Clears the Chat view log
+	public void clearChatLog(){
+		clearLog (ChatView, 4); // A chatview dialogue box has 4 items (the parent and 3 children (text, L/R icons))
+	}
+
+	// Clears the AN view log
+	public void clearANLog(){
+		clearLog (ANView, 2); // An AN view dialogue box has 2 items (the parent and 1 child (text))
+	}
+
+	// Fill the choice display boxes with current options text
+	public void populateChoices(){
+		Text[] choiceText = input_display_choices.GetComponentsInChildren<Text>();
+		DialogueItem d_item = curr_dialogue.GetComponents<DialogueItem> () [curr_line];
+		int j = 0;
+		for (int i = 1; (i < choiceText.Length) && (j < d_item.input_options.Length); i = i + 2) {
+			choiceText [i].text = d_item.input_options[j];
+			++j;
+		}
 	}
 }

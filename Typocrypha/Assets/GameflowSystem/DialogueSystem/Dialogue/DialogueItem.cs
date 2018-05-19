@@ -19,5 +19,6 @@ public abstract class DialogueItem : MonoBehaviour {
 	// These fields are for input sections where the choices are limited
 	// If the input section is free response, arrays are empty
 	public string[] input_options; // Possible strings user can type in
+	public string[] input_answers; // Strings free response looks for
 	public Dialogue[] input_branches; // Dialogue to transition to after choice is made
 }

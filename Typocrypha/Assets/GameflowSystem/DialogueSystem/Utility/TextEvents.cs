@@ -31,6 +31,8 @@ public class TextEvents : MonoBehaviour {
 	public GameObject dialogue_box; // dialogue box object
 	public GameObject glitch_effect; // sprite used for glitch effect
 	public GameObject screen_frame; // screenframe object
+	public Transform float_text_view; // view for floating text
+	public GameObject float_d_box_prefab; // floating text dialogue box prefab
 
 	void Awake() {
 		main = this;
@@ -53,6 +55,7 @@ public class TextEvents : MonoBehaviour {
 			{"hide-text-box", hideTextBox},
 			{"set-talk-sfx", setTalkSFX},
 			{"highlight-character", highlightCharacter},
+			{"sole-highlight", soleHighlight},
 			{"remove-character", removeCharacter},
 			{"remove-all-character", removeAllCharacter},
             {"evil-eye", evilEye},
@@ -60,7 +63,10 @@ public class TextEvents : MonoBehaviour {
 			{"glitch", glitch},
 			{"set-name", setName},
 			{"frame", frame},
-			{"heal-player", healPlayer}
+			{"heal-player", healPlayer},
+			{"clear-log", clearTextLog},
+			{"float-text", floatText},
+			{"multi-float-text", multiFloatText}
 		};
 		is_prompt = false;
 	}
@@ -78,6 +84,8 @@ public class TextEvents : MonoBehaviour {
 		main_camera.transform.position = new Vector3 (0,0,-10);
 		DialogueManager.main.pause_scroll = false;
 		DialogueManager.main.block_input = false;
+		//foreach (Transform tr in float_text_view)
+		//	Destroy (tr.gameObject);
 	}
 
 	// finishes up persistent events that might have been skipped (like removing a character)
@@ -354,11 +362,18 @@ public class TextEvents : MonoBehaviour {
 		yield return true;
 	}
 
-	// Toggles highlighting a character
+	// Allows for highlighting a character
 	// input: [0]: string, name of sprite to highlight
 	//        [1]: float, amount to highlight (multiplier to tint)
 	IEnumerator highlightCharacter(string[] opt) {
 		DialogueManager.main.highlightCharacter(opt[0], float.Parse(opt[1]));
+		yield return true;
+	}
+
+	// Highlights one character and unhighlights all others (0.5 greyscale)
+	// input: [0]: string, name of sprite to highlight
+	IEnumerator soleHighlight(string[] opt) {
+		DialogueManager.main.soleHighlight (opt [0]);
 		yield return true;
 	}
 
@@ -423,6 +438,50 @@ public class TextEvents : MonoBehaviour {
 		Debug.Log ("[JohnTypocrypha Voice]: i need healing");
 		Player.main.restoreToFull ();
 		yield return true;
+	}
+
+	// clears the chat and AN text logs
+	// input: [0]: [chat|an], 'chat' clears chat log, 'an' clears AN log
+	IEnumerator clearTextLog(string[] opt){
+		if (opt [0].CompareTo ("chat") == 0) {
+			Debug.Log ("chat log flushed");
+			DialogueManager.main.clearChatLog();
+		}
+		else if (opt [0].CompareTo ("an") == 0){
+			Debug.Log ("an log flushed");
+			DialogueManager.main.clearANLog();
+		}
+		yield return true;
+	}
+
+	// scrolls floating text at a specific location
+	// input: [0]: float, x-position in world coordinates (bottom left corner)
+	//        [1]: float, y-position in world coordinates
+	//        [2]: string, text to be displayed
+	IEnumerator floatText(string[] opt) {
+		// setup dialogue item and dialogue box
+		GameObject d_box_obj = Instantiate (float_d_box_prefab, float_text_view);
+		string text = opt [2];
+		for (int i = 3; i < opt.Length; i++) text += "," + opt [i];
+		d_box_obj.GetComponent<FloatText> ().startFloatText (float.Parse(opt[0]), float.Parse(opt[1]), text);
+		yield return true;
+	}
+
+	// scrolls a bunch of floating text objects at random locations
+	// input: [0]: int, number of floating text objs
+	//        [1]: string, text to be display
+	IEnumerator multiFloatText(string[] opt) {
+		int num = int.Parse (opt [0]);
+		for (int i = 0; i < num; i++) {
+			// setup dialogue item and dialogue box
+			GameObject d_box_obj = Instantiate (float_d_box_prefab, float_text_view);
+			string text = opt [1];
+			for (int j = 3; j < opt.Length; j++) text += "," + opt [j];
+			float x = ((Random.value - 0.5f) * 18) - 2;
+			float y = (Random.value - 0.5f) * 10;
+			d_box_obj.GetComponent<FloatText> ().startFloatText (x, y, text);
+			yield return null;
+		}
 	}
 }
 

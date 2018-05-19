@@ -1,79 +1,64 @@
 ﻿Shader "Custom/PixelateSprite"
 {
-	Properties
-	{
-		_MainTex ("Texture", 2D) = "white" {}
-		_Color("Tint",Color)=(1,1,1,1)
-		_PixelSize("Pixel Size",float)=4
+    Properties
+    {
+        [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
+        _Color ("Tint", Color) = (1,1,1,1)
+        [MaterialToggle] PixelSnap ("Pixel snap", Float) = 0
+        [HideInInspector] _RendererColor ("RendererColor", Color) = (1,1,1,1)
+        [HideInInspector] _Flip ("Flip", Vector) = (1,1,1,1)
+        [PerRendererData] _AlphaTex ("External Alpha", 2D) = "white" {}
+        [PerRendererData] _EnableExternalAlpha ("Enable External Alpha", Float) = 0
+        _PixelSize("Pixel Size",float)=1
 		_Width("Width",float)=1
 		_Height("Height",float)=1
-	}
-	SubShader
-	{
-		Tags
-		{
-			"Queue"="Transparent" 
-			"IgnoreProjector"="True"
-			"RenderType"="Transparent" 
-			"PreviewType"="Plane"
-		}
+    }
 
-		// No culling or depth
-		Cull Off 
-		ZWrite Off 
-		ZTest Always
-		Lighting Off
-		Blend One OneMinusSrcAlpha
+    SubShader
+    {
+        Tags
+        {
+            "Queue"="Transparent"
+            "IgnoreProjector"="True"
+            "RenderType"="Transparent"
+            "PreviewType"="Plane"
+            "CanUseSpriteAtlas"="True"
+        }
 
-		Pass
-		{
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag
-			#pragma target 3.0
-			
-			#include "UnityCG.cginc"
+        Cull Off
+        Lighting Off
+        ZWrite Off
+        Blend One OneMinusSrcAlpha
 
-			struct appdata
-			{
-				float4 vertex : POSITION;
-				float4 color : COLOR;
-				float2 uv : TEXCOORD0;
-			};
+        Pass
+        {
+        CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #pragma target 2.0
+            #pragma multi_compile_instancing
+            #pragma multi_compile _ PIXELSNAP_ON
+            #pragma multi_compile _ ETC1_EXTERNAL_ALPHA
+            #include "UnitySprites.cginc"
 
-			struct v2f
-			{
-				float2 uv : TEXCOORD0;
-				fixed4 color : COLOR;
-			};
-
-			v2f vert (float4 vertex : POSITION, float4 color : COLOR, float2 uv : TEXCOORD0, out float4 outpos : SV_POSITION)
-			{
-				v2f o;
-				o.uv = uv;
-				o.color = color;
-				outpos = UnityObjectToClipPos(vertex);
-				return o;
-			}
-			
-			sampler2D _MainTex;
-			fixed4 _Color;
-			float _PixelSize;
+            float _PixelSize;
 			float _Width;
 			float _Height;
 
-			fixed4 frag (v2f i, UNITY_VPOS_TYPE screenPos : VPOS) : SV_Target
-			{
-				float2 spriteSize = float2(_Width, _Height);
+            v2f vert(appdata_t IN) {
+            	return SpriteVert(IN);
+            }
+
+            fixed4 frag(v2f IN) : SV_Target {
+            	float2 spriteSize = float2(_Width, _Height);
 				float pixelScale = spriteSize.x/_PixelSize;
 				// set pixel color to color of bottom left corner of block
 				if (_PixelSize > 1) {
-					i.uv = floor(i.uv * pixelScale)/pixelScale;
+					IN.texcoord = floor(IN.texcoord * pixelScale)/pixelScale;
 				}
-				fixed4 c = tex2D (_MainTex, i.uv);
-				return c;
-			}
-			ENDCG
-		}
-	}
+            	return SpriteFrag(IN);
+            }
+        ENDCG
+        }
+    }
 }

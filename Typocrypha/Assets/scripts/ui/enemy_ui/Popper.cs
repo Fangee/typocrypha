@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Popper : MonoBehaviour {
 
 	public GameObject poptext_prefab;
+	public GameObject poptext_gradient_prefab;
 	GameObject txtObj;
 	PopText pt;
 
@@ -35,6 +36,15 @@ public class Popper : MonoBehaviour {
 		txtObj.transform.position = pos;
 		pt = txtObj.GetComponent<PopText>();
 		pt.setColor (color);
+		pt.display (message, delay);
+	}
+
+	//overloaded with 2 color fields
+	public void spawnText (string message, float delay, Vector3 pos, Color colorTop, Color colorBottom) {
+		txtObj = GameObject.Instantiate (poptext_gradient_prefab, transform);
+		txtObj.transform.position = pos;
+		pt = txtObj.GetComponent<PopText>();
+		pt.setColor (colorTop, colorBottom);
 		pt.display (message, delay);
 	}
 

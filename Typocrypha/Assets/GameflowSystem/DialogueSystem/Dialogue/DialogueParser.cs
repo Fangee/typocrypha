@@ -35,7 +35,8 @@ public class DialogueParser : MonoBehaviour {
 		d_item.fx_text_effects = new List<FXTextEffect> ();
 		d_item.text_events = new List<TextEvent>[text.Length];
 		bool tag = false; // Are we parsing a tag?
-		for (int i = 0; i < text.Length; ++i) {
+		int i = 0;
+		for (; i < text.Length; ++i) {
 			char c = text [i];
 			if (c == '|') { // FXTextEffect start tag
 				tag = !tag;
@@ -44,10 +45,14 @@ public class DialogueParser : MonoBehaviour {
 				tag = !tag;
 				if (tag) parseEffectEnd (i + 1, text, d_item, parsed);
 			} else if (c == '[' || c == ']') { // Text Event
-				tag = !tag;
-				if (tag) parseTextEvent (i, text, d_item, parsed);
+				i = parseTextEvent (i, text, d_item, parsed);
 			} else if (!tag) {
-				parsed.Append (c);
+				if(c == '’'){
+					parsed.Append ("'");
+				}
+				else {
+					parsed.Append (c);
+				}
 			}
 		}
 		return parsed.ToString ();
@@ -59,6 +64,7 @@ public class DialogueParser : MonoBehaviour {
 		int end_pos = text.IndexOf ('|', start_pos) - 1;
 		string fx_name = text.Substring (start_pos, end_pos - start_pos + 1);
 		FXTextEffect text_effect = text_effect_map[fx_name].clone(d_box.fx_text.gameObject);
+		text_effect.font = d_box.fx_text.font;
 		text_effect.initEffect (); // TEMP; should read options from tag
 		text_effect.chars = new int[2] {parsed.Length, -1};
 		effect_stack.Push(text_effect);
@@ -76,7 +82,7 @@ public class DialogueParser : MonoBehaviour {
 	}
 
 	// Parses a Text Event
-	void parseTextEvent(int start_pos, string text, DialogueItem d_item, StringBuilder parsed) {
+	int parseTextEvent(int start_pos, string text, DialogueItem d_item, StringBuilder parsed) {
 		int end_pos = text.IndexOf (']', start_pos);
 		int eq_pos = text.IndexOf ('=', start_pos);
 		string evt;
@@ -92,7 +98,7 @@ public class DialogueParser : MonoBehaviour {
 			d_item.text_events [parsed.Length] = new List<TextEvent> ();
 		d_item.text_events [parsed.Length].Add(new TextEvent(evt, opt));
 		//Debug.Log ("  text_event:" + evt + ":" + opt.Aggregate("", (acc, next) => acc + "," + next));
-		return;
+		return end_pos;
 	}
 
 	// Substiutes macros in (curly braces)
@@ -103,7 +109,7 @@ public class DialogueParser : MonoBehaviour {
 				int start_pos = i + 1;
 				int end_pos = text.IndexOf ('}', start_pos);
 				string[] macro = text.Substring (start_pos, end_pos - start_pos).Split(opt_delim);
-				//Debug.Log ("  macro:" + macro.Aggregate("", (acc, next) => acc + "," + next));
+				Debug.Log ("  macro:" + macro.Aggregate("", (acc, next) => acc + "," + next));
 				string[] opt = macro.Skip (1).Take (macro.Length - 1).ToArray ();
 				string sub = TextMacros.main.macro_map [macro[0]] (opt);
 				//Debug.Log ("    macro sub:" + sub);

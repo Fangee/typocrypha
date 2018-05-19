@@ -9,7 +9,8 @@ using UnityEngine.UI;
 public class DialogueBox : MonoBehaviour {
 	public string speaker; // Speaker's name
 	public string text; // Text to be displayed
-	public float scroll_delay; // Time (in seconds) between showing characters
+	public float scroll_delay = 0.01f; // Time (in seconds) between showing characters
+	public bool talk_sfx = true; // Should talking sfx play?
 	public FXText fx_text; // FXText component for displaying text
 	public Image left_icon; // Left dialogue speaker's icon
 	public Image right_icon; // Light dialogue speaker's icon
@@ -28,7 +29,7 @@ public class DialogueBox : MonoBehaviour {
 		set_color.color.a = 0;
 		set_color.chars = new int[2]{0,text.Length};
 		fx_text.addEffect (set_color);
-		scroll_delay = 0.05f; // DEFAULT TEMP
+		scroll_delay = 0.01f; // DEFAULT TEMP
 		if (d_item.GetType () == typeof(DialogueItemChat)) {
 			DialogueItemChat c_item = (DialogueItemChat)d_item;
 			// Set icon
@@ -55,14 +56,15 @@ public class DialogueBox : MonoBehaviour {
 			// Display character sprites
 			for (int i = 0; i < v_item.char_sprites.Length; ++i)
 				DialogueManager.main.displayCharacter (v_item.char_sprites [i], v_item.char_sprite_pos [i]);
-			// Set text
 			fx_text.text = text;
 		} else if (d_item.GetType () == typeof(DialogueItemAN)) {
-			// Set text
+			fx_text.text = text;
+			setBoxHeight ();
+		} else {
 			fx_text.text = text;
 		}
 		// Set talking sfx
-		AudioPlayer.main.setSFX(AudioPlayer.channel_voice, "speak_boop");
+		if (talk_sfx) AudioPlayer.main.setSFX(AudioPlayer.channel_voice, "speak_boop");
 		cr_scroll = StartCoroutine (textScrollCR ());
 	}
 
@@ -103,7 +105,7 @@ public class DialogueBox : MonoBehaviour {
 			}
 			*/
 			set_color.chars [0] = ++cnt;
-			if (cnt % sfx_interval == 0) AudioPlayer.main.playSFX (AudioPlayer.channel_voice);
+			if (talk_sfx && cnt % sfx_interval == 0) AudioPlayer.main.playSFX (AudioPlayer.channel_voice);
             if (scroll_delay * DialogueManager.main.scroll_scale > 0)
                 yield return new WaitForSeconds(scroll_delay * DialogueManager.main.scroll_scale);
 		}

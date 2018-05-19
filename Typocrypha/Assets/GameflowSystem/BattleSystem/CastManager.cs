@@ -37,6 +37,7 @@ public class CastManager : MonoBehaviour
         //Send spell, Enemy state, and target index to parser and caster
         CastStatus status = spellDict.parse(spell.ToLower(), out s);
         Pair<bool[], bool[]> targetPattern = null;
+        callback.clearBuffer();
         switch (status)
         {
             case CastStatus.SUCCESS:
@@ -44,26 +45,28 @@ public class CastManager : MonoBehaviour
                 targetPattern = spellDict.getTargetPattern(s, field.enemy_arr, field.target_ind, field.player_arr, field.player_ind);
                 message = chat.getLine(field.Player.Stats.ChatDatabaseID);
                 preCastEffects(targetPattern, field.Player, s, message);
+                AudioPlayer.main.playSFX("sfx_enter");
                 StartCoroutine(pauseAttackCurrent(s, field.Player));
-                callback.clearBuffer();
                 return true; //Clear the casting buffer
             case CastStatus.BOTCH:
                 //diplay.playBotchEffects
                 spellEffects.popp.spawnSprite("popups_invalid", 1.0F, field.Player.Transform.position - new Vector3(0, 0.375f, 0));
-                callback.clearBuffer();
+                AudioPlayer.main.playSFX("sfx_enter_bad");
                 return true; //Clear the casting buffer
             case CastStatus.FIZZLE:
                 //diplay.playBotchEffects
                 spellEffects.popp.spawnSprite("popups_invalid", 1.0F, field.Player.Transform.transform.position - new Vector3(0, 0.375f, 0));
-                callback.clearBuffer();
+                AudioPlayer.main.playSFX("sfx_enter_bad");
                 return true; //Clear the casting buffer
             case CastStatus.ONCOOLDOWN:
                 //display.playOnCooldownEffects
                 spellEffects.popp.spawnSprite("popups_oncooldown", 1.0F, field.Player.Transform.position - new Vector3(0, 0.375f, 0));
+                AudioPlayer.main.playSFX("sfx_enter_bad");
                 return false;
             case CastStatus.COOLDOWNFULL:
                 //diplay.playCooldownFullEffects
                 spellEffects.popp.spawnSprite("popups_cooldownfull", 1.0F, field.Player.Transform.position - new Vector3(0, 0.375f, 0));
+                AudioPlayer.main.playSFX("sfx_enter_bad");
                 return false;
             case CastStatus.ALLYSPELL:
                 int allyPos = getAllyPosition(s.root);
@@ -73,7 +76,6 @@ public class CastManager : MonoBehaviour
                 message = chat.getLine(field.player_arr[allyPos].Stats.ChatDatabaseID);
                 preCastEffects(targetPattern, field.player_arr[allyPos], s, message);
                 StartCoroutine(pauseAttackCurrent(s, field.player_arr[allyPos]));
-                callback.clearBuffer();
                 return true; //Clear the casting buffer
             default:
                 return false;
@@ -85,6 +87,8 @@ public class CastManager : MonoBehaviour
     {
         field.Pause = true;
 
+		uiManager.setEnabledGauges (false);
+
         //BEGIN pause//
 
         yield return new WaitForSeconds(1f);
@@ -95,12 +99,14 @@ public class CastManager : MonoBehaviour
         data = spellDict.cast(s, field.enemy_arr, field.target_ind, field.player_arr, caster.Position);
         processCast(data, s);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.1f);
 
         //END pause//
 
+		uiManager.setEnabledGauges (true);
+
         postCastEffects();
-        field.Pause = false;
+        //Updates field.Pause if necessary
         field.update();
     }
 
@@ -109,6 +115,7 @@ public class CastManager : MonoBehaviour
     {
         field.Pause = true; // parent.pause battle for attack
         AudioPlayer.main.playSFX("sfx_enemy_cast");
+		AnimationPlayer.main.playAnimation("anim_spell_empower", field.enemy_arr[position].Transform.position, 2f);
         Pair<bool[], bool[]> targetPattern = spellDict.getTargetPattern(s, field.player_arr, target, field.enemy_arr, position);
         preCastEffects(targetPattern, field.enemy_arr[position], s, chat.getLine(field.enemy_arr[position].Stats.ChatDatabaseID));
 		BattleEffects.main.setDim(true, field.enemy_arr[position].enemy_sprite);
@@ -117,6 +124,7 @@ public class CastManager : MonoBehaviour
 
     private IEnumerator enemy_pause_cast(SpellDictionary dict, SpellData s, int position, int target)
     {
+		uiManager.setEnabledGauges (false);
 
 		BattleEffects.main.setDim(true, field.enemy_arr[position].enemy_sprite);
 
@@ -128,9 +136,11 @@ public class CastManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+		uiManager.setEnabledGauges (true);
+
         postCastEffects();
+
         field.enemy_arr[position].attack_in_progress = false;
-        field.Pause = false;
         field.update();
     }
 
@@ -138,11 +148,30 @@ public class CastManager : MonoBehaviour
     //Called by Cast in the SUCCESS CastStatus case, possibly on BOTCH in the future
     private void processCast(List<CastData> data, SpellData s)
     {
-        field.last_cast = data;
-        field.last_spell = s;
+        if(data.Count > 0)
+        {
+            ICasterType toCheck = data[0].Caster.CasterType;
+            if (data[0].repel)
+                toCheck = data[0].Target.CasterType;
+            if(toCheck == ICasterType.PLAYER)
+            {
+                field.last_player_cast = data;
+                field.last_player_spell = s;
+            }
+            else if(toCheck == ICasterType.ENEMY)
+            {
+                field.last_enemy_cast = data;
+                field.last_enemy_spell = s;
+            }
+        }
+		uiManager.battle_log.stop ();
+        float delay = 0;
         //Process the data here
         foreach (CastData d in data)
-            spellEffects.StartCoroutine(spellEffects.playEffects(d, s));
+        {
+            spellEffects.StartCoroutine(spellEffects.playEffects(d, s, delay));
+            delay += 0.1f;
+        }
         //Register unregistered keywords here
         bool[] regData = spellDict.safeRegister(spellBook, s);
         if (regData[0] || regData[1] || regData[2])
@@ -151,7 +180,6 @@ public class CastManager : MonoBehaviour
         //Process regData (for register graphics) here. 
         //format is bool [3], where regData[0] is true if s.element is new, regData[1] is true if s.root is new, and regData[2] is true if s.style is new
     }
-
     private IEnumerator learnSFX()
     {
         yield return new WaitWhile(() => field.Pause);
@@ -161,7 +189,7 @@ public class CastManager : MonoBehaviour
     private void preCastEffects(Pair<bool[], bool[]> targetPattern, ICaster caster, SpellData cast, string message)
     {
         BattleEffects.main.setDim(true);
-        uiManager.battle_log.log(cast.ToString(), caster.CasterType, message, caster.Stats.name);
+		uiManager.battle_log.log(cast, caster.CasterType, message, caster.Stats.name, caster.Transform.position);
         if (targetPattern != null)
         {
             if (caster.CasterType == ICasterType.ENEMY)
@@ -175,7 +203,7 @@ public class CastManager : MonoBehaviour
     //effects that hafter after any actor casts
     private void postCastEffects()
     {
-        uiManager.battle_log.stop();
+        //uiManager.battle_log.stop();
         for (int i = 0; i < 3; ++i)
         {
             if (field.enemy_arr[i] != null)

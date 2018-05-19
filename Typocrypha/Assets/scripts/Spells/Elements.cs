@@ -21,6 +21,7 @@ public static class Elements
     }
     public enum Element
     {
+        NOTNULL = -2,
         ANY = -1,
         NULL,
         FIRE,

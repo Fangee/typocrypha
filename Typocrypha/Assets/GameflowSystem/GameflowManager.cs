@@ -7,14 +7,29 @@ using UnityEngine;
 public class GameflowManager : MonoBehaviour {
 	public static GameflowManager main = null; // Global static ref
 	public GameObject player_ui; // the Typocrypha UI 
-	int curr_item; // Current event number
+	public int curr_item; // Current event number
 
 	void Awake() {
 		if (main == null) main = this;
 		else Destroy (this);
 	}
 
-	public void gameflowStart() {
+    private void Start() {
+        StartCoroutine(waitForLoad());
+    }
+
+    // waits for files to load
+    IEnumerator waitForLoad() {
+        yield return new WaitUntil(() => AudioPlayer.main.ready);
+        AudioPlayer.main.stopAll(); 
+        yield return new WaitUntil(() => EnemyDatabase.main.is_loaded);
+        yield return new WaitUntil(() => AllyDatabase.main.is_loaded);
+        yield return new WaitUntil(() => AnimationPlayer.main.ready);
+        Debug.Log("done loading assets");
+        gameflowStart();
+    }
+
+    public void gameflowStart() {
 		Debug.Log ("gameflowStart");
 		curr_item = -1;
 		if (transform.childCount != 0) next (); // Start immediately

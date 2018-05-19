@@ -31,13 +31,13 @@ public abstract class EnemyAI
     public AI_State State { get { return state; } set { state = value; } }
     //Returns the next spell for the enemy to cast and sets the target in out int target
     public abstract SpellData getNextSpell(EnemySpellList spells, Enemy[] allies, int position, ICaster[] player_arr, out int target);
-    //Updates the state of this AI module based on field data (returns true if new form (and attack needs to change)
+    //Updates the state of this AI module based on field data
     public abstract void updateState(Enemy[] allies, int position, ICaster[] player_arr, Update_Case flag);
 
     //Public static methods
 
     //Returns an appropriate EnemyAI derivitive with specified parameters from ID string (MAYBE IMPROVE)
-    public static EnemyAI GetAIFromString(string key, string[] parameters = null)
+    public static EnemyAI GetAIFromString(string key, string[] parameters = null, Enemy self = null)
     {
         switch (key)
         {
@@ -45,8 +45,10 @@ public abstract class EnemyAI
                 return new AttackerAI1();
             case "HealthLow1":
                 return new HealthLowAI1(parameters);
+            case "FormChange1":
+                return new FormChangeAI1(parameters);
             case "Doppleganger1":
-                return new DopplegangerAI1();
+                return new DopplegangerAI1(self);
             default:
                 throw new System.NotImplementedException(key + " is not an AI type!");
         }
@@ -139,16 +141,53 @@ public class HealthLowAI1 : EnemyAI
             state = AI_State.NORMAL;
     }
 }
-//Doppleganger Unique AI (does nothing right now)
+//Enemy AI that switches to another enemy when health is below a certain level
+public class FormChangeAI1 : EnemyAI
+{
+    protected EnemyAI baseAI;
+    protected string nextForm;
+    bool resetHealthandStagger;
+    bool resetAttack = true;
+    bool hasChanged = false;
+    //Params: the class name of the base AI to use (string), the name of the enemydatabase entry to change to (string), 
+    //and whether or not to reset health on change (bool)
+    public FormChangeAI1(string[] parameters)
+    {
+        baseAI = GetAIFromString(parameters[0]);
+        nextForm = parameters[1];
+        bool.TryParse(parameters[2], out resetHealthandStagger);
+        if (parameters.Length >= 4)
+            bool.TryParse(parameters[3], out resetAttack);
+    }
+    public override SpellData getNextSpell(EnemySpellList spells, Enemy[] allies, int position, ICaster[] player_arr, out int target)
+    {
+        return baseAI.getNextSpell(spells, allies, position, player_arr, out target);
+    }
+
+    public override void updateState(Enemy[] allies, int position, ICaster[] player_arr, Update_Case flag)
+    {
+        baseAI.updateState(allies, position, player_arr, flag);
+        if(!hasChanged && flag == Update_Case.WAS_HIT)
+        {
+            allies[position].setStats(EnemyDatabase.main.getData(nextForm), resetHealthandStagger);
+            if(resetAttack)
+                allies[position].resetAttack();
+            allies[position].changeForm();
+            hasChanged = true;
+        }
+    }
+}
+//Doppleganger Unique AI
 public class DopplegangerAI1 : EnemyAI
 {
     int numAttacks = 0;
     int form = 1;
     string color = "NONE";
-    readonly string[] colors = { "RED", "YELLOW", "BLUE" };
-    public DopplegangerAI1()
+    readonly string[] colors = { "RED", "BLUE", "YELLOW" };
+    public DopplegangerAI1(Enemy self)
     {
         state = AI_State.NORMAL;
+        self.stagger_time = 2;
     }
     public override SpellData getNextSpell(EnemySpellList spells, Enemy[] allies, int position, ICaster[] player_arr, out int target)
     {
@@ -159,8 +198,6 @@ public class DopplegangerAI1 : EnemyAI
             return spells.getSpells("TOO_LONG")[0];
         else if (state == AI_State.ATTACK_SPECIAL)
         {
-            //return spells.getSpells("SPECIAL")[0]; //(TODO)
-            //state == AI_State.NORMAL;
             return spells.getSpells()[0];
         }
         else
@@ -169,6 +206,7 @@ public class DopplegangerAI1 : EnemyAI
 
     public override void updateState(Enemy[] allies, int position, ICaster[] player_arr, Update_Case flag)
     {
+        Debug.Log("updating doppel AI state: attack in prog = " + allies[position].attack_in_progress + " " + flag.ToString());
         if(form <= 3)
         {
             if (flag == Update_Case.AFTER_CAST)
@@ -184,19 +222,24 @@ public class DopplegangerAI1 : EnemyAI
                 if(form == 1)
                 {
                     state = AI_State.NORMAL;
-                    allies[position].changeForm(EnemyDatabase.main.getData("Doppelganger (YELLOW)"), true);
+                    allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (YELLOW)"), true);
+                    allies[position].stagger_time = 2f;
+                    allies[position].changeForm();
                     allies[position].resetAttack();
                 }
                 else if(form == 2)
                 {
                     state = AI_State.NORMAL;
-                    allies[position].changeForm(EnemyDatabase.main.getData("Doppelganger (RED)"), true);
+                    allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (RED)"), true);
+                    allies[position].stagger_time = 2f;
+                    allies[position].changeForm();
                     allies[position].resetAttack();
                 }
                 else if(form == 3)
                 {
                     state = AI_State.ATTACK_SPECIAL;
-                    allies[position].changeForm(EnemyDatabase.main.getData("Doppelganger (???)"), true);
+                    allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (???)"), true);
+                    allies[position].stagger_time = 2f;
                     changeToRandomColor(allies[position]);
                     allies[position].resetAttack();
                 }
@@ -207,17 +250,21 @@ public class DopplegangerAI1 : EnemyAI
         {
             if (flag == Update_Case.UNSTUN)
             {
-                allies[position].changeForm(EnemyDatabase.main.getData("Doppelganger (GRAY)"), true);
                 state = AI_State.NORMAL;
+                allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (GRAY)"), true);
+                allies[position].stagger_time = 10f;
                 allies[position].resetAttack();
+                allies[position].changeForm();
                 ++form;
             }
             else if (flag == Update_Case.AFTER_CAST)
             {
                 changeToRandomColor(allies[position]);
             }
-            else
+            else // was hit
             {
+                if (allies[position].attack_in_progress)
+                    return;
                 changeToRandomColor(allies[position]);
                 switch (color)
                 {
@@ -249,8 +296,13 @@ public class DopplegangerAI1 : EnemyAI
         var randomIndex = Random.Range(0, colors.Length);
         while(colors[randomIndex] == color)
             randomIndex = Random.Range(0, colors.Length);
-        self.changeForm(EnemyDatabase.main.getData("Doppelganger (" + colors[randomIndex] + ")"), false);
         color = colors[randomIndex];
+        EnemyStats formStats = EnemyDatabase.main.getData("Doppelganger (" + color + ")");
+        ((EnemyStats)self.Stats).sprite_path = formStats.sprite_path;
+        self.Stats.vsElement = formStats.vsElement;
+        self.Stats.vsElement[0] = 0;
+        ((EnemyStats)self.Stats).spells = formStats.spells;
+        self.changeForm();
     }
 }
 

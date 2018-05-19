@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleManagerS : MonoBehaviour {
     public static BattleManagerS main = null;
     public Player player;
     public TrackTyping trackTyping;
+    public BattleKeyboard battleKeyboard;
     public BattleUI uiManager;
     public CastManager castManager;
+    public BattleEventManager globalEvents;
     public EnemyDatabase enemyData;
     public AllyDatabase allyData;
     public GameObject enemy_prefab; // prefab for enemy object
@@ -17,8 +20,10 @@ public class BattleManagerS : MonoBehaviour {
 
     private BattleWave Wave { get { return waves[curr_wave]; } }
     private int curr_wave = -1;
+    private bool wave_started = false;
     private BattleWave[] waves;
     private GameObject curr_battle;
+    private List<GameObject> sceneQueue = new List<GameObject>();
 
     private void Awake()
     {
@@ -85,6 +90,11 @@ public class BattleManagerS : MonoBehaviour {
                 AudioPlayer.main.playSFX("sfx_spellbook_scroll", 0.3F);
             //else {play sfx_thud (player is on the last page this direction)}
         }
+
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            trackTyping.revertBuffer();
+        }
     }
 
     public void setEnabled(bool e)
@@ -98,14 +108,22 @@ public class BattleManagerS : MonoBehaviour {
         trackTyping.enabled = !p;
     }
 
+    //MAIN BATTLE FLOW-----------------------------------------------------------------------//
+
     // start battle scene
     public void startBattle(GameObject new_battle)
     {
+        //Reset player stats and status
         player.restoreToFull();
+        battleKeyboard.clearStatus();
         castManager.cooldown.removeAll();
+        trackTyping.clearBuffer();
+        trackTyping.updateDisplay();
+        //Reset BattleManager curr variables
         curr_battle = new_battle;
         curr_wave = -1;
         waves = new_battle.GetComponents<BattleWave>();
+        //Reset target
 		field.target_ind = 1;
         StartCoroutine(finishBattlePrep());
     }
@@ -116,36 +134,54 @@ public class BattleManagerS : MonoBehaviour {
 		pause = true;
         BattleEffects.main.battleTransitionEffect("swirl_in", 1f);
         yield return new WaitForSeconds(1f);
-        uiManager.initialize();
-		nextWave ();
-		BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
-        yield return new WaitForSeconds(2f);      
-		pause = false;
-        checkInterrupts();
+		if (waves[0].Background != string.Empty) {
+			uiManager.initBg(waves[0].Background);
+		} 
+		else {
+			uiManager.initBg();
+		}
+        BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
+        yield return new WaitForSeconds(0.5f);
+        nextWave();
     }
     // go to next wave (also starts first wave for real)
     public void nextWave()
     {
-		resetInterruptData();
-		if (++curr_wave >= waves.Length)
-		{
-			Debug.Log("Encounter over: going to victory screen");
-			victoryScreen();
-			return;
-		}
-		Debug.Log("starting wave: " + Wave.Title);
-		foreach (Transform tr in transform) 
-		{
-			Destroy (tr.gameObject);
-		}
-		uiManager.startWave();
-		createEnemies(Wave);
-		uiManager.updateUI ();
-		waveTransition(Wave.Title);
-		if(Wave.Music != string.Empty)
-			AudioPlayer.main.playMusic(Wave.Music);
-		if(curr_wave != 0)
-			checkInterrupts();
+        if (++curr_wave >= waves.Length)
+        {
+            Debug.Log("Encounter over: going to victory screen");
+            victoryScreen();
+            return;
+        }
+        StartCoroutine(waveTransition());
+    }
+    private IEnumerator waveTransition()
+    {
+        //Moved from next wave coroutine
+        yield return new WaitForSeconds(1f);
+        setPause(true);
+        resetInterruptData();
+        Debug.Log("starting wave: " + Wave.Title);
+        //Delete old enemies
+        foreach (Transform tr in transform)
+        {
+            Destroy(tr.gameObject);
+        }
+        //Clear UI for new wave
+        uiManager.startWave();
+		//Create enemies and wait until all enemies spawn in
+		yield return StartCoroutine(createEnemies(Wave));
+        //update Target Ret
+        if (curr_wave == 0)
+            uiManager.initTarget();
+        //Play Wave transition and wait for the animation to finish (plays the SFX too)
+        yield return StartCoroutine(uiManager.waveTransition(Wave.Title, curr_wave + 1, waves.Length));
+        //Play music if applicable (BUG HERE WHERE LOADING MUSIC CAUSES LAG)
+        if (Wave.Music != string.Empty)
+            AudioPlayer.main.playMusic(Wave.Music);
+        if (checkInterrupts() == false)
+            setPause(false);
+        wave_started = true;
     }
     // show victory screen after all waves are done
     public void victoryScreen()
@@ -169,6 +205,9 @@ public class BattleManagerS : MonoBehaviour {
         GameflowManager.main.next();
 
     }
+
+    //END MAIN BATTLE FLOW-------------------------------------------------------------------//
+
     //Handles a spellcast (by calling the castmanager) and clears callback's buffer if necessary
     public void handleSpellCast(string spell, TrackTyping callback)
     {
@@ -181,7 +220,6 @@ public class BattleManagerS : MonoBehaviour {
         StopAllCoroutines();
         castManager.StopAllCoroutines();
         uiManager.StopAllCoroutines();
-        pause = true;
         foreach (Enemy enemy in field.enemy_arr)
         {
             if (enemy != null) GameObject.Destroy(enemy.gameObject);
@@ -199,17 +237,73 @@ public class BattleManagerS : MonoBehaviour {
         uiManager.clear();
         startBattle(curr_battle);
     }
+    //Update Enemies and Check for death
+    public void updateEnemies()
+    {
+        for (int i = 0; i < field.enemy_arr.Length; i++)
+        {
+            if (field.enemy_arr[i] != null && !field.enemy_arr[i].Is_dead)
+            {
+                field.enemy_arr[i].updateCondition();
+                if (field.enemy_arr[i].Is_dead)
+                    ++field.curr_dead;
+            }
+        }
+        uiManager.updateUI();
+        if (player.Is_dead)
+        {
+            playerDeath();
+        }
+        else if (field.curr_dead >= field.enemy_count && wave_started) // next wave if all enemies dead
+        {
+            Debug.Log("Wave: " + Wave.Title + " complete!");
+            wave_started = false;
+            nextWave();
+        }
+        else if (!checkInterrupts())
+            setPause(false);
+    }
+    //Add Scene to trigger queue
+    public void addSceneToQueue(GameObject interruptScene)
+    {
+        sceneQueue.Add(interruptScene);
+    }
+    //Play Dialogue scene from queue
+    public bool playSceneFromQueue()
+    {
+        if (sceneQueue.Count > 0)
+        {
+            setPause(true);
+            DialogueManager.main.setEnabled(true);
+            DialogueManager.main.startInterrupt(sceneQueue[0]);
+            sceneQueue.RemoveAt(0);
+            return true;
+        }
+        return false;
+    }
 
     //Create all enemies for this wave
-    private void createEnemies(BattleWave wave)
-    {
-        if (wave.Enemy1 != string.Empty)
-            createEnemy(0, wave.Enemy1);
-        if (wave.Enemy2 != string.Empty)
-            createEnemy(1, wave.Enemy2);
-        if (wave.Enemy3 != string.Empty)
-            createEnemy(2, wave.Enemy3);
-    }
+	private IEnumerator createEnemies(BattleWave wave){
+		if (wave.Enemy1 != string.Empty) {
+			createEnemy (0, wave.Enemy1);
+            AudioPlayer.main.playSFX ("sfx_blight_hit");
+			AnimationPlayer.main.playAnimation("anim_element_reflect", field.enemy_arr[0].Transform.position, 2f);
+			yield return new WaitForSeconds(0.4f);
+		}
+		if (wave.Enemy2 != string.Empty) {
+			createEnemy (1, wave.Enemy2);
+			AudioPlayer.main.playSFX ("sfx_blight_hit");
+			AnimationPlayer.main.playAnimation("anim_element_reflect", field.enemy_arr[1].Transform.position, 2f);
+			yield return new WaitForSeconds(0.4f);
+		}
+		if (wave.Enemy3 != string.Empty) {
+			createEnemy (2, wave.Enemy3);
+			AudioPlayer.main.playSFX ("sfx_blight_hit");
+			AnimationPlayer.main.playAnimation("anim_element_reflect", field.enemy_arr[2].Transform.position, 2f);
+			yield return new WaitForSeconds(0.4f);
+		}
+	}
+
     // creates the enemy specified at 'i' (0-left, 1-mid, 2-right) by the 'scene'
     private void createEnemy(int i, string name)
     {
@@ -223,59 +317,45 @@ public class BattleManagerS : MonoBehaviour {
         enemy.initialize(enemyData.getData(name)); //sets enemy stats (AND INITITIALIZES ATTACKING AND AI)
         enemy.Position = i;      //Log enemy position in field
         enemy.bars = uiManager.charge_bars; //Give enemy access to charge_bars
-        Vector3 bar_pos = enemy.transform.position + new Vector3(-0.5f, -1.0f, 0);
+        Vector3 bar_pos = enemy.transform.position + new Vector3(0, -1.75f, 0);
         uiManager.charge_bars.makeChargeMeter(i, bar_pos);
         uiManager.stagger_bars.makeStaggerMeter(i, bar_pos);
         uiManager.health_bars.makeHealthMeter(i, bar_pos);
         field.enemy_arr[i] = enemy;
-    }
-
-    private void waveTransition(string Title)
-    {
-		//uiManager.initialize();
-    }
-
-    public void updateEnemies()
-    {
-        for (int i = 0; i < field.enemy_arr.Length; i++)
-        {
-            if (field.enemy_arr[i] != null && !field.enemy_arr[i].Is_dead)
-            {
-                field.enemy_arr[i].updateCondition();
-                if (field.enemy_arr[i].Is_dead)
-                    ++field.curr_dead;
-            }
-        }
+		enemy.enemy_animator.Play ("enemy_spawn_in");
         uiManager.updateUI();
-        if(player.Is_dead)
-        {
-            playerDeath();
-        }
-        else if (field.curr_dead == field.enemy_count) // next wave if all enemies dead
-        {
-            Debug.Log("Wave: " + Wave.Title + " complete!");
-            nextWave();
-        }
-        else
-            checkInterrupts();
-    }   
+    }
 
-    private void checkInterrupts()
+    private bool checkInterrupts()
     {
         foreach (BattleEventTrigger e in Wave.events)
         {
             if (!e.HasTriggered && e.checkTrigger(field) && e.onTrigger(field))
-                setPause(true);
+            {
+
+            }
         }
+        if (!globalEvents.HasTriggered && globalEvents.checkTrigger(field) && globalEvents.onTrigger(field))
+        {
+        }
+        //Play a scene if any are in the queue
+        return playSceneFromQueue();
     }
 
     private void resetInterruptData()
     {
 
         field.time_started = System.DateTime.Now; // time battle started
-        if(field.last_cast != null)
-            field.last_cast.Clear(); // last performed cast action
-        field.last_spell = new SpellData(""); // last performed spell
+        if (field.last_enemy_cast != null)
+            field.last_enemy_cast.Clear(); // last performed cast action
+        else
+            field.last_enemy_cast = new List<CastData>();
+        field.last_enemy_spell = new SpellData(""); // last performed spell
+        if (field.last_player_cast != null)
+            field.last_player_cast.Clear(); // last performed cast action
+        else
+            field.last_player_cast = new List<CastData>();
+        field.last_enemy_spell = new SpellData(""); // last performed spell
         field.last_register = new bool[3] { false, false, false }; // last spell register status
         field.num_player_attacks = 0; // number of player attacks from beginning of battle
     }

@@ -6,7 +6,7 @@ public class BIEnemyIsStunned : BattleInterruptTrigger
 {
     public override bool checkTrigger(BattleField state)
     {
-        foreach (CastData d in state.last_cast)
+        foreach (CastData d in state.last_enemy_cast)
 			if (d.isStun) return true;
         return false;
     }

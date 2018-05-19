@@ -79,13 +79,20 @@ public class Enemy : MonoBehaviour, ICaster {
     public CastManager castManager;
     public EnemyChargeBars bars;
 	public SpriteRenderer enemy_sprite; // this enemy's sprite
+	public ChangeAnimatedSprite change_sprite; // for changing the sprite
 	public Animator enemy_animator; // this enemy's animator
     public EnemyAI AI = null;
     public static AssetBundle sprite_bundle = null; 
+	public ParticleSystem enemy_particle_sys; // Sprite particle system
+	public Material material_default; // Sprite default material
+	public Material material_pixelate; // Sprite pixelation material
+	public Material material_glitch; // Sprite glitchout material
+	public Material material_slice; // Sprite slicing material
+	public Material material_wavy; // Sprite waving material
 
     //Private fields//
 
-    EnemyStats stats; // stats of enemy DO NOT MUTATE
+    EnemyStats stats; // stats of enemy
     BuffDebuff buffDebuff = new BuffDebuff(); // buff/debuff state
 
     bool is_dead; // is enemy dead?
@@ -97,14 +104,17 @@ public class Enemy : MonoBehaviour, ICaster {
 	int curr_hp; // current amount of health
     int curr_shield; //current amount of shield
     int curr_stagger; //current amount of stagger
-    float stagger_time; //The time an enemy's stun will last
+    public float stagger_time; //The time an enemy's stun will last
 	float curr_stagger_time; // current time staggered
     float curr_time; // current time (from 0 to atk_time)
     float atk_time; // time it takes to attack
+	Coroutine attack_cr;
+    Coroutine form_change_cr = null;
 
     //Methods//
     void Awake()
     {
+		enemy_particle_sys.Stop ();
         if(sprite_bundle == null)
             sprite_bundle = AssetBundle.LoadFromFile(System.IO.Path.Combine(Application.streamingAssetsPath, "enemy_sprites"));
 		is_dead = false;
@@ -127,18 +137,18 @@ public class Enemy : MonoBehaviour, ICaster {
         enemy_sprite.sprite = sprite_bundle.LoadAsset<Sprite>(stats.sprite_path);
 		enemy_sprite.sortingOrder = enemy_sprite_layer;
         //Get AI module
-        AI = EnemyAI.GetAIFromString(stats.ai_type, stats.ai_params);
+        AI = EnemyAI.GetAIFromString(stats.ai_type, stats.ai_params, this);
         //Start Attacking
-        StartCoroutine (attackRoutine ()); 
+        attack_cr = StartCoroutine (attackRoutine ()); 
 	}
-    //Changes enemy stats without messing with AI and current values
-    public void changeForm(EnemyStats i_stats, bool resetCurrent)
+
+    //AI Helper/Utility functions
+
+    //Sets enemy stats without change
+    public void setStats(EnemyStats i_stats, bool resetCurrent = false)
     {
         //Set stats
         stats = i_stats;
-        //Get sprite components
-        enemy_sprite.sprite = sprite_bundle.LoadAsset<Sprite>(stats.sprite_path);
-        enemy_sprite.sortingOrder = enemy_sprite_layer;
         //Initialize combat values
         if (resetCurrent)
         {
@@ -147,21 +157,36 @@ public class Enemy : MonoBehaviour, ICaster {
             Curr_stagger = stats.max_stagger;
             stagger_time = (stats.max_stagger * stagger_mult_constant) + stagger_add_constant;
         }
+        field.updateScourterInfo();
     }
+    //Changes plays the form change animation
+    public void changeForm()
+    {
+        if(form_change_cr != null)
+            StopCoroutine(form_change_cr);
+        form_change_cr = StartCoroutine(formChangeGraphics());
+        Debug.Log("changing form");
+
+    }
+    IEnumerator formChangeGraphics()
+    {
+        yield return new WaitWhile(() => BattleManagerS.main.pause);
+		enemy_animator.Play("enemy_pixelate_in");
+		yield return new WaitForSeconds (1f);
+		change_sprite.changeSprite(sprite_bundle.LoadAsset<Sprite>(stats.sprite_path));
+		enemy_sprite.sortingOrder = enemy_sprite_layer;
+    }
+    //Ends and restarts the attacking Coroutine
     public void resetAttack()
     {
         curr_time = 0;
-        StopAllCoroutines();
-        StartCoroutine(attackRoutine());
+		StopCoroutine(attack_cr);
+        attack_cr = StartCoroutine(attackRoutine());
     }
+    //Resets the AI object
     public void resetAI()
     {
-        AI = EnemyAI.GetAIFromString(stats.ai_type, stats.ai_params);
-    }
-
-    public void change_spell(string elem, string root, string style)
-    {
-
+        AI = EnemyAI.GetAIFromString(stats.ai_type, stats.ai_params, this);
     }
 
 	// returns curr_time/atk_time
@@ -193,22 +218,28 @@ public class Enemy : MonoBehaviour, ICaster {
             {
 				yield return new WaitForEndOfFrame();
 				transform.position = (Vector3)original_pos + (Vector3)(Random.insideUnitCircle * 0.05f);
+				enemy_sprite.material = material_glitch;
 				yield return new WaitWhile (() => BattleManagerS.main.pause);
 				curr_stagger_time += Time.deltaTime;
                 if (curr_stagger_time >= stagger_time)//End stun if time up
                 {
                     unStun();
                     curr_stagger_time = 0F;
+					enemy_sprite.material = material_pixelate;
                 }
             }
 			transform.position = original_pos;
 			curr_time += Time.deltaTime;
 			if (curr_time >= atk_time) {
                 attack_in_progress = true;
+				enemy_animator.Play("enemy_swell_cast");
                 fullBarFX(); // notify player of full bar
                 yield return new WaitForSeconds(1f);
                 yield return new WaitWhile(() => BattleManagerS.main.pause);
-                if(!is_stunned)
+                //Only attack if stunned, else perfect stagger
+                if (is_stunned)
+                    attack_in_progress = false;
+                else
                     attackPlayer (curr_spell);
                 //Update state (will move to make it so that state change can interrupt cast)
 				AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.AFTER_CAST);
@@ -216,7 +247,7 @@ public class Enemy : MonoBehaviour, ICaster {
 				curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target).clone();
                 atk_time = castManager.spellDict.getCastingTime(curr_spell, stats.speed);//get new casting time
                 curr_time = 0;
-                //resetBarFX(); // stop full bar effects (now in barFlash)
+				enemy_animator.Play("enemy_idle");
             }
 		}
 	}
@@ -263,12 +294,8 @@ public class Enemy : MonoBehaviour, ICaster {
         if (CasterOps.calcRepel(data,d,element,caster,this,crit,reflect))
             return;
         CasterOps.calcDamage(data, d, element, caster, this, crit, Is_stunned);
-        //Apply stun if applicable
-        if (curr_stagger <= 0 && is_stunned == false)
-        {
-            data.isStun = true;
-            stun();
-        }
+        //log stun stun actually happens in update condition
+        data.isStun = curr_stagger <= 0 && is_stunned == false;
         //opacity and death are now updated in updateCondition()
         was_hit = true;
     }
@@ -294,16 +321,40 @@ public class Enemy : MonoBehaviour, ICaster {
         if (was_hit)
         {
 			AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.WAS_HIT);
+            if (curr_stagger <= 0 && is_stunned == false)
+                stun();
             was_hit = false;
         }
         if (curr_hp <= 0)
         { // check if killed
             Debug.Log(stats.name + " has been slain!");
 			AudioPlayer.main.playSFX ("sfx_enemy_death"); // enemy death noise placeholder
-			enemy_animator.SetTrigger("death");
+            deathAnimation(1);
+			//enemy_animator.SetTrigger("death");
 			is_dead = true;
 			StopAllCoroutines();
-			BattleManagerS.main.updateEnemies ();
+        }
+    }
+
+    private void deathAnimation(int chooseDeath)
+    {
+        switch (chooseDeath)
+        {
+            case 0:
+                enemy_sprite.material = material_default;
+                enemy_animator.Play("enemy_death");
+                break;
+            case 1:
+                enemy_sprite.material = material_default;
+                enemy_animator.Play("enemy_death_launcher");
+                AudioPlayer.main.playSFX("sfx_death_flyaway");
+                break;
+            case 2:
+                enemy_animator.Play("enemy_death_slice");
+                break;
+            case 3:
+                enemy_animator.Play("enemy_death_wavy");
+                break;
         }
     }
 

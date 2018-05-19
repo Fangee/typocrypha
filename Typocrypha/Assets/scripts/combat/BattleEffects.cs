@@ -76,7 +76,8 @@ public class BattleEffects : MonoBehaviour {
 		Vector3 old_pos = cam_pos.position;
 		float curr_time = 0;
 		while (curr_time < sec) {
-			cam_pos.position = Random.insideUnitCircle * amt;
+            Vector2 new_pos_2d = Random.insideUnitCircle * amt;
+            cam_pos.position = new Vector3(new_pos_2d.x, new_pos_2d.y, -10);
 			yield return new WaitForEndOfFrame();
 			curr_time += Time.deltaTime;
 		}

@@ -11,10 +11,10 @@ public class SpellBook : MonoBehaviour {
     //UI text objects
 
     public Text pageTitle;
+    public GameObject upArrow;
+    public GameObject downArrow;
     private Text[] entryNames = new Text[pageSize];
     private Text[] descritptions = new Text[pageSize];
-    private Image upArrow;
-    private Image downArrow;
 
     //Private constants
     private const int pageSize = 5;     //Number of entries per page
@@ -32,8 +32,6 @@ public class SpellBook : MonoBehaviour {
             entryNames[i].text = emptyEntryText;
             descritptions[i].text = emptyEntryText;
         }
-        upArrow = gameObject.transform.GetChild(pageSize).GetComponent<Image>();
-        downArrow = gameObject.transform.GetChild(pageSize + 1).GetComponent<Image>();
         updatePage();
 	}
 	
@@ -96,7 +94,9 @@ public class SpellBook : MonoBehaviour {
     //Returns true on success, false on failure (no next page)
     public bool nextPage()
     {
-        if(pageIndex + pageSize >= data[typeIndex].Count)
+        if (data.Count <= 0)
+            return false;
+        if (pageIndex + pageSize >= data[typeIndex].Count)
         {
             if (typeIndex + 1 >= data.Count)
                 return false;
@@ -113,6 +113,8 @@ public class SpellBook : MonoBehaviour {
     //Returns true on success, false on failure (no previous page)
     public bool previousPage()
     {
+        if (data.Count <= 0)
+            return false;
         if(pageIndex - pageSize < 0)
         {
             if (typeIndex <= 0)
@@ -137,6 +139,8 @@ public class SpellBook : MonoBehaviour {
         if (data.Count == 0)
         {
             pageTitle.text = titleString + "NO SPELLS";
+            downArrow.SetActive(false);
+            upArrow.SetActive(false);
             return false;
         }
         SpellbookList current = data[typeIndex];
@@ -156,8 +160,8 @@ public class SpellBook : MonoBehaviour {
             }
             ++j;
         }
-        downArrow.enabled = checkNext();
-        upArrow.enabled = checkPrev();
+        downArrow.SetActive(checkNext());
+        upArrow.SetActive(checkPrev());
         return true;
     }
     //returns true iff there is a next page

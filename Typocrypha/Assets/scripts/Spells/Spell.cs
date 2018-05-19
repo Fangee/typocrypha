@@ -9,6 +9,7 @@ public abstract class Spell
     //Enums
 
     public enum ModFlags { NORMAL, NO_ELEMENT, NO_STYLE, NO_TARGETING, NO_MODIFICATION}
+    public enum WordType { ANY = -1, ROOT, ELEMENT, STYLE}
 
     //public methods
 
