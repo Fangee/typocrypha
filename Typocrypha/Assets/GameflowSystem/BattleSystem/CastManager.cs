@@ -99,7 +99,7 @@ public class CastManager : MonoBehaviour
         data = spellDict.cast(s, field.enemy_arr, field.target_ind, field.player_arr, caster.Position);
         processCast(data, s);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.1f);
 
         //END pause//
 
@@ -139,6 +139,7 @@ public class CastManager : MonoBehaviour
 		uiManager.setEnabledGauges (true);
 
         postCastEffects();
+
         field.enemy_arr[position].attack_in_progress = false;
         field.update();
     }

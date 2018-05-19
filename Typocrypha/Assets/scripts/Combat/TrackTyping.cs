@@ -19,6 +19,7 @@ public class TrackTyping : MonoBehaviour {
     string last_buffer = "";
 	string buffer = ""; // contains typed text
 	int count; // number of characters typed
+	int deleteCounter = 0; // tracks how long the player holds down backspace to clear buffer
 	string[] rows = { "qwertyuiop", "asdfghjkl", "zxcvbnm", " " };
 	float[] row_offsets = { 0f, 24f, 72f, 0 };
 
@@ -35,6 +36,9 @@ public class TrackTyping : MonoBehaviour {
     {
         setBuffer(last_buffer);
     }
+	public string getBuffer(){
+		return last_buffer;
+	}
 
 	void Start () {
 		typed_text.text = "";
@@ -72,9 +76,19 @@ public class TrackTyping : MonoBehaviour {
 		} else if (Input.GetKey (KeyCode.Backspace)) {
 			if (Input.GetKeyDown (KeyCode.Backspace)) {
 				if (count > 0) {
-                    AudioPlayer.main.playSFX("sfx_backspace", 0.15f);
+					AudioPlayer.main.playSFX ("sfx_backspace", 0.15f);
 					buffer = buffer.Remove (count - 1, 1);
 					count = count - 1;
+				}
+			} else {
+				if (count > 0) {
+					if (deleteCounter < 15) {
+						++deleteCounter;
+					} else {
+						AudioPlayer.main.playSFX ("sfx_backspace", 0.15f);
+						buffer = "";
+						count = 0;
+					}
 				}
 			}
 		} else if (Input.GetKey (KeyCode.KeypadMinus) || Input.GetKey (KeyCode.Minus)){
@@ -83,6 +97,7 @@ public class TrackTyping : MonoBehaviour {
 			pop[0].spawnText ("<color=red>USE THE SPACEBAR INSTEAD OF THE MINUS/DASH</color>", 1.0f, new Vector3(0.0f,-1.0f,0.0f));
 		}
 		else {
+			deleteCounter = 0;
             string in_str = Input.inputString;
             if (TextEvents.main.is_prompt) {
                 buffer += in_str;

@@ -118,12 +118,14 @@ public class SpellEffects : MonoBehaviour {
 				BattleEffects.main.screenShake (0.15f + shakeIntensity / 2, shakeIntensity + 0.3f);
 			} else if (d.Target.CasterType == ICasterType.ENEMY) {
 				// Gradually lower enemy HP gauge displays
-				Enemy enemyObj = (Enemy)d.Target;
-				ParticleSystem.EmitParams emitOverride = new ParticleSystem.EmitParams ();
-				emitOverride.startLifetime = 10f;
 				BattleManagerS.main.uiManager.setEnabledGauges(true);
 				StartCoroutine (enemy_hp_bars.gradualUpdateDamage (d.Target.Position,d.damageInflicted));
-				enemyObj.enemy_particle_sys.Emit (emitOverride, 10);
+				if (d.isStun) {
+					Enemy enemyObj = (Enemy)d.Target;
+					ParticleSystem.EmitParams emitOverride = new ParticleSystem.EmitParams ();
+					emitOverride.startLifetime = 10f;
+					enemyObj.enemy_particle_sys.Emit (emitOverride, 10);
+				}
 			}
 			// Set damage text size based on amount of damage ratios
 			string sizeTagOpen = "<size=";
@@ -156,6 +158,7 @@ public class SpellEffects : MonoBehaviour {
 				popp.spawnText (d.damageInflicted.ToString (), POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET);
 			}
 		}
+		//yield return new WaitForSeconds(5.0f);
 		//Debug.Log (d.Target.Transform.position);
     }
 

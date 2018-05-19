@@ -99,6 +99,6 @@ public class BattleLog : MonoBehaviour {
 	{
 		battleLogCast.SetActive(false);
 		battleLogTalk.SetActive(false);
-		battleLogSubAnimator.Play ("anim_sub_battlelog_exit");
+		battleLogSubAnimator.Play ("anim_sub_battlelog_exit_swell");
 	}
 }

@@ -15,6 +15,8 @@ public class BattleUI : MonoBehaviour
     public Image wave_transition_banner;
     public Text wave_title_text;
     public Text wave_banner_text;
+	public Text last_cast_text; // Text for logging previous spell attempt
+	public TrackTyping trackTyping;
     //public GameObject dialogue_box; // text box for dialogue
     public GameObject battle_bg_prefab; // prefab of battle background
 
@@ -74,6 +76,7 @@ public class BattleUI : MonoBehaviour
         target_ret_scr.updateTarget();
         target_floor_scr.updateFloor();
 		charge_bars.updateChargeBars ();
+		last_cast_text.text = "[TAB] -> USE LAST CAST\n> " + trackTyping.getBuffer().Replace(" ", "-").ToUpper();
     }
     //Sets the target from specified index
     public void setTarget(int target_ind)

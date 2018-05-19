@@ -70,16 +70,19 @@ public class StatusFreeze : StatusEffect
 
     public override string processKey(char key)
     {
+		string popText;
         --freezeNum;
         if (freezeNum == 0)
         {
             AudioPlayer.main.playSFX("sfx_status_frozen_key_break");
-            player_popper.spawnText("<color=lime>" + key + "</color> <color=aqua>THAWED</color>", 1.0f, new Vector3(0.0f, -0.5f, 0.0f));
+			popText = ("<color=lime>" + key + "</color> <color=aqua>THAWED</color>").ToUpper ();
+            player_popper.spawnText(popText, 1.0f, new Vector3(0.0f, -0.5f, 0.0f));
         }
         else
         {
             AudioPlayer.main.playSFX("sfx_status_frozen_key_hit");
-            player_popper.spawnText("<color=red>" + key + "</color> <color=aqua>FROZEN</color>", 1.0f, new Vector3(0.0f, -0.5f, 0.0f));
+			popText = "<color=red>" + key + "</color> <color=aqua>FROZEN</color>";
+            player_popper.spawnText(popText, 1.0f, new Vector3(0.0f, -0.5f, 0.0f));
         }
         return "";
     }
@@ -113,7 +116,8 @@ public class StatusBurn : StatusEffect
 		} else {
 			p.Curr_hp -= dmg;
 		}
-		player_popper.spawnText ("<color=red>"+key+"</color> <color=orange>BURN</color>", 1.0f, new Vector3(0.0f,0.0f,0.0f));
+		string popText = ("<color=red>" + key + "</color> <color=orange>BURN</color>").ToUpper ();
+		player_popper.spawnText (popText, 1.0f, new Vector3(0.0f,0.0f,0.0f));
 		player_popper.spawnText (dmg+"", 1.0f, new Vector3(0.0f,-1.0f,0.0f));
 		AudioPlayer.main.playSFX ("sfx_spell_hit");
         return key.ToString();
@@ -141,7 +145,8 @@ public class StatusShock : StatusEffect
     public override string processKey(char key)
     {
 		AudioPlayer.main.playSFX("sfx_botch");
-		player_popper.spawnText ("<color=red>" + this.original + "</color> <color=yellow><===></color> <color=lime>" + swapped + "</color>", 1.0f, new Vector3 (0.0f, -0.5f, 0.0f));
+		string popText = ("<color=red>" + this.original + "</color> <color=yellow><===></color> <color=lime>" + swapped + "</color>").ToUpper ();
+		player_popper.spawnText (popText, 1.0f, new Vector3 (0.0f, -0.5f, 0.0f));
 		return swapped.ToString().ToUpper();
     }
 
