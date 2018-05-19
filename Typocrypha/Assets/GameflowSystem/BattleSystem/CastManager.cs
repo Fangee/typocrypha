@@ -165,8 +165,13 @@ public class CastManager : MonoBehaviour
             }
         }
 		uiManager.battle_log.stop ();
+        float delay = 0;
         //Process the data here
-		StartCoroutine(playSpellEffectsSequence(data, s));
+        foreach (CastData d in data)
+        {
+            spellEffects.StartCoroutine(spellEffects.playEffects(d, s, delay));
+            delay += 0.1f;
+        }
         //Register unregistered keywords here
         bool[] regData = spellDict.safeRegister(spellBook, s);
         if (regData[0] || regData[1] || regData[2])
@@ -175,14 +180,6 @@ public class CastManager : MonoBehaviour
         //Process regData (for register graphics) here. 
         //format is bool [3], where regData[0] is true if s.element is new, regData[1] is true if s.root is new, and regData[2] is true if s.style is new
     }
-	// Play spell effects for all actors sequencially
-	private IEnumerator playSpellEffectsSequence(List<CastData> data, SpellData s){
-		foreach (CastData d in data) {
-			spellEffects.StartCoroutine(spellEffects.playEffects(d, s));
-			yield return new WaitForSeconds (0.1f);
-		}
-	}
-
     private IEnumerator learnSFX()
     {
         yield return new WaitWhile(() => field.Pause);

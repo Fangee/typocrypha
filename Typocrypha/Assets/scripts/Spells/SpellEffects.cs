@@ -18,8 +18,9 @@ public class SpellEffects : MonoBehaviour {
 		
 	}
 
-    public IEnumerator playEffects(CastData d, SpellData s)
+    public IEnumerator playEffects(CastData d, SpellData s, float delay = 0)
     {
+        yield return new WaitForSeconds(delay);
 		//caster_cutin_animator.Play ("anim_wave_banner_image");
         if (d.isHit == false)//Spell misses
         {
