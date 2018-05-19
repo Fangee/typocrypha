@@ -1,6 +1,5 @@
 WindowsStandalone
 SceneListBegin?
-Assets/scenes/TitleScene.unity
 Assets/scenes/MainScene.unity
 SceneListEnd?
 5d75edbb35270054d1f659d53420b859 Assembly-CSharp.dll:.BattleUI
@@ -18,7 +17,9 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 9ca6347af5ceb6b0d1c105af31b6722e UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 12672a8e633ad52ed9b23ae85d96fb53 Assembly-CSharp.dll:.SetFramerate
 a25852c78d2e05e2c489b6d255467720 Assembly-CSharp.dll:.Gameflow
+4d5e65da3e1954fb9c4e81fcda16c86c Assembly-CSharp.dll:.SfxSlider
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PopImage
+1f5c42689c07d5c5f070cbdad89652c6 Assembly-CSharp.dll:.ResolutionDropdown
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 49cd62a578efc0a599b810a2b66cd49c UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -145,6 +146,7 @@ fe3464db2d62a6a92b397a2fb715a8b7 Assembly-CSharp.dll:.FXTextWave
 d95f4fbb7b6174f9695740fffffff962 Assembly-CSharp.dll:.AnimationPlayer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TextMacros
 f78fad66be86eae9440de5d93ea76fb2 Assembly-CSharp.dll:.PixelateScreen
+4d5e65da3e1954fb9c4e81fcda16c86c Assembly-CSharp.dll:.MusicSlider
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.StopPostProcessing
 7930b5c96177ee5e29eaf63f85b32517 Assembly-CSharp.dll:.BITimed
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
@@ -158,10 +160,11 @@ f552d7dff35e072126cf429143174067 Assembly-CSharp.dll:.EnemyChargeBars
 4a2a402297a23a701a497ca8ec19cd72 Assembly-CSharp.dll:.BattleLog
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.DialogueParser
 c44a97a19f54d01b341617dbc0f07ef5 Assembly-CSharp.dll:.BICountPlayerAttacks
+4d5e65da3e1954fb9c4e81fcda16c86c Assembly-CSharp.dll:.ScrollSlider
 75980aa24940c3e274f3343490f9d47f Assembly-CSharp.dll:.GameflowManager
 252ad8eab7862e540681f733349622e2 Assembly-CSharp.dll:.SpellBook
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Dialogue
-63058289b9695fa839d1b48fbc258840 Assembly-CSharp.dll:.DialogueManager
+8893e44ba68c4714cdf51838730f4bfa Assembly-CSharp.dll:.DialogueManager
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -179,6 +182,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 8b5b3ee913eb9bea6526b08750fe4c4a Assembly-CSharp.dll:.IntroSequence
 4112ca1267ccb8c3d292c95c09b1bc6b Assembly-CSharp.dll:.BattleEffects
 35f8c532666052abfafbcc631133dd7b Assembly-CSharp.dll:.BattleKeyboard
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Pause
 e1163606af28e03f4109609e66cbb535 Assembly-CSharp.dll:.PlayerDialogueInfo
 2207347cdd3c531640ad9ff32ed12d6a Assembly-CSharp.dll:.CastManager
 bea99607f4cad288c69ab18d52c51dee Assembly-CSharp.dll:.BattleWave
