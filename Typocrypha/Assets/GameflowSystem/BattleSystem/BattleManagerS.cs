@@ -64,6 +64,13 @@ public class BattleManagerS : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
         {
             uiManager.toggleScouter();
+            Time.timeScale = 0.1f;
+            Time.fixedDeltaTime = 0.0005f;
+        }
+        if(Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            Time.timeScale = 1;
+            Time.fixedDeltaTime = 0.02f;
         }
 
         // fix if target is out of bounds

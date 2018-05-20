@@ -289,9 +289,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AnimationPing.cs" />
-    <Compile Include="Assets\EnemyIntel.cs" />
-    <Compile Include="Assets\FinishEnemyDeath.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\Battle.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BattleEventManager.cs" />
     <Compile Include="Assets\GameflowSystem\BattleSystem\BattleEvents\BattleEventTrigger.cs" />
@@ -334,17 +331,13 @@
     <Compile Include="Assets\GameflowSystem\Gameflow.cs" />
     <Compile Include="Assets\GameflowSystem\GameflowItem.cs" />
     <Compile Include="Assets\GameflowSystem\GameflowManager.cs" />
-    <Compile Include="Assets\MouseDisable.cs" />
-    <Compile Include="Assets\MusicSlider.cs" />
-    <Compile Include="Assets\Pause.cs" />
-    <Compile Include="Assets\PauseOnAttack.cs" />
-    <Compile Include="Assets\ResFullscreenToggle.cs" />
-    <Compile Include="Assets\ResScaleDropdown.cs" />
-    <Compile Include="Assets\ResSetButton.cs" />
+    <Compile Include="Assets\scripts\animation\AnimationPing.cs" />
     <Compile Include="Assets\scripts\animation\AnimationPlayer.cs" />
     <Compile Include="Assets\scripts\animation\BackgroundEffects.cs" />
     <Compile Include="Assets\scripts\animation\ChangeAnimatedSprite.cs" />
     <Compile Include="Assets\scripts\animation\DestroyOnEnd.cs" />
+    <Compile Include="Assets\scripts\animation\FinishEnemyDeath.cs" />
+    <Compile Include="Assets\scripts\animation\PauseOnAttack.cs" />
     <Compile Include="Assets\scripts\animation\StopPostProcessing.cs" />
     <Compile Include="Assets\scripts\audio\AudioPlayer.cs" />
     <Compile Include="Assets\scripts\combat\Ally.cs" />
@@ -352,6 +345,7 @@
     <Compile Include="Assets\scripts\combat\ChatDatabase.cs" />
     <Compile Include="Assets\scripts\combat\Enemy.cs" />
     <Compile Include="Assets\scripts\combat\EnemyAI.cs" />
+    <Compile Include="Assets\scripts\combat\EnemyIntel.cs" />
     <Compile Include="Assets\scripts\combat\Player.cs" />
     <Compile Include="Assets\scripts\combat\StatusEffect.cs" />
     <Compile Include="Assets\scripts\combat\TrackTyping.cs" />
@@ -362,6 +356,13 @@
     <Compile Include="Assets\scripts\PostProcessing\PixelateScreen.cs" />
     <Compile Include="Assets\scripts\PostProcessing\PostProcess.cs" />
     <Compile Include="Assets\scripts\PostProcessing\SwirlScreen.cs" />
+    <Compile Include="Assets\scripts\Settings\MusicSlider.cs" />
+    <Compile Include="Assets\scripts\Settings\Pause.cs" />
+    <Compile Include="Assets\scripts\Settings\ResFullscreenToggle.cs" />
+    <Compile Include="Assets\scripts\Settings\ResScaleDropdown.cs" />
+    <Compile Include="Assets\scripts\Settings\ResSetButton.cs" />
+    <Compile Include="Assets\scripts\Settings\ScrollSlider.cs" />
+    <Compile Include="Assets\scripts\Settings\SfxSlider.cs" />
     <Compile Include="Assets\scripts\Spells\BuffDebuff.cs" />
     <Compile Include="Assets\scripts\Spells\CastData.cs" />
     <Compile Include="Assets\scripts\Spells\CasterOps.cs" />
@@ -386,10 +387,12 @@
     <Compile Include="Assets\scripts\UI\enemy_ui\PopImage.cs" />
     <Compile Include="Assets\scripts\UI\enemy_ui\Popper.cs" />
     <Compile Include="Assets\scripts\UI\enemy_ui\PopText.cs" />
+    <Compile Include="Assets\scripts\UI\MouseDisable.cs" />
     <Compile Include="Assets\scripts\UI\Scouter.cs" />
     <Compile Include="Assets\scripts\UI\SetResolution.cs" />
     <Compile Include="Assets\scripts\UI\TargetFloor.cs" />
     <Compile Include="Assets\scripts\UI\TargetReticule.cs" />
+    <Compile Include="Assets\scripts\UI\TextGradientFill.cs" />
     <Compile Include="Assets\scripts\UI\UIScreenframeInfo.cs" />
     <Compile Include="Assets\scripts\Utility\DelayedDestroy.cs" />
     <Compile Include="Assets\scripts\Utility\Operators.cs" />
@@ -398,9 +401,6 @@
     <Compile Include="Assets\scripts\Utility\SetFramerate.cs" />
     <Compile Include="Assets\scripts\Utility\Timer.cs" />
     <Compile Include="Assets\scripts\Utility\UtilityClasses.cs" />
-    <Compile Include="Assets\ScrollSlider.cs" />
-    <Compile Include="Assets\SfxSlider.cs" />
-    <Compile Include="Assets\TextGradientFill.cs" />
     <Compile Include="Assets\WavySprite\Scripts\SRWavySprite.cs" />
     <Compile Include="Assets\WavySprite\Scripts\WavySprite.cs" />
   </ItemGroup>
