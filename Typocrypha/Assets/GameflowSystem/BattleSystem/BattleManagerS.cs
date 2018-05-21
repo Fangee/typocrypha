@@ -21,7 +21,7 @@ public class BattleManagerS : MonoBehaviour {
 
     private bool thirdEyeActive = false;
     private Coroutine thirdEyeCr = null;
-    private const float maxThirdEyeCharge = 11;
+    private const float maxThirdEyeCharge = 10.5f;
     private float currThirdEyeCharge = maxThirdEyeCharge;
     private BattleWave Wave { get { return waves[curr_wave]; } }
     private int curr_wave = -1;
@@ -121,6 +121,8 @@ public class BattleManagerS : MonoBehaviour {
 
     public void startThirdEye()
     {
+        if (currThirdEyeCharge < 1)
+            return; //Play not working sfx here later
         thirdEyeActive = true;
         uiManager.showScouter();
         trackTyping.enabled = false;
