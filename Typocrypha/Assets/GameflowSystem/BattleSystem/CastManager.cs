@@ -113,6 +113,7 @@ public class CastManager : MonoBehaviour
     //Casts from an enemy position: calls processCast on results
     public void enemyCast(SpellDictionary dict, SpellData s, int position, int target)
     {
+        field.breakThirdEye();
         field.Pause = true; // parent.pause battle for attack
         AudioPlayer.main.playSFX("sfx_enemy_cast");
 		AnimationPlayer.main.playAnimation("anim_spell_empower", field.enemy_arr[position].Transform.position, 2f);

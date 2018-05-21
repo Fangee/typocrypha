@@ -96,6 +96,14 @@ public class BattleUI : MonoBehaviour
 			AudioPlayer.main.playSFX("sfx_scanner_close");
 		}
     }
+    public void showScouter()
+    {
+        target_ret_scr.showScouter();
+    }
+    public void hideScouter()
+    {
+        target_ret_scr.hideScouter();
+    }
     //update scouterInfo (refreshes the info for form changes)
     public void updateScourterInfo()
     {

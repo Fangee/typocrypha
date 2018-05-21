@@ -73,7 +73,8 @@ public class DialogueBox : MonoBehaviour {
 		TextEvents.main.StopAllCoroutines ();
 		TextEvents.main.reset ();
 		TextEvents.main.finishUp (d_item.text_events);
-		StopCoroutine (cr_scroll);
+        if(cr_scroll != null)
+		    StopCoroutine (cr_scroll);
 		cr_scroll = null;
 		set_color.chars [0] = text.Length;
 	}

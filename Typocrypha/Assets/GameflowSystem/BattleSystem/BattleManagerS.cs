@@ -16,8 +16,13 @@ public class BattleManagerS : MonoBehaviour {
     public GameObject enemy_prefab; // prefab for enemy object
     public GameObject ally_prefab; //prefab for ally object
     public BattleField field;
+    public Text debugThirdEyeCharge;
     [HideInInspector] public bool pause = true;
 
+    private bool thirdEyeActive = false;
+    private Coroutine thirdEyeCr = null;
+    private const float maxThirdEyeCharge = 11;
+    private float currThirdEyeCharge = maxThirdEyeCharge;
     private BattleWave Wave { get { return waves[curr_wave]; } }
     private int curr_wave = -1;
     private bool wave_started = false;
@@ -60,19 +65,18 @@ public class BattleManagerS : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.LeftArrow)) --field.target_ind;
         if (Input.GetKeyDown(KeyCode.RightArrow)) ++field.target_ind;
 
-        //toggle enemy info on Shift
+        // third eye stuff
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
         {
-            uiManager.toggleScouter();
-            Time.timeScale = 0.1f;
-            Time.fixedDeltaTime = 0.0005f;
+            startThirdEye();
         }
-        if(Input.GetKeyUp(KeyCode.LeftShift))
+        if((Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) && thirdEyeActive)
         {
-            Time.timeScale = 1;
-            Time.fixedDeltaTime = 0.02f;
+            stopThirdEye();
         }
-
+        if(!thirdEyeActive)
+            currThirdEyeCharge = Mathf.Min(currThirdEyeCharge + 0.03f, maxThirdEyeCharge);
+        debugThirdEyeCharge.text = ((currThirdEyeCharge / maxThirdEyeCharge) * 10).ToString();
         // fix if target is out of bounds
         if (field.target_ind < 0) field.target_ind = 0;
         if (field.target_ind > 2) field.target_ind = 2;
@@ -115,6 +119,48 @@ public class BattleManagerS : MonoBehaviour {
         trackTyping.enabled = !p;
     }
 
+    public void startThirdEye()
+    {
+        thirdEyeActive = true;
+        uiManager.showScouter();
+        trackTyping.enabled = false;
+        startSlowMo();
+        thirdEyeCr = StartCoroutine(thirdEye());
+    }
+    public void stopThirdEye()
+    {
+        if (thirdEyeCr != null)
+            StopCoroutine(thirdEyeCr);
+        stopSlowMo();
+        trackTyping.enabled = true;
+        uiManager.hideScouter();
+        thirdEyeActive = false;
+    }
+    private IEnumerator thirdEye()
+    {
+        currThirdEyeCharge = Mathf.Max(currThirdEyeCharge - 0.5f, 0);
+        while (currThirdEyeCharge > 0)
+        {
+            yield return new WaitForFixedUpdate();
+            currThirdEyeCharge -= Time.fixedUnscaledDeltaTime;
+        }
+        stopThirdEye();
+    }
+    private void startSlowMo()
+    {
+        Time.timeScale = 0.15f;
+        Time.fixedDeltaTime = 0.0005f;
+        AudioPlayer.main.playSFX("sfx_slowmo_2");
+        BattleEffects.main.setDim(true);
+    }
+    private void stopSlowMo()
+    {
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = 0.02f;
+        AudioPlayer.main.playSFX("sfx_speedup3");
+        BattleEffects.main.setDim(false);
+    }
+
     //MAIN BATTLE FLOW-----------------------------------------------------------------------//
 
     // start battle scene
@@ -122,6 +168,7 @@ public class BattleManagerS : MonoBehaviour {
     {
         //Reset player stats and status
         player.restoreToFull();
+        currThirdEyeCharge = maxThirdEyeCharge;
         battleKeyboard.clearStatus();
         castManager.cooldown.removeAll();
         trackTyping.clearBuffer();
@@ -310,7 +357,6 @@ public class BattleManagerS : MonoBehaviour {
 			yield return new WaitForSeconds(0.4f);
 		}
 	}
-
     // creates the enemy specified at 'i' (0-left, 1-mid, 2-right) by the 'scene'
     private void createEnemy(int i, string name)
     {

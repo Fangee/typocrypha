@@ -29,6 +29,8 @@ public class Scouter : MonoBehaviour {
 
     //Hide scouter
     public void hide() {
+        if (!isActive)
+            return;
         StopAllCoroutines();
         StartCoroutine(fadeOut());
         isActive = false;

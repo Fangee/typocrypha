@@ -73,4 +73,8 @@ public class BattleField {
     {
         callback.uiManager.updateScourterInfo();
     }
+    public void breakThirdEye()
+    {
+        callback.stopThirdEye();
+    }
 }
