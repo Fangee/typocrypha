@@ -10,7 +10,7 @@ public class SpellEffects : MonoBehaviour {
     Vector3 DMGNUM_OFFSET = new Vector3(0, 0.375f, 0); //where the damage number should be
     Vector3 UNDER_OFFSET = new Vector3(0, -0.75f, 0); //where something under the damage num should be
     Vector3 OVER_OFFSET = new Vector3(0, 1.5f, 0); //where something over the damage num should be
-    Vector3 ELEM_OFFSET = new Vector3(-0.75f, 1.6f, 0);
+    Vector3 ELEM_OFFSET = new Vector3(-1.65f, 1.6f, 0);
     const float shakeIntensityMod = 0.1f; //The amount to scale each shake by (per keyword)
 
     // Use this for initialization
@@ -77,7 +77,9 @@ public class SpellEffects : MonoBehaviour {
 			else if (d.Target.CasterType == ICasterType.PLAYER || d.Target.CasterType == ICasterType.NPC_ALLY)
 				AudioPlayer.main.playSFX ("sfx_party_weakcrit_dmg");
 			//process crit graphics
-			popp.spawnSprite ("popup_critical", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET);
+			//popp.spawnSprite ("popup_critical", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET);
+			Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
+			popp.spawnText ("<size=28>CRITICAL!</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, Color.yellow, Color.white);
 		} else if ((d.elementalData == Elements.vsElement.WEAK || d.elementalData == Elements.vsElement.SUPERWEAK) && d.damageInflicted > 0){
 			if (d.Target.CasterType == ICasterType.ENEMY)
 				AudioPlayer.main.playSFX ("sfx_enemy_weakcrit_dmg");
@@ -142,14 +144,14 @@ public class SpellEffects : MonoBehaviour {
 			string damageText = sizeTagOpen + sizeValueCurr + ">" + d.damageInflicted.ToString () + sizeTagClose;
 			popp.spawnText ("-" + damageText + "<size=24>HP</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET, dmgNumColorTop, dmgNumColorBottom);
 			if(sizeRatio > 0.5) AudioPlayer.main.playSFX("sfx_fire_hit");
-			if ((d.Target.Curr_hp <= 0) && (d.damageInflicted > (d.Target.Stats.max_hp))) {
+			/*if ((d.Target.Curr_hp <= 0) && (d.damageInflicted > (d.Target.Stats.max_hp))) {
 				Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
 				popp.spawnText ("<size=28>OVERKILL!</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, Color.yellow, Color.white);
 			}
 			else if (d.Target.Curr_hp <= 0) {
 				Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
 				popp.spawnText ("<size=28>K.O.</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, dmgNumColorTop, dmgNumColorBottom);
-			}
+			}*/
 		} else if (d.damageInflicted < 0) {
 			string heal = "+" + (-1 * (d.damageInflicted)).ToString () + "<size=32>HP</size>";
 			AudioPlayer.main.playSFX ("sfx_heal");
@@ -187,7 +189,9 @@ public class SpellEffects : MonoBehaviour {
 				AudioPlayer.main.playSFX ("sfx_spell_resist");
                 break;
             case Elements.vsElement.WEAK:
-				popp.spawnSprite("popup_weak", POP_TIMER, pos.position + OVER_OFFSET);
+				Vector3 TEXT_OFFSET = new Vector3(0.5f, 0.05f, 0);
+				//popp.spawnSprite("ui_elem_popup", POP_TIMER, pos.position + OVER_OFFSET);
+				popp.spawnText ("WEAK!", POP_TIMER, pos.position + OVER_OFFSET + TEXT_OFFSET, Color.yellow, Color.white);
                 break;
             case Elements.vsElement.SUPERWEAK:
                 popp.spawnSprite("popup_superweak", POP_TIMER, pos.position + OVER_OFFSET);
