@@ -27,9 +27,10 @@ public class PopImage : MonoBehaviour {
 	}
 
     IEnumerator WipeIn () {
-        for(int i = 1; i < 7; i++)
+		for(int i = 1; i < 7; i = i+2)
         {
-            img.rectTransform.sizeDelta = new Vector2 (img.sprite.rect.size.x*i/10, img.sprite.rect.size.y);
+            //img.rectTransform.sizeDelta = new Vector2 (img.sprite.rect.size.x*i/10, img.sprite.rect.size.y);
+			img.rectTransform.sizeDelta = new Vector2 (img.sprite.rect.size.x*i/10, img.sprite.rect.size.y*i/10);
             yield return new WaitForEndOfFrame();
         }
         img.rectTransform.sizeDelta = img.sprite.rect.size;
@@ -38,7 +39,8 @@ public class PopImage : MonoBehaviour {
     IEnumerator WipeOut () {
         for(int i = 6; i > 0; i--)
         {
-            img.rectTransform.sizeDelta = new Vector2 (img.sprite.rect.size.x*(16-i)/10, img.sprite.rect.size.y*i/10);
+            //img.rectTransform.sizeDelta = new Vector2 (img.sprite.rect.size.x*(16-i)/10, img.sprite.rect.size.y*i/10);
+			img.rectTransform.sizeDelta = new Vector2 (img.sprite.rect.size.x*(16-i)/10, img.sprite.rect.size.y*i/10);
             yield return new WaitForEndOfFrame();
         }
         Destroy (gameObject);

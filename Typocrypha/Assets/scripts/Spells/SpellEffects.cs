@@ -11,6 +11,8 @@ public class SpellEffects : MonoBehaviour {
     Vector3 UNDER_OFFSET = new Vector3(0, -0.75f, 0); //where something under the damage num should be
     Vector3 OVER_OFFSET = new Vector3(0, 1.5f, 0); //where something over the damage num should be
     Vector3 ELEM_OFFSET = new Vector3(-1.65f, 1.6f, 0);
+	Vector3 BACK_OFFSET = new Vector3(-1.65f, 1.4f, 0);
+	Vector3 TEXT_OFFSET = new Vector3(0.0f, -0.25f, 0);
     const float shakeIntensityMod = 0.1f; //The amount to scale each shake by (per keyword)
 
     // Use this for initialization
@@ -78,8 +80,8 @@ public class SpellEffects : MonoBehaviour {
 				AudioPlayer.main.playSFX ("sfx_party_weakcrit_dmg");
 			//process crit graphics
 			//popp.spawnSprite ("popup_critical", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET);
-			Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
-			popp.spawnText ("<size=28>CRITICAL!</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, Color.yellow, Color.white);
+			//Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
+			//popp.spawnText ("<size=28>CRITICAL!</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, Color.yellow, Color.white);
 		} else if ((d.elementalData == Elements.vsElement.WEAK || d.elementalData == Elements.vsElement.SUPERWEAK) && d.damageInflicted > 0){
 			if (d.Target.CasterType == ICasterType.ENEMY)
 				AudioPlayer.main.playSFX ("sfx_enemy_weakcrit_dmg");
@@ -115,8 +117,10 @@ public class SpellEffects : MonoBehaviour {
 			BattleEffects.main.spriteShake (d.Target.Transform, 0.3f, 0.1f);
 			AudioPlayer.main.playSFX ("sfx_spell_hit");
 			Color dmgNumColor = Color.white;
-			Color dmgNumColorTop = new Color(255f/255f, 0, 25f/255f);
-			Color dmgNumColorBottom = new Color(255f/255f, 85f/255f, 85f/255f);
+			Color dmgNumColorTop = new Color (255f/255f,100f/255f,220f/255f);
+			Color dmgNumColorBottom = Color.white;
+			//Color dmgNumColorTop = new Color(255f/255f, 0, 25f/255f);
+			//Color dmgNumColorBottom = new Color(255f/255f, 85f/255f, 85f/255f);
 			if (d.Target.CasterType == ICasterType.PLAYER) {
 				if (d.repel)
 					dmgNumColor = new Color (255, 0, 255);//new Color(220, 86, 249);
@@ -142,16 +146,22 @@ public class SpellEffects : MonoBehaviour {
 			Debug.Log ("damage ratio to max hp: " + sizeRatio);
 			int sizeValueCurr = sizeValueMin + Mathf.RoundToInt (((float)sizeValueDiff)*sizeRatio);
 			string damageText = sizeTagOpen + sizeValueCurr + ">" + d.damageInflicted.ToString () + sizeTagClose;
-			popp.spawnText ("-" + damageText + "<size=24>HP</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET, dmgNumColorTop, dmgNumColorBottom);
+			popp.spawnText ("-" + damageText + "<size=24>HP</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET, dmgNumColorBottom, dmgNumColorTop);
 			if(sizeRatio > 0.5) AudioPlayer.main.playSFX("sfx_fire_hit");
-			/*if ((d.Target.Curr_hp <= 0) && (d.damageInflicted > (d.Target.Stats.max_hp))) {
+
+			if ((d.Target.Curr_hp <= 0) && (d.damageInflicted > (d.Target.Stats.max_hp))) {
 				Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
-				popp.spawnText ("<size=28>OVERKILL!</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, Color.yellow, Color.white);
+				popp.spawnText ("<size=28>OVERKILL!</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, dmgNumColorTop, dmgNumColorBottom);
 			}
 			else if (d.Target.Curr_hp <= 0) {
 				Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
 				popp.spawnText ("<size=28>K.O.</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, dmgNumColorTop, dmgNumColorBottom);
-			}*/
+			}
+			else if (d.isCrit && d.elementalData != Elements.vsElement.BLOCK){
+				Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
+				popp.spawnText ("<size=28>CRITICAL!</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, Color.yellow, Color.white);
+			}
+
 		} else if (d.damageInflicted < 0) {
 			string heal = "+" + (-1 * (d.damageInflicted)).ToString () + "<size=32>HP</size>";
 			AudioPlayer.main.playSFX ("sfx_heal");
@@ -173,25 +183,29 @@ public class SpellEffects : MonoBehaviour {
         switch (vElem)
         {
             case Elements.vsElement.REPEL:
-                popp.spawnSprite("popup_reflect", POP_TIMER, pos.position + OVER_OFFSET);
+                //popp.spawnSprite("popup_reflect", POP_TIMER, pos.position + OVER_OFFSET);
+				popp.spawnText ("REPEL", POP_TIMER, pos.position + OVER_OFFSET + TEXT_OFFSET, Color.magenta, Color.white);
 				AudioPlayer.main.playSFX ("sfx_spell_reflect");
                 break;
             case Elements.vsElement.DRAIN:
-                popp.spawnSprite("popup_absorb", POP_TIMER, pos.position + OVER_OFFSET);
+                //popp.spawnSprite("popup_absorb", POP_TIMER, pos.position + OVER_OFFSET);
+				popp.spawnText ("DRAIN", POP_TIMER, pos.position + OVER_OFFSET + TEXT_OFFSET, Color.green, Color.white);
 				AudioPlayer.main.playSFX ("sfx_spell_drain");
                 break;
             case Elements.vsElement.BLOCK:
-                popp.spawnSprite("popup_nullify", POP_TIMER, pos.position + OVER_OFFSET);
+                //popp.spawnSprite("popup_nullify", POP_TIMER, pos.position + OVER_OFFSET);
+				popp.spawnText ("BLOCK", POP_TIMER, pos.position + OVER_OFFSET + TEXT_OFFSET, Color.gray, Color.white);
 				AudioPlayer.main.playSFX ("sfx_spell_block");
                 break;
             case Elements.vsElement.RESIST:
-                popp.spawnSprite("popup_resistant", POP_TIMER, pos.position + OVER_OFFSET);
+                //popp.spawnSprite("popup_resistant", POP_TIMER, pos.position + OVER_OFFSET);
+				popp.spawnText ("RESIST", POP_TIMER, pos.position + OVER_OFFSET + TEXT_OFFSET, Color.yellow, Color.white);
 				AudioPlayer.main.playSFX ("sfx_spell_resist");
                 break;
             case Elements.vsElement.WEAK:
-				Vector3 TEXT_OFFSET = new Vector3(0.5f, 0.05f, 0);
 				//popp.spawnSprite("ui_elem_popup", POP_TIMER, pos.position + OVER_OFFSET);
-				popp.spawnText ("WEAK!", POP_TIMER, pos.position + OVER_OFFSET + TEXT_OFFSET, Color.yellow, Color.white);
+				popp.spawnSprite("popup_weak_backing", POP_TIMER, pos.position + BACK_OFFSET);
+				popp.spawnText ("<size=36>WEAK!</size>", POP_TIMER, pos.position + OVER_OFFSET + TEXT_OFFSET, new Color(255f/255f, 35f/255f, 25f/255f), new Color(255f/255f, 100f/255f, 85f/255f));
                 break;
             case Elements.vsElement.SUPERWEAK:
                 popp.spawnSprite("popup_superweak", POP_TIMER, pos.position + OVER_OFFSET);
@@ -202,16 +216,16 @@ public class SpellEffects : MonoBehaviour {
             switch (element)
             {
                 case 0:
-                    popp.spawnSprite("popup_slash", POP_TIMER, pos.position + ELEM_OFFSET);
+					popp.spawnSprite("popup_slash", POP_TIMER, pos.position + ELEM_OFFSET + TEXT_OFFSET);
                     break;
                 case 1:
-                    popp.spawnSprite("popup_fire", POP_TIMER, pos.position + ELEM_OFFSET);
+					popp.spawnSprite("popup_fire", POP_TIMER, pos.position + ELEM_OFFSET + TEXT_OFFSET);
                     break;
                 case 2:
-                    popp.spawnSprite("popup_ice", POP_TIMER, pos.position + ELEM_OFFSET);
+					popp.spawnSprite("popup_ice", POP_TIMER, pos.position + ELEM_OFFSET + TEXT_OFFSET);
                     break;
                 case 3:
-                    popp.spawnSprite("popup_bolt", POP_TIMER, pos.position + ELEM_OFFSET);
+					popp.spawnSprite("popup_bolt", POP_TIMER, pos.position + ELEM_OFFSET + TEXT_OFFSET);
                     break;
             }
         }
