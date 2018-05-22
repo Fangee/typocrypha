@@ -16,6 +16,8 @@ public class BattleManagerS : MonoBehaviour {
     public GameObject enemy_prefab; // prefab for enemy object
     public GameObject ally_prefab; //prefab for ally object
     public BattleField field;
+	public GameObject typocrypha_object;
+	public Animator typocrypha_animator; // animator for typocrypha object
     public Text debugThirdEyeCharge;
     [HideInInspector] public bool pause = true;
 
@@ -188,6 +190,7 @@ public class BattleManagerS : MonoBehaviour {
     {
         // play battle transition
 		pause = true;
+		typocrypha_object.SetActive (false);
         BattleEffects.main.battleTransitionEffect("swirl_in", 1f);
         yield return new WaitForSeconds(1f);
 		if (waves[0].Background != string.Empty) {
@@ -197,7 +200,10 @@ public class BattleManagerS : MonoBehaviour {
 			uiManager.initBg();
 		}
         BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
+		typocrypha_object.SetActive (true);
+		typocrypha_animator.Play ("anim_typocrypha_entrance");
+		yield return new WaitForSeconds(0.5f);
         nextWave();
     }
     // go to next wave (also starts first wave for real)

@@ -10,6 +10,7 @@ public class BattleEffects : MonoBehaviour {
 	public SpriteRenderer dimmer; // dimmer image
 	public Canvas canvas; // canvas component
 	public Animator camera_animator; // animator for camera object
+	public Animator damage_overlay_animator; // damage overlay sprite animator
 
 	private int old_dim_layer;
 
@@ -173,5 +174,11 @@ public class BattleEffects : MonoBehaviour {
 	public void swirlOut(float speed) {
 		camera_animator.speed = speed;
 		camera_animator.Play ("swirl_out",0,0f);
+	}
+
+	// flash the damage overlay sprite
+	public void flashDamageOverlay(float speed){
+		damage_overlay_animator.speed = speed;
+		damage_overlay_animator.Play ("anim_overlay_damage");
 	}
 }

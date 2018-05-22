@@ -28,7 +28,8 @@ public class BarMeter : MonoBehaviour {
 
 	// set bar length
 	public void setValue(float new_percent) {
-		percent = new_percent >= 0 ? new_percent : 0; // don't go past 0
+		float new_percent_round = Mathf.Min (new_percent, 1.0f);
+		percent = new_percent_round >= 0 ? new_percent_round : 0; // don't go past 0
 		bar.localScale = new Vector3 (percent, 1, 1);
 	}
 

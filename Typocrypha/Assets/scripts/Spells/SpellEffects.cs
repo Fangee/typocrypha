@@ -125,6 +125,7 @@ public class SpellEffects : MonoBehaviour {
 				if (d.repel)
 					dmgNumColor = new Color (255, 0, 255);//new Color(220, 86, 249);
 				BattleEffects.main.screenShake (0.15f + shakeIntensity / 2, shakeIntensity + 0.3f);
+				BattleEffects.main.flashDamageOverlay (1.0f);
 			} else if (d.Target.CasterType == ICasterType.ENEMY) {
 				// Gradually lower enemy HP gauge displays
 				BattleManagerS.main.uiManager.setEnabledGauges(true);
