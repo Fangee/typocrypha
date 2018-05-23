@@ -203,6 +203,7 @@ public class BattleManagerS : MonoBehaviour {
         yield return new WaitForSeconds(1.5f);
 		typocrypha_object.SetActive (true);
 		typocrypha_animator.Play ("anim_typocrypha_entrance");
+        AudioPlayer.main.playSFX("sfx_bootup");
 		yield return new WaitForSeconds(0.5f);
         nextWave();
     }
