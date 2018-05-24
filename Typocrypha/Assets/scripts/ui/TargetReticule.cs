@@ -23,7 +23,7 @@ public class TargetReticule : MonoBehaviour
     public float smooth_time = 0.15f; // time it takes for target to reach position
     public float h_r_scale = 8f; // scaling factor from horizontal speed to rotation speed
 
-    bool scoutVisible = false; //for when scouter is shown
+    private bool scoutVisible = false; //for when scouter is shown
     private Vector2 target_destination_pos; // position of target ret
 
     void Start()
@@ -53,9 +53,12 @@ public class TargetReticule : MonoBehaviour
     }
 
     //hide enemy info
-    public void hideScouter()
+    public void hideScouter(bool hideImmeadiate = false)
     {
-        scouter.hide();
+        if (hideImmeadiate)
+            scouter.hideImmediate();
+        else
+            scouter.hide();
         scoutVisible = false;
         updateArrows();
     }

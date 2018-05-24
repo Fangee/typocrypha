@@ -100,9 +100,9 @@ public class BattleUI : MonoBehaviour
     {
         target_ret_scr.showScouter();
     }
-    public void hideScouter()
+    public void hideScouter(bool hideImmeadiate = false)
     {
-        target_ret_scr.hideScouter();
+        target_ret_scr.hideScouter(hideImmeadiate);
     }
     //update scouterInfo (refreshes the info for form changes)
     public void updateScourterInfo()

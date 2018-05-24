@@ -75,6 +75,7 @@ public class BattleField {
     }
     public void breakThirdEye()
     {
-        callback.stopThirdEye();
+        if(callback.thirdEyeActive)
+            callback.stopThirdEye(true);
     }
 }

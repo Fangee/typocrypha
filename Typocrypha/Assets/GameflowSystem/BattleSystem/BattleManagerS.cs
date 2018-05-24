@@ -21,7 +21,7 @@ public class BattleManagerS : MonoBehaviour {
     public Text debugThirdEyeCharge;
     [HideInInspector] public bool pause = true;
 
-    private bool thirdEyeActive = false;
+    [HideInInspector] public bool thirdEyeActive = false;
     private Coroutine thirdEyeCr = null;
     private const float maxThirdEyeCharge = 10.5f;
     private float currThirdEyeCharge = maxThirdEyeCharge;
@@ -68,7 +68,7 @@ public class BattleManagerS : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.RightArrow)) ++field.target_ind;
 
         // third eye stuff
-        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift) && !thirdEyeActive)
         {
             startThirdEye();
         }
@@ -131,13 +131,13 @@ public class BattleManagerS : MonoBehaviour {
         startSlowMo();
         thirdEyeCr = StartCoroutine(thirdEye());
     }
-    public void stopThirdEye()
+    public void stopThirdEye(bool hideImmeadiate = false)
     {
         if (thirdEyeCr != null)
             StopCoroutine(thirdEyeCr);
         stopSlowMo();
         trackTyping.enabled = true;
-        uiManager.hideScouter();
+        uiManager.hideScouter(hideImmeadiate);
         thirdEyeActive = false;
     }
     private IEnumerator thirdEye()

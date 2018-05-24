@@ -35,6 +35,17 @@ public class Scouter : MonoBehaviour {
         StartCoroutine(fadeOut());
         isActive = false;
     }
+    //Hide scouter
+    public void hideImmediate()
+    {
+        if (!isActive)
+            return;
+        StopAllCoroutines();
+        left.color = new Color(255f, 255f, 255f, 0);
+        right.color = new Color(255f, 255f, 255f, 0);
+        brackets.color = new Color(255f, 255f, 255f, 0);
+        isActive = false;
+    }
 
     public bool toggle()
     {
