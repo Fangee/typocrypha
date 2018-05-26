@@ -255,7 +255,7 @@ public class BattleManagerS : MonoBehaviour {
     // end the battle and transition to the next GameflowItem
     public void endBattle()
     {
-        pause = true;
+        setPause(true);
         foreach (Enemy enemy in field.enemy_arr)
         {
             if (enemy != null) GameObject.Destroy(enemy.gameObject);
@@ -264,6 +264,7 @@ public class BattleManagerS : MonoBehaviour {
 		{
 			Destroy (tr.gameObject);
 		}
+        stopThirdEye(true);
         uiManager.clear();
         GameflowManager.main.next();
 

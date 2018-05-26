@@ -26,8 +26,9 @@ public class TextMacros : MonoBehaviour {
 			{"t", macroSetTalkSfx},
 			{"h", macroHighlightCharacter},
 			{"speak", macroSpeaker},
-            {"tl", macroTranslate}
-		};
+            {"tl", macroTranslate},
+            {"translate", macroTranslate}
+        };
 		color_map = new Dictionary<string, string> {
 			{ "spell",      "#ff6eff" },
 			{ "ui-terms",   "#05abff" },
@@ -46,11 +47,12 @@ public class TextMacros : MonoBehaviour {
 			{"evil_eye", new Pair<string, string>("evil_eye", "vo_evil_eye")}
 		};
         translate_map = new Dictionary<char, char> {
-            {'a', 'x' }, {'e', 'x' }, {'i', 'x' }, {'o', 'x' }, {'u', 'x' },
-            {'b', 'y' }, {'c', 'y' }, {'d', 'x' }, {'f', 'x' }, {'g', 'x' },
-            {'h', 'x' }, {'u', 'x' }, {'b', 'y' }, {'c', 'y' }, {'d', 'x' },
-            {'b', 'y' }, {'c', 'y' }, {'d', 'x' }, {'f', 'x' }, {'i', 'x' },
-            {'o', 'x' }, {'u', 'x' }, {'b', 'y' }, {'c', 'y' }, {'d', 'x' },
+            {'a', 'e' }, {'b', 'd' }, {'c', 'k' }, {'d', 'b' }, {'e', 'i' },
+            {'f', 'h' }, {'g', 'h' }, {'h', 'f' }, {'i', 'a' }, {'j', 'z' },
+            {'k', 'x' }, {'l', 't' }, {'m', 'l' }, {'n', 'v' }, {'o', 'u' },
+            {'p', 'g' }, {'q', 'n' }, {'r', 'w' }, {'s', 'y' }, {'t', 'm' },
+            {'u', 'o' }, {'v', 'r' }, {'w', 'p' }, {'x', 'c' }, {'y', 's' },
+            {'z', 'j' }, {'.', ',' }, {',', '.' }
         };
 	}
 
@@ -146,7 +148,13 @@ public class TextMacros : MonoBehaviour {
 	}
 
     string macroTranslate(string[] opt) {
-        const int i = 0;
-        return "";
+        char[] op = opt[0].ToCharArray(); //char array is faster than StringBuilder here because mutations are simple
+        for(int i = 0; i < op.Length; ++i) {
+            if (translate_map.ContainsKey(op[i]) && char.IsLower(op[i]))
+                op[i] = translate_map[op[i]];
+            else if (translate_map.ContainsKey(char.ToLower(op[i])))
+                op[i] = char.ToUpper(translate_map[char.ToLower(op[i])]);
+        }
+        return new string (op);
     }
 }
