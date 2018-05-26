@@ -11,6 +11,7 @@ public class TextMacros : MonoBehaviour {
 	public Dictionary<string, MacroSubDel> macro_map; // for substituting macros
 	public Dictionary<string, string> color_map; // for color presets (hex representation)
 	public Dictionary<string, Pair<string, string>> character_map; // for character dialogue presets
+    public Dictionary<char, char> translate_map;
 
 	void Awake () {
 		if (main == null) main = this;
@@ -24,7 +25,8 @@ public class TextMacros : MonoBehaviour {
 			{"c", macroColor},
 			{"t", macroSetTalkSfx},
 			{"h", macroHighlightCharacter},
-			{"speak", macroSpeaker}
+			{"speak", macroSpeaker},
+            {"tl", macroTranslate}
 		};
 		color_map = new Dictionary<string, string> {
 			{ "spell",      "#ff6eff" },
@@ -43,6 +45,13 @@ public class TextMacros : MonoBehaviour {
 			{"mc", new Pair<string, string>("_mc_", "vo_mc")},
 			{"evil_eye", new Pair<string, string>("evil_eye", "vo_evil_eye")}
 		};
+        translate_map = new Dictionary<char, char> {
+            {'a', 'x' }, {'e', 'x' }, {'i', 'x' }, {'o', 'x' }, {'u', 'x' },
+            {'b', 'y' }, {'c', 'y' }, {'d', 'x' }, {'f', 'x' }, {'g', 'x' },
+            {'h', 'x' }, {'u', 'x' }, {'b', 'y' }, {'c', 'y' }, {'d', 'x' },
+            {'b', 'y' }, {'c', 'y' }, {'d', 'x' }, {'f', 'x' }, {'i', 'x' },
+            {'o', 'x' }, {'u', 'x' }, {'b', 'y' }, {'c', 'y' }, {'d', 'x' },
+        };
 	}
 
 	// substitutes player's name
@@ -135,4 +144,9 @@ public class TextMacros : MonoBehaviour {
 			"[sole-highlight=" + character_map[opt[0]].first + "]";
 		return macro;
 	}
+
+    string macroTranslate(string[] opt) {
+        const int i = 0;
+        return "";
+    }
 }
