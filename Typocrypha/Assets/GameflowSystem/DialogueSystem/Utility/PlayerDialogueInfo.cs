@@ -9,18 +9,40 @@ public class PlayerDialogueInfo : MonoBehaviour {
 	public static PlayerDialogueInfo main = null; // global static ref
 	public Sprite[] player_sprites; // all options for player sprites
 	public SpriteRenderer player_sprite_r; // where player sprite is rendered
+    public Dictionary<string, string> player_info_map;
 
 	[HideInInspector] public string player_name { get; set; }
 	[HideInInspector] public Pronoun player_pronoun { get; set; }
 	[HideInInspector] public Sprite player_sprite { get; set; }
 
-	void Start() {
+    private void Awake() {
+        player_info_map = new Dictionary<string, string> { };
+    }
+
+    void Start() {
 		if (main == null) main = this;
 		player_name = "???";
-	}
 
-	// set player's sprite and update image in dialogue box
-	public void setSprite(int ind) {
+    }
+
+    // return an info string from the info map, or throw an exception if one does not exist
+    public string getInfo(string key) {
+        if (player_info_map.ContainsKey(key))
+            return player_info_map[key];
+        throw new System.Exception("PlayerDialogueInfo: getInfo: no info with key: " + key);
+    }
+
+    // set an info string in the info map
+    public void setInfo(string key, string data)
+    {
+        if (player_info_map.ContainsKey(key))
+            player_info_map[key] = data;
+        else
+            player_info_map.Add(key, data);
+    }
+
+    // set player's sprite and update image in dialogue box
+    public void setSprite(int ind) {
 		player_sprite = player_sprites [ind];
 		player_sprite_r.sprite = player_sprite;
 	}
