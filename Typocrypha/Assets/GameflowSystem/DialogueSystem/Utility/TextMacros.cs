@@ -27,7 +27,7 @@ public class TextMacros : MonoBehaviour {
 			{"h", macroHighlightCharacter},
 			{"speak", macroSpeaker},
             {"tl", macroTranslate},
-            {"translate", macroTranslate}
+            {"translate", macroTranslate},
         };
 		color_map = new Dictionary<string, string> {
 			{ "spell",      "#ff6eff" },

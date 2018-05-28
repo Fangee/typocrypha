@@ -209,6 +209,9 @@ public class DialogueManager : MonoBehaviour {
 					case 1:
 						comparisonLetter = "B";
 						break;
+					case 2:
+						comparisonLetter = "C";
+						break;
 					}
 					if (comparisonLetter.Trim ().ToLower ().CompareTo (answer.Trim ().ToLower ()) == 0)
 						break;
