@@ -39,5 +39,7 @@ empowered	5	"+DMG, +casting time"	anim_spell_empower	sfx_slash	1.5	5	1.5	0	1	0	1
 weakened	-5	"-DMG, -casting time"	anim_spell_empower	sfx_stab	0.75	0	0.5	0	1	5	1	0	1	None
 widened	0	"-power, +AOE, +casting  time"	anim_spell_empower	sfx_slash	0.75	1	1.15	0	1	0	1	0	1	LMRT
 shank	0	"+crit rate, +casting time"	anim_spell_empower	sfx_slash	1	3	1.5	0	1	10	1.5	0	1	None
+self	0	forces spell to target self	anim_spell_empower	sfx_mystery_effect	1	0	1	0	1	0	1	0	1	mS
+other	0	forces spell to target other	anim_spell_empower	sfx_mystery_effect	1	0	1	0	1	0	1	0	1	MT
 miss	0	"debug, causes player to miss"	anim_spell_empower	sfx_slash	1	0	1	-100	0.25	0	1	0	1	None
 END														

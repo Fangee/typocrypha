@@ -385,33 +385,41 @@ public class TargetData
     //Modifies this by target data mod
     public void modify(TargetData mod)
     {
-        bool targets_enemy = (enemyL || enemyM || enemyR);
-        bool targets_ally = (allyL || allyM || allyR);
-        if (targets_enemy && targets_ally)
-        {
-            enemyL = mod.enemyL;
-            enemyM = mod.enemyM;
-            enemyR = mod.enemyR;
-            allyL = mod.enemyL;
-            allyM = mod.enemyM;
-            allyR = mod.enemyR;
-            targeted = mod.targeted;
-            selfCenter = mod.selfCenter;
-        }
-        else if (targets_enemy)
-        {
-            enemyL = mod.enemyL;
-            enemyM = mod.enemyM;
-            enemyR = mod.enemyR;
-            targeted = mod.targeted;
-        }
-        else if(targets_ally)
-        {
-            allyL = mod.allyL;
-            allyM = mod.allyM;
-            allyR = mod.allyR;
-            selfCenter = mod.selfCenter;
-        }
+        //bool targets_enemy = (enemyL || enemyM || enemyR);
+        //bool targets_ally = (allyL || allyM || allyR);
+        //if (targets_enemy && targets_ally)
+        //{
+        //    enemyL = mod.enemyL;
+        //    enemyM = mod.enemyM;
+        //    enemyR = mod.enemyR;
+        //    allyL = mod.enemyL;
+        //    allyM = mod.enemyM;
+        //    allyR = mod.enemyR;
+        //    targeted = mod.targeted;
+        //    selfCenter = mod.selfCenter;
+        //}
+        //else if (targets_enemy)
+        //{
+        //    enemyL = mod.enemyL;
+        //    enemyM = mod.enemyM;
+        //    enemyR = mod.enemyR;
+        //    targeted = mod.targeted;
+        //}
+        //else if(targets_ally)
+        //{
+        //    allyL = mod.allyL;
+        //    allyM = mod.allyM;
+        //    allyR = mod.allyR;
+        //    selfCenter = mod.selfCenter;
+        //}
+        enemyL = mod.enemyL;
+        enemyM = mod.enemyM;
+        enemyR = mod.enemyR;
+        allyL = mod.allyL;
+        allyM = mod.allyM;
+        allyR = mod.allyR;
+        targeted = mod.targeted;
+        selfCenter = mod.selfCenter;
     }
     public void copyFrom(TargetData toCopy)
     {

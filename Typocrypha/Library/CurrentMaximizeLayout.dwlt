@@ -13,26 +13,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Children:
   - {fileID: 3}
-  - {fileID: 16}
+  - {fileID: 14}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 30
-<<<<<<< HEAD
-    width: 1366
-    height: 635
-  m_MinSize: {x: 915, y: 392}
-  m_MaxSize: {x: 22010, y: 14042}
-  vertical: 0
-  controlID: 6624
-=======
     width: 1536
     height: 731
-  m_MinSize: {x: 911, y: 392}
-  m_MaxSize: {x: 22006, y: 14042}
+  m_MinSize: {x: 917, y: 392}
+  m_MaxSize: {x: 22012, y: 14042}
   vertical: 0
-  controlID: 6141
->>>>>>> sammy-battle-implementation
+  controlID: 16123
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -55,30 +46,30 @@ MonoBehaviour:
   m_DepthBufferBits: 32
   m_Pos:
     serializedVersion: 2
-    x: 440
+    x: 594
     y: 92
-    width: 526
-    height: 319
+    width: 591
+    height: 420
   m_PersistentViewDataDictionary: {fileID: 0}
   m_MaximizeOnPlay: 1
   m_Gizmos: 0
   m_Stats: 0
-  m_SelectedSizes: 05000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_SelectedSizes: 07000000000000000000000000000000000000000000000000000000000000000000000000000000
   m_TargetDisplay: 0
   m_ZoomArea:
     m_HRangeLocked: 0
     m_VRangeLocked: 0
-    m_HBaseRangeMin: -263
-    m_HBaseRangeMax: 263
-    m_VBaseRangeMin: -147.9375
-    m_VBaseRangeMax: 147.9375
+    m_HBaseRangeMin: -640
+    m_HBaseRangeMax: 640
+    m_VBaseRangeMin: -360
+    m_VBaseRangeMax: 360
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
     m_VAllowExceedBaseRangeMax: 1
     m_ScaleWithWindow: 0
-    m_HSlider: 1
-    m_VSlider: 1
+    m_HSlider: 0
+    m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
     m_EnableMouseInput: 1
     m_EnableSliderZoom: 0
@@ -88,39 +79,25 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 17
-<<<<<<< HEAD
-      width: 526
-      height: 302
-    m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 263, y: 151}
-=======
-      width: 592
-      height: 353
-    m_Scale: {x: 1.0609, y: 1.0609}
-    m_Translation: {x: 296, y: 176.63983}
->>>>>>> sammy-battle-implementation
+      width: 591
+      height: 403
+    m_Scale: {x: 0.46171874, y: 0.46171874}
+    m_Translation: {x: 295.5, y: 201.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-<<<<<<< HEAD
-      x: -263
-      y: -151
-      width: 526
-      height: 302
-=======
-      x: -279.0084
-      y: -166.49998
-      width: 558.0168
-      height: 332.73636
->>>>>>> sammy-battle-implementation
+      x: -640
+      y: -436.41287
+      width: 1280
+      height: 872.82574
     m_MinimalGUI: 1
-  m_defaultScale: 1
+  m_defaultScale: 0.46171874
   m_TargetTexture: {fileID: 0}
   m_CurrentColorSpace: 0
-  m_LastWindowPixelSize: {x: 526, y: 319}
+  m_LastWindowPixelSize: {x: 591, y: 420}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000100000100
@@ -137,26 +114,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Children:
   - {fileID: 4}
-  - {fileID: 13}
+  - {fileID: 12}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-<<<<<<< HEAD
-    width: 968
-    height: 635
-  m_MinSize: {x: 638, y: 392}
-  m_MaxSize: {x: 18008, y: 14042}
-  vertical: 1
-  controlID: 6625
-=======
-    width: 1088
+    width: 1187
     height: 731
-  m_MinSize: {x: 636, y: 392}
-  m_MaxSize: {x: 18006, y: 14042}
+  m_MinSize: {x: 640, y: 392}
+  m_MaxSize: {x: 18010, y: 14042}
   vertical: 1
-  controlID: 6142
->>>>>>> sammy-battle-implementation
+  controlID: 16124
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -176,21 +144,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-<<<<<<< HEAD
-    width: 968
-    height: 340
-  m_MinSize: {x: 638, y: 271}
-  m_MaxSize: {x: 18008, y: 10021}
+    width: 1187
+    height: 441
+  m_MinSize: {x: 640, y: 271}
+  m_MaxSize: {x: 18010, y: 10021}
   vertical: 0
-  controlID: 6626
-=======
-    width: 1088
-    height: 391
-  m_MinSize: {x: 636, y: 271}
-  m_MaxSize: {x: 18006, y: 10021}
-  vertical: 0
-  controlID: 5969
->>>>>>> sammy-battle-implementation
+  controlID: 16072
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -207,10 +166,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 204
-    height: 340
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+    width: 295
+    height: 441
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -240,21 +199,14 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 92
-    width: 202
-    height: 319
+    width: 293
+    height: 420
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
-<<<<<<< HEAD
-    scrollPos: {x: 0, y: 166}
-    m_SelectedIDs: 1c380000
-    m_LastClickedID: 0
-    m_ExpandedIDs: a4b3fcff9accffff00000000b2470000744a000096540000
-=======
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 30b5fdff
-    m_LastClickedID: -150224
-    m_ExpandedIDs: 7a09ffff9efbffff00000000b83400007a370000783c0000
->>>>>>> sammy-battle-implementation
+    scrollPos: {x: 0, y: 120}
+    m_SelectedIDs: 743f0000
+    m_LastClickedID: 16244
+    m_ExpandedIDs: ecccfeff68efffff8cfbffff00000000603500003c3800008e3c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -291,19 +243,12 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 204
+    x: 295
     y: 0
-<<<<<<< HEAD
-    width: 234
-    height: 340
+    width: 297
+    height: 441
   m_MinSize: {x: 230, y: 250}
   m_MaxSize: {x: 10000, y: 10000}
-=======
-    width: 263
-    height: 391
-  m_MinSize: {x: 234, y: 271}
-  m_MaxSize: {x: 10004, y: 10021}
->>>>>>> sammy-battle-implementation
   m_ActualView: {fileID: 8}
   m_Panes:
   - {fileID: 8}
@@ -331,10 +276,10 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: 206
+    x: 297
     y: 92
-    width: 230
-    height: 319
+    width: 293
+    height: 420
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SearchFilter:
     m_NameFilter: 
@@ -348,26 +293,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-<<<<<<< HEAD
-    - Assets/GameflowSystem/DialogueSystem/Dialogue
-=======
-    - Assets/GameflowSystem/DialogueSystem/Utility
->>>>>>> sammy-battle-implementation
+    - Assets/excel
   m_ViewMode: 0
   m_StartGridSize: 64
-  m_LastFolders: []
+  m_LastFolders:
+  - Assets
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\Hughe\Documents\GitHub\typocrypha\Typocrypha
+  m_LastProjectPath: C:\Users\valen\Documents\GitHub\typocrypha\Typocrypha
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 28330000
-    m_LastClickedID: 13096
-<<<<<<< HEAD
-    m_ExpandedIDs: 000000000c370000b4380000703a00007c3a0000383c00005c3c00005e3d0000b43f0000de3f00006e400000864000009c400000a2400000ba400000f64000000841000024410000b64100004842000076420000d2420000f04200000c430000384300005c430000ba430000d443000092440000ba440000da4400002245000034450000444500004c5500004e5500005055000052550000
-=======
-    m_ExpandedIDs: 00000000540600008c2800009229000096290000bc290000d8290000062a00004a2a00005e2a0000d42a0000002b00001e2b0000d82b00002e2c0000462c0000562d0000ae2d0000e02d0000fe2d0000282e0000982e0000642f000084300000b6300000ee300000603100007431000084310000aa440000ac440000ae440000b0440000
->>>>>>> sammy-battle-implementation
+    m_SelectedIDs: 8c280000
+    m_LastClickedID: 10380
+    m_ExpandedIDs: 0000000054060000382900007a290000402a0000442a00006a2a0000862a0000902a0000b42a0000d42a0000f82a00000c2b0000822b0000ae2b0000cc2b0000862c0000dc2c0000f42c0000c82d0000062e00005e2e0000902e0000ae2e0000d82e0000462f0000ee2f00001230000032310000643100000e3200002232000032320000ca450000cc450000ce450000d0450000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -392,17 +330,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-<<<<<<< HEAD
-    scrollPos: {x: 0, y: 120}
-    m_SelectedIDs: 1c380000
-    m_LastClickedID: 14364
-    m_ExpandedIDs: 000000000c370000b4380000703a00007c3a0000383c00005c3c00005e3d0000b43f0000de3f00006e400000864000009c400000a2400000ba400000f64000000841000024410000b64100004842000076420000d2420000f04200000c4300005c430000ba430000d44300003844000092440000ba440000da44000022450000344500004c5500004e5500005055000052550000
-=======
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 30b5fdff
+    scrollPos: {x: 0, y: 240}
+    m_SelectedIDs: 743f0000
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000540600008c2800009229000096290000bc290000d8290000062a00004a2a00005e2a0000d42a0000002b00001e2b0000d82b00002e2c0000462c0000562d0000ae2d0000e02d0000fe2d0000282e0000982e0000642f000084300000b6300000ee300000603100007431000084310000aa440000ac440000ae440000b0440000
->>>>>>> sammy-battle-implementation
+    m_ExpandedIDs: 0000000054060000382900007a290000402a0000442a00006a2a0000862a0000902a0000b42a0000d42a0000f82a00000c2b0000822b0000ae2b0000cc2b0000862c0000dc2c0000f42c0000c82d0000062e00005e2e0000902e0000ae2e0000d82e0000462f0000ee2f00001230000032310000643100000e3200002232000032320000ca450000cc450000ce450000d0450000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -427,14 +358,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-<<<<<<< HEAD
-    m_SelectedInstanceIDs: 1c380000
-    m_LastClickedInstanceID: 14364
-=======
-    m_SelectedInstanceIDs: 30b5fdff
-    m_LastClickedInstanceID: -150224
->>>>>>> sammy-battle-implementation
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: 743f0000
+    m_LastClickedInstanceID: 16244
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -476,15 +402,10 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 438
+    x: 592
     y: 0
-<<<<<<< HEAD
-    width: 530
-    height: 340
-=======
-    width: 596
-    height: 391
->>>>>>> sammy-battle-implementation
+    width: 595
+    height: 441
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 2}
@@ -492,9 +413,8 @@ MonoBehaviour:
   - {fileID: 10}
   - {fileID: 2}
   - {fileID: 11}
-  - {fileID: 12}
   m_Selected: 1
-  m_LastSelected: 2
+  m_LastSelected: 0
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -517,20 +437,20 @@ MonoBehaviour:
   m_DepthBufferBits: 32
   m_Pos:
     serializedVersion: 2
-    x: 440
+    x: 594
     y: 92
-    width: 526
-    height: 319
+    width: 591
+    height: 420
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 4227.149269758801
+  lastFramingTime: 0
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.7174326, y: -0.9865755, z: 89.869255}
+    m_Target: {x: -0.27847815, y: -0.15365523, z: -0.013283052}
     speed: 2
-    m_Value: {x: 0.7174326, y: -0.9865755, z: 89.869255}
+    m_Value: {x: -0.27847815, y: -0.15365523, z: -0.013283052}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -558,9 +478,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 13.699841
+    m_Target: 11.321444
     speed: 2
-    m_Value: 13.699841
+    m_Value: 11.321444
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -594,89 +514,12 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: 440
-    y: 92
-    width: 526
-    height: 319
+    x: 468
+    y: 181
+    width: 973
+    height: 501
   m_PersistentViewDataDictionary: {fileID: 0}
 --- !u!114 &12
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 12914, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AutoRepaintOnSceneChange: 1
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Animator
-    m_Image: {fileID: 663490763026382308, guid: 0000000000000000d000000000000000,
-      type: 0}
-    m_Tooltip: 
-  m_DepthBufferBits: 0
-  m_Pos:
-    serializedVersion: 2
-    x: 440
-    y: 92
-    width: 526
-    height: 319
-  m_PersistentViewDataDictionary: {fileID: 0}
-  m_ViewTransforms:
-    m_KeySerializationHelper:
-    - {fileID: 1107277075767925906, guid: a3dd4208c6e84bc41b49242e91c50ba3, type: 2}
-    - {fileID: 1107657940957089248, guid: a000b80e09e10a844b36fa19c54965ab, type: 2}
-    m_ValueSerializationHelper:
-    - e00: 0.560613
-      e01: 0
-      e02: 0
-      e03: 30.757095
-      e10: 0
-      e11: 0.560613
-      e12: 0
-      e13: 45.369263
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.43952802
-      e01: 0
-      e02: 0
-      e03: 49.533157
-      e10: 0
-      e11: 0.43952802
-      e12: 0
-      e13: 34.822052
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-  m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 0}
-  m_BreadCrumbs: []
-  stateMachineGraph: {fileID: 0}
-  stateMachineGraphGUI: {fileID: 0}
-  blendTreeGraph: {fileID: 0}
-  blendTreeGraphGUI: {fileID: 0}
-  m_AutoLiveLink: 1
-  m_MiniTool: 0
-  m_SerializedLocked: 0
-  m_CurrentEditor: 0
-  m_LayerEditor:
-    m_SelectedLayerIndex: 0
---- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -691,26 +534,17 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-<<<<<<< HEAD
-    y: 340
-    width: 968
-    height: 295
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-=======
-    y: 391
-    width: 1088
-    height: 340
+    y: 441
+    width: 1187
+    height: 290
   m_MinSize: {x: 102, y: 121}
   m_MaxSize: {x: 4002, y: 4021}
->>>>>>> sammy-battle-implementation
-  m_ActualView: {fileID: 14}
+  m_ActualView: {fileID: 13}
   m_Panes:
-  - {fileID: 14}
-  - {fileID: 15}
+  - {fileID: 13}
   m_Selected: 0
-  m_LastSelected: 1
---- !u!114 &14
+  m_LastSelected: 0
+--- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -733,40 +567,11 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 432
-    width: 966
-    height: 274
+    y: 533
+    width: 1185
+    height: 269
   m_PersistentViewDataDictionary: {fileID: 0}
---- !u!114 &15
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12071, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AutoRepaintOnSceneChange: 0
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Animation
-    m_Image: {fileID: 1561878555887300916, guid: 0000000000000000d000000000000000,
-      type: 0}
-    m_Tooltip: 
-  m_DepthBufferBits: 0
-  m_Pos:
-    serializedVersion: 2
-    x: 8
-    y: 491
-    width: 1086
-    height: 319
-  m_PersistentViewDataDictionary: {fileID: 0}
-  m_AnimEditor: {fileID: 0}
-  m_Locked: 0
---- !u!114 &16
+--- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -780,18 +585,18 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 968
+    x: 1187
     y: 0
-    width: 398
-    height: 635
-  m_MinSize: {x: 277, y: 71}
-  m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 17}
+    width: 349
+    height: 731
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 15}
   m_Panes:
-  - {fileID: 17}
+  - {fileID: 15}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &17
+--- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -813,16 +618,12 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: 970
+    x: 1189
     y: 92
-    width: 396
-    height: 614
+    width: 347
+    height: 710
   m_PersistentViewDataDictionary: {fileID: 0}
-<<<<<<< HEAD
-  m_ScrollPosition: {x: 0, y: 0}
-=======
-  m_ScrollPosition: {x: 0, y: 1174.9551}
->>>>>>> sammy-battle-implementation
+  m_ScrollPosition: {x: 0, y: 4500}
   m_InspectorMode: 0
   m_PreviewResizer:
     m_CachedPref: 160
