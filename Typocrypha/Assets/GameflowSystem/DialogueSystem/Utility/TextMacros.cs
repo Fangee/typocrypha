@@ -19,6 +19,7 @@ public class TextMacros : MonoBehaviour {
 			{"name", macroNameSub},
 			{"NAME", macroNameSub},
 			{"pronoun",macroPronoun},
+            {"info", macroInfo},
 			{"last-cast", macroLastCast},
             {"last-cast-enemy", macroLastCastEnemy},
             {"time", macroTime},
@@ -78,6 +79,12 @@ public class TextMacros : MonoBehaviour {
 		default: return "pronoun";
 		}
 	}
+
+    // substitutes in info from the PlayerDialogueInfo map
+    // input: [0]: string: info key
+    string macroInfo(string[] opt) {
+        return PlayerDialogueInfo.main.getInfo(opt[0]);
+    }
 
 	// substitutes last cast spell's attributes
 	// input: [0]: string, "elem","root","style" : specifies which part of spell to display (or "all" for whole spell)

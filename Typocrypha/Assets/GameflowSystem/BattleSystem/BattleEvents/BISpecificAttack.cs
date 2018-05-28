@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BISpecificAttack : BattleInterruptTrigger
 {
+    public int numAttacks = 1;
     public BattleField.FieldPosition caster = BattleField.FieldPosition.ANY;
     public BattleField.FieldPosition target = BattleField.FieldPosition.ANY;
     public string rootKeywordIs = string.Empty;
@@ -16,15 +17,18 @@ public class BISpecificAttack : BattleInterruptTrigger
     public int damageIsAtLeast = 0;
     public Elements.vsElement vsElementMustBe = Elements.vsElement.ANY;
 
+    private int curr_attacks = 0;
+
     public override bool checkTrigger(BattleField state)
     {
+        bool ret = false;
         if (caster == BattleField.FieldPosition.PLAYER)
-            return checkCast(state, state.last_player_cast, state.last_player_spell);
+            ret = checkCast(state, state.last_player_cast, state.last_player_spell);
         else if (caster == BattleField.FieldPosition.LEFT || caster == BattleField.FieldPosition.MIDDLE || caster == BattleField.FieldPosition.RIGHT)
-            return checkCast(state, state.last_enemy_cast, state.last_enemy_spell);
+            ret = checkCast(state, state.last_enemy_cast, state.last_enemy_spell);
         else if (caster == BattleField.FieldPosition.ANY)
-            return checkCast(state, state.last_player_cast, state.last_player_spell) || checkCast(state, state.last_enemy_cast, state.last_enemy_spell);
-        return false;
+            ret = checkCast(state, state.last_player_cast, state.last_player_spell) || checkCast(state, state.last_enemy_cast, state.last_enemy_spell);
+        return (ret && ++curr_attacks >= numAttacks);
     }
     protected bool checkCast(BattleField state, List<CastData> dataToCheck, SpellData spellToCheck)
     {

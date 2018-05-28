@@ -62,6 +62,7 @@ public class TextEvents : MonoBehaviour {
             {"prompt", prompt},
 			{"glitch", glitch},
 			{"set-name", setName},
+            {"set-info", setInfo},
 			{"frame", frame},
 			{"heal-player", healPlayer},
 			{"clear-log", clearTextLog},
@@ -421,9 +422,23 @@ public class TextEvents : MonoBehaviour {
 		yield return true;
 	}
 
-	// makes the screenframe come in/out
-	// input: [0]: [in|out], 'in' re-reveals screenframe, 'out' hides it
-	IEnumerator frame(string[] opt) {
+    // Sets specified info from last inputed text
+    // Input: [0]: string: the key of the info to set (from input if only one arg)
+    //        [1]: string: the data to set the info to (optional)
+    IEnumerator setInfo(string[] opt)
+    {
+        if (opt.Length == 1)
+            PlayerDialogueInfo.main.setInfo(opt[0], DialogueManager.main.answer);
+        else if (opt.Length == 2)
+            PlayerDialogueInfo.main.setInfo(opt[0], opt[1]);
+        else
+            throw new System.Exception("TextEvents.cs: setInfo: Too many args, use 1 or 2");
+        yield return true;
+    }
+
+    // makes the screenframe come in/out
+    // input: [0]: [in|out], 'in' re-reveals screenframe, 'out' hides it
+    IEnumerator frame(string[] opt) {
 		if (opt [0].CompareTo ("out") == 0) { // hide screenframe
 			screen_frame.SetActive(false);
 		} else { // show screenframe
