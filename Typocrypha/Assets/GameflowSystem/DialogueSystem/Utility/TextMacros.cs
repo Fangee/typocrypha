@@ -29,6 +29,7 @@ public class TextMacros : MonoBehaviour {
 			{"speak", macroSpeaker},
             {"tl", macroTranslate},
             {"translate", macroTranslate},
+			{"languageTL", macroTranslatedLanguage},
         };
 		color_map = new Dictionary<string, string> {
 			{ "spell",      "#ff6eff" },
@@ -170,4 +171,8 @@ public class TextMacros : MonoBehaviour {
         }
         return new string (op);
     }
+
+	string macroTranslatedLanguage(string[] opt) {
+		return "Ihsuik";
+	}
 }
