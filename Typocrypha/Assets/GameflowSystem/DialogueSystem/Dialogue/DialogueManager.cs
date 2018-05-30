@@ -111,37 +111,41 @@ public class DialogueManager : MonoBehaviour {
 			// Create dialogue box
 			DialogueItem d_item = curr_dialogue.GetComponents<DialogueItem>()[++curr_line];
 			DialogueBox d_box = null;
-			if (d_item.GetType () == typeof(DialogueItemJump)) {
-				curr_dialogue = ((DialogueItemJump)d_item).target.gameObject;
-				GameflowManager.main.curr_item = ((DialogueItemJump)d_item).target.gameObject.transform.GetSiblingIndex () - 1;
-				return false;
-			} else if (d_item.GetType () == typeof(DialogueItemVN)) {
-				Sprite mc_sprite = ((DialogueItemVN)d_item).mc_sprite;
-				Sprite codec_sprite = ((DialogueItemVN)d_item).codec_sprite;
-				if (mc_sprite != null)
-					VNMCSprite.sprite = mc_sprite;
-				if (codec_sprite != null)
-					VNCodecSprite.sprite = codec_sprite;
-				VNView.SetActive (true);
-				ChatView.SetActive (false);
-				ANView.SetActive (false);
-				d_box = VNDialogueBox;
-				VNSpeaker.text = DialogueParser.main.substituteMacros(d_item.speaker_name);
-			} else if (d_item.GetType () == typeof(DialogueItemChat)) {
-				VNView.SetActive (false);
-				ChatView.SetActive (true);
-				ANView.SetActive (false);
-				//clearLog (ChatView);
-				GameObject d_obj = Instantiate (dialogue_box_prefab, ChatContent);
-				d_box = d_obj.GetComponent<DialogueBox> ();
-			} else if (d_item.GetType () == typeof(DialogueItemAN)) {
-				VNView.SetActive (false);
-				ChatView.SetActive (false);
-				ANView.SetActive (true);
-				//clearLog (ANView);
-				GameObject d_obj = Instantiate (an_dialouge_box_prefab, ANContent);
-				d_box = d_obj.GetComponent<DialogueBox> ();
-			}
+            if (d_item.GetType() == typeof(DialogueItemJump)) {
+                curr_dialogue = ((DialogueItemJump)d_item).target.gameObject;
+                GameflowManager.main.curr_item = ((DialogueItemJump)d_item).target.gameObject.transform.GetSiblingIndex() - 1;
+                return false;
+            } else if (d_item.GetType() == typeof(DialogueItemConditionalJump)) {
+                curr_dialogue = ((DialogueItemConditionalJump)d_item).evaluateTarget().gameObject;
+                GameflowManager.main.curr_item = curr_dialogue.transform.GetSiblingIndex() - 1;
+                return false;
+            } else if (d_item.GetType() == typeof(DialogueItemVN)) {
+                Sprite mc_sprite = ((DialogueItemVN)d_item).mc_sprite;
+                Sprite codec_sprite = ((DialogueItemVN)d_item).codec_sprite;
+                if (mc_sprite != null)
+                    VNMCSprite.sprite = mc_sprite;
+                if (codec_sprite != null)
+                    VNCodecSprite.sprite = codec_sprite;
+                VNView.SetActive(true);
+                ChatView.SetActive(false);
+                ANView.SetActive(false);
+                d_box = VNDialogueBox;
+                VNSpeaker.text = DialogueParser.main.substituteMacros(d_item.speaker_name);
+            } else if (d_item.GetType() == typeof(DialogueItemChat)) {
+                VNView.SetActive(false);
+                ChatView.SetActive(true);
+                ANView.SetActive(false);
+                //clearLog (ChatView);
+                GameObject d_obj = Instantiate(dialogue_box_prefab, ChatContent);
+                d_box = d_obj.GetComponent<DialogueBox>();
+            } else if (d_item.GetType() == typeof(DialogueItemAN)) {
+                VNView.SetActive(false);
+                ChatView.SetActive(false);
+                ANView.SetActive(true);
+                //clearLog (ANView);
+                GameObject d_obj = Instantiate(an_dialouge_box_prefab, ANContent);
+                d_box = d_obj.GetComponent<DialogueBox>();
+            }
 			d_box.d_item = d_item;
 			d_box.speaker = DialogueParser.main.substituteMacros(d_item.speaker_name);
 			// Remove old text effects

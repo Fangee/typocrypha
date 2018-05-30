@@ -9611,7 +9611,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: '{speak,mc}Uh {tl,Hello?}'
+  text: '[set-info=c-tl,a]{speak,mc}Uh {tl,Hello?}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -14632,7 +14632,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: "{speak,mc}|shake|O-OK shapeshifters! I know you\u2019re hiding there!\\shake\\"
+  text: "[set-info=c-tl,c]{speak,mc}|shake|O-OK shapeshifters! I know you\u2019re
+    hiding there!\\shake\\"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -27461,7 +27462,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: '{speak,mc}Uh, hi there!'
+  text: '[set-info=c-tl,b]{speak,mc}Uh, hi there!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -39692,6 +39693,7 @@ GameObject:
   - component: {fileID: 1543939414}
   - component: {fileID: 1543939415}
   - component: {fileID: 1543939416}
+  - component: {fileID: 1543939417}
   m_Layer: 5
   m_Name: D_SHOW_VARIED_DIALOGUE_START
   m_TagString: Untagged
@@ -39824,6 +39826,34 @@ MonoBehaviour:
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
+--- !u!114 &1543939417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1543939410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fd1ed7a3f592774abcd804a4a0e0ad7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: 
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  conditionKey: c-tl
+  conditionCases:
+  - a
+  - b
+  - c
+  targets:
+  - {fileID: 226019616}
+  - {fileID: 193480896}
+  - {fileID: 590508434}
 --- !u!1 &1551729104
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,7 +29,8 @@ public class PlayerDialogueInfo : MonoBehaviour {
     public string getInfo(string key) {
         if (player_info_map.ContainsKey(key))
             return player_info_map[key];
-        throw new System.Exception("PlayerDialogueInfo: getInfo: no info with key: " + key);
+        Debug.LogWarning("PlayerDialogueInfo: no info with key " + key + ", returning undefined");
+        return "undefined";
     }
 
     // set an info string in the info map
