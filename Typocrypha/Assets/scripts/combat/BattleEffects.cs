@@ -177,8 +177,8 @@ public class BattleEffects : MonoBehaviour {
 	}
 
 	// flash the damage overlay sprite
-	public void flashDamageOverlay(float speed){
+	public void flashDamageOverlay(float speed, string anim){
 		damage_overlay_animator.speed = speed;
-		damage_overlay_animator.Play ("anim_overlay_damage");
+		damage_overlay_animator.Play(anim);
 	}
 }

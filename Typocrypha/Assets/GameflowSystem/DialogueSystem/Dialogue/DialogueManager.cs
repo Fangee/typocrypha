@@ -30,6 +30,10 @@ public class DialogueManager : MonoBehaviour {
 	public float top_space; // Space between top of window and dialogue
 
 	public GameObject input_display_choices; // Game object displaying dialogue choices
+	public GameObject input_display_C; // Dialogue choice C box
+
+	public GameObject spacebar_icon_vn; // Spacebar icon VN view
+	public Animator animator_spacebar_vn; // Spacebar icon key animator
 
 	[HideInInspector] public bool pause_scroll; // Pause text scroll
 	[HideInInspector] public bool block_input; // Blocks user input
@@ -63,7 +67,16 @@ public class DialogueManager : MonoBehaviour {
 	}
 
 	void Update() {
-		if (block_input) return;
+		if (history [history.Count - 1].cr_scroll == null && !input) {
+			spacebar_icon_vn.SetActive (true);
+		}
+		if (block_input) {
+			spacebar_icon_vn.SetActive (true);
+			animator_spacebar_vn.Play ("anim_key_spacebar_no");
+			return;
+		} else {
+			animator_spacebar_vn.Play ("anim_key_spacebar");
+		}
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			if (!nextLine ()) {
 				if (isInterrupt) {
@@ -106,6 +119,7 @@ public class DialogueManager : MonoBehaviour {
 			history [history.Count - 1].dumpText ();
 		} else {
 			//if (!input && Input.GetKeyDown (KeyCode.Space)) AudioPlayer.main.playSFX ("sfx_advance_text");
+			spacebar_icon_vn.SetActive (false);
 			if (input) return true;
 			if (curr_line >= curr_dialogue.GetComponents<DialogueItem>().Length - 1) return false;
 			// Create dialogue box
@@ -179,9 +193,18 @@ public class DialogueManager : MonoBehaviour {
 		yield return new WaitUntil (() => d_box.cr_scroll == null);
 		input_field.gameObject.SetActive (true);
 		input_field.ActivateInputField ();
+		animator_spacebar_vn.Play("anim_key_spacebar_no");
 		if (d_item.input_display != null)
 			input_display = Instantiate (d_item.input_display, transform);
 		if (d_item.input_options.Length > 0) {
+			switch (d_item.input_options.Length) {
+			case 2:
+				input_display_C.SetActive (false);
+				break;
+			case 3:
+				input_display_C.SetActive (true);
+				break;
+			}
 			populateChoices ();
 			input_display_choices.SetActive (true);
 		}
@@ -225,6 +248,7 @@ public class DialogueManager : MonoBehaviour {
 				curr_dialogue = d_item.input_branches [i].gameObject;
 				GameflowManager.main.curr_item = d_item.input_branches [i].gameObject.transform.GetSiblingIndex ();
 				curr_line = -1;
+				animator_spacebar_vn.Play("anim_key_spacebar");
 				AudioPlayer.main.playSFX ("sfx_enter");
 			} else { // If not found, try again
 				curr_line--;
@@ -256,6 +280,7 @@ public class DialogueManager : MonoBehaviour {
 					curr_dialogue = d_item.input_branches [i].gameObject;
 					GameflowManager.main.curr_item = d_item.input_branches [i].gameObject.transform.GetSiblingIndex ();
 					curr_line = -1;
+					animator_spacebar_vn.Play("anim_key_spacebar");
 					AudioPlayer.main.playSFX ("sfx_enter");
 				} else { // If not found, try again
 					curr_line--;
@@ -263,6 +288,7 @@ public class DialogueManager : MonoBehaviour {
 					AudioPlayer.main.playSFX ("sfx_botch");
 				}
 			} else {
+				animator_spacebar_vn.Play("anim_key_spacebar");
 				AudioPlayer.main.playSFX ("sfx_enter");
 			}
 			//}

@@ -125,7 +125,21 @@ public class SpellEffects : MonoBehaviour {
 				if (d.repel)
 					dmgNumColor = new Color (255, 0, 255);//new Color(220, 86, 249);
 				BattleEffects.main.screenShake (0.15f + shakeIntensity / 2, shakeIntensity + 0.3f);
-				BattleEffects.main.flashDamageOverlay (1.0f);
+				switch (d.element) {
+				case 0:
+					BattleEffects.main.flashDamageOverlay (1.0f, "anim_overlay_damage");
+					break;
+				case 1:
+					BattleEffects.main.flashDamageOverlay (1.0f, "anim_overlay_damage_fire");
+					break;
+				case 2:
+					BattleEffects.main.flashDamageOverlay (1.0f, "anim_overlay_damage_ice");
+					break;
+				case 3:
+					BattleEffects.main.flashDamageOverlay (1.0f, "anim_overlay_damage_volt");
+					break;
+				}
+				//BattleEffects.main.flashDamageOverlay (1.0f, "anim_overlay_damage");
 			} else if (d.Target.CasterType == ICasterType.ENEMY) {
 				// Gradually lower enemy HP gauge displays
 				BattleManagerS.main.uiManager.setEnabledGauges(true);
@@ -167,6 +181,9 @@ public class SpellEffects : MonoBehaviour {
 			string heal = "+" + (-1 * (d.damageInflicted)).ToString () + "<size=32>HP</size>";
 			AudioPlayer.main.playSFX ("sfx_heal");
 			popp.spawnText (heal, POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET, new Color(27f/255f, 195f/255f, 43f/255f));
+			if (d.Target.CasterType == ICasterType.PLAYER) {
+				BattleEffects.main.flashDamageOverlay (1.0f, "anim_overlay_damage_heal");
+			}
 		} else {
 			if (d.elementalData == Elements.vsElement.BLOCK) {
 				popp.spawnText ("NULL", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET, Color.gray);
