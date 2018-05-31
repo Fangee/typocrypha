@@ -342,7 +342,7 @@ public class DialogueManager : MonoBehaviour {
 			if (spr_r.sprite.name.Contains (spr_name)) {
 				spr_r.color = new Color (1, 1, 1, 1);
 			} else {
-				spr_r.color = new Color (0.5f, 0.5f, 0.5f, 1);
+				spr_r.color = new Color (0.25f, 0.25f, 0.25f, 1);
 			}
 		}
 	}

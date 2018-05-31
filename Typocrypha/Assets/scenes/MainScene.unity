@@ -2015,8 +2015,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: 
-  text: '[stop-music]Ah!'
+  speaker_name: Cat Person
+  text: '[stop-music]{speak,cat_person}Ah!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -2050,7 +2050,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '{c,ui-terms}> The Cat Person falls to the ground.{c,}'
+  text: '[set-bg=bg_alleycat]{c,ui-terms}> The Cat Person falls to the ground.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -5791,6 +5791,7 @@ GameObject:
   - component: {fileID: 194396689}
   - component: {fileID: 194396690}
   - component: {fileID: 194396691}
+  - component: {fileID: 194396698}
   - component: {fileID: 194396692}
   - component: {fileID: 194396693}
   - component: {fileID: 194396694}
@@ -5836,14 +5837,14 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: "[remove-all-character]{c,ui-terms}> There\u2019s a swarm of cats in front
-    of a house. Someone is feeding them.{c,}"
+  text: "[remove-all-character][set-bg=bg_alleycat_person]{c,ui-terms}> There\u2019s
+    a swarm of cats in front of a house. Someone is feeding them.{c,}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: eb416a3691a496849952474a70a1f306, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 93a24b5b8440cf5479b4df884abb69b3, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &194396684
@@ -5924,8 +5925,10 @@ MonoBehaviour:
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
+  char_sprite_pos:
+  - {x: 4, y: -0.5}
 --- !u!114 &194396688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6035,15 +6038,21 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat Person
-  text: '{tl,Hmm? You all like cats too?}'
+  text: '{speak,cat_person}{tl,Hmm? You all like cats too?}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: 865827466435f2145a279e657fd874e9, type: 3}
+  - {fileID: 21300000, guid: ace760d0494bd6744abd6c165e5a26cd, type: 3}
+  - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
+  char_sprite_pos:
+  - {x: 5, y: -0.5}
+  - {x: -6, y: -0.5}
+  - {x: -3, y: -0.5}
 --- !u!114 &194396693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6152,6 +6161,29 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Illyia
   text: "{speak,illyia}Really? Why didn\u2019t you tell us sooner!"
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &194396698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 194396681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '[remove-all-character][next]'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -9560,6 +9592,7 @@ GameObject:
   m_Component:
   - component: {fileID: 327953939}
   - component: {fileID: 327953941}
+  - component: {fileID: 327953953}
   - component: {fileID: 327953940}
   - component: {fileID: 327953942}
   - component: {fileID: 327953943}
@@ -9618,8 +9651,10 @@ MonoBehaviour:
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: 865827466435f2145a279e657fd874e9, type: 3}
+  char_sprite_pos:
+  - {x: 5, y: -0.5}
 --- !u!114 &327953941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9645,7 +9680,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat Person
-  text: "{tl,Hmm? Oh hello! What\u2019s up?}"
+  text: "{speak,cat_person}{tl,Hmm? Oh hello! What\u2019s up?}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -9737,7 +9772,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat Person
-  text: '[play-sfx=sfx_damage_number][screen-shake=2.0,0.1]!!'
+  text: '{speak,cat_person}[play-sfx=sfx_damage_number][screen-shake=2.0,0.1]!!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -9760,8 +9795,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat Person
-  text: '{c,evil-eye}EVIL EYE{c,} {tl,Renaissance? I will not stand for followers
-    of that accursed eye! Do you have a death wish!?}'
+  text: '{speak,cat_person}{c,evil-eye}EVIL EYE{c,} {tl,Renaissance? I will not stand
+    for followers of that accursed eye! Do you have a death wish!?}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -9830,7 +9865,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat Person
-  text: "{tl,You aren\u2019t from that eye-sore of a floating city are you?}"
+  text: "{speak,cat_person}{tl,You aren\u2019t from that eye-sore of a floating city
+    are you?}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -9882,6 +9918,29 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   target: {fileID: 1712987603}
+--- !u!114 &327953953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 327953938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '[remove-all-character][next]'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &328106859
 GameObject:
   m_ObjectHideFlags: 0
@@ -14401,6 +14460,7 @@ GameObject:
   m_Component:
   - component: {fileID: 586949733}
   - component: {fileID: 586949745}
+  - component: {fileID: 586949735}
   - component: {fileID: 586949744}
   - component: {fileID: 586949743}
   - component: {fileID: 586949742}
@@ -14455,6 +14515,29 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   target: {fileID: 1712987603}
+--- !u!114 &586949735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 586949732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '[remove-all-character][next]'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!114 &586949737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14492,8 +14575,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat Person
-  text: "{tl,You\u2019re fucking insane! What do you think you\u2019re doing to these
-    cats?}"
+  text: "{speak,cat_person}|shake|{tl,You\u2019re fucking insane! What do you think
+    you\u2019re doing to these cats?}\\shake\\"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -14563,7 +14646,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat Person
-  text: "{tl,What the hell do you think you\u2019re doing!?}"
+  text: "{speak,cat_person}{tl,What the hell do you think you\u2019re doing!?}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -14586,7 +14669,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat Person
-  text: '!!!'
+  text: '{speak,cat_person}!!!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -14640,8 +14723,10 @@ MonoBehaviour:
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: 865827466435f2145a279e657fd874e9, type: 3}
+  char_sprite_pos:
+  - {x: 5, y: -0.5}
 --- !u!114 &586949745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27179,6 +27264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1088031915}
   - component: {fileID: 1088031927}
+  - component: {fileID: 1088031929}
   - component: {fileID: 1088031926}
   - component: {fileID: 1088031925}
   - component: {fileID: 1088031924}
@@ -27230,7 +27316,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat Person
-  text: '{tl,Huh? Are you going to hurt the cats?!? What do you want with Lulu-}'
+  text: '{speak,cat_person}{tl,Huh? Are you going to hurt the cats?!? What do you
+    want with Lulu-}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -27323,7 +27410,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat Person
-  text: "{tl,Look I don\u2019t know what you want.}"
+  text: "{speak,cat_person}{tl,Look I don\u2019t know what you want.}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -27369,7 +27456,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat Person
-  text: "{tl,What? I don\u2019t speak English. Who are you?}"
+  text: "{speak,cat_person}{tl,What? I don\u2019t speak English. Who are you?}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -27439,7 +27526,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat Person
-  text: '?'
+  text: '{speak,cat_person}?'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -27469,8 +27556,10 @@ MonoBehaviour:
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: 865827466435f2145a279e657fd874e9, type: 3}
+  char_sprite_pos:
+  - {x: 5, y: -0.5}
 --- !u!114 &1088031927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27502,6 +27591,29 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   target: {fileID: 1712987603}
+--- !u!114 &1088031929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1088031914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '[remove-all-character][next]'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &1089634084
 GameObject:
   m_ObjectHideFlags: 0
@@ -41594,7 +41706,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[stop-music][set-bg=bg_arizona][block=t][fade=in,2,0,0,0][pause=2][block=f]{c,ui-terms}>
+  text: '[stop-music][set-bg=bg_street][block=t][fade=in,2,0,0,0][pause=2][block=f]{c,ui-terms}>
     |shake|*rustle rustle*\shake\{c,}'
   input_display: {fileID: 0}
   input_options: []
@@ -41750,7 +41862,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 14c70df2607f3d74393f4ae62fe73e61, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1596509897
@@ -45072,7 +45184,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat Person
-  text: '[play-music=bgm_curse]|shake|{tl,Huh? Kitty noooo!}\shake\'
+  text: '[set-bg=bg_alleycat_person2][play-music=bgm_curse]{speak,cat_person}|shake|{tl,Huh?
+    Kitty noooo!}\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
