@@ -201,35 +201,11 @@ public class SpellDictionary : MonoBehaviour
             float.TryParse(cols[++ind].Trim(), out s.critModM);
             int.TryParse(cols[++ind].Trim(), out s.statusEffectChanceMod);
             float.TryParse(cols[++ind].Trim(), out s.statusEffectChanceModM);
-            string pattern = cols[++ind].Trim();
-            if (pattern.Contains("N"))
+            string[] pattern = cols[++ind].Trim().Split(',');
+            if (pattern[0].Contains("N"))
                 s.isTarget = false;
-            else if (pattern.Contains("A"))
-            {
-                s.targets = new TargetData(true);
-                s.targets.selfCenter = false;
-                s.targets.targeted = false;
-            }
             else
-            {
-                s.targets = new TargetData(false);
-                if (pattern.Contains("L"))
-                    s.targets.enemyL = true;
-                if (pattern.Contains("M"))
-                    s.targets.enemyM = true;
-                if (pattern.Contains("R"))
-                    s.targets.enemyR = true;
-                if (pattern.Contains("l"))
-                    s.targets.allyL = true;
-                if (pattern.Contains("m"))
-                    s.targets.allyM = true;
-                if (pattern.Contains("r"))
-                    s.targets.allyR = true;
-                if (pattern.Contains("S"))
-                    s.targets.selfCenter = true;
-                if (pattern.Contains("T"))
-                    s.targets.targeted = true;
-            }
+                s.targets = TargetMod.createFromString(pattern[0].Trim('"'), pattern);
             styles.Add(key, s);
             i++;
         }
@@ -466,7 +442,7 @@ public class SpellDictionary : MonoBehaviour
         {
             TargetData t = new TargetData(false);
             t.copyFrom(spells[data.root].targetData);
-            t.modify(styles[data.style].targets);
+            styles[data.style].targets.modify(t);
             return t.toArrayPair(targets, selected, allies, position);
         }
     }
@@ -590,6 +566,17 @@ public class SpellData
         if (style != null)
             result += ("-" + style);
         return result.ToUpper();
+    }
+    //Returns a string representation of a component of a spell (used for displaying casts in spelleffects)
+    public string getWord(int index)
+    {
+        if (index == 0)
+            return style;
+        if (index == 1)
+            return root;
+        if (index == 2)
+            return element;
+        throw new System.Exception("Not a valid spell index");
     }
     //Returns a copy of this spellData
     public SpellData clone()

@@ -345,6 +345,17 @@ public class BattleManagerS : MonoBehaviour {
         }
         return false;
     }
+    public void postInterrupt()
+    {
+        for (int i = 0; i < field.enemy_arr.Length; i++)
+        {
+            Enemy e = field.enemy_arr[i];
+            if (e != null && !e.Is_dead)
+            {
+                e.AI.updateState(field.enemy_arr, e.Position, field.player_arr, EnemyAI.Update_Case.AFTER_INTERRUPT);
+            }
+        }
+    }
 
     //Create all enemies for this wave
 	private IEnumerator createEnemies(BattleWave wave){

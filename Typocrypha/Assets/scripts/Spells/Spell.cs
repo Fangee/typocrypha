@@ -40,7 +40,7 @@ public abstract class Spell
             {
                 if (modFlag == ModFlags.NO_TARGETING)
                     return;
-                targetData.modify(s.targets);
+                s.targets.modify(targetData);
             }
             //Apply power mod
             power = Mathf.CeilToInt(power * s.powerModM);
@@ -328,11 +328,19 @@ public class StyleMod
     public int statusEffectChanceMod;
     public float statusEffectChanceModM;
     public bool isTarget = true;
-    public TargetData targets;
+    public TargetMod targets;
 }
 //Contains targeting data and associated targeting modification methods
 public class TargetData
 {
+    public bool enemyL;
+    public bool enemyM;
+    public bool enemyR;
+    public bool allyL;
+    public bool allyM;
+    public bool allyR;
+    public bool selfCenter;
+    public bool targeted;
     public TargetData(bool b)
     {
         enemyL = b;
@@ -345,7 +353,39 @@ public class TargetData
         targeted = b;
 
     }
-
+    public TargetData(string pattern)
+    {
+        if (pattern.Contains("A"))
+        {
+            enemyL = true;
+            enemyM = true;
+            enemyR = true;
+            allyL = true;
+            allyM = true;
+            allyR = true;
+            selfCenter = false;
+            targeted = false;
+        }
+        else
+        {
+            if (pattern.Contains("L"))
+                enemyL = true;
+            if (pattern.Contains("M"))
+                enemyM = true;
+            if (pattern.Contains("R"))
+                enemyR = true;
+            if (pattern.Contains("l"))
+                allyL = true;
+            if (pattern.Contains("m"))
+                allyM = true;
+            if (pattern.Contains("r"))
+                allyR = true;
+            if (pattern.Contains("S"))
+                selfCenter = true;
+            if (pattern.Contains("T"))
+                targeted = true;
+        }
+    }
     public Pair<bool[], bool[]> toArrayPair(ICaster[] targets, int selected, ICaster[] allies, int position)
     {
         bool[] enemy_r = { false, false, false };
@@ -374,52 +414,38 @@ public class TargetData
             ally_r[i] = true;
         return new Pair<bool[], bool[]>(enemy_r, ally_r);
     }
-    public bool enemyL;
-    public bool enemyM;
-    public bool enemyR;
-    public bool allyL;
-    public bool allyM;
-    public bool allyR;
-    public bool selfCenter;
-    public bool targeted;
     //Modifies this by target data mod
     public void modify(TargetData mod)
     {
-        //bool targets_enemy = (enemyL || enemyM || enemyR);
-        //bool targets_ally = (allyL || allyM || allyR);
-        //if (targets_enemy && targets_ally)
-        //{
-        //    enemyL = mod.enemyL;
-        //    enemyM = mod.enemyM;
-        //    enemyR = mod.enemyR;
-        //    allyL = mod.enemyL;
-        //    allyM = mod.enemyM;
-        //    allyR = mod.enemyR;
-        //    targeted = mod.targeted;
-        //    selfCenter = mod.selfCenter;
-        //}
-        //else if (targets_enemy)
-        //{
-        //    enemyL = mod.enemyL;
-        //    enemyM = mod.enemyM;
-        //    enemyR = mod.enemyR;
-        //    targeted = mod.targeted;
-        //}
-        //else if(targets_ally)
-        //{
-        //    allyL = mod.allyL;
-        //    allyM = mod.allyM;
-        //    allyR = mod.allyR;
-        //    selfCenter = mod.selfCenter;
-        //}
-        enemyL = mod.enemyL;
-        enemyM = mod.enemyM;
-        enemyR = mod.enemyR;
-        allyL = mod.allyL;
-        allyM = mod.allyM;
-        allyR = mod.allyR;
-        targeted = mod.targeted;
-        selfCenter = mod.selfCenter;
+        bool targets_enemy = (enemyL || enemyM || enemyR);
+        bool targets_ally = (allyL || allyM || allyR);
+        bool mod_targets_enemy = (mod.enemyL || mod.enemyM || mod.enemyR);
+        bool mod_targets_ally = (mod.allyL || mod.allyM || mod.allyR);
+        if (targets_enemy && targets_ally && mod_targets_ally && mod_targets_enemy)
+        {
+            enemyL = mod.enemyL;
+            enemyM = mod.enemyM;
+            enemyR = mod.enemyR;
+            allyL = mod.allyL;
+            allyM = mod.allyM;
+            allyR = mod.allyR;
+            targeted = mod.targeted;
+            selfCenter = mod.selfCenter;
+        }
+        else if (targets_enemy)
+        {
+            enemyL = mod.enemyL;
+            enemyM = mod.enemyM;
+            enemyR = mod.enemyR;
+            targeted = mod.targeted;
+        }
+        else if (targets_ally)
+        {
+            allyL = mod.allyL;
+            allyM = mod.allyM;
+            allyR = mod.allyR;
+            selfCenter = mod.selfCenter;
+        }
     }
     public void copyFrom(TargetData toCopy)
     {

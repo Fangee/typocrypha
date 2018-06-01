@@ -75,13 +75,15 @@ public class DialogueManager : MonoBehaviour {
 			animator_spacebar_vn.Play ("anim_key_spacebar_no");
 			return;
 		} else {
-			animator_spacebar_vn.Play ("anim_key_spacebar");
+            if(spacebar_icon_vn.activeInHierarchy)
+			    animator_spacebar_vn.Play ("anim_key_spacebar");
 		}
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			if (!nextLine ()) {
 				if (isInterrupt) {
                     if(!BattleManagerS.main.playSceneFromQueue()) {
                         BattleManagerS.main.setPause(false);
+                        BattleManagerS.main.postInterrupt();
                         isInterrupt = false;
                         setEnabled(false);
                     }
@@ -361,7 +363,7 @@ public class DialogueManager : MonoBehaviour {
 		}
 	}
 
-	// Highlights given character, and dims rest (0.5 greyscale)
+	// Highlights given character, and dims rest (0.25 greyscale)
 	public void soleHighlight(string spr_name) {
 		foreach(GameObject chr_spr in chr_spr_list) {
 			SpriteRenderer spr_r = chr_spr.GetComponent<SpriteRenderer> ();

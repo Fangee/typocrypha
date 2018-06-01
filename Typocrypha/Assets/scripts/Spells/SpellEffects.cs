@@ -65,9 +65,9 @@ public class SpellEffects : MonoBehaviour {
                    BattleEffects.main.screenShake(0.15f + shakeIntensity/8, 0.05f + shakeIntensity);
                 shakeIntensity += shakeIntensityMod;
 				if (d.repel) {
-					popp.spawnText (s.root.ToUpper()+"!", POP_TIMER, d.Caster.Transform.position, Color.black, new Color(1,111f/255f,1));
+					popp.spawnText (s.getWord(i).ToUpper()+"!", POP_TIMER, d.Caster.Transform.position, Color.black, new Color(1,111f/255f,1));
 				} else {
-					popp.spawnText (s.root.ToUpper()+"!", POP_TIMER, d.Caster.Transform.position, new Color(1,111f/255f,1), Color.white);
+					popp.spawnText (s.getWord(i).ToUpper()+"!", POP_TIMER, d.Caster.Transform.position, new Color(1,111f/255f,1), Color.white);
 				}
                 yield return new WaitForSeconds(0.333F);
 			}
