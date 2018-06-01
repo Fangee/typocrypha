@@ -10,7 +10,7 @@ gun	attack	High Crit (secret)	anim_spell_crush	sfx_crush	15	15	100	45	0	MT	None	
 cleaver	attack	a targeted wide atk	anim_spell_slash	sfx_slash	10	10	75	10	0	LMRT	None	0		
 sacrifice	attack	"hurts self, does big ds"	anim_spell_slash	sfx_slash	40	10	95	10	0	LRmS	None	0		
 crush	attack	applies def- debuff	anim_spell_crush	sfx_crush	10	10	80	10	0	MT	D	100		
-splash	attack	always misses (debug )	anim_spell_slash	sfx_slash	1	1	-1000	10	0	MT	None	0		
+splash	attack	not meant to cause harm	anim_spell_slash	sfx_slash	9999	5	-1000	10	0	MT	None	0		
 poke	attack	high damage (debug)	anim_spell_slash	sfx_slash	999	1	100	0	0	MT	None	0		
 crit	attack	always crits (debug)	anim_spell_slash	sfx_slash	2	1	100	100	0	MT	None	0		
 death	attack	kills self (debug)	anim_spell_slash	sfx_slash	999	1	100	0	0	mS	None	0		

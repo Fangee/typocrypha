@@ -123,9 +123,10 @@ GameObject:
   - component: {fileID: 2902969}
   - component: {fileID: 2902974}
   - component: {fileID: 2902973}
-  - component: {fileID: 2902972}
   - component: {fileID: 2902971}
   - component: {fileID: 2902970}
+  - component: {fileID: 2902975}
+  - component: {fileID: 2902972}
   m_Layer: 5
   m_Name: BI_IJIRAQ_NULLHIT
   m_TagString: Untagged
@@ -164,15 +165,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: Soul of Mackey
-  text: '{t,mackey}Those spells are of the {c,spell}Physical{c,} element-type. {c,highlight}Try
-    to figure out how the enemy is using different elements.{c,}'
+  speaker_name: Illyia
+  text: '{t,illyia}You''ll have to apply an {c,spell}Element Prefix{c,} like {c,spell}AGNI{c,}
+    to your spell to get through its defenses.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: b1c187b112cd2fc4f9fc1bf45026c771, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2902971
@@ -188,15 +189,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: Soul of Mackey
-  text: '{t,mackey}{NAME}. This isn''t the place for basic {c,spell}SWORD{c,}s and
-    {c,spell}LANCE{c,}s.'
+  speaker_name: Illyia
+  text: '{t,illyia}Oh shit, {NAME}. This demon {c,highlight}Blocks{c,} physical attacks.
+    {c,spell}SWORD{c,}s and {c,spell}LANCE{c,}s are useless by themselves!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: b1c187b112cd2fc4f9fc1bf45026c771, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2902972
@@ -212,14 +213,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: 
-  text: '> An image of Mackey enters your mind...'
+  speaker_name: Illyia
+  text: '{t,illyia}try inserting a word sperator using your {c,ui-terms}Space Bar{c,}
+    to cast {c,spell}AGNI-SWORD{c,} on {c,enemy-name}Ijiraq{c,}!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: b1c187b112cd2fc4f9fc1bf45026c771, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2902973
@@ -257,6 +259,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2902975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2902968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Illyia
+  text: '{t,illyia}{c,spell}AGNI{c,} is the official TYPOCRYPHA prefix for the {c,orange}fire{c,}
+    element.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &3761278
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,11 +1049,9 @@ GameObject:
   m_Component:
   - component: {fileID: 42027555}
   - component: {fileID: 42027561}
-  - component: {fileID: 42027560}
   - component: {fileID: 42027559}
   - component: {fileID: 42027558}
   - component: {fileID: 42027557}
-  - component: {fileID: 42027556}
   m_Layer: 5
   m_Name: BI_IJIRAQ2_IN
   m_TagString: Untagged
@@ -1053,29 +1077,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &42027556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 42027554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: Ala
-  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}BE CONSUMED BY OUR POWER!{c,}'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: f3884a14518795b40afe5c61a9ac4cbe, type: 3}
-  char_sprites: []
-  char_sprite_pos: []
 --- !u!114 &42027557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1090,8 +1091,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Ijiraq
-  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}I, {c,enemy-name}IJIRAQ,{c,} ONLY RESPECT
-    EYE! EYE ALONE! THAT MEANS YOU DIE!{c,}'
+  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}TIME TO {c,cyan}|shake|FREEZE\shake\{c,}
+    YOUR ACCURSED TYPOCRYPHA BEFORE YOU CAN BURN ME AGAIN!{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -1114,8 +1115,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Ijiraq
-  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}BUT HUMAN. YOU NOT LIVE FOREVER. UNLIKE
-    EYE! PUNY MORTAL.{c,}'
+  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}ICEY YOU ARE A GREATER THREAT THAN I
+    HAD THOUGH.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -1138,38 +1139,13 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Ijiraq
-  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}BRAVE MAGICIAN, YOU ARE! STRONG, LIKE
-    EYE!{c,}'
+  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}BRAVE MAGICIAN, YOU HAVE HURT ME!{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 21300000, guid: 014f8993b714f3c489414f5fc3221115, type: 3}
-  char_sprites: []
-  char_sprite_pos: []
---- !u!114 &42027560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 42027554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: Ala
-  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}CHILD, YOUR HOPE IS FUTILE. I, THE MISTRESS
-    {c,enemy-name}ALA{c,}, WILL DEVOUR THE SUNLIGHT FROM YOUR HEART.{c,}'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: f3884a14518795b40afe5c61a9ac4cbe, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &42027561
@@ -1591,7 +1567,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &57851097
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1983,7 +1959,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &74530118
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3217,7 +3193,7 @@ GameObject:
   - component: {fileID: 113542836}
   - component: {fileID: 113542835}
   m_Layer: 5
-  m_Name: BI_VR_TUTW2_1
+  m_Name: BI_TUT_INTRO2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3254,10 +3230,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: '{t,mackey}[heal-player][play-sfx=sfx_mystery_effect]I''ve healed any wounds
-    you''ve sustained from the previous encounter. Don''t get used to it; in war,
-    count only on yourself.'
+  speaker_name: Dahlia
+  text: '{t,dahlia}[heal-player][play-sfx=sfx_mystery_effect] I just healed you, but
+    I have to go support Illiya. Good luck!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -3279,8 +3254,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: '{t,mackey}This next battle includes multiple foes. Use the {c,ui-terms}LEFT/RIGHT
+  speaker_name: Dahlia
+  text: '{t,dahlia}It looks like more than one of them are after you. Use the {c,ui-terms}LEFT/RIGHT
     ARROW keys{c,} to change targets. {c,highlight}Spells always center on the targetting
     reticule position.{c,}'
   input_display: {fileID: 0}
@@ -3288,7 +3263,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 0e5673948cf85044d95bf7e1054c93fb, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &113542837
@@ -3304,15 +3279,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: '{t,mackey}Good work. Perhaps your future at the Academy will be a bright
-    one...'
+  speaker_name: Illyia
+  text: '{t,illyia}Damn it! even more are coming. Watch out, {name}!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &113542838
@@ -3566,6 +3540,7 @@ GameObject:
   m_Component:
   - component: {fileID: 136171210}
   - component: {fileID: 136171211}
+  - component: {fileID: 136171212}
   m_Layer: 5
   m_Name: BI_FRENZY_CAST!
   m_TagString: Untagged
@@ -3602,6 +3577,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &136171212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 136171209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: ???
+  text: UNLEASH YouR FINAL FORM THIS IS PLACEHOLDER TEXT FOR A CLIMACTIC MOMENT
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &138375124
 GameObject:
   m_ObjectHideFlags: 0
@@ -4638,7 +4636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &173911255
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5150,7 +5148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &181451881
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5631,7 +5629,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &193480892
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5805,7 +5803,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &194396682
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6220,7 +6218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &198372661
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6714,7 +6712,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &205596595
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7001,7 +6999,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &213370331
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7649,7 +7647,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &226019614
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8141,7 +8139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &239973557
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9618,7 +9616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &327953939
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12253,6 +12251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 444267044}
   - component: {fileID: 444267045}
+  - component: {fileID: 444267046}
   m_Layer: 5
   m_Name: BI_CATSUNE_IN
   m_TagString: Untagged
@@ -12289,6 +12288,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &444267046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 444267043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{i,cat-name}'
+  text: Meow...
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 0707e1af17f980b4b899df626a699f95, type: 3}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &448470092
 GameObject:
   m_ObjectHideFlags: 0
@@ -13494,7 +13516,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &525117283
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14483,7 +14505,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &586949733
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14852,7 +14874,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &590508429
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15460,7 +15482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &638545936
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16901,6 +16923,11 @@ GameObject:
   m_Component:
   - component: {fileID: 692578021}
   - component: {fileID: 692578022}
+  - component: {fileID: 692578027}
+  - component: {fileID: 692578026}
+  - component: {fileID: 692578025}
+  - component: {fileID: 692578024}
+  - component: {fileID: 692578023}
   m_Layer: 5
   m_Name: BI_TUT_STAGGER_DMG
   m_TagString: Untagged
@@ -16937,6 +16964,126 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &692578023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 692578020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke} you can deal {c,highlight}stagger damage{c,} by hitting an enemy
+    with their weakness or a critical hit!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &692578024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 692578020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}That {c,ui-terms}Shield{c,} shows the {c,highlight}number of stagger
+    damage it will take to stagger the enemy!{c,}'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &692578025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 692578020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}Also, have you noticed the {c,ui-terms}Shield to the right of the
+    enemy''s status bars{c,}?'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &692578026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 692578020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}Remember, {c,highlight}sometimes using no {c,spell}Elemental Prefix{c,}
+    can be more effective than using one.{c,}'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &692578027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 692578020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}Looks like {c,enemy-name}Wechselbalg{c,} is weak to the {c,gray}physical{c,}
+    element!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 6d91601cbaa58cc40bebbbd59a090c65, type: 3}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &706308404
 GameObject:
   m_ObjectHideFlags: 0
@@ -17613,7 +17760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &723685589
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18564,7 +18711,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &769192459
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19632,7 +19779,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &828981989
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19799,7 +19946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &830637600
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22554,7 +22701,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &921353016
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23521,7 +23668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &975594711
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24564,7 +24711,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1004357517
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24648,6 +24795,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1005218295}
   - component: {fileID: 1005218296}
+  - component: {fileID: 1005218299}
+  - component: {fileID: 1005218298}
+  - component: {fileID: 1005218297}
   m_Layer: 5
   m_Name: BI_GO_FOR_THE_KILL
   m_TagString: Untagged
@@ -24684,6 +24834,77 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1005218297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1005218294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}Be sure to |wave|murder\wave\ poor {c,enemy-name}Wech{c,} be fore
+    they get the chance to cast {c,spell}SELFCARE{c,}!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1005218298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1005218294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}Staggered enemies take more damage than usual {c,highlight}and
+    can not charge up their spells.{c,}'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1005218299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1005218294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}Good job! you''ve staggered {c,enemy-name}Wechselbalg!{c,}'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 6d91601cbaa58cc40bebbbd59a090c65, type: 3}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &1008986904
 GameObject:
   m_ObjectHideFlags: 0
@@ -24926,6 +25147,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1034563229}
   - component: {fileID: 1034563230}
+  - component: {fileID: 1034563234}
+  - component: {fileID: 1034563233}
+  - component: {fileID: 1034563232}
+  - component: {fileID: 1034563231}
   m_Layer: 5
   m_Name: BI_ICE_KEYS
   m_TagString: Untagged
@@ -24962,6 +25187,101 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1034563231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1034563228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}{c,cyan}ice{c,} damage caused by the {c,spell}CRYO{c,} prefix will
+    freeze your {c,ui-terms}Keys{c,}. Mash them to remove the {c,cyan}ice{c,}!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1034563232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1034563228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}Elemental damage will cause parts of your {c,ui-terms}Keyboard{c,}
+    to malfunction.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1034563233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1034563228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}It appears your TYPOCRYPHA has been hit by an {c,cyan}ice attack.{c,}'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1034563234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1034563228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}As Illyia and Dahlia are occupied cleaning up your mess, I will
+    instruct you from here on out.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 6d91601cbaa58cc40bebbbd59a090c65, type: 3}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &1036015172
 GameObject:
   m_ObjectHideFlags: 0
@@ -25213,7 +25533,7 @@ GameObject:
   - component: {fileID: 1040296702}
   - component: {fileID: 1040296701}
   m_Layer: 5
-  m_Name: BI_VR_MackHint1
+  m_Name: BI_CASTING_HINT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25251,8 +25571,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: General Mackey
-  text: '{t,mackey}To demonstrate, steal the {c,enemy-name}Changeling''s{c,} {c,spell}SWORD{c,}.
-    Hit the {c,ui-terms}ENTER key{c,} to cast it, once you have typed it out.'
+  text: '{t,dahlia}Try copying the {c,enemy-name}Changeling''s{c,} {c,spell}SWORD{c,}.
+    Hit the {c,ui-terms}ENTER key{c,} to cast it once you''ve typed it out.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -25274,9 +25594,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: '{t,mackey}The true strength of the TYPOCRYPHA is {c,highlight}versatility:
-    you can use any {c,spell}Spell Word{c,} that you know, without restraint.{c,}'
+  speaker_name: Dahlia
+  text: '{t,dahlia}Remember,  {c,highlight}you can cast any {c,spell}Spell Word{c,}
+    that you know, even if you''ve just seen it.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -25298,8 +25618,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: "{t,mackey}Under the {c,enemy-name}Changeling{c,} is the word {c,spell}SWORD{c,}.
+  speaker_name: Dahlia
+  text: "{t,dahlia}Under the {c,enemy-name}Changeling{c,} is the word {c,spell}SWORD{c,}.
     That is what is known as a {c,spell}Spell Word{c,}.\r"
   input_display: {fileID: 0}
   input_options: []
@@ -25322,8 +25642,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: '{t,mackey}Look at the bottom of the enemy''s {c,ui-terms}Status Bars{c,}.'
+  speaker_name: Dahlia
+  text: '{t,dahlia}Look at the bottom of the enemy''s {c,ui-terms}Status Bars{c,}.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -25345,15 +25665,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: '{t,mackey}No matter. We all must climb the arduous mountain of life with
-    struggle.'
+  speaker_name: Dahlia
+  text: '{t,dahlia}It''s ok {name}, you can still do this.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 0e5673948cf85044d95bf7e1054c93fb, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1040296706
@@ -25369,8 +25688,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: '{t,mackey}...It appears that you''re struggling. Hmph.'
+  speaker_name: Illyia
+  text: '{t,illyia}It''s beating you {name}, what are you doing?'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -26233,7 +26552,7 @@ GameObject:
   - component: {fileID: 1055337795}
   - component: {fileID: 1055337794}
   m_Layer: 5
-  m_Name: BI_VR_MackHint2
+  m_Name: BI_COOLDOWN_TUT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26270,9 +26589,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: '{t,mackey}A rookie technique is to use {c,spell}LANCE</color> while {c,spell}SWORD</color>
-    recharges, and vice versa. A rotation, if you will. Use it well.'
+  speaker_name: Illyia
+  text: '{t,illyia} {c,spell}LANCE{c,} is more powerful than {c,spell}SWORD{c,}, but
+    its cooldown is longer. use it wisely!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -26294,9 +26613,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: '{t,mackey}Some advice. Have you noticed that {c,enemy-name}TANUKI</color>''s
-    spell? {c,spell}LANCE</color>?'
+  speaker_name: Illyia
+  text: '{t,illyia}Also. Have you noticed that {c,enemy-name}TANUKI</color>''s spell?
+    {c,spell}LANCE</color>?'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -26318,9 +26637,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: '{t,mackey}Be careful not to leave yourself defenseless while your Spells
-    cooldown. This is the leading cause of death in magical warfare.'
+  speaker_name: Illyia
+  text: '{t,illyia}You''ll have to wait until a {c,spell}Spell Word{c,} has finished
+    cooling down to use it again.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -26342,8 +26661,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: "{t,mackey}{c,ui-terms}Cooldowns{c,} are shown at the bottom left of the screen.\r"
+  speaker_name: Illyia
+  text: "{t,illyia}{c,ui-terms}Cooldowns{c,} are shown at the bottom left of the screen.\r"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -26365,9 +26684,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: "{t,mackey}You may have noticed, but your spells must recharge in {c,ui-terms}Cooldowns{c,}
-    before being cast again.\r"
+  speaker_name: Illyia
+  text: "{t,illyia}You'll have to pay attention to your {c,ui-terms}Cooldowns{c,}
+    in a longer battle like this.\r"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -26389,15 +26708,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: '{t,mackey}In real warfare, your enemies will be durable and resistant. Currently,
-    the enemy forces continue to stand.'
+  speaker_name: Illyia
+  text: '{t,illyia}The demons are still standing!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1055337800
@@ -26510,6 +26828,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1068107114}
   - component: {fileID: 1068107115}
+  - component: {fileID: 1068107118}
+  - component: {fileID: 1068107117}
+  - component: {fileID: 1068107116}
+  - component: {fileID: 1068107120}
+  - component: {fileID: 1068107119}
   m_Layer: 5
   m_Name: BI_TUT_SCOUTER
   m_TagString: Untagged
@@ -26546,6 +26869,127 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1068107116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1068107113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}Enemy weakness information will appear in the {c,ui-terms}Scouter{c,}
+    as you try that element out on the enemy! {c,highlight}-- means normal damage,
+    BL is block, DR is drain, and RF is reflect!{c,}'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1068107117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1068107113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}This one''s weakness may be more difficult to determine. Use your
+    {c,ui-terms}Scouter{c,} by holding the {c,ui-terms}Shift Key{c,}.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1068107118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1068107113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}It looks like that cat was another shapeshifter!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 6d91601cbaa58cc40bebbbd59a090c65, type: 3}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1068107119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1068107113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}However, {c,highlight}you are unable to type or cast while the
+    {c,ui-terms}Scouter{c,}is active, so use it wisely!{c,}'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1068107120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1068107113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}{c,highlight}Focusing on the enemies will also make it so time
+    move slowly{c,}, so feel free to use the {c,ui-terms}Scouter{c,} to catch a break
+    and look at your surroundings.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &1074766384
 GameObject:
   m_ObjectHideFlags: 0
@@ -26926,7 +27370,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1081221319
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27292,7 +27736,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1088031915
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29708,6 +30152,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1168889514}
   - component: {fileID: 1168889515}
+  - component: {fileID: 1168889518}
+  - component: {fileID: 1168889517}
+  - component: {fileID: 1168889516}
+  - component: {fileID: 1168889519}
   m_Layer: 5
   m_Name: BI_VOLT_KEYS
   m_TagString: Untagged
@@ -29744,6 +30192,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1168889516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1168889513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}{c,yellow}volt damage{c,}{c,highlight}will short-circuit your keys
+    so they swap letters with another key{c,highlight}'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1168889517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1168889513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}{c,yellow}volt damage{c,} is caused by {c,spell}spells{c,} with
+    the {c,spell}VELD Element Prefix{c,}.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 6d91601cbaa58cc40bebbbd59a090c65, type: 3}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1168889518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1168889513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}It looks like you''ve been hit by {c,yellow}volt damage{c,}. '
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1168889519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1168889513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}remember to page through your {c,ui-terms}Spellbook{c,} using the
+    {c,ui-terms}UP and DOWN arrows{c,} to view your {c,spell}Element Prefixes and
+    other Spell Words{c,}'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &1169885266
 GameObject:
   m_ObjectHideFlags: 0
@@ -30256,7 +30800,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1188334823
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32480,7 +33024,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1261315380
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33033,7 +33577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1269042617
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34228,7 +34772,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1324949584
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34524,7 +35068,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1329476168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -35865,7 +36409,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1397513931
 RectTransform:
   m_ObjectHideFlags: 0
@@ -35944,12 +36488,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1397513930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: decfadfcb3f890843b1cb235cc31835c, type: 3}
+  m_Script: {fileID: 11500000, guid: 35d67eafccfc8f544a3a87154779a20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interruptScene: {fileID: 1040296699}
-  whoToCheck: 4
-  healthRatio: 0.75
+  numAttacks: 3
+  caster: 1
+  target: 4
+  rootKeywordIs: 
+  elementKeywordIs: 
+  styleKeywordIs: 
+  elementMustBe: -1
+  spellMustHit: 1
+  spellMustCrit: 0
+  spellMustStun: 0
+  damageIsAtLeast: 0
+  vsElementMustBe: -1
 --- !u!114 &1397513936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36496,7 +37050,7 @@ GameObject:
   - component: {fileID: 1422320706}
   - component: {fileID: 1422320705}
   m_Layer: 5
-  m_Name: BI_VR_TUTW1_1
+  m_Name: BI_TUT_INTRO1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36533,10 +37087,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: '{t,mackey}Let us see how well you do without any guidance.
-
-    Good luck.'
+  speaker_name: Illyia
+  text: '{t,illyia}Remember your combat training! Use your TYPOCRYPHA!!!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -36558,10 +37110,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: "{t,mackey}Our country, {c,tips}The States of Armica{c,} prides itself as
-    the pinnacle of knowledge-based power. Armican soldiers must how to think on their
-    feet.\r"
+  speaker_name: Illyia
+  text: '{t,illyia}I know this is your first mission, but you are going to have to
+    defend yourself.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -36583,15 +37134,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: '{t,mackey}{NAME}. Regardless of your experience, it is important that I first
-    test your intuition in battle.'
+  speaker_name: Illyia
+  text: '{t,illyia}There are too many of them!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: b1c187b112cd2fc4f9fc1bf45026c771, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1422320708
@@ -37403,7 +37953,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1453214174
 RectTransform:
   m_ObjectHideFlags: 0
@@ -39173,8 +39723,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: use the UP and DOWN arrows to navigate to the element page to view your registered
-    elemen keywords!
+  text: '{t,clarke}Use the {c,ui-terms}UP and DOWN arrows{c,} to navigate to the {c,spell}Element
+    Prefix{c,} section to view your element keywords!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -39197,8 +39747,9 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: This might be a good time to use the spellbook on the right side of your TYPOCRYPHA
-    device
+  text: '{t,clarke}Do you remember the {c,ui-terms}Spellbook on the right side of
+    your TYPOCRYPHA device?{c,} Now might be a good to to use its {c,spell}Element
+    Prefix{c,} section.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -39221,13 +39772,14 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: This enemy seems to be vulnerable to an element other than {c,spell}AGNI{c,}.
+  text: '{t,clarke}This enemy seems to be vulnerable to an {c,spell}Element Prefix{c,}
+    other than {c,spell}AGNI{c,}.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 6d91601cbaa58cc40bebbbd59a090c65, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1510001569
@@ -39825,7 +40377,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1543939411
 RectTransform:
   m_ObjectHideFlags: 0
@@ -40424,150 +40976,6 @@ MonoBehaviour:
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
---- !u!1 &1554790298
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1554790299}
-  - component: {fileID: 1554790304}
-  - component: {fileID: 1554790303}
-  - component: {fileID: 1554790302}
-  - component: {fileID: 1554790301}
-  - component: {fileID: 1554790300}
-  m_Layer: 5
-  m_Name: BI_IJIRAQ_NULLHIT_2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1554790299
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1554790298}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1682365445}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1554790300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1554790298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: Soul of Mackey
-  text: '{t,mackey}Those spells are of the {c,spell}Physical{c,} element-type. {c,highlight}Try
-    to figure out how the enemy is using different elements.{c,}'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: b1c187b112cd2fc4f9fc1bf45026c771, type: 3}
-  char_sprites: []
-  char_sprite_pos: []
---- !u!114 &1554790301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1554790298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: Soul of Mackey
-  text: '{t,mackey}{NAME}. This isn''t the place for basic {c,spell}SWORD{c,}s and
-    {c,spell}LANCE{c,}s.'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: b1c187b112cd2fc4f9fc1bf45026c771, type: 3}
-  char_sprites: []
-  char_sprite_pos: []
---- !u!114 &1554790302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1554790298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: 
-  text: '> An image of Mackey enters your mind...'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: b1c187b112cd2fc4f9fc1bf45026c771, type: 3}
-  char_sprites: []
-  char_sprite_pos: []
---- !u!114 &1554790303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1554790298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: Ijiraq
-  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}HA! FOOLISH HUMAN. I AM A PHANTOM. MAN''S
-    WEAPONS HURT ME NOT.{c,}'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 014f8993b714f3c489414f5fc3221115, type: 3}
-  char_sprites: []
-  char_sprite_pos: []
---- !u!114 &1554790304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1554790298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1554873791
 GameObject:
   m_ObjectHideFlags: 0
@@ -41686,7 +42094,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1596509888
 RectTransform:
   m_ObjectHideFlags: 0
@@ -42530,7 +42938,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1601679510
 RectTransform:
   m_ObjectHideFlags: 0
@@ -44049,7 +44457,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1678004669
 RectTransform:
   m_ObjectHideFlags: 0
@@ -44167,7 +44575,7 @@ RectTransform:
   m_Children:
   - {fileID: 1822313456}
   - {fileID: 2902969}
-  - {fileID: 1554790299}
+  - {fileID: 2106448166}
   - {fileID: 42027555}
   - {fileID: 1034563229}
   - {fileID: 1510001565}
@@ -44314,7 +44722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d67eafccfc8f544a3a87154779a20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interruptScene: {fileID: 1554790298}
+  interruptScene: {fileID: 2106448165}
   numAttacks: 3
   caster: 4
   target: 1
@@ -44409,7 +44817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interruptScene: {fileID: 1068107113}
-  triggerAfterXAttacks: 1
+  triggerAfterXAttacks: 2
 --- !u!114 &1682365458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44437,7 +44845,7 @@ MonoBehaviour:
   Music: 
   Background: 
   Enemy1: 
-  Enemy2: Tanooki
+  Enemy2: Obviously A Cat
   Enemy3: 
   Ally1: 
   Ally2: 
@@ -45135,7 +45543,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1712987601
 RectTransform:
   m_ObjectHideFlags: 0
@@ -45425,7 +45833,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1750468868
 RectTransform:
   m_ObjectHideFlags: 0
@@ -47584,7 +47992,6 @@ GameObject:
   - component: {fileID: 1822313460}
   - component: {fileID: 1822313459}
   - component: {fileID: 1822313458}
-  - component: {fileID: 1822313457}
   m_Layer: 5
   m_Name: BI_IJIRAQ_IN
   m_TagString: Untagged
@@ -47610,29 +48017,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1822313457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1822313455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: Ala
-  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}BE CONSUMED BY OUR POWER!{c,}'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: f3884a14518795b40afe5c61a9ac4cbe, type: 3}
-  char_sprites: []
-  char_sprite_pos: []
 --- !u!114 &1822313458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47654,7 +48038,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 014f8993b714f3c489414f5fc3221115, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1822313459
@@ -47670,15 +48054,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: Ijiraq
-  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}BUT HUMAN. YOU NOT LIVE FOREVER. UNLIKE
-    EYE! PUNY MORTAL.{c,}'
+  speaker_name: Illyia
+  text: '{t,illyia} Well, Dahlia and I are occupied. you''d better take care of this
+    one, {name}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 014f8993b714f3c489414f5fc3221115, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1822313460
@@ -47695,8 +48079,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Ijiraq
-  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}BRAVE MAGICIAN, YOU ARE! STRONG, LIKE
-    EYE!{c,}'
+  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}YOU HURT MY FIEND AND NOW I''MA HURT
+    YOU{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -47718,15 +48102,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: Ala
-  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}CHILD, YOUR HOPE IS FUTILE. I, THE MISTRESS
-    {c,enemy-name}ALA{c,}, WILL DEVOUR THE SUNLIGHT FROM YOUR HEART.{c,}'
+  speaker_name: Illyia
+  text: '{t,illyia} It looks like you really pissed them off, {name}. What the hell
+    did you say?'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: f3884a14518795b40afe5c61a9ac4cbe, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1822313462
@@ -48736,6 +49120,7 @@ GameObject:
   - component: {fileID: 1873694477}
   - component: {fileID: 1873694476}
   - component: {fileID: 1873694475}
+  - component: {fileID: 1873694479}
   m_Layer: 5
   m_Name: BI_CAT_WAVE3_INTRO
   m_TagString: Untagged
@@ -48774,10 +49159,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: '{t,mackey}Let us see how well you do without any guidance.
-
-    Good luck.'
+  speaker_name: Dahlia
+  text: '{t,dahlia} {c,spell}Spell Words{c,} your enemies cast will be added to your
+    {c,ui-terms}Spellbook{c,} automatically!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -48799,10 +49183,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: "{t,mackey}Our country, {c,tips}The States of Armica{c,} prides itself as
-    the pinnacle of knowledge-based power. Armican soldiers must how to think on their
-    feet.\r"
+  speaker_name: Dahlia
+  text: '{t,dahlia} If you''re having trouble remembering the {c,spell}Spell Words{c,}
+    you''ve used, check the {c,ui-terms}Spellbook{c,} in your {c,highlight}lower right{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -48824,15 +49207,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
-  text: '{t,mackey}{NAME}. Regardless of your experience, it is important that I first
-    test your intuition in battle.'
+  speaker_name: Dahlia
+  text: '{t,dahlia}Looks like this is the last of them. Just hold out a little longer!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: b1c187b112cd2fc4f9fc1bf45026c771, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 0e5673948cf85044d95bf7e1054c93fb, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1873694478
@@ -48846,6 +49228,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1873694479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1873694473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Illyia
+  text: '{t,illyia}Go get ''em, {name}!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &1885889532
 GameObject:
   m_ObjectHideFlags: 0
@@ -49305,7 +49710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1896248617
 RectTransform:
   m_ObjectHideFlags: 0
@@ -50026,7 +50431,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1916023005
 RectTransform:
   m_ObjectHideFlags: 0
@@ -50684,7 +51089,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1936568530
 RectTransform:
   m_ObjectHideFlags: 0
@@ -52887,7 +53292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2029538952
 RectTransform:
   m_ObjectHideFlags: 0
@@ -54472,6 +54877,151 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2106448165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2106448166}
+  - component: {fileID: 2106448171}
+  - component: {fileID: 2106448170}
+  - component: {fileID: 2106448169}
+  - component: {fileID: 2106448168}
+  - component: {fileID: 2106448167}
+  m_Layer: 5
+  m_Name: BI_IJIRAQ_NULLHIT2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2106448166
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2106448165}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1682365445}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2106448167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2106448165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Illyia
+  text: '{t,illyia}try inserting a word sperator using your {c,ui-terms}Space Bar{c,}
+    to cast {c,spell}AGNI-SWORD{c,} on {c,enemy-name}Ijiraq{c,}!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2106448168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2106448165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Illyia
+  text: '{t,illyia}{c,spell}AGNI{c,} is the official TYPOCRYPHA prefix for the {c,orange}fire{c,}
+    element.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2106448169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2106448165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Illyia
+  text: '{t,illyia}You''ll have to apply an {c,spell}Element Prefix{c,} like {c,spell}AGNI{c,}
+    to your spell to get through its defenses.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2106448170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2106448165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Illyia
+  text: '{t,illyia}Oh shit, {NAME}. This demon {c,highlight}Blocks{c,} physical attacks.
+    {c,spell}SWORD{c,}s and {c,spell}LANCE{c,}s are useless by themselves!.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2106448171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2106448165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2120598029
 GameObject:
   m_ObjectHideFlags: 0
@@ -54770,6 +55320,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2139373287}
   - component: {fileID: 2139373288}
+  - component: {fileID: 2139373291}
+  - component: {fileID: 2139373290}
+  - component: {fileID: 2139373289}
   m_Layer: 5
   m_Name: BI_FIRE_KEYS
   m_TagString: Untagged
@@ -54806,3 +55359,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2139373289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2139373286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}Hitting burned keys will damage you, {c,orange}but the fire will
+    go out eventually{c,}. Wait it out, or take the damage if you really need to!'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2139373290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2139373286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}{c,orange}fire damage{c,} is caused by spells with the {c,spell}AGNI{c,}
+    prefix and will burn your {c,ui-terms}keys.{c,}'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &2139373291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2139373286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}It seems like your TYPOCRYPHA has taken {c,orange}fire  damage.{c,}'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 6d91601cbaa58cc40bebbbd59a090c65, type: 3}
+  char_sprites: []
+  char_sprite_pos: []

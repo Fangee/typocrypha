@@ -29,8 +29,8 @@ public class Enemy : MonoBehaviour, ICaster {
 
     //Const fields//
 
-    private const float stagger_mult_constant = 1F;//Amount to multiply max_stagger by when calculating stagger time
-    private const float stagger_add_constant = 5F;//Amount to add when calculating stagger time
+    private const float stagger_mult_constant = 1.2F;//Amount to multiply max_stagger by when calculating stagger time
+    private const float stagger_add_constant = 7.5F;//Amount to add when calculating stagger time
 	private const int enemy_sprite_layer = -5;//Layer of enemy sprite in sorting order
 
     //ICaster Properties//
