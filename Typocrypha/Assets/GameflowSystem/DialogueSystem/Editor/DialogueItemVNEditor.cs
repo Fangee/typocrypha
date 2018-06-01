@@ -39,24 +39,23 @@ public class DialogueItemVNEditor : Editor
     {
         serializedObject.Update();
         EditorGUILayout.PropertyField(dialogueType, new GUIContent("Mode"));
-        EditorGUILayout.PropertyField(speakerName, new GUIContent("Speaker"));
+        EditorGUILayout.PropertyField(speakerName, new GUIContent("Speaker Name"));
         EditorGUILayout.PropertyField(text);
-        if (dialogueType.enumValueIndex == (int)DialogueType.INPUT)
-        {
-            EditorGUILayout.PropertyField(inputDisplay);
-            EditorGUILayout.PropertyField(inputOptions, true);
-            EditorGUILayout.PropertyField(inputAnswers, true);
-            EditorGUILayout.PropertyField(inputBranches, true);
-        }
         spriteOptions = EditorGUILayout.Foldout(spriteOptions, new GUIContent("Sprite Options"));
         if (spriteOptions)
         {
-            EditorGUILayout.PropertyField(mcSprite);
-            EditorGUILayout.PropertyField(codecSprite);
-            EditorGUILayout.PropertyField(charSprites, true);
-            EditorGUILayout.PropertyField(charSpritePos, true);
+            EditorGUILayout.PropertyField(mcSprite, new GUIContent("Set MC Sprite"));
+            EditorGUILayout.PropertyField(codecSprite, new GUIContent("Set Codec Sprite"));
+            EditorGUILayout.PropertyField(charSprites, new GUIContent("Add Character Sprites"), true);
+            EditorGUILayout.PropertyField(charSpritePos, new GUIContent("Add Character Sprite Positions"), true);
         }
-        //inputBranches.stringValue = EditorGUILayout.TextArea(inputBranches.stringValue, GUILayout.MinHeight(128));
+        if (dialogueType.enumValueIndex == (int)DialogueType.INPUT)
+        {
+            EditorGUILayout.PropertyField(inputDisplay, new GUIContent("Input Display"));
+            EditorGUILayout.PropertyField(inputOptions, new GUIContent("Input Options"), true);
+            EditorGUILayout.PropertyField(inputAnswers, new GUIContent("Input Answers"), true);
+            EditorGUILayout.PropertyField(inputBranches, new GUIContent("Branches"), true);
+        }
         serializedObject.ApplyModifiedProperties();
     }
 }
