@@ -3263,7 +3263,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 0e5673948cf85044d95bf7e1054c93fb, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 15a3d82b9ee04b94f8e6ab70db5c672b, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &113542837
@@ -3286,7 +3286,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &113542838
@@ -6619,8 +6619,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 202969421}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -523.3, y: -58.1, z: 0}
-  m_LocalScale: {x: 50, y: 50, z: 1}
+  m_LocalPosition: {x: -512, y: -16, z: 0}
+  m_LocalScale: {x: 64, y: 64, z: 1}
   m_Children: []
   m_Father: {fileID: 261958434}
   m_RootOrder: 2
@@ -6659,15 +6659,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: f5b6a29de40609a40951b4893503c834, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 6.25, y: 6.25}
+  m_Size: {x: 1.2, y: 1.04}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 1
 --- !u!222 &202969424
 CanvasRenderer:
@@ -8582,7 +8582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &261958434
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10852,15 +10852,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 6.25, y: 6.25}
+  m_Size: {x: 1.2, y: 1.04}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 1
 --- !u!114 &375218126
 MonoBehaviour:
@@ -10887,8 +10887,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 375218124}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 523.3, y: -58.100006, z: 0}
-  m_LocalScale: {x: 50, y: 50, z: 1.00032}
+  m_LocalPosition: {x: 512, y: -16, z: 0}
+  m_LocalScale: {x: 64, y: 64, z: 1}
   m_Children: []
   m_Father: {fileID: 261958434}
   m_RootOrder: 6
@@ -25675,7 +25675,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 0e5673948cf85044d95bf7e1054c93fb, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 15a3d82b9ee04b94f8e6ab70db5c672b, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1040296706
@@ -25699,7 +25699,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1040296707
@@ -26719,7 +26719,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1055337800
@@ -37144,8 +37144,8 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
+  mc_sprite: {fileID: 21300000, guid: f5b6a29de40609a40951b4893503c834, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1422320708
@@ -49231,7 +49231,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 0e5673948cf85044d95bf7e1054c93fb, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 15a3d82b9ee04b94f8e6ab70db5c672b, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1873694478
@@ -49265,7 +49265,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &1885889532

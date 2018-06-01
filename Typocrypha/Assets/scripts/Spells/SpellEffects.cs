@@ -9,6 +9,7 @@ public class SpellEffects : MonoBehaviour {
     const float POP_TIMER = 1.5f; //pop-ups last this many seconds long
     Vector3 DMGNUM_OFFSET = new Vector3(0, 0.375f, 0); //where the damage number should be
     Vector3 UNDER_OFFSET = new Vector3(0, -0.75f, 0); //where something under the damage num should be
+	Vector3 UNDER_OFFSET_2 = new Vector3(1.5f, -1.5f, 0); //where something under the damage num should be
     Vector3 OVER_OFFSET = new Vector3(0, 1.5f, 0); //where something over the damage num should be
     Vector3 ELEM_OFFSET = new Vector3(-1.65f, 1.6f, 0);
 	Vector3 BACK_OFFSET = new Vector3(-1.65f, 1.4f, 0);
@@ -74,8 +75,12 @@ public class SpellEffects : MonoBehaviour {
 		}
         if (d.isCrit && d.elementalData != Elements.vsElement.BLOCK) {//Spell is crit
 			Debug.Log (d.Caster.Stats.name + " scores a critical with " + s.ToString () + " on " + d.Target.Stats.name);
-			if (d.Target.CasterType == ICasterType.ENEMY)
+			if (d.Target.CasterType == ICasterType.ENEMY) {
 				AudioPlayer.main.playSFX ("sfx_enemy_weakcrit_dmg");
+				if (!d.isStun && !d.Target.Is_stunned) popp.spawnText ("<size=48>-1<size=24>SHIELD</size></size>", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET_2, Color.cyan, Color.white);
+				if (d.isStun) popp.spawnText ("BREAK!", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET_2, Color.cyan, Color.white);
+				//if (d.Target.Is_stunned) popp.spawnText ("BONUS DMG!", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET_2, Color.red, Color.white);
+			}
 			else if (d.Target.CasterType == ICasterType.PLAYER || d.Target.CasterType == ICasterType.NPC_ALLY)
 				AudioPlayer.main.playSFX ("sfx_party_weakcrit_dmg");
 			//process crit graphics
@@ -83,8 +88,12 @@ public class SpellEffects : MonoBehaviour {
 			//Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
 			//popp.spawnText ("<size=28>CRITICAL!</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, Color.yellow, Color.white);
 		} else if ((d.elementalData == Elements.vsElement.WEAK || d.elementalData == Elements.vsElement.SUPERWEAK) && d.damageInflicted > 0){
-			if (d.Target.CasterType == ICasterType.ENEMY)
+			if (d.Target.CasterType == ICasterType.ENEMY) {
 				AudioPlayer.main.playSFX ("sfx_enemy_weakcrit_dmg");
+				if (!d.isStun && !d.Target.Is_stunned) popp.spawnText ("<size=48>-1<size=24>SHIELD</size></size>", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET_2, Color.cyan, Color.white);
+				if (d.isStun) popp.spawnText ("BREAK!", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET_2, Color.cyan, Color.white);
+
+			}
 			else if (d.Target.CasterType == ICasterType.PLAYER || d.Target.CasterType == ICasterType.NPC_ALLY)
 				AudioPlayer.main.playSFX ("sfx_party_weakcrit_dmg");
 		}
@@ -150,6 +159,7 @@ public class SpellEffects : MonoBehaviour {
 					emitOverride.startLifetime = 10f;
 					enemyObj.enemy_particle_sys.Emit (emitOverride, 10);
 				}
+				if (!d.isStun && d.Target.Is_stunned) popp.spawnText ("<size=24>DAMAGE BONUS!</size>", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET_2, Color.red, Color.white);
 			}
 			// Set damage text size based on amount of damage ratios
 			string sizeTagOpen = "<size=";
@@ -217,7 +227,7 @@ public class SpellEffects : MonoBehaviour {
                 break;
             case Elements.vsElement.RESIST:
                 //popp.spawnSprite("popup_resistant", POP_TIMER, pos.position + OVER_OFFSET);
-				popp.spawnText ("RESIST", POP_TIMER, pos.position + OVER_OFFSET + TEXT_OFFSET, Color.yellow, Color.white);
+				popp.spawnText ("<size=36>RESIST</size>", POP_TIMER, pos.position + OVER_OFFSET + TEXT_OFFSET, Color.yellow, Color.white);
 				AudioPlayer.main.playSFX ("sfx_spell_resist");
                 break;
             case Elements.vsElement.WEAK:
@@ -226,8 +236,9 @@ public class SpellEffects : MonoBehaviour {
 				popp.spawnText ("<size=36>WEAK!</size>", POP_TIMER, pos.position + OVER_OFFSET + TEXT_OFFSET, new Color(255f/255f, 35f/255f, 25f/255f), new Color(255f/255f, 100f/255f, 85f/255f));
                 break;
             case Elements.vsElement.SUPERWEAK:
-                popp.spawnSprite("popup_superweak", POP_TIMER, pos.position + OVER_OFFSET);
-                break;
+				popp.spawnSprite("popup_weak_backing", POP_TIMER, pos.position + BACK_OFFSET);
+				popp.spawnText ("<size=36>WEAK!</size>", POP_TIMER, pos.position + OVER_OFFSET + TEXT_OFFSET, new Color(255f/255f, 35f/255f, 25f/255f), new Color(255f/255f, 100f/255f, 85f/255f));
+				break;
         }
         if (vElem != Elements.vsElement.NEUTRAL)
         {
