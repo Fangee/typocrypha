@@ -33,6 +33,7 @@ public class TextEvents : MonoBehaviour {
 	public GameObject screen_frame; // screenframe object
 	public Transform float_text_view; // view for floating text
 	public GameObject float_d_box_prefab; // floating text dialogue box prefab
+	public Animator train_animator; // animator component for train
 
 	void Awake() {
 		main = this;
@@ -67,7 +68,8 @@ public class TextEvents : MonoBehaviour {
 			{"heal-player", healPlayer},
 			{"clear-log", clearTextLog},
 			{"float-text", floatText},
-			{"multi-float-text", multiFloatText}
+			{"multi-float-text", multiFloatText},
+			{"train-transition", trainTransition}
 		};
 		is_prompt = false;
 	}
@@ -497,6 +499,15 @@ public class TextEvents : MonoBehaviour {
 			d_box_obj.GetComponent<FloatText> ().startFloatText (x, y, text);
 			yield return null;
 		}
+	}
+
+	// plays train transition animation
+	// input: [0]: float, length in seconds of transition
+	IEnumerator trainTransition(string[] opt) {
+		train_animator.Play ("train_fade_in");
+		yield return new WaitForSeconds (float.Parse(opt[0]));
+		train_animator.Play ("train_fade_out");
+		yield return true;
 	}
 }
 
