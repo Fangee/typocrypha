@@ -190,8 +190,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}Oh shit, {NAME}. This demon {c,highlight}Blocks{c,} physical attacks.
-    {c,spell}SWORD{c,}s and {c,spell}LANCE{c,}s are useless by themselves!'
+  text: '{t,illyia}|shake|Shit!\shake\ This demon {c,highlight}Blocks{c,} Physical
+    attacks. {c,spell}SWORD{c,}s and {c,spell}LANCE{c,}s are useless by themselves!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -214,7 +214,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}try inserting a word sperator using your {c,ui-terms}Space Bar{c,}
+  text: '{t,illyia}Try inserting a word seperator using your {c,ui-terms}Space Bar{c,}
     to cast {c,spell}AGNI-SWORD{c,} on {c,enemy-name}Ijiraq{c,}!'
   input_display: {fileID: 0}
   input_options: []
@@ -238,8 +238,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Ijiraq
-  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}HA! FOOLISH HUMAN. I AM A PHANTOM. MAN''S
-    WEAPONS HURT ME NOT.{c,}'
+  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}HA! FOOLISH ARMICAN. I AM A PHANTOM.
+    MAN''S WEAPONS HURT ME NOT.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -273,7 +273,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}{c,spell}AGNI{c,} is the official TYPOCRYPHA prefix for the {c,orange}fire{c,}
+  text: '{t,illyia}{c,spell}AGNI{c,} is the official TYPOCRYPHA prefix for the {c,orange}Fire{c,}
     element.'
   input_display: {fileID: 0}
   input_options: []
@@ -542,7 +542,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -4}
+  m_AnchoredPosition: {x: 600, y: -4}
   m_SizeDelta: {x: 0, y: 8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9396650
@@ -1091,7 +1091,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Ijiraq
-  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}TIME TO {c,cyan}|shake|FREEZE\shake\{c,}
+  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}I WILL {c,cyan}|shake|FREEZE\shake\{c,}
     YOUR ACCURSED TYPOCRYPHA BEFORE YOU CAN BURN ME AGAIN!{c,}'
   input_display: {fileID: 0}
   input_options: []
@@ -1115,8 +1115,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Ijiraq
-  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}ICEY YOU ARE A GREATER THREAT THAN I
-    HAD THOUGH.{c,}'
+  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}YOU ARE A GREATER THREAT THAN I IMAGINED.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -1139,7 +1138,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Ijiraq
-  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}BRAVE MAGICIAN, YOU HAVE HURT ME!{c,}'
+  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}YOU''VE FOUND MY {c,highlight}WEAKNESS{c,},
+    INVADER...{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -1319,8 +1319,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: "{speak,doppelganger} It appears EYE really have to handle this myself...
-    if you still won\u2019t accept me into your heart...  "
+  text: "{speak,doppelganger}{c,evil-eye}It appears EYE really have to handle this
+    myself... if you still won\u2019t accept me into your heart...{c,}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -1343,8 +1343,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: "{speak,doppelganger} You\u2019re not above \u201CI\u201D after all! We truly
-    are one and the same!"
+  text: "{speak,doppelganger}{c,evil-eye}You\u2019re not above \u201CI\u201D after
+    all! |shake|We truly are one and the same!\\shake\\{c,}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -1367,8 +1367,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: "{speak,doppelganger} Haha... hahahHa|scramble|hHAhHAh\\scramble\\ahHA! You\u2019ve
-    killed your friends!"
+  text: "{speak,doppelganger}{c,evil-eye}Haha... hahahHa|scramble|hHAhHAh\\scramble\\ahHA!
+    You\u2019ve killed your friends!{c,}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -1567,7 +1567,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &57851097
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1763,7 +1763,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1959,7 +1959,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &74530118
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3231,8 +3231,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '{t,dahlia}[heal-player][play-sfx=sfx_mystery_effect] I just healed you, but
-    I have to go support Illiya. Good luck!'
+  text: '{t,dahlia}[heal-player][play-sfx=sfx_heal]I just healed you, but I have to
+    go support Illyia now. Good luck!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -3255,7 +3255,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '{t,dahlia}It looks like more than one of them are after you. Use the {c,ui-terms}LEFT/RIGHT
+  text: '{t,dahlia}It looks like two of them are after you. Use the {c,ui-terms}LEFT/RIGHT
     ARROW keys{c,} to change targets. {c,highlight}Spells always center on the targetting
     reticule position.{c,}'
   input_display: {fileID: 0}
@@ -3280,7 +3280,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}Damn it! even more are coming. Watch out, {name}!'
+  text: '{t,illyia}Dammit, reinforcements are here! Watch out, {name}!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -4319,7 +4319,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '>> Topic :'
+  m_Text: EVE-IRIS
 --- !u!222 &145013055
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4636,7 +4636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &173911255
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5148,7 +5148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &181451881
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5629,7 +5629,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &193480892
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5803,7 +5803,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &194396682
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6218,7 +6218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &198372661
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6712,7 +6712,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &205596595
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6999,7 +6999,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &213370331
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7647,7 +7647,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &226019614
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8091,7 +8091,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &235889484
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8139,7 +8139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &239973557
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8582,7 +8582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &261958434
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9053,7 +9053,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
@@ -9616,7 +9616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &327953939
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10394,7 +10394,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: '{speak,doppelganger} ...Can you overcome their judgement first-hand?'
+  text: '{speak,doppelganger}{c,evil-eye}...Can you overcome their judgement first-hand?{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -10417,7 +10417,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: "{speak,doppelganger} No, you cling to YOUR FRIENDS\u2019 memory of the Past.\r\n"
+  text: "{speak,doppelganger}{c,evil-eye}No, you cling to YOUR FRIENDS\u2019 memory
+    of the Past.\r{c,}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -10440,7 +10441,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: "{speak,doppelganger} I see... you don\u2019t cling to OUR memory of the Past. "
+  text: "{speak,doppelganger}{c,evil-eye}I see... you don\u2019t cling to OUR memory
+    of the Past.{c,}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -10941,8 +10943,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: '{speak,doppelganger} Perhaps I should remind you of how this all started...
-    the memory of that mission...'
+  text: '{speak,doppelganger}{c,evil-eye}Perhaps I should remind you of how this all
+    started... the memory of that mission...{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -10965,8 +10967,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: "{speak,doppelganger} Why won\u2019t you live for yourself over the others
-    who do nothing but expect more from you?"
+  text: "{speak,doppelganger}{c,evil-eye}Why won\u2019t you live for yourself over
+    the others who do nothing but expect more from you?{c,}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -12302,7 +12304,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{i,cat-name}'
-  text: Meow...
+  text: '[play-music=bgm_battle_midboss]Meow...'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -13516,7 +13518,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &525117283
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14505,7 +14507,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &586949733
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14874,7 +14876,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &590508429
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15482,7 +15484,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &638545936
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16978,8 +16980,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: '{t,clarke} you can deal {c,highlight}stagger damage{c,} by hitting an enemy
-    with their weakness or a critical hit!'
+  text: '{t,clarke}You can deal {c,highlight}Stagger{c,} by hitting an enemy with
+    their {c,highlight}Weakness{c,} or a {c,highlight}Critical Hit!{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -17002,8 +17004,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: '{t,clarke}That {c,ui-terms}Shield{c,} shows the {c,highlight}number of stagger
-    damage it will take to stagger the enemy!{c,}'
+  text: '{t,clarke}That {c,ui-terms}Shield{c,} shows the {c,highlight}number of effective
+    hits it will take to Stagger the enemy!{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -17074,7 +17076,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: '{t,clarke}Looks like {c,enemy-name}Wechselbalg{c,} is weak to the {c,gray}physical{c,}
+  text: '{t,clarke}Looks like {c,enemy-name}Wechselbalg{c,} is weak to the {c,gray}Physical{c,}
     element!'
   input_display: {fileID: 0}
   input_options: []
@@ -17760,7 +17762,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &723685589
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18711,7 +18713,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &769192459
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19779,7 +19781,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &828981989
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19946,7 +19948,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &830637600
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20496,7 +20498,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Nihilism
+  m_Text: 
 --- !u!222 &837894847
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22484,7 +22486,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 910055479}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -22701,7 +22703,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &921353016
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23451,7 +23453,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 300}
+  m_AnchoredPosition: {x: 0, y: -0.000005453498}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &965409675
@@ -23668,7 +23670,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &975594711
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24210,7 +24212,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 225, y: -207}
+  m_AnchoredPosition: {x: 273, y: 2}
   m_SizeDelta: {x: 16, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &983073167
@@ -24711,7 +24713,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1004357517
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24848,7 +24850,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: '{t,clarke}Be sure to |wave|murder\wave\ poor {c,enemy-name}Wech{c,} be fore
+  text: '{t,clarke}Be sure to |wave|murder\wave\ poor {c,enemy-name}Wech{c,} before
     they get the chance to cast {c,spell}SELFCARE{c,}!'
   input_display: {fileID: 0}
   input_options: []
@@ -24872,8 +24874,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: '{t,clarke}Staggered enemies take more damage than usual {c,highlight}and
-    can not charge up their spells.{c,}'
+  text: '{t,clarke}{c,highlight}Staggered{c,} enemies take more damage than usual
+    {c,highlight}and cannot charge up their spells.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -24896,7 +24898,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: '{t,clarke}Good job! you''ve staggered {c,enemy-name}Wechselbalg!{c,}'
+  text: '{t,clarke}Good job! You''ve {c,highlight}Staggered{c,} {c,enemy-name}Wechselbalg!{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -25201,8 +25203,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: '{t,clarke}{c,cyan}ice{c,} damage caused by the {c,spell}CRYO{c,} prefix will
-    freeze your {c,ui-terms}Keys{c,}. Mash them to remove the {c,cyan}ice{c,}!'
+  text: '{t,clarke}{c,cyan}Ice{c,} damage caused by the {c,spell}CRYO-{c,} prefix
+    will freeze your {c,ui-terms}Keys{c,}. Mash them to remove the {c,cyan}Ice{c,}!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -25249,7 +25251,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: '{t,clarke}It appears your TYPOCRYPHA has been hit by an {c,cyan}ice attack.{c,}'
+  text: '{t,clarke}It appears your TYPOCRYPHA has been hit by an {c,cyan}Ice{c,} attack.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -25570,7 +25572,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: General Mackey
+  speaker_name: Dahlia
   text: '{t,dahlia}Try copying the {c,enemy-name}Changeling''s{c,} {c,spell}SWORD{c,}.
     Hit the {c,ui-terms}ENTER key{c,} to cast it once you''ve typed it out.'
   input_display: {fileID: 0}
@@ -25595,7 +25597,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '{t,dahlia}Remember,  {c,highlight}you can cast any {c,spell}Spell Word{c,}
+  text: '{t,dahlia}Remember, {c,highlight}you can cast any {c,spell}Spell Word{c,}
     that you know, even if you''ve just seen it.{c,}'
   input_display: {fileID: 0}
   input_options: []
@@ -25666,7 +25668,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '{t,dahlia}It''s ok {name}, you can still do this.'
+  text: '{t,dahlia}It''s OK {name}, I know this is still your first real combat experience.
+    You can still do this.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -25689,7 +25692,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}It''s beating you {name}, what are you doing?'
+  text: '{t,illyia}|shake|What''s wrong, {name}? You''re not going to just take a
+    beating, are you!?\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -25866,7 +25870,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '>> Chatroom:'
+  m_Text: GROUP CHAT
 --- !u!222 &1046996118
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -26590,8 +26594,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia} {c,spell}LANCE{c,} is more powerful than {c,spell}SWORD{c,}, but
-    its cooldown is longer. use it wisely!'
+  text: '{t,illyia}{c,spell}LANCE{c,} is more powerful than {c,spell}SWORD{c,}, but
+    its cooldown is longer. Use it wisely!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -26614,7 +26618,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}Also. Have you noticed that {c,enemy-name}TANUKI</color>''s spell?
+  text: '{t,illyia}Also! Have you noticed that {c,enemy-name}TANUKI</color>''s spell?
     {c,spell}LANCE</color>?'
   input_display: {fileID: 0}
   input_options: []
@@ -26685,7 +26689,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "{t,illyia}You'll have to pay attention to your {c,ui-terms}Cooldowns{c,}
+  text: "{t,illyia}{name}! You'll have to pay attention to your {c,ui-terms}Cooldowns{c,}
     in a longer battle like this.\r"
   input_display: {fileID: 0}
   input_options: []
@@ -26709,7 +26713,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}The demons are still standing!'
+  text: '{t,illyia}Tch! Looks like they won''t go down so easily...'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -26883,9 +26887,9 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: '{t,clarke}Enemy weakness information will appear in the {c,ui-terms}Scouter{c,}
-    as you try that element out on the enemy! {c,highlight}-- means normal damage,
-    BL is block, DR is drain, and RF is reflect!{c,}'
+  text: '{t,clarke}Enemy {c,highlight}Weakness{c,} information will appear in the
+    {c,ui-terms}Scouter{c,} as you try that element out on the enemy! {c,highlight}--
+    means normal damage, BL is Block, DR is Drain, and RF is Reflect!{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -26908,8 +26912,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: '{t,clarke}This one''s weakness may be more difficult to determine. Use your
-    {c,ui-terms}Scouter{c,} by holding the {c,ui-terms}Shift Key{c,}.'
+  text: '{t,clarke}This one''s {c,highlight}Weakness{c,} may be more difficult to
+    determine. Use your {c,ui-terms}Scouter{c,} by holding the {c,ui-terms}Shift Key{c,}.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -27370,7 +27374,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1081221319
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27736,7 +27740,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1088031915
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30206,8 +30210,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: '{t,clarke}{c,yellow}volt damage{c,}{c,highlight}will short-circuit your keys
-    so they swap letters with another key{c,highlight}'
+  text: '{t,clarke}{c,yellow}Volt{c,} damage {c,highlight}will short-circuit your
+    keys so they swap letters with another key{c,highlight}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -30230,7 +30234,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: '{t,clarke}{c,yellow}volt damage{c,} is caused by {c,spell}spells{c,} with
+  text: '{t,clarke}{c,yellow}Volt{c,} damage is caused by {c,spell}spells{c,} with
     the {c,spell}VELD Element Prefix{c,}.'
   input_display: {fileID: 0}
   input_options: []
@@ -30254,7 +30258,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: '{t,clarke}It looks like you''ve been hit by {c,yellow}volt damage{c,}. '
+  text: '{t,clarke}It looks like you''ve been hit by {c,yellow}Volt{c,} damage.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -30277,7 +30281,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: '{t,clarke}remember to page through your {c,ui-terms}Spellbook{c,} using the
+  text: '{t,clarke}Remember to page through your {c,ui-terms}Spellbook{c,} using the
     {c,ui-terms}UP and DOWN arrows{c,} to view your {c,spell}Element Prefixes and
     other Spell Words{c,}'
   input_display: {fileID: 0}
@@ -30800,7 +30804,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1188334823
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33024,7 +33028,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1261315380
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33121,8 +33125,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: "[play-music=bgm_exposition]\r{t,evil_eye}{c,evil-eye}We are cursed by the
-    EVIL EYE.{c,}\n{t,evil_eye}{c,evil-eye}A circle, ensnaring us in its gaze.{c,}\r"
+  text: "{t,evil_eye}{c,evil-eye}We are cursed by the EVIL EYE.{c,}\n{t,evil_eye}{c,evil-eye}A
+    circle, ensnaring us in its gaze.{c,}\r"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -33577,7 +33581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1269042617
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34362,7 +34366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interruptScene: {fileID: 376546580}
-  numAttacks: 1
+  numAttacks: 0
   caster: 4
   target: 1
   rootKeywordIs: 
@@ -34407,7 +34411,7 @@ MonoBehaviour:
   Ally2: 
   events:
   - {fileID: 1298971145}
-  - {fileID: 1298971145}
+  - {fileID: 1298971144}
 --- !u!114 &1298971147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34772,7 +34776,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1324949584
 RectTransform:
   m_ObjectHideFlags: 0
@@ -35068,7 +35072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1329476168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36409,7 +36413,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1397513931
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37088,7 +37092,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}Remember your combat training! Use your TYPOCRYPHA!!!'
+  text: '{t,illyia}Remember your training, {name}! |shake|Use your {c,highlight}TYPOCRYPHA!!!{c,}\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -37111,8 +37115,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}I know this is your first mission, but you are going to have to
-    defend yourself.'
+  text: '{t,illyia}{name}! I know this is your first mission, but you''ll need to
+    defend yourself! Dali and I will keep stronger demons away!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -37135,13 +37139,13 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}There are too many of them!'
+  text: '{t,illyia}|shake|Goddammit! We''ve been ambushed!\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
+  codec_sprite: {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1422320708
@@ -37729,7 +37733,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 57866461}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -37953,7 +37957,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1453214174
 RectTransform:
   m_ObjectHideFlags: 0
@@ -39724,7 +39728,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Clarke
   text: '{t,clarke}Use the {c,ui-terms}UP and DOWN arrows{c,} to navigate to the {c,spell}Element
-    Prefix{c,} section to view your element keywords!'
+    Prefix{c,} section to view your {c,highlight}Element Keywords!{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -40377,7 +40381,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1543939411
 RectTransform:
   m_ObjectHideFlags: 0
@@ -42094,7 +42098,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1596509888
 RectTransform:
   m_ObjectHideFlags: 0
@@ -42591,8 +42595,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: '{speak,doppelganger} ...Starting with MY past self: you, {name}, and all
-    the judgement you cling to.'
+  text: '{speak,doppelganger}{c,evil-eye}...Starting with MY past self: you, {name},
+    and all the judgement you cling to.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -42615,8 +42619,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: '{speak,doppelganger} In that case... for our own mutual survival, I will
-    be the one to kill our past... '
+  text: '{speak,doppelganger}{c,evil-eye}In that case... for our own mutual survival,
+    I will be the one to kill our past...{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -42639,7 +42643,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: "{speak,doppelganger} Don\u2019t tell me you still care about what THEY think... "
+  text: "{speak,doppelganger}{c,evil-eye}Don\u2019t tell me you still care about what
+    THEY think...{c,}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -42938,7 +42943,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1601679510
 RectTransform:
   m_ObjectHideFlags: 0
@@ -43916,6 +43921,7 @@ MonoBehaviour:
   VNCodecSprite: {fileID: 375218125}
   ANView: {fileID: 1576722628}
   ANContent: {fileID: 28611441}
+  player_ui: {fileID: 585812794}
   input_field: {fileID: 86583221}
   dialogue_box_prefab: {fileID: 1367198019291800, guid: be59032e3f3bd424c95f63e8f0860dd9,
     type: 2}
@@ -44457,7 +44463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1678004669
 RectTransform:
   m_ObjectHideFlags: 0
@@ -44783,7 +44789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Title: Elemental Casting!
-  Music: bgm_battle_midboss
+  Music: bgm_battle_normal
   Background: BattleBGAbyss
   Enemy1: 
   Enemy2: ijiraq
@@ -44860,10 +44866,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1682365444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0eb10eec0f7ecf4da89b33fc157a240, type: 3}
+  m_Script: {fileID: 11500000, guid: 35d67eafccfc8f544a3a87154779a20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interruptScene: {fileID: 1005218294}
+  numAttacks: 0
+  caster: 4
+  target: 1
+  rootKeywordIs: 
+  elementKeywordIs: 
+  styleKeywordIs: 
+  elementMustBe: 0
+  spellMustHit: 1
+  spellMustCrit: 0
+  spellMustStun: 1
+  damageIsAtLeast: 0
+  vsElementMustBe: 6
 --- !u!114 &1682365461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45115,9 +45133,9 @@ GameObject:
   - component: {fileID: 1704200375}
   - component: {fileID: 1704200374}
   - component: {fileID: 1704200373}
+  - component: {fileID: 1704200380}
+  - component: {fileID: 1704200381}
   - component: {fileID: 1704200372}
-  - component: {fileID: 1704200371}
-  - component: {fileID: 1704200370}
   - component: {fileID: 1704200369}
   - component: {fileID: 1704200368}
   - component: {fileID: 1704200379}
@@ -45160,8 +45178,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: "[set-info=doppel-fr-transform,true]I... I\u2019ve fallen and I can\u2019t
-    get up... \r[play-music=bgm_battle_midboss]\n"
+  text: "[set-info=doppel-fr-transform,true]{speak,doppelganger}{c,evil-eye}I... I
+    wish you would all leave me alone!\r{c,}[play-music=bgm_battle_midboss]\n"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -45184,53 +45202,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia? And Dahlia?
-  text: 'I-ignore that! W-we... I... '
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
---- !u!114 &1704200370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1704200366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: Dahlia
-  text: '{speak,dahlia}Text us back as soon as you get this.'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
---- !u!114 &1704200371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1704200366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: Dahlia
-  text: "{speak,dahlia}We\u2019re coming to find you."
+  text: '{speak,doppelganger}I-ignore that! W-we... I... '
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -45247,21 +45219,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1704200366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a689a357230e2f4a82f84ec858e0fcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: Illyia
-  text: "{speak,illyia}We\u2019re worried. Where r u?"
+  speaker_name: Dahlia
+  text: '{speak,dahlia}Text us back as soon as you get this.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  left_icon: {fileID: 21300000, guid: d7a1fb6562d253a49aa57e44759094ea, type: 3}
+  right_icon: {fileID: 0}
+  icon_side: 0
 --- !u!114 &1704200373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45270,7 +45241,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1704200366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a689a357230e2f4a82f84ec858e0fcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fx_text_effects: []
@@ -45282,10 +45253,9 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  left_icon: {fileID: 21300000, guid: 63393d0a276169c4c93392e6f32404b1, type: 3}
+  right_icon: {fileID: 0}
+  icon_side: 0
 --- !u!114 &1704200374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45300,7 +45270,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[stop-music]>You have received a ChapSnat message.'
+  text: '[stop-music][play-sfx=sfx_ringtone]{c,ui-terms}> You have received a ChapSnat
+    message.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -45322,8 +45293,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: Illyia? And Dahlia?
-  text: "|shake|You don\u2019t belong with us, {name}\\shake\\.\r\n"
+  speaker_name: Illyia?
+  text: "{speak,illyia}|shake|You don\u2019t belong with us, {name}\\shake\\.\r\n"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -45346,7 +45317,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia?
-  text: "We could do so much better if it were just Lya and \u201CI\u201D..."
+  text: "{speak,dahlia}We could do so much better if it were just Lya and \u201CI\u201D..."
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -45369,7 +45340,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia?
-  text: 'Pathetic. You were always the weakest link. '
+  text: '{speak,illyia}Pathetic. You were always the weakest link. '
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -45403,7 +45374,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: '[heal-player]{speak,mc}(Somehow, I''m feeling a little less stressed...)'
+  text: '[heal-player][play-sfx=sfx_heal]{speak,mc}(Somehow, I''m feeling a little
+    less stressed...)'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -45412,6 +45384,50 @@ MonoBehaviour:
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
+--- !u!114 &1704200380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1704200366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a689a357230e2f4a82f84ec858e0fcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Illyia
+  text: "{speak,illyia}We\u2019re worried. Where r u?"
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  left_icon: {fileID: 21300000, guid: 63393d0a276169c4c93392e6f32404b1, type: 3}
+  right_icon: {fileID: 0}
+  icon_side: 0
+--- !u!114 &1704200381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1704200366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a689a357230e2f4a82f84ec858e0fcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Dahlia
+  text: "{speak,dahlia}We\u2019re coming to find you."
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  left_icon: {fileID: 21300000, guid: d7a1fb6562d253a49aa57e44759094ea, type: 3}
+  right_icon: {fileID: 0}
+  icon_side: 0
 --- !u!1 &1708500768
 GameObject:
   m_ObjectHideFlags: 0
@@ -45543,7 +45559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1712987601
 RectTransform:
   m_ObjectHideFlags: 0
@@ -45833,7 +45849,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1750468868
 RectTransform:
   m_ObjectHideFlags: 0
@@ -48031,8 +48047,9 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Ijiraq
-  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}I, {c,enemy-name}IJIRAQ,{c,} ONLY RESPECT
-    EYE! EYE ALONE! THAT MEANS YOU DIE!{c,}'
+  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}I, {c,enemy-name}IJIRAQ,{c,} WILL NOT
+    LET OUR PEACEFUL WAY OF LIFE BE TRAMPLED BY THE {c,tips}STATES OF ARMICA.{c,}
+    BEGONE, INVADERS!{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -48055,8 +48072,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia} Well, Dahlia and I are occupied. you''d better take care of this
-    one, {name}'
+  text: '{t,illyia}|shake|Shit, demons are pouring out everywhere. {name}, Dahlia
+    and I will try to contain the situation; you take care of this one.\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -48079,8 +48096,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Ijiraq
-  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}YOU HURT MY FIEND AND NOW I''MA HURT
-    YOU{c,}'
+  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}YOU''VE THREATENED OUR DEAR FRIEND...
+    WHAT DO YOU SEEK TO GAIN FROM THIS?{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -48103,8 +48120,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia} It looks like you really pissed them off, {name}. What the hell
-    did you say?'
+  text: '{t,illyia}|shake|Christ, you really pissed them off, {name}! What the hell
+    did you tell ''em!?\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -48660,7 +48677,7 @@ RectTransform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: 0, y: 0}
@@ -49160,7 +49177,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '{t,dahlia} {c,spell}Spell Words{c,} your enemies cast will be added to your
+  text: '{t,dahlia}{c,spell}Spell Words{c,} your enemies cast will be added to your
     {c,ui-terms}Spellbook{c,} automatically!'
   input_display: {fileID: 0}
   input_options: []
@@ -49184,7 +49201,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '{t,dahlia} If you''re having trouble remembering the {c,spell}Spell Words{c,}
+  text: '{t,dahlia}If you''re having trouble remembering the {c,spell}Spell Words{c,}
     you''ve used, check the {c,ui-terms}Spellbook{c,} in your {c,highlight}lower right{c,}'
   input_display: {fileID: 0}
   input_options: []
@@ -49242,7 +49259,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}Go get ''em, {name}!'
+  text: '{t,illyia}|shake|Tear ''em apart, {name}!\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -49710,7 +49727,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1896248617
 RectTransform:
   m_ObjectHideFlags: 0
@@ -50431,7 +50448,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1916023005
 RectTransform:
   m_ObjectHideFlags: 0
@@ -50780,7 +50797,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Anime Hell 2033
+  m_Text: 
 --- !u!222 &1922030786
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -51089,7 +51106,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1936568530
 RectTransform:
   m_ObjectHideFlags: 0
@@ -52157,7 +52174,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Wechselbalg
   text: '[set-talk-sfx=vo_demon]{c,enemy-talk}|shake|H-hey! Mx. {NAME}! No holding
-    back! I''M GONNA TEAR YOU APART!\shake\{c,}'
+    back! I''M GONNA KILL YOU!\shake\{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -53292,7 +53309,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2029538952
 RectTransform:
   m_ObjectHideFlags: 0
@@ -54890,6 +54907,7 @@ GameObject:
   - component: {fileID: 2106448169}
   - component: {fileID: 2106448168}
   - component: {fileID: 2106448167}
+  - component: {fileID: 2106448172}
   m_Layer: 5
   m_Name: BI_IJIRAQ_NULLHIT2
   m_TagString: Untagged
@@ -54929,8 +54947,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}try inserting a word sperator using your {c,ui-terms}Space Bar{c,}
-    to cast {c,spell}AGNI-SWORD{c,} on {c,enemy-name}Ijiraq{c,}!'
+  text: '[screen-shake=2.0,0.1]{c,ui-terms}> Illyia was hit by a {c,spell}SWORD{c,}
+    spell!{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -54953,8 +54971,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}{c,spell}AGNI{c,} is the official TYPOCRYPHA prefix for the {c,orange}fire{c,}
-    element.'
+  text: '{t,illyia}[play-sfx=sfx_slash]|shake|A-AH!\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -54977,8 +54994,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}You''ll have to apply an {c,spell}Element Prefix{c,} like {c,spell}AGNI{c,}
-    to your spell to get through its defenses.'
+  text: '{t,illyia}YOU GOTTA BURN IT UP! Use {c,spell}AGNI-SWORD{c,}! {c,spell}AGNI-LANCE{c,}!
+    {c,spell}AGNI-HAMMER{c,}! |shake|{c,spell}AGNI-{c,} ANYTHIN-\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -55001,8 +55018,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}Oh shit, {NAME}. This demon {c,highlight}Blocks{c,} physical attacks.
-    {c,spell}SWORD{c,}s and {c,spell}LANCE{c,}s are useless by themselves!.'
+  text: '{t,illyia}|shake|What are doing, {name}!? Are you even paying attention?
+    Those attacks aren''t doing damage!! Please focus!\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -55022,6 +55039,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2106448172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2106448165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Illyia
+  text: '{t,illyia}|shake|You bastards!\shake\ {name}, don''t die, you hear me!? {c,spell}AGNI-SWORD{c,}!
+    {c,spell}AGNI-LANCE{c,}! {c,spell}AGNI-HAMMER{c,}! REMEMBER.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &2120598029
 GameObject:
   m_ObjectHideFlags: 0
@@ -55373,8 +55414,9 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: '{t,clarke}Hitting burned keys will damage you, {c,orange}but the fire will
-    go out eventually{c,}. Wait it out, or take the damage if you really need to!'
+  text: '{t,clarke}Hitting {c,orange}Burned{c,} keys will damage you, {c,orange}but
+    the fire will go out eventually{c,}. Wait it out, or take the damage if you really
+    need to!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -55397,8 +55439,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: '{t,clarke}{c,orange}fire damage{c,} is caused by spells with the {c,spell}AGNI{c,}
-    prefix and will burn your {c,ui-terms}keys.{c,}'
+  text: '{t,clarke}{c,orange}Fire{c,} damage is caused by spells with the {c,spell}AGNI{c,}
+    prefix and will {c,orange}Burn{c,} your {c,ui-terms}keys.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -55421,7 +55463,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: '{t,clarke}It seems like your TYPOCRYPHA has taken {c,orange}fire  damage.{c,}'
+  text: '{t,clarke}Your TYPOCRYPHA has taken {c,orange}Fire{c,} damage.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []

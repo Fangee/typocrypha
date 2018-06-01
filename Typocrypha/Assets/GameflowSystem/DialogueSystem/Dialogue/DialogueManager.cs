@@ -21,6 +21,8 @@ public class DialogueManager : MonoBehaviour {
 	public GameObject ANView; // Audio Novel view hiearchy
 	public RectTransform ANContent; // Content of scroll view
 
+	public RectTransform player_ui; // the Typocrypha UI
+
 	public InputField input_field; // Input field for dialogue choices
 	public GameObject dialogue_box_prefab; // Prefab of dialogue box object
 	public GameObject an_dialouge_box_prefab; // Prefab of audio novel dialogue 
@@ -78,10 +80,13 @@ public class DialogueManager : MonoBehaviour {
             if(spacebar_icon_vn.activeInHierarchy)
 			    animator_spacebar_vn.Play ("anim_key_spacebar");
 		}
+		if (isInterrupt)
+			player_ui.localScale = new Vector3(0,0,0);
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			if (!nextLine ()) {
 				if (isInterrupt) {
                     if(!BattleManagerS.main.playSceneFromQueue()) {
+						player_ui.localScale = new Vector3(1,1,1);
                         BattleManagerS.main.setPause(false);
                         BattleManagerS.main.postInterrupt();
                         isInterrupt = false;

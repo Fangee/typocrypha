@@ -36,7 +36,7 @@ public class TextMacros : MonoBehaviour {
 			{ "spell",      "#ff6eff" },
 			{ "ui-terms",   "#05abff" },
 			{ "evil-eye",   "#ff0042" },
-			{ "enemy-talk", "#be2dd4" },
+			{ "enemy-talk", "#974dfe" },
 			{ "enemy-name", "#16e00c" },
 			{ "tips",       "#ffdb16" },
 			{ "whisper",    "#c8c8c8" },
