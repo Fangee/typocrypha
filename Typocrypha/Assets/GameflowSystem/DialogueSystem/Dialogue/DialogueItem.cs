@@ -11,7 +11,7 @@ public abstract class DialogueItem : MonoBehaviour {
 	[HideInInspector] public List<TextEvent>[] text_events; // Array of text events at each character index
 	public DialogueType dialogue_type; // Type of player interaction with dialogue
 	public string speaker_name; // Label of who is speaking
-	[TextArea(4,20)] // Blaze It
+	[TextArea(2,20)] //Sorry no more Blaze It
 	public string text; // Dialogue text
 
 	// Input fields

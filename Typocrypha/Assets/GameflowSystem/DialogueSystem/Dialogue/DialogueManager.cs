@@ -67,7 +67,7 @@ public class DialogueManager : MonoBehaviour {
 	}
 
 	void Update() {
-		if (history [history.Count - 1].cr_scroll == null && !input) {
+		if (history.Count > 0 && history [history.Count - 1].cr_scroll == null && !input) {
 			spacebar_icon_vn.SetActive (true);
 		}
 		if (block_input) {
@@ -195,7 +195,8 @@ public class DialogueManager : MonoBehaviour {
 		yield return new WaitUntil (() => d_box.cr_scroll == null);
 		input_field.gameObject.SetActive (true);
 		input_field.ActivateInputField ();
-		animator_spacebar_vn.Play("anim_key_spacebar_no");
+        spacebar_icon_vn.SetActive(true);
+        animator_spacebar_vn.Play("anim_key_spacebar_no");
 		if (d_item.input_display != null)
 			input_display = Instantiate (d_item.input_display, transform);
 		if (d_item.input_options.Length > 0) {
