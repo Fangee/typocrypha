@@ -1280,6 +1280,8 @@ GameObject:
   - component: {fileID: 49644902}
   - component: {fileID: 49644901}
   - component: {fileID: 49644900}
+  - component: {fileID: 49644904}
+  - component: {fileID: 49644905}
   m_Layer: 5
   m_Name: BI_DOPPEL_BOSS_IN
   m_TagString: Untagged
@@ -1388,6 +1390,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &49644904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 49644898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{name}'
+  text: '{speak,mc}|shake|I''m not taking your shit any longer, freak!\shake\'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &49644905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 49644898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '[heal-player][play-sfx=sfx_heal]{c,ui-terms}> {name} felt a surge of energy!
+    {c,}'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &50502091
 GameObject:
   m_ObjectHideFlags: 0
@@ -1567,7 +1616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &57851097
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1959,7 +2008,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &74530118
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4636,7 +4685,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &173911255
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5148,7 +5197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &181451881
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5629,7 +5678,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &193480892
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5803,7 +5852,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &194396682
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6218,7 +6267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &198372661
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6712,7 +6761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &205596595
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6999,7 +7048,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &213370331
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7647,7 +7696,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &226019614
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8139,7 +8188,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &239973557
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9616,7 +9665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &327953939
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10361,7 +10410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &338771796
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10910,7 +10959,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &376546581
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13518,7 +13567,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &525117283
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14507,7 +14556,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &586949733
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14876,7 +14925,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &590508429
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15484,7 +15533,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &638545936
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17762,7 +17811,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &723685589
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18713,7 +18762,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &769192459
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19781,7 +19830,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &828981989
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19948,7 +19997,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &830637600
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22703,7 +22752,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &921353016
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23670,7 +23719,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &975594711
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24713,7 +24762,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1004357517
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26984,7 +27033,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Clarke
   text: '{t,clarke}{c,highlight}Focusing on the enemies will also make it so time
-    move slowly{c,}, so feel free to use the {c,ui-terms}Scouter{c,} to catch a break
+    move slowly{c,}, so feel free to use the {c,ui-terms}Scouter{c,}  to catch a break
     and look at your surroundings.'
   input_display: {fileID: 0}
   input_options: []
@@ -27374,7 +27423,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1081221319
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27740,7 +27789,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1088031915
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30166,7 +30215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1168889514
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30211,7 +30260,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Clarke
   text: '{t,clarke}{c,yellow}Volt{c,} damage {c,highlight}will short-circuit your
-    keys so they swap letters with another key{c,highlight}'
+    keys so they swap letters with another key.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -30804,7 +30853,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1188334823
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33028,7 +33077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1261315380
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33581,7 +33630,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1269042617
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34267,7 +34316,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1298971140
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34300,7 +34349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: Formeless
+  Title: You're a Monster Like Me
   Music: 
   Background: 
   Enemy1: Ala
@@ -34344,7 +34393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: The VELD element
+  Title: Repeated Failure
   Music: 
   Background: 
   Enemy1: 
@@ -34401,7 +34450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: Der Doppelganger
+  Title: 'BOSS: Der Doppelganger'
   Music: bgm_battle_midboss
   Background: BattleBGAbyss
   Enemy1: 
@@ -34776,7 +34825,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1324949584
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34975,7 +35024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: Friends?
+  Title: 'BOSS: Friends'
   Music: bgm_ominous
   Background: 
   Enemy1: Dahlia?
@@ -35019,7 +35068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: The Evil "I"
+  Title: 'BOSS: The Evil "I"'
   Music: bgm_battle_doppelganger
   Background: 
   Enemy1: 
@@ -35072,7 +35121,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1329476168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36413,7 +36462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1397513931
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36576,7 +36625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: On Your Own Now
+  Title: 'Basics: You''re On Your Own Now Nerd'
   Music: 
   Background: 
   Enemy1: changeling
@@ -37957,7 +38006,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1453214174
 RectTransform:
   m_ObjectHideFlags: 0
@@ -40381,7 +40430,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1543939411
 RectTransform:
   m_ObjectHideFlags: 0
@@ -42098,7 +42147,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1596509888
 RectTransform:
   m_ObjectHideFlags: 0
@@ -42562,7 +42611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1599218054
 RectTransform:
   m_ObjectHideFlags: 0
@@ -42943,7 +42992,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1601679510
 RectTransform:
   m_ObjectHideFlags: 0
@@ -44463,7 +44512,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1678004669
 RectTransform:
   m_ObjectHideFlags: 0
@@ -44568,7 +44617,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1682365445
 RectTransform:
   m_ObjectHideFlags: 0
@@ -44648,7 +44697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: Bunbuku the Burning
+  Title: 'No More Basics: Desperate Struggle'
   Music: 
   Background: 
   Enemy1: 
@@ -44706,7 +44755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: Elemental Status Effects (CRYO)
+  Title: 'Basics: Status Effects'
   Music: 
   Background: 
   Enemy1: tanuki
@@ -44788,7 +44837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: Elemental Casting!
+  Title: 'Basics: Elemental Casting'
   Music: bgm_battle_normal
   Background: BattleBGAbyss
   Enemy1: 
@@ -44847,7 +44896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: What You Deserve
+  Title: 'BOSS: {cat-name}: Reunion'
   Music: 
   Background: 
   Enemy1: 
@@ -44929,7 +44978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd08b3a8e790b7458fe2e7a86dc1189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: This is Your Fault
+  Title: 'Back To Basics: Stagger'
   Music: 
   Background: 
   Enemy1: 
@@ -45559,7 +45608,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1712987601
 RectTransform:
   m_ObjectHideFlags: 0
@@ -45849,7 +45898,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1750468868
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49727,7 +49776,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1896248617
 RectTransform:
   m_ObjectHideFlags: 0
@@ -50448,7 +50497,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1916023005
 RectTransform:
   m_ObjectHideFlags: 0
@@ -51106,7 +51155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1936568530
 RectTransform:
   m_ObjectHideFlags: 0
@@ -53309,7 +53358,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2029538952
 RectTransform:
   m_ObjectHideFlags: 0

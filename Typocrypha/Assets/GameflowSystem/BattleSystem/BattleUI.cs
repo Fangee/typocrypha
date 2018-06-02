@@ -123,8 +123,8 @@ public class BattleUI : MonoBehaviour
     public IEnumerator waveTransition(string title, int curr_wave, int max_wave)
     {
         AudioPlayer.main.playSFX("sfx_spell_miss");
-        wave_banner_text.text = title;
-        wave_title_text.text = "Wave " + curr_wave + "/ " + max_wave;
+        wave_banner_text.text = "Wave " + curr_wave + "/ " + max_wave; //title;
+        wave_title_text.text = title; //"Wave " + curr_wave + "/ " + max_wave;
         Animator banner_text_animator = wave_banner_text.GetComponent<Animator>();
         Animator banner_img_animator = wave_transition_banner.GetComponent<Animator>();
         Animator title_text_animator = wave_title_text.GetComponent<Animator>();
