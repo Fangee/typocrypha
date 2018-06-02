@@ -21,6 +21,8 @@ public class DialogueManager : MonoBehaviour {
 	public GameObject ANView; // Audio Novel view hiearchy
 	public RectTransform ANContent; // Content of scroll view
 
+	public RectTransform player_ui; // the Typocrypha UI
+
 	public InputField input_field; // Input field for dialogue choices
 	public GameObject dialogue_box_prefab; // Prefab of dialogue box object
 	public GameObject an_dialouge_box_prefab; // Prefab of audio novel dialogue 
@@ -30,6 +32,10 @@ public class DialogueManager : MonoBehaviour {
 	public float top_space; // Space between top of window and dialogue
 
 	public GameObject input_display_choices; // Game object displaying dialogue choices
+	public GameObject input_display_C; // Dialogue choice C box
+
+	public GameObject spacebar_icon_vn; // Spacebar icon VN view
+	public Animator animator_spacebar_vn; // Spacebar icon key animator
 
 	[HideInInspector] public bool pause_scroll; // Pause text scroll
 	[HideInInspector] public bool block_input; // Blocks user input
@@ -63,12 +69,26 @@ public class DialogueManager : MonoBehaviour {
 	}
 
 	void Update() {
-		if (block_input) return;
+		if (history.Count > 0 && history [history.Count - 1].cr_scroll == null && !input) {
+			spacebar_icon_vn.SetActive (true);
+		}
+		if (block_input) {
+			spacebar_icon_vn.SetActive (true);
+			animator_spacebar_vn.Play ("anim_key_spacebar_no");
+			return;
+		} else {
+            if(spacebar_icon_vn.activeInHierarchy)
+			    animator_spacebar_vn.Play ("anim_key_spacebar");
+		}
+		if (isInterrupt)
+			player_ui.localScale = new Vector3(0,0,0);
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			if (!nextLine ()) {
 				if (isInterrupt) {
                     if(!BattleManagerS.main.playSceneFromQueue()) {
+						player_ui.localScale = new Vector3(1,1,1);
                         BattleManagerS.main.setPause(false);
+                        BattleManagerS.main.postInterrupt();
                         isInterrupt = false;
                         setEnabled(false);
                     }
@@ -106,42 +126,47 @@ public class DialogueManager : MonoBehaviour {
 			history [history.Count - 1].dumpText ();
 		} else {
 			//if (!input && Input.GetKeyDown (KeyCode.Space)) AudioPlayer.main.playSFX ("sfx_advance_text");
+			spacebar_icon_vn.SetActive (false);
 			if (input) return true;
 			if (curr_line >= curr_dialogue.GetComponents<DialogueItem>().Length - 1) return false;
 			// Create dialogue box
 			DialogueItem d_item = curr_dialogue.GetComponents<DialogueItem>()[++curr_line];
 			DialogueBox d_box = null;
-			if (d_item.GetType () == typeof(DialogueItemJump)) {
-				curr_dialogue = ((DialogueItemJump)d_item).target.gameObject;
-				GameflowManager.main.curr_item = ((DialogueItemJump)d_item).target.gameObject.transform.GetSiblingIndex () - 1;
-				return false;
-			} else if (d_item.GetType () == typeof(DialogueItemVN)) {
-				Sprite mc_sprite = ((DialogueItemVN)d_item).mc_sprite;
-				Sprite codec_sprite = ((DialogueItemVN)d_item).codec_sprite;
-				if (mc_sprite != null)
-					VNMCSprite.sprite = mc_sprite;
-				if (codec_sprite != null)
-					VNCodecSprite.sprite = codec_sprite;
-				VNView.SetActive (true);
-				ChatView.SetActive (false);
-				ANView.SetActive (false);
-				d_box = VNDialogueBox;
-				VNSpeaker.text = DialogueParser.main.substituteMacros(d_item.speaker_name);
-			} else if (d_item.GetType () == typeof(DialogueItemChat)) {
-				VNView.SetActive (false);
-				ChatView.SetActive (true);
-				ANView.SetActive (false);
-				//clearLog (ChatView);
-				GameObject d_obj = Instantiate (dialogue_box_prefab, ChatContent);
-				d_box = d_obj.GetComponent<DialogueBox> ();
-			} else if (d_item.GetType () == typeof(DialogueItemAN)) {
-				VNView.SetActive (false);
-				ChatView.SetActive (false);
-				ANView.SetActive (true);
-				//clearLog (ANView);
-				GameObject d_obj = Instantiate (an_dialouge_box_prefab, ANContent);
-				d_box = d_obj.GetComponent<DialogueBox> ();
-			}
+            if (d_item.GetType() == typeof(DialogueItemJump)) {
+                curr_dialogue = ((DialogueItemJump)d_item).target.gameObject;
+                GameflowManager.main.curr_item = ((DialogueItemJump)d_item).target.gameObject.transform.GetSiblingIndex() - 1;
+                return false;
+            } else if (d_item.GetType() == typeof(DialogueItemConditionalJump)) {
+                curr_dialogue = ((DialogueItemConditionalJump)d_item).evaluateTarget().gameObject;
+                GameflowManager.main.curr_item = curr_dialogue.transform.GetSiblingIndex() - 1;
+                return false;
+            } else if (d_item.GetType() == typeof(DialogueItemVN)) {
+                Sprite mc_sprite = ((DialogueItemVN)d_item).mc_sprite;
+                Sprite codec_sprite = ((DialogueItemVN)d_item).codec_sprite;
+                if (mc_sprite != null)
+                    VNMCSprite.sprite = mc_sprite;
+                if (codec_sprite != null)
+                    VNCodecSprite.sprite = codec_sprite;
+                VNView.SetActive(true);
+                ChatView.SetActive(false);
+                ANView.SetActive(false);
+                d_box = VNDialogueBox;
+                VNSpeaker.text = DialogueParser.main.substituteMacros(d_item.speaker_name);
+            } else if (d_item.GetType() == typeof(DialogueItemChat)) {
+                VNView.SetActive(false);
+                ChatView.SetActive(true);
+                ANView.SetActive(false);
+                //clearLog (ChatView);
+                GameObject d_obj = Instantiate(dialogue_box_prefab, ChatContent);
+                d_box = d_obj.GetComponent<DialogueBox>();
+            } else if (d_item.GetType() == typeof(DialogueItemAN)) {
+                VNView.SetActive(false);
+                ChatView.SetActive(false);
+                ANView.SetActive(true);
+                //clearLog (ANView);
+                GameObject d_obj = Instantiate(an_dialouge_box_prefab, ANContent);
+                d_box = d_obj.GetComponent<DialogueBox>();
+            }
 			d_box.d_item = d_item;
 			d_box.speaker = DialogueParser.main.substituteMacros(d_item.speaker_name);
 			// Remove old text effects
@@ -175,9 +200,19 @@ public class DialogueManager : MonoBehaviour {
 		yield return new WaitUntil (() => d_box.cr_scroll == null);
 		input_field.gameObject.SetActive (true);
 		input_field.ActivateInputField ();
+        spacebar_icon_vn.SetActive(true);
+        animator_spacebar_vn.Play("anim_key_spacebar_no");
 		if (d_item.input_display != null)
 			input_display = Instantiate (d_item.input_display, transform);
 		if (d_item.input_options.Length > 0) {
+			switch (d_item.input_options.Length) {
+			case 2:
+				input_display_C.SetActive (false);
+				break;
+			case 3:
+				input_display_C.SetActive (true);
+				break;
+			}
 			populateChoices ();
 			input_display_choices.SetActive (true);
 		}
@@ -221,6 +256,7 @@ public class DialogueManager : MonoBehaviour {
 				curr_dialogue = d_item.input_branches [i].gameObject;
 				GameflowManager.main.curr_item = d_item.input_branches [i].gameObject.transform.GetSiblingIndex ();
 				curr_line = -1;
+				animator_spacebar_vn.Play("anim_key_spacebar");
 				AudioPlayer.main.playSFX ("sfx_enter");
 			} else { // If not found, try again
 				curr_line--;
@@ -252,6 +288,7 @@ public class DialogueManager : MonoBehaviour {
 					curr_dialogue = d_item.input_branches [i].gameObject;
 					GameflowManager.main.curr_item = d_item.input_branches [i].gameObject.transform.GetSiblingIndex ();
 					curr_line = -1;
+					animator_spacebar_vn.Play("anim_key_spacebar");
 					AudioPlayer.main.playSFX ("sfx_enter");
 				} else { // If not found, try again
 					curr_line--;
@@ -259,6 +296,7 @@ public class DialogueManager : MonoBehaviour {
 					AudioPlayer.main.playSFX ("sfx_botch");
 				}
 			} else {
+				animator_spacebar_vn.Play("anim_key_spacebar");
 				AudioPlayer.main.playSFX ("sfx_enter");
 			}
 			//}
@@ -331,14 +369,14 @@ public class DialogueManager : MonoBehaviour {
 		}
 	}
 
-	// Highlights given character, and dims rest (0.5 greyscale)
+	// Highlights given character, and dims rest (0.25 greyscale)
 	public void soleHighlight(string spr_name) {
 		foreach(GameObject chr_spr in chr_spr_list) {
 			SpriteRenderer spr_r = chr_spr.GetComponent<SpriteRenderer> ();
 			if (spr_r.sprite.name.Contains (spr_name)) {
 				spr_r.color = new Color (1, 1, 1, 1);
 			} else {
-				spr_r.color = new Color (0.5f, 0.5f, 0.5f, 1);
+				spr_r.color = new Color (0.25f, 0.25f, 0.25f, 1);
 			}
 		}
 	}

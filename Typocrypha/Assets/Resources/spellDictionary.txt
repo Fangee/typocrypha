@@ -3,13 +3,14 @@ sword	attack	Basic Phys ATK	anim_spell_slash	sfx_slash	10	4	100	5	0	MT	None	0
 lance	attack	Medium Phys ATK	anim_spell_stab	sfx_stab	20	7	95	5	0	MT	None	0		
 hammer	attack	Heavy Phys ATK	anim_spell_crush	sfx_crush	30	15	100	10	0	MT	None	0		
 halberd	attack	"Inaccurate, But High Dmg"	anim_spell_crush	sfx_slash	40	20	50	3	0	MT	None	0		
-selfcare	attack	Recover User's HP	anim_spell_heal	sfx_mystery_effect	-50	15	9999	5	0	mS	None	0		
+care	attack	Recover Enemy's HP	anim_spell_heal	sfx_mystery_effect	-50	15	9999	5	0	MT	None	0		
+selfcare	attack	Recover User's HP	anim_spell_heal	sfx_mystery_effect	-50	15	9999	5	0	m	None	0		
 stress	attack	Hurts Caster	anim_spell_empower	sfx_spell_resist	12	4	9999	0	0	mS	None	0		
 gun	attack	High Crit (secret)	anim_spell_crush	sfx_crush	15	15	100	45	0	MT	None	0		
 cleaver	attack	a targeted wide atk	anim_spell_slash	sfx_slash	10	10	75	10	0	LMRT	None	0		
 sacrifice	attack	"hurts self, does big ds"	anim_spell_slash	sfx_slash	40	10	95	10	0	LRmS	None	0		
 crush	attack	applies def- debuff	anim_spell_crush	sfx_crush	10	10	80	10	0	MT	D	100		
-splash	attack	always misses (debug )	anim_spell_slash	sfx_slash	1	1	-1000	10	0	MT	None	0		
+splash	attack	not meant to cause harm	anim_spell_slash	sfx_slash	9999	5	-1000	10	0	MT	None	0		
 poke	attack	high damage (debug)	anim_spell_slash	sfx_slash	999	1	100	0	0	MT	None	0		
 crit	attack	always crits (debug)	anim_spell_slash	sfx_slash	2	1	100	100	0	MT	None	0		
 death	attack	kills self (debug)	anim_spell_slash	sfx_slash	999	1	100	0	0	mS	None	0		
@@ -37,9 +38,11 @@ name (style)	powerMod+	spellbook description	anim ID	sfx ID	power mod*	cooldown+
 aimed	0	"+ACC, -DMG"	anim_spell_empower	sfx_slash	0.75	0	1	10	1.2	0	1	0	1	None
 empowered	5	"+DMG, +casting time"	anim_spell_empower	sfx_slash	1.5	5	1.5	0	1	0	1.25	0	1	None
 weakened	-5	"-DMG, -casting time"	anim_spell_empower	sfx_stab	0.75	0	0.5	0	1	5	1	0	1	None
-widened	0	"-power, +AOE, +casting  time"	anim_spell_empower	sfx_slash	0.75	1	1.15	0	1	0	1	0	1	LMRT
+widened	0	"-power, +AOE, +casting  time"	anim_spell_empower	sfx_slash	0.75	1	1.15	0	1	0	1	0	1	"r,LMRlmrT"
 shank	0	"+crit rate, +casting time"	anim_spell_empower	sfx_slash	1	3	1.5	0	1	10	1.5	0	1	None
-self	0	forces spell to target self	anim_spell_empower	sfx_mystery_effect	1	0	1	0	1	0	1	0	1	mS
-other	0	forces spell to target other	anim_spell_empower	sfx_mystery_effect	1	0	1	0	1	0	1	0	1	MT
+self	0	forces spell to target self	anim_spell_empower	sfx_mystery_effect	1	0	1	0	1	0	1	0	1	self
+other	0	forces spell to target other	anim_spell_empower	sfx_mystery_effect	1	0	1	0	1	0	1	0	1	other
+copy	0	copies target pattern to other side	anim_spell_empower	sfx_mystery_effect	1	0	1	0	1	0	1	0	1	copy
 miss	0	"debug, causes player to miss"	anim_spell_empower	sfx_slash	1	0	1	-100	0.25	0	1	0	1	None
+all	0	hits everyone! (secret)	anim_spell_empower	sfx_mystery_effect	0.5	0	1	0	1	0	1	0	1	"a,A"
 END														

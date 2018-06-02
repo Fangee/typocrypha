@@ -23,6 +23,7 @@ public abstract class EnemyAI
     public enum Update_Case
     {
         AFTER_CAST,
+        AFTER_INTERRUPT,
         UNSTUN,
         WAS_HIT,
     }
@@ -47,8 +48,10 @@ public abstract class EnemyAI
                 return new HealthLowAI1(parameters);
             case "FormChange1":
                 return new FormChangeAI1(parameters);
-            case "Doppleganger1":
-                return new DopplegangerAI1(self);
+            case "Doppelganger1":
+                return new DoppelgangerAI1(self);
+            case "DoppelFriend1":
+                return new DoppelFriendAI1(parameters);
             default:
                 throw new System.NotImplementedException(key + " is not an AI type!");
         }
@@ -178,13 +181,13 @@ public class FormChangeAI1 : EnemyAI
     }
 }
 //Doppleganger Unique AI
-public class DopplegangerAI1 : EnemyAI
+public class DoppelgangerAI1 : EnemyAI
 {
     int numAttacks = 0;
     int form = 1;
     string color = "NONE";
     readonly string[] colors = { "RED", "BLUE", "YELLOW" };
-    public DopplegangerAI1(Enemy self)
+    public DoppelgangerAI1(Enemy self)
     {
         state = AI_State.NORMAL;
         self.stagger_time = 2;
@@ -261,7 +264,7 @@ public class DopplegangerAI1 : EnemyAI
             {
                 changeToRandomColor(allies[position]);
             }
-            else // was hit
+            else if(flag == Update_Case.WAS_HIT)// was hit
             {
                 if (allies[position].attack_in_progress)
                     return;
@@ -303,6 +306,26 @@ public class DopplegangerAI1 : EnemyAI
         self.Stats.vsElement[0] = 0;
         ((EnemyStats)self.Stats).spells = formStats.spells;
         self.changeForm();
+    }
+}
+
+public class DoppelFriendAI1 : AttackerAI1
+{
+    protected string nextForm;
+    private bool changed = false;
+    public DoppelFriendAI1(string[] parameters)
+    {
+        nextForm = parameters[0];
+    }
+    public override void updateState(Enemy[] allies, int position, ICaster[] player_arr, Update_Case flag)
+    {
+        if(flag == Update_Case.AFTER_INTERRUPT && !changed && PlayerDialogueInfo.main.getInfo("doppel-fr-transform") == "true")
+        {
+            allies[position].setStats(EnemyDatabase.main.getData(nextForm), true);
+            allies[position].changeForm();
+            allies[position].resetAttack();
+        }
+
     }
 }
 

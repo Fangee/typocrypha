@@ -20,7 +20,8 @@ public class TextMacros : MonoBehaviour {
 			{"NAME", macroNameSub},
 			{"pronoun",macroPronoun},
             {"info", macroInfo},
-			{"last-cast", macroLastCast},
+            {"i", macroInfo},
+            {"last-cast", macroLastCast},
             {"last-cast-enemy", macroLastCastEnemy},
             {"time", macroTime},
 			{"c", macroColor},
@@ -35,7 +36,7 @@ public class TextMacros : MonoBehaviour {
 			{ "spell",      "#ff6eff" },
 			{ "ui-terms",   "#05abff" },
 			{ "evil-eye",   "#ff0042" },
-			{ "enemy-talk", "#be2dd4" },
+			{ "enemy-talk", "#974dfe" },
 			{ "enemy-name", "#16e00c" },
 			{ "tips",       "#ffdb16" },
 			{ "whisper",    "#c8c8c8" },
@@ -49,6 +50,7 @@ public class TextMacros : MonoBehaviour {
 			{"doppelganger", new Pair<string, string>("doppelganger", "vo_doppelganger")},
 			{"clarke", new Pair<string, string>("clarke", "vo_clarke")},
 			{"iris", new Pair<string, string>("iris", "vo_iris")},
+			{"cat_person", new Pair<string, string>("cat_person", "speak_boop")},
 			{"evil_eye", new Pair<string, string>("evil_eye", "vo_evil_eye")}
 		};
         translate_map = new Dictionary<char, char> {
