@@ -82,7 +82,8 @@ public class BattleEffects : MonoBehaviour {
 			yield return new WaitForEndOfFrame();
 			curr_time += Time.deltaTime;
 		}
-		cam_pos.position = old_pos;
+		//cam_pos.position = old_pos; // WARNING: May cause camera to not reset if multiple shakes happen
+		cam_pos.position = new Vector3 (0f, 0f, -10f);
 	}
 
 	// shake a sprite for sec seconds and amt intensity
