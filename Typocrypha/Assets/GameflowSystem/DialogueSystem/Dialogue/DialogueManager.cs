@@ -108,6 +108,8 @@ public class DialogueManager : MonoBehaviour {
 
 	// Starts a new dialogue scene
 	public void startDialogue(GameObject new_dialogue) {
+		clearChatLog ();
+		clearANLog ();
 		curr_line = -1;
 		curr_dialogue = new_dialogue;
 		nextLine ();
@@ -413,7 +415,6 @@ public class DialogueManager : MonoBehaviour {
 
 	// Clears the given chat log of all objects in its hierarchy (general function)
 	public void clearLog(GameObject textView, int offset){
-		resetWindowSize();
 		Transform content = textView.transform.GetChild(0).GetChild(0);
 		int skipSpacer = 0; // skip the Spacer object in the content hierarchy
 		//VerticalLayoutGroup layout = content.GetComponents<VerticalLayoutGroup>();
@@ -432,6 +433,7 @@ public class DialogueManager : MonoBehaviour {
 			}
 			Debug.Log ("skip current box = " + skipCurrentBox);
 		}
+		resetWindowSize();
 	}
 
 	// Pops off the latest item in the given chat log of all objects in its hierarchy (general function)
