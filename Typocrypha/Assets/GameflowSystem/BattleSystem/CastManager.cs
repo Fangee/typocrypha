@@ -172,6 +172,13 @@ public class CastManager : MonoBehaviour
         {
             spellEffects.StartCoroutine(spellEffects.playEffects(d, s, delay));
             delay += 0.1f;
+            if (!d.isHit)
+                continue;
+            //Learn intel if applicable
+            if (d.Target.CasterType == ICasterType.ENEMY)
+                EnemyIntel.main.learnIntel(d.Target.Stats.name, d.element);
+            else if (d.Caster.CasterType == ICasterType.ENEMY && d.Target.CasterType == ICasterType.PLAYER && d.repel)
+                EnemyIntel.main.learnIntel(d.Caster.Stats.name, d.element);
         }
         //Register unregistered keywords here
         bool[] regData = spellDict.safeRegister(spellBook, s);
@@ -248,6 +255,27 @@ public class CastManager : MonoBehaviour
     {
         float cooldownTime = spellDict.getCastingTime(data, castingPlayer.Stats.speed);
         spellDict.getSpell(data).startCooldown(cooldown, data.root, cooldownTime);
+    }
+
+    //Utility
+
+    //Returns valid spelldata if the string is a valid spell, or null if not
+    public SpellData isValidSpell(string spell)
+    {
+        SpellData s = null;
+        CastStatus status = spellDict.parse(spell, out s);
+        if (status == CastStatus.SUCCESS || status == CastStatus.ONCOOLDOWN || status == CastStatus.COOLDOWNFULL)
+            return s;
+        return null;
+    }
+    //Play a spell animation without really doing anything
+    public IEnumerator playSpellEffects(SpellData s, CastData dummyValues)
+    {
+        dummyValues.animData = spellDict.getAnimData(s);
+        dummyValues.sfxData = spellDict.getSfxData(s);
+        dummyValues.element = Elements.fromString(s.element);
+        dummyValues.damageInflicted = spellDict.getSpell(s).power * 2;
+        yield return StartCoroutine(spellEffects.playEffects(dummyValues, s));
     }
 
     //SpellBook management

@@ -65,7 +65,7 @@ public class TrackTyping : MonoBehaviour {
     }
 
 	void Update () {
-		if ((BattleManagerS.main.pause || BattleManagerS.main.enabled == false) &&
+		if (((BattleManagerS.main.pause && !BattleManagerS.main.frenzyCastActive) || BattleManagerS.main.enabled == false) &&
 			(!TextEvents.main.is_prompt)) {
 			entry_ok.text = "NO";
 			return;

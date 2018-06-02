@@ -36,13 +36,18 @@ veld	volt	Override ATK type to Volt	anim_spell_volt	sfx_volt_hit	0	1
 END														
 name (style)	powerMod+	spellbook description	anim ID	sfx ID	power mod*	cooldown+	cooldown*	hit% mod+	hit% *	crit % mod+	crit % mod*	status% +	status% *	pattern
 aimed	0	"+ACC, -DMG"	anim_spell_empower	sfx_slash	0.75	0	1	10	1.2	0	1	0	1	None
-empowered	5	"+DMG, +casting time"	anim_spell_empower	sfx_slash	1.5	5	1.5	0	1	0	1.25	0	1	None
-weakened	-5	"-DMG, -casting time"	anim_spell_empower	sfx_stab	0.75	0	0.5	0	1	5	1	0	1	None
-widened	0	"-power, +AOE, +casting  time"	anim_spell_empower	sfx_slash	0.75	1	1.15	0	1	0	1	0	1	"r,LMRlmrT"
+empowered	10	"+DMG, +casting time"	anim_spell_empower	sfx_slash	2	10	3	0	0.9	0	1.25	0	1	None
+powered	5	"+DMG, +casting time"	anim_spell_empower	sfx_slash	1.5	5	1.5	0	1	0	1.25	0	1	None
+weakened	-10	"-DMG, -casting time"	anim_spell_empower	sfx_stab	0.5	-5	0.25	0	1.1	5	0.9	0	1	None
+weak	-5	"-DMG, -casting time"	anim_spell_empower	sfx_stab	0.75	0	0.5	0	1	5	0.9	0	1	None
+widened	0	"-power, +AOE, +casting  time"	anim_spell_empower	sfx_slash	0.85	5	1.15	0	1	0	1	0	1	"r,LMRlmrT"
+wide	0	"-power, +AOE, +casting  time"	anim_spell_empower	sfx_slash	0.75	1	1.15	0	1	0	1	0	1	"r,LMRlmrT"
 shank	0	"+crit rate, +casting time"	anim_spell_empower	sfx_slash	1	3	1.5	0	1	10	1.5	0	1	None
 self	0	forces spell to target self	anim_spell_empower	sfx_mystery_effect	1	0	1	0	1	0	1	0	1	self
 other	0	forces spell to target other	anim_spell_empower	sfx_mystery_effect	1	0	1	0	1	0	1	0	1	other
 copy	0	copies target pattern to other side	anim_spell_empower	sfx_mystery_effect	1	0	1	0	1	0	1	0	1	copy
 miss	0	"debug, causes player to miss"	anim_spell_empower	sfx_slash	1	0	1	-100	0.25	0	1	0	1	None
 all	0	hits everyone! (secret)	anim_spell_empower	sfx_mystery_effect	0.5	0	1	0	1	0	1	0	1	"a,A"
+mirrored	0	reverses DMG (secret)	anim_spell_empower	sfx_mystery_effect	-1.5	10	1.5	0	0.95	0	1.1	0	1	None
+mirror	0	reverses DMG (secret)	anim_spell_empower	sfx_mystery_effect	-1	7.5	1.25	0	1	0	1	0	1	None
 END														

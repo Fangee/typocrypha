@@ -57,6 +57,7 @@ public class TextEvents : MonoBehaviour {
 			{"set-talk-sfx", setTalkSFX},
 			{"highlight-character", highlightCharacter},
 			{"sole-highlight", soleHighlight},
+            {"sole-highlight-codec", soleHighlightCodec},
 			{"remove-character", removeCharacter},
 			{"remove-all-character", removeAllCharacter},
             {"evil-eye", evilEye},
@@ -380,9 +381,17 @@ public class TextEvents : MonoBehaviour {
 		yield return true;
 	}
 
-	// Removes a specific character from the scene
-	// input: [0]: string, name of sprite to remove
-	IEnumerator removeCharacter(string[] opt) {
+    // Highlights one character and unhighlights all others (0.5 greyscale)
+    // input: [0]: string, name of sprite to highlight
+    IEnumerator soleHighlightCodec(string[] opt)
+    {
+        DialogueManager.main.soleHighlightCodec();
+        yield return true;
+    }
+
+    // Removes a specific character from the scene
+    // input: [0]: string, name of sprite to remove
+    IEnumerator removeCharacter(string[] opt) {
 		DialogueManager.main.removeCharacter (opt [0]);
 		yield return true;
 	}

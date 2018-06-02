@@ -34,16 +34,6 @@ public class SpellEffects : MonoBehaviour {
             BattleEffects.main.spriteShift(d.Target.Transform, 0.3f, 0.1f); // sprite moves to the right as a dodge
             yield break;
         }
-        else if (d.Target.CasterType == ICasterType.ENEMY)// when enemy is hit
-        {
-            //learn their strength/weaknesses against the element used
-            EnemyIntel.main.learnIntel(d.Target.Stats.name, d.element);
-        }
-        else if(d.Caster.CasterType == ICasterType.ENEMY && d.Target.CasterType == ICasterType.PLAYER && d.repel)
-        {
-            //learn their strength/weaknesses against the element used
-            EnemyIntel.main.learnIntel(d.Caster.Stats.name, d.element);
-        }
 
 		//Process repel
 		if (d.repel)
@@ -66,16 +56,17 @@ public class SpellEffects : MonoBehaviour {
                    BattleEffects.main.screenShake(0.15f + shakeIntensity/8, 0.05f + shakeIntensity);
                 shakeIntensity += shakeIntensityMod;
 				if (d.repel) {
-					popp.spawnText (s.getWord(i).ToUpper()+"!", POP_TIMER, d.Caster.Transform.position, Color.black, new Color(1,111f/255f,1));
+					popp.spawnText (s.getWord(i).ToUpper()+"!", POP_TIMER - 1, d.Caster.Transform.position, Color.black, new Color(1,111f/255f,1));
 				} else {
-					popp.spawnText (s.getWord(i).ToUpper()+"!", POP_TIMER, d.Caster.Transform.position, new Color(1,111f/255f,1), Color.white);
+					popp.spawnText (s.getWord(i).ToUpper()+"!", POP_TIMER - 1, d.Caster.Transform.position, new Color(1,111f/255f,1), Color.white);
 				}
                 yield return new WaitForSeconds(0.333F);
 			}
 		}
-        if (d.isCrit && d.elementalData != Elements.vsElement.BLOCK) {//Spell is crit
+        if (d.isCrit && d.vsElement != Elements.vsElement.BLOCK) {//Spell is crit
 			Debug.Log (d.Caster.Stats.name + " scores a critical with " + s.ToString () + " on " + d.Target.Stats.name);
-			if (d.Target.CasterType == ICasterType.ENEMY) {
+			if (d.Target.CasterType == ICasterType.ENEMY)
+            {
 				AudioPlayer.main.playSFX ("sfx_enemy_weakcrit_dmg");
 				if (!d.isStun && !d.Target.Is_stunned) popp.spawnText ("<size=48>-1<size=24>SHIELD</size></size>", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET_2, Color.cyan, Color.white);
 				if (d.isStun) popp.spawnText ("BREAK!", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET_2, Color.cyan, Color.white);
@@ -83,11 +74,9 @@ public class SpellEffects : MonoBehaviour {
 			}
 			else if (d.Target.CasterType == ICasterType.PLAYER || d.Target.CasterType == ICasterType.NPC_ALLY)
 				AudioPlayer.main.playSFX ("sfx_party_weakcrit_dmg");
-			//process crit graphics
-			//popp.spawnSprite ("popup_critical", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET);
-			//Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
-			//popp.spawnText ("<size=28>CRITICAL!</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, Color.yellow, Color.white);
-		} else if ((d.elementalData == Elements.vsElement.WEAK || d.elementalData == Elements.vsElement.SUPERWEAK) && d.damageInflicted > 0){
+		}
+        else if ((d.vsElement == Elements.vsElement.WEAK || d.vsElement == Elements.vsElement.SUPERWEAK) && d.damageInflicted > 0)
+        {
 			if (d.Target.CasterType == ICasterType.ENEMY) {
 				AudioPlayer.main.playSFX ("sfx_enemy_weakcrit_dmg");
 				if (!d.isStun && !d.Target.Is_stunned) popp.spawnText ("<size=48>-1<size=24>SHIELD</size></size>", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET_2, Color.cyan, Color.white);
@@ -104,105 +93,36 @@ public class SpellEffects : MonoBehaviour {
             AudioPlayer.main.playSFX("sfx_stagger");
         }
 
-        Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage x" + d.Target.Stats.getFloatVsElement(d.Target.BuffDebuff, d.element));
+        Debug.Log(d.Target.Stats.name + " was hit for " + d.damageInflicted + " " + Elements.toString(d.element) + " damage: " + d.vsElement);
 
         //Process elemental wk/resist/drain/repel graphics
-		if (!((d.elementalData == Elements.vsElement.WEAK || d.elementalData == Elements.vsElement.SUPERWEAK) && d.damageInflicted <= 0)) {
-			spawnElementPopup(d.element, d.elementalData, d.Target.Transform);
+		if (!((d.vsElement == Elements.vsElement.WEAK || d.vsElement == Elements.vsElement.SUPERWEAK) && d.damageInflicted <= 0)) {
+			spawnElementPopup(d.element, d.vsElement, d.Target.Transform);
 		}
 
 		//Play block/reflect/drain animations if necessary
-		if (d.elementalData == Elements.vsElement.BLOCK) {
+		if (d.vsElement == Elements.vsElement.BLOCK) {
 			AnimationPlayer.main.playAnimation("anim_element_block", d.Target.Transform.position, 2f);
 			yield return new WaitForSeconds(0.333F);
 		}
-		else if (d.elementalData == Elements.vsElement.DRAIN) {
+		else if (d.vsElement == Elements.vsElement.DRAIN) {
 			AnimationPlayer.main.playAnimation("anim_element_drain", d.Target.Transform.position, 2f);
 			yield return new WaitForSeconds(0.333F);
 		}
-
-        //Process damage graphics
-		if (d.damageInflicted > 0) {
-			BattleEffects.main.spriteShake (d.Target.Transform, 0.3f, 0.1f);
-			AudioPlayer.main.playSFX ("sfx_spell_hit");
-			Color dmgNumColor = Color.white;
-			Color dmgNumColorTop = new Color (255f/255f,100f/255f,220f/255f);
-			Color dmgNumColorBottom = Color.white;
-			//Color dmgNumColorTop = new Color(255f/255f, 0, 25f/255f);
-			//Color dmgNumColorBottom = new Color(255f/255f, 85f/255f, 85f/255f);
-			if (d.Target.CasterType == ICasterType.PLAYER) {
-				if (d.repel)
-					dmgNumColor = new Color (255, 0, 255);//new Color(220, 86, 249);
-				BattleEffects.main.screenShake (0.15f + shakeIntensity / 2, shakeIntensity + 0.3f);
-				switch (d.element) {
-				case 0:
-					BattleEffects.main.flashDamageOverlay (1.0f, "anim_overlay_damage");
-					break;
-				case 1:
-					BattleEffects.main.flashDamageOverlay (1.0f, "anim_overlay_damage_fire");
-					break;
-				case 2:
-					BattleEffects.main.flashDamageOverlay (1.0f, "anim_overlay_damage_ice");
-					break;
-				case 3:
-					BattleEffects.main.flashDamageOverlay (1.0f, "anim_overlay_damage_volt");
-					break;
-				}
-				//BattleEffects.main.flashDamageOverlay (1.0f, "anim_overlay_damage");
-			} else if (d.Target.CasterType == ICasterType.ENEMY) {
-				// Gradually lower enemy HP gauge displays
-				BattleManagerS.main.uiManager.setEnabledGauges(true);
-				StartCoroutine (enemy_hp_bars.gradualUpdateDamage (d.Target.Position,d.damageInflicted));
-				if (d.isStun) {
-					Enemy enemyObj = (Enemy)d.Target;
-					ParticleSystem.EmitParams emitOverride = new ParticleSystem.EmitParams ();
-					emitOverride.startLifetime = 10f;
-					enemyObj.enemy_particle_sys.Emit (emitOverride, 10);
-				}
-				if (!d.isStun && d.Target.Is_stunned) popp.spawnText ("<size=24>DAMAGE BONUS!</size>", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET_2, Color.red, Color.white);
-			}
-			// Set damage text size based on amount of damage ratios
-			string sizeTagOpen = "<size=";
-			string sizeTagClose = "</size>";
-			int sizeValueMin = 36;
-			int sizeValueMax = 72;
-			int sizeValueDiff = sizeValueMax - sizeValueMin;
-			float sizeRatio = (float)d.damageInflicted / (float)d.Target.Stats.max_hp;
-			Debug.Log ("damage ratio to max hp: " + sizeRatio);
-			int sizeValueCurr = sizeValueMin + Mathf.RoundToInt (((float)sizeValueDiff)*sizeRatio);
-			string damageText = sizeTagOpen + sizeValueCurr + ">" + d.damageInflicted.ToString () + sizeTagClose;
-			popp.spawnText ("-" + damageText + "<size=24>HP</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET, dmgNumColorBottom, dmgNumColorTop);
-			if(sizeRatio > 0.5) AudioPlayer.main.playSFX("sfx_fire_hit");
-
-			if ((d.Target.Curr_hp <= 0) && (d.damageInflicted > (d.Target.Stats.max_hp))) {
-				Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
-				popp.spawnText ("<size=28>OVERKILL!</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, dmgNumColorTop, dmgNumColorBottom);
-			}
-			else if (d.Target.Curr_hp <= 0) {
-				Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
-				popp.spawnText ("<size=28>K.O.</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, dmgNumColorTop, dmgNumColorBottom);
-			}
-			else if (d.isCrit && d.elementalData != Elements.vsElement.BLOCK){
-				Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
-				popp.spawnText ("<size=28>CRITICAL!</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, Color.yellow, Color.white);
-			}
-
-		} else if (d.damageInflicted < 0) {
-			string heal = "+" + (-1 * (d.damageInflicted)).ToString () + "<size=32>HP</size>";
-			AudioPlayer.main.playSFX ("sfx_heal");
-			popp.spawnText (heal, POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET, new Color(27f/255f, 195f/255f, 43f/255f));
-			if (d.Target.CasterType == ICasterType.PLAYER) {
-				BattleEffects.main.flashDamageOverlay (1.0f, "anim_overlay_damage_heal");
-			}
-		} else {
-			if (d.elementalData == Elements.vsElement.BLOCK) {
-				popp.spawnText ("NULL", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET, Color.gray);
-			} else {
-				popp.spawnText (d.damageInflicted.ToString (), POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET);
-			}
-		}
-		//yield return new WaitForSeconds(5.0f);
-		//Debug.Log (d.Target.Transform.position);
+        //Spawn damage number and some other gubs
+        spawnDamagePopup(d, shakeIntensity);
+    }
+    public IEnumerator finishFrenzyCast(int damage, string animationID, string sfxId, CastData d)
+    {
+        AudioPlayer.main.setSFX(AudioPlayer.channel_spell_sfx, sfxId);
+        AudioPlayer.main.playSFX(AudioPlayer.channel_spell_sfx);
+        AnimationPlayer.main.playAnimation(animationID, d.Target.Transform.position, 1f);
+        if (d.Target.CasterType == ICasterType.PLAYER)
+            BattleEffects.main.screenShake(0.75f, 1f);
+        yield return new WaitForSeconds(0.75F);
+        d.damageInflicted = damage;
+        spawnDamagePopup(d, 2);
+        yield return new WaitForSeconds(1F);
     }
 
     //Spawns elemental popup with proper icon
@@ -259,7 +179,111 @@ public class SpellEffects : MonoBehaviour {
             }
         }
     }
+    //Spawns damage popup with lots of complicated stuff (clean up)
+    private void spawnDamagePopup(CastData d, float shakeIntensity)
+    {
+        //Process damage graphics
+        if (d.damageInflicted > 0)
+        {
+            BattleEffects.main.spriteShake(d.Target.Transform, 0.3f, 0.1f);
+            AudioPlayer.main.playSFX("sfx_spell_hit");
+            Color dmgNumColor = Color.white;
+            Color dmgNumColorTop = new Color(255f / 255f, 100f / 255f, 220f / 255f);
+            Color dmgNumColorBottom = Color.white;
+            if (d.Target.CasterType == ICasterType.PLAYER)
+            {
+                if (d.repel)
+                    dmgNumColor = new Color(255, 0, 255);//new Color(220, 86, 249);
+                BattleEffects.main.screenShake(0.15f + shakeIntensity / 2, shakeIntensity + 0.3f);
+                spawnDamageOverlay(d.element);
+            }
+            else if (d.Target.CasterType == ICasterType.ENEMY)
+            {
+                // Gradually lower enemy HP gauge displays
+                BattleManagerS.main.uiManager.setEnabledGauges(true);
+                StartCoroutine(enemy_hp_bars.gradualUpdateDamage(d.Target.Position, d.damageInflicted));
+                if (d.isStun)
+                {
+                    Enemy enemyObj = (Enemy)d.Target;
+                    ParticleSystem.EmitParams emitOverride = new ParticleSystem.EmitParams();
+                    emitOverride.startLifetime = 10f;
+                    enemyObj.enemy_particle_sys.Emit(emitOverride, 10);
+                }
+                if (!d.isStun && d.Target.Is_stunned) popp.spawnText("<size=24>DAMAGE BONUS!</size>", POP_TIMER, d.Target.Transform.position + UNDER_OFFSET_2, Color.red, Color.white);
+            }
+            // Set damage text size based on amount of damage ratios
+            string sizeTagOpen = "<size=";
+            string sizeTagClose = "</size>";
+            int sizeValueMin = 36;
+            int sizeValueMax = 72;
+            int sizeValueDiff = sizeValueMax - sizeValueMin;
+            float sizeRatio = (float)d.damageInflicted / (float)d.Target.Stats.max_hp;
+            Debug.Log("damage ratio to max hp: " + sizeRatio);
+            int sizeValueCurr = sizeValueMin + Mathf.RoundToInt(((float)sizeValueDiff) * sizeRatio);
+            string damageText = sizeTagOpen + sizeValueCurr + ">" + d.damageInflicted.ToString() + sizeTagClose;
+            popp.spawnText("-" + damageText + "<size=24>HP</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET, dmgNumColorBottom, dmgNumColorTop);
+            if (sizeRatio > 0.5) AudioPlayer.main.playSFX("sfx_fire_hit");
+            if ((d.Target.Curr_hp <= 0) && (d.damageInflicted > (d.Target.Stats.max_hp)))
+            {
+                Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
+                popp.spawnText("<size=28>OVERKILL!</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, dmgNumColorTop, dmgNumColorBottom);
+            }
+            else if (d.Target.Curr_hp <= 0)
+            {
+                Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
+                popp.spawnText("<size=28>K.O.</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, dmgNumColorTop, dmgNumColorBottom);
+            }
+            else if (d.isCrit && d.vsElement != Elements.vsElement.BLOCK)
+            {
+                Vector3 ko_offset = new Vector3(0.5f, -0.5f, 0);
+                popp.spawnText("<size=28>CRITICAL!</size>", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET + ko_offset, Color.yellow, Color.white);
+            }
 
+        }
+        else if (d.damageInflicted < 0)
+        {
+            string heal = "+" + (-1 * (d.damageInflicted)).ToString() + "<size=32>HP</size>";
+            AudioPlayer.main.playSFX("sfx_heal");
+            popp.spawnText(heal, POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET, new Color(27f / 255f, 195f / 255f, 43f / 255f));
+            if (d.Target.CasterType == ICasterType.PLAYER)
+            {
+                spawnDamageOverlay(-1);
+            }
+        }
+        else
+        {
+            if (d.vsElement == Elements.vsElement.BLOCK)
+            {
+                popp.spawnText("NULL", POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET, Color.gray);
+            }
+            else
+            {
+                popp.spawnText(d.damageInflicted.ToString(), POP_TIMER, d.Target.Transform.position + DMGNUM_OFFSET);
+            }
+        }
+    }
+    //Plays screen overlay
+    private void spawnDamageOverlay(int element)
+    {
+        switch (element)
+        {
+            case -1:
+                BattleEffects.main.flashDamageOverlay(1.0f, "anim_overlay_damage_heal");
+                break;
+            case 0:
+                BattleEffects.main.flashDamageOverlay(1.0f, "anim_overlay_damage");
+                break;
+            case 1:
+                BattleEffects.main.flashDamageOverlay(1.0f, "anim_overlay_damage_fire");
+                break;
+            case 2:
+                BattleEffects.main.flashDamageOverlay(1.0f, "anim_overlay_damage_ice");
+                break;
+            case 3:
+                BattleEffects.main.flashDamageOverlay(1.0f, "anim_overlay_damage_volt");
+                break;
+        }
+    }
     // Update is called once per frame
     void Update () {
 		

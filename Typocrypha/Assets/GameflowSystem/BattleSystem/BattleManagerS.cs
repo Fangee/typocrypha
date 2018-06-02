@@ -19,12 +19,20 @@ public class BattleManagerS : MonoBehaviour {
 	public GameObject typocrypha_object;
 	public Animator typocrypha_animator; // animator for typocrypha object
     public Text debugThirdEyeCharge;
+    public Text debugFrenzyCastTime;
+    public Text debugFrenzyCastInstructions;
     [HideInInspector] public bool pause = true;
 
     [HideInInspector] public bool thirdEyeActive = false;
     private Coroutine thirdEyeCr = null;
     private const float maxThirdEyeCharge = 10.5f;
     private float currThirdEyeCharge = maxThirdEyeCharge;
+
+    [HideInInspector] public bool frenzyCastActive = false;
+    private Coroutine frenzyCastCr = null;
+    private const float frenzyCastTime = 20f;
+    private List<SpellData> frenzySpells = new List<SpellData>();
+
     private BattleWave Wave { get { return waves[curr_wave]; } }
     private int curr_wave = -1;
     private bool wave_started = false;
@@ -72,7 +80,7 @@ public class BattleManagerS : MonoBehaviour {
         {
             startThirdEye();
         }
-        if((Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) && thirdEyeActive)
+        if((Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift)) && thirdEyeActive)
         {
             stopThirdEye();
         }
@@ -108,6 +116,10 @@ public class BattleManagerS : MonoBehaviour {
         {
             trackTyping.revertBuffer();
         }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            startFrenzyCast();
+        }
     }
 
     public void setEnabled(bool e)
@@ -119,50 +131,6 @@ public class BattleManagerS : MonoBehaviour {
     {
         pause = p;
         trackTyping.enabled = !p;
-    }
-
-    public void startThirdEye()
-    {
-        if (currThirdEyeCharge < 1)
-            return; //Play not working sfx here later
-        thirdEyeActive = true;
-        uiManager.showScouter();
-        trackTyping.enabled = false;
-        startSlowMo();
-        thirdEyeCr = StartCoroutine(thirdEye());
-    }
-    public void stopThirdEye(bool hideImmeadiate = false)
-    {
-        if (thirdEyeCr != null)
-            StopCoroutine(thirdEyeCr);
-        stopSlowMo();
-        trackTyping.enabled = true;
-        uiManager.hideScouter(hideImmeadiate);
-        thirdEyeActive = false;
-    }
-    private IEnumerator thirdEye()
-    {
-        currThirdEyeCharge = Mathf.Max(currThirdEyeCharge - 0.5f, 0);
-        while (currThirdEyeCharge > 0)
-        {
-            yield return new WaitForFixedUpdate();
-            currThirdEyeCharge -= Time.fixedUnscaledDeltaTime;
-        }
-        stopThirdEye();
-    }
-    private void startSlowMo()
-    {
-        Time.timeScale = 0.15f;
-        Time.fixedDeltaTime = 0.0005f;
-        AudioPlayer.main.playSFX("sfx_slowmo_2");
-        BattleEffects.main.setDim(true);
-    }
-    private void stopSlowMo()
-    {
-        Time.timeScale = 1;
-        Time.fixedDeltaTime = 0.02f;
-        AudioPlayer.main.playSFX("sfx_speedup3");
-        BattleEffects.main.setDim(false);
     }
 
     //MAIN BATTLE FLOW-----------------------------------------------------------------------//
@@ -249,6 +217,15 @@ public class BattleManagerS : MonoBehaviour {
     // show victory screen after all waves are done
     public void victoryScreen()
     {
+        StartCoroutine(endBattleTranstion());
+    }
+    private IEnumerator endBattleTranstion()
+    {
+        yield return new WaitForSeconds(1f);
+        BattleEffects.main.battleTransitionEffect("swirl_in", 1f);
+        yield return new WaitForSeconds(1f);
+        BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
+        yield return new WaitForSeconds(1f);
         //Transition to victoryScreen
         endBattle();
     }
@@ -264,7 +241,8 @@ public class BattleManagerS : MonoBehaviour {
 		{
 			Destroy (tr.gameObject);
 		}
-        stopThirdEye(true);
+        if(thirdEyeActive)
+            stopThirdEye(true);
         uiManager.clear();
         GameflowManager.main.next();
 
@@ -275,7 +253,20 @@ public class BattleManagerS : MonoBehaviour {
     //Handles a spellcast (by calling the castmanager) and clears callback's buffer if necessary
     public void handleSpellCast(string spell, TrackTyping callback)
     {
-        castManager.attackCurrent(spell, callback);
+        if (frenzyCastActive)
+        {
+            SpellData s = castManager.isValidSpell(spell);
+            if (s != null)
+            {
+                frenzySpells.Add(s);
+                AudioPlayer.main.playSFX("sfx_enter");
+            }
+            else
+                AudioPlayer.main.playSFX("sfx_enter_bad");
+            trackTyping.clearBuffer();
+        }
+        else
+            castManager.attackCurrent(spell, callback);
     }
     //Handle player death
     public void playerDeath()
@@ -355,6 +346,7 @@ public class BattleManagerS : MonoBehaviour {
                 e.AI.updateState(field.enemy_arr, e.Position, field.player_arr, EnemyAI.Update_Case.AFTER_INTERRUPT);
             }
         }
+        checkInterrupts();
     }
 
     //Create all enemies for this wave
@@ -434,4 +426,93 @@ public class BattleManagerS : MonoBehaviour {
         field.num_player_attacks = 0; // number of player attacks from beginning of battle
     }
 
+    //Extra stuff
+
+    //Third EYE and Slow motion
+
+    public void startThirdEye()
+    {
+        //if (currThirdEyeCharge < 1)
+        //    return; //Play not working sfx here later
+        thirdEyeActive = true;
+        uiManager.showScouter();
+        trackTyping.enabled = false;
+        startSlowMo();
+        //thirdEyeCr = StartCoroutine(thirdEye());
+    }
+    public void stopThirdEye(bool hideImmeadiate = false)
+    {
+        //if (thirdEyeCr != null)
+        //    StopCoroutine(thirdEyeCr);
+        stopSlowMo();
+        trackTyping.enabled = true;
+        uiManager.hideScouter(hideImmeadiate);
+        thirdEyeActive = false;
+    }
+    private IEnumerator thirdEye()
+    {
+        currThirdEyeCharge = Mathf.Max(currThirdEyeCharge - 0.5f, 0);
+        while (currThirdEyeCharge > 0)
+        {
+            yield return new WaitForFixedUpdate();
+            currThirdEyeCharge -= Time.fixedUnscaledDeltaTime;
+        }
+        stopThirdEye();
+    }
+    private void startSlowMo(float timeScale = 0.15f)
+    {
+        Time.timeScale = timeScale;
+        Time.fixedDeltaTime = 0.0005f;
+        AudioPlayer.main.playSFX("sfx_slowmo_2");
+        BattleEffects.main.setDim(true);
+    }
+    private void stopSlowMo()
+    {
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = 0.02f;
+        AudioPlayer.main.playSFX("sfx_speedup3");
+        BattleEffects.main.setDim(false);
+    }
+
+    //Frenzy casting
+    public void startFrenzyCast()
+    {
+        debugFrenzyCastTime.gameObject.SetActive(true);
+        debugFrenzyCastInstructions.gameObject.SetActive(true);
+        frenzySpells.Clear();
+        pause = true;//don't stop typing
+        //Play any fenzy cast start effects
+        AudioPlayer.main.playSFX("sfx_slowmo_2");
+        BattleEffects.main.setDim(true);
+        frenzyCastCr = StartCoroutine(frenzyCast());
+    }
+    private IEnumerator frenzyCast()
+    {
+        frenzyCastActive = true;
+        float timeLeft = frenzyCastTime;//a float in case you want to use a bar
+        while(timeLeft > 0)
+        {
+            debugFrenzyCastTime.text = "Time Left: " + Mathf.RoundToInt(timeLeft);
+            yield return new WaitForEndOfFrame();
+            timeLeft -= Time.deltaTime;
+        }
+        CastData d = new CastData();
+        d.isHit = true;
+        d.setLocationData(field.enemy_arr[1], field.Player);
+        d.vsElement = Elements.vsElement.NEUTRAL;
+        setPause(true);
+        BattleEffects.main.setDim(false);
+        debugFrenzyCastTime.gameObject.SetActive(false);
+        debugFrenzyCastInstructions.gameObject.SetActive(false);
+        AudioPlayer.main.playSFX("sfx_speedup3");
+        foreach (SpellData s in frenzySpells)
+            yield return StartCoroutine(castManager.playSpellEffects(s, d));
+        yield return StartCoroutine(castManager.spellEffects.finishFrenzyCast(99999999, "anim_spell_slash_big", "sfx_slowmo", d));
+        field.enemy_arr[1].Curr_hp = 0;
+        updateEnemies();
+        yield return new WaitForSeconds(1f);
+        setPause(false);
+        frenzyCastActive = false;
+        BattleEffects.main.setDim(false);
+    }
 }

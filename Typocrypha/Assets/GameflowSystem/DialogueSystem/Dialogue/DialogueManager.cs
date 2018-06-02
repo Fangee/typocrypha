@@ -74,7 +74,8 @@ public class DialogueManager : MonoBehaviour {
 		}
 		if (block_input) {
 			spacebar_icon_vn.SetActive (true);
-			animator_spacebar_vn.Play ("anim_key_spacebar_no");
+            if (spacebar_icon_vn.activeInHierarchy)
+                animator_spacebar_vn.Play ("anim_key_spacebar_no");
 			return;
 		} else {
             if(spacebar_icon_vn.activeInHierarchy)
@@ -373,18 +374,36 @@ public class DialogueManager : MonoBehaviour {
 
 	// Highlights given character, and dims rest (0.25 greyscale)
 	public void soleHighlight(string spr_name) {
-		foreach(GameObject chr_spr in chr_spr_list) {
+        Color dimColor = new Color(0.25f, 0.25f, 0.25f, 1);
+        foreach (GameObject chr_spr in chr_spr_list) {
 			SpriteRenderer spr_r = chr_spr.GetComponent<SpriteRenderer> ();
 			if (spr_r.sprite.name.Contains (spr_name)) {
 				spr_r.color = new Color (1, 1, 1, 1);
 			} else {
-				spr_r.color = new Color (0.25f, 0.25f, 0.25f, 1);
+				spr_r.color = dimColor;
 			}
 		}
-	}
+        if (VNMCSprite.sprite.name.Contains(spr_name.Trim('_'))) VNMCSprite.color = new Color(1, 1, 1, 1);
+        else VNMCSprite.color = dimColor;
+        if (VNCodecSprite.sprite.name.Contains(spr_name.Trim('_'))) VNCodecSprite.color = new Color(1, 1, 1, 1);
+        else VNCodecSprite.color = dimColor;
+    }
 
-	// Finds first character with specified sprite, and removes it
-	public void removeCharacter(Sprite spr) {
+    // Highlights given character, and dims rest (0.25 greyscale)
+    public void soleHighlightCodec()
+    {
+        Color dimColor = new Color(0.25f, 0.25f, 0.25f, 1);
+        foreach (GameObject chr_spr in chr_spr_list)
+        {
+            SpriteRenderer spr_r = chr_spr.GetComponent<SpriteRenderer>();
+            spr_r.color =  dimColor;
+        }
+        VNMCSprite.color = dimColor;
+        VNCodecSprite.color = new Color(1, 1, 1, 1);
+    }
+
+    // Finds first character with specified sprite, and removes it
+    public void removeCharacter(Sprite spr) {
 		foreach(GameObject chr_spr in chr_spr_list) {
 			if (chr_spr.GetComponent<SpriteRenderer> ().sprite == spr) {
 				chr_spr_list.Remove (chr_spr);

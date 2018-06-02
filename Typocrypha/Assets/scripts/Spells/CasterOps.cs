@@ -45,7 +45,7 @@ public static class CasterOps
                 target.Curr_hp += Mathf.CeilToInt(dMod);
 
             data.damageInflicted = Mathf.CeilToInt(-1 * dMod);
-            data.elementalData = Elements.vsElement.DRAIN;
+            data.vsElement = Elements.vsElement.DRAIN;
             return false;
         }
 
@@ -62,19 +62,19 @@ public static class CasterOps
         //Apply elemental weakness/resistances
         dMod *= targetMod.vsElement[element];
         if (targetMod.vsElement[element] == 0.0F)
-            data.elementalData = Elements.vsElement.BLOCK;
+            data.vsElement = Elements.vsElement.BLOCK;
         else if (targetMod.vsElement[element] > 1)//If enemy is weak
         {
             if (targetMod.vsElement[element] > 2)
-                data.elementalData = Elements.vsElement.SUPERWEAK;
+                data.vsElement = Elements.vsElement.SUPERWEAK;
             else
-                data.elementalData = Elements.vsElement.WEAK;
+                data.vsElement = Elements.vsElement.WEAK;
             staggerDamage++;
         }
         else if (targetMod.vsElement[element] < 1)
-            data.elementalData = Elements.vsElement.RESIST;
+            data.vsElement = Elements.vsElement.RESIST;
         else
-            data.elementalData = Elements.vsElement.NEUTRAL;
+            data.vsElement = Elements.vsElement.NEUTRAL;
 
         //Apply stun damage mod (if stunned)
         if (is_stunned)

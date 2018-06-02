@@ -431,6 +431,30 @@ public class SpellDictionary : MonoBehaviour
     {
         return spells[data.root];
     }
+    //Get an array holding the animation data array for a given SpellData
+    public string[] getAnimData(SpellData data)
+    {
+        string[] ret = { null, null, null };
+        if (data.style != null)
+            ret[0] = styles[data.style].animationID;
+        if (data.root != null)
+            ret[1] = spells[data.root].animationID;
+        if (data.element != null)
+            ret[2] = elements[data.element].animationID;
+        return ret;
+    }
+    //Get an array holding the sfx data array for a given SpellData
+    public string[] getSfxData(SpellData data)
+    {
+        string[] ret = { null, null, null };
+        if (data.style != null)
+            ret[0] = styles[data.style].sfxID;
+        if (data.root != null)
+            ret[1] = spells[data.root].sfxID;
+        if (data.element != null)
+            ret[2] = elements[data.element].sfxID;
+        return ret;
+    }
     //Return the targeting pattern
     public Pair<bool[], bool[]> getTargetPattern(SpellData data, ICaster[] targets, int selected, ICaster[] allies, int position)
     {

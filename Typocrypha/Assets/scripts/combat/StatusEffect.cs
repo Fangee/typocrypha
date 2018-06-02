@@ -94,7 +94,7 @@ public class StatusFreeze : StatusEffect
 
 public class StatusBurn : StatusEffect
 {
-    const int dmg = 10;
+    const int dmg = 3;
     Player p;
 	Popper player_popper;
 	public StatusBurn(Player p, Popper popp, char c)

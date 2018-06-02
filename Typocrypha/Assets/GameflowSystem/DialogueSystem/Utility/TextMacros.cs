@@ -27,7 +27,8 @@ public class TextMacros : MonoBehaviour {
 			{"c", macroColor},
 			{"t", macroSetTalkSfx},
 			{"h", macroHighlightCharacter},
-			{"speak", macroSpeaker},
+            {"hc", macroHighlightCodec},
+            {"speak", macroSpeaker},
             {"tl", macroTranslate},
             {"translate", macroTranslate},
 			{"languageTL", macroTranslatedLanguage},
@@ -153,10 +154,17 @@ public class TextMacros : MonoBehaviour {
 		return "[highlight-character=" + opt[0] + "," + opt[1] + "]";
 	}
 
-	// substitutes combined 'set-talk-sfx' and 'highlight-character'
-	// solely highlights given character, and switches to their talk sfx
-	// input: [0]: string, name of character (see character map)
-	string macroSpeaker(string[] opt) {
+    // substitutes in 'highlight-codec' TextEvent.
+    string macroHighlightCodec(string[] opt)
+    {
+        return "[sole-highlight-codec]";
+    }
+
+
+    // substitutes combined 'set-talk-sfx' and 'highlight-character'
+    // solely highlights given character, and switches to their talk sfx
+    // input: [0]: string, name of character (see character map)
+    string macroSpeaker(string[] opt) {
 		string macro = 
 			"[set-talk-sfx=" + character_map[opt[0]].second + "]" +
 			"[sole-highlight=" + character_map[opt[0]].first + "]";

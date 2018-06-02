@@ -14,7 +14,7 @@ public class CastData
     public bool isBuff = false;
     public int damageInflicted = 0;
     public int element = Elements.notAnElement;
-    public Elements.vsElement elementalData = Elements.vsElement.INVALID;
+    public Elements.vsElement vsElement = Elements.vsElement.INVALID;
     public BuffData buffInflicted = null;
 
     //number of keywords in the spell

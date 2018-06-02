@@ -53,7 +53,7 @@ public class BISpecificAttack : BattleInterruptTrigger
                 bool crit = (!spellMustCrit) || d.isCrit;
                 bool stun = (!spellMustStun) || d.isStun;
                 bool dmg = d.damageInflicted >= damageIsAtLeast;
-                bool elemVs = (vsElementMustBe == Elements.vsElement.ANY) || (vsElementMustBe == d.elementalData);
+                bool elemVs = (vsElementMustBe == Elements.vsElement.ANY) || (vsElementMustBe == d.vsElement);
                 bool result = (element && hit && crit && stun && dmg && elemVs);
                 if (result)
                     return true;
