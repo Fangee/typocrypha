@@ -14,5 +14,7 @@ public class SwirlScreen : PostProcess {
 		shader_params [0] = swirl_amount;
 		for (int i = 0; i < shader_props.Length; ++i)
 			mat.SetFloat (shader_props[i], shader_params[i]);
+		mat.SetFloat ("_Width", Screen.width);
+		mat.SetFloat ("_Height", Screen.height);
 	}
 }
