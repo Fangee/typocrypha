@@ -512,11 +512,12 @@ public class TextEvents : MonoBehaviour {
 	}
 
 	// plays train transition animation
-	// input: [0]: float, length in seconds of transition
+	// input: [0]: [in|out], 'in' shows train scene, 'out' hides it
 	IEnumerator trainTransition(string[] opt) {
-		train_animator.Play ("train_fade_in");
-		yield return new WaitForSeconds (float.Parse(opt[0]));
-		train_animator.Play ("train_fade_out");
+		if (opt[0] == "in") 
+			train_animator.Play ("train_fade_in");
+		else
+			train_animator.Play ("train_fade_out");
 		yield return true;
 	}
 }

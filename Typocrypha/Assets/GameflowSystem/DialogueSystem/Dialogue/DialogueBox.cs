@@ -15,6 +15,7 @@ public class DialogueBox : MonoBehaviour {
 	public Image left_icon; // Left dialogue speaker's icon
 	public Image right_icon; // Light dialogue speaker's icon
 	public RectTransform rect_tr; // RectTransform of dialogue box
+	public bool is_floating; // Is this floating text?
 	[HideInInspector] public Coroutine cr_scroll; // Coroutine that scrolls text
 	[HideInInspector] public DialogueItem d_item; // Dialogue item
 
@@ -87,24 +88,12 @@ public class DialogueBox : MonoBehaviour {
 		int sfx_interval = 3; // Play voice effect for every Xth char displayed
 		while (cnt < text.Length) {
 			StartCoroutine(checkEvents (cnt - offset));
-            if (DialogueManager.main.pause_scroll)
+			if (DialogueManager.main.pause_scroll && !is_floating)
 			    yield return new WaitWhile (() => DialogueManager.main.pause_scroll);
 			if (text [cnt] == '<') {
 				cnt = text.IndexOf ('>', cnt + 1) + 1;
 				if (cnt >= text.Length) break;
 			}
-			/*
-			if (!tag && sfx_interval <= 0  
-				&& !(text[cnt].CompareTo(' ') >= 0 && text[cnt].CompareTo('/') <= 0) 
-				&& !(text[cnt].CompareTo(':') >= 0 && text[cnt].CompareTo('@') <= 0)
-				&& !(text[cnt].CompareTo('[') >= 0 && text[cnt].CompareTo('`') <= 0)
-				&& !(text[cnt].CompareTo('{') >= 0 && text[cnt].CompareTo('~') <= 0)) {
-				AudioPlayer.main.playSFX (AudioPlayer.channel_voice);
-				sfx_interval = 2;
-			} else {
-				--sfx_interval;
-			}
-			*/
 			set_color.chars [0] = ++cnt;
 			if (talk_sfx && cnt % sfx_interval == 0) AudioPlayer.main.playSFX (AudioPlayer.channel_voice);
             if (scroll_delay * DialogueManager.main.scroll_scale > 0)
