@@ -70,7 +70,8 @@ public class TextEvents : MonoBehaviour {
 			{"clear-log", clearTextLog},
 			{"float-text", floatText},
 			{"multi-float-text", multiFloatText},
-			{"train-transition", trainTransition}
+			{"train-transition", trainTransition},
+			{"train-sign", trainSign}
 		};
 		is_prompt = false;
 	}
@@ -518,6 +519,13 @@ public class TextEvents : MonoBehaviour {
 			train_animator.Play ("train_fade_in");
 		else
 			train_animator.Play ("train_fade_out");
+		yield return true;
+	}
+
+	// plays train animation where character wiggles their flag
+	// input: [0]: string, character's name
+	IEnumerator trainSign(string[] opt) {
+		train_animator.Play ("train_" + opt[0] + "_sign");
 		yield return true;
 	}
 }
