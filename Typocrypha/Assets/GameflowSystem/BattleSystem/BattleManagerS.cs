@@ -281,7 +281,7 @@ public class BattleManagerS : MonoBehaviour {
         }
         foreach(BattleWave w in waves)
         {
-            foreach(BattleInterruptTrigger  e in  w.events)
+            foreach(BattleEventTrigger  e in  w.events)
             {
                 e.HasTriggered = false;
             }
@@ -507,8 +507,12 @@ public class BattleManagerS : MonoBehaviour {
         AudioPlayer.main.playSFX("sfx_speedup3");
         foreach (SpellData s in frenzySpells)
             yield return StartCoroutine(castManager.playSpellEffects(s, d));
+		AudioPlayer.main.stopMusic ();
         yield return StartCoroutine(castManager.spellEffects.finishFrenzyCast(99999999, "anim_spell_slash_big", "sfx_slowmo", d));
-        field.enemy_arr[1].Curr_hp = 0;
+		AudioPlayer.main.playSFX("sfx_stagger");
+		AudioPlayer.main.playSFX("sfx_astral_hit");
+		AudioPlayer.main.playSFX("sfx_blight_hit");
+		field.enemy_arr[1].Curr_hp = 0;
         updateEnemies();
         yield return new WaitForSeconds(1f);
         setPause(false);

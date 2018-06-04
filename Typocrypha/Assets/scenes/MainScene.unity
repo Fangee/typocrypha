@@ -166,14 +166,14 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}You''ll have to apply an {c,spell}Element Prefix{c,} like {c,spell}AGNI{c,}
+  text: '{speak,illyia}You''ll have to apply an {c,spell}Element Prefix{c,} like {c,spell}AGNI{c,}
     to your spell to get through its defenses.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2902971
@@ -190,14 +190,14 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}|shake|Shit!\shake\ This demon {c,highlight}Blocks{c,} Physical
+  text: '{speak,illyia}|shake|Shit!\shake\ This demon {c,highlight}Blocks{c,} Physical
     attacks. {c,spell}SWORD{c,}s and {c,spell}LANCE{c,}s are useless by themselves!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2902972
@@ -214,14 +214,14 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}Try inserting a word seperator using your {c,ui-terms}Space Bar{c,}
-    to cast {c,spell}AGNI-SWORD{c,} on {c,enemy-name}Ijiraq{c,}!'
+  text: '{speak,illyia}Try inserting a word seperator using your {c,ui-terms}Space
+    Bar{c,} to cast {c,spell}AGNI-SWORD{c,} on {c,enemy-name}Ijiraq{c,}!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2902973
@@ -238,14 +238,14 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Ijiraq
-  text: '[set-talk-sfx=vo_demon]{c,enemy-talk}HA! FOOLISH ARMICAN. I AM A PHANTOM.
+  text: '{hc,}[set-talk-sfx=vo_demon]{c,enemy-talk}HA! FOOLISH ARMICAN. I AM A PHANTOM.
     MAN''S WEAPONS HURT ME NOT.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 014f8993b714f3c489414f5fc3221115, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 99e1b89c5605dbf41ba5435b09e4fab1, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2902974
@@ -273,14 +273,14 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}{c,spell}AGNI{c,} is the official TYPOCRYPHA prefix for the {c,orange}Fire{c,}
-    element.'
+  text: '{speak,illyia}{c,spell}AGNI{c,} is the official TYPOCRYPHA prefix for the
+    {c,orange}Fire{c,} element.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &3761278
@@ -1195,7 +1195,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 014f8993b714f3c489414f5fc3221115, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 99e1b89c5605dbf41ba5435b09e4fab1, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &42027559
@@ -1219,7 +1219,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 014f8993b714f3c489414f5fc3221115, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 99e1b89c5605dbf41ba5435b09e4fab1, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &42027561
@@ -1355,6 +1355,7 @@ GameObject:
   - component: {fileID: 49644901}
   - component: {fileID: 49644900}
   - component: {fileID: 49644904}
+  - component: {fileID: 49644906}
   - component: {fileID: 49644905}
   m_Layer: 5
   m_Name: BI_DOPPEL_BOSS_IN
@@ -1420,7 +1421,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: '{name}?'
   text: "{speak,doppelganger}{c,evil-eye}You\u2019re not above \u201CI\u201D after
-    all! |shake|We truly are one and the same!\\shake\\{c,}"
+    all! \n|shake|We truly are one and the same!\\shake\\{c,}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -1450,7 +1451,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: c651b0f161527d94d8247fe721429f89, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &49644903
@@ -1478,7 +1479,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: '{speak,mc}|shake|I''m not taking your shit any longer, freak!\shake\'
+  text: '[stop-music]{speak,mc}|shake|Listen... I don''t know who you are... but...\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -1501,8 +1502,33 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[heal-player][play-sfx=sfx_heal]{c,ui-terms}> {name} felt a surge of energy!
+  text: '[heal-player][play-sfx=sfx_heal]{c,ui-terms}> {name} felt a rush of blood!
     {c,}'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &49644906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 49644898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{name}'
+  text: '[play-music=bgm_battle_doppelganger]{speak,mc}|shake|I hate you!\shake\ Everything
+    about you! |shake|Your clothes... your face... your stupid name... I... I-I...
+    \shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -1764,7 +1790,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &57851097
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1776,7 +1802,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 6
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1820,7 +1846,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '{c,ui-terms}>{info,cat-name} lets the compliment get to their head.{c,}'
+  text: '{c,ui-terms}> {info,cat-name} lets the compliment get to their head.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -1843,7 +1869,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{info,cat-name}'
-  text: '{hc,}Mreow!'
+  text: '{hc,}{speak,cat}Mreow!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -2150,13 +2176,14 @@ GameObject:
   - component: {fileID: 74530124}
   - component: {fileID: 74530125}
   - component: {fileID: 74530126}
+  - component: {fileID: 74530127}
   m_Layer: 5
   m_Name: D_SHOW_AFTER_MIDBOSS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &74530118
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2168,7 +2195,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 21
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2189,13 +2216,13 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat Person
-  text: '[stop-music]{speak,cat_person}Ah!'
+  text: '[screen-shake=2.0,0.2][play-sfx=sfx_party_weakcrit_dmg][stop-music]{speak,cat_person}Ah!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: f5b6a29de40609a40951b4893503c834, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 93a24b5b8440cf5479b4df884abb69b3, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &74530120
@@ -2223,7 +2250,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[set-bg=bg_alleycat]{c,ui-terms}> The Cat Person falls to the ground.{c,}'
+  text: '[screen-shake=2.0,0.2][play-sfx=sfx_crush][set-bg=bg_alleycat]{c,ui-terms}>
+    The Cat Person falls to the ground.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -2254,8 +2282,10 @@ MonoBehaviour:
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: 2a3553ba9e5241943bb3b2faf11a7588, type: 3}
+  char_sprite_pos:
+  - {x: 5, y: -0.5}
 --- !u!114 &74530123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2300,8 +2330,10 @@ MonoBehaviour:
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: ace760d0494bd6744abd6c165e5a26cd, type: 3}
+  char_sprite_pos:
+  - {x: -5, y: -0.5}
 --- !u!114 &74530125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2339,7 +2371,30 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: "{speak,dahlia}C\u2019MON!"
+  text: "[screen-shake=2.0,0.2][play-sfx=sfx_flash]{speak,dahlia}C\u2019MON!"
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &74530127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 74530117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '[block=t][remove-all-character][block=f][next]'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -3925,6 +3980,99 @@ SpriteMask:
   m_FrontSortingOrder: 0
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 0
+--- !u!1 &135065399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 135065400}
+  - component: {fileID: 135065402}
+  - component: {fileID: 135065401}
+  - component: {fileID: 135065403}
+  m_Layer: 5
+  m_Name: D_SHOW_NEXT_NAME
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &135065400
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 135065399}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 309855630}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.0000009536743, y: -0.00000023841858}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &135065401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 135065399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{info,cat-name}'
+  text: '{hc,}{speak,cat}Meow meow?'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &135065402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 135065399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &135065403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 135065399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{name}'
+  text: '{speak,mc}Hm? Oh, my name is...'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &136171209
 GameObject:
   m_ObjectHideFlags: 0
@@ -3934,7 +4082,10 @@ GameObject:
   m_Component:
   - component: {fileID: 136171210}
   - component: {fileID: 136171211}
+  - component: {fileID: 136171214}
   - component: {fileID: 136171212}
+  - component: {fileID: 136171213}
+  - component: {fileID: 136171215}
   m_Layer: 5
   m_Name: BI_FRENZY_CAST!
   m_TagString: Untagged
@@ -3984,9 +4135,82 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: ???
-  text: '[set-info=doppel-frenzy,true]UNLEASH YouR FINAL FORM AND CHANGE TO THE UBER
-    DRAMA MUSIC!!!!'
+  speaker_name: '{name}'
+  text: '{speak,mc}After what you''ve just put me through? |shake|Hell no.\shake\'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &136171213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 136171209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{name}'
+  text: '[set-info=doppel-frenzy,true]{speak,mc}|shake|God, why won''t you just...
+    die!\shake\'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &136171214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 136171209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{name}?'
+  text: '{speak,doppelganger}{c,evil-eye}|shake|T-this isn''t healthy for either of
+    us, {name}... perhaps we can end this peacefully... before we lose ourselves entirely...!\shake\{c,}'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &136171215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 136171209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '[heal-player][play-sfx=sfx_stagger]{c,ui-terms}> {name}''s breaking their
+    limit!{c,}
+
+    {c,highlight}SPELL COOLDOWNS HAVE BEEN DISABLED.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -5031,7 +5255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &173911255
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5043,7 +5267,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 15
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5543,7 +5767,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &181451881
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5555,7 +5779,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 5
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5599,7 +5823,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '{c,ui-terms}>{info,cat-name} looks dismissive.{c,}'
+  text: '{c,ui-terms}> {info,cat-name} looks dismissive.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -5622,7 +5846,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{info,cat-name}'
-  text: '{hc,}Mreow...'
+  text: '{hc,}{speak,cat}Mreow...'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -6024,7 +6248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &193480892
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6036,7 +6260,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 38
+  m_RootOrder: 41
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6198,7 +6422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &194396682
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6210,7 +6434,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 14
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6237,8 +6461,8 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 21300000, guid: eb416a3691a496849952474a70a1f306, type: 3}
-  codec_sprite: {fileID: 21300000, guid: 93a24b5b8440cf5479b4df884abb69b3, type: 3}
+  mc_sprite: {fileID: 21300000, guid: f5b6a29de40609a40951b4893503c834, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 95e2766e790c22f4cbf8be320b5226f1, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &194396684
@@ -6366,7 +6590,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 416c5310bc5f3f245a52f54ce297e795, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &194396690
@@ -6432,7 +6656,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat Person
-  text: '{speak,cat_person}{tl,Hmm? You all like cats too?}'
+  text: '[play-sfx=sfx_huh]{speak,cat_person}{tl,Hmm? You all like cats too?}[block=f]'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -6507,7 +6731,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '[stop-music][play-sfx=sfx_huh]{speak,dahlia}Wait!'
+  text: '[stop-music][play-sfx=sfx_flash]{speak,dahlia}Wait!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -6531,7 +6755,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Dahlia
   text: "[play-music=bgm_ominous]{speak,dahlia}{name}, didn\u2019t you take a class
-    on Ihsuik?"
+    on {languageTL}?"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -6577,7 +6801,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[remove-all-character][next]'
+  text: '[block=t][remove-all-character][next]'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -6613,7 +6837,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &198372661
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6625,7 +6849,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 7
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6687,7 +6911,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: b8ed51d828c90bb4fb42b75169d01d63, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &198372665
@@ -6710,7 +6934,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 27584c4f675a94b4ca4374b515ba697c, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &198372666
@@ -6733,7 +6957,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: cbdf30af2f34d014f83e7e17077d9406, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &198372667
@@ -6750,7 +6974,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[stop-music][remove-all-character][next]'
+  text: '[block=t][stop-music][remove-all-character][next]'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -6773,7 +6997,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Frantic Girl
-  text: '{speak,dahlia}|shake|ILLYIA. GET BACK!\shake\'
+  text: '[screen-shake=2.0,0.2][play-sfx=sfx_flash]{speak,dahlia}|shake|ILLYIA. GET
+    BACK!\shake\[block=f]'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -6870,7 +7095,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '[remove-character=spr_vn_illyia_1]{speak,illyia}!?'
+  text: '[remove-character=spr_vn_illyia_1]{speak,illyia}W-whoa, what the...!?'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -6895,13 +7120,14 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{info,cat-name}'
-  text: '{t,demon}{hc,}{c,evil-eye}Meor|scramble|w meOW MeoWww\scramble\{c,}'
+  text: '[screen-shake=2.0,0.3][play-sfx=sfx_fire_hit][play-sfx=sfx_blight_hit]{t,demon}{hc,}{c,evil-eye}Meor|scramble|w
+    meOW MeoWww\scramble\{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 5fd9ff4907effec4487eb4206fd7d8fa, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &198372674
@@ -7107,7 +7333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &205596595
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7119,7 +7345,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 26
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7394,7 +7620,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &213370331
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7406,7 +7632,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 25
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8042,7 +8268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &226019614
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8054,7 +8280,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 37
+  m_RootOrder: 40
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8534,7 +8760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &239973557
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8546,7 +8772,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 9
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8572,8 +8798,8 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: f5b6a29de40609a40951b4893503c834, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 93a24b5b8440cf5479b4df884abb69b3, type: 3}
   char_sprites:
   - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
   - {fileID: 21300000, guid: ace760d0494bd6744abd6c165e5a26cd, type: 3}
@@ -10037,6 +10263,9 @@ RectTransform:
   - {fileID: 1261315380}
   - {fileID: 1113894808}
   - {fileID: 1596509888}
+  - {fileID: 902453338}
+  - {fileID: 135065400}
+  - {fileID: 443609135}
   - {fileID: 1453214174}
   - {fileID: 638545936}
   - {fileID: 181451881}
@@ -10132,7 +10361,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &327953939
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10144,7 +10373,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 16
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10165,7 +10394,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: '[block=f][set-info=c-tl,a]{speak,mc}Uh {tl,Hello?}'
+  text: '[set-info=c-tl,a]{speak,mc}Uh {tl,Hello?}[block=f]'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -10871,13 +11100,14 @@ GameObject:
   - component: {fileID: 338771799}
   - component: {fileID: 338771798}
   - component: {fileID: 338771797}
+  - component: {fileID: 338771801}
   m_Layer: 5
   m_Name: D_SHOW_3DOPPEL_SUMMON
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &338771796
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10889,7 +11119,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 45
+  m_RootOrder: 48
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10957,16 +11187,18 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: "{speak,doppelganger}{c,evil-eye}I see... you don\u2019t cling to OUR memory
-    of the Past.{c,}"
+  text: "[stop-music]{speak,doppelganger}{c,evil-eye}I see... you don\u2019t cling
+    to OUR memory of the Past.{c,}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  codec_sprite: {fileID: 21300000, guid: 93a24b5b8440cf5479b4df884abb69b3, type: 3}
+  char_sprites:
+  - {fileID: 21300000, guid: eddabf0c623cfa54e8da149df1c6753f, type: 3}
+  char_sprite_pos:
+  - {x: 0, y: 0.5}
 --- !u!114 &338771800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10978,6 +11210,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &338771801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 338771795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '[remove-all-character][next]'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &340179477
 GameObject:
   m_ObjectHideFlags: 0
@@ -11500,7 +11755,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &376546581
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11533,8 +11788,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: '{speak,doppelganger}{c,evil-eye}Perhaps I should remind you of how this all
-    started... the memory of that mission...{c,}'
+  text: '[play-music=bgm_battle_midboss]{speak,doppelganger}{c,evil-eye}Perhaps I
+    should remind you of how this all started... the memory of that mission...{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -11557,14 +11812,14 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: "{speak,doppelganger}{c,evil-eye}Why won\u2019t you live for yourself over
-    the others who do nothing but expect more from you?{c,}"
+  text: "[stop-music]{speak,doppelganger}{c,evil-eye}Why won\u2019t you live for yourself
+    over the others who do nothing but expect more from you?{c,}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: c651b0f161527d94d8247fe721429f89, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &376546584
@@ -12953,6 +13208,153 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &443609134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 443609135}
+  - component: {fileID: 443609137}
+  - component: {fileID: 443609136}
+  - component: {fileID: 443609138}
+  - component: {fileID: 443609140}
+  - component: {fileID: 443609139}
+  m_Layer: 5
+  m_Name: D_SHOW_YOURNAME
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &443609135
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 443609134}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 309855630}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.0000009536743, y: -0.00000023841858}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &443609136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 443609134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 1
+  speaker_name: PROMPT
+  text: '{c,highlight}> Enter your name.{c,}'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &443609137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 443609134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &443609138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 443609134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '[block=t][set-name][next]'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &443609139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 443609134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 1
+  speaker_name: PROMPT
+  text: '{c,ui-terms}> Is <{c,highlight}{name}{c,}> the correct name?{c,}
+
+    {c,highlight}> Type in A or B and hit the ENTER key to confirm.{c,}'
+  input_display: {fileID: 0}
+  input_options:
+  - Yes.
+  - No.
+  input_answers: []
+  input_branches:
+  - {fileID: 1453214178}
+  - {fileID: 443609137}
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &443609140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 443609134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: PROMPT
+  text: '{c,ui-terms}> Your name shall be set as <{c,highlight}{name}{c,}>.{c,}[block=f]'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &444267043
 GameObject:
   m_ObjectHideFlags: 0
@@ -13013,13 +13415,13 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{i,cat-name}'
-  text: '[play-music=bgm_battle_midboss]{hc,}Meow...'
+  text: '[play-music=bgm_battle_midboss]{hc,}{speak,cat}Meow...'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 0707e1af17f980b4b899df626a699f95, type: 3}
+  codec_sprite: {fileID: 21300000, guid: d2fd53d6488b09b439aa6f8c9afa9c9d, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &448470092
@@ -14347,7 +14749,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &525117283
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14359,7 +14761,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 11
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15410,7 +15812,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &586949733
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15422,7 +15824,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 18
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15626,7 +16028,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '{c,ui-terms}> You ready a SWORD spell.{c,}'
+  text: '[play-sfx=sfx_bootup]{c,ui-terms}> You ready a SWORD spell.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -15649,8 +16051,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: "[block=f][set-info=c-tl,c]{speak,mc}|shake|O-OK shapeshifters! I know you\u2019re
-    hiding there!\\shake\\"
+  text: "[set-info=c-tl,c]{speak,mc}|shake|O-OK shapeshifters! I know you\u2019re
+    hiding there!\\shake\\[block=f]"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -15779,7 +16181,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &590508429
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15791,7 +16193,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 39
+  m_RootOrder: 42
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16491,7 +16893,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &638545936
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16503,7 +16905,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 4
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16558,7 +16960,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{info,cat-name}'
-  text: '{hc,}Mreow!'
+  text: '{hc,}{speak,cat}Mreow!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -16581,7 +16983,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '{c,ui-terms}>{info,cat-name} sees through your bravado.{c,}'
+  text: '{c,ui-terms}> {info,cat-name} sees through your bravado.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -17337,7 +17739,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 47
+  m_RootOrder: 50
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18163,7 +18565,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 6d91601cbaa58cc40bebbbd59a090c65, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 416c5310bc5f3f245a52f54ce297e795, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &706308404
@@ -18842,7 +19244,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &723685589
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18854,7 +19256,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 24
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -19228,6 +19630,8 @@ GameObject:
   - component: {fileID: 741979178}
   - component: {fileID: 741979180}
   - component: {fileID: 741979179}
+  - component: {fileID: 741979182}
+  - component: {fileID: 741979181}
   m_Layer: 5
   m_Name: FrenzyCastTimeLeft
   m_TagString: Untagged
@@ -19250,8 +19654,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 230}
-  m_SizeDelta: {x: 600, y: 36}
+  m_AnchoredPosition: {x: 0, y: 74.765}
+  m_SizeDelta: {x: 600, y: 110.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &741979179
 MonoBehaviour:
@@ -19265,7 +19669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.872, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -19273,12 +19677,12 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 32
+    m_Font: {fileID: 12800000, guid: bb9d36ae96a107043a02064687ed8de8, type: 3}
+    m_FontSize: 64
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 40
+    m_MaxSize: 64
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -19292,6 +19696,34 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 741979177}
+--- !u!114 &741979181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 741979177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
+--- !u!114 &741979182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 741979177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1573420865, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &743140129
 GameObject:
   m_ObjectHideFlags: 0
@@ -19867,7 +20299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &769192459
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19879,7 +20311,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 13
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -19942,10 +20374,8 @@ MonoBehaviour:
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites:
-  - {fileID: 21300000, guid: db40770dc9547784494470c962216881, type: 3}
-  char_sprite_pos:
-  - {x: 0, y: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!114 &769192463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19967,11 +20397,9 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites:
-  - {fileID: 21300000, guid: db40770dc9547784494470c962216881, type: 3}
-  char_sprite_pos:
-  - {x: 0, y: 0}
+  codec_sprite: {fileID: 21300000, guid: 95e2766e790c22f4cbf8be320b5226f1, type: 3}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!114 &769192464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19993,10 +20421,8 @@ MonoBehaviour:
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites:
-  - {fileID: 21300000, guid: db40770dc9547784494470c962216881, type: 3}
-  char_sprite_pos:
-  - {x: 0, y: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &770241909
 GameObject:
   m_ObjectHideFlags: 0
@@ -21002,7 +21428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &828981989
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21014,7 +21440,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 12
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -21169,7 +21595,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &830637600
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21181,7 +21607,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 43
+  m_RootOrder: 46
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -21202,8 +21628,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: '[play-music=bgm_curse_arrival]{speak,doppelganger}{c,evil-eye}Yes, your past
-    deserves to die.{c,}'
+  text: '[set-bg=bg_train_inverse][block=t][fade=in,2,1,1,1][pause=2][block=f][play-music=bgm_curse_arrival]{speak,doppelganger}{c,evil-eye}Yes,
+    your past deserves to die.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -23879,6 +24305,153 @@ MonoBehaviour:
   healthbar_prefab: {fileID: 1314706796157826, guid: 6e64541e496404944b7bc1fb241c00d1,
     type: 2}
   bar_width: 72
+--- !u!1 &902453337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 902453338}
+  - component: {fileID: 902453340}
+  - component: {fileID: 902453339}
+  - component: {fileID: 902453342}
+  - component: {fileID: 902453341}
+  - component: {fileID: 902453343}
+  m_Layer: 5
+  m_Name: D_SHOW_CAT_NAMELOOP
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &902453338
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 902453337}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 309855630}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.0000009536743, y: -0.00000023841858}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &902453339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 902453337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 1
+  speaker_name: PROMPT
+  text: "{hc,}{c,highlight}> Enter the cat\u2019s name.{c,}"
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &902453340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 902453337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3d3289e50690f42b4d6c2ea33626a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &902453341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 902453337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: PROMPT
+  text: '{c,ui-terms}> The cat''s name shall be set as <{c,highlight}{info,cat-name}{c,}>.{c,}[block=f]'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &902453342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 902453337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '[block=t][set-info=cat-name][next]'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &902453343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 902453337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 1
+  speaker_name: PROMPT
+  text: '{c,ui-terms}> Is <{c,highlight}{info,cat-name}{c,}> the correct name?{c,}
+
+    {c,highlight}> Type in A or B and hit the ENTER key to confirm.{c,}'
+  input_display: {fileID: 0}
+  input_options:
+  - Yes.
+  - No.
+  input_answers: []
+  input_branches:
+  - {fileID: 135065402}
+  - {fileID: 902453340}
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!1 &908766834
 GameObject:
   m_ObjectHideFlags: 0
@@ -24192,7 +24765,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &921353016
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24204,7 +24777,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 41
+  m_RootOrder: 44
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -25189,7 +25762,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &975594711
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25201,7 +25774,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 29
+  m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -25282,7 +25855,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '[remove-character=spr_vn_iris_3][remove-character=spr_vn_iris_2]{speak,illyia}got
+  text: '[remove-character=spr_vn_iris_3][remove-character=spr_vn_iris_2]{t,illyia}got
     stuck in traffic on way to your place.'
   input_display: {fileID: 0}
   input_options: []
@@ -25308,7 +25881,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{speak,illyia}will probably miss meeting with my insane sister'
+  text: '{t,illyia}will probably miss meeting with my insane sister'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -25331,7 +25904,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "{speak,illyia}don\u2019t let anything she says get to you!"
+  text: "{t,illyia}don\u2019t let anything she says get to you!"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -25354,7 +25927,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "{speak,illyia}when we get there it\u2019s |wave||color-cycle|donut time\\color-cycle\\\\wave\\!"
+  text: "{t,illyia}when we get there it\u2019s |wave||color-cycle|donut time\\color-cycle\\\\wave\\!"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -25476,7 +26049,7 @@ MonoBehaviour:
   text: '[float-text=1,0,where did this come from?][float-text=-3,2,uh... waht?][remove-character=spr_vn_iris_3][remove-character=spr_vn_iris_3]{speak,iris}{name},
     what enemy do you never want to fight against?
 
-    {c,highlight}> Type in ANYTHING and hit ENTER to submit.{c,}'
+    {c,highlight}> FREE RESPONSE. Hit ENTER to submit.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers:
@@ -26232,7 +26805,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1004357517
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26244,7 +26817,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 30
+  m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -26369,7 +26942,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: '{t,clarke}Be sure to |wave|murder\wave\ poor {c,enemy-name}Wech{c,} before
+  text: '{t,clarke}Be sure to |wave|annihilate\wave\ poor {c,enemy-name}Wech{c,} before
     they get the chance to cast {c,spell}SELFCARE{c,}!'
   input_display: {fileID: 0}
   input_options: []
@@ -26423,7 +26996,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 6d91601cbaa58cc40bebbbd59a090c65, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 416c5310bc5f3f245a52f54ce297e795, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &1008986904
@@ -26920,7 +27493,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 6d91601cbaa58cc40bebbbd59a090c65, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 416c5310bc5f3f245a52f54ce297e795, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!1 &1036015172
@@ -28758,7 +29331,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 6d91601cbaa58cc40bebbbd59a090c65, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 416c5310bc5f3f245a52f54ce297e795, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1068107119
@@ -28776,7 +29349,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Clarke
   text: '{t,clarke}However, {c,highlight}you are unable to type or cast while the
-    {c,ui-terms}Scouter{c,}is active, so use it wisely!{c,}'
+    {c,ui-terms}Scouter{c,} is active, so use it wisely!{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -28800,7 +29373,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Clarke
   text: '{t,clarke}{c,highlight}Focusing on the enemies will also make it so time
-    move slowly{c,}, so feel free to use the {c,ui-terms}Scouter{c,}  to catch a break
+    move slowly{c,}, so feel free to use the {c,ui-terms}Scouter{c,} to catch a break
     and look at your surroundings.'
   input_display: {fileID: 0}
   input_options: []
@@ -29190,7 +29763,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1081221319
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29202,7 +29775,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 32
+  m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -29223,7 +29796,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Iris
-  text: "{speak,iris}The answer is \u2018yourself.\u2019"
+  text: '{speak,iris}The answer is "yourself."'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -29556,7 +30129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1088031915
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29568,7 +30141,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 17
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -29613,13 +30186,13 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '{c,ui-terms}>{name} points at a cat.{c,}'
+  text: '{hc,}{c,ui-terms}> {name} points at a cat.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: d2fd53d6488b09b439aa6f8c9afa9c9d, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1088031918
@@ -29666,7 +30239,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1088031920
@@ -29759,7 +30332,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 15a3d82b9ee04b94f8e6ab70db5c672b, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1088031924
@@ -29822,7 +30395,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: '[block=f][set-info=c-tl,b]{speak,mc}Uh, hi there!'
+  text: '[set-info=c-tl,b]{speak,mc}Uh, hi there![block=f]'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -30722,7 +31295,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1113894808
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32115,13 +32688,14 @@ GameObject:
   - component: {fileID: 1168889517}
   - component: {fileID: 1168889516}
   - component: {fileID: 1168889519}
+  - component: {fileID: 1168889520}
   m_Layer: 5
   m_Name: BI_VOLT_KEYS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1168889514
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32219,7 +32793,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 416c5310bc5f3f245a52f54ce297e795, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1168889519
@@ -32238,7 +32812,30 @@ MonoBehaviour:
   speaker_name: Clarke
   text: '{t,clarke}Remember to page through your {c,ui-terms}Spellbook{c,} using the
     {c,ui-terms}UP and DOWN arrows{c,} to view your {c,spell}Element Prefixes and
-    other Spell Words{c,}'
+    other Spell Words{c,}.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1168889520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1168889513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}...I support you, {name}.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -32759,7 +33356,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1188334823
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32771,7 +33368,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 28
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -35092,7 +35689,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1261315380
 RectTransform:
   m_ObjectHideFlags: 0
@@ -35125,11 +35722,11 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[block=t]{t,evil_eye}{c,evil-eye}Destroy the EVIL EYE!{c,}[pause=1]
+  text: '[block=t]{t,evil_eye}{c,evil-eye}Destroy the EVIL EYE!{c,}
 
-    {t,evil_eye}{c,evil-eye}Destroy the EVIL EYE!{c,}[pause=1]
+    {t,evil_eye}{c,evil-eye}Destroy the EVIL EYE!{c,}
 
-    {t,evil_eye}{c,evil-eye}Destroy the EVIL EYE!{c,}[pause=1]
+    {t,evil_eye}{c,evil-eye}Destroy the EVIL EYE!{c,}
 
     [fade=out,2,0,0,0][pause=2][next]'
   input_display: {fileID: 0}
@@ -35169,8 +35766,9 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: "{t,evil_eye}{c,evil-eye}Alienating us from our true beings.{c,}\r\n{t,evil_eye}{c,evil-eye}Thus,
-    we must rid the world of its judgement.{c,}"
+  text: '{t,evil_eye}{c,evil-eye}Alienating us from our true beings.{c,}
+
+    {t,evil_eye}{c,evil-eye}Thus, we must rid the world of its judgement.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -35765,7 +36363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1269042617
 RectTransform:
   m_ObjectHideFlags: 0
@@ -35777,7 +36375,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 34
+  m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -36498,7 +37096,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1298971140
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36513,7 +37111,7 @@ RectTransform:
   - {fileID: 376546581}
   - {fileID: 1168889514}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 44
+  m_RootOrder: 47
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -36633,7 +37231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Title: 'BOSS: Der Doppelganger'
-  Music: bgm_battle_midboss
+  Music: 
   Background: BattleBGAbyss
   Enemy1: 
   Enemy2: Doppelganger
@@ -37007,7 +37605,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1324949584
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37019,7 +37617,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 33
+  m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -37165,7 +37763,7 @@ RectTransform:
   - {fileID: 49644899}
   - {fileID: 136171210}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 46
+  m_RootOrder: 49
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -37252,7 +37850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Title: 'BOSS: The Evil "I"'
-  Music: bgm_battle_doppelganger
+  Music: 
   Background: 
   Enemy1: 
   Enemy2: Doppelganger (BLUE)
@@ -37316,7 +37914,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1329476168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37328,7 +37926,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 22
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -37377,7 +37975,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 21300000, guid: eb416a3691a496849952474a70a1f306, type: 3}
+  mc_sprite: {fileID: 21300000, guid: f5b6a29de40609a40951b4893503c834, type: 3}
   codec_sprite: {fileID: 21300000, guid: 93a24b5b8440cf5479b4df884abb69b3, type: 3}
   char_sprites:
   - {fileID: 21300000, guid: 7891c897fbc75804caa2a6d3a1abeda0, type: 3}
@@ -37978,7 +38576,7 @@ RectTransform:
   - {fileID: 1264951112}
   - {fileID: 1863799721}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 48
+  m_RootOrder: 51
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -38659,7 +39257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1397513931
 RectTransform:
   m_ObjectHideFlags: 0
@@ -38676,7 +39274,7 @@ RectTransform:
   - {fileID: 1055337793}
   - {fileID: 1873694474}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 8
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -40428,6 +41026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1453214174}
   - component: {fileID: 1453214178}
+  - component: {fileID: 1453214185}
   - component: {fileID: 1453214177}
   - component: {fileID: 1453214176}
   - component: {fileID: 1453214175}
@@ -40443,7 +41042,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1453214174
 RectTransform:
   m_ObjectHideFlags: 0
@@ -40455,7 +41054,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -40579,8 +41178,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Loud Person
-  text: '[stop-music]{speak,illyia}HEY DAHLIA! |shake|{NAME} IS TOTALLY TALKING TO
-    A CAT!\shake\'
+  text: '[screen-shake=2.0,0.2][play-sfx=sfx_damage_number][stop-music]{speak,illyia}HEY
+    DAHLIA! |shake|{NAME} IS TOTALLY TALKING TO A CAT!\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -40687,6 +41286,29 @@ MonoBehaviour:
   - {fileID: 638545938}
   - {fileID: 181451886}
   - {fileID: 57851102}
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &1453214185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1453214173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: '{name}'
+  text: "{speak,mc}I\u2019m {name}. Nice to meet you, {info,cat-name}."
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
   char_sprites: []
@@ -42342,7 +42964,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 6d91601cbaa58cc40bebbbd59a090c65, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 416c5310bc5f3f245a52f54ce297e795, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1510001569
@@ -42415,7 +43037,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: daaf157db4bf816408366c277be67114, type: 3}
+  codec_sprite: {fileID: 21300000, guid: fc26182ce3462cc4ea98b573ba9c378e, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1510001572
@@ -42940,7 +43562,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1543939411
 RectTransform:
   m_ObjectHideFlags: 0
@@ -42952,7 +43574,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 36
+  m_RootOrder: 39
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -44645,19 +45267,13 @@ GameObject:
   - component: {fileID: 1596509899}
   - component: {fileID: 1596509901}
   - component: {fileID: 1596509900}
-  - component: {fileID: 1596509903}
-  - component: {fileID: 1596509907}
-  - component: {fileID: 1596509902}
-  - component: {fileID: 1596509904}
-  - component: {fileID: 1596509905}
-  - component: {fileID: 1596509906}
   m_Layer: 5
   m_Name: D_SHOW_CAT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1596509888
 RectTransform:
   m_ObjectHideFlags: 0
@@ -44690,14 +45306,14 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[stop-music][set-bg=bg_street][block=t][fade=in,2,0,0,0][pause=2][block=f]{c,ui-terms}>
+  text: '[stop-music][set-bg=bg_street][block=t][fade=in,2,0,0,0][pause=2][block=f]{t,demon}{c,ui-terms}>
     |shake|*rustle rustle*\shake\{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 21300000, guid: eb416a3691a496849952474a70a1f306, type: 3}
-  codec_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: f5b6a29de40609a40951b4893503c834, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 93a24b5b8440cf5479b4df884abb69b3, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1596509890
@@ -44725,7 +45341,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '{c,ui-terms}> A shadow darts behind a nearby trashcan.{c,}'
+  text: '[play-sfx=sfx_spell_miss][screen-shake=2.0,0.1]{c,ui-terms}> A shadow darts
+    behind a nearby trashcan.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -44794,7 +45411,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[play-music=bgm_battle_normal]{c,ui-terms}> The shadow attacks!{c,}'
+  text: '[play-music=bgm_battle_normal][screen-shake=2.0,0.3][play-sfx=sfx_flash][play-sfx=sfx_slash]{c,ui-terms}>
+    The shadow attacks!{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -44817,7 +45435,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: '{speak,mc}A-Aaah!'
+  text: '[screen-shake=3.0,0.5][play-sfx=sfx_damage_number]{speak,mc}|shake|A-Aaah!\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -44840,13 +45458,13 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Obviously a Cat
-  text: '[stop-music]{hc,}Meow!'
+  text: '[stop-music]{hc,}{speak,cat}Meow!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 14c70df2607f3d74393f4ae62fe73e61, type: 3}
+  codec_sprite: {fileID: 21300000, guid: d2fd53d6488b09b439aa6f8c9afa9c9d, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1596509897
@@ -44909,7 +45527,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Obviously a Cat
-  text: "{hc,}|wave|Purrrr\u2026\\wave\\"
+  text: "{hc,}{speak,cat}|wave|Purrrr\u2026\\wave\\"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -44956,144 +45574,6 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: 
   text: "{c,ui-terms}> The cat can\u2019t understand you because it is a cat.{c,}"
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
---- !u!114 &1596509902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1596509887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: '{info,cat-name}'
-  text: '{hc,}Meow meow?'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
---- !u!114 &1596509903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1596509887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 1
-  speaker_name: PROMPT
-  text: "{c,highlight}> Enter the cat\u2019s name.{c,}"
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
---- !u!114 &1596509904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1596509887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 1
-  speaker_name: '{name}'
-  text: '{speak,mc}Hm? Oh, my name is...'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
---- !u!114 &1596509905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1596509887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: 
-  text: '[set-name][next]'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
---- !u!114 &1596509906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1596509887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: '{name}'
-  text: "{speak,mc}I\u2019m {name}. Nice to meet you, {info,cat-name}."
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
---- !u!114 &1596509907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1596509887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: 
-  text: '[set-info=cat-name] [next]'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -45230,7 +45710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1599218054
 RectTransform:
   m_ObjectHideFlags: 0
@@ -45318,7 +45798,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: c651b0f161527d94d8247fe721429f89, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1599218058
@@ -45611,7 +46091,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1601679510
 RectTransform:
   m_ObjectHideFlags: 0
@@ -45623,7 +46103,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 42
+  m_RootOrder: 45
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -45644,13 +46124,14 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[stop-music][set-bg=bg_train]{c,ui-terms}> {name} is lost.{c,}'
+  text: '[stop-music][play-music=sfx_london_train_snippet_clean][set-bg=bg_train]{c,ui-terms}>
+    {name} is lost.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: f5b6a29de40609a40951b4893503c834, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 93a24b5b8440cf5479b4df884abb69b3, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1601679512
@@ -45797,7 +46278,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: "[stop-music]{speak,mc}I wish I could just forget it all.\r"
+  text: "[block=t][stop-music]{speak,mc}I wish I could just forget it all.\r[pause=2][play-sfx=sfx_vr_bootup][fade=out,2,1,1,1][pause=2][next]"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -46519,6 +47000,8 @@ GameObject:
   - component: {fileID: 1625511976}
   - component: {fileID: 1625511978}
   - component: {fileID: 1625511977}
+  - component: {fileID: 1625511980}
+  - component: {fileID: 1625511979}
   m_Layer: 5
   m_Name: FrenzyCastInstructions
   m_TagString: Untagged
@@ -46541,8 +47024,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 260}
-  m_SizeDelta: {x: 700, y: 50}
+  m_AnchoredPosition: {x: 0, y: 195}
+  m_SizeDelta: {x: 1200, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1625511977
 MonoBehaviour:
@@ -46564,7 +47047,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: bb9d36ae96a107043a02064687ed8de8, type: 3}
     m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
@@ -46576,13 +47059,44 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Type in and cast as many spells as you can!
+  m_Text: 'Type in and cast as many spells as you can!
+
+
+    ALL SPELLS WILL EXECUTE WHEN TIME REACHES ZERO'
 --- !u!222 &1625511978
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1625511975}
+--- !u!114 &1625511979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1625511975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
+--- !u!114 &1625511980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1625511975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1573420865, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1634065327
 GameObject:
   m_ObjectHideFlags: 0
@@ -47280,7 +47794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1678004669
 RectTransform:
   m_ObjectHideFlags: 0
@@ -47292,7 +47806,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 35
+  m_RootOrder: 38
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -47411,7 +47925,7 @@ RectTransform:
   - {fileID: 400916058}
   - {fileID: 1771799160}
   m_Father: {fileID: 309855630}
-  m_RootOrder: 20
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -48115,8 +48629,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: "[set-info=doppel-fr-transform,true]{speak,doppelganger}{c,evil-eye}I... I
-    wish you would all leave me alone!\r[play-music=bgm_battle_second_hand]{c,}\n"
+  text: "[block=t][set-info=doppel-fr-transform,true]{speak,doppelganger}{c,evil-eye}I...
+    I wish you would all leave me alone!\r[play-music=bgm_battle_second_hand]{c,}[block=f]"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -48145,7 +48659,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: c651b0f161527d94d8247fe721429f89, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1704200372
@@ -48237,7 +48751,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1704200376
@@ -48260,7 +48774,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 15a3d82b9ee04b94f8e6ab70db5c672b, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1704200377
@@ -48283,7 +48797,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1704200378
@@ -48616,7 +49130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1712987601
 RectTransform:
   m_ObjectHideFlags: 0
@@ -48628,7 +49142,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 19
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -48649,13 +49163,13 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat
-  text: '[stop-music]*Hiss*!!'
+  text: '[stop-music]{t,demon}{hc,}|shake|*Hiss*!!\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: b8ed51d828c90bb4fb42b75169d01d63, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1712987603
@@ -48683,13 +49197,13 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat?
-  text: '{t,demon}{c,demon}Mre|scramble|admvkanjn anajnvjad\scramble\{c,}'
+  text: '{t,demon}{hc,}{c,evil-eye}Mre|scramble|admvkanjn anajnvjad\scramble\{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 27584c4f675a94b4ca4374b515ba697c, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1712987605
@@ -48706,7 +49220,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat Person
-  text: '[set-bg=bg_alleycat_person2][play-music=bgm_curse]{speak,cat_person}|shake|{tl,Huh?
+  text: '[remove-character=spr_vn_cat_person_1][set-bg=bg_alleycat_person2][play-music=bgm_curse]{speak,cat_person}|shake|{tl,Huh?
     Kitty noooo!}\shake\'
   input_display: {fileID: 0}
   input_options: []
@@ -48740,7 +49254,7 @@ MonoBehaviour:
   char_sprites:
   - {fileID: 21300000, guid: 2a3553ba9e5241943bb3b2faf11a7588, type: 3}
   char_sprite_pos:
-  - {x: -3, y: -0.5}
+  - {x: 5, y: -0.5}
 --- !u!114 &1712987607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48778,15 +49292,18 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: "{speak,dahlia}We\u2019ll talk about this later!"
+  text: "[screen-shake=2.0,0.3][play-sfx=sfx_fire_hit][play-sfx=sfx_blight_hit]{speak,dahlia}We\u2019ll
+    talk about this later!"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  codec_sprite: {fileID: 21300000, guid: 5fd9ff4907effec4487eb4206fd7d8fa, type: 3}
+  char_sprites:
+  - {fileID: 21300000, guid: ace760d0494bd6744abd6c165e5a26cd, type: 3}
+  char_sprite_pos:
+  - {x: -5, y: -0.5}
 --- !u!114 &1712987609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49026,7 +49543,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1750468868
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49038,7 +49555,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 10
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -49186,13 +49703,13 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '{c,ui-terms}> {name} picked up a broken amulet.{c,}'
+  text: '{hc,}{c,ui-terms}> {name} picked up a broken amulet.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: aceb66023d80cc44ea8bb0b97a0be0c7, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1750468876
@@ -49209,7 +49726,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 1
   speaker_name: '{name}'
-  text: '{speak,mc}It kinda looks like...
+  text: '{speak,mc}{hc,}It kinda looks like...
 
     {c,highlight}> Type in A or B and hit ENTER to choose.{c,}'
   input_display: {fileID: 0}
@@ -51232,7 +51749,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 014f8993b714f3c489414f5fc3221115, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 99e1b89c5605dbf41ba5435b09e4fab1, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1822313459
@@ -51280,7 +51797,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 014f8993b714f3c489414f5fc3221115, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 99e1b89c5605dbf41ba5435b09e4fab1, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1822313461
@@ -51303,7 +51820,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: f5b6a29de40609a40951b4893503c834, type: 3}
   codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -52484,7 +53001,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Dahlia
   text: '{t,dahlia}If you''re having trouble remembering the {c,spell}Spell Words{c,}
-    you''ve used, check the {c,ui-terms}Spellbook{c,} in your {c,highlight}lower right{c,}'
+    you''ve used, check the {c,ui-terms}Spellbook{c,} in your {c,highlight}lower right{c,}.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -53009,7 +53526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1896248617
 RectTransform:
   m_ObjectHideFlags: 0
@@ -53021,7 +53538,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 31
+  m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -53102,8 +53619,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Iris
-  text: "[remove-character=spr_vn_iris_3]{speak,iris}Well, in any case, the correct
-    answer is \u2018yourself.\u2019"
+  text: '[remove-character=spr_vn_iris_3]{speak,iris}Well, in any case, the correct
+    answer is "yourself."'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -53730,7 +54247,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1916023005
 RectTransform:
   m_ObjectHideFlags: 0
@@ -53742,7 +54259,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 40
+  m_RootOrder: 43
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -54388,7 +54905,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1936568530
 RectTransform:
   m_ObjectHideFlags: 0
@@ -54400,7 +54917,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 27
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -55484,8 +56001,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Wechselbalg
-  text: "[set-talk-sfx=vo_demon]{c,enemy-talk}|shake|(But, Master Eye will kill me...
-    Scary Eye\u2026 Scary Eye!! N-noooo!!!)\\shake\\{c,}"
+  text: "[set-talk-sfx=vo_demon]{c,enemy-talk}|shake|(But, those eyes... Scary Eyes\u2026
+    Scary Eyes!! N-noooo!!!)\\shake\\{c,}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -55539,7 +56056,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 2169b86692f43ec4fa9322e16690fad3, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 146fa302c63eeda40b45a58cc3b4b299, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1980902393
@@ -56670,7 +57187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2029538952
 RectTransform:
   m_ObjectHideFlags: 0
@@ -56682,7 +57199,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 309855630}
-  m_RootOrder: 23
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -58429,8 +58946,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '[screen-shake=2.0,0.1]{c,ui-terms}> Illyia was hit by a {c,spell}SWORD{c,}
-    spell!{c,}'
+  text: '[screen-shake=2.0,0.1][play-sfx=sfx_spell_hit]{c,ui-terms}> Illyia was hit
+    by a {c,spell}SWORD{c,} spell!{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -58453,13 +58970,13 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}[play-sfx=sfx_slash]|shake|A-AH!\shake\'
+  text: '{speak,illyia}[play-sfx=sfx_slash]|shake|A-AH!\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 652cc0dc9a383d445a4b651caca78d1b, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &2106448169
@@ -58476,7 +58993,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}YOU GOTTA BURN IT UP! Use {c,spell}AGNI-SWORD{c,}! {c,spell}AGNI-LANCE{c,}!
+  text: '{speak,illyia}YOU GOTTA BURN IT UP! Use {c,spell}AGNI-SWORD{c,}! {c,spell}AGNI-LANCE{c,}!
     {c,spell}AGNI-HAMMER{c,}! |shake|{c,spell}AGNI-{c,} ANYTHIN-\shake\'
   input_display: {fileID: 0}
   input_options: []
@@ -58500,7 +59017,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}|shake|What are doing, {name}!? Are you even paying attention?
+  text: '{speak,illyia}|shake|What are doing, {name}!? Are you even paying attention?
     Those attacks aren''t doing damage!! Please focus!\shake\'
   input_display: {fileID: 0}
   input_options: []
@@ -58535,8 +59052,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{t,illyia}|shake|You bastards!\shake\ {name}, don''t die, you hear me!? {c,spell}AGNI-SWORD{c,}!
-    {c,spell}AGNI-LANCE{c,}! {c,spell}AGNI-HAMMER{c,}! REMEMBER.'
+  text: '{speak,illyia}|shake|You bastards!\shake\ {name}, don''t die, you hear me!?
+    {c,spell}AGNI-SWORD{c,}! {c,spell}AGNI-LANCE{c,}! {c,spell}AGNI-HAMMER{c,}! REMEMBER.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -59098,6 +59615,6 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 6d91601cbaa58cc40bebbbd59a090c65, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 416c5310bc5f3f245a52f54ce297e795, type: 3}
   char_sprites: []
   char_sprite_pos: []
