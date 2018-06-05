@@ -44,7 +44,8 @@ public class TextMacros : MonoBehaviour {
 			{ "highlight",  "#ff840c" },
 			{ "mc",         "#d043e2" },
 			{ "illyia",     "#c70126" },
-			{ "dahlia",     "#181988" }
+			{ "dahlia",     "#181988" },
+			{ "doppel",     "#E0015A" }
 		};
 		character_map = new Dictionary<string, Pair<string, string>> {
 			{"dahlia", new Pair<string, string>("dahlia", "vo_dahlia") },
