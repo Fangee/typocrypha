@@ -76,7 +76,8 @@ public class TextEvents : MonoBehaviour {
 			{"multi-float-text", multiFloatText},
 			{"train-switch", trainSwitch},
 			{"train-transition", trainTransition},
-			{"train-sign", trainSign}
+			{"train-sign", trainSign},
+			{"train-chr-pos", trainChrPos}
 		};
 		is_prompt = false;
 	}
@@ -539,6 +540,15 @@ public class TextEvents : MonoBehaviour {
 	// input: [0]: string, character's name
 	IEnumerator trainSign(string[] opt) {
 		train_animator.Play ("train_" + opt[0] + "_sign");
+		yield return true;
+	}
+
+	// moves train character sprites
+	// input: [0]: string, name of character's game object
+	//        [1]: int, 0-11, which seat (from leftmost complete seat) to move character
+	IEnumerator trainChrPos(string[] opt) {
+		Transform chr = train_sprite.transform.Find (opt[0]);
+		chr.localPosition = new Vector2 ((float.Parse (opt [1]) * 0.7825f) - 4.199f, chr.localPosition.y);
 		yield return true;
 	}
 }
