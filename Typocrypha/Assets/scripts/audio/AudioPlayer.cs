@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Audio;
 // CHANNEL GUIDE:
 //   SFX can be played in one of 8 channels (numbered 0-7).
 //   playSFX(string) will just choose the first one that's available, so for general use, use that
@@ -21,6 +22,9 @@ public class AudioPlayer : MonoBehaviour {
 	public bool ready; // are all the assets loaded?
 	public AudioSource music; // plays music
 	public Transform sfx; // contains sfx channels
+	public AudioMixerSnapshot bgm_full; // snapshot for full volume music
+	public AudioMixerSnapshot bgm_off; // snapshot for no music
+
 	AudioSource[] sfx_channels; // sfx channels
 	bool[] channel_reserved; // is that channel reserved?
 	AssetBundle sfx_bundle;
@@ -160,7 +164,7 @@ public class AudioPlayer : MonoBehaviour {
 
 	// stop all audio clips
 	public void stopAll() {
-		music.Stop ();
+		stopMusic ();
 		foreach (Transform child in sfx)
 			child.gameObject.GetComponent<AudioSource> ().Stop();
 	}
@@ -178,14 +182,12 @@ public class AudioPlayer : MonoBehaviour {
             child.gameObject.GetComponent<AudioSource> ().UnPause();
     }
 
-	// fade a sound clip to a stop
-	IEnumerator fadeToStop(AudioSource source) {
-		if (source.isPlaying) {
-			while (source.volume > 0) {
-				source.volume -= 0.05F;
-				yield return new WaitForEndOfFrame ();
-			}
-		}
+	// fade music in/out linearly over time (dir = false: in, dir = true: out)
+	public void fadeMusic(bool dir, float time) {
+		if (dir)
+			bgm_off.TransitionTo (time);
+		else
+			bgm_full.TransitionTo (time);
 	}
 
 /**************** DEPRECATED AUDIO SYSTEM *********************/

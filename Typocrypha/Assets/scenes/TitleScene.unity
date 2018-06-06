@@ -994,7 +994,8 @@ AudioSource:
   m_GameObject: {fileID: 525624811}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 1c974bb0bac3b97438c23d13d59c4f66,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.524
@@ -2064,6 +2065,8 @@ MonoBehaviour:
   ready: 0
   music: {fileID: 525624812}
   sfx: {fileID: 245030511}
+  bgm_full: {fileID: 24500006, guid: 1c974bb0bac3b97438c23d13d59c4f66, type: 2}
+  bgm_off: {fileID: 245080841098249708, guid: 1c974bb0bac3b97438c23d13d59c4f66, type: 2}
 --- !u!4 &1262490389
 Transform:
   m_ObjectHideFlags: 0
@@ -3093,6 +3096,10 @@ MonoBehaviour:
   dialogue_box: {fileID: 0}
   glitch_effect: {fileID: 0}
   screen_frame: {fileID: 0}
+  float_text_view: {fileID: 0}
+  float_d_box_prefab: {fileID: 0}
+  train_animator: {fileID: 0}
+  train_sprite: {fileID: 0}
 --- !u!1 &2039497106
 GameObject:
   m_ObjectHideFlags: 0

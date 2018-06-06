@@ -55,7 +55,10 @@ public class TextEvents : MonoBehaviour {
 			{"play-bgm", playMusic},
 			{"stop-music", stopMusic},
 			{"stop-bgm", stopMusic},
+			{"fade-music", fadeMusic},
+			{"fade-bgm", fadeMusic},
 			{"set-scroll-delay", setScrollDelay},
+			{"set-scroll-scale", setScrollScale},
 			{"set-bg", setBG},
 			{"hide-text-box", hideTextBox},
 			{"set-talk-sfx", setTalkSFX},
@@ -281,10 +284,29 @@ public class TextEvents : MonoBehaviour {
 		yield return true;
 	}
 
-	// sets scroll delay of main dialogue text scroll
+	// fades music in/out (linear)
+	// input: [0]: string, music filename (if "_", no change)
+	//        [1]: [in|out], if 'in', fades music in, if 'out' fades music out
+	//        [2]: float, time (in seconds) over which to transition
+	IEnumerator fadeMusic(string[] opt) {
+		if (opt [0] != "_")
+			AudioPlayer.main.playMusic (opt [0]);
+		bool dir = opt [1] == "out" ? true : false;
+		AudioPlayer.main.fadeMusic (dir, float.Parse (opt [2]));
+		yield return true;
+	}
+
+	// sets scroll delay of main dialogue text scroll (BROKEN)
 	// input: [0]: float, new delay amount in seconds
 	IEnumerator setScrollDelay(string[] opt) {
 		DialogueManager.main.setScrollDelay(float.Parse (opt [0]));
+		yield return true;
+	}
+
+	// set scroll delay scale (BROKEN)
+	// input: [0]: float, new scroll scale amount
+	IEnumerator setScrollScale(string[] opt) {
+		DialogueManager.main.scroll_scale = float.Parse (opt [0]);
 		yield return true;
 	}
 		

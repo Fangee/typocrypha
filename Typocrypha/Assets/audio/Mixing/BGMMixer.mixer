@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!241 &24100000
+AudioMixerController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: BGMMixer
+  m_OutputGroup: {fileID: 0}
+  m_MasterGroup: {fileID: 24300002}
+  m_Snapshots:
+  - {fileID: 24500006}
+  - {fileID: 245606989226481320}
+  - {fileID: 245080841098249708}
+  m_StartSnapshot: {fileID: 24500006}
+  m_SuspendThreshold: -80
+  m_EnableSuspend: 1
+  m_UpdateMode: 0
+  m_ExposedParameters: []
+  m_AudioMixerGroupViews:
+  - guids:
+    - 3c4efe292934d8349aa1c247c98cd853
+    name: View
+  m_CurrentViewIndex: 0
+  m_TargetSnapshot: {fileID: 245606989226481320}
+--- !u!243 &24300002
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Master
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 3c4efe292934d8349aa1c247c98cd853
+  m_Children: []
+  m_Volume: 751c79e64f9ee6a458410bcf13724050
+  m_Pitch: 192e2e39064e66748a99ddd6912af09c
+  m_Effects:
+  - {fileID: 24400004}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &24400004
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 998ee41dc97b59047a0611878d7a2189
+  m_EffectName: Attenuation
+  m_MixLevel: ea8442fd052525041bf0977c536b43ae
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!245 &24500006
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: BGMFull
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: c4f54449344165b4180f4892476fef42
+  m_FloatValues:
+    751c79e64f9ee6a458410bcf13724050: 0
+  m_TransitionOverrides: {}
+--- !u!245 &245080841098249708
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: BGMOff
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: 349893d47f699c04eafadd1711ff6c2e
+  m_FloatValues:
+    751c79e64f9ee6a458410bcf13724050: -80
+  m_TransitionOverrides: {}
+--- !u!245 &245606989226481320
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: BGMHalf
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: 11f2656bdd77a5d4ebcca6a7ab80c713
+  m_FloatValues:
+    751c79e64f9ee6a458410bcf13724050: -20.09816
+  m_TransitionOverrides: {}

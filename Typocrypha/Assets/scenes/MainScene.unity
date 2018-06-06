@@ -2246,7 +2246,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[block=t][remove-all-character][fade=out,2,0,0,0][pause=2.5][next]'
+  text: '[block=t][remove-all-character][fade=out,2,0,0,0][fade-music=_,out,4][pause=2.5][next]'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -6185,7 +6185,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: "[remove-all-character][set-bg=bg_alleycat_person][fade=in,2,0,0,0][pause=2.5][block=f]{c,ui-terms}>
+  text: "[remove-all-character][set-bg=bg_alleycat_person][fade=in,2,0,0,0][fade-music=_,in,4][pause=2.5][block=f]{c,ui-terms}>
     There\u2019s a swarm of cats in front of a house. Someone is feeding them.{c,}"
   input_display: {fileID: 0}
   input_options: []
@@ -7383,7 +7383,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 1
   speaker_name: Iris
-  text: '[remove-character=spr_vn_iris_2][remove-character=spr_vn_iris_4][play-music=bgm_suave]{speak,iris}How
+  text: '[remove-character=spr_vn_iris_2][remove-character=spr_vn_iris_4][fade-music=bgm_suave,in,0.5]{speak,iris}How
     are you feeling, {name}?
 
     {c,highlight}> Type in A or B and hit ENTER to choose.{c,}'
@@ -11523,7 +11523,8 @@ AudioSource:
   m_GameObject: {fileID: 378488912}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 1c974bb0bac3b97438c23d13d59c4f66,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.524
@@ -19521,7 +19522,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[block=t][fade=out,2,0,0,0][pause=2.5][next]'
+  text: '[block=t][fade=out,2,0,0,0][fade-music=_,out,4][pause=2.5][next]'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -23719,7 +23720,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[remove-all-character]{c,ui-terms}> Iris has left.{c,}'
+  text: '[fade-music=_,out,4][remove-all-character]{c,ui-terms}> Iris has left.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -23742,7 +23743,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[stop-music]{c,ui-terms}> Your room is silent.{c,}'
+  text: '{c,ui-terms}> Your room is silent.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -25648,6 +25649,8 @@ MonoBehaviour:
   ready: 0
   music: {fileID: 378488913}
   sfx: {fileID: 1588267011}
+  bgm_full: {fileID: 24500006, guid: 1c974bb0bac3b97438c23d13d59c4f66, type: 2}
+  bgm_off: {fileID: 245080841098249708, guid: 1c974bb0bac3b97438c23d13d59c4f66, type: 2}
 --- !u!4 &1003318565
 Transform:
   m_ObjectHideFlags: 0
@@ -43051,6 +43054,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1471841451856714, guid: d9553b719a4b91842827c19059ceaf8d, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d9553b719a4b91842827c19059ceaf8d, type: 2}
   m_IsPrefabParent: 0
@@ -44183,7 +44190,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[stop-music][play-music=sfx_london_train_snippet_clean][set-bg=bg_train][fade=in,2,0,0,0][pause=2.5][block=f]{c,ui-terms}>
+  text: '[stop-music][fade-music=sfx_london_train_snippet_clean,in,4][set-bg=bg_train][fade=in,2,0,0,0][pause=2.5][block=f]{c,ui-terms}>
     {name} is lost.{c,}'
   input_display: {fileID: 0}
   input_options: []
@@ -46572,7 +46579,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1704200366}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -46598,8 +46605,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: "[block=t][set-info=doppel-fr-transform,true]{speak,doppelganger}{c,evil-eye}I...
-    I wish you would all leave me alone!\r[play-music=bgm_battle_second_hand]{c,}[block=f]"
+  text: "[block=t][set-info=doppel-fr-transform,true]{speak,doppelganger}{c,evil-eye}I...[fade-music=_,out,2][pause=2.1][fade-music=bgm_battle_second_hand,in,0]
+    I wish you would all leave me alone!\r{c,}[block=f]"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -46667,8 +46674,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "[play-music=bgm_second_hand]{speak,illyia}Hey, we just got to your apartment
-    and you aren\u2019t there."
+  text: "[fade-music=bgm_second_hand,in,0.2]{speak,illyia}Hey, we just got to your
+    apartment and you aren\u2019t there."
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -46690,8 +46697,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[stop-music][play-sfx=sfx_ringtone]{c,ui-terms}> You have received a ChapSnat
-    message.{c,}'
+  text: '[fade-music=_,out,0][play-sfx=sfx_ringtone]{c,ui-terms}> You have received
+    a ChapSnat message.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
