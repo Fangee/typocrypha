@@ -41,7 +41,11 @@ public class TextMacros : MonoBehaviour {
 			{ "enemy-name", "#16e00c" },
 			{ "tips",       "#ffdb16" },
 			{ "whisper",    "#c8c8c8" },
-			{ "highlight",  "#ff840c" }
+			{ "highlight",  "#ff840c" },
+			{ "mc",         "#d043e2" },
+			{ "illyia",     "#c70126" },
+			{ "dahlia",     "#8097e0" },
+			{ "doppel",     "#E0015A" }
 		};
 		character_map = new Dictionary<string, Pair<string, string>> {
 			{"dahlia", new Pair<string, string>("dahlia", "vo_dahlia") },

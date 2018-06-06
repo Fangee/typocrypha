@@ -34,9 +34,13 @@ public class TextEvents : MonoBehaviour {
 	public Transform float_text_view; // view for floating text
 	public GameObject float_d_box_prefab; // floating text dialogue box prefab
 	public Animator train_animator; // animator component for train
+	public SpriteRenderer train_sprite; // sprite renderer for train 
+
+	AssetBundle train_bundle; // asset bundle for train sprites
 
 	void Awake() {
 		main = this;
+		train_bundle = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "train_sprites"));
 		text_event_map = new Dictionary<string, TextEventDel> {
 			{"screen-shake", screenShake},
 			{"block", block},
@@ -70,7 +74,10 @@ public class TextEvents : MonoBehaviour {
 			{"clear-log", clearTextLog},
 			{"float-text", floatText},
 			{"multi-float-text", multiFloatText},
-			{"train-transition", trainTransition}
+			{"train-switch", trainSwitch},
+			{"train-transition", trainTransition},
+			{"train-sign", trainSign},
+			{"train-chr-pos", trainChrPos}
 		};
 		is_prompt = false;
 	}
@@ -512,11 +519,36 @@ public class TextEvents : MonoBehaviour {
 	}
 
 	// plays train transition animation
-	// input: [0]: float, length in seconds of transition
+	// input: [0]: [in|out], 'in' shows train scene, 'out' hides it
 	IEnumerator trainTransition(string[] opt) {
-		train_animator.Play ("train_fade_in");
-		yield return new WaitForSeconds (float.Parse(opt[0]));
-		train_animator.Play ("train_fade_out");
+		if (opt[0] == "in") 
+			train_animator.Play ("train_fade_in");
+		else
+			train_animator.Play ("train_fade_out");
+		yield return true;
+	}
+
+	// switches train transition sprite
+	// input: [0]: string, name of sprite
+	IEnumerator trainSwitch(string[] opt) {
+		Sprite spr = train_bundle.LoadAsset<Sprite>(opt[0]);
+		train_sprite.sprite = spr;
+		yield return true;
+	}
+
+	// plays train animation where character wiggles their flag
+	// input: [0]: string, character's name
+	IEnumerator trainSign(string[] opt) {
+		train_animator.Play ("train_" + opt[0] + "_sign");
+		yield return true;
+	}
+
+	// moves train character sprites
+	// input: [0]: string, name of character's game object
+	//        [1]: int, 0-11, which seat (from leftmost complete seat) to move character
+	IEnumerator trainChrPos(string[] opt) {
+		Transform chr = train_sprite.transform.Find (opt[0]);
+		chr.localPosition = new Vector2 ((float.Parse (opt [1]) * 0.7825f) - 4.199f, chr.localPosition.y);
 		yield return true;
 	}
 }
