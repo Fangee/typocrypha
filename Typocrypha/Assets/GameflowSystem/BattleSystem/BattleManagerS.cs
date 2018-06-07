@@ -223,11 +223,14 @@ public class BattleManagerS : MonoBehaviour {
     {
         yield return new WaitForSeconds(1f);
         BattleEffects.main.battleTransitionEffect("swirl_in", 1f);
-        yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(1f);
+		endBattle ();
+		BackgroundEffects.main.setSpriteBG (curr_battle.GetComponent<Battle>().next_bg);
         BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
         yield return new WaitForSeconds(1f);
+		GameflowManager.main.next();
         //Transition to victoryScreen
-        endBattle();
+        //endBattle();
     }
     // end the battle and transition to the next GameflowItem
     public void endBattle()
@@ -243,8 +246,8 @@ public class BattleManagerS : MonoBehaviour {
 		}
         if(thirdEyeActive)
             stopThirdEye(true);
-        uiManager.clear();
-        GameflowManager.main.next();
+		uiManager.clear();
+        //GameflowManager.main.next();
 
     }
 

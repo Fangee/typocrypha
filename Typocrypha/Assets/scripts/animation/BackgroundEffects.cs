@@ -24,7 +24,8 @@ public class BackgroundEffects : MonoBehaviour {
 
 	// sets sprite of background image
 	public void setSpriteBG(string sprite_name) {
-        wavy_sprite.texture = backgrounds.LoadAsset<Texture2D> (sprite_name);
+		if (sprite_name != "")
+        	wavy_sprite.texture = backgrounds.LoadAsset<Texture2D> (sprite_name);
 	}
 
 	// sets prefab background object as background
