@@ -36,6 +36,8 @@ public class TextEvents : MonoBehaviour {
 	public Animator train_animator; // animator component for train
 	public SpriteRenderer train_sprite; // sprite renderer for train 
 
+	public Animator eye_frame_animator; // animator for evil eye frame
+
 	AssetBundle train_bundle; // asset bundle for train sprites
 
 	void Awake() {
@@ -80,7 +82,8 @@ public class TextEvents : MonoBehaviour {
 			{"train-switch", trainSwitch},
 			{"train-transition", trainTransition},
 			{"train-sign", trainSign},
-			{"train-chr-pos", trainChrPos}
+			{"train-chr-pos", trainChrPos},
+			{"eye-emote", eyeEmote}
 		};
 		is_prompt = false;
 	}
@@ -571,6 +574,14 @@ public class TextEvents : MonoBehaviour {
 	IEnumerator trainChrPos(string[] opt) {
 		Transform chr = train_sprite.transform.Find (opt[0]);
 		chr.localPosition = new Vector2 ((float.Parse (opt [1]) * 0.7825f) - 4.199f, chr.localPosition.y);
+		yield return true;
+	}
+
+	// changes evil eye frame emotion animation
+	// input: [0]: string, name of expression to play
+	IEnumerator eyeEmote(string[] opt) {
+		string animName = "anim_evil_eye_frame_" + (opt[0]);
+		eye_frame_animator.Play (animName);
 		yield return true;
 	}
 }

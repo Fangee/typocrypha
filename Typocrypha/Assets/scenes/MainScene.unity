@@ -4613,7 +4613,7 @@ GameObject:
   - component: {fileID: 148890177}
   - component: {fileID: 148890178}
   m_Layer: 5
-  m_Name: New Sprite Mask
+  m_Name: EvilEyeSpritemask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6635,7 +6635,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "{speak,illyia}Don\u2019t worry about it!"
+  text: "[eye-emote=happy]{speak,illyia}Don\u2019t worry about it!"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -6737,7 +6737,7 @@ MonoBehaviour:
   codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
-  - {fileID: 21300000, guid: ace760d0494bd6744abd6c165e5a26cd, type: 3}
+  - {fileID: 21300000, guid: fd7aeb2dad816444b9cd2ece8e3e9fe9, type: 3}
   char_sprite_pos:
   - {x: 4, y: -0.5}
   - {x: -4, y: -0.5}
@@ -8561,7 +8561,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{speak,illyia}Gh!'
+  text: '[play-sfx=sfx_spell_resist][screen-shake=2.0,0.1]{speak,illyia}Gh!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -25245,7 +25245,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.125, y: 3.125}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -34192,7 +34192,9 @@ GameObject:
   - component: {fileID: 1261315380}
   - component: {fileID: 1261315389}
   - component: {fileID: 1261315388}
+  - component: {fileID: 1261315382}
   - component: {fileID: 1261315387}
+  - component: {fileID: 1261315381}
   - component: {fileID: 1261315384}
   - component: {fileID: 1261315383}
   m_Layer: 5
@@ -34220,6 +34222,44 @@ RectTransform:
   m_AnchoredPosition: {x: -0.0000014305115, y: 0.00000047683716}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1261315381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1261315379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a2e4f5ad325835499b6338067975b2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: '{t,evil_eye}{c,evil-eye}Thus, we must rid the world of its judgement.{c,}'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+--- !u!114 &1261315382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1261315379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a2e4f5ad325835499b6338067975b2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: 
+  text: "{t,evil_eye}{c,evil-eye}A circle, ensnaring us in its gaze.{c,}\r"
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
 --- !u!114 &1261315383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34234,13 +34274,13 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[block=t]{t,evil_eye}{c,evil-eye}Destroy the EVIL EYE!{c,}
+  text: '[fade-music=_,out,30][block=t]{t,evil_eye}{c,evil-eye}Destroy the EVIL EYE!{c,}
 
     {t,evil_eye}{c,evil-eye}Destroy the EVIL EYE!{c,}
 
     {t,evil_eye}{c,evil-eye}Destroy the EVIL EYE!{c,}
 
-    [fade=out,2,0,0,0][pause=2][next]'
+    [play-sfx=sfx_evil_laugh][fade=out,6,0,0,0][pause=6][next]'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -34278,9 +34318,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '{t,evil_eye}{c,evil-eye}Alienating us from our true beings.{c,}
-
-    {t,evil_eye}{c,evil-eye}Thus, we must rid the world of its judgement.{c,}'
+  text: '{t,evil_eye}{c,evil-eye}Alienating us from our true beings.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -34299,8 +34337,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: "{t,evil_eye}{c,evil-eye}We are cursed by the EVIL EYE.{c,}\n{t,evil_eye}{c,evil-eye}A
-    circle, ensnaring us in its gaze.{c,}\r"
+  text: '[play-music=bgm_exposition][block=t][fade=in,7,0,0,0][pause=7][block=f]{t,evil_eye}{c,evil-eye}We
+    are cursed by the EVIL EYE.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -39237,7 +39275,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: '{speak,mc}(Why am I talking to a cat?)'
+  text: '[eye-emote=happy]{speak,mc}(Why am I talking to a cat?)'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -39317,7 +39355,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Loud Person
-  text: '[screen-shake=2.0,0.2][play-sfx=sfx_damage_number][stop-music]{speak,illyia}HEY
+  text: '[eye-emote=shifty][screen-shake=2.0,0.2][play-sfx=sfx_damage_number][stop-music]{speak,illyia}HEY
     DAHLIA! |shake|{NAME} IS TOTALLY TALKING TO A CAT!\shake\'
   input_display: {fileID: 0}
   input_options: []
@@ -42905,14 +42943,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: aaeec051b65069344aac1eb4e54b9dc6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 53d481aedd8bb75428de690be358d190, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -43481,7 +43519,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[stop-music][set-bg=bg_street][block=t][fade=in,2,0,0,0][pause=2][block=f]{t,demon}{c,ui-terms}>
+  text: '[fade-music=_,in,0][stop-music][pause=2][set-bg=bg_street][block=t][fade=in,4,0,0,0][pause=4][block=f]{t,demon}{c,ui-terms}>
     |shake|*rustle rustle*\shake\{c,}'
   input_display: {fileID: 0}
   input_options: []
@@ -43540,7 +43578,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: '{speak,mc}W-What was that...?'
+  text: '[eye-emote=shifty]{speak,mc}W-What was that...?'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -43633,7 +43671,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Obviously a Cat
-  text: '[stop-music]{hc,}{speak,cat}Meow!'
+  text: '[eye-emote=rolling][stop-music]{hc,}{speak,cat}Meow!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -43679,7 +43717,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: '[play-music=bgm_naive]{speak,mc}Huh? Oh... Hey there.'
+  text: '[eye-emote=default][play-music=bgm_naive]{speak,mc}Huh? Oh... Hey there.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -45402,6 +45440,7 @@ MonoBehaviour:
     type: 2}
   train_animator: {fileID: 1293660866}
   train_sprite: {fileID: 708040338}
+  eye_frame_animator: {fileID: 984235994}
 --- !u!114 &1663170421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46605,7 +46644,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: "[block=t][set-info=doppel-fr-transform,true]{speak,doppelganger}{c,evil-eye}I...[fade-music=_,out,2][pause=2.1][fade-music=bgm_battle_second_hand,in,0]
+  text: "[block=t][set-info=doppel-fr-transform,true]{speak,doppelganger}{c,evil-eye}I...[fade-music=_,out,2][pause=2.1][fade-music=bgm_battle_second_hand,in,0][eye-emote=crying]
     I wish you would all leave me alone!\r{c,}[block=f]"
   input_display: {fileID: 0}
   input_options: []
