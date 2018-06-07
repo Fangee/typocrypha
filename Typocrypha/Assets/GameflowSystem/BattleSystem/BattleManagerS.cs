@@ -30,7 +30,7 @@ public class BattleManagerS : MonoBehaviour {
 
     [HideInInspector] public bool frenzyCastActive = false;
     private Coroutine frenzyCastCr = null;
-    private const float frenzyCastTime = 20f;
+    private const float frenzyCastTime = 2f;
     private List<SpellData> frenzySpells = new List<SpellData>();
 
     private BattleWave Wave { get { return waves[curr_wave]; } }
@@ -516,7 +516,7 @@ public class BattleManagerS : MonoBehaviour {
 		AudioPlayer.main.playSFX("sfx_astral_hit");
 		AudioPlayer.main.playSFX("sfx_blight_hit");
 		field.enemy_arr[1].Curr_hp = 0;
-		AnimationPlayer.main.playScreenEffect ("split");
+		AnimationPlayer.main.playScreenEffect ("mega_slash");
 		yield return new WaitForSeconds (2f);
 		frenzyCastActive = false;
         //updateEnemies();

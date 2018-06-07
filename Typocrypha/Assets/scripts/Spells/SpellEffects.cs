@@ -114,11 +114,16 @@ public class SpellEffects : MonoBehaviour {
     }
     public IEnumerator finishFrenzyCast(int damage, string animationID, string sfxId, CastData d)
     {
-        AudioPlayer.main.setSFX(AudioPlayer.channel_spell_sfx, sfxId);
-        AudioPlayer.main.playSFX(AudioPlayer.channel_spell_sfx);
+		yield return new WaitForSeconds (0.5f);
+		AnimationPlayer.main.playFlashEffect ("flash");
+		yield return new WaitForSeconds (1f);
+		AudioPlayer.main.setSFX(AudioPlayer.channel_spell_sfx, sfxId);
+		AudioPlayer.main.playSFX(AudioPlayer.channel_spell_sfx);
         AnimationPlayer.main.playAnimation(animationID, d.Target.Transform.position, 3f);
-        if (d.Target.CasterType == ICasterType.PLAYER)
-            BattleEffects.main.screenShake(0.75f, 1f);
+
+        //if (d.Target.CasterType == ICasterType.PLAYER)
+        //    BattleEffects.main.screenShake(0.75f, 1f);
+		BattleEffects.main.screenShake(0.75f, 1f);
         yield return new WaitForSeconds(0.75F);
         d.damageInflicted = damage;
         spawnDamagePopup(d, 2);
