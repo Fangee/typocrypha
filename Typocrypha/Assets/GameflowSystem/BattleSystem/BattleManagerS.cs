@@ -513,10 +513,12 @@ public class BattleManagerS : MonoBehaviour {
 		AudioPlayer.main.playSFX("sfx_astral_hit");
 		AudioPlayer.main.playSFX("sfx_blight_hit");
 		field.enemy_arr[1].Curr_hp = 0;
-        updateEnemies();
-        yield return new WaitForSeconds(1f);
-        setPause(false);
-        frenzyCastActive = false;
+		AnimationPlayer.main.playScreenEffect ("split");
+		yield return new WaitForSeconds (2f);
+		frenzyCastActive = false;
+        //updateEnemies();
+        //setPause(false);
         BattleEffects.main.setDim(false);
+		endBattle ();
     }
 }

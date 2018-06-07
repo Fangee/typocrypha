@@ -67,10 +67,10 @@ Shader "Custom/SwirlScreen"
 				if (_SwirlAmount == 0) return tex2D (_MainTex, i.uv);
 
 				float2 screenSize = float2(_Width, _Height);
-				float2 pos = float2(screenPos.x,screenPos.y);
+				float2 pos = float2(screenPos.x,-screenPos.y);
 				// shift screen center to middle
 				pos.x -= _Width/2;
-				pos.y -= _Height/2;
+				pos.y += _Height/2;
 				// calculate rotation amount based on distance from center
 				float rot = dot(pos, pos);
 				float len = dot(float2(_Width/2, _Height/2), float2(_Width/2, _Height/2));

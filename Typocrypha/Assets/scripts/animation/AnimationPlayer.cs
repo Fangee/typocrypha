@@ -7,6 +7,7 @@ using UnityEngine.U2D;
 public class AnimationPlayer : MonoBehaviour {
 	public static AnimationPlayer main = null; // global static ref
 	public bool ready; // are all of the assets loaded?
+	public Animator camera_animator; // animator for main camera
 	public GameObject animation_holder_prefab; // object prefab that holds the animations
 
 	void Awake() {
@@ -25,5 +26,10 @@ public class AnimationPlayer : MonoBehaviour {
 		Animator animator = display.GetComponent<Animator>();
 		animator.speed = speed;
 		animator.Play (name, 0, 0f);
+	}
+
+	// plays specified screen effect
+	public void playScreenEffect(string name) {
+		camera_animator.Play (name);
 	}
 }

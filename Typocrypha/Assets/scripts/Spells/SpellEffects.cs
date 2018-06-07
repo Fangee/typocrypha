@@ -116,7 +116,7 @@ public class SpellEffects : MonoBehaviour {
     {
         AudioPlayer.main.setSFX(AudioPlayer.channel_spell_sfx, sfxId);
         AudioPlayer.main.playSFX(AudioPlayer.channel_spell_sfx);
-        AnimationPlayer.main.playAnimation(animationID, d.Target.Transform.position, 2f);
+        AnimationPlayer.main.playAnimation(animationID, d.Target.Transform.position, 3f);
         if (d.Target.CasterType == ICasterType.PLAYER)
             BattleEffects.main.screenShake(0.75f, 1f);
         yield return new WaitForSeconds(0.75F);

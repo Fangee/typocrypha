@@ -35,6 +35,7 @@ public class TextEvents : MonoBehaviour {
 	public GameObject float_d_box_prefab; // floating text dialogue box prefab
 	public Animator train_animator; // animator component for train
 	public SpriteRenderer train_sprite; // sprite renderer for train 
+	public GameObject credits_obj; // credits prefab
 
 	AssetBundle train_bundle; // asset bundle for train sprites
 
@@ -80,7 +81,9 @@ public class TextEvents : MonoBehaviour {
 			{"train-switch", trainSwitch},
 			{"train-transition", trainTransition},
 			{"train-sign", trainSign},
-			{"train-chr-pos", trainChrPos}
+			{"train-chr-pos", trainChrPos},
+			{"reset-camera", resetCamera},
+			{"credits", credits}
 		};
 		is_prompt = false;
 	}
@@ -571,6 +574,20 @@ public class TextEvents : MonoBehaviour {
 	IEnumerator trainChrPos(string[] opt) {
 		Transform chr = train_sprite.transform.Find (opt[0]);
 		chr.localPosition = new Vector2 ((float.Parse (opt [1]) * 0.7825f) - 4.199f, chr.localPosition.y);
+		yield return true;
+	}
+
+	// Resets camera animator
+	// input: NONE
+	IEnumerator resetCamera(string[] opt) {
+		AnimationPlayer.main.playScreenEffect ("NULL");
+		yield return true;
+	}
+
+	// Plays credits
+	// input: NONE
+	IEnumerator credits(string[] opt) {
+		credits_obj.SetActive (true);
 		yield return true;
 	}
 }

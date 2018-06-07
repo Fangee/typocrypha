@@ -4,14 +4,15 @@ using UnityEngine;
 
 // post processing effects
 public class PostProcess : MonoBehaviour {
-	public static PostProcess main = null;
+	public static List<PostProcess> main = null;
 	public Material mat;
 
 	public string[] shader_props; // shader property names
 	public float[] shader_params; // shader property parameters
 
 	void Awake() {
-		if (main == null) main = this;
+		if (main == null) main = new List<PostProcess>();
+		main.Add (this);
 	}
 
 	void Update() {
