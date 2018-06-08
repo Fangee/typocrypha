@@ -64,6 +64,8 @@ public class EnemyStaggerBars : MonoBehaviour {
 						stagger_bars[i].gameObject.SetActive(false);
 					}
 				} else { // if enemy has died, remove bar
+					stagger_bars[i].setValue(0);
+					stagger_bars[i].setAfterimage(0);
 					stagger_bars[i].gameObject.SetActive(false);
 				}
 			}

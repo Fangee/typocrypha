@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Scouter : MonoBehaviour {
 
+	public Image inputDisableImage;
     public BattleManagerS field;
 
     TextMesh left; //buff/debuff
@@ -44,6 +46,7 @@ public class Scouter : MonoBehaviour {
         left.color = new Color(255f, 255f, 255f, 0);
         right.color = new Color(255f, 255f, 255f, 0);
         brackets.color = new Color(255f, 255f, 255f, 0);
+		inputDisableImage.color = new Color(255f, 255f, 255f, 0);
         isActive = false;
     }
 
@@ -102,19 +105,19 @@ public class Scouter : MonoBehaviour {
             switch (modifier)
             {
                 case Elements.vsElement.REPEL:
-                    return "RP";
+                    return "Rp";
                 case Elements.vsElement.DRAIN:
-                    return "DR";
+                    return "Dr";
                 case Elements.vsElement.BLOCK:
-                    return "BL";
+                    return "Bl";
                 case Elements.vsElement.RESIST:
-                    return "RS";
+                    return "Rs";
                 case Elements.vsElement.NEUTRAL:
                     return "--";
                 case Elements.vsElement.WEAK:
-                    return "WK";
+                    return "Wk";
                 case Elements.vsElement.SUPERWEAK:
-                    return "SW";
+                    return "Wk";
             }
         }
         return "??";
@@ -128,6 +131,7 @@ public class Scouter : MonoBehaviour {
             left.color = new Color(255f, 255f, 255f, alpha);
             right.color = new Color(255f, 255f, 255f, alpha);
             brackets.color = new Color(255f, 255f, 255f, alpha);
+			inputDisableImage.color = new Color(255f, 255f, 255f, alpha);
             yield return new WaitForEndOfFrame();
         }
     }
@@ -140,6 +144,7 @@ public class Scouter : MonoBehaviour {
             left.color = new Color(255f, 255f, 255f, alpha);
             right.color = new Color(255f, 255f, 255f, alpha);
             brackets.color = new Color(255f, 255f, 255f, alpha);
+			inputDisableImage.color = new Color(255f, 255f, 255f, alpha);
             yield return new WaitForEndOfFrame();
         }
     }

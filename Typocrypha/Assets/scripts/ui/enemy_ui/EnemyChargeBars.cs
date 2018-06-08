@@ -91,6 +91,8 @@ public class EnemyChargeBars : MonoBehaviour {
 						}
 					}
 				} else { // if enemy has died, remove bar
+					charge_bars[i].setValue(0);
+					charge_bars[i].setAfterimage(0);
 					charge_bars[i].gameObject.SetActive(false);
 				}
 			}

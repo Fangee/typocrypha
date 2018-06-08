@@ -81,7 +81,7 @@ public class StatusFreeze : StatusEffect
         else
         {
             AudioPlayer.main.playSFX("sfx_status_frozen_key_hit");
-			popText = "<color=red>" + key + "</color> <color=aqua>FROZEN</color>";
+			popText = ("<color=red>" + key + "</color> <color=aqua>FROZEN</color>").ToUpper();
             player_popper.spawnText(popText, 1.0f, new Vector3(0.0f, -0.5f, 0.0f));
         }
         return "";
@@ -144,7 +144,8 @@ public class StatusShock : StatusEffect
     }
     public override string processKey(char key)
     {
-		AudioPlayer.main.playSFX("sfx_botch");
+		AudioPlayer.main.playSFX("sfx_type_key");
+		AudioPlayer.main.playSFX("sfx_key_voltage");
 		string popText = ("<color=red>" + this.original + "</color> <color=yellow><===></color> <color=lime>" + swapped + "</color>").ToUpper ();
 		player_popper.spawnText (popText, 1.0f, new Vector3 (0.0f, -0.5f, 0.0f));
 		return swapped.ToString().ToUpper();

@@ -60,7 +60,9 @@ public class EnemyHealthBars : MonoBehaviour {
 					health_bars[i].setValue(((float)enemy.Curr_hp / (float)enemy.Stats.max_hp));
 					health_bars[i].setAfterimage(((float)enemy.Curr_hp / (float)enemy.Stats.max_hp));
 				} else { // if enemy has died, remove bar
-					health_bars[i].gameObject.SetActive(false);
+					health_bars[i].setValue(0);
+					health_bars[i].setAfterimage(0);
+					//health_bars[i].gameObject.SetActive(false);
 				}
 			}
 		}
