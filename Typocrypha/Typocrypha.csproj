@@ -13,14 +13,12 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectGenerator>VSTU</UnityProjectGenerator>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>2017.3.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -343,8 +341,8 @@
     <Compile Include="Assets\scripts\animation\FinishEnemyDeath.cs" />
     <Compile Include="Assets\scripts\animation\PauseOnAttack.cs" />
     <Compile Include="Assets\scripts\animation\StopPostProcessing.cs" />
-    <Compile Include="Assets\scripts\animation\TrainHandles.cs" />
     <Compile Include="Assets\scripts\audio\AudioPlayer.cs" />
+    <Compile Include="Assets\scripts\audio\TrainSFX.cs" />
     <Compile Include="Assets\scripts\combat\Ally.cs" />
     <Compile Include="Assets\scripts\combat\BattleEffects.cs" />
     <Compile Include="Assets\scripts\combat\ChatDatabase.cs" />
@@ -401,6 +399,7 @@
     <Compile Include="Assets\scripts\UI\TargetReticule.cs" />
     <Compile Include="Assets\scripts\UI\TextGradientFill.cs" />
     <Compile Include="Assets\scripts\UI\UIScreenframeInfo.cs" />
+    <Compile Include="Assets\scripts\Utility\AlphaOfHiearchy.cs" />
     <Compile Include="Assets\scripts\Utility\DelayedDestroy.cs" />
     <Compile Include="Assets\scripts\Utility\Operators.cs" />
     <Compile Include="Assets\scripts\Utility\Pair.cs" />
@@ -408,7 +407,6 @@
     <Compile Include="Assets\scripts\Utility\SetFramerate.cs" />
     <Compile Include="Assets\scripts\Utility\Timer.cs" />
     <Compile Include="Assets\scripts\Utility\UtilityClasses.cs" />
-    <Compile Include="Assets\TrainSFX.cs" />
     <Compile Include="Assets\WavySprite\Scripts\SRWavySprite.cs" />
     <Compile Include="Assets\WavySprite\Scripts\WavySprite.cs" />
   </ItemGroup>
