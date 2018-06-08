@@ -1642,7 +1642,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &57851097
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2183,7 +2183,7 @@ MonoBehaviour:
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
   char_sprites:
-  - {fileID: 21300000, guid: ace760d0494bd6744abd6c165e5a26cd, type: 3}
+  - {fileID: 21300000, guid: fd7aeb2dad816444b9cd2ece8e3e9fe9, type: 3}
   char_sprite_pos:
   - {x: -5, y: -0.5}
 --- !u!114 &74530125
@@ -3655,7 +3655,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &135065400
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5054,15 +5054,18 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: "{speak,dahlia}Oh... Well, can\u2019t you just ask some simple questions?"
+  text: "{rc,dahlia_3}{speak,dahlia}Oh... Well, can\u2019t you just ask some simple
+    questions?"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: 9281b6bb3d1b0594e9df02608bdb0dc1, type: 3}
+  char_sprite_pos:
+  - {x: -6, y: -0.5}
 --- !u!114 &173911259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5497,7 +5500,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &181451881
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6143,6 +6146,7 @@ GameObject:
   - component: {fileID: 194396692}
   - component: {fileID: 194396693}
   - component: {fileID: 194396694}
+  - component: {fileID: 194396699}
   - component: {fileID: 194396695}
   - component: {fileID: 194396696}
   - component: {fileID: 194396697}
@@ -6274,7 +6278,7 @@ MonoBehaviour:
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
   char_sprites:
-  - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
+  - {fileID: 21300000, guid: fd9404e740e2d2a4387e813a83210f66, type: 3}
   char_sprite_pos:
   - {x: 4, y: -0.5}
 --- !u!114 &194396688
@@ -6363,15 +6367,17 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '{speak,dahlia}Um, excuse me!'
+  text: '{rc,dahlia_1}{speak,dahlia}Um, excuse me!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: 664f022bb9b3fa74c8683ac9f76ec777, type: 3}
+  char_sprite_pos:
+  - {x: -4, y: -0.5}
 --- !u!114 &194396692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6395,8 +6401,8 @@ MonoBehaviour:
   codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: 865827466435f2145a279e657fd874e9, type: 3}
-  - {fileID: 21300000, guid: ace760d0494bd6744abd6c165e5a26cd, type: 3}
-  - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
+  - {fileID: 21300000, guid: 664f022bb9b3fa74c8683ac9f76ec777, type: 3}
+  - {fileID: 21300000, guid: fd9404e740e2d2a4387e813a83210f66, type: 3}
   char_sprite_pos:
   - {x: 5, y: -0.5}
   - {x: -6, y: -0.5}
@@ -6415,15 +6421,17 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '{speak,dahlia}Uh, do you speak English?'
+  text: '{rc,dahlia_3}{speak,dahlia}Uh, do you speak English?'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: a8decaef22b02b849857c6e079bb92cc, type: 3}
+  char_sprite_pos:
+  - {x: -6, y: -0.5}
 --- !u!114 &194396694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6461,15 +6469,17 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '[stop-music][play-sfx=sfx_flash]{speak,dahlia}Wait!'
+  text: '{rc,dahlia_2}[stop-music][play-sfx=sfx_flash]{speak,dahlia}Oh! Wait!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: 664f022bb9b3fa74c8683ac9f76ec777, type: 3}
+  char_sprite_pos:
+  - {x: -6, y: -0.5}
 --- !u!114 &194396696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6508,15 +6518,17 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "{speak,illyia}Really? Why didn\u2019t you tell us sooner!"
+  text: "{rc,illyia_2}{speak,illyia}Really? Why didn\u2019t you tell us sooner!"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: 3bad54d9ebfdbc345803841dd317bffd, type: 3}
+  char_sprite_pos:
+  - {x: -3, y: -0.5}
 --- !u!114 &194396698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6532,6 +6544,29 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: 
   text: '[block=t][remove-all-character][next]'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &194396699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 194396681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Dahlia
+  text: '{speak,dahlia}...should''ve known better than to assume.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -6567,7 +6602,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &198372661
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6635,15 +6670,17 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "[eye-emote=happy]{speak,illyia}Don\u2019t worry about it!"
+  text: "{rc,illyia_1}[eye-emote=happy]{speak,illyia}Don\u2019t worry about it!"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 21300000, guid: b8ed51d828c90bb4fb42b75169d01d63, type: 3}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: 3bad54d9ebfdbc345803841dd317bffd, type: 3}
+  char_sprite_pos:
+  - {x: 0, y: -0.5}
 --- !u!114 &198372665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6658,15 +6695,18 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "{speak,illyia}Dunno what we\u2019ll do about the shapeshifters though...\r"
+  text: "{rc,illyia_1}{speak,illyia}Dunno what we\u2019ll do about the shapeshifters
+    though...\r"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 21300000, guid: 27584c4f675a94b4ca4374b515ba697c, type: 3}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: fd9404e740e2d2a4387e813a83210f66, type: 3}
+  char_sprite_pos:
+  - {x: 0, y: -0.5}
 --- !u!114 &198372666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6681,15 +6721,18 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "{speak,illyia}The demon we\u2019re looking for is pretty low level."
+  text: "{rc,illyia_3}{speak,illyia}The demon we\u2019re looking for is pretty low
+    level."
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 21300000, guid: cbdf30af2f34d014f83e7e17077d9406, type: 3}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
+  char_sprite_pos:
+  - {x: 0, y: -0.5}
 --- !u!114 &198372667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6736,7 +6779,7 @@ MonoBehaviour:
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
   char_sprites:
-  - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
+  - {fileID: 21300000, guid: fd9404e740e2d2a4387e813a83210f66, type: 3}
   - {fileID: 21300000, guid: fd7aeb2dad816444b9cd2ece8e3e9fe9, type: 3}
   char_sprite_pos:
   - {x: 4, y: -0.5}
@@ -6778,16 +6821,18 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "{speak,illyia}Oh, don\u2019t worry about {name}, they\u2019re fine. Just
-    messing with this cat-"
+  text: "{rc,illyia_2}{speak,illyia}Oh, don\u2019t worry about {name}, they\u2019re
+    fine. Just messing with this cat-"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
+  char_sprite_pos:
+  - {x: 4, y: -0.5}
 --- !u!114 &198372671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6825,7 +6870,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '[remove-character=spr_vn_illyia_1]{speak,illyia}W-whoa, what the...!?'
+  text: '{rc,illyia_1}{speak,illyia}W-whoa, what the...!?'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -8483,6 +8528,8 @@ GameObject:
   - component: {fileID: 239973568}
   - component: {fileID: 239973569}
   - component: {fileID: 239973572}
+  - component: {fileID: 239973570}
+  - component: {fileID: 239973573}
   - component: {fileID: 239973571}
   m_Layer: 5
   m_Name: D_SHOW_LESBIAB
@@ -8531,8 +8578,8 @@ MonoBehaviour:
   mc_sprite: {fileID: 21300000, guid: f5b6a29de40609a40951b4893503c834, type: 3}
   codec_sprite: {fileID: 21300000, guid: 93a24b5b8440cf5479b4df884abb69b3, type: 3}
   char_sprites:
-  - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
-  - {fileID: 21300000, guid: ace760d0494bd6744abd6c165e5a26cd, type: 3}
+  - {fileID: 21300000, guid: 2a3553ba9e5241943bb3b2faf11a7588, type: 3}
+  - {fileID: 21300000, guid: a8decaef22b02b849857c6e079bb92cc, type: 3}
   char_sprite_pos:
   - {x: 4, y: -0.5}
   - {x: -4, y: -0.5}
@@ -8561,15 +8608,17 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '[play-sfx=sfx_spell_resist][screen-shake=2.0,0.1]{speak,illyia}Gh!'
+  text: '{rc,illyia_action_1}[play-sfx=sfx_spell_resist][screen-shake=2.0,0.1]{speak,illyia}Gh!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: 77cfe788167cfbe4dac5410175498930, type: 3}
+  char_sprite_pos:
+  - {x: 4, y: -0.5}
 --- !u!114 &239973561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8607,15 +8656,17 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '{speak,dahlia}Step back, {name}!'
+  text: '{rc,dahlia_2}{speak,dahlia}Step back, {name}!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: fd7aeb2dad816444b9cd2ece8e3e9fe9, type: 3}
+  char_sprite_pos:
+  - {x: -4, y: -0.5}
 --- !u!114 &239973563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8653,16 +8704,18 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "{speak,illyia}Th-Thanks Dali. Thought I wouldn\u2019t make it there for a
-    second..."
+  text: "{rc,dahlia_action_1}{speak,illyia}Th-Thanks Dali. Thought I wouldn\u2019t
+    make it there for a second..."
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: a8decaef22b02b849857c6e079bb92cc, type: 3}
+  char_sprite_pos:
+  - {x: -4, y: -0.5}
 --- !u!114 &239973565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8747,15 +8800,17 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '{c,ui-terms}> Dahlia rolls her eyes.{c,}'
+  text: '{rc,dahlia_2}{c,ui-terms}> Dahlia rolls her eyes.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: 3ac4e654e2aa8f24caeaee7066167f79, type: 3}
+  char_sprite_pos:
+  - {x: -4, y: -0.5}
 --- !u!114 &239973569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8770,7 +8825,31 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '[stop-music]{speak,dahlia}...'
+  text: "[stop-music]{speak,dahlia}...Lya, please take the mission seriously. \nNo
+    time for... {c,whisper}fooling around...{c,}"
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
+--- !u!114 &239973570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 239973556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Dahlia
+  text: '{speak,dahlia}...N-no. We need to stay focused on the task at hand.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -8793,15 +8872,20 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia X Dahlia
-  text: "[float-text=2,0,hahahaha...][float-text=-3,-1,i\u2019m here too?][play-sfx=sfx_flash][screen-shake=2.0,0.1]|shake|PffttHahahahahaha!!\\shake\\"
+  text: "{rc,illyia_hurt_2}{rc,dahlia_7}[float-text=2,0,hahahaha...][float-text=-3,-1,i\u2019m
+    here too?][play-sfx=sfx_flash][screen-shake=2.0,0.1]|shake|...PffttHahahahahaha!!\\shake\\"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: 3bad54d9ebfdbc345803841dd317bffd, type: 3}
+  - {fileID: 21300000, guid: 664f022bb9b3fa74c8683ac9f76ec777, type: 3}
+  char_sprite_pos:
+  - {x: 4, y: -0.5}
+  - {x: -4, y: -0.5}
 --- !u!114 &239973572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8816,15 +8900,46 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{speak,illyia}...Well, it was worth a shot.'
+  text: '[play-sfx=sfx_flash]{rc,dahlia_4}{rc,illyia_hurt_1}{speak,illyia}...c''mon
+    Dali, ease up on protocol for once!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: a1dd1d0d683df0a478ae49fc446c2daf, type: 3}
+  - {fileID: 21300000, guid: 10fa1e561b3c68441b2028517b1f27b1, type: 3}
+  char_sprite_pos:
+  - {x: 4, y: -0.5}
+  - {x: -4, y: -0.5}
+--- !u!114 &239973573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 239973556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Dahlia
+  text: '[play-sfx=sfx_huh]{rc,dahlia_6}{speak,dahlia}...|shake|it''s already hard
+    enough to concentrate when I''m together with you, y''know?\shake\'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites:
+  - {fileID: 21300000, guid: 74522a5105617bb4ab9453d74f093e05, type: 3}
+  char_sprite_pos:
+  - {x: -4, y: -0.5}
 --- !u!1 &248634807
 GameObject:
   m_ObjectHideFlags: 0
@@ -12647,7 +12762,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &443609135
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14140,15 +14255,17 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{speak,illyia}Probably? I dunno.'
+  text: '{rc,illyia_1}{speak,illyia}Probably? I dunno.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: fd9404e740e2d2a4387e813a83210f66, type: 3}
+  char_sprite_pos:
+  - {x: 4, y: -0.5}
 --- !u!114 &525117288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16045,7 +16162,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &638545936
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20602,15 +20719,17 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{speak,illyia}Beats me. Probably just for disguise.'
+  text: '{rc,illyia_1}{speak,illyia}Beats me. Probably just for disguise.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: fd9404e740e2d2a4387e813a83210f66, type: 3}
+  char_sprite_pos:
+  - {x: 4, y: -0.5}
 --- !u!1 &830637599
 GameObject:
   m_ObjectHideFlags: 0
@@ -23213,7 +23332,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &902453338
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28820,7 +28939,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
+  codec_sprite: {fileID: 21300000, guid: c9eda325e59b8c74aacbce6b61f896cb, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1088031920
@@ -28913,7 +29032,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 15a3d82b9ee04b94f8e6ab70db5c672b, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 1181d40e830e5334eb758254dea16b3e, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1088031924
@@ -30641,9 +30760,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ef7277a044d8394ea5aa5a09fe33934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 1280
-  height: 720
-  full: 0
+  width: 1920
+  height: 1080
+  full: 1
 --- !u!114 &1149999596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31386,7 +31505,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: 6d91601cbaa58cc40bebbbd59a090c65, type: 3}
+  codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1168889518
@@ -34203,7 +34322,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1261315380
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37674,7 +37793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1397513931
 RectTransform:
   m_ObjectHideFlags: 0
@@ -39219,7 +39338,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1453214174
 RectTransform:
   m_ObjectHideFlags: 0
@@ -39364,7 +39483,7 @@ MonoBehaviour:
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
   char_sprites:
-  - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
+  - {fileID: 21300000, guid: 3bad54d9ebfdbc345803841dd317bffd, type: 3}
   char_sprite_pos:
   - {x: 0, y: -0.5}
 --- !u!114 &1453214181
@@ -39404,15 +39523,17 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: "{speak,illyia}Ah, I\u2019m just messing with ya, {name}."
+  text: "{rc,illyia_3}{speak,illyia}Ah, I\u2019m just messing with ya, {name}."
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
+  char_sprite_pos:
+  - {x: 0, y: -0.5}
 --- !u!114 &1453214183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39427,15 +39548,18 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{speak,illyia}|wave|{c,whisper}(Although I did record that on ChapSnat...){c,}\wave\'
+  text: '{rc,illyia_1}{speak,illyia}|wave|{c,whisper}(Although I did record that on
+    ChapSnat...){c,}\wave\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: 3bad54d9ebfdbc345803841dd317bffd, type: 3}
+  char_sprite_pos:
+  - {x: 0, y: -0.5}
 --- !u!114 &1453214184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39450,7 +39574,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 1
   speaker_name: Illyia
-  text: '{speak,illyia}You doing OK?
+  text: '{rc,illyia_3}{speak,illyia}You doing OK?
 
     {c,highlight}> Type in A / B / C and hit ENTER to choose.{c,}'
   input_display: {fileID: 0}
@@ -39465,8 +39589,10 @@ MonoBehaviour:
   - {fileID: 57851102}
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
+  char_sprite_pos:
+  - {x: 0, y: -0.5}
 --- !u!114 &1453214185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43486,7 +43612,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1596509888
 RectTransform:
   m_ObjectHideFlags: 0
@@ -47196,7 +47322,7 @@ MonoBehaviour:
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 21300000, guid: 5fd9ff4907effec4487eb4206fd7d8fa, type: 3}
   char_sprites:
-  - {fileID: 21300000, guid: ace760d0494bd6744abd6c165e5a26cd, type: 3}
+  - {fileID: 21300000, guid: fd7aeb2dad816444b9cd2ece8e3e9fe9, type: 3}
   char_sprite_pos:
   - {x: -5, y: -0.5}
 --- !u!114 &1712987609
@@ -47351,15 +47477,18 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '[play-music=bgm_explorer]{speak,dahlia}But seriously, I was really worried.'
+  text: '{rc,dahlia_3}[play-music=bgm_explorer]{speak,dahlia}But seriously, I was
+    really worried.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: ace760d0494bd6744abd6c165e5a26cd, type: 3}
+  char_sprite_pos:
+  - {x: -4, y: -0.5}
 --- !u!114 &1750468870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47409,15 +47538,17 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{speak,illyia}All that training finally paid off, huh {name}?'
+  text: '{rc,illyia_3}{speak,illyia}All that training finally paid off, huh {name}?'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
+  char_sprite_pos:
+  - {x: 4, y: -0.5}
 --- !u!114 &1750468873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47455,15 +47586,18 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '{speak,dahlia}? Hey, it looks like the Changelings left something behind...'
+  text: '{rc,dahlia_1}{speak,dahlia}? Hey, it looks like the Changelings left something
+    behind...'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: a8decaef22b02b849857c6e079bb92cc, type: 3}
+  char_sprite_pos:
+  - {x: -4, y: -0.5}
 --- !u!114 &1750468875
 MonoBehaviour:
   m_ObjectHideFlags: 0

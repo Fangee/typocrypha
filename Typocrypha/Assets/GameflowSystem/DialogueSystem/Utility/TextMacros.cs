@@ -32,6 +32,7 @@ public class TextMacros : MonoBehaviour {
             {"tl", macroTranslate},
             {"translate", macroTranslate},
 			{"languageTL", macroTranslatedLanguage},
+			{"rc", macroRemoveCharacter}
         };
 		color_map = new Dictionary<string, string> {
 			{ "spell",      "#ff6eff" },
@@ -189,5 +190,13 @@ public class TextMacros : MonoBehaviour {
 
 	string macroTranslatedLanguage(string[] opt) {
 		return "Ihsuik";
+	}
+
+	// substitutes 'remove-character'
+	// input: [0]: string, name of character sprite (spr_vn_ omitted)
+	string macroRemoveCharacter(string[] opt) {
+		string macro = 
+			"[remove-character=spr_vn_" + opt[0] + "]";
+		return macro;
 	}
 }

@@ -138,10 +138,13 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 e81a60b0820813f15d8a74e045917104 Assembly-CSharp.dll:.TargetReticule
 1ef8627cd2c988fe34dcd47dde2b1f72 Assembly-CSharp.dll:.DialogueItemChat
+d01fba27b3d890a4c98aedfdd86bcac4 Assembly-CSharp.dll:.NoisyAreaEffector2D
+ee954f73194e806504a4ffd88f1f498c Assembly-CSharp.dll:.TrainSFX
 3bbb6e4c696a1748d27ca7bbc11ab521 Assembly-CSharp.dll:.BIRegister
 41f275fbdb794288e7294a6bacb61bbb Assembly-CSharp.dll:.FXTextScramble
 2b806280ea1be262fce93f20bdab14ef Assembly-CSharp.dll:.FXTextEffect
 3a277006097971561e046190aecc7714 Assembly-CSharp.dll:.WavySprite
+37d65bf29af9dd2fac1cab17987f9faa Assembly-CSharp.dll:.AlphaOfHiearchy
 fe3464db2d62a6a92b397a2fb715a8b7 Assembly-CSharp.dll:.FXTextWave
 d95f4fbb7b6174f9695740fffffff962 Assembly-CSharp.dll:.AnimationPlayer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TextMacros
@@ -166,7 +169,7 @@ c44a97a19f54d01b341617dbc0f07ef5 Assembly-CSharp.dll:.BICountPlayerAttacks
 00d4a99ff2cdf1982d1fab602659e2bc Assembly-CSharp.dll:.GameflowManager
 50191b99cd40131fa416ef9d8b2f5174 Assembly-CSharp.dll:.SpellBook
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Dialogue
-8033cb6126542e424ced3ee10a82554d Assembly-CSharp.dll:.DialogueManager
+4971f3de0181bdf84e005cb15c375139 Assembly-CSharp.dll:.DialogueManager
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -189,6 +192,7 @@ e1163606af28e03f4109609e66cbb535 Assembly-CSharp.dll:.PlayerDialogueInfo
 54d10e09a7b69deb93a89b6a2aa689a4 Assembly-CSharp.dll:.BattleWave
 b34a40054d7116da0d1f2b22ba0d97c6 Assembly-CSharp.dll:.DialogueItemAN
 871badb1a9642cb4c7ef9fc6d9cc24b1 Assembly-CSharp.dll:.SetResolution
+c5db60f1889cbd5d5f887c40f2991a0a Assembly-CSharp.dll:.DialogueItemConditionalJump
 37c82cf84e3700b6a4d5bc53edd3aec0 Assembly-CSharp.dll:.BIImmediate
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 96d0fbde9fd209878a0a291f82c9bcdd UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
@@ -198,7 +202,7 @@ b34a40054d7116da0d1f2b22ba0d97c6 Assembly-CSharp.dll:.DialogueItemAN
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 9f468abfdc8452b62e6e25a5f50ab629 Assembly-CSharp.dll:.EnemyStaggerBars
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
-ec3d8b2824f582df705154012f1f472b Assembly-CSharp.dll:.TextEvents
+e308da468ef59960b026a02552bfe686 Assembly-CSharp.dll:.TextEvents
 cf2a99cfcabf3e534cba652fa5dd83cd Assembly-CSharp.dll:.EnemyHealthBars
 de7378f075c9e5f72d7e3b11424e6f52 Assembly-CSharp.dll:.PopText
 6399c76edde91703c9ec36581c12c101 Assembly-CSharp.dll:.FXTextColorCycle
@@ -221,13 +225,14 @@ faba6f8202914ac179156ba210c543b0 Assembly-CSharp.dll:.Player
 8fa58fabd5f1625ddbe844b46ca91ce6 Assembly-CSharp.dll:.PreTitle
 c6d43981762dbfee5ed20f15bc81bb99 Assembly-CSharp.dll:.TargetFloor
 58d808d4ae85ab3b07f5047f6eb254a7 Assembly-CSharp.dll:.TrackTyping
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BEDoppelFrenzy
 d5251882c4ce5bf0689c5850babe9d68 Assembly-CSharp.dll:.CooldownList
-9bd95601fc421cd72308acc353cb5a8e Assembly-CSharp.dll:.BattleManagerS
+58f61fc052c6f76defd15d21add73bba Assembly-CSharp.dll:.BattleManagerS
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.FloatText
-2ae71e3740764da42b09b46d0af9f6cb Assembly-CSharp.dll:.DialogueBox
+83be41988a815bd00f496d7d8deb52bb Assembly-CSharp.dll:.DialogueBox
 fe3464db2d62a6a92b397a2fb715a8b7 Assembly-CSharp.dll:.FXTextPulse
 37c82cf84e3700b6a4d5bc53edd3aec0 Assembly-CSharp.dll:.BIEnemyIsStunned
-58711b9d427e67fa9046a7ceba197417 Assembly-CSharp.dll:.AudioPlayer
+07522084f92d9ab0b75b638b650842b2 Assembly-CSharp.dll:.AudioPlayer
 5151c876d535c98e14767c526c3782ef Assembly-CSharp.dll:.BackgroundEffects
 26f0dc6b414f524a0d504d2e023ff54a Assembly-CSharp.dll:.DisplayAlly
 bad4ea897925c4aec1b4489e26fe7aa8 Assembly-CSharp.dll:.DialogueBoxEffects
