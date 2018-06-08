@@ -47,6 +47,7 @@ public class DialogueManager : MonoBehaviour {
 	Coroutine slide_scroll_cr; // Coroutine that smoothly adjusts window
 	List<DialogueBox> history; // List of all dialogue boxes
 	List<GameObject> chr_spr_list; // List of character sprite holders
+	string stringEdit = "";
 
 	bool input; // Are we waiting for input?
 	GameObject input_display; // Display image for input
@@ -220,10 +221,17 @@ public class DialogueManager : MonoBehaviour {
 			input_display_choices.SetActive (true);
 		}
 	}
+		
 
 	// Called when input field is submitted
 	public void submitInput() {
 		answer = input_field.text;
+		if (Input.GetKey (KeyCode.Escape) || Input.GetMouseButton(0) || Input.GetMouseButton(1) || Input.GetMouseButton(2)) {
+			input_field.ActivateInputField ();
+			//input_field.text = answer;
+			//input_field.ForceLabelUpdate ();
+			return;
+		}
 		// CHECK IF CORRECT INPUT
 		input_field.gameObject.SetActive (false);
 		input_field.text = "";

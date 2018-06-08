@@ -14,6 +14,8 @@ public class Pause : MonoBehaviour {
     void Start () {
         gamePause = false;
 		hideChild = transform.GetChild(0).gameObject;
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
     }
 	
 	// Update is called once per frame
@@ -31,8 +33,11 @@ public class Pause : MonoBehaviour {
                 BattleEffects.main.setDim(true);
                 blockTextboxInput = DialogueManager.main.block_input;
                 DialogueManager.main.block_input = true;
+				DialogueManager.main.input_field.DeactivateInputField ();
                 AudioPlayer.main.pauseSFX();
 				hideChild.SetActive (true);
+				Cursor.visible = true;
+				Cursor.lockState = CursorLockMode.None;
             }
             else
             {
@@ -42,6 +47,8 @@ public class Pause : MonoBehaviour {
                 DialogueManager.main.block_input = blockTextboxInput;
                 AudioPlayer.main.unpauseSFX();
 				hideChild.SetActive (false);
+				Cursor.visible = false;
+				Cursor.lockState = CursorLockMode.Locked;
             }
         }
 	}
