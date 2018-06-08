@@ -30,7 +30,7 @@ public class BattleManagerS : MonoBehaviour {
 
     [HideInInspector] public bool frenzyCastActive = false;
     private Coroutine frenzyCastCr = null;
-    private const float frenzyCastTime = 2f;
+    private const float frenzyCastTime = 20f;
     private List<SpellData> frenzySpells = new List<SpellData>();
 
     private BattleWave Wave { get { return waves[curr_wave]; } }
@@ -523,5 +523,6 @@ public class BattleManagerS : MonoBehaviour {
         //setPause(false);
         BattleEffects.main.setDim(false);
 		endBattle ();
+		GameflowManager.main.next ();
     }
 }

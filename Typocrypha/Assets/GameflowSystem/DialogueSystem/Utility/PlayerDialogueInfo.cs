@@ -21,7 +21,7 @@ public class PlayerDialogueInfo : MonoBehaviour {
 
     void Start() {
 		if (main == null) main = this;
-		player_name = "???";
+		player_name = "JohnTypocrypha";
 
     }
 
