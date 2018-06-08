@@ -2068,7 +2068,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat Person
-  text: '[screen-shake=2.0,0.2][play-sfx=sfx_party_weakcrit_dmg][stop-music]{speak,cat_person}Ah!'
+  text: '[eye-emote=crying][screen-shake=2.0,0.2][play-sfx=sfx_party_weakcrit_dmg][stop-music]{speak,cat_person}Ah!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -6189,7 +6189,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: "[remove-all-character][set-bg=bg_alleycat_person][fade=in,2,0,0,0][fade-music=_,in,4][pause=2.5][block=f]{c,ui-terms}>
+  text: "[eye-emote=default][remove-all-character][set-bg=bg_alleycat_person][fade=in,2,0,0,0][fade-music=_,in,4][pause=2.5][block=f]{c,ui-terms}>
     There\u2019s a swarm of cats in front of a house. Someone is feeding them.{c,}"
   input_display: {fileID: 0}
   input_options: []
@@ -6566,7 +6566,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '{speak,dahlia}...should''ve known better than to assume.'
+  text: '[eye-emote=happy]{speak,dahlia}...should''ve known better than to assume.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -6770,8 +6770,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Frantic Girl
-  text: '[screen-shake=2.0,0.2][play-sfx=sfx_flash]{speak,dahlia}|shake|ILLYIA. GET
-    BACK!\shake\[block=f]'
+  text: '[eye-emote=shifty][screen-shake=2.0,0.2][play-sfx=sfx_flash]{speak,dahlia}|shake|ILLYIA.
+    GET BACK!\shake\[block=f]'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -6847,7 +6847,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: "{speak,dahlia}|shake|That\u2019s not a cat!\\shake\\"
+  text: "[eye-emote=happy]{speak,dahlia}|shake|That\u2019s not a cat!\\shake\\"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -8537,7 +8537,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &239973557
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8570,7 +8570,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '[stop-music]{speak,illyia}{name}, are you-'
+  text: '[eye-emote=crying][stop-music]{speak,illyia}{name}, are you-'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -8608,7 +8608,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{rc,illyia_action_1}[play-sfx=sfx_spell_resist][screen-shake=2.0,0.1]{speak,illyia}Gh!'
+  text: '[eye-emote=happy]{rc,illyia_action_1}[play-sfx=sfx_spell_resist][screen-shake=2.0,0.1]{speak,illyia}Gh!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -8753,7 +8753,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '[play-music=bgm_death_sad][play-sfx=sfx_damage_number][screen-shake=2.0,0.1]{speak,illyia}|shake|Gah!
+  text: '[eye-emote=sad][play-music=bgm_death_sad][play-sfx=sfx_damage_number][screen-shake=2.0,0.1]{speak,illyia}|shake|Gah!
     I... Feel weak...\shake\'
   input_display: {fileID: 0}
   input_options: []
@@ -8800,7 +8800,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '{rc,dahlia_2}{c,ui-terms}> Dahlia rolls her eyes.{c,}'
+  text: '[eye-emote=rolling]{rc,dahlia_2}{c,ui-terms}> Dahlia rolls her eyes.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -8825,8 +8825,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: "[stop-music]{speak,dahlia}...Lya, please take the mission seriously. \nNo
-    time for... {c,whisper}fooling around...{c,}"
+  text: "[eye-emote=shifty][stop-music]{speak,dahlia}...Lya, please take the mission
+    seriously. \nNo time for... {c,whisper}fooling around...{c,}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -8928,8 +8928,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '[play-sfx=sfx_huh]{rc,dahlia_6}{speak,dahlia}...|shake|it''s already hard
-    enough to concentrate when I''m together with you, y''know?\shake\'
+  text: '[eye-emote=rolling][play-sfx=sfx_huh]{rc,dahlia_6}{speak,dahlia}...|shake|it''s
+    already hard enough to concentrate when I''m together with you, y''know?\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -13136,6 +13136,97 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &456254817
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 456254818}
+  - component: {fileID: 456254820}
+  - component: {fileID: 456254819}
+  m_Layer: 0
+  m_Name: SpaceBarIcon (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &456254818
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 456254817}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -324, y: 0, z: 0}
+  m_LocalScale: {x: 64, y: 64, z: 64}
+  m_Children: []
+  m_Father: {fileID: 1008986905}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &456254819
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 456254817}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c5521376893552642b89e8b7a5d62961, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!212 &456254820
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 456254817}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 93d6bfe95b83a9f4da365469daf085de, type: 3}
+  m_Color: {r: 0.891, g: 0.891, b: 0.903, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 0.5}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &466450760
 GameObject:
   m_ObjectHideFlags: 0
@@ -14164,7 +14255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &525117283
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14197,7 +14288,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: "{speak,mc}... the Evil Eye? I mean, it\u2019s to be expected..."
+  text: "{speak,mc}...the Evil Eye? I mean, it\u2019s to be expected..."
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -20586,7 +20677,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &828981989
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22350,6 +22441,17 @@ Prefab:
     - target: {fileID: 4066980676037918, guid: a0e3851bc7c4e0b4aaf66f8baf39737a, type: 2}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 212251141652839144, guid: a0e3851bc7c4e0b4aaf66f8baf39737a,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ba1bfea158eff024590380e936d34284,
+        type: 3}
+    - target: {fileID: 212251141652839144, guid: a0e3851bc7c4e0b4aaf66f8baf39737a,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a0e3851bc7c4e0b4aaf66f8baf39737a, type: 2}
@@ -24759,7 +24861,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '[remove-character=spr_vn_iris_3][remove-character=spr_vn_iris_2]{t,illyia}got
+  text: '[play-sfx=sfx_scanner_open][remove-character=spr_vn_iris_3][remove-character=spr_vn_iris_2]{t,illyia}got
     stuck in traffic on way to your place.'
   input_display: {fileID: 0}
   input_options: []
@@ -24854,7 +24956,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: "[remove-character=spr_vn_chatsnap]{speak,mc}(Thanks ya\u2019ll...)"
+  text: "[play-sfx=sfx_scanner_close][remove-character=spr_vn_chatsnap]{speak,mc}(Thanks
+    ya\u2019ll...)"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -24990,8 +25093,10 @@ MonoBehaviour:
   codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: 54142944ae49bbc4eb6de9da3c68c858, type: 3}
+  - {fileID: 21300000, guid: 24b8aa4b828cb6944a4ea58af392fd63, type: 3}
   char_sprite_pos:
   - {x: 0, y: -0.5}
+  - {x: 4, y: -0.5}
 --- !u!1 &980007244
 GameObject:
   m_ObjectHideFlags: 0
@@ -26025,6 +26130,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1512057314}
+  - {fileID: 1885547908}
+  - {fileID: 456254818}
   m_Father: {fileID: 945826267}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -30079,6 +30186,16 @@ Prefab:
     - target: {fileID: 1927675947563472, guid: 3264e04bf987fa44e87796d7a3cf8f7c, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114485826801079028, guid: 3264e04bf987fa44e87796d7a3cf8f7c,
+        type: 2}
+      propertyPath: text
+      value: '[train-switch=bg_train_car_expand_2][train-chr-pos=train_figure_mc,4][train-chr-pos=train_figure_dahlia,8][train-chr-pos=train_figure_illyia,9][pause=1][train-transition=in][pause=2][train-sign=dahlia][float-text=1,4,{c,dahlia}Are...
+        Are you OK Lya?{c,}][pause=2][train-sign=illyia][float-text=1,3,{c,illyia}I
+        don''t know... That was bad...{c,}][pause=3][train-sign=mc][float-text=-6,2,{c,mc}(This
+        is all my fault...) {c,}][pause=4][train-sign=illyia][float-text=2,1,{c,illyia}Iris
+        isn''t going to like this...{c,}][pause=2][pause=4][train-text=SKY CITY AGARTHA,3
+        DAYS LATER][train-transition=out][pause=2][next]'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3264e04bf987fa44e87796d7a3cf8f7c, type: 2}
@@ -35206,6 +35323,7 @@ RectTransform:
   m_LocalScale: {x: 0.015625, y: 0.015625, z: 0.015625}
   m_Children:
   - {fileID: 1922726211}
+  - {fileID: 1396467595}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -35631,7 +35749,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1298971140
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36283,7 +36401,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1325611112
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36505,7 +36623,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: '[stop-music][set-bg=bg_player_bedroom][fade=in,2,0,0,0][pause=2.5][block=f]{speak,mc}...'
+  text: '[eye-emote=happy][stop-music][set-bg=bg_player_bedroom][fade=in,2,0,0,0][pause=2.5][block=f]{speak,mc}...'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -37770,6 +37888,132 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1396467594
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1396467595}
+  - component: {fileID: 1396467597}
+  - component: {fileID: 1396467596}
+  - component: {fileID: 1396467598}
+  - component: {fileID: 1396467600}
+  - component: {fileID: 1396467599}
+  m_Layer: 5
+  m_Name: TrainsitionText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1396467595
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1396467594}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1278807432}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -270, y: 192}
+  m_SizeDelta: {x: 640, y: 196}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1396467596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1396467594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: bb9d36ae96a107043a02064687ed8de8, type: 3}
+    m_FontSize: 36
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: '<size=28>NEXT DESTINATION:</size>
+
+    ASIARMICAN OCCUPIED TERRITORY, RESIDENTIAL DISTRICT
+
+    <size=28>>> 1 HOUR LATER</size>'
+--- !u!222 &1396467597
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1396467594}
+--- !u!95 &1396467598
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1396467594}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d2b5e24456ed59c4dacffaeb54bbcbc0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &1396467599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1396467594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1573420865, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
+--- !u!114 &1396467600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1396467594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1397513930
 GameObject:
   m_ObjectHideFlags: 0
@@ -41908,8 +42152,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Iris
-  text: '{speak,iris}In particular, consider your interaction with the civilian during
-    the mission.'
+  text: '{rc,mackey_ghost}{speak,iris}In particular, consider your interaction with
+    the civilian during the mission.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -43222,6 +43466,14 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114896646330679180, guid: d9553b719a4b91842827c19059ceaf8d,
+        type: 2}
+      propertyPath: text
+      value: '[train-switch=bg_train_car_expand_4][train-chr-pos=train_figure_mc,0][train-chr-pos=train_figure_illyia,30][train-chr-pos=train_figure_dahlia,30][train-chr-pos=train_figure_doppelganger,6][train-chr-pos=train_lone_signs,5.5][pause=1][train-transition=in][pause=2][train-sign=mc][float-text=-9,3,{c,mc}...
+        Where am I even going...{c,}][pause=4][train-sign=doppelganger][float-text=-2.5,2,{c,doppel}|scramble|The
+        Evil Eye Awakens\scramble\{c,}][pause=4][train-text=The Finale,Destroy the
+        Evil Eye.][train-transition=out][pause=2][next]'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d9553b719a4b91842827c19059ceaf8d, type: 2}
   m_IsPrefabParent: 0
@@ -44354,7 +44606,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[stop-music][fade-music=sfx_london_train_snippet_clean,in,4][set-bg=bg_train][fade=in,2,0,0,0][pause=2.5][block=f]{c,ui-terms}>
+  text: '[eye-emote=default][stop-music][fade-music=sfx_london_train_snippet_clean,in,4][set-bg=bg_train][fade=in,2,0,0,0][pause=2.5][block=f]{c,ui-terms}>
     {name} is lost.{c,}'
   input_display: {fileID: 0}
   input_options: []
@@ -44461,8 +44713,9 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: "[multi-float-text=5,What enemy do you never want to fight against?]\r[multi-float-text=5,{c,evil-eye}|shake|What
-    enemy do you never want to fight against?\\shake\\{c,}]..."
+  text: "[eye-emote=happy][multi-float-text=5,What enemy do you never want to fight
+    against?]\r[multi-float-text=3,{c,evil-eye}|shake|What enemy do you never want
+    to fight against?\\shake\\{c,}]..."
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -44508,7 +44761,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: "[block=t][stop-music]{speak,mc}I wish I could just forget it all.\r[pause=2][play-sfx=sfx_vr_bootup][fade=out,2,1,1,1][pause=2][next]"
+  text: "[eye-emote=dark][block=t][stop-music]{speak,mc}I wish I could just forget
+    it all.\r[pause=2][play-sfx=sfx_vr_bootup][fade=out,2,1,1,1][pause=2][next]"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -45447,6 +45701,15 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114383275380750170, guid: b41b6d4ac8aae044fa0320884f67306d,
+        type: 2}
+      propertyPath: text
+      value: '[train-switch=bg_train_car][pause=1][train-transition=in][pause=2][train-sign=illyia][float-text=-7,4,{c,illyia}Why
+        do we have to take the train?{c,}][pause=2][train-sign=dahlia][float-text=-2,3,{c,dahlia}I
+        kinda like trains, actually...{c,}][pause=2][train-sign=mc][float-text=-6,2,{c,mc}(This
+        mission might make me a dog person...){c,}][pause=4][train-text=ASIARMICAN
+        OCCUPIED TERRITORY,1 HOUR LATER][train-transition=out][pause=2][next]'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b41b6d4ac8aae044fa0320884f67306d, type: 2}
   m_IsPrefabParent: 0
@@ -45566,6 +45829,8 @@ MonoBehaviour:
     type: 2}
   train_animator: {fileID: 1293660866}
   train_sprite: {fileID: 708040338}
+  train_text: {fileID: 1396467596}
+  train_text_animator: {fileID: 1396467598}
   eye_frame_animator: {fileID: 984235994}
 --- !u!114 &1663170421
 MonoBehaviour:
@@ -46770,7 +47035,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: "[block=t][set-info=doppel-fr-transform,true]{speak,doppelganger}{c,evil-eye}I...[fade-music=_,out,2][pause=2.1][fade-music=bgm_battle_second_hand,in,0][eye-emote=crying]
+  text: "[eye-emote=crying][block=t][set-info=doppel-fr-transform,true]{speak,doppelganger}{c,evil-eye}I...[fade-music=_,out,2][pause=2.1][fade-music=bgm_battle_second_hand,in,0][eye-emote=crying]
     I wish you would all leave me alone!\r{c,}[block=f]"
   input_display: {fileID: 0}
   input_options: []
@@ -47184,7 +47449,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Cat
-  text: '[stop-music]{t,demon}{hc,}|shake|*Hiss*!!\shake\'
+  text: '[eye-emote=dark][stop-music]{t,demon}{hc,}|shake|*Hiss*!!\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -47444,7 +47709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1750468868
 RectTransform:
   m_ObjectHideFlags: 0
@@ -47477,8 +47742,8 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '{rc,dahlia_3}[play-music=bgm_explorer]{speak,dahlia}But seriously, I was
-    really worried.'
+  text: '[eye-emote=default]{rc,dahlia_3}[play-music=bgm_explorer]{speak,dahlia}But
+    seriously, I was really worried.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -47612,7 +47877,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '{hc,}{c,ui-terms}> {name} picked up a broken amulet.{c,}'
+  text: '[eye-emote=shifty]{hc,}{c,ui-terms}> {name} picked up a broken amulet.{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -50871,6 +51136,97 @@ MonoBehaviour:
   codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
+--- !u!1 &1885547907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1885547908}
+  - component: {fileID: 1885547910}
+  - component: {fileID: 1885547909}
+  m_Layer: 0
+  m_Name: SpaceBarIcon (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1885547908
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1885547907}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 324, y: 0, z: 0}
+  m_LocalScale: {x: 64, y: 64, z: 64}
+  m_Children: []
+  m_Father: {fileID: 1008986905}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1885547909
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1885547907}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c5521376893552642b89e8b7a5d62961, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!212 &1885547910
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1885547907}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 93d6bfe95b83a9f4da365469daf085de, type: 3}
+  m_Color: {r: 0.891, g: 0.891, b: 0.903, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 0.5}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!1 &1885889532
 GameObject:
   m_ObjectHideFlags: 0
@@ -52120,7 +52476,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Iris
   text: '[remove-character=spr_vn_iris_2][remove-character=spr_vn_iris_3][remove-character=spr_vn_iris_1]{speak,iris}What
-    if there were more demons than you could handle?'
+    if there were more demons than you could handle?[block=f]'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -52223,7 +52579,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[remove-all-character][next]'
+  text: '[block=t][remove-all-character][next]'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []

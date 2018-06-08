@@ -35,6 +35,8 @@ public class TextEvents : MonoBehaviour {
 	public GameObject float_d_box_prefab; // floating text dialogue box prefab
 	public Animator train_animator; // animator component for train
 	public SpriteRenderer train_sprite; // sprite renderer for train 
+	public Text train_text; // Text for displaying next destination text
+	public Animator train_text_animator; // Text animator for displaying next destination text
 
 	public Animator eye_frame_animator; // animator for evil eye frame
 
@@ -83,7 +85,8 @@ public class TextEvents : MonoBehaviour {
 			{"train-transition", trainTransition},
 			{"train-sign", trainSign},
 			{"train-chr-pos", trainChrPos},
-			{"eye-emote", eyeEmote}
+			{"eye-emote", eyeEmote},
+			{"train-text", trainTextShow}
 		};
 		is_prompt = false;
 	}
@@ -582,6 +585,16 @@ public class TextEvents : MonoBehaviour {
 	IEnumerator eyeEmote(string[] opt) {
 		string animName = "anim_evil_eye_frame_" + (opt[0]);
 		eye_frame_animator.Play (animName);
+		yield return true;
+	}
+
+	// changes train transition display text and plays animation of text appearing
+	// input: [0]: string, 1st line (Location)
+	// input: [1]: string, 2nd line (Time/etc.)
+	IEnumerator trainTextShow(string[] opt) {
+		string newText = "<size=28>NEXT DESTINATION:</size>\n" + (opt[0]) + "\n>> " + (opt[1]);
+		train_text.text = newText;
+		train_text_animator.Play ("train_destination_text");
 		yield return true;
 	}
 }
