@@ -69,7 +69,7 @@ Shader "Custom/PixelateScreen"
 				if (_PixelSize <= 1) return tex2D (_MainTex, i.uv);
 
 				float2 screenSize = float2(_Width, _Height);
-				float2 pos = float2(screenPos.x, screenPos.y);
+				float2 pos = float2(screenPos.x, _Height - screenPos.y);
 				// divide screen into blocks
 				pos.xy += float2(_PixelSize, _PixelSize);
 				pos.xy -= (pos.xy % _PixelSize);

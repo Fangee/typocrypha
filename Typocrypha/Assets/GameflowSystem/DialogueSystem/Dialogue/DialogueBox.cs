@@ -66,7 +66,7 @@ public class DialogueBox : MonoBehaviour {
 		}
 		// Set talking sfx
 		if (talk_sfx) AudioPlayer.main.setSFX(AudioPlayer.channel_voice, "speak_boop");
-		cr_scroll = StartCoroutine (textScrollCR ());
+		StartCoroutine (startTextScrollCR ());
 	}
 
 	// Dumps all remaining text
@@ -75,9 +75,15 @@ public class DialogueBox : MonoBehaviour {
 		TextEvents.main.reset ();
 		TextEvents.main.finishUp (d_item.text_events);
         if(cr_scroll != null)
-		    StopCoroutine (cr_scroll);
+		 	StopCoroutine (cr_scroll);
 		cr_scroll = null;
 		set_color.chars [0] = text.Length;
+	}
+
+	// Starts scrolling text
+	IEnumerator startTextScrollCR() {
+		yield return new WaitWhile (() => cr_scroll != null);
+		cr_scroll = StartCoroutine (textScrollCR ());
 	}
 
 	// Scrolls text character by character

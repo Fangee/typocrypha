@@ -440,7 +440,7 @@ public class DialogueManager : MonoBehaviour {
 		Transform[] contentArray = content.GetComponentsInChildren<Transform>();
 		int skipCurrentBox = 0; // tracks when to stop going through log as to not delete current textbox
 		int currentBoxPosition = contentArray.Length - (offset*2); // when to stop deleting items
-		Debug.Log ("current box position = " + currentBoxPosition);
+		//Debug.Log ("current box position = " + currentBoxPosition);
 		foreach (Transform tr in content.transform) {
 			if (skipSpacer > 0 && skipCurrentBox < currentBoxPosition) {
 				Destroy (tr.gameObject);
@@ -450,7 +450,7 @@ public class DialogueManager : MonoBehaviour {
 				++skipSpacer;
 				++skipCurrentBox;
 			}
-			Debug.Log ("skip current box = " + skipCurrentBox);
+			//Debug.Log ("skip current box = " + skipCurrentBox);
 		}
 		resetWindowSize();
 	}
@@ -458,7 +458,7 @@ public class DialogueManager : MonoBehaviour {
 	// Pops off the latest item in the given chat log of all objects in its hierarchy (general function)
 	// BUGGED
 	public void popLog(GameObject textView, int offset){
-		Debug.Log ("popping log");
+		//Debug.Log ("popping log");
 		resetWindowSize();
 		Transform content = textView.transform.GetChild(0).GetChild(0);
 		int skipSpacer = 0; // skip the Spacer object in the content hierarchy

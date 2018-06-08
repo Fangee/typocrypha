@@ -9,6 +9,7 @@ public class BattleManagerS : MonoBehaviour {
     public TrackTyping trackTyping;
     public BattleKeyboard battleKeyboard;
     public BattleUI uiManager;
+	public GameObject player_ui;
     public CastManager castManager;
     public BattleEventManager globalEvents;
     public EnemyDatabase enemyData;
@@ -223,11 +224,14 @@ public class BattleManagerS : MonoBehaviour {
     {
         yield return new WaitForSeconds(1f);
         BattleEffects.main.battleTransitionEffect("swirl_in", 1f);
-        yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(1f);
+		endBattle ();
+		BackgroundEffects.main.setSpriteBG (curr_battle.GetComponent<Battle>().next_bg);
         BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
         yield return new WaitForSeconds(1f);
+		GameflowManager.main.next();
         //Transition to victoryScreen
-        endBattle();
+        //endBattle();
     }
     // end the battle and transition to the next GameflowItem
     public void endBattle()
@@ -243,8 +247,9 @@ public class BattleManagerS : MonoBehaviour {
 		}
         if(thirdEyeActive)
             stopThirdEye(true);
-        uiManager.clear();
-        GameflowManager.main.next();
+		uiManager.clear();
+		player_ui.SetActive (false);
+        //GameflowManager.main.next();
 
     }
 
@@ -513,10 +518,13 @@ public class BattleManagerS : MonoBehaviour {
 		AudioPlayer.main.playSFX("sfx_astral_hit");
 		AudioPlayer.main.playSFX("sfx_blight_hit");
 		field.enemy_arr[1].Curr_hp = 0;
-        updateEnemies();
-        yield return new WaitForSeconds(1f);
-        setPause(false);
-        frenzyCastActive = false;
+		AnimationPlayer.main.playScreenEffect ("mega_slash");
+		yield return new WaitForSeconds (2f);
+		frenzyCastActive = false;
+        //updateEnemies();
+        //setPause(false);
         BattleEffects.main.setDim(false);
+		endBattle ();
+		GameflowManager.main.next ();
     }
 }

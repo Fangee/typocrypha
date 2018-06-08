@@ -37,8 +37,8 @@ public class TextEvents : MonoBehaviour {
 	public SpriteRenderer train_sprite; // sprite renderer for train 
 	public Text train_text; // Text for displaying next destination text
 	public Animator train_text_animator; // Text animator for displaying next destination text
-
 	public Animator eye_frame_animator; // animator for evil eye frame
+	public GameObject credits_obj; // credits prefab
 
 	AssetBundle train_bundle; // asset bundle for train sprites
 
@@ -86,7 +86,9 @@ public class TextEvents : MonoBehaviour {
 			{"train-sign", trainSign},
 			{"train-chr-pos", trainChrPos},
 			{"eye-emote", eyeEmote},
-			{"train-text", trainTextShow}
+			{"train-text", trainTextShow},
+			{"reset-camera", resetCamera},
+			{"credits", credits}
 		};
 		is_prompt = false;
 	}
@@ -595,6 +597,20 @@ public class TextEvents : MonoBehaviour {
 		string newText = "<size=28>NEXT DESTINATION:</size>\n" + (opt[0]) + "\n>> " + (opt[1]);
 		train_text.text = newText;
 		train_text_animator.Play ("train_destination_text");
+		yield return true;
+	}
+	
+	// Resets camera animator
+	// input: NONE
+	IEnumerator resetCamera(string[] opt) {
+		AnimationPlayer.main.playScreenEffect ("NULL");
+		yield return true;
+	}
+
+	// Plays credits
+	// input: NONE
+	IEnumerator credits(string[] opt) {
+		credits_obj.SetActive (true);
 		yield return true;
 	}
 }

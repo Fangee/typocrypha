@@ -117,7 +117,7 @@ public class BattleUI : MonoBehaviour
         health_bars.removeAll();
         target_ret.SetActive(false);
         target_floor.SetActive(false);
-        BackgroundEffects.main.removePrefabBG(2.0f);
+        BackgroundEffects.main.removePrefabBG(0f);
     }
     //Play the wave transition animations
     public IEnumerator waveTransition(string title, int curr_wave, int max_wave)
