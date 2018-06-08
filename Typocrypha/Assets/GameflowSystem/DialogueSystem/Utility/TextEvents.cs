@@ -6,6 +6,9 @@ using UnityEngine.UI;
 // edits by James Iwamasa
 
 // represents an event to be played during text dialogue scrolling
+using UnityEngine.Video;
+
+
 public delegate IEnumerator TextEventDel(string[] opt);
 
 // struct to contain event text
@@ -39,6 +42,8 @@ public class TextEvents : MonoBehaviour {
 	public Animator train_text_animator; // Text animator for displaying next destination text
 	public Animator eye_frame_animator; // animator for evil eye frame
 	public GameObject credits_obj; // credits prefab
+	public VideoPlayer credits_video; // credits video player
+	public GameObject credits_stinger_obj; // credits stinger prefab
 
 	AssetBundle train_bundle; // asset bundle for train sprites
 
@@ -88,7 +93,10 @@ public class TextEvents : MonoBehaviour {
 			{"eye-emote", eyeEmote},
 			{"train-text", trainTextShow},
 			{"reset-camera", resetCamera},
-			{"credits", credits}
+			{"credits", credits},
+			{"credits-play", creditsPlay},
+			{"credits-stinger", creditsStinger},
+			{"quit-game", quitGame}
 		};
 		is_prompt = false;
 	}
@@ -607,10 +615,32 @@ public class TextEvents : MonoBehaviour {
 		yield return true;
 	}
 
-	// Plays credits
+	// Shows credits object
 	// input: NONE
 	IEnumerator credits(string[] opt) {
-		credits_obj.SetActive (true);
+		if(credits_obj.activeSelf == false ) credits_obj.SetActive (true);
+		else credits_obj.SetActive (false);
+		yield return true;
+	}
+
+	// Plays credits video
+	// input: NONE
+	IEnumerator creditsPlay(string[] opt) {
+		credits_video.Play ();
+		//yield return new WaitUntil (credits_video.loopPointReached);
+		yield return true;
+	}
+
+	// Shows stinger credits object
+	// input: NONE
+	IEnumerator creditsStinger(string[] opt) {
+		if(credits_stinger_obj.activeSelf == false ) credits_stinger_obj.SetActive (true);
+		else credits_stinger_obj.SetActive (false);
+		yield return true;
+	}
+
+	IEnumerator quitGame(string[] opt) {
+		Application.Quit ();
 		yield return true;
 	}
 }

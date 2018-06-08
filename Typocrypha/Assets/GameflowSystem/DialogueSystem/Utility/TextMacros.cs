@@ -58,7 +58,8 @@ public class TextMacros : MonoBehaviour {
 			{"iris", new Pair<string, string>("iris", "vo_iris")},
 			{"cat", new Pair<string, string>("cat", "vo_cat")},
 			{"cat_person", new Pair<string, string>("cat_person", "vo_cat_person")},
-			{"evil_eye", new Pair<string, string>("evil_eye", "vo_evil_eye")}
+			{"evil_eye", new Pair<string, string>("evil_eye", "vo_evil_eye")},
+			{"marcel", new Pair<string, string>("marcel", "vo_marcel")}
 		};
         translate_map = new Dictionary<char, char> {
             {'a', 'e' }, {'b', 'd' }, {'c', 'k' }, {'d', 'b' }, {'e', 'i' },
