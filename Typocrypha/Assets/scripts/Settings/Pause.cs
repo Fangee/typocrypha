@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Pause : MonoBehaviour {
-    
+	public static Pause main = null; // Global static reference
     bool gamePause;
     Color dimCol;
     string pauseKey = "escape";
     GameObject hideChild;
     bool battlePause = false; //saves battlemanager pause state
     bool blockTextboxInput = false;
+	public bool block_pause = false;
 
     void Start () {
         gamePause = false;
@@ -22,7 +23,7 @@ public class Pause : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(pauseKey))
         {
-            gamePause = !gamePause;
+			if(block_pause == false) gamePause = !gamePause;
 
             if (gamePause)
             {

@@ -14,6 +14,7 @@ public class TitleScreen : MonoBehaviour {
 	public SpriteRenderer title_sprite; // title screen sprite
 	public SpriteRenderer dimmer;
 	public Color text_highlight_color;
+	public GameObject load_text;
 
     private bool isActive = false;
     private int index = 0;
@@ -54,10 +55,15 @@ public class TitleScreen : MonoBehaviour {
         {
             switch (index)
             {
-                case 0: //continue button
-                    throw new System.NotImplementedException("continue functionality is not implemented (see TitleScreen.cs)");
+				case 0: //continue button
+					Debug.Log ("starting new game");
+					transitionToStart ();
+					break;
+                    //throw new System.NotImplementedException("continue functionality is not implemented (see TitleScreen.cs)");
                 case 1: //load game button
-                    throw new System.NotImplementedException("load game functionality is not implemented (see TitleScreen.cs)");
+					Application.Quit();
+					break;
+                    //throw new System.NotImplementedException("load game functionality is not implemented (see TitleScreen.cs)");
                 case 2: //new game button
                     Debug.Log("starting new game");
                     transitionToStart();
@@ -80,10 +86,10 @@ public class TitleScreen : MonoBehaviour {
 		foreach (Text option in title_options) {
 			switch (i) {
 				case 0:
-					selected_option_text = "CONTINUE";
+					selected_option_text = "BEGIN DEMO";
 					break;
 				case 1:
-					selected_option_text = "LOAD GAME";
+					selected_option_text = "QUIT";
 					break;
 				case 2:
 					selected_option_text = "NEW GAME";
@@ -118,6 +124,9 @@ public class TitleScreen : MonoBehaviour {
 
 	// called to transition to MainScene (new game) when start is pressed
 	void transitionToStart() {
+		
+		load_text.SetActive (true);
+
 		AsyncOperation load_op = SceneManager.LoadSceneAsync ("MainScene", LoadSceneMode.Additive);
 		StartCoroutine (loadMainScene (load_op));
 	}
@@ -127,6 +136,7 @@ public class TitleScreen : MonoBehaviour {
 		Debug.Log ("loading main scene...");
 		//new_file_button.interactable = false;
 		//new_file_button.gameObject.GetComponentInChildren<Text>().text = "Loading...";
+		//StartCoroutine (fadeAndEnd());
 		yield return new WaitUntil (() => load_op.isDone);
 		GameObject.Find ("Main Camera").GetComponent<AudioListener>().enabled = false; // to avoid multiple listeners
 		StartCoroutine (fadeAndStart ());
@@ -143,5 +153,14 @@ public class TitleScreen : MonoBehaviour {
 		}
 		yield return new WaitForSeconds (2f);
 		SceneManager.UnloadSceneAsync ("TitleScene");
+	}
+
+	IEnumerator fadeAndEnd(){
+		float alpha = 1.0f;
+		while (alpha > 0) {
+			dimmer.color = new Color (dimmer.color.r, dimmer.color.g, dimmer.color.b, alpha);
+			alpha -= 0.01f;
+			yield return new WaitForEndOfFrame ();
+		}
 	}
 }

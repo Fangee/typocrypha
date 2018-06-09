@@ -96,7 +96,8 @@ public class TextEvents : MonoBehaviour {
 			{"credits", credits},
 			{"credits-play", creditsPlay},
 			{"credits-stinger", creditsStinger},
-			{"quit-game", quitGame}
+			{"quit-game", quitGame},
+			{"block-pause", blockPause}
 		};
 		is_prompt = false;
 	}
@@ -641,6 +642,13 @@ public class TextEvents : MonoBehaviour {
 
 	IEnumerator quitGame(string[] opt) {
 		Application.Quit ();
+		yield return true;
+	}
+
+	IEnumerator blockPause(string[] opt) {
+		if (opt [0].CompareTo ("t") == 0)
+			Pause.main.block_pause = true;
+		else Pause.main.block_pause = false;
 		yield return true;
 	}
 }
