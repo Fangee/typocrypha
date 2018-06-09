@@ -1526,8 +1526,8 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: '{name}'
   text: '[fade-music=bgm_battle_doppelganger,in,0.1]{speak,mc}|shake|I hate you!\shake\
-    Everything about you! |shake|Your clothes... your face... your stupid puns...
-    I... I-I... \shake\'
+    Everything about you! |shake|Your clothes... your face... especially your name...
+    {name}... I... I-I... \shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -6094,7 +6094,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -8168,7 +8168,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -18816,7 +18816,7 @@ VideoPlayer:
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 1
   m_TargetAudioSources:
-  - {fileID: 378488913}
+  - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
   m_Url: 
@@ -45730,7 +45730,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[block=t][credits][stop-music][pause=4][fade=out,4,0,0,0][pause=4][credits-play][pause=91][credits][eye-emote=dark][fade-music=sfx_london_train_snippet_clean,in,4][fade=in,2,0,0,0][pause=2.5][play-sfx=sfx_bark][block=f]{t,vo_demon}Grrr...! '
+  text: '[block=t][credits][stop-music][pause=4][fade=out,4,0,0,0][pause=4][play-bgm=bgm_ending][credits-play][pause=93][stop-music][credits][eye-emote=dark][fade-music=sfx_london_train_snippet_clean,in,4][fade=in,2,0,0,0][pause=2.5][play-sfx=sfx_bark][block=f]{t,vo_demon}Grrr...! '
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -45822,7 +45822,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Detective Marcel
-  text: '{speak,marcel}Perhaps they can help me find the Truth of Agartha...'
+  text: '{speak,marcel}Perhaps they can help me find the truth of Agartha...'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -45906,7 +45906,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 50
   m_Sprite: {fileID: 21300000, guid: 6c5405f3dbf75df45b48822b0894d77d, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
