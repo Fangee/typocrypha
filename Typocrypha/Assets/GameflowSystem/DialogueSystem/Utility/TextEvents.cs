@@ -44,6 +44,7 @@ public class TextEvents : MonoBehaviour {
 	public GameObject credits_obj; // credits prefab
 	public VideoPlayer credits_video; // credits video player
 	public GameObject credits_stinger_obj; // credits stinger prefab
+	public Sprite[] trainsition_sprites;
 
 	AssetBundle train_bundle; // asset bundle for train sprites
 
@@ -570,8 +571,9 @@ public class TextEvents : MonoBehaviour {
 	// switches train transition sprite
 	// input: [0]: string, name of sprite
 	IEnumerator trainSwitch(string[] opt) {
-		Sprite spr = train_bundle.LoadAsset<Sprite>(opt[0]);
-		train_sprite.sprite = spr;
+		//Sprite spr = train_bundle.LoadAsset<Sprite>(opt[0]);
+		int num = int.Parse (opt [0]);
+		train_sprite.sprite = trainsition_sprites[num];
 		yield return true;
 	}
 

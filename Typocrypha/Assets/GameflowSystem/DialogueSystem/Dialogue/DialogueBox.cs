@@ -91,7 +91,7 @@ public class DialogueBox : MonoBehaviour {
 		Debug.Log (text);
 		int offset = set_color.chars [0];
 		int cnt = set_color.chars[0];
-		int sfx_interval = 4; // Play voice effect for every Xth char displayed
+		int sfx_interval = 5; // Play voice effect for every Xth char displayed
 		while (cnt < text.Length) {
 			StartCoroutine(checkEvents (cnt - offset));
 			if (DialogueManager.main.pause_scroll && !is_floating)

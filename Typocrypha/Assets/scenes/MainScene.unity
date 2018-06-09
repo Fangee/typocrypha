@@ -244,7 +244,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7549a0db15b854244bae25270ab851b5, type: 3}
   codec_sprite: {fileID: 21300000, guid: 99e1b89c5605dbf41ba5435b09e4fab1, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -1216,7 +1216,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 21300000, guid: 99e1b89c5605dbf41ba5435b09e4fab1, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -1401,7 +1401,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 9b93ece8233cc71419fa1ae02f624ef8, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &49644901
@@ -1448,8 +1448,8 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: c651b0f161527d94d8247fe721429f89, type: 3}
+  mc_sprite: {fileID: 21300000, guid: 58b536f9bcbb24d4e9de5a12f8be4212, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 9383f63dcf221d842a56d413f977100e, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &49644903
@@ -1477,12 +1477,13 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: '[stop-music]{speak,mc}|shake|Listen... I don''t know who you are... but...\shake\'
+  text: '[fade-music=_,out,1]{speak,mc}|shake|Listen... I don''t know who you are...
+    but...\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: cdfb5dbbb36fbf4409fc24927efbb152, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -1500,7 +1501,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: 
-  text: '[heal-player][play-sfx=sfx_heal]{c,ui-terms}> {name} felt a rush of blood!
+  text: '[heal-player][play-sfx=sfx_heal]{c,enemy-name}> {name} felt a rush of blood!
     {c,}'
   input_display: {fileID: 0}
   input_options: []
@@ -1524,14 +1525,14 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: '[play-music=bgm_battle_doppelganger]{speak,mc}|shake|I hate you!\shake\ Everything
-    about you! |shake|Your clothes... your face... your stupid name... I... I-I...
-    \shake\'
+  text: '[fade-music=bgm_battle_doppelganger,in,0.1]{speak,mc}|shake|I hate you!\shake\
+    Everything about you! |shake|Your clothes... your face... your stupid puns...
+    I... I-I... \shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 83734c178d590334cac100b33361744f, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -1821,7 +1822,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 804999a7b3ffdf248832c9cc3c1e037a, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -1855,7 +1856,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 804999a7b3ffdf248832c9cc3c1e037a, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -2145,7 +2146,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 21300000, guid: f5b6a29de40609a40951b4893503c834, type: 3}
+  mc_sprite: {fileID: 21300000, guid: 7549a0db15b854244bae25270ab851b5, type: 3}
   codec_sprite: {fileID: 21300000, guid: 93a24b5b8440cf5479b4df884abb69b3, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -3465,7 +3466,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7549a0db15b854244bae25270ab851b5, type: 3}
   codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -3800,7 +3801,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 804999a7b3ffdf248832c9cc3c1e037a, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -3872,7 +3873,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 83734c178d590334cac100b33361744f, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -3921,7 +3922,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 9b93ece8233cc71419fa1ae02f624ef8, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &136171215
@@ -5098,7 +5099,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 8bc2d4ec71b31504db272f2d64a4cba9, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -5158,7 +5159,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -5181,7 +5182,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: cdfb5dbbb36fbf4409fc24927efbb152, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -5235,7 +5236,7 @@ MonoBehaviour:
   - {fileID: 327953941}
   - {fileID: 1088031927}
   - {fileID: 586949745}
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 83734c178d590334cac100b33361744f, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -5680,7 +5681,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -6140,7 +6141,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 2867ae1bc6cc40a4eabd3e642f8951df, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -6267,7 +6268,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 21300000, guid: f5b6a29de40609a40951b4893503c834, type: 3}
+  mc_sprite: {fileID: 21300000, guid: cdfb5dbbb36fbf4409fc24927efbb152, type: 3}
   codec_sprite: {fileID: 21300000, guid: 95e2766e790c22f4cbf8be320b5226f1, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -6324,7 +6325,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 2867ae1bc6cc40a4eabd3e642f8951df, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -6419,7 +6420,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: c775bb4008aa8a643b574a41b42fe843, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: ace760d0494bd6744abd6c165e5a26cd, type: 3}
@@ -6547,7 +6548,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 2be02ca63a66767499e3eb7e02fe520e, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: 664f022bb9b3fa74c8683ac9f76ec777, type: 3}
@@ -6573,7 +6574,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 83734c178d590334cac100b33361744f, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -6690,7 +6691,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 2be02ca63a66767499e3eb7e02fe520e, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -6724,7 +6725,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: cdfb5dbbb36fbf4409fc24927efbb152, type: 3}
   codec_sprite: {fileID: 21300000, guid: b8ed51d828c90bb4fb42b75169d01d63, type: 3}
   char_sprites:
   - {fileID: 21300000, guid: 3bad54d9ebfdbc345803841dd317bffd, type: 3}
@@ -6750,7 +6751,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7549a0db15b854244bae25270ab851b5, type: 3}
   codec_sprite: {fileID: 21300000, guid: 27584c4f675a94b4ca4374b515ba697c, type: 3}
   char_sprites:
   - {fileID: 21300000, guid: fd9404e740e2d2a4387e813a83210f66, type: 3}
@@ -6776,7 +6777,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 21300000, guid: cbdf30af2f34d014f83e7e17077d9406, type: 3}
   char_sprites:
   - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
@@ -6796,13 +6797,13 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Frantic Girl
-  text: '{rc,illyia_2}[play-sfx=sfx_flash][screen-shake=2.0,0.2][eye-emote=shifty]{speak,dahlia}|shake|ILLYIA.
+  text: '[stop-music]{rc,illyia_2}[play-sfx=sfx_flash][screen-shake=2.0,0.2][eye-emote=shifty]{speak,dahlia}|shake|ILLYIA.
     GET BACK!\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 83734c178d590334cac100b33361744f, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: fd9404e740e2d2a4387e813a83210f66, type: 3}
@@ -7232,7 +7233,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: c775bb4008aa8a643b574a41b42fe843, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -7255,7 +7256,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 8bc2d4ec71b31504db272f2d64a4cba9, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -8109,7 +8110,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 2867ae1bc6cc40a4eabd3e642f8951df, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -8602,7 +8603,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 21300000, guid: f5b6a29de40609a40951b4893503c834, type: 3}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 21300000, guid: 93a24b5b8440cf5479b4df884abb69b3, type: 3}
   char_sprites:
   - {fileID: 21300000, guid: 2a3553ba9e5241943bb3b2faf11a7588, type: 3}
@@ -8640,7 +8641,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7549a0db15b854244bae25270ab851b5, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: 77cfe788167cfbe4dac5410175498930, type: 3}
@@ -8762,7 +8763,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -8832,7 +8833,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: c775bb4008aa8a643b574a41b42fe843, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: 3ac4e654e2aa8f24caeaee7066167f79, type: 3}
@@ -8956,12 +8957,12 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Dahlia
   text: '[eye-emote=rolling][play-sfx=sfx_huh]{rc,dahlia_6}{speak,dahlia}...|shake|it''s
-    already hard enough to concentrate when I''m together with you, y''know?\shake\'
+    already hard enough to concentrate when I''m together with you, Lya. Y''know?\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 2867ae1bc6cc40a4eabd3e642f8951df, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: 74522a5105617bb4ab9453d74f093e05, type: 3}
@@ -10154,7 +10155,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 2867ae1bc6cc40a4eabd3e642f8951df, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -10211,7 +10212,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 804999a7b3ffdf248832c9cc3c1e037a, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -10234,7 +10235,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: c775bb4008aa8a643b574a41b42fe843, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -10327,7 +10328,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: cdfb5dbbb36fbf4409fc24927efbb152, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -10350,7 +10351,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 83734c178d590334cac100b33361744f, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -10397,7 +10398,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7549a0db15b854244bae25270ab851b5, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -10923,10 +10924,10 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 83734c178d590334cac100b33361744f, type: 3}
   codec_sprite: {fileID: 21300000, guid: 93a24b5b8440cf5479b4df884abb69b3, type: 3}
   char_sprites:
-  - {fileID: 21300000, guid: eddabf0c623cfa54e8da149df1c6753f, type: 3}
+  - {fileID: 21300000, guid: e2cdf3c59d3c85941849bc78734c2083, type: 3}
   char_sprite_pos:
   - {x: 0, y: -0.5}
 --- !u!114 &338771800
@@ -11579,8 +11580,8 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: c651b0f161527d94d8247fe721429f89, type: 3}
+  mc_sprite: {fileID: 21300000, guid: 7549a0db15b854244bae25270ab851b5, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 9b93ece8233cc71419fa1ae02f624ef8, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &376546584
@@ -13079,7 +13080,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 83734c178d590334cac100b33361744f, type: 3}
   codec_sprite: {fileID: 21300000, guid: d2fd53d6488b09b439aa6f8c9afa9c9d, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -14419,7 +14420,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: cdfb5dbbb36fbf4409fc24927efbb152, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -14454,7 +14455,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 2be02ca63a66767499e3eb7e02fe520e, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -15431,7 +15432,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -15478,7 +15479,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 83734c178d590334cac100b33361744f, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -15502,7 +15503,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7549a0db15b854244bae25270ab851b5, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -15595,7 +15596,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -15799,7 +15800,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 83734c178d590334cac100b33361744f, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -16473,7 +16474,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -17953,7 +17954,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: cdfb5dbbb36fbf4409fc24927efbb152, type: 3}
   codec_sprite: {fileID: 21300000, guid: 416c5310bc5f3f245a52f54ce297e795, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -19853,7 +19854,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: f34b1916e7182f84e9fd412fadd92d60, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -19900,7 +19901,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 804999a7b3ffdf248832c9cc3c1e037a, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -20947,7 +20948,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 2be02ca63a66767499e3eb7e02fe520e, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -20970,7 +20971,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: cdfb5dbbb36fbf4409fc24927efbb152, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -21077,7 +21078,7 @@ MonoBehaviour:
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
   char_sprites:
-  - {fileID: 21300000, guid: eddabf0c623cfa54e8da149df1c6753f, type: 3}
+  - {fileID: 21300000, guid: e2cdf3c59d3c85941849bc78734c2083, type: 3}
   char_sprite_pos:
   - {x: 0, y: -0.5}
 --- !u!114 &830637602
@@ -21110,7 +21111,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -21157,7 +21158,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7549a0db15b854244bae25270ab851b5, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -21175,15 +21176,18 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: '{speak,doppelganger}{c,evil-eye}Who do you want to be, {name}?{c,}'
+  text: '{rc,doppelganger_3}{speak,doppelganger}{c,evil-eye}Who do you want to be,
+    {name}?{c,}'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: d536c3ca682fea843bfb547918e29e80, type: 3}
+  char_sprite_pos:
+  - {x: 0, y: -0.5}
 --- !u!114 &830637607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21246,16 +21250,18 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: "{speak,doppelganger}{c,evil-eye}Don\u2019t you wish you could just end it?
-    Destroy those Evil Eyes that gaze upon your soul?{c,}"
+  text: "{rc,doppelganger_1}{speak,doppelganger}{c,evil-eye}Don\u2019t you wish you
+    could just end it? Destroy those Evil Eyes that gaze upon your soul?{c,}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: e2cdf3c59d3c85941849bc78734c2083, type: 3}
+  char_sprite_pos:
+  - {x: 0, y: -0.5}
 --- !u!114 &830637610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21270,16 +21276,19 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}?'
-  text: "{speak,doppelganger}{c,evil-eye}Then accept those destructive urges... end
-    the Curse of others\u2019 judgement! |shake|END THE CURSE OF THE EVIL EYE!\\shake\\{c,}"
+  text: "{rc,doppelganger_3}{speak,doppelganger}{c,evil-eye}Then accept those destructive
+    urges... end the Curse of others\u2019 judgement! |shake|END THE CURSE OF THE
+    EVIL EYE!\\shake\\{c,}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: 9b7db627110afa04183c43a03d5718bb, type: 3}
+  char_sprite_pos:
+  - {x: 0, y: -0.5}
 --- !u!114 &830637611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24231,7 +24240,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -24265,7 +24274,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 83734c178d590334cac100b33361744f, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -24337,7 +24346,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 8bc2d4ec71b31504db272f2d64a4cba9, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -24383,7 +24392,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 83734c178d590334cac100b33361744f, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -25339,7 +25348,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 2be02ca63a66767499e3eb7e02fe520e, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -25400,7 +25409,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 2867ae1bc6cc40a4eabd3e642f8951df, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: bdd0ee3eb53497f4c8cc143170809c0a, type: 3}
@@ -25495,7 +25504,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: c775bb4008aa8a643b574a41b42fe843, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: 41caad3f54bd5b64e97c03dcf4e84ca1, type: 3}
@@ -25622,7 +25631,7 @@ MonoBehaviour:
   - {fileID: 1269042621}
   - {fileID: 1269042621}
   - {fileID: 1678004671}
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 8bc2d4ec71b31504db272f2d64a4cba9, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: 54142944ae49bbc4eb6de9da3c68c858, type: 3}
@@ -26722,7 +26731,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: cdfb5dbbb36fbf4409fc24927efbb152, type: 3}
   codec_sprite: {fileID: 21300000, guid: 416c5310bc5f3f245a52f54ce297e795, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -27101,7 +27110,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: c775bb4008aa8a643b574a41b42fe843, type: 3}
   codec_sprite: {fileID: 21300000, guid: 416c5310bc5f3f245a52f54ce297e795, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -27519,7 +27528,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 83734c178d590334cac100b33361744f, type: 3}
   codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -28539,7 +28548,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -28762,7 +28771,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7549a0db15b854244bae25270ab851b5, type: 3}
   codec_sprite: {fileID: 21300000, guid: 416c5310bc5f3f245a52f54ce297e795, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -29646,7 +29655,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -29762,7 +29771,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: c775bb4008aa8a643b574a41b42fe843, type: 3}
   codec_sprite: {fileID: 21300000, guid: 1181d40e830e5334eb758254dea16b3e, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -29785,7 +29794,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 804999a7b3ffdf248832c9cc3c1e037a, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -29831,7 +29840,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 2867ae1bc6cc40a4eabd3e642f8951df, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -30789,7 +30798,7 @@ Prefab:
     - target: {fileID: 114485826801079028, guid: 3264e04bf987fa44e87796d7a3cf8f7c,
         type: 2}
       propertyPath: text
-      value: '[train-switch=bg_train_car_expand_2][train-chr-pos=train_figure_mc,4][train-chr-pos=train_figure_dahlia,8][train-chr-pos=train_figure_illyia,9][pause=1][train-transition=in][pause=2][train-sign=dahlia][float-text=1,4,{c,dahlia}Are...
+      value: '[train-switch=1][train-chr-pos=train_figure_mc,4][train-chr-pos=train_figure_dahlia,8][train-chr-pos=train_figure_illyia,9][pause=1][train-transition=in][pause=2][train-sign=dahlia][float-text=1,4,{c,dahlia}Are...
         Are you OK Lya?{c,}][pause=2][train-sign=illyia][float-text=1,3,{c,illyia}I
         don''t know... That was bad...{c,}][pause=3][train-sign=mc][float-text=-6,2,{c,mc}(This
         is all my fault...) {c,}][pause=4][train-sign=illyia][float-text=2,1,{c,illyia}Iris
@@ -31043,7 +31052,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -32223,7 +32232,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 83734c178d590334cac100b33361744f, type: 3}
   codec_sprite: {fileID: 21300000, guid: 416c5310bc5f3f245a52f54ce297e795, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -32271,7 +32280,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: c775bb4008aa8a643b574a41b42fe843, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -32949,7 +32958,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 83734c178d590334cac100b33361744f, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -32995,7 +33004,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: cdfb5dbbb36fbf4409fc24927efbb152, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -36590,7 +36599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title: 'BOSS: Der Doppelganger'
   Music: 
-  Background: BattleBGAbyss
+  Background: BattleBGTrain
   Enemy1: 
   Enemy2: Doppelganger
   Enemy3: 
@@ -37167,7 +37176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Title: 'BOSS: Friends'
   Music: bgm_ominous
-  Background: 
+  Background: BattleBGEvilEyeBirth
   Enemy1: Dahlia?
   Enemy2: 
   Enemy3: Illyia?
@@ -37351,7 +37360,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 21300000, guid: f5b6a29de40609a40951b4893503c834, type: 3}
+  mc_sprite: {fileID: 21300000, guid: 8bc2d4ec71b31504db272f2d64a4cba9, type: 3}
   codec_sprite: {fileID: 21300000, guid: 93a24b5b8440cf5479b4df884abb69b3, type: 3}
   char_sprites:
   - {fileID: 21300000, guid: 7891c897fbc75804caa2a6d3a1abeda0, type: 3}
@@ -39493,7 +39502,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 21300000, guid: f5b6a29de40609a40951b4893503c834, type: 3}
+  mc_sprite: {fileID: 21300000, guid: 7549a0db15b854244bae25270ab851b5, type: 3}
   codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -40345,7 +40354,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -40368,7 +40377,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: cdfb5dbbb36fbf4409fc24927efbb152, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -40391,7 +40400,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 2867ae1bc6cc40a4eabd3e642f8951df, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -40425,7 +40434,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: c775bb4008aa8a643b574a41b42fe843, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -40474,7 +40483,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 2be02ca63a66767499e3eb7e02fe520e, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -40497,7 +40506,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: cdfb5dbbb36fbf4409fc24927efbb152, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
@@ -40556,7 +40565,7 @@ MonoBehaviour:
   - {fileID: 638545938}
   - {fileID: 181451886}
   - {fileID: 57851102}
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: c775bb4008aa8a643b574a41b42fe843, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: f5c6afae5f02c9748bd47b3f98348378, type: 3}
@@ -42238,7 +42247,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 21300000, guid: fc26182ce3462cc4ea98b573ba9c378e, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -42803,7 +42812,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: 54142944ae49bbc4eb6de9da3c68c858, type: 3}
@@ -44006,7 +44015,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1576722629
 RectTransform:
   m_ObjectHideFlags: 0
@@ -44197,7 +44206,7 @@ Prefab:
     - target: {fileID: 114896646330679180, guid: d9553b719a4b91842827c19059ceaf8d,
         type: 2}
       propertyPath: text
-      value: '[train-switch=bg_train_car_expand_4][train-chr-pos=train_figure_mc,0][train-chr-pos=train_figure_illyia,30][train-chr-pos=train_figure_dahlia,30][train-chr-pos=train_figure_doppelganger,6][train-chr-pos=train_lone_signs,5.5][pause=1][train-transition=in][pause=2][train-sign=mc][float-text=-9,3,{c,mc}...
+      value: '[train-switch=2][train-chr-pos=train_figure_mc,0][train-chr-pos=train_figure_illyia,30][train-chr-pos=train_figure_dahlia,30][train-chr-pos=train_figure_doppelganger,6][train-chr-pos=train_lone_signs,5.5][pause=1][train-transition=in][pause=2][train-sign=mc][float-text=-9,3,{c,mc}...
         Where am I even going...{c,}][pause=4][train-sign=doppelganger][float-text=-2.5,2,{c,doppel}|scramble|The
         Evil Eye Awakens\scramble\{c,}][pause=4][train-text=The Finale,Destroy the
         Evil Eye.][train-transition=out][pause=2][next]'
@@ -44632,7 +44641,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 21300000, guid: f5b6a29de40609a40951b4893503c834, type: 3}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 21300000, guid: 93a24b5b8440cf5479b4df884abb69b3, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -44667,7 +44676,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: c775bb4008aa8a643b574a41b42fe843, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -44760,7 +44769,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7549a0db15b854244bae25270ab851b5, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -44806,7 +44815,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: f34b1916e7182f84e9fd412fadd92d60, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -44829,7 +44838,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 2be02ca63a66767499e3eb7e02fe520e, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -44875,7 +44884,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 59f2932b1b6378e46862d6c6290f116c, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -44898,7 +44907,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: c775bb4008aa8a643b574a41b42fe843, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -44961,7 +44970,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
+  codec_sprite: {fileID: 21300000, guid: 9383f63dcf221d842a56d413f977100e, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1599218056
@@ -44984,7 +44993,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7549a0db15b854244bae25270ab851b5, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -45009,7 +45018,7 @@ MonoBehaviour:
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: c651b0f161527d94d8247fe721429f89, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 9b93ece8233cc71419fa1ae02f624ef8, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1599218058
@@ -45031,7 +45040,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: c775bb4008aa8a643b574a41b42fe843, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -45341,7 +45350,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 21300000, guid: f5b6a29de40609a40951b4893503c834, type: 3}
+  mc_sprite: {fileID: 21300000, guid: 83734c178d590334cac100b33361744f, type: 3}
   codec_sprite: {fileID: 21300000, guid: 93a24b5b8440cf5479b4df884abb69b3, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -45376,7 +45385,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: c775bb4008aa8a643b574a41b42fe843, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -45401,7 +45410,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: cdfb5dbbb36fbf4409fc24927efbb152, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -45449,7 +45458,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 83734c178d590334cac100b33361744f, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -45683,15 +45692,18 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Detective Marcel
-  text: '{speak,marcel}...you feel it too, don''t you Bullet?'
+  text: '[set-bg=bg_train][play-sfx=sfx_huh]{speak,marcel}...you feel it too, don''t
+    you Bullet?'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
+  char_sprites:
+  - {fileID: 21300000, guid: 67247c4560d7ba744ab0d25297cc6542, type: 3}
+  char_sprite_pos:
+  - {x: 0, y: 0}
 --- !u!114 &1607339509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45717,18 +45729,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fx_text_effects: []
   dialogue_type: 0
-  speaker_name: Dog
-  text: '{h,spr_vn_marcel_2,0.0}[block=t][credits][stop-music][pause=4][fade=out,4,0,0,0][pause=4][credits-play][pause=91][credits][eye-emote=dark]{h,spr_vn_marcel_2,1.0}[fade-music=sfx_london_train_snippet_clean,in,4][set-bg=bg_train][fade=in,2,0,0,0][pause=2.5][play-sfx=sfx_bark][block=f]{t,vo_demon}Grrr...! '
+  speaker_name: 
+  text: '[block=t][credits][stop-music][pause=4][fade=out,4,0,0,0][pause=4][credits-play][pause=91][credits][eye-emote=dark][fade-music=sfx_london_train_snippet_clean,in,4][fade=in,2,0,0,0][pause=2.5][play-sfx=sfx_bark][block=f]{t,vo_demon}Grrr...! '
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
   mc_sprite: {fileID: 0}
   codec_sprite: {fileID: 0}
-  char_sprites:
-  - {fileID: 21300000, guid: 67247c4560d7ba744ab0d25297cc6542, type: 3}
-  char_sprite_pos:
-  - {x: 0, y: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!114 &1607339511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45812,7 +45822,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Detective Marcel
-  text: '{speak,marcel}Maybe they can lead me to the truth of Agartha...'
+  text: '{speak,marcel}Perhaps they can help me find the Truth of Agartha...'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -45896,7 +45906,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 50
   m_Sprite: {fileID: 21300000, guid: 6c5405f3dbf75df45b48822b0894d77d, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -46735,7 +46745,7 @@ Prefab:
     - target: {fileID: 114383275380750170, guid: b41b6d4ac8aae044fa0320884f67306d,
         type: 2}
       propertyPath: text
-      value: '[train-switch=bg_train_car][pause=1][train-transition=in][pause=2][train-sign=illyia][float-text=-7,4,{c,illyia}Why
+      value: '[train-switch=0][pause=1][train-transition=in][pause=2][train-sign=illyia][float-text=-7,4,{c,illyia}Why
         do we have to take the train?{c,}][pause=2][train-sign=dahlia][float-text=-2,3,{c,dahlia}I
         kinda like trains, actually...{c,}][pause=2][train-sign=mc][float-text=-6,2,{c,mc}(This
         mission might make me a dog person...){c,}][pause=4][train-text=ASIARMICAN
@@ -46866,6 +46876,10 @@ MonoBehaviour:
   credits_obj: {fileID: 895615335}
   credits_video: {fileID: 724583762}
   credits_stinger_obj: {fileID: 5624166}
+  trainsition_sprites:
+  - {fileID: 21300000, guid: 999cbb2a3be27c54c9f64a3dd4c92d61, type: 3}
+  - {fileID: 21300000, guid: ce372b48aeb038a4b9259fc49074c885, type: 3}
+  - {fileID: 21300000, guid: ba1bfea158eff024590380e936d34284, type: 3}
 --- !u!114 &1663170421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48075,7 +48089,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 58b536f9bcbb24d4e9de5a12f8be4212, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -48098,8 +48112,8 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: c651b0f161527d94d8247fe721429f89, type: 3}
+  mc_sprite: {fileID: 21300000, guid: 2be02ca63a66767499e3eb7e02fe520e, type: 3}
+  codec_sprite: {fileID: 21300000, guid: 9b93ece8233cc71419fa1ae02f624ef8, type: 3}
   char_sprites: []
   char_sprite_pos: []
 --- !u!114 &1704200372
@@ -48236,7 +48250,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 83734c178d590334cac100b33361744f, type: 3}
   codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -48488,7 +48502,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 8bc2d4ec71b31504db272f2d64a4cba9, type: 3}
   codec_sprite: {fileID: 21300000, guid: b8ed51d828c90bb4fb42b75169d01d63, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -48522,7 +48536,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 83734c178d590334cac100b33361744f, type: 3}
   codec_sprite: {fileID: 21300000, guid: 27584c4f675a94b4ca4374b515ba697c, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -48594,7 +48608,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7549a0db15b854244bae25270ab851b5, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -48867,7 +48881,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: c775bb4008aa8a643b574a41b42fe843, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -48916,7 +48930,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: cdfb5dbbb36fbf4409fc24927efbb152, type: 3}
   codec_sprite: {fileID: 21300000, guid: aceb66023d80cc44ea8bb0b97a0be0c7, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -51026,12 +51040,12 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Illyia
   text: '{t,illyia}{hc,}|shake|Christ, you really pissed them off, {name}! What the
-    hell did you tell ''em!?\shake\'
+    hell...!?\shake\'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 21300000, guid: f5b6a29de40609a40951b4893503c834, type: 3}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -52135,7 +52149,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: c775bb4008aa8a643b574a41b42fe843, type: 3}
   codec_sprite: {fileID: 21300000, guid: 15a3d82b9ee04b94f8e6ab70db5c672b, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -52667,7 +52681,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -52798,7 +52812,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: c775bb4008aa8a643b574a41b42fe843, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -53482,7 +53496,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -53517,7 +53531,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7549a0db15b854244bae25270ab851b5, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites:
   - {fileID: 21300000, guid: 7891c897fbc75804caa2a6d3a1abeda0, type: 3}
@@ -54117,7 +54131,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -54174,7 +54188,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: c775bb4008aa8a643b574a41b42fe843, type: 3}
   codec_sprite: {fileID: 0}
   char_sprites: []
   char_sprite_pos: []
@@ -55229,7 +55243,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 21300000, guid: 146fa302c63eeda40b45a58cc3b4b299, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -57936,7 +57950,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7549a0db15b854244bae25270ab851b5, type: 3}
   codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -58007,7 +58021,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7cd55d100ef5e2149a00b6af568150f0, type: 3}
   codec_sprite: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
   char_sprites: []
   char_sprite_pos: []
@@ -58451,7 +58465,7 @@ MonoBehaviour:
   input_options: []
   input_answers: []
   input_branches: []
-  mc_sprite: {fileID: 0}
+  mc_sprite: {fileID: 21300000, guid: 7549a0db15b854244bae25270ab851b5, type: 3}
   codec_sprite: {fileID: 21300000, guid: 416c5310bc5f3f245a52f54ce297e795, type: 3}
   char_sprites: []
   char_sprite_pos: []
