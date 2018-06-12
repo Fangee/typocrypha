@@ -25403,7 +25403,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '[play-sfx=sfx_scanner_open][remove-character=spr_vn_iris_3][remove-character=spr_vn_iris_2]{t,illyia}got
+  text: '[play-sfx=sfx_scanner_open]{rc,iris_2}{rc,iris_3}[remove-character=spr_vn_iris_2]{t,illyia}got
     stuck in traffic on way to your place.'
   input_display: {fileID: 0}
   input_options: []

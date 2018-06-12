@@ -117,10 +117,10 @@ public class BattleManagerS : MonoBehaviour {
         {
             trackTyping.revertBuffer();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        /*if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             startFrenzyCast();
-        }
+        }*/
     }
 
     public void setEnabled(bool e)
