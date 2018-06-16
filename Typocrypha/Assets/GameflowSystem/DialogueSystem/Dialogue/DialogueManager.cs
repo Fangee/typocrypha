@@ -199,7 +199,7 @@ public class DialogueManager : MonoBehaviour {
 		yield return new WaitUntil (() => d_box.cr_scroll == null);
 		input_field.gameObject.SetActive (true);
 		input_field.ActivateInputField ();
-        spacebar_icon_vn.SetActive(true);
+        //spacebar_icon_vn.SetActive(true);
         animator_spacebar_vn.Play("anim_key_spacebar_no");
 		if (d_item.input_display != null)
 			input_display = Instantiate (d_item.input_display, transform);
