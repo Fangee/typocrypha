@@ -22,24 +22,25 @@ public class BISpecificAttack : BattleInterruptTrigger
     public override bool checkTrigger(BattleField state)
     {
         bool ret = false;
-        if (caster == BattleField.FieldPosition.PLAYER)
+        if (caster == BattleField.FieldPosition.PLAYER && state.lastCaster == BattleField.FieldPosition.PLAYER)
             ret = checkCast(state, state.last_player_cast, state.last_player_spell);
-        else if (caster == BattleField.FieldPosition.LEFT || caster == BattleField.FieldPosition.MIDDLE || caster == BattleField.FieldPosition.RIGHT)
+        else if ((caster == BattleField.FieldPosition.LEFT || caster == BattleField.FieldPosition.MIDDLE || caster == BattleField.FieldPosition.RIGHT) 
+                    && (state.lastCaster == BattleField.FieldPosition.LEFT || state.lastCaster == BattleField.FieldPosition.MIDDLE || state.lastCaster == BattleField.FieldPosition.RIGHT))
             ret = checkCast(state, state.last_enemy_cast, state.last_enemy_spell);
-        else if (caster == BattleField.FieldPosition.ANY)
+        else if (caster == BattleField.FieldPosition.ANY && state.lastCaster != BattleField.FieldPosition.NONE)
             ret = checkCast(state, state.last_player_cast, state.last_player_spell) || checkCast(state, state.last_enemy_cast, state.last_enemy_spell);
-        return (ret && ++curr_attacks >= numAttacks);
+        return (ret && (++curr_attacks >= numAttacks));
     }
     protected bool checkCast(BattleField state, List<CastData> dataToCheck, SpellData spellToCheck)
     {
         if (spellToCheck == null ||
-            (!string.IsNullOrEmpty(rootKeywordIs) && rootKeywordIs != spellToCheck.root) ||
-            (!string.IsNullOrEmpty(elementKeywordIs) && elementKeywordIs != spellToCheck.element) ||
-            (!string.IsNullOrEmpty(styleKeywordIs) && styleKeywordIs != spellToCheck.style))
+            (!string.IsNullOrEmpty(rootKeywordIs) && (rootKeywordIs != spellToCheck.root)) ||
+            (!string.IsNullOrEmpty(elementKeywordIs) && (elementKeywordIs != spellToCheck.element)) ||
+            (!string.IsNullOrEmpty(styleKeywordIs) && (styleKeywordIs != spellToCheck.style)))
             return false;
         if (dataToCheck == null || dataToCheck.Count <= 0)
             return false;
-        if (caster != BattleField.FieldPosition.ANY && dataToCheck[0].Caster != state.getCasterFromFieldPosition(caster))
+        if (caster != BattleField.FieldPosition.ANY && (dataToCheck[0].Caster != state.getCasterFromFieldPosition(caster)))
             return false;
         ICaster targetToCheck = state.getCasterFromFieldPosition(target);
         if (targetToCheck == null && target != BattleField.FieldPosition.ANY)

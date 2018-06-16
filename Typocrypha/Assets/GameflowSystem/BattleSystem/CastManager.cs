@@ -15,18 +15,6 @@ public class CastManager : MonoBehaviour
     [HideInInspector] public BattleField Field { get { return field; } set { field = value; } }
     private BattleField field;
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     //CASTING CODE//---------------------------------------------------------------------------------------------------------------------------------------//
 
     // attack currently targeted enemy with spell
@@ -106,6 +94,7 @@ public class CastManager : MonoBehaviour
 		uiManager.setEnabledGauges (true);
 
         postCastEffects();
+        field.lastCaster = BattleField.FieldPosition.PLAYER;
         //Updates field.Pause if necessary
         field.update();
     }
@@ -125,7 +114,7 @@ public class CastManager : MonoBehaviour
 
     private IEnumerator enemy_pause_cast(SpellDictionary dict, SpellData s, int position, int target)
     {
-		uiManager.setEnabledGauges (false);
+        uiManager.setEnabledGauges (false);
 
 		BattleEffects.main.setDim(true, field.enemy_arr[position].enemy_sprite);
 
@@ -142,6 +131,7 @@ public class CastManager : MonoBehaviour
         postCastEffects();
 
         field.enemy_arr[position].attack_in_progress = false;
+        field.lastCaster = (BattleField.FieldPosition)position;
         field.update();
     }
 

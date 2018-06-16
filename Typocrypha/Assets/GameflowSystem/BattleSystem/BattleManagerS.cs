@@ -351,6 +351,7 @@ public class BattleManagerS : MonoBehaviour {
                 e.AI.updateState(field.enemy_arr, e.Position, field.player_arr, EnemyAI.Update_Case.AFTER_INTERRUPT);
             }
         }
+        field.lastCaster = BattleField.FieldPosition.NONE;
         checkInterrupts();
     }
 

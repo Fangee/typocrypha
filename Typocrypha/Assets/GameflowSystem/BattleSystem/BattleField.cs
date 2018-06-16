@@ -12,6 +12,7 @@ public class BattleField {
 
     public enum FieldPosition
     {
+        NONE = -2,
         ANY = -1,
         LEFT,
         MIDDLE,
@@ -46,7 +47,8 @@ public class BattleField {
     //Interrupt stuff
 
 	[HideInInspector] public System.DateTime time_started; // time battle started
-	[HideInInspector] public List<CastData> last_enemy_cast; // last performed cast action
+    [HideInInspector] public FieldPosition lastCaster = FieldPosition.NONE;
+    [HideInInspector] public List<CastData> last_enemy_cast; // last performed cast action
     [HideInInspector] public List<CastData> last_player_cast;
 	[HideInInspector] public SpellData last_enemy_spell; // last performed spell
     [HideInInspector] public SpellData last_player_spell; // last performed spell
