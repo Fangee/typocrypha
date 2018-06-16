@@ -508,7 +508,6 @@ public class TextEvents : MonoBehaviour {
 	// restore player to full HP
 	// input: N/A
 	IEnumerator healPlayer(string[] opt) {
-		Debug.Log ("[JohnTypocrypha Voice]: i need healing");
 		Player.main.restoreToFull ();
         BattleManagerS.main.battleKeyboard.clearStatus();
 		yield return true;

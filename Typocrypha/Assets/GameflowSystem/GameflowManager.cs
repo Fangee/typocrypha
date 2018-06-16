@@ -4,12 +4,13 @@ using UnityEngine;
 
 // Manages game flow (from dialogue to battle to etc...)
 // Different scenes are store as child objects to 'GameflowManager' object
-public class GameflowManager : MonoBehaviour {
+public class GameflowManager : Gameflow {
 	public static GameflowManager main = null; // Global static ref
 	public GameObject player_ui; // the Typocrypha UI 
-	public int curr_item; // Current event number
+    private Gameflow curr_gameflow;
 
 	void Awake() {
+        curr_gameflow = this;
 		if (main == null) main = this;
 		else Destroy (this);
 	}
@@ -37,24 +38,42 @@ public class GameflowManager : MonoBehaviour {
 
 	// Go to next item
 	public void next() {
-		GameflowItem item = transform.GetChild(++curr_item).gameObject.GetComponent<GameflowItem>();
+        if(++(curr_gameflow.curr_item) >= curr_gameflow.transform.childCount) {//Go back to last gameflow object if at the end of nested gameflow
+            Debug.Log("returning to gameflow: " + curr_gameflow.transform.parent.name);
+            curr_gameflow = curr_gameflow.transform.parent.GetComponent<Gameflow>();
+            if (curr_gameflow == null) throw new System.NotImplementedException("Reached end of main gameflow: currently unhadled");
+            next();
+            return;
+        }
+        GameflowItem item = curr_gameflow.transform.GetChild(curr_gameflow.curr_item).gameObject.GetComponent<GameflowItem>();
 		if (item.gameObject.activeInHierarchy == false) { // Don't read disabled items
 			next ();
 			return;
 		}
-		if (item.GetType() == typeof(Dialogue)) {
+        if (item.GetType() == typeof(Dialogue)) {
 			Debug.Log ("starting dialogue: " + item.name);
 			player_ui.SetActive (false);
             BattleManagerS.main.setEnabled(false);
             DialogueManager.main.setEnabled(true);
-			DialogueManager.main.startDialogue (transform.GetChild(curr_item).gameObject);
+			DialogueManager.main.startDialogue (curr_gameflow.transform.GetChild(curr_gameflow.curr_item).gameObject);
 		} else if(item.GetType() == typeof(Battle)) {
             Debug.Log("starting battle: " + item.name);
 			player_ui.SetActive (true);
             DialogueManager.main.setEnabled(false);
             BattleManagerS.main.setEnabled(true);
-            BattleManagerS.main.startBattle(transform.GetChild(curr_item).gameObject);
+            BattleManagerS.main.startBattle(curr_gameflow.transform.GetChild(curr_gameflow.curr_item).gameObject);
+        } else if (item.GetType() == typeof(Gameflow)) {
+            Debug.Log("starting gameflow: " + item.name);
+            curr_gameflow = (Gameflow)item;
+            next();
         }
 	}
+    // Jump to item
+    public void jump(GameObject targetGameFlowItem, bool goToNext = true) {
+        Debug.Log("Gameflow: Jumping to " + targetGameFlowItem.name);
+        curr_gameflow = targetGameFlowItem.transform.parent.GetComponent<Gameflow>();
+        curr_gameflow.curr_item = targetGameFlowItem.transform.GetSiblingIndex() - 1;
+        if (goToNext) next();
+    }
 }
 

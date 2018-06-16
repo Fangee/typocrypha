@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Represents the flow of a level (from dialogue to battle to etc...)
-[CreateAssetMenu]
-public class Gameflow : ScriptableObject {
-	public GameflowItem[] items; // List of events
+public class Gameflow : GameflowItem {
+    [HideInInspector] public int curr_item = -1; // Current event number
 }
