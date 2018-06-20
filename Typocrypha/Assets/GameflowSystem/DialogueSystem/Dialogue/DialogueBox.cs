@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class DialogueBox : MonoBehaviour {
 	public string speaker; // Speaker's name
 	public string text; // Text to be displayed
-	public float scroll_delay = 0.01f; // Time (in seconds) between showing characters
+	public float scroll_delay; // Time (in seconds) between showing characters
 	public bool talk_sfx = true; // Should talking sfx play?
 	public FXText fx_text; // FXText component for displaying text
 	public Image left_icon; // Left dialogue speaker's icon
@@ -31,7 +31,6 @@ public class DialogueBox : MonoBehaviour {
 		set_color.color.a = 0;
 		set_color.chars = new int[2]{0,text.Length};
 		fx_text.addEffect (set_color);
-		scroll_delay = 0.01f; // DEFAULT TEMP
 		if (d_item.GetType () == typeof(DialogueItemChat)) {
 			DialogueItemChat c_item = (DialogueItemChat)d_item;
 			// Set icon
@@ -71,14 +70,15 @@ public class DialogueBox : MonoBehaviour {
 	}
 
 	// Dumps all remaining text
-	public void dumpText() {
-		TextEvents.main.StopAllCoroutines ();
+	public IEnumerator dumpText() {
+		TextEvents.main.stopEvents();
 		TextEvents.main.reset ();
-		TextEvents.main.finishUp (d_item.text_events);
-        if(cr_scroll != null)
+		yield return TextEvents.main.finishUp (d_item.text_events);
+        if (cr_scroll != null)
 		 	StopCoroutine (cr_scroll);
 		cr_scroll = null;
 		set_color.chars [0] = text.Length;
+		DialogueManager.main.is_dump = false;
 	}
 
 	// Starts scrolling text
@@ -117,7 +117,7 @@ public class DialogueBox : MonoBehaviour {
 		List<TextEvent> evt_list = d_item.text_events [start_pos];
 		if (evt_list != null && evt_list.Count > 0) {
 			foreach (TextEvent t in evt_list) {
-				TextEvents.main.playEvent (t.evt, t.opt);
+				TextEvents.main.evt_queue.Enqueue(TextEvents.main.playEvent (t.evt, t.opt));
 				if (t.evt == "pause")
 					yield return new WaitForSeconds (float.Parse(t.opt[0]));
 			}

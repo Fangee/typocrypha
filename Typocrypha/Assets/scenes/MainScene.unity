@@ -17281,6 +17281,7 @@ MonoBehaviour:
   animator_spacebar_vn: {fileID: 602362912}
   pause_scroll: 0
   block_input: 0
+  is_dump: 0
   answer: 
 --- !u!114 &1663170419
 MonoBehaviour:
@@ -20355,6 +20356,58 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234604780912334, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1828818657626670, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1194992156280432, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1529301539322222, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1909334709251904, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114840056104395494, guid: a83b43be611ebb54ca774269f8be1fcf,
+        type: 2}
+      propertyPath: text
+      value: "[fade=in,0,0,0,0]{speak,mc}I\u2019m {name}. Nice to meet you, {info,cat-name}."
+      objectReference: {fileID: 0}
+    - target: {fileID: 114893209778139760, guid: a83b43be611ebb54ca774269f8be1fcf,
+        type: 2}
+      propertyPath: text
+      value: '{speak,mc}...'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114398735104481334, guid: a83b43be611ebb54ca774269f8be1fcf,
+        type: 2}
+      propertyPath: text
+      value: "[fade=in,0,0,0,0]{speak,mc}In fact, I\u2019ve never even really been
+        outside of Agartha for more than a day or two."
+      objectReference: {fileID: 0}
+    - target: {fileID: 1407015794859084, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416948340598738, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1154562812068456, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1321203343401616, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}

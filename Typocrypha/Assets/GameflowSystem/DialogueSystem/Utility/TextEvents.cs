@@ -27,6 +27,7 @@ public class TextEvents : MonoBehaviour {
 	public Dictionary<string, TextEventDel> text_event_map;
 	[HideInInspector] public bool is_prompt; // are we prompting input?
 	[HideInInspector] public string prompt_input; // input from prompt
+	[HideInInspector] public Queue<Coroutine> evt_queue; // queue of currently running text events
 
 	public SpriteRenderer dimmer; // sprite used to cover screen for fade/dim effects
 	public GameObject center_text; // for showing floating text in the center
@@ -52,6 +53,7 @@ public class TextEvents : MonoBehaviour {
 		main = this;
 		train_bundle = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "train_sprites"));
 		is_prompt = false;
+		evt_queue = new Queue<Coroutine> ();
 		text_event_map = new Dictionary<string, TextEventDel> {
 			{"screen-shake", screenShake},
 			{"block", block},
@@ -111,7 +113,15 @@ public class TextEvents : MonoBehaviour {
 		Coroutine cr = StartCoroutine (text_event (opt));
 		return cr;
 	}
-		
+
+	// stops all text events in event queue (doesn't include events called by 'finishUp')
+	public void stopEvents() {
+		while (evt_queue.Count != 0) {
+			Coroutine cr = evt_queue.Dequeue ();
+			if (cr != null) StopCoroutine (cr);
+		}
+	}
+
 	// resets all the parameters that might have been changed
 	public void reset() {
 		main_camera.transform.position = new Vector3 (0,0,-10);
@@ -120,7 +130,7 @@ public class TextEvents : MonoBehaviour {
 	}
 
 	// finishes up persistent events that might have been skipped (like removing a character)
-	public void finishUp(List<TextEvent>[] text_events) {
+	public IEnumerator finishUp(List<TextEvent>[] text_events) {
 		foreach (List<TextEvent> text_event_pos in text_events) {
 			if (text_event_pos == null) continue;
 			foreach (TextEvent text_event in text_event_pos) {
@@ -133,10 +143,10 @@ public class TextEvents : MonoBehaviour {
 				case "remove-character":
 				case "remove-all-character":
 				case "hide-text-box":
-					playEvent (text_event.evt, text_event.opt);
+					yield return playEvent (text_event.evt, text_event.opt);
 					break;
 				case "fade": // immediately finish fade
-					playEvent (text_event.evt, new string[] {
+					yield return playEvent (text_event.evt, new string[] {
 						text_event.opt [0],
 						"0",
 						text_event.opt [1],

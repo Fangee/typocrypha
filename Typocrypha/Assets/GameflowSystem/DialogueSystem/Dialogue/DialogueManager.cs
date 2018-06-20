@@ -40,19 +40,20 @@ public class DialogueManager : MonoBehaviour {
 
 	[HideInInspector] public bool pause_scroll; // Pause text scroll
 	[HideInInspector] public bool block_input; // Blocks user input
+	[HideInInspector] public bool is_dump; // Is text being dumped?
 	[HideInInspector] public string answer; // Player's input
 
 	int curr_line; // Current line number of dialogue
 	float window_height; // Height of dialogue history
 	float default_window_height; // Default Height of dialogue history (to reset)
 	Coroutine slide_scroll_cr; // Coroutine that smoothly adjusts window
+	Coroutine dump_cr; // Coroutine that dumps text
 	List<DialogueBox> history; // List of all dialogue boxes
 	List<GameObject> chr_spr_list; // List of character sprite holders
 	string stringEdit = "";
 
 	bool input; // Are we waiting for input?
 	GameObject input_display; // Display image for input
-
 
     private bool isInterrupt = false; //is this dialogue event a oneshot (interrupts, etc)
 
@@ -85,6 +86,8 @@ public class DialogueManager : MonoBehaviour {
 		}
 		if (isInterrupt)
 			player_ui.localScale = new Vector3(0,0,0);
+		if (is_dump)
+			return;
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			if (!nextLine ()) {
 				if (isInterrupt) {
@@ -119,8 +122,7 @@ public class DialogueManager : MonoBehaviour {
 	}
 
     // Starts a new dialogue scene
-    public void startInterrupt(GameObject new_dialogue_interrupt)
-    {
+    public void startInterrupt(GameObject new_dialogue_interrupt) {
         isInterrupt = true;
         startDialogue(new_dialogue_interrupt);
     }
@@ -128,7 +130,8 @@ public class DialogueManager : MonoBehaviour {
     // Displays next line of dialogue. Returns 'false' if there is no next line.
     bool nextLine() {
 		if (history.Count > 0 && history [history.Count - 1].cr_scroll != null) {
-			history [history.Count - 1].dumpText ();
+			is_dump = true; // Flag is set back to false by 'dumpText()'
+			dump_cr = StartCoroutine (history [history.Count - 1].dumpText ());
 		} else {
 			//if (!input && Input.GetKeyDown (KeyCode.Space)) AudioPlayer.main.playSFX ("sfx_advance_text");
 			spacebar_icon_vn.SetActive (false);
