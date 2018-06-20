@@ -28,6 +28,7 @@ public class DialogueManager : MonoBehaviour {
 	public GameObject an_dialouge_box_prefab; // Prefab of audio novel dialogue 
 	public GameObject chr_spr_prefab; // Prefab of character sprite display
 	public float scroll_time; // Time it takes to automatically update window
+	public float scroll_delay = 0.01f; // Time it takes for text to scroll 
     public float scroll_scale; // Scroll delay multiplier
 	public float top_space; // Space between top of window and dialogue
 
@@ -180,23 +181,24 @@ public class DialogueManager : MonoBehaviour {
 				d_box.fx_text.addEffect (text_effect);
 			// Add dialogue box to history (only really works for Chat items)
 			history.Add (d_box);
+			// Start scroll
+			d_box.scroll_delay = scroll_delay;
+			Coroutine d_box_init = d_box.dialogueBoxStart ();
 			// Prompt input if necessary
 			if (d_item.dialogue_type == DialogueType.INPUT) {
 				input = true;
-				StartCoroutine(showInput(d_item, d_box));
+				StartCoroutine(showInput(d_item, d_box, d_box_init));
 			} else {
 				input = false;
 			}
-			d_box.scroll_delay = 0.01f;
-			d_box.dialogueBoxStart ();
 		}
 		return true;
 	}
 
 	// Show input options when text is done scrolling
-	IEnumerator showInput(DialogueItem d_item, DialogueBox d_box) {
-		yield return new WaitUntil (() => d_box.cr_scroll != null);
-		yield return new WaitUntil (() => d_box.cr_scroll == null);
+	IEnumerator showInput(DialogueItem d_item, DialogueBox d_box, Coroutine d_box_init) {
+		yield return d_box_init; // Wait for d_box to finish setting up
+		yield return new WaitUntil (() => d_box.cr_scroll == null); // Wait for scroll to end
 		input_field.gameObject.SetActive (true);
 		input_field.ActivateInputField ();
         //spacebar_icon_vn.SetActive(true);
@@ -216,7 +218,6 @@ public class DialogueManager : MonoBehaviour {
 			input_display_choices.SetActive (true);
 		}
 	}
-		
 
 	// Called when input field is submitted
 	public void submitInput() {

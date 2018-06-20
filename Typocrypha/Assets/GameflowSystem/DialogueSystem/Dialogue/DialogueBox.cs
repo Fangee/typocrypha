@@ -22,7 +22,8 @@ public class DialogueBox : MonoBehaviour {
 	FXTextColor set_color; // Effect that hides text for scrolling
 	float text_pad; // Padding between text and dialogue box
 
-	public void dialogueBoxStart() {
+	// Initializes dialogue box and starts text scroll
+	public Coroutine dialogueBoxStart() {
 		text_pad = fx_text.rectTransform.offsetMin.y - fx_text.rectTransform.offsetMax.y;
 		// Initialize color effect to hide text
 		set_color = fx_text.gameObject.AddComponent<FXTextColor> ();
@@ -66,7 +67,7 @@ public class DialogueBox : MonoBehaviour {
 		}
 		// Set talking sfx
 		if (talk_sfx) AudioPlayer.main.setSFX(AudioPlayer.channel_voice, "speak_boop");
-		StartCoroutine (startTextScrollCR ());
+		return StartCoroutine (startTextScrollCR ());
 	}
 
 	// Dumps all remaining text
@@ -93,7 +94,7 @@ public class DialogueBox : MonoBehaviour {
 		int cnt = set_color.chars[0];
 		int sfx_interval = 5; // Play voice effect for every Xth char displayed
 		while (cnt < text.Length) {
-			StartCoroutine(checkEvents (cnt - offset));
+			yield return StartCoroutine(checkEvents (cnt - offset));
 			if (DialogueManager.main.pause_scroll && !is_floating)
 			    yield return new WaitWhile (() => DialogueManager.main.pause_scroll);
 			if (text [cnt] == '<') {

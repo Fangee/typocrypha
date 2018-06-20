@@ -51,6 +51,7 @@ public class TextEvents : MonoBehaviour {
 	void Awake() {
 		main = this;
 		train_bundle = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "train_sprites"));
+		is_prompt = false;
 		text_event_map = new Dictionary<string, TextEventDel> {
 			{"screen-shake", screenShake},
 			{"block", block},
@@ -100,7 +101,6 @@ public class TextEvents : MonoBehaviour {
 			{"quit-game", quitGame},
 			{"block-pause", blockPause}
 		};
-		is_prompt = false;
 	}
 
 	// plays the event 'evt', returning the coroutine created (null if event doesnt exist)
@@ -108,16 +108,15 @@ public class TextEvents : MonoBehaviour {
 		TextEventDel text_event;
 		if (!text_event_map.TryGetValue (evt, out text_event))
 			Debug.LogException (new System.Exception("Bad text event parameters:" + evt));
-		return StartCoroutine(text_event (opt));
+		Coroutine cr = StartCoroutine (text_event (opt));
+		return cr;
 	}
-
+		
 	// resets all the parameters that might have been changed
 	public void reset() {
 		main_camera.transform.position = new Vector3 (0,0,-10);
 		DialogueManager.main.pause_scroll = false;
 		DialogueManager.main.block_input = false;
-		//foreach (Transform tr in float_text_view)
-		//	Destroy (tr.gameObject);
 	}
 
 	// finishes up persistent events that might have been skipped (like removing a character)
@@ -135,6 +134,15 @@ public class TextEvents : MonoBehaviour {
 				case "remove-all-character":
 				case "hide-text-box":
 					playEvent (text_event.evt, text_event.opt);
+					break;
+				case "fade": // immediately finish fade
+					playEvent (text_event.evt, new string[] {
+						text_event.opt [0],
+						"0",
+						text_event.opt [1],
+						text_event.opt [2],
+						text_event.opt [3]
+					});
 					break;
 				default:
 					break;

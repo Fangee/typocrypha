@@ -3613,7 +3613,7 @@ MonoBehaviour:
   spellMustCrit: 0
   spellMustStun: 0
   damageIsAtLeast: 0
-  vsElementMustBe: -1
+  vsElementMustBe: 3
 --- !u!114 &114153500284794014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7611,7 +7611,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Clarke
   text: '{t,clarke}{c,highlight}Focusing on the enemies will also make it so time
-    move slowly{c,}, so feel free to use the {c,ui-terms}Scouter{c,} to catch a break
+    moves slowly{c,}, so feel free to use the {c,ui-terms}Scouter{c,} to catch a break
     and look at your surroundings.'
   input_display: {fileID: 0}
   input_options: []
@@ -9229,7 +9229,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Illyia
-  text: '{speak,illyia}|shake|What are doing, {name}!? Are you even paying attention?
+  text: '{speak,illyia}|shake|What are you doing, {name}!? Are you even paying attention?
     Those attacks aren''t doing damage!! Please focus!\shake\'
   input_display: {fileID: 0}
   input_options: []
@@ -10861,7 +10861,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: '{name}'
-  text: "{speak,mc}I\u2019m {name}. Nice to meet you, {info,cat-name}."
+  text: "[fade=in,0,0,0,0]{speak,mc}I\u2019m {name}. Nice to meet you, {info,cat-name}."
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
