@@ -46,6 +46,7 @@ public class TextEvents : MonoBehaviour {
 	public VideoPlayer credits_video; // credits video player
 	public GameObject credits_stinger_obj; // credits stinger prefab
 	public Sprite[] trainsition_sprites;
+	public Pause pause_menu; // Pause menu script
 
 	AssetBundle train_bundle; // asset bundle for train sprites
 
@@ -666,8 +667,8 @@ public class TextEvents : MonoBehaviour {
 
 	IEnumerator blockPause(string[] opt) {
 		if (opt [0].CompareTo ("t") == 0)
-			Pause.main.block_pause = true;
-		else Pause.main.block_pause = false;
+			pause_menu.block_pause = true;
+		else pause_menu.block_pause = false;
 		yield return true;
 	}
 }
