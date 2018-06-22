@@ -14,6 +14,6 @@ public class ScrollSlider : MonoBehaviour {
     }
 
     void ValueChangeCheck(){
-        DialogueManager.main.scroll_scale = slider.value;
+		DialogueManager.main.scroll_scale = 1+(11-(slider.value*10));
     }
 }
