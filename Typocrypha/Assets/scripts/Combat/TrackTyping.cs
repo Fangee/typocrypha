@@ -86,7 +86,7 @@ public class TrackTyping : MonoBehaviour {
 		} else if (Input.GetKey (KeyCode.Backspace)) {
 			if (Input.GetKeyDown (KeyCode.Backspace)) {
 				if (count > 0) {
-					AudioPlayer.main.playSFX ("sfx_backspace", 0.15f);
+					AudioPlayer.main.playSFX ("sfx_backspace");
 					buffer = buffer.Remove (count - 1, 1);
 					count = count - 1;
 				}
@@ -95,7 +95,7 @@ public class TrackTyping : MonoBehaviour {
 					if (deleteCounter < 15) {
 						++deleteCounter;
 					} else {
-						AudioPlayer.main.playSFX ("sfx_backspace", 0.15f);
+						AudioPlayer.main.playSFX ("sfx_backspace");
 						buffer = "";
 						count = 0;
 					}

@@ -16,6 +16,7 @@ public class BattleUI : MonoBehaviour
     public Text wave_title_text;
     public Text wave_banner_text;
 	public Text last_cast_text; // Text for logging previous spell attempt
+	public Text current_wave_title_text; // For battle screenframe
 	public TrackTyping trackTyping;
     //public GameObject dialogue_box; // text box for dialogue
     public GameObject battle_bg_prefab; // prefab of battle background
@@ -76,7 +77,7 @@ public class BattleUI : MonoBehaviour
         target_ret_scr.updateTarget();
         target_floor_scr.updateFloor();
 		charge_bars.updateChargeBars ();
-		last_cast_text.text = "[TAB] -> USE LAST CAST\n> " + trackTyping.getBuffer().Replace(" ", "-").ToUpper();
+		last_cast_text.text = ">" + trackTyping.getBuffer().Replace(" ", "-").ToUpper();
     }
     //Sets the target from specified index
     public void setTarget(int target_ind)
@@ -127,6 +128,7 @@ public class BattleUI : MonoBehaviour
         wave_title_text.text = title; //"Wave " + curr_wave + "/ " + max_wave;
         if (title.Contains("{cat-name}"))
             wave_title_text.text = "Boss: " + PlayerDialogueInfo.main.getInfo("cat-name") + " Reunion";
+		current_wave_title_text.text = wave_title_text.text;
         Animator banner_text_animator = wave_banner_text.GetComponent<Animator>();
         Animator banner_img_animator = wave_transition_banner.GetComponent<Animator>();
         Animator title_text_animator = wave_title_text.GetComponent<Animator>();
@@ -140,7 +142,7 @@ public class BattleUI : MonoBehaviour
         wave_transition_banner.GetComponent<Animator>().enabled = false;
         wave_title_text.GetComponent<Animator>().enabled = false;
         wave_transition_title.GetComponent<Animator>().enabled = false;
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+		yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.Space) && !Pause.main.isPaused()));
         wave_banner_text.GetComponent<Animator>().enabled = true;
         wave_transition_banner.GetComponent<Animator>().enabled = true;
         wave_title_text.GetComponent<Animator>().enabled = true;

@@ -22,6 +22,10 @@ public class BattleManagerS : MonoBehaviour {
     public Text debugThirdEyeCharge;
     public Text debugFrenzyCastTime;
     public Text debugFrenzyCastInstructions;
+	public GameObject screenframe_vn;
+	public GameObject screenframe_battle;
+	public GameObject screenframe_eye;
+	//public SpriteRenderer dimmer; // sprite used to cover screen for fade/dim effects
     [HideInInspector] public bool pause = true;
 
     [HideInInspector] public bool thirdEyeActive = false;
@@ -115,6 +119,7 @@ public class BattleManagerS : MonoBehaviour {
 
         if(Input.GetKeyDown(KeyCode.Tab))
         {
+			AudioPlayer.main.playSFX("sfx_backspace");
             trackTyping.revertBuffer();
         }
         /*if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -160,16 +165,23 @@ public class BattleManagerS : MonoBehaviour {
         // play battle transition
 		pause = true;
 		typocrypha_object.SetActive (false);
-        BattleEffects.main.battleTransitionEffect("swirl_in", 1f);
-        yield return new WaitForSeconds(1f);
+		screenframe_vn.SetActive (false);
+		screenframe_eye.transform.localScale = new Vector3 (0, 0, 0);
+		BattleEffects.main.screenFade (false, 2.5f, 0f, 0f, 0f);
+        BattleEffects.main.battleTransitionEffect("swirl_in", 0.45f);
+		AudioPlayer.main.playSFX ("sfx_battle_start");
+		yield return new WaitForSeconds(2.5f);
 		if (waves[0].Background != string.Empty) {
 			uiManager.initBg(waves[0].Background);
 		} 
 		else {
 			uiManager.initBg();
 		}
-        BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
-        yield return new WaitForSeconds(1.5f);
+		screenframe_battle.SetActive (true);
+		screenframe_eye.transform.localScale = new Vector3 (128, 128, 64);
+		BattleEffects.main.screenFade (true, 2.5f, 0f, 0f, 0f);
+        BattleEffects.main.battleTransitionEffect("swirl_out", 0.45f);
+		yield return new WaitForSeconds(2.5f);
 		typocrypha_object.SetActive (true);
 		typocrypha_animator.Play ("anim_typocrypha_entrance");
         AudioPlayer.main.playSFX("sfx_bootup_2");
@@ -223,12 +235,21 @@ public class BattleManagerS : MonoBehaviour {
     private IEnumerator endBattleTranstion()
     {
         yield return new WaitForSeconds(1f);
-        BattleEffects.main.battleTransitionEffect("swirl_in", 1f);
-		yield return new WaitForSeconds(1f);
+		AudioPlayer.main.fadeMusic (true, 2.5f);
+		BattleEffects.main.screenFade (false, 2.5f, 1f, 1f, 1f);
+		BattleEffects.main.battleTransitionEffect("swirl_in", 0.45f);
+		AudioPlayer.main.playSFX ("sfx_vr_bootup");
+		yield return new WaitForSeconds(2.5f);
 		endBattle ();
+		AudioPlayer.main.stopMusic ();
+		AudioPlayer.main.fadeMusic (false, 2.5f);
 		BackgroundEffects.main.setSpriteBG (curr_battle.GetComponent<Battle>().next_bg);
-        BattleEffects.main.battleTransitionEffect("swirl_out", 1f);
-        yield return new WaitForSeconds(1f);
+		screenframe_battle.SetActive (false);
+		screenframe_vn.SetActive (true);
+		screenframe_eye.transform.localScale = new Vector3 (128, 128, 64);
+		BattleEffects.main.screenFade (true, 2.5f, 0f, 0f, 0f);
+		BattleEffects.main.battleTransitionEffect("swirl_out", 0.45f);
+		yield return new WaitForSeconds(2.5f);
 		GameflowManager.main.next();
         //Transition to victoryScreen
         //endBattle();
@@ -258,20 +279,18 @@ public class BattleManagerS : MonoBehaviour {
     //Handles a spellcast (by calling the castmanager) and clears callback's buffer if necessary
     public void handleSpellCast(string spell, TrackTyping callback)
     {
-        if (frenzyCastActive)
-        {
-            SpellData s = castManager.isValidSpell(spell);
-            if (s != null)
-            {
-                frenzySpells.Add(s);
-                AudioPlayer.main.playSFX("sfx_enter");
-            }
-            else
-                AudioPlayer.main.playSFX("sfx_enter_bad");
-            trackTyping.clearBuffer();
-        }
-        else
-            castManager.attackCurrent(spell, callback);
+		uiManager.updateUI(); // Update Tab buffer UI
+		if (frenzyCastActive) {
+			SpellData s = castManager.isValidSpell (spell);
+			if (s != null) {
+				frenzySpells.Add (s);
+				AudioPlayer.main.playSFX ("sfx_enter");
+			} else
+				AudioPlayer.main.playSFX ("sfx_enter_bad");
+			trackTyping.clearBuffer ();
+		} else {
+			castManager.attackCurrent (spell, callback);
+		}
     }
     //Handle player death
     public void playerDeath()

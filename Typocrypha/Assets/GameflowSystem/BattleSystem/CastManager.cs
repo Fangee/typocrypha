@@ -34,6 +34,9 @@ public class CastManager : MonoBehaviour
                 message = chat.getLine(field.Player.Stats.ChatDatabaseID);
                 preCastEffects(targetPattern, field.Player, s, message);
                 AudioPlayer.main.playSFX("sfx_enter");
+				AudioPlayer.main.playSFX ("sfx_player_cast");
+				AudioPlayer.main.playSFX ("sfx_cast", 0.35f);
+				AnimationPlayer.main.playAnimation("anim_spell_empower", field.Player.Transform.position, 2f);
                 StartCoroutine(pauseAttackCurrent(s, field.Player));
                 return true; //Clear the casting buffer
             case CastStatus.BOTCH:

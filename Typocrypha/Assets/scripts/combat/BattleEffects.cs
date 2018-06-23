@@ -8,6 +8,7 @@ public class BattleEffects : MonoBehaviour {
 	public static BattleEffects main = null; // static global ref
 	public Transform cam_pos; // main camera
 	public SpriteRenderer dimmer; // dimmer image
+	public SpriteRenderer screen_dimmer; // overlay screen dimmer image (for fades/flashes)
 	public Canvas canvas; // canvas component
 	public Animator camera_animator; // animator for camera object
 	public Animator damage_overlay_animator; // damage overlay sprite animator
@@ -181,5 +182,35 @@ public class BattleEffects : MonoBehaviour {
 	public void flashDamageOverlay(float speed, string anim){
 		damage_overlay_animator.speed = speed;
 		damage_overlay_animator.Play(anim);
+	}
+
+	// Coroutine that fades a dimmer (same as TextEvents dimmer)
+	IEnumerator screenFadeCR(bool isIn, float time, float red, float green, float blue) {
+		float fade_time = time;
+		float r = red;
+		float g = green;
+		float b = blue;
+		float alpha;
+		float a_step = 1f * Time.deltaTime / fade_time; // amount of change each frame
+		if (a_step > 1) a_step = 1;
+		alpha = dimmer.color.a;
+		if (!isIn) { // hide screen
+			while (alpha < 1f) {
+				yield return null;
+				alpha += a_step;
+				dimmer.color = new Color (r, g, b, alpha);
+			}
+		} else { // show screen
+			while (alpha > 0f) {
+				yield return null;;
+				alpha -= a_step;
+				dimmer.color = new Color (r, g, b, alpha);
+			}
+		}
+	}
+
+	// fades the screen dimmer in or out
+	public void screenFade(bool isIn, float time, float red, float green, float blue) {
+		StartCoroutine(screenFadeCR (isIn, time, red, green, blue));
 	}
 }

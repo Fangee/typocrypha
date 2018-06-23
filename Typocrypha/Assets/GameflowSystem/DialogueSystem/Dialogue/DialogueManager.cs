@@ -72,17 +72,24 @@ public class DialogueManager : MonoBehaviour {
 	}
 
 	void Update() {
+		if (Pause.main.isPaused ())
+			return;
 		if (history.Count > 0 && history [history.Count - 1].cr_scroll == null && !input) {
 			spacebar_icon_vn.SetActive (true);
 		}
 		if (block_input) {
 			spacebar_icon_vn.SetActive (true);
+			if (Input.GetKeyDown (KeyCode.Space)) AudioPlayer.main.playSFX ("sfx_botch");
             if (spacebar_icon_vn.activeInHierarchy)
                 animator_spacebar_vn.Play ("anim_key_spacebar_no");
 			return;
 		} else {
-            if(spacebar_icon_vn.activeInHierarchy)
-			    animator_spacebar_vn.Play ("anim_key_spacebar");
+			if (history.Count > 0 && history [history.Count - 1].cr_scroll != null){
+				spacebar_icon_vn.SetActive (false);
+			}
+			if (spacebar_icon_vn.activeInHierarchy) {
+				animator_spacebar_vn.Play ("anim_key_spacebar");
+			} 
 		}
 		if (isInterrupt)
 			player_ui.localScale = new Vector3(0,0,0);
@@ -91,16 +98,20 @@ public class DialogueManager : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Space)) {
 			if (!nextLine ()) {
 				if (isInterrupt) {
-                    if(!BattleManagerS.main.playSceneFromQueue()) {
-						player_ui.localScale = new Vector3(1,1,1);
-                        BattleManagerS.main.setPause(false);
-                        BattleManagerS.main.postInterrupt();
-                        isInterrupt = false;
-                        setEnabled(false);
-                    }
+					if (!BattleManagerS.main.playSceneFromQueue ()) {
+						player_ui.localScale = new Vector3 (1, 1, 1);
+						BattleManagerS.main.setPause (false);
+						BattleManagerS.main.postInterrupt ();
+						isInterrupt = false;
+						setEnabled (false);
+					}
 				} else {
 					GameflowManager.main.next ();
 				}
+			}
+			if (!block_input) {
+				if (!input)
+					AudioPlayer.main.playSFX ("sfx_type_key");
 			}
 		}
 	}

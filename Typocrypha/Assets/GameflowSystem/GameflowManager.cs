@@ -7,6 +7,8 @@ using UnityEngine;
 public class GameflowManager : Gameflow {
 	public static GameflowManager main = null; // Global static ref
 	public GameObject player_ui; // the Typocrypha UI 
+	//public GameObject screenframe_vn;
+	//public GameObject screenframe_battle;
     private Gameflow curr_gameflow;
 
 	void Awake() {
@@ -53,12 +55,16 @@ public class GameflowManager : Gameflow {
         if (item.GetType() == typeof(Dialogue)) {
 			Debug.Log ("starting dialogue: " + item.name);
 			player_ui.SetActive (false);
+			//screenframe_vn.SetActive (true);
+			//screenframe_battle.SetActive (false);
             BattleManagerS.main.setEnabled(false);
             DialogueManager.main.setEnabled(true);
 			DialogueManager.main.startDialogue (curr_gameflow.transform.GetChild(curr_gameflow.curr_item).gameObject);
 		} else if(item.GetType() == typeof(Battle)) {
             Debug.Log("starting battle: " + item.name);
 			player_ui.SetActive (true);
+			//screenframe_vn.SetActive (false);
+			//screenframe_battle.SetActive (true);
             DialogueManager.main.setEnabled(false);
             BattleManagerS.main.setEnabled(true);
             BattleManagerS.main.startBattle(curr_gameflow.transform.GetChild(curr_gameflow.curr_item).gameObject);

@@ -6,7 +6,7 @@ using System;
 
 public class Pause : MonoBehaviour {
 	public static Pause main = null; // Global static reference
-    bool gamePause;
+	bool gamePause;
     Color dimCol;
     string pauseKey = "escape";
     GameObject hideChild;
@@ -26,6 +26,7 @@ public class Pause : MonoBehaviour {
 	public Image[] settings_buttons;
 	public Text[] texts_toggles;
 	public Image[] toggle_arrows;
+	public GameObject select_instructions;
 
 	int pos_menu_h = 0;
 	int pos_menu_v = 0;
@@ -38,6 +39,7 @@ public class Pause : MonoBehaviour {
 	Dictionary<int, int[]> resolution_map;
 
     void Start () {
+		if (main == null) main = this;
         gamePause = false;
 		hideChild = transform.GetChild(0).gameObject;
 		Cursor.visible = false;
@@ -97,7 +99,7 @@ public class Pause : MonoBehaviour {
             }
         }
 
-		if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+		if (Input.GetKeyDown(KeyCode.LeftArrow) && gamePause) {
 			switch(pos_menu_v){
 			case 0:
 				if(slider_music.slider.value != 0) AudioPlayer.main.playSFX ("sfx_type_key");
@@ -137,7 +139,7 @@ public class Pause : MonoBehaviour {
 			}
 
 		}
-		if (Input.GetKeyDown (KeyCode.RightArrow)) {
+		if (Input.GetKeyDown (KeyCode.RightArrow) && gamePause) {
 			switch (pos_menu_v) {
 			case 0:
 				if(slider_music.slider.value != 1) AudioPlayer.main.playSFX ("sfx_type_key");
@@ -177,19 +179,19 @@ public class Pause : MonoBehaviour {
 			}
 		}
 			
-		if (Input.GetKeyDown (KeyCode.UpArrow)) {
+		if (Input.GetKeyDown (KeyCode.UpArrow) && gamePause) {
 			if(pos_menu_v != 0) AudioPlayer.main.playSFX ("sfx_enemy_select");
 			--pos_menu_v;
 			pos_menu_v = Mathf.Max (pos_menu_v, 0);
 			pos_menu_h = 0;
 		}
-		if (Input.GetKeyDown (KeyCode.DownArrow)) {
+		if (Input.GetKeyDown (KeyCode.DownArrow) && gamePause) {
 			if(pos_menu_v != 5) AudioPlayer.main.playSFX ("sfx_enemy_select");
 			++pos_menu_v;
 			pos_menu_v = Mathf.Min (pos_menu_v, 5);
 		}
 
-		if (Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown (KeyCode.Return)) {
+		if ((Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown (KeyCode.Return)) && gamePause) {
 			if (pos_menu_v == 5) {
 				if (pos_menu_h == 0) {
 					AudioPlayer.main.playSFX ("sfx_enter");
@@ -206,6 +208,12 @@ public class Pause : MonoBehaviour {
 		}
 
 		// UPDATE GRAPHICS BASED ON NEW VALUES
+
+		if (pos_menu_v == 5) {
+			select_instructions.SetActive (true);
+		} else {
+			select_instructions.SetActive (false);
+		}
 
 		string newvalue;
 		newvalue = Mathf.RoundToInt(slider_music.slider.value * 100) + "%";
@@ -311,5 +319,9 @@ public class Pause : MonoBehaviour {
 
 	void ExitGame(){
 		Application.Quit ();
+	}
+
+	public bool isPaused(){
+		return gamePause;
 	}
 }
