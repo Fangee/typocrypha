@@ -223,6 +223,7 @@ public class BattleManagerS : MonoBehaviour {
         //Play music if applicable (BUG HERE WHERE LOADING MUSIC CAUSES LAG)
         if (Wave.Music != string.Empty)
             AudioPlayer.main.playMusic(Wave.Music);
+        field.lastCaster = BattleField.FieldPosition.NONE;
         if (checkInterrupts() == false)
             setPause(false);
         wave_started = true;
