@@ -34,6 +34,10 @@ public class BattleField {
         }
         return target;
     }
+    public static bool isEnemy(FieldPosition pos)
+    {
+        return (pos == FieldPosition.LEFT || pos == FieldPosition.MIDDLE || pos == FieldPosition.RIGHT);
+    }
 
     //BattleField data
 
@@ -71,7 +75,7 @@ public class BattleField {
     {
         callback.updateEnemies();
     }
-    public void updateScourterInfo()
+    public void updateScouterInfo()
     {
         callback.uiManager.updateScourterInfo();
     }

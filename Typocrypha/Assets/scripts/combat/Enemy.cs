@@ -141,7 +141,12 @@ public class Enemy : MonoBehaviour, ICaster {
         //Start Attacking
         attack_cr = StartCoroutine (attackRoutine ()); 
 	}
-
+    public void dummy()
+    {
+        is_dead = true;
+        enemy_sprite.enabled = false;
+        enemy_animator.enabled = false;
+    }
     //AI Helper/Utility functions
 
     //Sets enemy stats without change
@@ -157,7 +162,7 @@ public class Enemy : MonoBehaviour, ICaster {
             Curr_stagger = stats.max_stagger;
             stagger_time = (stats.max_stagger * stagger_mult_constant) + stagger_add_constant;
         }
-        field.updateScourterInfo();
+        field.updateScouterInfo();
     }
     //Changes plays the form change animation
     public void changeForm()

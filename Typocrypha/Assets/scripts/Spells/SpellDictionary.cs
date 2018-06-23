@@ -349,8 +349,9 @@ public class SpellDictionary : MonoBehaviour
             return status;
     }
     //Casts spell from NPC (enemy or ally)
-    public List<CastData> cast(SpellData spell, ICaster[] targets, int selected, ICaster[] allies, int position)
+    public List<CastData> cast(SpellData spell, ICaster[] targets, int selected, ICaster[] allies, int position, out List<Transform> noTargetPositions)
     {
+        noTargetPositions = new List<Transform>();
         ICaster caster = allies[position];
         Spell s = spells[spell.root];
         Spell c = createSpellFromType(s.type);
@@ -379,6 +380,11 @@ public class SpellDictionary : MonoBehaviour
         List<CastData> data = new List<CastData>();
         foreach (ICaster target in toCastAt)
         {
+            if (target == null || target.Is_dead)
+            {
+                noTargetPositions.Add(target.Transform);
+                continue;
+            }
             CastData castData = c.cast(target, caster);
             animData.CopyTo(castData.animData, 0);
             sfxData.CopyTo(castData.sfxData, 0);

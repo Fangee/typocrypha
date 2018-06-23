@@ -65,24 +65,24 @@ public abstract class Spell
         int i = 1;
         if (targetData.targeted)//If spell is cursor-dependant
             i += (selected - 1);
-        if (targetData.enemyM && targets[i] != null && !targets[i].Is_dead)//Middle enemy
+        if (targetData.enemyM)//Middle enemy
             castAt.Add(targets[i]);
         i--;
-        if (i >= 0 && targetData.enemyL && targets[i] != null && !targets[i].Is_dead)//Left enemy
+        if (i >= 0 && targetData.enemyL)//Left enemy
             castAt.Add(targets[i]);
         i += 2;
-        if (i <= 2 && targetData.enemyR && targets[i] != null && !targets[i].Is_dead)//Right enemy
+        if (i <= 2 && targetData.enemyR)//Right enemy
             castAt.Add(targets[i]);
         i = 1;
         if (targetData.selfCenter)//If spell is not cursor-dependant
             i += (position - 1);
-        if (targetData.allyM && allies[i] != null && !allies[i].Is_dead)//Middle ally
+        if (targetData.allyM)//Middle ally
             castAt.Add(allies[i]);
         i--;
-        if (i >= 0 && targetData.allyL && allies[i] != null && !allies[i].Is_dead)//Left ally
+        if (i >= 0 && targetData.allyL)//Left ally
             castAt.Add(allies[i]);
         i += 2;
-        if (i <= 2 && targetData.allyR && allies[i] != null && !allies[i].Is_dead)//Right ally
+        if (i <= 2 && targetData.allyR)//Right ally
             castAt.Add(allies[i]);
         return castAt;
     }

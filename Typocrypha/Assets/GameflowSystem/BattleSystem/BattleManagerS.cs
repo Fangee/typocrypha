@@ -381,20 +381,27 @@ public class BattleManagerS : MonoBehaviour {
             AudioPlayer.main.playSFX ("sfx_blight_hit");
 			AnimationPlayer.main.playAnimation("anim_element_reflect", field.enemy_arr[0].Transform.position, 2f);
 			yield return new WaitForSeconds(0.4f);
-		}
+		} else {
+            createDummyEnemy(0);
+        }
 		if (wave.Enemy2 != string.Empty) {
 			createEnemy (1, wave.Enemy2);
 			AudioPlayer.main.playSFX ("sfx_blight_hit");
 			AnimationPlayer.main.playAnimation("anim_element_reflect", field.enemy_arr[1].Transform.position, 2f);
 			yield return new WaitForSeconds(0.4f);
-		}
-		if (wave.Enemy3 != string.Empty) {
+		} else {
+            createDummyEnemy(1);
+        }
+        if (wave.Enemy3 != string.Empty) {
 			createEnemy (2, wave.Enemy3);
 			AudioPlayer.main.playSFX ("sfx_blight_hit");
 			AnimationPlayer.main.playAnimation("anim_element_reflect", field.enemy_arr[2].Transform.position, 2f);
 			yield return new WaitForSeconds(0.4f);
 		}
-	}
+        else {
+            createDummyEnemy(2);
+        }
+    }
     // creates the enemy specified at 'i' (0-left, 1-mid, 2-right) by the 'scene'
     private void createEnemy(int i, string name)
     {
@@ -415,6 +422,16 @@ public class BattleManagerS : MonoBehaviour {
         field.enemy_arr[i] = enemy;
 		enemy.enemy_animator.Play ("enemy_spawn_in");
         uiManager.updateUI();
+    }
+    // creates a dummy enemy for getting positioning right for no_target stuff
+    private void createDummyEnemy(int i)
+    {
+        Enemy dummy = Instantiate(enemy_prefab, transform).GetComponent<Enemy>(); ;
+        dummy.transform.localScale = new Vector3(1, 1, 1);
+        Vector3 enemy_pos = new Vector3(i * BattleUI.enemy_spacing, BattleUI.enemy_y_offset, 0);
+        dummy.transform.localPosition = enemy_pos;
+        dummy.dummy();
+        field.enemy_arr[i] = dummy;
     }
 
     private bool checkInterrupts()

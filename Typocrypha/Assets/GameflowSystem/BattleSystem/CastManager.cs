@@ -87,8 +87,9 @@ public class CastManager : MonoBehaviour
         //CASTING//
         startCooldown(s, field.Player);
         List<CastData> data;
-        data = spellDict.cast(s, field.enemy_arr, field.target_ind, field.player_arr, caster.Position);
-        processCast(data, s);
+        List<Transform> noTargetPositions;
+        data = spellDict.cast(s, field.enemy_arr, field.target_ind, field.player_arr, caster.Position, out noTargetPositions);
+        processCast(data, s, noTargetPositions, BattleField.FieldPosition.PLAYER);
 
         yield return new WaitForSeconds(1.1f);
 
@@ -124,8 +125,9 @@ public class CastManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         field.enemy_arr[position].startSwell();
-        List<CastData> data = dict.cast(s, field.player_arr, target, field.enemy_arr, position);
-        processCast(data, s);
+        List<Transform> noTargetPositions;
+        List<CastData> data = dict.cast(s, field.player_arr, target, field.enemy_arr, position, out noTargetPositions);
+        processCast(data, s, noTargetPositions, (BattleField.FieldPosition)position);
 
         yield return new WaitForSeconds(1f);
 
@@ -140,26 +142,25 @@ public class CastManager : MonoBehaviour
 
     //Method for processing CastData (most effects now happen in SpellEffects.cs)
     //Called by Cast in the SUCCESS CastStatus case, possibly on BOTCH in the future
-    private void processCast(List<CastData> data, SpellData s)
+    private void processCast(List<CastData> data, SpellData s, List<Transform> noTargetPositions, BattleField.FieldPosition casterPos)
     {
-        if(data.Count > 0)
+        if (casterPos == BattleField.FieldPosition.PLAYER)
         {
-            ICasterType toCheck = data[0].Caster.CasterType;
-            if (data[0].repel)
-                toCheck = data[0].Target.CasterType;
-            if(toCheck == ICasterType.PLAYER)
-            {
-                field.last_player_cast = data;
-                field.last_player_spell = s;
-            }
-            else if(toCheck == ICasterType.ENEMY)
-            {
-                field.last_enemy_cast = data;
-                field.last_enemy_spell = s;
-            }
+            field.last_player_cast = data;
+            field.last_player_spell = s;
+        }
+        else if (BattleField.isEnemy(casterPos))
+        {
+            field.last_enemy_cast = data;
+            field.last_enemy_spell = s;
         }
 		uiManager.battle_log.stop ();
         float delay = 0;
+        foreach(Transform t in noTargetPositions)
+        {
+            spellEffects.StartCoroutine(spellEffects.noTargetEffects(t, delay));
+            //delay += 0.1f;
+        }
         //Process the data here
         foreach (CastData d in data)
         {

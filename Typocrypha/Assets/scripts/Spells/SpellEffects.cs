@@ -16,11 +16,6 @@ public class SpellEffects : MonoBehaviour {
 	Vector3 TEXT_OFFSET = new Vector3(0.0f, -0.25f, 0);
     const float shakeIntensityMod = 0.1f; //The amount to scale each shake by (per keyword)
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-
     public IEnumerator playEffects(CastData d, SpellData s, float delay = 0)
     {
         yield return new WaitForSeconds(delay);
@@ -111,6 +106,11 @@ public class SpellEffects : MonoBehaviour {
 		}
         //Spawn damage number and some other gubs
         spawnDamagePopup(d, shakeIntensity);
+    }
+    public IEnumerator noTargetEffects(Transform pos, float delay = 0)
+    {
+        yield return new WaitForSeconds(delay);
+        popp.spawnText("No Target!", POP_TIMER, pos.position, Color.red, Color.white);
     }
     public IEnumerator finishFrenzyCast(int damage, string animationID, string sfxId, CastData d)
     {
@@ -289,8 +289,4 @@ public class SpellEffects : MonoBehaviour {
                 break;
         }
     }
-    // Update is called once per frame
-    void Update () {
-		
-	}
 }
