@@ -72,9 +72,14 @@ public class DialogueManager : MonoBehaviour {
 	}
 
 	void Update() {
-		if (Pause.main.isPaused ())
-			return;
-		if (history.Count > 0 && history [history.Count - 1].cr_scroll == null && !input) {
+		if (Pause.main.isPaused ()) {
+            if (input_field.enabled) {
+                input_field.enabled = false;
+            }
+            return;
+        }
+        input_field.enabled = true;
+        if (history.Count > 0 && history [history.Count - 1].cr_scroll == null && !input) {
 			spacebar_icon_vn.SetActive (true);
 		}
 		if (block_input) {

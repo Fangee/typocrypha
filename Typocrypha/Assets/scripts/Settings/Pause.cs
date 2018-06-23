@@ -78,7 +78,6 @@ public class Pause : MonoBehaviour {
                 BattleEffects.main.setDim(true);
                 blockTextboxInput = DialogueManager.main.block_input;
                 DialogueManager.main.block_input = true;
-				DialogueManager.main.input_field.DeactivateInputField ();
                 AudioPlayer.main.pauseSFX();
 				hideChild.SetActive (true);
 				//Cursor.visible = true;
