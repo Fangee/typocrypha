@@ -380,7 +380,9 @@ public class SpellDictionary : MonoBehaviour
         List<CastData> data = new List<CastData>();
         foreach (ICaster target in toCastAt)
         {
-            if (target == null || target.Is_dead)
+            if (target == null)
+                continue;
+            if (target.Is_dead)
             {
                 noTargetPositions.Add(target.Transform);
                 continue;

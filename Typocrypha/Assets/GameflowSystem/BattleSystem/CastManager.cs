@@ -161,6 +161,8 @@ public class CastManager : MonoBehaviour
             spellEffects.StartCoroutine(spellEffects.noTargetEffects(t, delay));
             //delay += 0.1f;
         }
+        if (noTargetPositions.Count > 0 && data.Count == 0)
+            AudioPlayer.main.playSFX("sfx_miss");
         //Process the data here
         foreach (CastData d in data)
         {
