@@ -52,7 +52,7 @@ public class EnemyStaggerBars : MonoBehaviour {
 
 	// update stagger bars
 	void Update() {
-		if (!BattleManagerS.main.enabled || BattleManagerS.main.pause) return;
+		if (!BattleManagerS.main.enabled) return;
 		for (int i = 0; i < 3; i++) {
 			if (stagger_bars [i] != null) {
 				Enemy enemy = BattleManagerS.main.field.enemy_arr [i];

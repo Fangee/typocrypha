@@ -53,7 +53,7 @@ public class EnemyChargeBars : MonoBehaviour {
 
 	// update charge bars
 	void Update() {
-		if (!BattleManagerS.main.enabled || BattleManagerS.main.pause) return;
+		if (!BattleManagerS.main.enabled) return;
 		updateChargeBars ();
 	}
 
