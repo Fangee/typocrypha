@@ -38,7 +38,13 @@ public class DialogueManager : MonoBehaviour {
 	public GameObject spacebar_icon_vn; // Spacebar icon VN view
 	public Animator animator_spacebar_vn; // Spacebar icon key animator
 
-	[HideInInspector] public bool pause_scroll; // Pause text scroll
+    public GameObject spacebar_icon_an; // Spacebar icon AN view
+    public Animator animator_spacebar_an; // Spacebar icon key animator
+
+    public GameObject spacebar_icon_chat; // Spacebar icon CHAT view
+    public Animator animator_spacebar_chat; // Spacebar icon key animator
+
+    [HideInInspector] public bool pause_scroll; // Pause text scroll
 	[HideInInspector] public bool block_input; // Blocks user input
 	[HideInInspector] public bool is_dump; // Is text being dumped?
 	[HideInInspector] public string answer; // Player's input
@@ -55,6 +61,9 @@ public class DialogueManager : MonoBehaviour {
 	bool input; // Are we waiting for input?
 	GameObject input_display; // Display image for input
 
+    private GameObject curr_spacebar_icon; // Spacebar icon VN view ref
+    private Animator curr_spacebar_animator; // Spacebar icon key animator ref
+
     private bool isInterrupt = false; //is this dialogue event a oneshot (interrupts, etc)
 
 	void Awake() {
@@ -67,6 +76,8 @@ public class DialogueManager : MonoBehaviour {
 		default_window_height = top_space;
 		history = new List<DialogueBox> ();
 		chr_spr_list = new List<GameObject> ();
+        curr_spacebar_icon = spacebar_icon_an;
+        curr_spacebar_animator = animator_spacebar_an;
 		input = false;
         scroll_scale = 1f;
 	}
@@ -80,20 +91,20 @@ public class DialogueManager : MonoBehaviour {
         }
         input_field.enabled = true;
         if (history.Count > 0 && history [history.Count - 1].cr_scroll == null && !input) {
-			spacebar_icon_vn.SetActive (true);
+			curr_spacebar_icon.SetActive (true);
 		}
 		if (block_input) {
-			spacebar_icon_vn.SetActive (true);
+			curr_spacebar_icon.SetActive (true);
 			if (Input.GetKeyDown (KeyCode.Space)) AudioPlayer.main.playSFX ("sfx_botch");
-            if (spacebar_icon_vn.activeInHierarchy)
-                animator_spacebar_vn.Play ("anim_key_spacebar_no");
+            if (curr_spacebar_icon.activeInHierarchy)
+                curr_spacebar_animator.Play ("anim_key_spacebar_no");
 			return;
 		} else {
 			if (history.Count > 0 && history [history.Count - 1].cr_scroll != null){
-				spacebar_icon_vn.SetActive (false);
+				curr_spacebar_icon.SetActive (false);
 			}
-			if (spacebar_icon_vn.activeInHierarchy) {
-				animator_spacebar_vn.Play ("anim_key_spacebar");
+			if (curr_spacebar_icon.activeInHierarchy) {
+                curr_spacebar_animator.Play ("anim_key_spacebar");
 			} 
 		}
 		if (isInterrupt)
@@ -150,7 +161,7 @@ public class DialogueManager : MonoBehaviour {
 			dump_cr = StartCoroutine (history [history.Count - 1].dumpText ());
 		} else {
 			//if (!input && Input.GetKeyDown (KeyCode.Space)) AudioPlayer.main.playSFX ("sfx_advance_text");
-			spacebar_icon_vn.SetActive (false);
+			//curr_spacebar_icon.SetActive (false);
 			if (input) return true;
 			if (curr_line >= curr_dialogue.GetComponents<DialogueItem>().Length - 1) return false;
 			// Create dialogue box
@@ -169,12 +180,16 @@ public class DialogueManager : MonoBehaviour {
                 VNView.SetActive(true);
                 ChatView.SetActive(false);
                 ANView.SetActive(false);
+                curr_spacebar_icon = spacebar_icon_vn;
+                curr_spacebar_animator = animator_spacebar_vn;
                 d_box = VNDialogueBox;
                 VNSpeaker.text = DialogueParser.main.substituteMacros(d_item.speaker_name);
             } else if (d_item.GetType() == typeof(DialogueItemChat)) {
                 VNView.SetActive(false);
                 ChatView.SetActive(true);
                 ANView.SetActive(false);
+                curr_spacebar_icon = spacebar_icon_chat;
+                curr_spacebar_animator = animator_spacebar_chat;
                 //clearLog (ChatView);
                 GameObject d_obj = Instantiate(dialogue_box_prefab, ChatContent);
                 d_box = d_obj.GetComponent<DialogueBox>();
@@ -182,6 +197,8 @@ public class DialogueManager : MonoBehaviour {
                 VNView.SetActive(false);
                 ChatView.SetActive(false);
                 ANView.SetActive(true);
+                curr_spacebar_icon = spacebar_icon_an;
+                curr_spacebar_animator = animator_spacebar_an;
                 //clearLog (ANView);
                 GameObject d_obj = Instantiate(an_dialouge_box_prefab, ANContent);
                 d_box = d_obj.GetComponent<DialogueBox>();
@@ -221,7 +238,7 @@ public class DialogueManager : MonoBehaviour {
 		input_field.gameObject.SetActive (true);
 		input_field.ActivateInputField ();
         //spacebar_icon_vn.SetActive(true);
-        animator_spacebar_vn.Play("anim_key_spacebar_no");
+        curr_spacebar_animator.Play("anim_key_spacebar_no");
 		if (d_item.input_display != null)
 			input_display = Instantiate (d_item.input_display, transform);
 		if (d_item.input_options.Length > 0) {
@@ -316,7 +333,7 @@ public class DialogueManager : MonoBehaviour {
 					AudioPlayer.main.playSFX ("sfx_botch");
 				}
 			} else {
-				animator_spacebar_vn.Play("anim_key_spacebar");
+				curr_spacebar_animator.Play("anim_key_spacebar");
 				AudioPlayer.main.playSFX ("sfx_enter");
 			}
 			//}
