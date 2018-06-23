@@ -125,10 +125,10 @@ public class DialogueManager : MonoBehaviour {
 					GameflowManager.main.next ();
 				}
 			}
-			if (!block_input) {
-				if (!input)
-					AudioPlayer.main.playSFX ("sfx_type_key");
-			}
+			//if (!block_input) {
+			//	if (!input)
+			//		AudioPlayer.main.playSFX ("sfx_type_key");
+			//}
 		}
 	}
 
