@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class PreTitle : MonoBehaviour {
 	public TextScroll text_scroll; // scrolls text character by character
 	public Text prompt_text; // prompts player
+	public Text instruction_text; // text with instructions
 	public Text input_text; // player's input
 	public string target_input; // what player should enter
 	public SpriteRenderer dimmer; // dims screen
@@ -84,6 +85,7 @@ public class PreTitle : MonoBehaviour {
 			caret.SetActive (false);
 			StartCoroutine (transitionToTitle ());
 		}
+		// Fade in
 		float alpha = 1;
 		while (alpha > 0) {
 			screen_dimmer.color = new Color (0, 0, 0, alpha);
@@ -91,7 +93,7 @@ public class PreTitle : MonoBehaviour {
 			yield return new WaitForEndOfFrame ();
 		}
 		yield return new WaitForSeconds (0.5f);
-		text_scroll.startPrint ("[set-talk-sfx=]Please type in the following phrase.", prompt_text);
+		text_scroll.startPrint ("[set-talk-sfx=]Please type in the following phrase (hit ENTER to submit):", instruction_text);
 		yield return new WaitWhile(() => text_scroll.is_print);
 		yield return new WaitForSeconds (0.5f);
 		prompt_text.text = target_input;
@@ -141,6 +143,7 @@ public class PreTitle : MonoBehaviour {
 		while (alpha > 0) {
 			input_text.color = new Color (1, 1, 1, alpha);
 			prompt_text.color = new Color (1, 1, 1, alpha);
+			instruction_text.color = new Color (1, 1, 1, alpha);
 			alpha -= 0.01f;
 			yield return new WaitForEndOfFrame ();
 		}
