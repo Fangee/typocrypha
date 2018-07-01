@@ -19,8 +19,6 @@ MonoBehaviour:
   nodes:
   - {fileID: 114244117740833322}
   - {fileID: 114563029048087304}
-  - {fileID: 114632089880246094}
-  - {fileID: 114703982382136252}
   groups: []
   Name: Dialog
 --- !u!114 &114023421092768214
@@ -53,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
   m_Name: From Previous
   m_EditorClassIdentifier: 
-  body: {fileID: 114703982382136252}
+  body: {fileID: 0}
   direction: 1
   maxConnectionCount: 0
   styleID: Gameflow
@@ -106,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
   m_Name: To Next
   m_EditorClassIdentifier: 
-  body: {fileID: 114703982382136252}
+  body: {fileID: 0}
   direction: 2
   maxConnectionCount: 1
   styleID: Gameflow
@@ -125,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
   m_Name: From Previous
   m_EditorClassIdentifier: 
-  body: {fileID: 114632089880246094}
+  body: {fileID: 0}
   direction: 1
   maxConnectionCount: 0
   styleID: Gameflow
@@ -159,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
   m_Name: To Next
   m_EditorClassIdentifier: 
-  body: {fileID: 114632089880246094}
+  body: {fileID: 0}
   direction: 2
   maxConnectionCount: 1
   styleID: Gameflow
@@ -180,7 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
   parentEditor: {fileID: 0}
-  selectedNode: {fileID: 114703982382136252}
+  selectedNode: {fileID: 0}
   panOffset: {x: 25, y: 44}
   zoom: 1
 --- !u!114 &114632089880246094
