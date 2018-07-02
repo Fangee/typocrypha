@@ -65,11 +65,14 @@ public class Pause : MonoBehaviour {
 			{1, new int[]{640, 360}},
 			{0, new int[]{256, 144}}
 		};
+		// Set initial resolution settings to current setting
 		pos_resolution = 8;
-		if (Screen.fullScreen)
-			pos_screenmode = 1;
-		else
-			pos_screenmode = 0;
+		foreach (KeyValuePair<int, int[]> res in resolution_map) {
+			if (Screen.width == res.Value [0] && Screen.height == res.Value [1])
+				pos_resolution = res.Key;
+		}
+		if (Screen.fullScreen) pos_screenmode = 1;
+		else                   pos_screenmode = 0;
     }
 
 	void LateUpdate () {

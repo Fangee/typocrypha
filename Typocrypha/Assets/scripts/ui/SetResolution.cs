@@ -13,7 +13,6 @@ public class SetResolution : MonoBehaviour {
 		DontDestroyOnLoad(transform.gameObject);
 		if (main == null) {
 			main = this;
-			ApplySettings ();
 		} else {
 			GameObject.Destroy (gameObject); // avoid multiple copies
 		}
