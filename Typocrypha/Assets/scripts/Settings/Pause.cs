@@ -68,7 +68,7 @@ public class Pause : MonoBehaviour {
 		// Set initial resolution settings to current setting
 		pos_resolution = 8;
 		foreach (KeyValuePair<int, int[]> res in resolution_map) {
-			if (Screen.width == res.Value [0] && Screen.height == res.Value [1])
+			if (Screen.currentResolution.width == res.Value [0] && Screen.currentResolution.height == res.Value [1])
 				pos_resolution = res.Key;
 		}
 		if (Screen.fullScreen) pos_screenmode = 1;
