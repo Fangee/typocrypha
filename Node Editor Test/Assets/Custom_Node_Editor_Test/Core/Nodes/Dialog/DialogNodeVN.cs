@@ -4,8 +4,8 @@ using NodeEditorFramework;
 
 namespace TypocryphaGameflow
 {
-    [Node(false, "Dialog/VN Dialog Node", new System.Type[]{typeof(GameflowCanvas) })]
-    public class DialogueNodeVN : BaseDialogNode
+    [Node(false, "Dialog/VN Dialog Node", new System.Type[] { typeof(GameflowCanvas) })]
+    public class DialogNodeVN : BaseDialogNode
     {
         public const string ID = "VN Dialog Node";
         public override string GetID { get { return ID; } }
@@ -42,7 +42,7 @@ namespace TypocryphaGameflow
             GUILayout.Space(5);
             EditorGUILayout.BeginVertical("Box");
             GUILayout.BeginHorizontal();
-            GUILayout.Label(new GUIContent("Name", tooltip_name) , labelStyle, GUILayout.Width(45f));
+            GUILayout.Label(new GUIContent("Name", tooltip_name), labelStyle, GUILayout.Width(45f));
             characterName = EditorGUILayout.TextField("", characterName, GUILayout.Width(235f));
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();

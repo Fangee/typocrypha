@@ -7,7 +7,7 @@ using NodeEditorFramework;
 namespace TypocryphaGameflow
 {
     [Node(false, "Dialog/Dialog Input", new System.Type[] { typeof(GameflowCanvas) })]
-    public class DialogNodeInput : DialogueNodeVN
+    public class DialogNodeInput : DialogNodeVN
     {
         new public const string ID = "inputDialogNode";
         public override string Title { get { return "Input Dialog Node"; } }
