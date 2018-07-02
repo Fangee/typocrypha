@@ -4,13 +4,13 @@ using NodeEditorFramework;
 
 namespace TypocryphaGameflow
 {
-    [Node(false, "Dialog/Testing/Test Dialog Node", new System.Type[]{typeof(GameflowCanvas) })]
-    public class BaseTextNode : BaseDialogNode
+    [Node(false, "Dialog/VN Dialog Node", new System.Type[]{typeof(GameflowCanvas) })]
+    public class DialogueNodeVN : BaseDialogNode
     {
-        public const string ID = "Test Dialog Node";
+        public const string ID = "VN Dialog Node";
         public override string GetID { get { return ID; } }
 
-        public override string Title { get { return "Test Dialog Node"; } }
+        public override string Title { get { return "VN Dialog Node"; } }
         public override Vector2 MinSize { get { return new Vector2(300, 60); } }
         public override bool AutoLayout { get { return true; } }
 

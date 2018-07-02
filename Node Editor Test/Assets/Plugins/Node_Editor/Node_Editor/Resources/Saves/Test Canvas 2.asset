@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cccd7263bead9b45812c09807fb759f, type: 3}
+  m_Name: Test Canvas 2
+  m_EditorClassIdentifier: 
+  editorStates:
+  - {fileID: 114397864182674312}
+  saveName: Assets\Plugins\Node_Editor\Node_Editor\Resources\Saves\Test Canvas 2
+  savePath: Assets\Plugins\Node_Editor\Node_Editor\Resources\Saves\Test Canvas 2.asset
+  livesInScene: 0
+  nodes:
+  - {fileID: 114312872940529430}
+  - {fileID: 114505436105520620}
+  groups: []
+--- !u!114 &114264035689209278
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: From Previous
+  m_EditorClassIdentifier: 
+  body: {fileID: 114312872940529430}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: Gameflow
+  _connections: []
+  side: 4
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114312872940529430
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: VN Dialog Node
+  m_EditorClassIdentifier: Assembly-CSharp:TypocryphaGameflow:DialogueNodeVN
+  position: {x: -750, y: -150}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  characterName: Character Name
+  dialogText: Insert dialog text here
+  fromPreviousIN: {fileID: 114264035689209278}
+  toNextOUT: {fileID: 114645854164112596}
+  expression: Expression
+--- !u!114 &114397864182674312
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ab6487237ff124ea4c2aa5de9ce3fb, type: 3}
+  m_Name: MainEditorState
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  parentEditor: {fileID: 0}
+  selectedNode: {fileID: 114505436105520620}
+  panOffset: {x: 369.8, y: 20.999996}
+  zoom: 1
+--- !u!114 &114505436105520620
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d272a38b9015334288766e9538f3b4d, type: 3}
+  m_Name: Gameflow Branch
+  m_EditorClassIdentifier: 
+  position: {x: -420.4, y: -148.8}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  fromPreviousIN: {fileID: 114688548693743572}
+  _cases:
+  - pattern: tccttctc
+    type: 0
+  - pattern: 
+    type: 0
+  - pattern: 
+    type: 0
+  - pattern: 
+    type: 1
+  - pattern: 252452
+    type: 0
+  - pattern: 
+    type: 0
+--- !u!114 &114645854164112596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: To Next
+  m_EditorClassIdentifier: 
+  body: {fileID: 114312872940529430}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114688548693743572}
+  side: 2
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114688548693743572
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: From Previous
+  m_EditorClassIdentifier: 
+  body: {fileID: 114505436105520620}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114645854164112596}
+  side: 4
+  sidePosition: 30
+  sideOffset: 0

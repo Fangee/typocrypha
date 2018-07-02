@@ -13,7 +13,7 @@ namespace TypocryphaGameflow
         public override string GetID { get { return ID; } }
 
         public override string Title { get { return "Gameflow Start"; } }
-        public override Vector2 MinSize { get { return new Vector2(300, 60); } }
+        public override Vector2 MinSize { get { return new Vector2(150, 60); } }
         public override bool AutoLayout { get { return true; } }
 
         protected static GUIStyle labelStyle = new GUIStyle();
@@ -32,11 +32,14 @@ namespace TypocryphaGameflow
 
         public override void NodeGUI()
         {
+            GUILayout.BeginVertical("Box");
             labelStyle.normal.textColor = Color.white;
             GUILayout.BeginHorizontal();
-            GUILayout.Label(new GUIContent("Name", tooltip_gameflowID), labelStyle, GUILayout.Width(45f));
-            gameflowID = EditorGUILayout.TextField("", gameflowID, GUILayout.Width(235f));
+            GUILayout.Label(new GUIContent("ID", tooltip_gameflowID), labelStyle, GUILayout.Width(20f));
+            gameflowID = EditorGUILayout.TextField("", gameflowID, GUILayout.Width(120f));
             EditorGUILayout.EndHorizontal();
+            GUILayout.Space(3);
+            GUILayout.EndVertical();
         }
     }
 }
