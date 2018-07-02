@@ -10,10 +10,12 @@ public class ScrollSlider : MonoBehaviour {
     // Use this for initialization
     void Start () {
         slider.onValueChanged.AddListener(delegate {ValueChangeCheck(); });
-        slider.value = DialogueManager.main.scroll_scale;
+		if (!Pause.main.title)
+        	slider.value = DialogueManager.main.scroll_scale;
     }
 
     void ValueChangeCheck(){
-		DialogueManager.main.scroll_scale = 0.1f+(11-(slider.value*10));
+		if (!Pause.main.title)
+			DialogueManager.main.scroll_scale = 0.1f+(11-(slider.value*10));
     }
 }

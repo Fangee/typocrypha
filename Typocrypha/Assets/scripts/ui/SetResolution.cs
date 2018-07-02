@@ -4,13 +4,19 @@ using UnityEngine;
 
 // sets resolution of screen
 public class SetResolution : MonoBehaviour {
+	public static SetResolution main = null;
 	public int width;
 	public int height;
 	public bool full;
 
-	void Start () {
-		ApplySettings ();
-		//Screen.SetResolution (1280, 720/2, false);
+	void Awake () {
+		DontDestroyOnLoad(transform.gameObject);
+		if (main == null) {
+			main = this;
+			ApplySettings ();
+		} else {
+			GameObject.Destroy (gameObject); // avoid multiple copies
+		}
 	}
 
 	public void SetRes (int w, int h) {

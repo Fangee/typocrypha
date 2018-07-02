@@ -20,11 +20,9 @@ public class TitleScreen : MonoBehaviour {
     private int index = 0;
     private const float y_offset = 0.62f;
 
-	void Awake () {
-	}
-
     private void Update()
     {
+		if (Pause.main.isPaused ()) return;
 		if (!isActive) {
 			title_menu.SetActive (false);
 			return;
@@ -55,54 +53,65 @@ public class TitleScreen : MonoBehaviour {
         {
             switch (index)
             {
-				case 0: //continue button
+				case 0: // Start Demo
 					Debug.Log ("starting new game");
 					transitionToStart ();
+					isActive = false;
+					Pause.main.title = false;
 					break;
-                    //throw new System.NotImplementedException("continue functionality is not implemented (see TitleScreen.cs)");
-                case 1: //load game button
+                case 1: // Quit game
 					Application.Quit();
 					break;
-                    //throw new System.NotImplementedException("load game functionality is not implemented (see TitleScreen.cs)");
-                case 2: //new game button
+				case 2: // Settings
+					Debug.Log("settings");
+					Pause.main.titleMenu ();
+					break;
+				/*
+                case 3: //new game button
                     Debug.Log("starting new game");
                     transitionToStart();
+					isActive = false;
                     break;
-                case 3: //settings button
-                    throw new System.NotImplementedException("settings functionality is not implemented (see TitleScreen.cs)");
                 case 4:
                     Application.Quit();
+					isActive = false;
                     break;
+                */
                 default:
                     throw new System.NotImplementedException("no such menu index: " + index);
-
             }
             AudioPlayer.main.playSFX("sfx_enter");
-            isActive = false;
         }
+		setTitleText ();
+    }
+
+	// Sets title menu text
+	private void setTitleText() {
 		Text[] title_options = title_menu_list.GetComponentsInChildren<Text> ();
 		string selected_option_text = "";
 		int i = 0;
 		foreach (Text option in title_options) {
 			switch (i) {
-				case 0:
-					selected_option_text = "BEGIN DEMO";
-					break;
-				case 1:
-					selected_option_text = "QUIT";
-					break;
-				case 2:
-					selected_option_text = "NEW GAME";
-					break;
+			case 0:
+				selected_option_text = "BEGIN DEMO";
+				break;
+			case 1:
+				selected_option_text = "QUIT";
+				break;
+			case 2:
+				selected_option_text = "SETTINGS";
+				break;
+				/*
 				case 3:
-					selected_option_text = "SETTINGS";
+					selected_option_text = "NEW GAME";
 					break;
 				case 4:
 					selected_option_text = "QUIT";
 					break;
-				default:
-					selected_option_text = "this text should not be seen";
-					break;
+				*/
+			default:
+				selected_option_text = "this text should not be seen";
+				break;
 			}
 			if (option == title_options[index]) {
 				option.text = "> " + selected_option_text + " <";
@@ -113,7 +122,7 @@ public class TitleScreen : MonoBehaviour {
 			}
 			++i;
 		}
-    }
+	}
 
     // starts title screen music/ui/animations/etc
     public void startTitle() {

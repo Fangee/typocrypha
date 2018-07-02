@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System;
 
 public class Pause : MonoBehaviour {
@@ -10,9 +11,11 @@ public class Pause : MonoBehaviour {
     Color dimCol;
     string pauseKey = "escape";
     GameObject hideChild;
-    bool battlePause = false; //saves battlemanager pause state
+    bool battlePause = false; // Saves battlemanager pause state
     bool blockTextboxInput = false;
+
 	public bool block_pause = false;
+	public bool title;
 
 	public SetResolution resolution_script;
 
@@ -40,6 +43,12 @@ public class Pause : MonoBehaviour {
 
     void Start () {
 		if (main == null) main = this;
+		else GameObject.Destroy (gameObject);
+
+		// Check if title screen or not
+		if (SceneManager.GetActiveScene ().name == "TitleScene") title = true;
+		else                                                     title = false;
+		
         gamePause = false;
 		hideChild = transform.GetChild(0).gameObject;
 		Cursor.visible = false;
@@ -56,47 +65,16 @@ public class Pause : MonoBehaviour {
 			{1, new int[]{640, 360}},
 			{0, new int[]{256, 144}}
 		};
-		pos_resolution = 9;
+		pos_resolution = 8;
 		if (Screen.fullScreen)
 			pos_screenmode = 1;
 		else
 			pos_screenmode = 0;
     }
-	
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown(pauseKey) && (block_pause == false))
-        {
-			gamePause = !gamePause;
 
-            if (gamePause)
-            {
-                Time.timeScale = 0;
-                battlePause = BattleManagerS.main.pause;
-                BattleManagerS.main.setPause(true);
-                dimCol = BattleEffects.main.dimmer.color;
-                BattleEffects.main.setDim(true);
-                blockTextboxInput = DialogueManager.main.block_input;
-                DialogueManager.main.block_input = true;
-                AudioPlayer.main.pauseSFX();
-				hideChild.SetActive (true);
-				//Cursor.visible = true;
-				//Cursor.lockState = CursorLockMode.None;
-				AudioPlayer.main.playSFX("sfx_scanner_open");
-            }
-            else
-            {
-                Time.timeScale = 1;
-                BattleManagerS.main.setPause(battlePause);
-                BattleEffects.main.dimmer.color = dimCol;
-                DialogueManager.main.block_input = blockTextboxInput;
-                AudioPlayer.main.unpauseSFX();
-				hideChild.SetActive (false);
-				//Cursor.visible = false;
-				//Cursor.lockState = CursorLockMode.Locked;
-				AudioPlayer.main.playSFX("sfx_scanner_close");
-            }
-        }
+	void LateUpdate () {
+		// Check if player presses pause key
+		if (Input.GetKeyDown(pauseKey) && (!block_pause) && (!title)) toggleMenu ();
 
 		if (Input.GetKeyDown(KeyCode.LeftArrow) && gamePause) {
 			switch(pos_menu_v){
@@ -194,14 +172,14 @@ public class Pause : MonoBehaviour {
 			if (pos_menu_v == 5) {
 				if (pos_menu_h == 0) {
 					AudioPlayer.main.playSFX ("sfx_enter");
-					resolution_script.SetFull (Convert.ToBoolean(pos_screenmode));
+					resolution_script.SetFull (Convert.ToBoolean (pos_screenmode));
 					selected_res = resolution_map [pos_resolution];
 					resolution_script.SetRes (selected_res [0], selected_res [1]);
 					resolution_script.ApplySettings ();
+					if (title) toggleMenu ();
 				} else {
-					//Application.Quit;
 					AudioPlayer.main.playSFX ("sfx_enter");
-					ExitGame();
+					ExitGame ();
 				}
 			}
 		}
@@ -316,11 +294,62 @@ public class Pause : MonoBehaviour {
 		}
 	}
 
-	void ExitGame(){
+	// Shows pause menu
+	private void showMenu() {
+		Time.timeScale = 0;
+		pos_menu_v = 0;
+		pos_menu_h = 0;
+		if (!title) {
+			battlePause = BattleManagerS.main.pause;
+			BattleManagerS.main.setPause (true);
+			dimCol = BattleEffects.main.dimmer.color;
+			BattleEffects.main.setDim (true);
+			blockTextboxInput = DialogueManager.main.block_input;
+			DialogueManager.main.block_input = true;
+		}
+		AudioPlayer.main.pauseSFX();
+		hideChild.SetActive (true);
+		//Cursor.visible = true;
+		//Cursor.lockState = CursorLockMode.None;
+		AudioPlayer.main.playSFX("sfx_scanner_open");
+	}
+
+	// Hides pause menu
+	private void hideMenu() {
+		Time.timeScale = 1;
+		if (!title) {
+			BattleManagerS.main.setPause (battlePause);
+			BattleEffects.main.dimmer.color = dimCol;
+			DialogueManager.main.block_input = blockTextboxInput;
+		}
+		AudioPlayer.main.unpauseSFX ();
+		hideChild.SetActive (false);
+		//Cursor.visible = false;
+		//Cursor.lockState = CursorLockMode.Locked;
+		AudioPlayer.main.playSFX("sfx_scanner_close");
+	}
+
+	// Toggles pause menu
+	private void toggleMenu() {
+		gamePause = !gamePause;
+		if (gamePause) showMenu ();
+		else           hideMenu ();
+	}
+
+	// Exits application (has no effect in editor)
+	private void ExitGame(){
 		Application.Quit ();
 	}
 
+	// Returns if game is paused and pause menu is visible
 	public bool isPaused(){
 		return gamePause;
 	}
+
+	// Toggles pause menu in title screen
+	public void titleMenu() {
+		if (!title) throw new Exception ("titleMenu(bool) should only be called during title screen.");
+		toggleMenu ();
+	}
+
 }
