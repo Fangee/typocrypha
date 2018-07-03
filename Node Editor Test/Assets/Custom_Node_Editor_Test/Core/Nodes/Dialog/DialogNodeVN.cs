@@ -15,10 +15,10 @@ namespace TypocryphaGameflow
         public override bool AutoLayout { get { return true; } }
 
         //Connection from previous node (INPUT)
-        [ConnectionKnob("From Previous", Direction.In, "Gameflow", NodeSide.Left, 30)]
+        [ConnectionKnob("From Previous", Direction.In, "Gameflow", ConnectionCount.Multi, NodeSide.Left, 30)]
         public ConnectionKnob fromPreviousIN;
         //Next Node to go to (OUTPUT)
-        [ConnectionKnob("To Next", Direction.Out, "Gameflow", NodeSide.Right, 30)]
+        [ConnectionKnob("To Next", Direction.Out, "Gameflow", ConnectionCount.Single, NodeSide.Right, 30)]
         public ConnectionKnob toNextOUT;
 
         public string expression;

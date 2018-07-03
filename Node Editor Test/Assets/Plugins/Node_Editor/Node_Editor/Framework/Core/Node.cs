@@ -568,18 +568,42 @@ namespace NodeEditorFramework
 			ConnectionPortManager.UpdateRepresentativePortLists(this);
 			return port;
 		}
+        //Edit to framework: (added to support inserting connection ports at an index)
+        public ConnectionPort CreateConnectionPort(ConnectionPortAttribute specificationAttribute, int index)
+        {
+            if (index >= 0 && index <= dynamicConnectionPorts.Count)
+            {
+                ConnectionPort port = specificationAttribute.CreateNew(this);
+                if (port == null)
+                    return null;
+                dynamicConnectionPorts.Insert(index, port);
+                ConnectionPortManager.UpdateRepresentativePortLists(this);
+                return port;
+            }
+            return null;
+        }
 
 		public ConnectionKnob CreateConnectionKnob(ConnectionKnobAttribute specificationAttribute)
 		{
 			return (ConnectionKnob)CreateConnectionPort(specificationAttribute);
 		}
+        //Edit to framework: (added to support inserting connection ports at an index)
+        public ConnectionKnob CreateConnectionKnob(ConnectionKnobAttribute specificationAttribute, int index)
+        {
+            return (ConnectionKnob)CreateConnectionPort(specificationAttribute, index);
+        }
 
-		public ValueConnectionKnob CreateValueConnectionKnob(ValueConnectionKnobAttribute specificationAttribute)
+        public ValueConnectionKnob CreateValueConnectionKnob(ValueConnectionKnobAttribute specificationAttribute)
 		{
 			return (ValueConnectionKnob)CreateConnectionPort(specificationAttribute);
 		}
+        //Edit to framework: (added to support inserting connection ports at an index)
+        public ValueConnectionKnob CreateValueConnectionKnob(ValueConnectionKnobAttribute specificationAttribute, int index)
+        {
+            return (ValueConnectionKnob)CreateConnectionPort(specificationAttribute, index);
+        }
 
-		public void DeleteConnectionPort(ConnectionPort dynamicPort)
+        public void DeleteConnectionPort(ConnectionPort dynamicPort)
 		{
 			dynamicPort.ClearConnections ();
 			dynamicConnectionPorts.Remove(dynamicPort);

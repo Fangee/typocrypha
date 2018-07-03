@@ -19,7 +19,7 @@ namespace TypocryphaGameflow
         public override string GetID { get { return Id; } }
 
         //Connection from previous node (INPUT)
-        [ConnectionKnob("From Previous", Direction.In, "Gameflow", NodeSide.Left, 30)]
+        [ConnectionKnob("From Previous", Direction.In, "Gameflow", ConnectionCount.Multi, NodeSide.Left, 30)]
         public ConnectionKnob fromPreviousIN;
 
         [SerializeField]
@@ -34,7 +34,7 @@ namespace TypocryphaGameflow
         protected override void OnCreate()
         {
             _cases = new List<BranchCaseData>();
-            _cases.Add(new BranchCaseData());
+            addListItem(_cases, 0, new BranchCaseData());
         }
 
         public override void NodeGUI()
@@ -51,6 +51,10 @@ namespace TypocryphaGameflow
                 };
                 _list.drawHeaderCallback = (Rect rect) => {
                     EditorGUI.LabelField(rect, new GUIContent("Branch Cases", tooltip_branch_case), new GUIStyle(GUIStyle.none) { alignment = TextAnchor.MiddleCenter });
+                };
+                _list.onReorderCallback = (ReorderableList list) =>
+                {
+
                 };
             }
             GUILayout.BeginVertical();
@@ -82,18 +86,19 @@ namespace TypocryphaGameflow
                 //list.Insert(index + 1, new BranchCaseData());
                 addListItem(list, index + 1, new BranchCaseData());
             }
+            ((ConnectionKnob)dynamicConnectionPorts[index]).SetPosition(rect.y + (EditorGUIUtility.singleLineHeight * 2) - 4);
         }
 
         private void addListItem(IList list, int index, BranchCaseData value)
         {
             list.Insert(index, value);
-            //CreateConnectionKnob(dynaCreationAttribute);
+            CreateConnectionKnob(dynaCreationAttribute, index);
         }
 
         private void removeListItem(IList list, int index)
         {
             list.RemoveAt(index);
-            //DeleteConnectionPort(index);
+            DeleteConnectionPort(index);
             //dynamicConnectionPorts.RemoveAt(index);
         }
 
