@@ -27,14 +27,14 @@ namespace TypocryphaGameflow
         ReorderableList _list = null;
 
         private ConnectionKnobAttribute dynaCreationAttribute
-            = new ConnectionKnobAttribute("To Branch Target", Direction.Out, "Gameflow", NodeSide.Right);
+            = new ConnectionKnobAttribute("To Branch Target", Direction.Out, "Gameflow", ConnectionCount.Single, NodeSide.Right);
 
         const string tooltip_branch_case = "A resizable list containing all branch conditions (temp)";
 
         protected override void OnCreate()
         {
             _cases = new List<BranchCaseData>();
-            addListItem(_cases, 0, new BranchCaseData());
+            addListItem(_cases, 0);
         }
 
         public override void NodeGUI()
@@ -84,15 +84,17 @@ namespace TypocryphaGameflow
             if (GUI.Button(UIrect, "+"))
             {
                 //list.Insert(index + 1, new BranchCaseData());
-                addListItem(list, index + 1, new BranchCaseData());
+                addListItem(list, index + 1);
             }
-            ((ConnectionKnob)dynamicConnectionPorts[index]).SetPosition(rect.y + (EditorGUIUtility.singleLineHeight * 2) - 4);
+            ((ConnectionKnob)dynamicConnectionPorts[item.portIndex]).SetPosition(rect.center.y + (EditorGUIUtility.singleLineHeight * 2) + 4);
         }
 
-        private void addListItem(IList list, int index, BranchCaseData value)
+        private void addListItem(IList list, int index)
         {
-            list.Insert(index, value);
             CreateConnectionKnob(dynaCreationAttribute, index);
+            BranchCaseData value = new BranchCaseData(index);
+            list.Insert(index, value);
+            CorrectNodeIndices(list, index);
         }
 
         private void removeListItem(IList list, int index)
@@ -102,9 +104,23 @@ namespace TypocryphaGameflow
             //dynamicConnectionPorts.RemoveAt(index);
         }
 
+        private void CorrectNodeIndices(IList list, int index)
+        {
+            for(int i = 0; i < list.Count; ++i)
+            {
+                BranchCaseData b = (BranchCaseData)list[i];
+                if (i != index && b.portIndex >= index)
+                    b.portIndex++;
+            }
+        }
+
         [System.Serializable]
         class BranchCaseData
         {
+            public BranchCaseData(int portIndex)
+            {
+                this.portIndex = portIndex;
+            }
             public enum CaseType
             {
                 Text,
@@ -112,6 +128,7 @@ namespace TypocryphaGameflow
             }
             public string pattern =  string.Empty;
             public CaseType type = CaseType.Text;
+            public int portIndex;
         }
     }
 }
