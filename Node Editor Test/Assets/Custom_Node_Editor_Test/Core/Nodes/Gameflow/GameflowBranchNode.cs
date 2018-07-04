@@ -94,38 +94,49 @@ namespace TypocryphaGameflow
             CreateConnectionKnob(dynaCreationAttribute, index);
             BranchCaseData value = new BranchCaseData(index);
             list.Insert(index, value);
-            CorrectNodeIndices(list, index);
+            CorrectNodeIndicesAfterInsert(list, index, value.portIndex);
+        }
+
+        private void CorrectNodeIndicesAfterInsert(IList list, int index, int portIndex)
+        {
+            for (int i = 0; i < list.Count; ++i)
+            {
+                BranchCaseData b = (BranchCaseData)list[i];
+                if (i != index && b.portIndex >= portIndex)
+                    b.portIndex++;
+            }
         }
 
         private void removeListItem(IList list, int index)
         {
+            int portIndex = ((BranchCaseData)list[index]).portIndex;
+            DeleteConnectionPort(portIndex);
             list.RemoveAt(index);
-            DeleteConnectionPort(index);
-            //dynamicConnectionPorts.RemoveAt(index);
+            CorrectNodeIndicesAfterRemove(list, portIndex);
         }
 
-        private void CorrectNodeIndices(IList list, int index)
+        private void CorrectNodeIndicesAfterRemove(IList list, int portIndex)
         {
-            for(int i = 0; i < list.Count; ++i)
+            for (int i = 0; i < list.Count; ++i)
             {
                 BranchCaseData b = (BranchCaseData)list[i];
-                if (i != index && b.portIndex >= index)
-                    b.portIndex++;
+                if (b.portIndex > portIndex)
+                    b.portIndex--;
             }
         }
 
         [System.Serializable]
         class BranchCaseData
         {
-            public BranchCaseData(int portIndex)
-            {
-                this.portIndex = portIndex;
-            }
             public enum CaseType
             {
                 Text,
                 Regex
             }
+            public BranchCaseData(int portIndex)
+            {
+                this.portIndex = portIndex;
+            }  
             public string pattern =  string.Empty;
             public CaseType type = CaseType.Text;
             public int portIndex;
