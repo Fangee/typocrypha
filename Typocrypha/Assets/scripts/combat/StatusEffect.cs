@@ -111,16 +111,11 @@ public class StatusBurn : StatusEffect
 
     public override string processKey(char key)
     {
-		if (p.Curr_hp - dmg <= 0) {
-			p.Curr_hp = 1;
-		} else {
-			p.Curr_hp -= dmg;
-		}
 		string popText = ("<color=red>" + key + "</color> <color=orange>BURN</color>").ToUpper ();
 		player_popper.spawnText (popText, 1.0f, new Vector3(0.0f,0.0f,0.0f));
-		player_popper.spawnText (dmg+"", 1.0f, new Vector3(0.0f,-1.0f,0.0f));
+		//player_popper.spawnText (dmg+"", 1.0f, new Vector3(0.0f,-1.0f,0.0f));
 		AudioPlayer.main.playSFX ("sfx_spell_hit");
-        return key.ToString();
+        return (key.ToString() + key.ToString());
     }
 }
 
