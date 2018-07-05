@@ -320,6 +320,8 @@ public class BattleManagerS : MonoBehaviour {
     //Update Enemies and Check for death
     public void updateEnemies()
     {
+        if (Wave.Title == "BOSS: The Evil \"I\"" && field.enemy_arr[1].Curr_hp <= 0 && !field.enemy_arr[1].Is_dead && checkInterrupts()) //hardcode for doppel quick kill
+            return;
         for (int i = 0; i < field.enemy_arr.Length; i++)
         {
             if (field.enemy_arr[i] != null && !field.enemy_arr[i].Is_dead)
@@ -346,7 +348,8 @@ public class BattleManagerS : MonoBehaviour {
     //Add Scene to trigger queue
     public void addSceneToQueue(GameObject interruptScene)
     {
-        sceneQueue.Add(interruptScene);
+        if (!sceneQueue.Contains(interruptScene))
+            sceneQueue.Add(interruptScene);
     }
     //Play Dialogue scene from queue
     public bool playSceneFromQueue()
