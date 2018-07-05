@@ -5693,9 +5693,9 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Clarke
-  text: '{t,clarke}Hitting {c,orange}Burned{c,} keys will damage you, {c,orange}but
-    the fire will go out eventually{c,}. Wait it out, or take the damage if you really
-    need to!'
+  text: '{t,clarke}Hitting {c,orange}Burned{c,} keys will overheat them and cause
+    their letter to be entered twice, so be sure to delete the extra letters! {c,orange}
+    And don''t panic, the fire will go out eventually{c,}.'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -6148,7 +6148,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Bunbuku
   text: "[set-talk-sfx=vo_demon]{c,enemy-talk}|shake|(Just gotta <color=orange>Burn
-    their keys and let them singe themself to death\u2026</color>)\\shake\\{c,}"
+    their keys and mess up their casting\u2026</color>)\\shake\\{c,}"
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
