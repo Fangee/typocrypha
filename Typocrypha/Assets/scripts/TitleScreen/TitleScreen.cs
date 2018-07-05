@@ -49,7 +49,7 @@ public class TitleScreen : MonoBehaviour {
                 AudioPlayer.main.playSFX("sfx_enemy_select");
             }
         }
-        if(Input.GetKeyDown(KeyCode.Return))
+        if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
         {
             switch (index)
             {

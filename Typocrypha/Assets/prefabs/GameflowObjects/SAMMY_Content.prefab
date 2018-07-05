@@ -440,6 +440,7 @@ GameObject:
   - component: {fileID: 114111534047705200}
   - component: {fileID: 114028006167259558}
   - component: {fileID: 114343891335760116}
+  - component: {fileID: 114418889049462770}
   m_Layer: 5
   m_Name: BI_FIRE_KEYS
   m_TagString: Untagged
@@ -5598,7 +5599,7 @@ MonoBehaviour:
   fx_text_effects: []
   dialogue_type: 0
   speaker_name: Dahlia
-  text: '{t,dahlia}It looks that spell didn''t target any enemies!. Remeber, use the
+  text: '{t,dahlia}It looks that spell didn''t target any enemies! Remember, use the
     {c,ui-terms}LEFT/RIGHT ARROW keys{c,} to change targets!'
   input_display: {fileID: 0}
   input_options: []
@@ -5694,8 +5695,7 @@ MonoBehaviour:
   dialogue_type: 0
   speaker_name: Clarke
   text: '{t,clarke}Hitting {c,orange}Burned{c,} keys will overheat them and cause
-    their letter to be entered twice, so be sure to delete the extra letters! {c,orange}
-    And don''t panic, the fire will go out eventually{c,}.'
+    their letter to be entered twice, so be sure to delete the extra letters!'
   input_display: {fileID: 0}
   input_options: []
   input_answers: []
@@ -6458,6 +6458,29 @@ MonoBehaviour:
   left_icon: {fileID: 21300000, guid: 63393d0a276169c4c93392e6f32404b1, type: 3}
   right_icon: {fileID: 0}
   icon_side: 0
+--- !u!114 &114418889049462770
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212414196347366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fx_text_effects: []
+  dialogue_type: 0
+  speaker_name: Clarke
+  text: '{t,clarke}{c,orange} And don''t panic, the fire will go out eventually{c,}.'
+  input_display: {fileID: 0}
+  input_options: []
+  input_answers: []
+  input_branches: []
+  mc_sprite: {fileID: 0}
+  codec_sprite: {fileID: 0}
+  char_sprites: []
+  char_sprite_pos: []
 --- !u!114 &114420424801630298
 MonoBehaviour:
   m_ObjectHideFlags: 1
