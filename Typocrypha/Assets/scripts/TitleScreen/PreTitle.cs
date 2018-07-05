@@ -53,22 +53,30 @@ public class PreTitle : MonoBehaviour {
                 buffer = "";
 				count = 0;
 			}
-		} else if (Input.GetKey (KeyCode.Backspace)) {
-			if (Input.GetKeyDown (KeyCode.Backspace)) {
-				if (count > 0) {
-					buffer = buffer.Remove (count - 1, 1);
-					count = count - 1;
-				}
+		} else if (Input.GetKeyDown (KeyCode.Backspace)) {
+			if (count > 0) {
+				AudioPlayer.main.playSFX ("sfx_backspace");
+				buffer = buffer.Remove (count - 1, 1);
+				count = count - 1;
 			}
 		} else {
 			string in_str = Input.inputString;
 			foreach (char c in in_str) {
-				AudioPlayer.main.playSFX ("sfx_type_key");
-				if (alpha_space.IsMatch(c.ToString())) {
-					buffer += c.ToString();
-					++count;
-					StopCoroutine (blink_caret);
-					blink_caret = StartCoroutine (blinkCaret ());
+				if (Input.GetKey (KeyCode.Backspace)) {
+					if (count > 0) {
+						AudioPlayer.main.playSFX ("sfx_backspace");
+						buffer = buffer.Remove (count - 1, 1);
+						count = count - 1;
+						break;
+					}
+				} else {
+					AudioPlayer.main.playSFX ("sfx_type_key");
+					if (alpha_space.IsMatch (c.ToString ())) {
+						buffer += c.ToString ();
+						++count;
+						StopCoroutine (blink_caret);
+						blink_caret = StartCoroutine (blinkCaret ());
+					}
 				}
 			}
 		}
