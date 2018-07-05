@@ -187,6 +187,7 @@ public class Enemy : MonoBehaviour, ICaster {
         curr_time = 0;
 		StopCoroutine(attack_cr);
         attack_cr = StartCoroutine(attackRoutine());
+		attack_in_progress = false;
     }
     //Resets the AI object
     public void resetAI()
