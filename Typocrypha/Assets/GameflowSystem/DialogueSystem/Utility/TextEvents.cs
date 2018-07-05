@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 // edits by James Iwamasa
 
 // represents an event to be played during text dialogue scrolling
@@ -662,6 +663,7 @@ public class TextEvents : MonoBehaviour {
 
 	IEnumerator quitGame(string[] opt) {
 		Application.Quit ();
+		//SceneManager.LoadScene("TitleScene"); // Causes strange errors
 		yield return true;
 	}
 
