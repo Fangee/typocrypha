@@ -65,6 +65,8 @@ namespace TypocryphaGameflow
 
         private void listItemGUI(BranchCaseData item, Rect rect, int index, IList list)
         {
+            if (!(Event.current.type == EventType.Repaint))//Only paint GUI during repaint (not layout)
+                return;
             float xOffset = 0;
             Rect UIrect = new Rect(rect.x, rect.y + 2, 60, EditorGUIUtility.singleLineHeight);
             item.type = (BranchCaseData.CaseType)EditorGUI.EnumPopup(UIrect, GUIContent.none, item.type);
@@ -86,7 +88,7 @@ namespace TypocryphaGameflow
                 //list.Insert(index + 1, new BranchCaseData());
                 addListItem(list, index + 1);
             }
-            ((ConnectionKnob)dynamicConnectionPorts[item.portIndex]).SetPosition(rect.center.y + (EditorGUIUtility.singleLineHeight * 2) + 4);
+            ((ConnectionKnob)dynamicConnectionPorts[item.portIndex]).SetPosition(rect.yMax + NodeEditorGUI.knobSize / 2);
         }
 
         private void addListItem(IList list, int index)
