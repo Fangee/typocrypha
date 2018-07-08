@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Manages searching through TIPS database
-public class TIPSSearch : MonoBehaviour {
+// Manages tab for searching through TIPS database
+public class TIPSSearch : TIPSTab {
     public InputField search_bar;
 
     // Open/close TIPS search tab
-    public bool isOpen
+    public override bool isOpen
     {
         // Get whether TIPS search tab is open or not
         get
@@ -18,7 +18,6 @@ public class TIPSSearch : MonoBehaviour {
         // Open/close TIPS search tab (true/false respectively)
         set
         {
-            Debug.Log("open TIPS search:" + value);
             gameObject.SetActive(value);
             if (value)
             {
