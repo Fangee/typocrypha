@@ -4,13 +4,13 @@ using NodeEditorFramework;
 
 namespace TypocryphaGameflow
 {
-    [Node(false, "Dialog/VN Dialog Node", new System.Type[] { typeof(GameflowCanvas) })]
+    [Node(false, "Dialog/VN Dialog", new System.Type[] { typeof(GameflowCanvas) })]
     public class DialogNodeVN : BaseDialogNode
     {
         public const string ID = "VN Dialog Node";
         public override string GetID { get { return ID; } }
 
-        public override string Title { get { return "VN Dialog Node"; } }
+        public override string Title { get { return "VN Dialog"; } }
         public override Vector2 MinSize { get { return new Vector2(300, 60); } }
         public override bool AutoLayout { get { return true; } }
 
@@ -28,6 +28,7 @@ namespace TypocryphaGameflow
 
         private const string tooltip_name = "The speaking character's name. Used to set speaking sfx and sprite highlighting if not overriden by text events";
         private const string tooltip_expr = "The speaking character's expression. Only needs to be set if the expression should be changed";
+        protected const string tooltip_text = "The text to be displayed. Can substitute text macros using {macro-name,args}, and call text events using [event-name,args]";
 
         protected override void OnCreate()
         {
@@ -52,7 +53,7 @@ namespace TypocryphaGameflow
             GUILayout.Space(3);
             GUILayout.EndVertical();
 
-            GUILayout.Label(new GUIContent("Dialogue Text", "add tooltip here"), NodeEditorGUI.nodeLabelBoldCentered);
+            GUILayout.Label(new GUIContent("Dialogue Text", tooltip_text), NodeEditorGUI.nodeLabelBoldCentered);
 
             GUILayout.BeginHorizontal();
 

@@ -16,30 +16,13 @@ namespace TypocryphaGameflow
         public override Vector2 MinSize { get { return new Vector2(150, 60); } }
         public override bool AutoLayout { get { return true; } }
 
-        protected static GUIStyle labelStyle = new GUIStyle();
-
-        public string gameflowID;
-        public const string tooltip_gameflowID = "The ID for this branch of this gameflow canvas. Can be used as a starting point for the canvas or as a point to jump to.";
-
         //Next Node to go to (OUTPUT)
         [ConnectionKnob("To Next", Direction.Out, "Gameflow", NodeSide.Right, 30)]
         public ConnectionKnob toNextOUT;
 
-        protected override void OnCreate()
-        {
-            gameflowID = "Gameflow ID";
-        }
-
         public override void NodeGUI()
         {
-            GUILayout.BeginVertical("Box");
-            labelStyle.normal.textColor = Color.white;
-            GUILayout.BeginHorizontal();
-            GUILayout.Label(new GUIContent("ID", tooltip_gameflowID), labelStyle, GUILayout.Width(20f));
-            gameflowID = EditorGUILayout.TextField("", gameflowID, GUILayout.Width(120f));
-            EditorGUILayout.EndHorizontal();
             GUILayout.Space(3);
-            GUILayout.EndVertical();
         }
     }
 }

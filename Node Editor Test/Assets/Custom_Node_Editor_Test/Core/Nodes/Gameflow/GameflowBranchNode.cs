@@ -14,7 +14,7 @@ namespace TypocryphaGameflow
         public enum controlExpressionType
         {
             Variable,
-            Input,
+            Last_Input,
         }
 
         public override string Title { get { return "Gameflow Branch"; } }
@@ -36,8 +36,8 @@ namespace TypocryphaGameflow
         ReorderableList _list = null;
 
         protected static GUIStyle labelStyle = new GUIStyle();
-        controlExpressionType exprType;
-        string variableName;
+        public controlExpressionType exprType;
+        public string variableName;
 
         private ConnectionKnobAttribute dynaCreationAttribute
             = new ConnectionKnobAttribute("To Branch Target", Direction.Out, "Gameflow", ConnectionCount.Single, NodeSide.Right);
@@ -50,7 +50,7 @@ namespace TypocryphaGameflow
         {
             _cases = new List<BranchCaseData>();
             addListItem(_cases, 0);
-            exprType = controlExpressionType.Input;
+            exprType = controlExpressionType.Last_Input;
             variableName = "variable-name";
         }
 
