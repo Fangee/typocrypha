@@ -11,6 +11,12 @@ namespace TypocryphaGameflow
     [Node(false, "Gameflow/Branch", new System.Type[] { typeof(GameflowCanvas) })]
     public class GameflowBranchNode : Node
     {
+        public enum controlExpressionType
+        {
+            Variable,
+            Input,
+        }
+
         public override string Title { get { return "Gameflow Branch"; } }
         public override Vector2 MinSize { get { return new Vector2(300, 40); } }
         public override bool AutoLayout { get { return true; } }
@@ -21,20 +27,31 @@ namespace TypocryphaGameflow
         //Connection from previous node (INPUT)
         [ConnectionKnob("From Previous", Direction.In, "Gameflow", ConnectionCount.Multi, NodeSide.Left, 30)]
         public ConnectionKnob fromPreviousIN;
+        //Connect to default branch
+        [ConnectionKnob("To Default Branch", Direction.Out, "Gameflow", ConnectionCount.Single, NodeSide.Right, 30)]
+        public ConnectionKnob toDefaultBranch;
 
         [SerializeField]
         List<BranchCaseData> _cases;
         ReorderableList _list = null;
 
+        protected static GUIStyle labelStyle = new GUIStyle();
+        controlExpressionType exprType;
+        string variableName;
+
         private ConnectionKnobAttribute dynaCreationAttribute
             = new ConnectionKnobAttribute("To Branch Target", Direction.Out, "Gameflow", ConnectionCount.Single, NodeSide.Right);
 
-        const string tooltip_branch_case = "A resizable list containing all branch conditions (temp)";
+        const string tooltip_branch_case = "The first case to evaluate to true (in decending order) will branch to the connected node. \nNote: macro variables may be evaluated in cases by using {varName} in text cases and \\{varName\\} in regex cases";
+        const string tooltip_data = "Where to get the input string from. \"Input\" takes input from the last player input and \"Variable\" takes input from the variable with the given name";
+        const string tooltip_branch_default = "The branch to take if no cases match";
 
         protected override void OnCreate()
         {
             _cases = new List<BranchCaseData>();
             addListItem(_cases, 0);
+            exprType = controlExpressionType.Input;
+            variableName = "variable-name";
         }
 
         public override void NodeGUI()
@@ -52,21 +69,30 @@ namespace TypocryphaGameflow
                 _list.drawHeaderCallback = (Rect rect) => {
                     EditorGUI.LabelField(rect, new GUIContent("Branch Cases", tooltip_branch_case), new GUIStyle(GUIStyle.none) { alignment = TextAnchor.MiddleCenter });
                 };
-                _list.onReorderCallback = (ReorderableList list) =>
-                {
-
-                };
             }
+            labelStyle.normal.textColor = Color.white;
+
+            GUILayout.Space(5);
+            EditorGUILayout.BeginVertical("Box");
+            GUILayout.Label(new GUIContent("Data to Test", tooltip_data), NodeEditorGUI.nodeLabelBoldCentered);
+            GUILayout.BeginHorizontal();
+            exprType = (controlExpressionType)EditorGUILayout.EnumPopup(exprType, GUILayout.Width(75f));
+            if(exprType == controlExpressionType.Variable)
+                variableName = EditorGUILayout.TextField("", variableName, GUILayout.Width(205f));
+            GUILayout.Space(5);
+            GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
             GUILayout.BeginVertical();
             _list.DoLayoutList();
             GUILayout.EndVertical();
-
+            GUILayout.BeginVertical("Box");
+            GUILayout.Label(new GUIContent("Default Branch", tooltip_branch_default), NodeEditorGUI.nodeLabelBoldCentered);
+            toDefaultBranch.SetPosition();
+            GUILayout.EndVertical();
         }
 
         private void listItemGUI(BranchCaseData item, Rect rect, int index, IList list)
         {
-            if (!(Event.current.type == EventType.Repaint))//Only paint GUI during repaint (not layout)
-                return;
             float xOffset = 0;
             Rect UIrect = new Rect(rect.x, rect.y + 2, 60, EditorGUIUtility.singleLineHeight);
             item.type = (BranchCaseData.CaseType)EditorGUI.EnumPopup(UIrect, GUIContent.none, item.type);
@@ -88,6 +114,8 @@ namespace TypocryphaGameflow
                 //list.Insert(index + 1, new BranchCaseData());
                 addListItem(list, index + 1);
             }
+            if (!(Event.current.type == EventType.Repaint))//Only paint GUI during repaint (not layout)
+                return;
             ((ConnectionKnob)dynamicConnectionPorts[item.portIndex]).SetPosition(rect.yMax + NodeEditorGUI.knobSize / 2);
         }
 
