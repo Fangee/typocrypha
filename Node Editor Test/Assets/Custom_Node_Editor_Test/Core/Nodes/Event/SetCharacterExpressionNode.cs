@@ -6,24 +6,22 @@ using NodeEditorFramework;
 
 namespace TypocryphaGameflow
 {
-    [Node(false, "Event/Add Character", new System.Type[] { typeof(GameflowCanvas) })]
-    public class AddCharacterNode : GameflowStandardIONode
+    [Node(false, "Event/Set Expression", new System.Type[] { typeof(GameflowCanvas) })]
+    public class SetCharacterExpressionNode : GameflowStandardIONode
     {
-        public const string ID = "Add Character Node";
+        public const string ID = "Set Character Expression Node";
         public override string GetID { get { return ID; } }
 
-        public override string Title { get { return "Add Character"; } }
+        public override string Title { get { return "Set Expression"; } }
         public override Vector2 MinSize { get { return new Vector2(150, 40); } }
 
         public string characterName;
-        public string startingExpression;
-        public Vector2 pos;
+        public string expression;
 
         protected override void OnCreate()
         {
             characterName = "Character Name";
-            startingExpression = "default";
-            pos = new Vector2(0, 0);
+            expression = "default";
         }
 
         public override void NodeGUI()
@@ -31,8 +29,7 @@ namespace TypocryphaGameflow
             GUILayout.Space(5);
             GUILayout.BeginVertical("box");
             characterName = GUILayout.TextField(characterName);
-            startingExpression = GUILayout.TextField(startingExpression);
-            pos = EditorGUILayout.Vector2Field("", pos);
+            expression = GUILayout.TextField(expression);
             GUILayout.EndVertical();
         }
     }

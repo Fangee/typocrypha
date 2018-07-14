@@ -12,71 +12,32 @@ MonoBehaviour:
   m_Name: Demo I
   m_EditorClassIdentifier: 
   editorStates:
-  - {fileID: 114447822601447442}
+  - {fileID: 114060723598741458}
   saveName: Assets\Plugins\Node_Editor\Node_Editor\Resources\Saves\Demo I
   savePath: Assets\Plugins\Node_Editor\Node_Editor\Resources\Saves\Demo I.asset
   livesInScene: 0
   nodes:
-  - {fileID: 114438736603970458}
-  - {fileID: 114590072408244580}
-  - {fileID: 114774956052930818}
-  - {fileID: 114682322399480786}
-  - {fileID: 114565806127141346}
-  - {fileID: 114409074886397008}
-  - {fileID: 114694930971640450}
-  - {fileID: 114093421453944282}
-  - {fileID: 114203113566493586}
-  - {fileID: 114570711413710308}
-  - {fileID: 114447351911926448}
-  - {fileID: 114049187202000528}
-  - {fileID: 114522550927652542}
-  - {fileID: 114708448145382154}
-  - {fileID: 114284200533287034}
-  - {fileID: 114849035198647586}
-  - {fileID: 114962004324666730}
-  - {fileID: 114054145914812992}
-  - {fileID: 114499113985679924}
+  - {fileID: 114137111120063902}
+  - {fileID: 114313954091962438}
+  - {fileID: 114208983641742046}
+  - {fileID: 114996324537521638}
+  - {fileID: 114574001839343090}
+  - {fileID: 114349799729946566}
+  - {fileID: 114892955530576590}
+  - {fileID: 114018894523339252}
+  - {fileID: 114068287003098028}
+  - {fileID: 114701794744772558}
+  - {fileID: 114997201345800884}
+  - {fileID: 114176770260186096}
+  - {fileID: 114793699679940336}
+  - {fileID: 114004809378122240}
+  - {fileID: 114182642259918668}
+  - {fileID: 114006696783148460}
+  - {fileID: 114940671249746642}
+  - {fileID: 114833083217863812}
+  - {fileID: 114826108823733154}
   groups: []
---- !u!114 &114042589485109886
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: To Next
-  m_EditorClassIdentifier: 
-  body: {fileID: 114522550927652542}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114737463953689982}
-  side: 2
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114049187202000528
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce9a1dcb07d1c7147b7c40571ecbf2bc, type: 3}
-  m_Name: VN Dialog
-  m_EditorClassIdentifier: 
-  position: {x: 2352, y: 66.60002}
-  dynamicConnectionPorts: []
-  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  characterName: Character Name
-  dialogText: I just translated you favorite color into Ishuik! it is now {v,favorite-color}
-  fromPreviousIN: {fileID: 114169588487916278}
-  toNextOUT: {fileID: 114841465656070844}
-  expression: Expression
---- !u!114 &114054145914812992
+--- !u!114 &114004809378122240
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -89,13 +50,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 598, y: -99.8}
   dynamicConnectionPorts:
-  - {fileID: 114329653298693638}
-  - {fileID: 114455197263468224}
-  - {fileID: 114156700680645714}
-  - {fileID: 114423749221578884}
+  - {fileID: 114068587130808440}
+  - {fileID: 114750647188447176}
+  - {fileID: 114923168280341608}
+  - {fileID: 114250558145423806}
   backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  fromPreviousIN: {fileID: 114606451997800096}
-  toDefaultBranch: {fileID: 114068922790372930}
+  fromPreviousIN: {fileID: 114621176567675416}
+  toDefaultBranch: {fileID: 114183489238288176}
   _cases:
   - pattern: Blue
     type: 0
@@ -111,223 +72,7 @@ MonoBehaviour:
     portIndex: 3
   exprType: 1
   variableName: 
---- !u!114 &114068922790372930
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: To Default Branch
-  m_EditorClassIdentifier: 
-  body: {fileID: 114054145914812992}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114104438803403368}
-  side: 2
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114069897121887782
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: To Next
-  m_EditorClassIdentifier: 
-  body: {fileID: 114409074886397008}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114913742899298328}
-  side: 2
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114093421453944282
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce9a1dcb07d1c7147b7c40571ecbf2bc, type: 3}
-  m_Name: VN Dialog Node
-  m_EditorClassIdentifier: 
-  position: {x: -149.1, y: -98.6}
-  dynamicConnectionPorts: []
-  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  characterName: Illyia
-  dialogText: This is a demo!
-  fromPreviousIN: {fileID: 114380943584651306}
-  toNextOUT: {fileID: 114232040641551168}
-  expression: Laughing
---- !u!114 &114104438803403368
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: From Previous
-  m_EditorClassIdentifier: 
-  body: {fileID: 114499113985679924}
-  direction: 1
-  maxConnectionCount: 1
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114068922790372930}
-  side: 4
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114129755191139470
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: To Branch Target
-  m_EditorClassIdentifier: 
-  body: {fileID: 114774956052930818}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114322792196791642}
-  side: 2
-  sidePosition: 97
-  sideOffset: 0
---- !u!114 &114156700680645714
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: To Branch Target
-  m_EditorClassIdentifier: 
-  body: {fileID: 114054145914812992}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114821265411713970}
-  side: 2
-  sidePosition: 118
-  sideOffset: 0
---- !u!114 &114169588487916278
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: From Previous
-  m_EditorClassIdentifier: 
-  body: {fileID: 114049187202000528}
-  direction: 1
-  maxConnectionCount: 1
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114478379878697508}
-  side: 4
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114177644720407652
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: To Next
-  m_EditorClassIdentifier: 
-  body: {fileID: 114438736603970458}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114701709758407832}
-  side: 2
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114203113566493586
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2415f2f211a270140b2881ef82766874, type: 3}
-  m_Name: Add Character Node
-  m_EditorClassIdentifier: 
-  position: {x: -391, y: -90.4}
-  dynamicConnectionPorts: []
-  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  fromPreviousIN: {fileID: 114460996241365400}
-  toNextOUT: {fileID: 114711799767095284}
-  characterName: Illyia
---- !u!114 &114227838783656498
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: From Previous
-  m_EditorClassIdentifier: 
-  body: {fileID: 114682322399480786}
-  direction: 1
-  maxConnectionCount: 1
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114687921128396258}
-  side: 4
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114232040641551168
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: To Next
-  m_EditorClassIdentifier: 
-  body: {fileID: 114093421453944282}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114750778242775624}
-  side: 2
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114284200533287034
+--- !u!114 &114006696783148460
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -338,15 +83,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca92a01cf0c0fe94e9c3b30d81cab97f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position: {x: 2780, y: -320}
+  position: {x: -395.4003, y: 17.400005}
   dynamicConnectionPorts: []
   backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  fromPreviousIN: {fileID: 114737463953689982}
-  toNextOUT: {fileID: 114343022563158908}
+  fromPreviousIN: {fileID: 114233725362839520}
+  toNextOUT: {fileID: 114327543419159456}
   fadeType: 1
   fadeTime: 3
   fadeColor: {r: 0, g: 0, b: 0, a: 1}
---- !u!114 &114322792196791642
+--- !u!114 &114007164051955068
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -357,76 +102,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
   m_Name: From Previous
   m_EditorClassIdentifier: 
-  body: {fileID: 114409074886397008}
+  body: {fileID: 114182642259918668}
   direction: 1
   maxConnectionCount: 1
   styleID: Gameflow
   _connections:
-  - {fileID: 114129755191139470}
+  - {fileID: 114183489238288176}
   side: 4
   sidePosition: 30
   sideOffset: 0
---- !u!114 &114325100000531658
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: To Next
-  m_EditorClassIdentifier: 
-  body: {fileID: 114499113985679924}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114750778242775624}
-  side: 2
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114329653298693638
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: To Branch Target
-  m_EditorClassIdentifier: 
-  body: {fileID: 114054145914812992}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114433864887550316}
-  side: 2
-  sidePosition: 139
-  sideOffset: 0
---- !u!114 &114343022563158908
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: To Next
-  m_EditorClassIdentifier: 
-  body: {fileID: 114284200533287034}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114524224784485048}
-  side: 2
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114364173054439828
+--- !u!114 &114012442956130574
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -437,196 +122,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
   m_Name: From Previous
   m_EditorClassIdentifier: 
-  body: {fileID: 114447351911926448}
+  body: {fileID: 114349799729946566}
   direction: 1
   maxConnectionCount: 1
   styleID: Gameflow
   _connections:
-  - {fileID: 114808598948271532}
+  - {fileID: 114248774093400314}
   side: 4
   sidePosition: 30
   sideOffset: 0
---- !u!114 &114365285566980824
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: To Default Branch
-  m_EditorClassIdentifier: 
-  body: {fileID: 114774956052930818}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114414903788754014}
-  side: 2
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114380943584651306
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: From Previous
-  m_EditorClassIdentifier: 
-  body: {fileID: 114093421453944282}
-  direction: 1
-  maxConnectionCount: 1
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114503952756588628}
-  side: 4
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114395608831010210
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: From Previous
-  m_EditorClassIdentifier: 
-  body: {fileID: 114438736603970458}
-  direction: 1
-  maxConnectionCount: 1
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114455197263468224}
-  - {fileID: 114423749221578884}
-  side: 4
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114409074886397008
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce9a1dcb07d1c7147b7c40571ecbf2bc, type: 3}
-  m_Name: VN Dialog
-  m_EditorClassIdentifier: 
-  position: {x: 1800, y: -170}
-  dynamicConnectionPorts: []
-  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  characterName: Character Name
-  dialogText: Your favorite is blue!
-  fromPreviousIN: {fileID: 114322792196791642}
-  toNextOUT: {fileID: 114069897121887782}
-  expression: Expression
---- !u!114 &114414903788754014
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: From Previous
-  m_EditorClassIdentifier: 
-  body: {fileID: 114565806127141346}
-  direction: 1
-  maxConnectionCount: 1
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114841166136596226}
-  - {fileID: 114365285566980824}
-  side: 4
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114418673115973410
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: To Next
-  m_EditorClassIdentifier: 
-  body: {fileID: 114849035198647586}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114737463953689982}
-  side: 2
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114423749221578884
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: To Branch Target
-  m_EditorClassIdentifier: 
-  body: {fileID: 114054145914812992}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114395608831010210}
-  side: 2
-  sidePosition: 160
-  sideOffset: 0
---- !u!114 &114433864887550316
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: From Previous
-  m_EditorClassIdentifier: 
-  body: {fileID: 114849035198647586}
-  direction: 1
-  maxConnectionCount: 1
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114329653298693638}
-  side: 4
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114438736603970458
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce9a1dcb07d1c7147b7c40571ecbf2bc, type: 3}
-  m_Name: VN Dialog Node
-  m_EditorClassIdentifier: 
-  position: {x: 1024.9, y: -111.399994}
-  dynamicConnectionPorts: []
-  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  characterName: Character Name
-  dialogText: Your favorite is blue or green!
-  fromPreviousIN: {fileID: 114395608831010210}
-  toNextOUT: {fileID: 114177644720407652}
-  expression: Expression
---- !u!114 &114447351911926448
+--- !u!114 &114018894523339252
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -642,10 +147,10 @@ MonoBehaviour:
   backgroundColor: {r: 1, g: 1, b: 1, a: 1}
   characterName: Character Name
   dialogText: Your favorite color is now {v,favorite-color}!
-  fromPreviousIN: {fileID: 114364173054439828}
-  toNextOUT: {fileID: 114486040103345306}
+  fromPreviousIN: {fileID: 114290242172539220}
+  toNextOUT: {fileID: 114755070521623470}
   expression: Expression
---- !u!114 &114447822601447442
+--- !u!114 &114060723598741458
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -659,9 +164,28 @@ MonoBehaviour:
   canvas: {fileID: 0}
   parentEditor: {fileID: 0}
   selectedNode: {fileID: 0}
-  panOffset: {x: -1003.9996, y: -88.8}
-  zoom: 2.4
---- !u!114 &114455197263468224
+  panOffset: {x: 35.600647, y: -224.6}
+  zoom: 1.4
+--- !u!114 &114068287003098028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce9a1dcb07d1c7147b7c40571ecbf2bc, type: 3}
+  m_Name: VN Dialog
+  m_EditorClassIdentifier: 
+  position: {x: 2352, y: 66.60002}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  characterName: Character Name
+  dialogText: I just translated you favorite color into Ishuik! it is now {v,favorite-color}
+  fromPreviousIN: {fileID: 114715972251257810}
+  toNextOUT: {fileID: 114911249096195850}
+  expression: Expression
+--- !u!114 &114068587130808440
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -672,16 +196,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
   m_Name: To Branch Target
   m_EditorClassIdentifier: 
-  body: {fileID: 114054145914812992}
+  body: {fileID: 114004809378122240}
   direction: 2
   maxConnectionCount: 0
   styleID: Gameflow
   _connections:
-  - {fileID: 114395608831010210}
+  - {fileID: 114694580059775026}
   side: 2
-  sidePosition: 97
+  sidePosition: 141
   sideOffset: 0
---- !u!114 &114460996241365400
+--- !u!114 &114078050370547974
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: To Next
+  m_EditorClassIdentifier: 
+  body: {fileID: 114833083217863812}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114233725362839520}
+  side: 2
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114136630004836644
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: To Next
+  m_EditorClassIdentifier: 
+  body: {fileID: 114793699679940336}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114434395722901584}
+  side: 2
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114137111120063902
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce9a1dcb07d1c7147b7c40571ecbf2bc, type: 3}
+  m_Name: VN Dialog Node
+  m_EditorClassIdentifier: 
+  position: {x: 1024.9, y: -111.399994}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  characterName: Character Name
+  dialogText: Your favorite is blue or green!
+  fromPreviousIN: {fileID: 114143009698186624}
+  toNextOUT: {fileID: 114183530751384424}
+  expression: Expression
+--- !u!114 &114143009698186624
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -692,16 +275,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
   m_Name: From Previous
   m_EditorClassIdentifier: 
-  body: {fileID: 114203113566493586}
+  body: {fileID: 114137111120063902}
   direction: 1
   maxConnectionCount: 1
   styleID: Gameflow
   _connections:
-  - {fileID: 114467547063215390}
+  - {fileID: 114750647188447176}
+  - {fileID: 114250558145423806}
   side: 4
   sidePosition: 30
   sideOffset: 0
---- !u!114 &114467547063215390
+--- !u!114 &114176770260186096
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -709,59 +293,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: To Next
+  m_Script: {fileID: 11500000, guid: ca92a01cf0c0fe94e9c3b30d81cab97f, type: 3}
+  m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 114694930971640450}
-  direction: 2
-  maxConnectionCount: 1
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114460996241365400}
-  side: 2
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114478379878697508
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: To Next
-  m_EditorClassIdentifier: 
-  body: {fileID: 114682322399480786}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114169588487916278}
-  side: 2
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114486040103345306
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: To Next
-  m_EditorClassIdentifier: 
-  body: {fileID: 114447351911926448}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114737463953689982}
-  side: 2
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114499113985679924
+  position: {x: 2780, y: -320}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  fromPreviousIN: {fileID: 114434395722901584}
+  toNextOUT: {fileID: 114450679650069018}
+  fadeType: 1
+  fadeTime: 3
+  fadeColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &114182642259918668
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -777,10 +320,30 @@ MonoBehaviour:
   backgroundColor: {r: 1, g: 1, b: 1, a: 1}
   characterName: PROMPT
   dialogText: Invalid Color.
-  fromPreviousIN: {fileID: 114104438803403368}
-  toNextOUT: {fileID: 114325100000531658}
+  fromPreviousIN: {fileID: 114007164051955068}
+  toNextOUT: {fileID: 114274392738124316}
   expression: Expression
---- !u!114 &114503952756588628
+--- !u!114 &114183489238288176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: To Default Branch
+  m_EditorClassIdentifier: 
+  body: {fileID: 114004809378122240}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114007164051955068}
+  side: 2
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114183530751384424
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -791,16 +354,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
   m_Name: To Next
   m_EditorClassIdentifier: 
-  body: {fileID: 114570711413710308}
+  body: {fileID: 114137111120063902}
   direction: 2
   maxConnectionCount: 0
   styleID: Gameflow
   _connections:
-  - {fileID: 114380943584651306}
+  - {fileID: 114576260269276288}
   side: 2
   sidePosition: 30
   sideOffset: 0
---- !u!114 &114522550927652542
+--- !u!114 &114208983641742046
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -808,18 +371,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce9a1dcb07d1c7147b7c40571ecbf2bc, type: 3}
-  m_Name: VN Dialog Node
+  m_Script: {fileID: 11500000, guid: 5d272a38b9015334288766e9538f3b4d, type: 3}
+  m_Name: Gameflow Branch
   m_EditorClassIdentifier: 
-  position: {x: 1030.2, y: 110.60002}
-  dynamicConnectionPorts: []
+  position: {x: 1396.2, y: -109.19999}
+  dynamicConnectionPorts:
+  - {fileID: 114248774093400314}
+  - {fileID: 114240672443055498}
   backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  characterName: Character Name
-  dialogText: Your favorite is yellow
-  fromPreviousIN: {fileID: 114821265411713970}
-  toNextOUT: {fileID: 114042589485109886}
-  expression: Expression
---- !u!114 &114524224784485048
+  fromPreviousIN: {fileID: 114576260269276288}
+  toDefaultBranch: {fileID: 114825633381666780}
+  _cases:
+  - pattern: blue
+    type: 0
+    portIndex: 0
+  - pattern: green
+    type: 0
+    portIndex: 1
+  exprType: 0
+  variableName: favorite-color
+--- !u!114 &114233725362839520
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -830,16 +401,337 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
   m_Name: From Previous
   m_EditorClassIdentifier: 
-  body: {fileID: 114708448145382154}
+  body: {fileID: 114006696783148460}
   direction: 1
   maxConnectionCount: 1
   styleID: Gameflow
   _connections:
-  - {fileID: 114343022563158908}
+  - {fileID: 114078050370547974}
   side: 4
   sidePosition: 30
   sideOffset: 0
---- !u!114 &114565806127141346
+--- !u!114 &114240672443055498
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: To Branch Target
+  m_EditorClassIdentifier: 
+  body: {fileID: 114208983641742046}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114355737350992702}
+  side: 2
+  sidePosition: 120
+  sideOffset: 0
+--- !u!114 &114248774093400314
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: To Branch Target
+  m_EditorClassIdentifier: 
+  body: {fileID: 114208983641742046}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114012442956130574}
+  side: 2
+  sidePosition: 99
+  sideOffset: 0
+--- !u!114 &114250558145423806
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: To Branch Target
+  m_EditorClassIdentifier: 
+  body: {fileID: 114004809378122240}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114143009698186624}
+  side: 2
+  sidePosition: 162
+  sideOffset: 0
+--- !u!114 &114250743612602792
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: To Next
+  m_EditorClassIdentifier: 
+  body: {fileID: 114826108823733154}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114621176567675416}
+  side: 2
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114274392738124316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: To Next
+  m_EditorClassIdentifier: 
+  body: {fileID: 114182642259918668}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114874544387570660}
+  side: 2
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114290242172539220
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: From Previous
+  m_EditorClassIdentifier: 
+  body: {fileID: 114018894523339252}
+  direction: 1
+  maxConnectionCount: 1
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114509569014264412}
+  side: 4
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114313954091962438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d87126bd1293fbd48b368443268e4997, type: 3}
+  m_Name: Set Variable
+  m_EditorClassIdentifier: 
+  position: {x: 2140.8003, y: -169.79997}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  fromPreviousIN: {fileID: 114859500955248380}
+  toNextOUT: {fileID: 114509569014264412}
+  variableName: favorite-color
+  value: azul
+--- !u!114 &114327543419159456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: To Next
+  m_EditorClassIdentifier: 
+  body: {fileID: 114006696783148460}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114671882202436592}
+  side: 2
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114349799729946566
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce9a1dcb07d1c7147b7c40571ecbf2bc, type: 3}
+  m_Name: VN Dialog
+  m_EditorClassIdentifier: 
+  position: {x: 1800, y: -170}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  characterName: Character Name
+  dialogText: Your favorite is blue!
+  fromPreviousIN: {fileID: 114012442956130574}
+  toNextOUT: {fileID: 114498880229450274}
+  expression: Expression
+--- !u!114 &114355737350992702
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: From Previous
+  m_EditorClassIdentifier: 
+  body: {fileID: 114574001839343090}
+  direction: 1
+  maxConnectionCount: 1
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114240672443055498}
+  - {fileID: 114825633381666780}
+  side: 4
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114434395722901584
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: From Previous
+  m_EditorClassIdentifier: 
+  body: {fileID: 114176770260186096}
+  direction: 1
+  maxConnectionCount: 1
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114755070521623470}
+  - {fileID: 114911249096195850}
+  - {fileID: 114136630004836644}
+  - {fileID: 114483019685748338}
+  side: 4
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114450679650069018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: To Next
+  m_EditorClassIdentifier: 
+  body: {fileID: 114176770260186096}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114860647896975426}
+  side: 2
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114458977984391998
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: From Previous
+  m_EditorClassIdentifier: 
+  body: {fileID: 114833083217863812}
+  direction: 1
+  maxConnectionCount: 1
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114904250850496634}
+  side: 4
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114483019685748338
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: To Next
+  m_EditorClassIdentifier: 
+  body: {fileID: 114701794744772558}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114434395722901584}
+  side: 2
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114498880229450274
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: To Next
+  m_EditorClassIdentifier: 
+  body: {fileID: 114349799729946566}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114859500955248380}
+  side: 2
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114509569014264412
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: To Next
+  m_EditorClassIdentifier: 
+  body: {fileID: 114313954091962438}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114290242172539220}
+  side: 2
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114574001839343090
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -855,47 +747,10 @@ MonoBehaviour:
   backgroundColor: {r: 1, g: 1, b: 1, a: 1}
   characterName: Character Name
   dialogText: your favorite is green!
-  fromPreviousIN: {fileID: 114414903788754014}
-  toNextOUT: {fileID: 114687921128396258}
+  fromPreviousIN: {fileID: 114355737350992702}
+  toNextOUT: {fileID: 114595553618401768}
   expression: Expression
---- !u!114 &114570711413710308
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca92a01cf0c0fe94e9c3b30d81cab97f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  position: {x: -396.2003, y: -17.799995}
-  dynamicConnectionPorts: []
-  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  fromPreviousIN: {fileID: 114989554910302006}
-  toNextOUT: {fileID: 114503952756588628}
-  fadeType: 1
-  fadeTime: 3
-  fadeColor: {r: 0, g: 0, b: 0, a: 1}
---- !u!114 &114590072408244580
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d87126bd1293fbd48b368443268e4997, type: 3}
-  m_Name: Set Variable
-  m_EditorClassIdentifier: 
-  position: {x: 2140.8003, y: -169.79997}
-  dynamicConnectionPorts: []
-  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  fromPreviousIN: {fileID: 114913742899298328}
-  toNextOUT: {fileID: 114808598948271532}
-  variableName: favorite-color
-  value: azul
---- !u!114 &114606451997800096
+--- !u!114 &114576260269276288
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -906,34 +761,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
   m_Name: From Previous
   m_EditorClassIdentifier: 
-  body: {fileID: 114054145914812992}
+  body: {fileID: 114208983641742046}
   direction: 1
   maxConnectionCount: 1
   styleID: Gameflow
   _connections:
-  - {fileID: 114889807957571006}
+  - {fileID: 114183530751384424}
   side: 4
   sidePosition: 30
   sideOffset: 0
---- !u!114 &114682322399480786
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d87126bd1293fbd48b368443268e4997, type: 3}
-  m_Name: Set Variable
-  m_EditorClassIdentifier: 
-  position: {x: 2148, y: 66.60002}
-  dynamicConnectionPorts: []
-  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  fromPreviousIN: {fileID: 114227838783656498}
-  toNextOUT: {fileID: 114478379878697508}
-  variableName: favorite-color
-  value: '{tl,green}'
---- !u!114 &114687921128396258
+--- !u!114 &114595553618401768
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -944,16 +781,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
   m_Name: To Next
   m_EditorClassIdentifier: 
-  body: {fileID: 114565806127141346}
+  body: {fileID: 114574001839343090}
   direction: 2
   maxConnectionCount: 0
   styleID: Gameflow
   _connections:
-  - {fileID: 114227838783656498}
+  - {fileID: 114861151034197052}
   side: 2
   sidePosition: 30
   sideOffset: 0
---- !u!114 &114694930971640450
+--- !u!114 &114621176567675416
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -961,14 +798,78 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b47af2bc75234d468d7b8273f8f0d88, type: 3}
-  m_Name: Gameflow Start
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: From Previous
   m_EditorClassIdentifier: 
-  position: {x: -620.5, y: -109.8}
+  body: {fileID: 114004809378122240}
+  direction: 1
+  maxConnectionCount: 1
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114250743612602792}
+  side: 4
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114671882202436592
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: From Previous
+  m_EditorClassIdentifier: 
+  body: {fileID: 114892955530576590}
+  direction: 1
+  maxConnectionCount: 1
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114327543419159456}
+  side: 4
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114694580059775026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: From Previous
+  m_EditorClassIdentifier: 
+  body: {fileID: 114793699679940336}
+  direction: 1
+  maxConnectionCount: 1
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114068587130808440}
+  side: 4
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114701794744772558
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce9a1dcb07d1c7147b7c40571ecbf2bc, type: 3}
+  m_Name: VN Dialog Node
+  m_EditorClassIdentifier: 
+  position: {x: 1030.2, y: 110.60002}
   dynamicConnectionPorts: []
   backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  toNextOUT: {fileID: 114467547063215390}
---- !u!114 &114701709758407832
+  characterName: Character Name
+  dialogText: Your favorite is yellow
+  fromPreviousIN: {fileID: 114832217001146760}
+  toNextOUT: {fileID: 114483019685748338}
+  expression: Expression
+--- !u!114 &114715972251257810
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -979,162 +880,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
   m_Name: From Previous
   m_EditorClassIdentifier: 
-  body: {fileID: 114774956052930818}
+  body: {fileID: 114068287003098028}
   direction: 1
   maxConnectionCount: 1
   styleID: Gameflow
   _connections:
-  - {fileID: 114177644720407652}
+  - {fileID: 114792929571614392}
   side: 4
   sidePosition: 30
   sideOffset: 0
---- !u!114 &114708448145382154
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a05d26699c2c95e43a8c82b5f9c2f141, type: 3}
-  m_Name: Gameflow End
-  m_EditorClassIdentifier: 
-  position: {x: 3000, y: -320}
-  dynamicConnectionPorts: []
-  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  fromPreviousIN: {fileID: 114524224784485048}
---- !u!114 &114711799767095284
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: To Next
-  m_EditorClassIdentifier: 
-  body: {fileID: 114203113566493586}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114989554910302006}
-  side: 2
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114737463953689982
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: From Previous
-  m_EditorClassIdentifier: 
-  body: {fileID: 114284200533287034}
-  direction: 1
-  maxConnectionCount: 1
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114486040103345306}
-  - {fileID: 114841465656070844}
-  - {fileID: 114418673115973410}
-  - {fileID: 114042589485109886}
-  side: 4
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114750778242775624
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: From Previous
-  m_EditorClassIdentifier: 
-  body: {fileID: 114962004324666730}
-  direction: 1
-  maxConnectionCount: 1
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114232040641551168}
-  - {fileID: 114325100000531658}
-  side: 4
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114774956052930818
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d272a38b9015334288766e9538f3b4d, type: 3}
-  m_Name: Gameflow Branch
-  m_EditorClassIdentifier: 
-  position: {x: 1396.2, y: -109.19999}
-  dynamicConnectionPorts:
-  - {fileID: 114129755191139470}
-  - {fileID: 114841166136596226}
-  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  fromPreviousIN: {fileID: 114701709758407832}
-  toDefaultBranch: {fileID: 114365285566980824}
-  _cases:
-  - pattern: blue
-    type: 0
-    portIndex: 0
-  - pattern: green
-    type: 0
-    portIndex: 1
-  exprType: 0
-  variableName: favorite-color
---- !u!114 &114808598948271532
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: To Next
-  m_EditorClassIdentifier: 
-  body: {fileID: 114590072408244580}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114364173054439828}
-  side: 2
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114821265411713970
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: From Previous
-  m_EditorClassIdentifier: 
-  body: {fileID: 114522550927652542}
-  direction: 1
-  maxConnectionCount: 1
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114156700680645714}
-  side: 4
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114841166136596226
+--- !u!114 &114750647188447176
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1145,16 +900,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
   m_Name: To Branch Target
   m_EditorClassIdentifier: 
-  body: {fileID: 114774956052930818}
+  body: {fileID: 114004809378122240}
   direction: 2
   maxConnectionCount: 0
   styleID: Gameflow
   _connections:
-  - {fileID: 114414903788754014}
+  - {fileID: 114143009698186624}
   side: 2
-  sidePosition: 118
+  sidePosition: 99
   sideOffset: 0
---- !u!114 &114841465656070844
+--- !u!114 &114755070521623470
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1165,16 +920,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
   m_Name: To Next
   m_EditorClassIdentifier: 
-  body: {fileID: 114049187202000528}
+  body: {fileID: 114018894523339252}
   direction: 2
   maxConnectionCount: 0
   styleID: Gameflow
   _connections:
-  - {fileID: 114737463953689982}
+  - {fileID: 114434395722901584}
   side: 2
   sidePosition: 30
   sideOffset: 0
---- !u!114 &114849035198647586
+--- !u!114 &114792929571614392
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: To Next
+  m_EditorClassIdentifier: 
+  body: {fileID: 114996324537521638}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114715972251257810}
+  side: 2
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114793699679940336
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1190,10 +965,10 @@ MonoBehaviour:
   backgroundColor: {r: 1, g: 1, b: 1, a: 1}
   characterName: Character Name
   dialogText: Your favorite is red
-  fromPreviousIN: {fileID: 114433864887550316}
-  toNextOUT: {fileID: 114418673115973410}
+  fromPreviousIN: {fileID: 114694580059775026}
+  toNextOUT: {fileID: 114136630004836644}
   expression: Expression
---- !u!114 &114889807957571006
+--- !u!114 &114825633381666780
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1202,38 +977,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: To Next
+  m_Name: To Default Branch
   m_EditorClassIdentifier: 
-  body: {fileID: 114962004324666730}
+  body: {fileID: 114208983641742046}
   direction: 2
   maxConnectionCount: 0
   styleID: Gameflow
   _connections:
-  - {fileID: 114606451997800096}
+  - {fileID: 114355737350992702}
   side: 2
   sidePosition: 30
   sideOffset: 0
---- !u!114 &114913742899298328
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
-  m_Name: From Previous
-  m_EditorClassIdentifier: 
-  body: {fileID: 114590072408244580}
-  direction: 1
-  maxConnectionCount: 1
-  styleID: Gameflow
-  _connections:
-  - {fileID: 114069897121887782}
-  side: 4
-  sidePosition: 30
-  sideOffset: 0
---- !u!114 &114962004324666730
+--- !u!114 &114826108823733154
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1248,12 +1003,12 @@ MonoBehaviour:
   dynamicConnectionPorts: []
   backgroundColor: {r: 1, g: 1, b: 1, a: 1}
   characterName: PROMPT
-  dialogText: Insert dialog text here
-  fromPreviousIN: {fileID: 114750778242775624}
-  toNextOUT: {fileID: 114889807957571006}
+  dialogText: What is your favorite color?
+  fromPreviousIN: {fileID: 114874544387570660}
+  toNextOUT: {fileID: 114250743612602792}
   expression: Expression
   variableName: favorite-color
---- !u!114 &114989554910302006
+--- !u!114 &114832217001146760
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1264,12 +1019,259 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
   m_Name: From Previous
   m_EditorClassIdentifier: 
-  body: {fileID: 114570711413710308}
+  body: {fileID: 114701794744772558}
   direction: 1
   maxConnectionCount: 1
   styleID: Gameflow
   _connections:
-  - {fileID: 114711799767095284}
+  - {fileID: 114923168280341608}
   side: 4
   sidePosition: 30
   sideOffset: 0
+--- !u!114 &114833083217863812
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2415f2f211a270140b2881ef82766874, type: 3}
+  m_Name: Add Character
+  m_EditorClassIdentifier: 
+  position: {x: -398.20047, y: -98}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  fromPreviousIN: {fileID: 114458977984391998}
+  toNextOUT: {fileID: 114078050370547974}
+  characterName: Illyia
+  startingExpression: default
+  pos: {x: 0, y: 0}
+--- !u!114 &114859500955248380
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: From Previous
+  m_EditorClassIdentifier: 
+  body: {fileID: 114313954091962438}
+  direction: 1
+  maxConnectionCount: 1
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114498880229450274}
+  side: 4
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114860647896975426
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: From Previous
+  m_EditorClassIdentifier: 
+  body: {fileID: 114997201345800884}
+  direction: 1
+  maxConnectionCount: 1
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114450679650069018}
+  side: 4
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114861151034197052
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: From Previous
+  m_EditorClassIdentifier: 
+  body: {fileID: 114996324537521638}
+  direction: 1
+  maxConnectionCount: 1
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114595553618401768}
+  side: 4
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114874544387570660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: From Previous
+  m_EditorClassIdentifier: 
+  body: {fileID: 114826108823733154}
+  direction: 1
+  maxConnectionCount: 1
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114990948024603030}
+  - {fileID: 114274392738124316}
+  side: 4
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114892955530576590
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce9a1dcb07d1c7147b7c40571ecbf2bc, type: 3}
+  m_Name: VN Dialog Node
+  m_EditorClassIdentifier: 
+  position: {x: -149.1, y: -98.6}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  characterName: Illyia
+  dialogText: This is a demo!
+  fromPreviousIN: {fileID: 114671882202436592}
+  toNextOUT: {fileID: 114990948024603030}
+  expression: Laughing
+--- !u!114 &114904250850496634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: To Next
+  m_EditorClassIdentifier: 
+  body: {fileID: 114940671249746642}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114458977984391998}
+  side: 2
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114911249096195850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: To Next
+  m_EditorClassIdentifier: 
+  body: {fileID: 114068287003098028}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114434395722901584}
+  side: 2
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114923168280341608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: To Branch Target
+  m_EditorClassIdentifier: 
+  body: {fileID: 114004809378122240}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114832217001146760}
+  side: 2
+  sidePosition: 120
+  sideOffset: 0
+--- !u!114 &114940671249746642
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b47af2bc75234d468d7b8273f8f0d88, type: 3}
+  m_Name: Gameflow Start
+  m_EditorClassIdentifier: 
+  position: {x: -620.5, y: -109.8}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  toNextOUT: {fileID: 114904250850496634}
+--- !u!114 &114990948024603030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3d338988a4691f43b8c0764bd85cf70, type: 3}
+  m_Name: To Next
+  m_EditorClassIdentifier: 
+  body: {fileID: 114892955530576590}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: Gameflow
+  _connections:
+  - {fileID: 114874544387570660}
+  side: 2
+  sidePosition: 30
+  sideOffset: 0
+--- !u!114 &114996324537521638
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d87126bd1293fbd48b368443268e4997, type: 3}
+  m_Name: Set Variable
+  m_EditorClassIdentifier: 
+  position: {x: 2148, y: 66.60002}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  fromPreviousIN: {fileID: 114861151034197052}
+  toNextOUT: {fileID: 114792929571614392}
+  variableName: favorite-color
+  value: '{tl,green}'
+--- !u!114 &114997201345800884
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a05d26699c2c95e43a8c82b5f9c2f141, type: 3}
+  m_Name: Gameflow End
+  m_EditorClassIdentifier: 
+  position: {x: 3000, y: -320}
+  dynamicConnectionPorts: []
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  fromPreviousIN: {fileID: 114860647896975426}
