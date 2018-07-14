@@ -17,7 +17,7 @@ namespace TypocryphaGameflow
         public override bool AutoLayout { get { return true; } }
 
         //Next Node to go to (OUTPUT)
-        [ConnectionKnob("To Next", Direction.Out, "Gameflow", NodeSide.Right, 30)]
+        [ConnectionKnob("To Next", Direction.Out, "Gameflow", ConnectionCount.Single, NodeSide.Right, 30)]
         public ConnectionKnob toNextOUT;
 
         public override void NodeGUI()
