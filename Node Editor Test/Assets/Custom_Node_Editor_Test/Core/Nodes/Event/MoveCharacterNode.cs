@@ -40,7 +40,8 @@ namespace TypocryphaGameflow
             GUILayout.Space(5);
             GUILayout.BeginVertical("box");
             characterName = GUILayout.TextField(characterName);
-            moveType = (MovementType)EditorGUILayout.EnumPopup(moveType);
+            //moveType = (MovementType)EditorGUILayout.EnumPopup(moveType);
+            moveType = (MovementType)GUIUtilities.OverlayEnumPopup(moveType, GUILayoutUtility.GetLastRect().position);
             if (moveType != MovementType.Set_Position)
                 time = EditorGUILayout.FloatField(time);
             moveTo = EditorGUILayout.Vector2Field("", moveTo);
