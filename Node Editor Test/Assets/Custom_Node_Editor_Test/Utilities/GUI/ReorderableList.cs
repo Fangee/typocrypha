@@ -13,7 +13,24 @@ namespace TypocryphaGameflow
         {
             public abstract void doGUI(Rect rect, int index, IList list);
             public virtual float getHeight(int index) { return EditorGUIUtility.singleLineHeight; }
-            public virtual void doAddMenu(IList list) { }
+            public abstract IEnumerable<System.Type> Subtypes { get; }
+            public virtual void doAddMenu(IList list)
+            {
+                var menu = new NodeEditorFramework.Utilities.GenericMenu();
+                foreach (var type in Subtypes)
+                {
+                    string[] path = type.ToString().Split('.');
+                    var name = path[path.Length - 1];
+                    menu.AddItem(new GUIContent(name),
+                    false, clickHandler, new GUIUtilities.MenuItemData(type, list));
+                }
+                menu.ShowAsContext();
+            }
+            private void clickHandler(object obj)
+            {
+                var data = (GUIUtilities.MenuItemData)obj;
+                data.list.Add(ScriptableObject.CreateInstance(data.type));
+            }
         }
         public abstract class ReorderableListItemNodeConnection : ReorderableListItem
         {

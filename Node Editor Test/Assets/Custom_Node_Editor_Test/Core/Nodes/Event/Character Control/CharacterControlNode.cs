@@ -59,25 +59,9 @@ namespace TypocryphaGameflow
         public abstract class EventData : GUIUtilities.ReorderableListItem
         {
             public static IEnumerable<System.Type> subtypes = GUIUtilities.ReflectiveEnumerator.GetAllSubclassTypes<EventData>();
+            public override IEnumerable<Type> Subtypes { get { return subtypes; } }
             public string characterName = "name";
-            protected int numElements = 1;
-            public override void doAddMenu(IList list)
-            {
-                var menu = new NodeEditorFramework.Utilities.GenericMenu();
-                foreach (var type in subtypes)
-                {
-                    string[] path = type.ToString().Split('.');
-                    var name = path[path.Length - 1];
-                    menu.AddItem(new GUIContent(name),
-                    false, clickHandler, new GUIUtilities.MenuItemData(type, list));
-                }
-                menu.ShowAsContext();
-            }
-            private void clickHandler(object obj)
-            {
-                var data = (GUIUtilities.MenuItemData)obj;
-                data.list.Add(ScriptableObject.CreateInstance(data.type));
-            }
+
             public override float getHeight(int index)
             {
                 return base.getHeight(index) * 2;
