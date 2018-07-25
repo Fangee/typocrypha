@@ -23,7 +23,6 @@ namespace TypocryphaGameflow
 
         public string expression;
 
-        private Vector2 scroll;
         protected static GUIStyle labelStyle = new GUIStyle();
 
         private const string tooltip_name = "The speaking character's name. Used to set speaking sfx and sprite highlighting if not overriden by text events";
@@ -56,12 +55,9 @@ namespace TypocryphaGameflow
             GUILayout.Label(new GUIContent("Dialogue Text", tooltip_text), NodeEditorGUI.nodeLabelBoldCentered);
 
             GUILayout.BeginHorizontal();
-
-            scroll = EditorGUILayout.BeginScrollView(scroll, GUILayout.Height(100));
-            EditorStyles.textField.wordWrap = true;
-            dialogText = EditorGUILayout.TextArea(dialogText, GUILayout.ExpandHeight(true));
-            EditorStyles.textField.wordWrap = false;
-            EditorGUILayout.EndScrollView();
+            GUIStyle dialogTextStyle = new GUIStyle(EditorStyles.textArea);
+            dialogTextStyle.wordWrap = true;
+            dialogText = EditorGUILayout.TextArea(dialogText, dialogTextStyle,GUILayout.MinHeight(EditorGUIUtility.singleLineHeight * 5));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
