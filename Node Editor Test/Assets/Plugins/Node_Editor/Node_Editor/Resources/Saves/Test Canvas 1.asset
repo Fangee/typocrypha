@@ -59,6 +59,8 @@ MonoBehaviour:
   fromPreviousIN: {fileID: 114602322372846034}
   toNextOUT: {fileID: 114056280623612094}
   characterName: Character Name
+  startingExpression: 
+  pos: {x: 0, y: 0}
 --- !u!114 &114056280623612094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -287,6 +289,7 @@ MonoBehaviour:
   - {fileID: 114322465239379942}
   backgroundColor: {r: 1, g: 1, b: 1, a: 1}
   fromPreviousIN: {fileID: 114139212551952974}
+  toDefaultBranch: {fileID: 0}
   _cases:
   - pattern: 
     type: 0
@@ -297,6 +300,8 @@ MonoBehaviour:
   - pattern: 
     type: 0
     portIndex: 1
+  exprType: 0
+  variableName: 
 --- !u!114 &114602322372846034
 MonoBehaviour:
   m_ObjectHideFlags: 1
