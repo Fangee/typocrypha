@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
 using NodeEditorFramework;
+using NodeEditorFramework.Utilities;
 
 namespace TypocryphaGameflow
 {
@@ -22,13 +23,13 @@ namespace TypocryphaGameflow
                     string[] path = type.ToString().Split('.');
                     var name = path[path.Length - 1];
                     menu.AddItem(new GUIContent(name),
-                    false, clickHandler, new GUIUtilities.MenuItemData(type, list));
+                    false, clickHandler, new MenuItemData(type, list));
                 }
-                menu.ShowAsContext();
+                menu.Show(Event.current.mousePosition + Event.current.delta);   
             }
             private void clickHandler(object obj)
             {
-                var data = (GUIUtilities.MenuItemData)obj;
+                var data = (MenuItemData)obj;
                 data.list.Add(ScriptableObject.CreateInstance(data.type));
             }
         }
@@ -36,6 +37,7 @@ namespace TypocryphaGameflow
         {
             public int[] nodeIndices;
         }
+        //Data class used to generate add context menus
         public class MenuItemData
         {
             //public string path;
@@ -47,6 +49,7 @@ namespace TypocryphaGameflow
                 this.list = list;
             }
         }
+        //Generic Reorderable list. Should only be used with non-polymorphic types marked with the System.Serializable
         public class ReorderableList<T>
         {
             public delegate void listItemGUI(T item, Rect rect, int index, IList list);
@@ -111,7 +114,7 @@ namespace TypocryphaGameflow
                 _list.DoList(rect);
             }
         }
-
+        //Specific reorderablelist implementation to be used with polymorphic scriptable objects that inherit from ReorderableListItem
         public class ReorderableItemList : ReorderableList<ReorderableListItem>
         {
             public ReorderableItemList(List<ReorderableListItem> elements, bool draggable = true, bool displayHeader = false, GUIContent headerLabel = null, bool displayAddButton = true, bool displayRemoveButton = true)

@@ -273,8 +273,8 @@ namespace NodeEditorFramework
 				else // Editor Context Click
 					FillContextMenu (inputInfo, contextMenu, ContextType.Canvas);
 				contextMenu.ShowAsContext ();
-				Event.current.Use ();
-			}
+                Event.current.Use ();
+            }
 		}
 
 		#endregion

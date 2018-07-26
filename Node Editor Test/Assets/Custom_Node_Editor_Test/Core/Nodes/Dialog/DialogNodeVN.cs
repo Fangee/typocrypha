@@ -60,6 +60,7 @@ namespace TypocryphaGameflow
             dialogText = EditorGUILayout.TextArea(dialogText, dialogTextStyle,GUILayout.MinHeight(EditorGUIUtility.singleLineHeight * 5));
             GUILayout.EndHorizontal();
 
+            //Don't know why this code needs to be here exactly, but it makes everything nicer? maybe add to some static stuff?
             GUILayout.BeginHorizontal();
             EditorGUIUtility.labelWidth = 90;
             GUILayout.EndHorizontal();

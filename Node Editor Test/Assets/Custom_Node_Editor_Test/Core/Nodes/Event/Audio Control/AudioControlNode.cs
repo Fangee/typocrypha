@@ -8,14 +8,14 @@ using System;
 
 namespace TypocryphaGameflow
 {
-    [Node(false, "Event/Character Control", new System.Type[] { typeof(GameflowCanvas) })]
-    public class CharacterControlNode : GameflowStandardIONode
+    [Node(false, "Event/Audio Control", new System.Type[] { typeof(GameflowCanvas) })]
+    public class AudioControlNode : GameflowStandardIONode
     {
-        public const string ID = "Character Control Node";
+        public const string ID = "Audio Control Node";
         public override string GetID { get { return ID; } }
 
-        public override string Title { get { return "Character Control"; } }
-        public override Vector2 MinSize { get { return new Vector2(150, 20); } }
+        public override string Title { get { return "Audio Control"; } }
+        public override Vector2 MinSize { get { return new Vector2(200, 20); } }
 
         [SerializeField]
         List<GUIUtilities.ReorderableListItem> _events;
@@ -23,7 +23,7 @@ namespace TypocryphaGameflow
         protected override void OnCreate()
         {
             _events = new List<GUIUtilities.ReorderableListItem>();
-            _events.Add((GUIUtilities.ReorderableListItem)ScriptableObject.CreateInstance(typeof(AddCharacter)));
+            _events.Add((GUIUtilities.ReorderableListItem)ScriptableObject.CreateInstance(typeof(PlayBgm)));
         }
 
         public override ScriptableObject[] GetScriptableObjects()
@@ -51,11 +51,10 @@ namespace TypocryphaGameflow
         {
             public static IEnumerable<System.Type> subtypes = GUIUtilities.ReflectiveEnumerator.GetAllSubclassTypes<EventData>();
             public override IEnumerable<Type> Subtypes { get { return subtypes; } }
-            public string characterName = "name";
 
             public override float getHeight(int index)
             {
-                return base.getHeight(index) * 2;
+                return EditorGUIUtility.singleLineHeight + 1;
             }
         }
     }
