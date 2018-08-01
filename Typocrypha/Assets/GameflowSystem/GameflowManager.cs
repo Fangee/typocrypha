@@ -59,7 +59,7 @@ public class GameflowManager : Gameflow {
 			//screenframe_battle.SetActive (false);
             BattleManagerS.main.setEnabled(false);
             DialogueManager.main.setEnabled(true);
-			DialogueManager.main.startDialogue (curr_gameflow.transform.GetChild(curr_gameflow.curr_item).gameObject);
+			//DialogueManager.main.startDialogue (curr_gameflow.transform.GetChild(curr_gameflow.curr_item).gameObject);
 		} else if(item.GetType() == typeof(Battle)) {
             Debug.Log("starting battle: " + item.name);
 			player_ui.SetActive (true);

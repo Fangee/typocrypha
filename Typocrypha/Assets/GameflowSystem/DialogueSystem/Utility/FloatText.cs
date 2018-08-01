@@ -9,7 +9,7 @@ public class FloatText : MonoBehaviour {
 	}
 
 	IEnumerator startFloatTextCR(float x, float y, string text) {
-		DialogueItem d_item = gameObject.AddComponent<DialogueItemAN>();
+        DialogueItem d_item = new DialogueItem("","");//gameObject.AddComponent<DialogueItemAN>();
 		transform.position = new Vector2 (x, y);
 		DialogueBox d_box = GetComponent<DialogueBox> ();
 		d_box.is_floating = true;
@@ -22,7 +22,7 @@ public class FloatText : MonoBehaviour {
 		foreach(FXTextEffect text_effect in d_item.fx_text_effects)
 			d_box.fx_text.addEffect (text_effect);
 		// start text scroll
-		d_box.dialogueBoxStart ();
+		d_box.dialogueBoxStart (null);
 		// wait for dialogue to finish scrolling
 		yield return new WaitUntil (() => d_box.cr_scroll != null);
 		yield return new WaitWhile (() => d_box.cr_scroll != null);

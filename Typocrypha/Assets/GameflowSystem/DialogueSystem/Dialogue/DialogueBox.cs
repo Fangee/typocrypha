@@ -23,7 +23,7 @@ public class DialogueBox : MonoBehaviour {
 	float text_pad; // Padding between text and dialogue box
 
 	// Initializes dialogue box and starts text scroll
-	public Coroutine dialogueBoxStart() {
+	public Coroutine dialogueBoxStart(TypocryphaGameflow.DialogManagerNode data) {
 		text_pad = fx_text.rectTransform.offsetMin.y - fx_text.rectTransform.offsetMax.y;
 		// Initialize color effect to hide text
 		set_color = fx_text.gameObject.AddComponent<FXTextColor> ();
@@ -31,41 +31,45 @@ public class DialogueBox : MonoBehaviour {
 		set_color.color.a = 0;
 		set_color.chars = new int[2]{0,text.Length};
 		fx_text.addEffect (set_color);
-		if (d_item.GetType () == typeof(DialogueItemChat)) {
-			DialogueItemChat c_item = (DialogueItemChat)d_item;
-			// Set icon
-			left_icon.sprite = c_item.left_icon;
-			right_icon.sprite = c_item.right_icon;
-			// Display appropriate icon
-			if (c_item.icon_side == IconSide.LEFT || c_item.icon_side == IconSide.BOTH)
-				left_icon.enabled = true;
-			if (c_item.icon_side == IconSide.RIGHT || c_item.icon_side == IconSide.BOTH)
-				right_icon.enabled = true;
-			// Add text with speaker's name, and offset text display
-			int offset = 0;
-			if (d_item.speaker_name != null && d_item.speaker_name.Length != 0) {
-				text = d_item.speaker_name + "\n" + text;
-				offset += d_item.speaker_name.Length + 1;
-			}
-			fx_text.text = text;
-			set_color.chars [0] = offset;
-			set_color.chars [1] += offset;
-			// Set box height
-			setBoxHeight ();
-		} else if (d_item.GetType () == typeof(DialogueItemVN)) {
-			DialogueItemVN v_item = (DialogueItemVN)d_item;
-			// Display character sprites
-			for (int i = 0; i < v_item.char_sprites.Length; ++i)
-				DialogueManager.main.displayCharacter (v_item.char_sprites [i], v_item.char_sprite_pos [i]);
-			fx_text.text = text;
-		} else if (d_item.GetType () == typeof(DialogueItemAN)) {
-			fx_text.text = text;
-			setBoxHeight ();
-		} else {
-			fx_text.text = text;
-		}
-		// Set talking sfx
-		if (talk_sfx) AudioPlayer.main.setSFX(AudioPlayer.channel_voice, "speak_boop");
+        //if (d_item.GetType () == typeof(DialogueItemChat)) {
+        //	DialogueItemChat c_item = (DialogueItemChat)d_item;
+        //	// Set icon
+        //	left_icon.sprite = c_item.left_icon;
+        //	right_icon.sprite = c_item.right_icon;
+        //	// Display appropriate icon
+        //	if (c_item.icon_side == IconSide.LEFT || c_item.icon_side == IconSide.BOTH)
+        //		left_icon.enabled = true;
+        //	if (c_item.icon_side == IconSide.RIGHT || c_item.icon_side == IconSide.BOTH)
+        //		right_icon.enabled = true;
+        //	// Add text with speaker's name, and offset text display
+        //	int offset = 0;
+        //	if (d_item.speaker_name != null && d_item.speaker_name.Length != 0) {
+        //		text = d_item.speaker_name + "\n" + text;
+        //		offset += d_item.speaker_name.Length + 1;
+        //	}
+        //	fx_text.text = text;
+        //	set_color.chars [0] = offset;
+        //	set_color.chars [1] += offset;
+        //	// Set box height
+        //	setBoxHeight ();
+        //} else 
+        if (data is TypocryphaGameflow.DialogNodeVN) {
+            // Display character sprites
+            //for (int i = 0; i < v_item.char_sprites.Length; ++i)
+            //    DialogueManager.main.displayCharacter(v_item.char_sprites[i], v_item.char_sprite_pos[i]);
+            fx_text.text = text;
+        }
+        //else if (d_item.GetType() == typeof(DialogueItemAN))
+        //{
+        //    fx_text.text = text;
+        //    setBoxHeight();
+        //}
+        //else
+        //{
+        //    fx_text.text = text;
+        //}
+        // Set talking sfx
+        if (talk_sfx) AudioPlayer.main.setSFX(AudioPlayer.channel_voice, "speak_boop");
 		return StartCoroutine (startTextScrollCR ());
 	}
 

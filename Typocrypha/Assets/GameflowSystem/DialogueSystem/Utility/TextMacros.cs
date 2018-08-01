@@ -21,6 +21,7 @@ public class TextMacros : MonoBehaviour {
 			{"pronoun",macroPronoun},
             {"info", macroInfo},
             {"i", macroInfo},
+            {"v", macroInfo},
             {"last-cast", macroLastCast},
             {"last-cast-enemy", macroLastCastEnemy},
             {"time", macroTime},
@@ -74,7 +75,7 @@ public class TextMacros : MonoBehaviour {
 	// substitutes player's name
 	// input: NONE
 	string macroNameSub(string[] opt) {
-		return PlayerDialogueInfo.main.player_name;
+		return PlayerDialogueInfo.main.getInfo("player-name");
 	}
 
 	// substitutes in appropriate pronoun term

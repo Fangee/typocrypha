@@ -3608,19 +3608,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: Soul of Mackey
-  text: '{t,mackey}{NAME}. I see you''ve cast a {c,spell}Element{c,} Keyword. These
-    are spell prefixes that override the {c,spell}Element-type{c,} of a spell.'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
 --- !u!114 &296170454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3643,18 +3630,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: 
-  text: '> An image of Mackey enters your mind...'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: b1c187b112cd2fc4f9fc1bf45026c771, type: 3}
-  char_sprites: []
-  char_sprite_pos: []
 --- !u!114 &296170456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3666,21 +3641,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: Soul of Mackey
-  text: '{t,mackey}For example, the {c,spell}AGNI{c,} keyword will make spells deal
-    {c,highlight}FIRE{c,} damage:
-
-    ie. {c,spell}AGNI-SWORD{c,}.'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
 --- !u!114 &296170457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3692,19 +3652,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: Soul of Mackey
-  text: '{t,mackey}Unlike most spells, {c,spell}Element{c,} keywords {c,highlight}use
-    official TYPOCRYPHA designators apart from the English language.{c,}'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
 --- !u!114 &296170458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3716,19 +3663,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: Soul of Mackey
-  text: '{t,mackey}Keep an eye out for peculiar spell prefixes, in the event that
-    you encounter an enemy with many {c,highlight}Elemental Resistances.{c,}'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
 --- !u!114 &296170459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3740,19 +3674,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: Soul of Mackey
-  text: '{t,mackey}Use the {c,ui-terms}SHIFT Key{c,} to toggle viewing of {c,highlight}Enemy
-    Weaknesses{c,}.'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
 --- !u!1 &300192066
 GameObject:
   m_ObjectHideFlags: 0
@@ -3914,7 +3835,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &309855630
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3924,8 +3845,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1203308216}
+  m_Children: []
   m_Father: {fileID: 763453157}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5466,18 +5386,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: 
-  text: '> An image of Mackey enters your mind...'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: b1c187b112cd2fc4f9fc1bf45026c771, type: 3}
-  char_sprites: []
-  char_sprite_pos: []
 --- !u!114 &466450763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5500,18 +5408,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: 
-  text: '{t,mackey}{NAME}. I see you''ve {c,highlight}registered aa new Spellword.{c,}'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
 --- !u!114 &466450765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5523,19 +5419,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: 
-  text: '{t,mackey}All of you and the enemy''s spells are chronicled in the {c,ui-terms}Spellbook
-    on the bottom right of the screen.{c,}'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
 --- !u!114 &466450766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5547,19 +5430,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: 
-  text: '{t,mackey}Use the {c,ui-terms}UP/DOWN Arrow Keys{c,} to navigate the {c,ui-terms}Spellbook''s
-    pages.{c,}'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
 --- !u!1 &467275146
 GameObject:
   m_ObjectHideFlags: 0
@@ -5878,146 +5748,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 491383772}
---- !u!1001 &520973396
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 309855630}
-    m_Modifications:
-    - target: {fileID: 224291679219575822, guid: a83b43be611ebb54ca774269f8be1fcf,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224291679219575822, guid: a83b43be611ebb54ca774269f8be1fcf,
-        type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224291679219575822, guid: a83b43be611ebb54ca774269f8be1fcf,
-        type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224291679219575822, guid: a83b43be611ebb54ca774269f8be1fcf,
-        type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224291679219575822, guid: a83b43be611ebb54ca774269f8be1fcf,
-        type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224291679219575822, guid: a83b43be611ebb54ca774269f8be1fcf,
-        type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224291679219575822, guid: a83b43be611ebb54ca774269f8be1fcf,
-        type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224291679219575822, guid: a83b43be611ebb54ca774269f8be1fcf,
-        type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224291679219575822, guid: a83b43be611ebb54ca774269f8be1fcf,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.00000047683716
-      objectReference: {fileID: 0}
-    - target: {fileID: 224291679219575822, guid: a83b43be611ebb54ca774269f8be1fcf,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.00000023841858
-      objectReference: {fileID: 0}
-    - target: {fileID: 224291679219575822, guid: a83b43be611ebb54ca774269f8be1fcf,
-        type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 224291679219575822, guid: a83b43be611ebb54ca774269f8be1fcf,
-        type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 224291679219575822, guid: a83b43be611ebb54ca774269f8be1fcf,
-        type: 2}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224291679219575822, guid: a83b43be611ebb54ca774269f8be1fcf,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224291679219575822, guid: a83b43be611ebb54ca774269f8be1fcf,
-        type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224291679219575822, guid: a83b43be611ebb54ca774269f8be1fcf,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224291679219575822, guid: a83b43be611ebb54ca774269f8be1fcf,
-        type: 2}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224291679219575822, guid: a83b43be611ebb54ca774269f8be1fcf,
-        type: 2}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1194992156280432, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1811351533148342, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1407015794859084, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234604780912334, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1909334709251904, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1828818657626670, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1529301539322222, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1321203343401616, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1175195932115936, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1581116007841730, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: a83b43be611ebb54ca774269f8be1fcf, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &532668779
 GameObject:
   m_ObjectHideFlags: 0
@@ -9007,6 +8737,7 @@ Transform:
   - {fileID: 1288384070}
   - {fileID: 94137937}
   - {fileID: 309855630}
+  - {fileID: 912533862}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9885,19 +9616,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: Soul of Mackey
-  text: '{t,mackey}Your {c,spell}Style{c,} keywords are on the 3rd page of your Spellbook,
-    below the Element keywords. Use them to unlock your potential.'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
 --- !u!114 &839043934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9920,21 +9638,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: Soul of Mackey
-  text: '{t,mackey}For example, the {c,spell}AIMED{c,} keyword will make spells more
-    accurate in return for lower power:
-
-    ie. {c,spell}AGNI-SWORD-AIMED{c,}.'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
 --- !u!114 &839043936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9946,19 +9649,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: Soul of Mackey
-  text: '{t,mackey}{NAME}. I see you''ve cast a {c,spell}Style{c,} Keyword. These
-    are spell suffixes that modify the attributes of a spell.'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 0}
-  char_sprites: []
-  char_sprite_pos: []
 --- !u!114 &839043937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9970,18 +9660,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21509c82077fd9445b21d4377156d9aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fx_text_effects: []
-  dialogue_type: 0
-  speaker_name: 
-  text: '> An image of Mackey enters your mind...'
-  input_display: {fileID: 0}
-  input_options: []
-  input_answers: []
-  input_branches: []
-  mc_sprite: {fileID: 0}
-  codec_sprite: {fileID: 21300000, guid: b1c187b112cd2fc4f9fc1bf45026c771, type: 3}
-  char_sprites: []
-  char_sprite_pos: []
 --- !u!1 &839056113
 GameObject:
   m_ObjectHideFlags: 0
@@ -11148,6 +10826,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar_prefab: {fileID: 1937227192886000, guid: 8191f1c04fd9b154a97f15f1df216183, type: 2}
+--- !u!1 &912533861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 912533862}
+  - component: {fileID: 912533863}
+  m_Layer: 0
+  m_Name: GameflowManagerS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &912533862
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 912533861}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 763453157}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &912533863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 912533861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cc1c5081e80ae04e9f1be80ac49d569, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player_ui: {fileID: 1378758522}
+  gameflow: {fileID: 11400000, guid: f7e9c101ffc2f9f42877df870184c9fe, type: 2}
 --- !u!1 &915031175
 GameObject:
   m_ObjectHideFlags: 0
@@ -14917,11 +14637,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wavy_sprite: {fileID: 1187835794}
   bg_dimmer: {fileID: 454910325}
---- !u!224 &1203308216 stripped
-RectTransform:
-  m_PrefabParentObject: {fileID: 224291679219575822, guid: a83b43be611ebb54ca774269f8be1fcf,
-    type: 2}
-  m_PrefabInternal: {fileID: 520973396}
 --- !u!1 &1213398746
 GameObject:
   m_ObjectHideFlags: 0
@@ -22543,7 +22258,6 @@ MonoBehaviour:
   right_icon: {fileID: 0}
   rect_tr: {fileID: 1898592526}
   is_floating: 0
-  d_item: {fileID: 0}
 --- !u!114 &1898592528
 MonoBehaviour:
   m_ObjectHideFlags: 0

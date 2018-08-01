@@ -495,7 +495,7 @@ public class TextEvents : MonoBehaviour {
 	// Sets name from last inputed text
 	// Input: NONE
 	IEnumerator setName(string[] opt) {
-		PlayerDialogueInfo.main.player_name = DialogueManager.main.answer;
+		PlayerDialogueInfo.main.setInfo("player-name", DialogueManager.main.answer);
 		yield return true;
 	}
 

@@ -7,6 +7,7 @@ public enum Pronoun { FEMININE, INCLUSIVE, FIRSTNAME, MASCULINE };
 // container class for player info needed for cutscenes
 public class PlayerDialogueInfo : MonoBehaviour {
 	public static PlayerDialogueInfo main = null; // global static ref
+    public const string defaultPromptKey = "prompt";
 	public Sprite[] player_sprites; // all options for player sprites
 	public SpriteRenderer player_sprite_r; // where player sprite is rendered
     public Dictionary<string, string> player_info_map;

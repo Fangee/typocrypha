@@ -145,6 +145,7 @@ public class BattleManagerS : MonoBehaviour {
     public void startBattle(GameObject new_battle)
     {
         //Reset player stats and status
+        setEnabled(true);
         player.restoreToFull();
         currThirdEyeCharge = maxThirdEyeCharge;
         battleKeyboard.clearStatus();
