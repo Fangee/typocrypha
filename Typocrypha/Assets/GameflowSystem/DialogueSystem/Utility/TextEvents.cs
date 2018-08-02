@@ -212,19 +212,25 @@ public class TextEvents : MonoBehaviour {
 		float g = float.Parse (opt [3]);
 		float b = float.Parse (opt [4]);
 		float alpha;
-		float a_step = 1f * Time.deltaTime / fade_time; // amount of change each frame
-		if (a_step > 1) a_step = 1;
+		float a_step = Time.deltaTime / fade_time; // amount of change each frame
+        Debug.Log("Alpha Step: " + a_step);
+        Debug.Log("Delta Time: " + Time.deltaTime);
+        Debug.Log("Fade Time: " + fade_time);
+        Debug.Log("Time Scale: " + Time.timeScale);
+        if (a_step > 1) a_step = 1;
 		alpha = dimmer.color.a;
 		if (opt [0].CompareTo ("out") == 0) { // hide screen
 			while (alpha < 1f) {
 				yield return null;
-				alpha += a_step;
+                a_step = Time.deltaTime / fade_time;
+                alpha += a_step;
 				dimmer.color = new Color (r, g, b, alpha);
 			}
 		} else { // show screen
 			while (alpha > 0f) {
-				yield return null;;
-				alpha -= a_step;
+				yield return null;
+                a_step = Time.deltaTime / fade_time;
+                alpha -= a_step;
 				dimmer.color = new Color (r, g, b, alpha);
 			}
 		}

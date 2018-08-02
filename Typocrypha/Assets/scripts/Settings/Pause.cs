@@ -41,7 +41,8 @@ public class Pause : MonoBehaviour {
     void Start () {
 		if (main == null) main = this;
         gamePause = false;
-		hideChild = transform.GetChild(0).gameObject;
+        Time.timeScale = 1;
+        hideChild = transform.GetChild(0).gameObject;
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
 		resolution_map = new Dictionary<int, int[]> {

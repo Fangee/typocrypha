@@ -48,6 +48,7 @@ namespace TypocryphaGameflow
         public void next()
         {
             currNode = currNode.next();
+            Debug.Log(currNode);
             //TODO: Item skipping/disabling
             if (currNode is DialogManagerNode)
             {
