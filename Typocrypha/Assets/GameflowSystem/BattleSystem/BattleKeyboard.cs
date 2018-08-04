@@ -10,7 +10,7 @@ public class BattleKeyboard : MonoBehaviour {
     public Sprite key_default; // default key image
     public Sprite[] frozen_keys = new Sprite[4]; // frozen key images
 	public GameObject popper_object; // popper object for player burn damage
-
+    
 
     Dictionary<char, StatusEffect> status_map = new Dictionary<char, StatusEffect>();
     char[] keys = { 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'};

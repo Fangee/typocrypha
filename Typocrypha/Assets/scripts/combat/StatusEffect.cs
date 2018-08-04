@@ -124,6 +124,7 @@ public class StatusShock : StatusEffect
     char swapped;
 	char original;
 	Popper player_popper;
+    bool animation_started = false; // Has animation started?
 	public StatusShock(char swap, char origin, Popper popp)
     {
         swapped = swap;
@@ -132,9 +133,11 @@ public class StatusShock : StatusEffect
     }
     public override IEnumerator keyGraphics(char key, Image image, Text text)
     {
-        text.color = Color.yellow;
-        image.color = Color.yellow;
-		text.text = swapped.ToString().ToUpper();
+        if (!animation_started)
+        {
+            AnimationPlayer.main.playStatusEffectVolt(image.transform.position, swapped.ToString().ToUpper());
+            animation_started = true;
+        }
         yield break;
     }
     public override string processKey(char key)

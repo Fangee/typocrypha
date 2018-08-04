@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
+using UnityEngine.UI;
 
 // plays effect animations
 public class AnimationPlayer : MonoBehaviour {
@@ -11,7 +12,10 @@ public class AnimationPlayer : MonoBehaviour {
 	public Animator flash_animator; // animator for white flashes
 	public GameObject animation_holder_prefab; // object prefab that holds the animations
 
-	void Awake() {
+    public Transform status_effects; // parent object to all status effect animations
+    public GameObject volt_prefab; // prefab for volt status effect animation object
+
+    void Awake() {
 		DontDestroyOnLoad(transform.gameObject);
 		if (main == null) main = this;
 		else GameObject.Destroy (gameObject); // avoid multiple copies
@@ -34,8 +38,18 @@ public class AnimationPlayer : MonoBehaviour {
 		camera_animator.Play (name);
 	}
 
-	// playes specified flash effect
+	// plays specified flash effect
 	public void playFlashEffect(string name) {
 		flash_animator.Play (name);
 	}
+
+    // displays volt status effect animation at specific location (runs for 10 seconds)
+    public void playStatusEffectVolt(Vector2 pos, string c)
+    {
+        GameObject display = Instantiate(volt_prefab, status_effects);
+        display.GetComponentInChildren<Text>().text = c;
+        display.transform.position = pos;
+        display.SetActive(true);
+        display.transform.Translate(new Vector3(0.3765f, -0.3765f, 0f));
+    }
 }
