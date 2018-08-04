@@ -11,6 +11,7 @@ namespace TypocryphaGameflow
     [Node(false, "Gameflow/Branch", new System.Type[] { typeof(GameflowCanvas) })]
     public class GameflowBranchNode : BaseNode
     {
+        #region Editor
         public enum controlExpressionType
         {
             Variable,
@@ -155,6 +156,9 @@ namespace TypocryphaGameflow
             }
         }
 
+        #endregion
+
+        #region Game
         public override BaseNode next()
         {
             string value = string.Empty;
@@ -166,16 +170,23 @@ namespace TypocryphaGameflow
             {
                 if (brCase.type == BranchCaseData.CaseType.Regex)
                     throw new System.NotImplementedException();
-                if (value == DialogueParser.main.substituteMacros(brCase.pattern))
+                else if (checkTextCase(brCase.pattern, value))//brCase.type == BranchCaseData.CaseType.Text
                     return dynamicConnectionPorts[brCase.portIndex].connection(0).body as BaseNode;
             }
             return toDefaultBranch.connection(0).body as BaseNode;
+        }
+
+        private bool checkTextCase(string pattern, string value)
+        {
+            return value.Trim().ToLower() == DialogueParser.main.substituteMacros(pattern).Trim().ToLower();
         }
 
         public override ProcessFlag process()
         {
             return ProcessFlag.Continue;
         }
+
+        #endregion
 
         [System.Serializable]
         class BranchCaseData

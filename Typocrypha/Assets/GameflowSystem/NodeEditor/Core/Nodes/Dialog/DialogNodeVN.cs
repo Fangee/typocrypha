@@ -19,7 +19,7 @@ namespace TypocryphaGameflow
 
         protected static GUIStyle labelStyle = new GUIStyle();
 
-        #region TooltipStrings
+        #region Tooltip Strings
         private const string tooltip_name = "The speaking character's name. Used to set speaking sfx and sprite highlighting if not overriden by text events";
         private const string tooltip_expr = "The speaking character's expression. Only needs to be set if the expression should be changed";
         protected const string tooltip_text = "The text to be displayed. Can substitute text macros using {macro-name,args}, and call text events using [event-name,args]";
