@@ -28,8 +28,14 @@ public class BackgroundEffects : MonoBehaviour {
         	wavy_sprite.texture = backgrounds.LoadAsset<Texture2D> (sprite_name);
 	}
 
-	// sets prefab background object as background
-	public void setPrefabBG(string prefab_name) {
+    // sets sprite of background image
+    public void setSpriteBG(Sprite sprite)
+    {
+        wavy_sprite.texture = sprite.texture;
+    }
+
+    // sets prefab background object as background
+    public void setPrefabBG(string prefab_name) {
 		prefab_bg = Instantiate (Resources.Load<GameObject> ("prefabs/" + prefab_name), this.transform);
 	}
 

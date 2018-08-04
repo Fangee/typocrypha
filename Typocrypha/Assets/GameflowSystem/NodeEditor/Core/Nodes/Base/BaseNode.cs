@@ -8,6 +8,7 @@ namespace TypocryphaGameflow
     [Node(true, "Gameflow/GameflowBase", new System.Type[] { typeof(GameflowCanvas) })]
     public abstract class BaseNode : Node
     {
+        public override bool AutoLayout { get { return true; } }
         public enum ProcessFlag
         {
             Continue,

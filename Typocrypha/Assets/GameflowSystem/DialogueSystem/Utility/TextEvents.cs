@@ -213,10 +213,6 @@ public class TextEvents : MonoBehaviour {
 		float b = float.Parse (opt [4]);
 		float alpha;
 		float a_step = Time.deltaTime / fade_time; // amount of change each frame
-        Debug.Log("Alpha Step: " + a_step);
-        Debug.Log("Delta Time: " + Time.deltaTime);
-        Debug.Log("Fade Time: " + fade_time);
-        Debug.Log("Time Scale: " + Time.timeScale);
         if (a_step > 1) a_step = 1;
 		alpha = dimmer.color.a;
 		if (opt [0].CompareTo ("out") == 0) { // hide screen

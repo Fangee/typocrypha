@@ -20,7 +20,6 @@ namespace TypocryphaGameflow
 
         public override string Title { get { return "Gameflow Branch"; } }
         public override Vector2 MinSize { get { return new Vector2(300, 40); } }
-        public override bool AutoLayout { get { return true; } }
 
         private const string Id = "gameflowBranch";
         public override string GetID { get { return Id; } }
@@ -178,6 +177,7 @@ namespace TypocryphaGameflow
 
         private bool checkTextCase(string pattern, string value)
         {
+            //(old answer leniency: answerString = answer.Trim().ToLower().Replace(".", string.Empty).Replace("?", string.Empty).Replace("!", string.Empty);
             return value.Trim().ToLower() == DialogueParser.main.substituteMacros(pattern).Trim().ToLower();
         }
 

@@ -12,6 +12,7 @@ namespace TypocryphaGameflow
         public override bool AutoLayout { get { return true; } }
         public override bool AllowRecursion { get { return true; } }
 
+        #region Game
         public override BaseNode next()
         {
             return toNextOUT.connections[0].body as BaseNode;
@@ -23,5 +24,7 @@ namespace TypocryphaGameflow
             //BattleManagerS.main.startBattle(this);
             return ProcessFlag.Wait;
         }
+
+        #endregion
     }
 }
