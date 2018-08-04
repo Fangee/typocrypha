@@ -6,7 +6,7 @@ using NodeEditorFramework;
 
 namespace TypocryphaGameflow {
     [Node(false, "Event/Transition/Fade", new System.Type[] { typeof(GameflowCanvas) })]
-    public class FadeNode : BaseEventNode {
+    public class FadeNode : BaseNodeIO {
         public enum FadeType
         {
             Fade_In,
@@ -57,13 +57,14 @@ namespace TypocryphaGameflow {
                 _title = "Fade Out";
         }
 
-        public override void processEvent()
+        public override ProcessFlag process()
         {
             string fadeTypeArg = "in";
             if (fadeType == FadeType.Fade_Out)
                 fadeTypeArg = "out";
             string[] args = new string[] { fadeTypeArg, fadeTime.ToString(), fadeColor.r.ToString(), fadeColor.g.ToString(), fadeColor.b.ToString() };
             TextEvents.main.playEvent("fade", args);
+            return ProcessFlag.Continue;
         }
     }
 }

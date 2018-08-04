@@ -9,7 +9,7 @@ using System;
 namespace TypocryphaGameflow
 {
     [Node(false, "Event/Audio Control", new System.Type[] { typeof(GameflowCanvas) })]
-    public class AudioControlNode : BaseEventNode
+    public class AudioControlNode : BaseNodeIO
     {
         public const string ID = "Audio Control Node";
         public override string GetID { get { return ID; } }
@@ -47,7 +47,7 @@ namespace TypocryphaGameflow
             GUILayout.EndVertical();
         }
 
-        public override void processEvent()
+        public override ProcessFlag process()
         {
             throw new NotImplementedException();
         }

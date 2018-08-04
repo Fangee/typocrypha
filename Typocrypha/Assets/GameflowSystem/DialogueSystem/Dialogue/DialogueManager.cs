@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager main = null; // Global static reference
-    public TypocryphaGameflow.DialogManagerNode curr_dialogue; // Current dialogue to be run
+    public TypocryphaGameflow.DialogNode curr_dialogue; // Current dialogue to be run
 
     public GameObject ChatView; // Chat view hiearchy
     public RectTransform ChatContent; // Content of chat scroll view (contains dialogue boxes)
@@ -141,7 +141,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     // Starts a new dialogue scene
-    public void startDialogue(TypocryphaGameflow.DialogManagerNode new_dialogue)
+    public void startDialogue(TypocryphaGameflow.DialogNode new_dialogue)
     {
         setEnabled(true);
         clearChatLog();

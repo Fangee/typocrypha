@@ -6,7 +6,7 @@ namespace TypocryphaGameflow
 {
 
     [Node(false, "Event/Set Variable", new System.Type[] { typeof(GameflowCanvas) })]
-    public class setVariableNode : BaseEventNode
+    public class setVariableNode : BaseNodeIO
     {
         public override string Title { get { return "Set Variable"; } }
         public override Vector2 MinSize { get { return new Vector2(150, 50); } }
@@ -38,9 +38,10 @@ namespace TypocryphaGameflow
             value = "value";
         }
 
-        public override void processEvent()
+        public override ProcessFlag process()
         {
             PlayerDialogueInfo.main.setInfo(variableName, DialogueParser.main.substituteMacros(value));
+            return ProcessFlag.Continue;
         }
     }
 }

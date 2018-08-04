@@ -23,7 +23,7 @@ public class DialogueBox : MonoBehaviour {
 	float text_pad; // Padding between text and dialogue box
 
 	// Initializes dialogue box and starts text scroll
-	public Coroutine dialogueBoxStart(TypocryphaGameflow.DialogManagerNode data) {
+	public Coroutine dialogueBoxStart(TypocryphaGameflow.DialogNode data) {
 		text_pad = fx_text.rectTransform.offsetMin.y - fx_text.rectTransform.offsetMax.y;
 		// Initialize color effect to hide text
 		set_color = fx_text.gameObject.AddComponent<FXTextColor> ();

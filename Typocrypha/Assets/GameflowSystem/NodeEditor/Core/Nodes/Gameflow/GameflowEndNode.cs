@@ -4,7 +4,7 @@ using NodeEditorFramework;
 namespace TypocryphaGameflow
 {
     [Node(false, "Gameflow/End", new System.Type[] { typeof(GameflowCanvas) })]
-    public class GameflowEndNode : GameflowNode
+    public class GameflowEndNode : BaseNode
     {
         public const string ID = "Gameflow End Node";
         public override string GetID { get { return ID; } }
@@ -22,9 +22,15 @@ namespace TypocryphaGameflow
             GUILayout.Space(3);
         }
 
-        public override BaseGameflowNode next()
+        public override BaseNode next()
         {
             return null;
+        }
+
+        public override ProcessFlag process()
+        {
+            Debug.Log("Reached the end of the gameflow!");
+            return ProcessFlag.Wait;
         }
     }
 }

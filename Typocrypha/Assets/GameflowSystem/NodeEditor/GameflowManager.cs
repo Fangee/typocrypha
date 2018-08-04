@@ -8,12 +8,8 @@ namespace TypocryphaGameflow
     public class GameflowManager : MonoBehaviour
     {    
         public static GameflowManager main = null; // Global static ref
-        public GameObject player_ui; // the Typocrypha UI 
-                                     //public GameObject screenframe_vn;
-                                     //public GameObject screenframe_battle;
         public GameflowCanvas gameflow;
-
-        BaseGameflowNode currNode;
+        BaseNode currNode;
 
         void Awake()
         {
@@ -36,41 +32,21 @@ namespace TypocryphaGameflow
             Debug.Log("done loading assets");
             gameflowStart();
         }
-
+        //Find the starting node of the canvas and start the game
         public void gameflowStart()
         {
             Debug.Log("gameflowStart");
             currNode = gameflow.getStartNode();
             next();
         }
-
         // Go to next item
         public void next()
         {
-            currNode = currNode.next();
-            Debug.Log(currNode);
             //TODO: Item skipping/disabling
-            if (currNode is DialogManagerNode)
-            {
-                Debug.Log("starting dialogue: " + currNode.name);
-                player_ui.SetActive(false);
-                BattleManagerS.main.setEnabled(false);
-                DialogueManager.main.startDialogue(currNode as DialogManagerNode);
-            }
-            else if (currNode is BattleManagerNode)
-            {
-                Debug.Log("starting battle: " + currNode.name);
-                player_ui.SetActive(true);
-                DialogueManager.main.setEnabled(false);
-                //BattleManagerS.main.startBattle(currNode as BattleManagerNode);
-            }
-            else if (currNode is BaseEventNode)
-            {
-                (currNode as BaseEventNode).processEvent();
+            currNode = currNode.next();
+            if (currNode.process() == BaseNode.ProcessFlag.Continue)
                 next();
-            }
-            else
-                next();
+            //Else currNode.process() == BaseNode.ProcessFlag.Wait (wait for callback from BattleManager.cs or DialogueManager.cs to continue)
         }
         // Jump to item
         public void jump(GameObject targetGameFlowItem, bool goToNext = true)

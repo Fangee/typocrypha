@@ -9,7 +9,7 @@ using System;
 namespace TypocryphaGameflow
 {
     [Node(false, "Event/Character Control", new System.Type[] { typeof(GameflowCanvas) })]
-    public class CharacterControlNode : BaseEventNode
+    public class CharacterControlNode : BaseNodeIO
     {
         public const string ID = "Character Control Node";
         public override string GetID { get { return ID; } }
@@ -47,7 +47,7 @@ namespace TypocryphaGameflow
             GUILayout.EndVertical();
         }
 
-        public override void processEvent()
+        public override ProcessFlag process()
         {
             throw new NotImplementedException();
         }

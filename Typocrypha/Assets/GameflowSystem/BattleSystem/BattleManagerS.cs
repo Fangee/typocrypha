@@ -132,6 +132,7 @@ public class BattleManagerS : MonoBehaviour {
     {
         enabled = e;
         trackTyping.enabled = e;
+        player_ui.SetActive(e);
     }
     public void setPause(bool p)
     {
@@ -139,8 +140,7 @@ public class BattleManagerS : MonoBehaviour {
         trackTyping.enabled = !p;
     }
 
-    //MAIN BATTLE FLOW-----------------------------------------------------------------------//
-
+    #region Main Battle Flow
     // start battle scene
     public void startBattle(GameObject new_battle)
     {
@@ -252,7 +252,7 @@ public class BattleManagerS : MonoBehaviour {
 		BattleEffects.main.screenFade (true, 2.5f, 0f, 0f, 0f);
 		BattleEffects.main.battleTransitionEffect("swirl_out", 0.45f);
 		yield return new WaitForSeconds(2.5f);
-		GameflowManager.main.next();
+		TypocryphaGameflow.GameflowManager.main.next();
         //Transition to victoryScreen
         //endBattle();
     }
@@ -275,10 +275,8 @@ public class BattleManagerS : MonoBehaviour {
         //GameflowManager.main.next();
 
     }
+    #endregion
 
-    //END MAIN BATTLE FLOW-------------------------------------------------------------------//
-
-    //Handles a spellcast (by calling the castmanager) and clears callback's buffer if necessary
     public void handleSpellCast(string spell, TrackTyping callback)
     {
 		uiManager.updateUI(); // Update Tab buffer UI
@@ -564,6 +562,6 @@ public class BattleManagerS : MonoBehaviour {
         //setPause(false);
         BattleEffects.main.setDim(false);
 		endBattle ();
-		GameflowManager.main.next ();
+        TypocryphaGameflow.GameflowManager.main.next ();
     }
 }

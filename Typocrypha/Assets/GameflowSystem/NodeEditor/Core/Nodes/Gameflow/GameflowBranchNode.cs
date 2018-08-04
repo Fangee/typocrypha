@@ -9,7 +9,7 @@ using NodeEditorFramework;
 namespace TypocryphaGameflow
 {
     [Node(false, "Gameflow/Branch", new System.Type[] { typeof(GameflowCanvas) })]
-    public class GameflowBranchNode : GameflowNode
+    public class GameflowBranchNode : BaseNode
     {
         public enum controlExpressionType
         {
@@ -155,7 +155,7 @@ namespace TypocryphaGameflow
             }
         }
 
-        public override BaseGameflowNode next()
+        public override BaseNode next()
         {
             string value = string.Empty;
             if (exprType == controlExpressionType.Last_Input)
@@ -167,9 +167,14 @@ namespace TypocryphaGameflow
                 if (brCase.type == BranchCaseData.CaseType.Regex)
                     throw new System.NotImplementedException();
                 if (value == DialogueParser.main.substituteMacros(brCase.pattern))
-                    return dynamicConnectionPorts[brCase.portIndex].connection(0).body as BaseGameflowNode;
+                    return dynamicConnectionPorts[brCase.portIndex].connection(0).body as BaseNode;
             }
-            return toDefaultBranch.connection(0).body as BaseGameflowNode;
+            return toDefaultBranch.connection(0).body as BaseNode;
+        }
+
+        public override ProcessFlag process()
+        {
+            return ProcessFlag.Continue;
         }
 
         [System.Serializable]

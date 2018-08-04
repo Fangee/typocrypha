@@ -7,7 +7,7 @@ using NodeEditorFramework;
 namespace TypocryphaGameflow
 {
     [Node(false, "Gameflow/Start", new System.Type[] { typeof(GameflowCanvas) })]
-    public class GameflowStartNode : GameflowStandardOutputNode
+    public class GameflowStartNode : BaseNodeOUT
     {
         public const string ID = "Gameflow Start Node";
         public override string GetID { get { return ID; } }
@@ -18,6 +18,12 @@ namespace TypocryphaGameflow
         public override void NodeGUI()
         {
             GUILayout.Space(3);
+        }
+
+        public override ProcessFlag process()
+        {
+            Debug.Log("Gameflow start");
+            return ProcessFlag.Continue;
         }
     }
 }
