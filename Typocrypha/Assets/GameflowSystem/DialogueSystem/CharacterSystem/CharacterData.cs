@@ -5,6 +5,7 @@ using UnityEngine;
 namespace TypocryphaGameflow
 {
     // Container for data about specific characters
+    [CreateAssetMenu]
     public class CharacterData : ScriptableObject
     {
         public HashSet<string> aliases; // Different aliases/names for this character
