@@ -15,7 +15,7 @@ namespace TypocryphaGameflow
         {
             set
             {
-                body.sprite = data.bodies[value];
+                body.sprite = data.poses[value];
             }
         }
         public string expression // Set facial expression

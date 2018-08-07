@@ -9,7 +9,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38d08267ce4612e46b6285fa57b73434, type: 3}
-  m_Name: Illyia
+  m_Name: illyia
   m_EditorClassIdentifier: 
-  talk_sfx: {fileID: 0}
-  chat_icon: {fileID: 0}
+  aliases:
+    _items:
+    - 
+  poses:
+    _keys:
+    - a
+    - b
+    _values:
+    - {fileID: 21300000, guid: 47b9edf182a6011438150efc3e804cc2, type: 3}
+    - {fileID: 21300004, guid: ee11725dc1167e7468e2cd650e8eea2a, type: 3}
+  expressions:
+    _keys:
+    - 
+    - 
+    _values:
+    - {fileID: 0}
+    - {fileID: 0}
+  codecs:
+    _keys:
+    - 
+    - 
+    _values:
+    - {fileID: 0}
+    - {fileID: 0}
+  chat_icon: {fileID: 21300000, guid: 199c37adbc0600f4a87b5888780da5b8, type: 3}
+  talk_sfx: {fileID: 8300000, guid: 25a2b8a5142f06d4bba8c3253665d671, type: 3}
