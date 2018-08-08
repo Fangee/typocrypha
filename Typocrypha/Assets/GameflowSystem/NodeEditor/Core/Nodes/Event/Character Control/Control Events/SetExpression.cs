@@ -8,6 +8,13 @@ namespace TypocryphaGameflow
     public class SetExpression : CharacterControlNode.EventData
     {
         public string expression = "base";
+
+        public override void characterControl(Character character)
+        {
+            character.expression = expression;
+        }
+
+        #region GUI
         public override void doGUI(Rect rect, int index, IList list)
         {
             Rect UIrect = new Rect(rect);
@@ -22,5 +29,6 @@ namespace TypocryphaGameflow
         {
             return EditorGUIUtility.singleLineHeight * 3 + 3;
         }
+        #endregion
     }
 }

@@ -7,6 +7,12 @@ namespace TypocryphaGameflow
 {
     public class RemoveCharacter : CharacterControlNode.EventData
     {
+        public override void characterControl(Character character)
+        {
+            // Intercepted in CharacterManager
+        }
+
+        #region GUI
         public override void doGUI(Rect rect, int index, IList list)
         {
             Rect UIrect = new Rect(rect);
@@ -15,5 +21,6 @@ namespace TypocryphaGameflow
             UIrect.y += EditorGUIUtility.singleLineHeight;
             characterName = GUI.TextField(UIrect, characterName);
         }
+        #endregion
     }
 }

@@ -51,5 +51,11 @@ namespace TypocryphaGameflow
             highlight = false;
         }
 
+        // Teleports character instantly to new location
+        public void teleport(Vector2 pos)
+        {
+            transform.position = pos;
+        }
+
     }
 }

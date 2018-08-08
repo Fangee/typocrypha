@@ -58,6 +58,8 @@ namespace TypocryphaGameflow
             public override IEnumerable<Type> Subtypes { get { return subtypes; } }
             public string characterName = "name";
 
+            public abstract void characterControl(Character character); // Apply character control event
+
             public override float getHeight(int index)
             {
                 return base.getHeight(index) * 2;

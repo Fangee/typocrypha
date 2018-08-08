@@ -20,6 +20,20 @@ namespace TypocryphaGameflow
         public float time = 1.0f;
         private int addLines = 0;
 
+        public override void characterControl(Character character)
+        {
+            switch(moveType)
+            {
+                case MovementType.Set_Position:
+                    character.teleport(targetPos);
+                    break;
+                default:
+                    break;
+            }
+            
+        }
+
+        #region GUI
         public override void doGUI(Rect rect, int index, IList list)
         {
             Rect UIrect = new Rect(rect);
@@ -45,6 +59,7 @@ namespace TypocryphaGameflow
         {
             return EditorGUIUtility.singleLineHeight * (4 + addLines) + (4 + addLines);
         }
+        #endregion
     }
 
 }

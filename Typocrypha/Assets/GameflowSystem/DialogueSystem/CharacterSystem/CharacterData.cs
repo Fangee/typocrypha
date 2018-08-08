@@ -36,12 +36,6 @@ namespace TypocryphaGameflow
         public override void OnInspectorGUI()
         {
             GUILayout.Label("Character: " + target.name);
-            
-        }
-
-        void NameMapGUI(NameMap nameMap)
-        {
-
         }
     }
 
