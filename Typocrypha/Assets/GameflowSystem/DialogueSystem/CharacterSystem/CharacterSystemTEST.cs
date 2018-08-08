@@ -14,19 +14,28 @@ namespace TypocryphaGameflow
         IEnumerator Start()
         {
             AddCharacter add = ScriptableObject.CreateInstance(typeof(AddCharacter)) as AddCharacter;
+            add.characterName = "Stick";
             add.pos = Vector2.zero;
             add.startingPose = "Normal";
             add.startingExpression = "Happy";
-            characterManager.characterControl("Stick", add);
+            characterManager.characterControl(add);
             yield return new WaitForSeconds(1f);
 
             MoveCharacter move = ScriptableObject.CreateInstance(typeof(MoveCharacter)) as MoveCharacter;
+            move.characterName = "Sticky";
             move.targetPos = new Vector2(2, 0);
-            characterManager.characterControl("Sticky", move);
+            characterManager.characterControl(move);
+            yield return new WaitForSeconds(1f);
+
+            SetExpression exp = ScriptableObject.CreateInstance(typeof(SetExpression)) as SetExpression;
+            exp.characterName = "Stick";
+            exp.expression = "Angry";
+            characterManager.characterControl(exp);
             yield return new WaitForSeconds(1f);
 
             RemoveCharacter remove = ScriptableObject.CreateInstance(typeof(RemoveCharacter)) as RemoveCharacter;
-            characterManager.characterControl("Stick", remove);
+            remove.characterName = "StickMan";
+            characterManager.characterControl(remove);
         }
     }
 }

@@ -29,20 +29,20 @@ namespace TypocryphaGameflow
         }
 
         // Applies a character control event to specified character
-        public void characterControl(string alias, CharacterControlNode.EventData ev)
+        public void characterControl(CharacterControlNode.EventData ev)
         {
             if (ev.GetType() == typeof(AddCharacter)) // Intercept character creation event
             {
                 AddCharacter add = ev as AddCharacter;
-                addCharacter(_allCharacterData[alias], add.pos, add.startingPose, add.startingExpression);
+                addCharacter(_allCharacterData[add.characterName], add.pos, add.startingPose, add.startingExpression);
             }
             else if (ev.GetType() == typeof(RemoveCharacter)) // Intercept character removal event
             {
-                removeCharacter(alias);
+                removeCharacter(ev.characterName);
             }
             else
             {
-                ev.characterControl(characters[alias]);
+                ev.characterControl(characters[ev.characterName]);
             }
         }
 
