@@ -68,15 +68,7 @@ namespace TypocryphaGameflow
             GameObject.Destroy(characters[alias].gameObject);
             // Destroy alias entries in characters dictionary
             NameSet names = _allCharacterData[alias].aliases;
-            List<string> toDelete = new List<string>();
-            foreach (var kvp in characters)
-            {
-                if (names.Contains(kvp.Key))
-                {
-                    toDelete.Add(kvp.Key);
-                }
-            }
-            foreach (string del in toDelete)
+            foreach (string del in names)
             {
                 characters.Remove(del);
             }
