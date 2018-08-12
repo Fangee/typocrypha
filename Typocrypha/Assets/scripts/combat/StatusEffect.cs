@@ -97,15 +97,22 @@ public class StatusBurn : StatusEffect
     const int dmg = 3;
     Player p;
 	Popper player_popper;
-	public StatusBurn(Player p, Popper popp, char c)
+    bool animation_started = false; // Has animation started?
+    public StatusBurn(Player p, Popper popp, char c)
     {
         this.p = p;
 		this.player_popper = popp;
     }
     public override IEnumerator keyGraphics(char key, Image image, Text text)
     {
-        text.color = Color.red;
-        image.color = Color.red;
+        //text.color = Color.red;
+        //image.color = Color.red;
+        //yield break;
+        if (!animation_started)
+        {
+            AnimationPlayer.main.playStatusEffectBurn(image.transform.position, key.ToString().ToUpper());
+            animation_started = true;
+        }
         yield break;
     }
 

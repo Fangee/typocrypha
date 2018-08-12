@@ -14,6 +14,7 @@ public class AnimationPlayer : MonoBehaviour {
 
     public Transform status_effects; // parent object to all status effect animations
     public GameObject volt_prefab; // prefab for volt status effect animation object
+    public GameObject burn_prefab; // prefab for burn status effect animation object
 
     void Awake() {
 		DontDestroyOnLoad(transform.gameObject);
@@ -47,6 +48,16 @@ public class AnimationPlayer : MonoBehaviour {
     public void playStatusEffectVolt(Vector2 pos, string c)
     {
         GameObject display = Instantiate(volt_prefab, status_effects);
+        display.GetComponentInChildren<Text>().text = c;
+        display.transform.position = pos;
+        display.SetActive(true);
+        display.transform.Translate(new Vector3(0.3765f, -0.3765f, 0f));
+    }
+
+    // displays burn status effect animation at specific location (runs for 10 seconds)
+    public void playStatusEffectBurn(Vector2 pos, string c)
+    {
+        GameObject display = Instantiate(burn_prefab, status_effects);
         display.GetComponentInChildren<Text>().text = c;
         display.transform.position = pos;
         display.SetActive(true);
