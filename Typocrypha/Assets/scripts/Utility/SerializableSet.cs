@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 // Serializable HashSet wrapper (native HashSet serialization not yet available)
 // Should only be set in Editor more; Is read only in game mode
