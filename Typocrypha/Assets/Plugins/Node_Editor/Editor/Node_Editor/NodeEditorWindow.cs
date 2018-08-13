@@ -26,7 +26,7 @@ namespace NodeEditorFramework.Standard
 		/// <summary>
 		/// Opens the Node Editor window and loads the last session
 		/// </summary>
-		[MenuItem("Window/Node Editor")]
+		[MenuItem("Window/Node Editor %#e")]
 		public static NodeEditorWindow OpenNodeEditor () 
 		{
 			_editor = GetWindow<NodeEditorWindow>();

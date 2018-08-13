@@ -27,7 +27,7 @@ namespace TypocryphaGameflow
             return null;
         }
 
-        public override ProcessFlag process()
+        public override ProcessFlag process(GameManagers managers)
         {
             Debug.Log("Reached the end of the gameflow!");
             return ProcessFlag.Wait;

@@ -319,7 +319,7 @@ public class DoppelFriendAI1 : AttackerAI1
     }
     public override void updateState(Enemy[] allies, int position, ICaster[] player_arr, Update_Case flag)
     {
-        if(flag == Update_Case.AFTER_INTERRUPT && !changed && PlayerDialogueInfo.main.getInfo("doppel-fr-transform") == "true")
+        if(flag == Update_Case.AFTER_INTERRUPT && !changed && PlayerDataManager.main.getData("doppel-fr-transform") == "true")
         {
             allies[position].setStats(EnemyDatabase.main.getData(nextForm), true);
             allies[position].changeForm();

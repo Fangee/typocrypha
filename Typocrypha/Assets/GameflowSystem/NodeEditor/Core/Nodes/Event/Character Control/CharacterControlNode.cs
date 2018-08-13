@@ -47,9 +47,13 @@ namespace TypocryphaGameflow
             GUILayout.EndVertical();
         }
 
-        public override ProcessFlag process()
+        public override ProcessFlag process(GameManagers managers)
         {
-            throw new NotImplementedException();
+            foreach (EventData e in _events)
+            {
+                managers.characterManager.characterControl(e);
+            }
+            return ProcessFlag.Continue;
         }
 
         public abstract class EventData : GUIUtilities.ReorderableListItem

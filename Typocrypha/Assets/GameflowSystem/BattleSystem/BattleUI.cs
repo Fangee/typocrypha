@@ -127,7 +127,7 @@ public class BattleUI : MonoBehaviour
         wave_banner_text.text = "Wave " + curr_wave + "/ " + max_wave; //title;
         wave_title_text.text = title; //"Wave " + curr_wave + "/ " + max_wave;
         if (title.Contains("{cat-name}"))
-            wave_title_text.text = "Boss: " + PlayerDialogueInfo.main.getInfo("cat-name") + " Reunion";
+            wave_title_text.text = "Boss: " + PlayerDataManager.main.getData("cat-name") + " Reunion";
 		current_wave_title_text.text = wave_title_text.text;
         Animator banner_text_animator = wave_banner_text.GetComponent<Animator>();
         Animator banner_img_animator = wave_transition_banner.GetComponent<Animator>();

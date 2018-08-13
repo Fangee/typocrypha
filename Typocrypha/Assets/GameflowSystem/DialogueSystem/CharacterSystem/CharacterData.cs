@@ -44,7 +44,7 @@ namespace TypocryphaGameflow
     {
         public CharacterData data;
 
-        [MenuItem("Window/Character Data Editor %#e")]
+        [MenuItem("Window/Character Data Editor %#c")]
         static void Init()
         {
             EditorWindow.GetWindow(typeof(CharacterDataEditor));

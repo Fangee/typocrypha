@@ -15,7 +15,7 @@ namespace TypocryphaGameflow
             Wait,
         }
         public abstract BaseNode next();
-        public abstract ProcessFlag process();
+        public abstract ProcessFlag process(GameManagers managers);
     }
     public class GameflowType : ConnectionKnobStyle //: IConnectionTypeDeclaration
     {

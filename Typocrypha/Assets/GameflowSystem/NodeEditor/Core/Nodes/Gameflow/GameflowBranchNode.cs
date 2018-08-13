@@ -162,9 +162,9 @@ namespace TypocryphaGameflow
         {
             string value = string.Empty;
             if (exprType == controlExpressionType.Last_Input)
-                value = PlayerDialogueInfo.main.getInfo(PlayerDialogueInfo.defaultPromptKey);
+                value = PlayerDataManager.main.getData(PlayerDataManager.defaultPromptKey);
             else
-                value = PlayerDialogueInfo.main.getInfo(variableName);
+                value = PlayerDataManager.main.getData(variableName);
             foreach(var brCase in _cases)
             {
                 if (brCase.type == BranchCaseData.CaseType.Regex)
@@ -181,7 +181,7 @@ namespace TypocryphaGameflow
             return value.Trim().ToLower() == DialogueParser.main.substituteMacros(pattern).Trim().ToLower();
         }
 
-        public override ProcessFlag process()
+        public override ProcessFlag process(GameManagers managers)
         {
             return ProcessFlag.Continue;
         }

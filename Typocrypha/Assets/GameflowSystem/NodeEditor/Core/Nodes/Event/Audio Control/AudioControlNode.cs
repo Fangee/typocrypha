@@ -47,7 +47,7 @@ namespace TypocryphaGameflow
             GUILayout.EndVertical();
         }
 
-        public override ProcessFlag process()
+        public override ProcessFlag process(GameManagers managers)
         {
             throw new NotImplementedException();
         }

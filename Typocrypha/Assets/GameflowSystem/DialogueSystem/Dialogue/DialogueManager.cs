@@ -378,8 +378,8 @@ public class DialogueManager : MonoBehaviour
         //}
         input_display_choices.SetActive(false);
         input = false;
-        PlayerDialogueInfo.main.setInfo(PlayerDialogueInfo.defaultPromptKey, answer);
-        PlayerDialogueInfo.main.setInfo((curr_dialogue as TypocryphaGameflow.DialogNodeInput).variableName, answer);
+        PlayerDataManager.main.setData(PlayerDataManager.defaultPromptKey, answer);
+        PlayerDataManager.main.setData((curr_dialogue as TypocryphaGameflow.DialogNodeInput).variableName, answer);
         forceNextLine();
     }
 

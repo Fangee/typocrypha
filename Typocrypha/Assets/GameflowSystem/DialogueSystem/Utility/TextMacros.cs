@@ -75,7 +75,7 @@ public class TextMacros : MonoBehaviour {
 	// substitutes player's name
 	// input: NONE
 	string macroNameSub(string[] opt) {
-		return PlayerDialogueInfo.main.getInfo("player-name");
+		return PlayerDataManager.main.PlayerName;
 	}
 
 	// substitutes in appropriate pronoun term
@@ -86,10 +86,10 @@ public class TextMacros : MonoBehaviour {
 	//   NOTE: input string is concatenated after player's name
 	// input: [3]: string: appropriate term for MASCULINE pronoun
 	string macroPronoun(string[] opt) {
-		switch (PlayerDialogueInfo.main.player_pronoun) {
+		switch (PlayerDataManager.main.player_pronoun) {
 		case Pronoun.FEMININE:  return opt [0];
 		case Pronoun.INCLUSIVE: return opt [1];
-		case Pronoun.FIRSTNAME: return PlayerDialogueInfo.main.player_name + opt [2];
+		case Pronoun.FIRSTNAME: return PlayerDataManager.main.PlayerName + opt [2];
 		case Pronoun.MASCULINE: return opt [3];
 		default: return "pronoun";
 		}
@@ -98,7 +98,7 @@ public class TextMacros : MonoBehaviour {
     // substitutes in info from the PlayerDialogueInfo map
     // input: [0]: string: info key
     string macroInfo(string[] opt) {
-        return PlayerDialogueInfo.main.getInfo(opt[0]);
+        return PlayerDataManager.main.getData(opt[0]);
     }
 
 	// substitutes last cast spell's attributes

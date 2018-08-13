@@ -20,7 +20,7 @@ namespace TypocryphaGameflow
             GUILayout.Space(3);
         }
 
-        public override ProcessFlag process()
+        public override ProcessFlag process(GameManagers managers)
         {
             Debug.Log("Gameflow start");
             return ProcessFlag.Continue;

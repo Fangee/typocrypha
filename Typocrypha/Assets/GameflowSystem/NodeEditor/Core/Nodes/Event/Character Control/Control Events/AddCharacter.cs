@@ -7,8 +7,8 @@ namespace TypocryphaGameflow
 {
     public class AddCharacter : CharacterControlNode.EventData
     {
-        public string startingPose = "base";
-        public string startingExpression = "base";
+        public string startingPose = "base pose";
+        public string startingExpression = "base expression";
         public Vector2 pos = new Vector2(0, 0);
 
         public override void characterControl(Character character)
@@ -25,7 +25,7 @@ namespace TypocryphaGameflow
             UIrect.y += EditorGUIUtility.singleLineHeight + 1;
             characterName = GUI.TextField(UIrect, characterName);
             UIrect.y += EditorGUIUtility.singleLineHeight + 1;
-            startingExpression = GUI.TextField(UIrect, startingPose);
+            startingPose = GUI.TextField(UIrect, startingPose);
             UIrect.y += EditorGUIUtility.singleLineHeight + 1;
             startingExpression = GUI.TextField(UIrect, startingExpression);
             UIrect.y += EditorGUIUtility.singleLineHeight + 1;
@@ -33,7 +33,7 @@ namespace TypocryphaGameflow
         }
         public override float getHeight(int index)
         {
-            return EditorGUIUtility.singleLineHeight * 4 + 3;
+            return EditorGUIUtility.singleLineHeight * 5 + 5;
         }
         #endregion
     }

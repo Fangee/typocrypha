@@ -19,11 +19,11 @@ namespace TypocryphaGameflow
         {
             return toNextOUT.connections[0].body as BaseNode;
         }
-        public override ProcessFlag process()
+        public override ProcessFlag process(GameManagers managers)
         {
             //    player_ui.SetActive(false);
-            BattleManagerS.main.setEnabled(false);
-            DialogueManager.main.startDialogue(this);
+            managers.battleManager.setEnabled(false);
+            managers.dialogueManager.startDialogue(this);
             return ProcessFlag.Wait;
         }
     }

@@ -13,6 +13,7 @@ namespace TypocryphaGameflow {
             Fade_Out,
         }
 
+        #region Editor
         public const string ID = "Fade Transition Node";
         public override string GetID { get { return ID; } }
 
@@ -56,15 +57,18 @@ namespace TypocryphaGameflow {
             else
                 _title = "Fade Out";
         }
+        #endregion
 
-        public override ProcessFlag process()
+        #region Game
+        public override ProcessFlag process(GameManagers managers)
         {
             string fadeTypeArg = "in";
             if (fadeType == FadeType.Fade_Out)
                 fadeTypeArg = "out";
             string[] args = new string[] { fadeTypeArg, fadeTime.ToString(), fadeColor.r.ToString(), fadeColor.g.ToString(), fadeColor.b.ToString() };
-            TextEvents.main.playEvent("fade", args);
+            managers.textEventManager.playEvent("fade", args);
             return ProcessFlag.Continue;
         }
+        #endregion
     }
 }

@@ -17,14 +17,13 @@ namespace TypocryphaGameflow
         {
             return toNextOUT.connections[0].body as BaseNode;
         }
-        public override ProcessFlag process()
+        public override ProcessFlag process(GameManagers managers)
         {
             //    player_ui.SetActive(false);
-            DialogueManager.main.setEnabled(false);
+            managers.battleManager.setEnabled(false);
             //BattleManagerS.main.startBattle(this);
             return ProcessFlag.Wait;
         }
-
         #endregion
     }
 }

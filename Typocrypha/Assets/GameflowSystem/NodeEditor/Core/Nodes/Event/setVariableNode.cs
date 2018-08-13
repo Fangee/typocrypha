@@ -38,9 +38,9 @@ namespace TypocryphaGameflow
             value = "value";
         }
 
-        public override ProcessFlag process()
+        public override ProcessFlag process(GameManagers managers)
         {
-            PlayerDialogueInfo.main.setInfo(variableName, DialogueParser.main.substituteMacros(value));
+            managers.playerDataManager.setData(variableName, DialogueParser.main.substituteMacros(value));
             return ProcessFlag.Continue;
         }
     }

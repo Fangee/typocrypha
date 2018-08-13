@@ -5,7 +5,7 @@ using UnityEngine;
 public class BEDoppelFrenzy :BattleEventTrigger {
     public override bool checkTrigger(BattleField state)
     {
-        return PlayerDialogueInfo.main.getInfo("doppel-frenzy") == "true";
+        return PlayerDataManager.main.getData("doppel-frenzy") == "true";
     }
 
     public override bool onTrigger(BattleField state)

@@ -497,7 +497,7 @@ public class TextEvents : MonoBehaviour {
 	// Sets name from last inputed text
 	// Input: NONE
 	IEnumerator setName(string[] opt) {
-		PlayerDialogueInfo.main.setInfo("player-name", DialogueManager.main.answer);
+		PlayerDataManager.main.setData("player-name", DialogueManager.main.answer);
 		yield return true;
 	}
 
@@ -507,9 +507,9 @@ public class TextEvents : MonoBehaviour {
     IEnumerator setInfo(string[] opt)
     {
         if (opt.Length == 1)
-            PlayerDialogueInfo.main.setInfo(opt[0], DialogueManager.main.answer);
+            PlayerDataManager.main.setData(opt[0], DialogueManager.main.answer);
         else if (opt.Length == 2)
-            PlayerDialogueInfo.main.setInfo(opt[0], opt[1]);
+            PlayerDataManager.main.setData(opt[0], opt[1]);
         else
             throw new System.Exception("TextEvents.cs: setInfo: Too many args, use 1 or 2");
         yield return true;

@@ -19,7 +19,7 @@ public class UIScreenframeInfo : MonoBehaviour {
 		string dayOfWeek = dayOfWeekSystem.ToString ();
 		string time = System.DateTime.Now.Hour + ":" + System.DateTime.Now.Minute;
 		string date = System.DateTime.Now.Month + " / " + System.DateTime.Now.Day + " / " + System.DateTime.Now.Year;
-		username.text = "U: " + PlayerDialogueInfo.main.player_name;
+		username.text = "U: " + PlayerDataManager.main.PlayerName;
 		currentTime.text = dayOfWeek + " " + time + "\n" + date;
 	}
 }

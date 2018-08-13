@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using NodeEditorFramework;
 
 namespace TypocryphaGameflow
@@ -9,6 +10,7 @@ namespace TypocryphaGameflow
     {    
         public static GameflowManager main = null; // Global static ref
         public GameflowCanvas gameflow;
+        public GameManagers managers = new GameManagers();
         BaseNode currNode;
 
         void Awake()
@@ -44,7 +46,7 @@ namespace TypocryphaGameflow
         {
             //TODO: Item skipping/disabling
             currNode = currNode.next();
-            if (currNode.process() == BaseNode.ProcessFlag.Continue)
+            if (currNode.process(managers) == BaseNode.ProcessFlag.Continue)
                 next();
             //Else currNode.process() == BaseNode.ProcessFlag.Wait (wait for callback from BattleManager.cs or DialogueManager.cs to continue)
         }
@@ -55,6 +57,48 @@ namespace TypocryphaGameflow
             //curr_gameflow = targetGameFlowItem.transform.parent.GetComponent<Gameflow>();
             //curr_gameflow.curr_item = targetGameFlowItem.transform.GetSiblingIndex() - 1;
             //if (goToNext) next();
+        }
+    }
+    [System.Serializable]
+    public class GameManagers
+    {
+        public DialogueManager dialogueManager;
+        public CharacterManager characterManager;
+        public BattleManagerS battleManager;
+        public BackgroundEffects backgroundManager;
+        public TextEvents textEventManager;
+        public PlayerDataManager playerDataManager;
+    }
+    [CustomPropertyDrawer(typeof(GameManagers))]
+    public class GameManagersDrawer : PropertyDrawer
+    {
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            // Using BeginProperty / EndProperty on the parent property means that
+            // prefab override logic works on the entire property.
+            EditorGUI.BeginProperty(position, label, property);
+
+            Rect UIrect = new Rect(position.position, new Vector2(position.width, EditorGUIUtility.singleLineHeight));
+
+            EditorGUI.LabelField(UIrect, new GUIContent("Managers"), new GUIStyle(GUIStyle.none) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold });
+            UIrect.y += EditorGUIUtility.singleLineHeight;
+            EditorGUI.PropertyField(UIrect, property.FindPropertyRelative("dialogueManager"));
+            UIrect.y += EditorGUIUtility.singleLineHeight;
+            EditorGUI.PropertyField(UIrect, property.FindPropertyRelative("characterManager"));
+            UIrect.y += EditorGUIUtility.singleLineHeight;
+            EditorGUI.PropertyField(UIrect, property.FindPropertyRelative("battleManager"));
+            UIrect.y += EditorGUIUtility.singleLineHeight;
+            EditorGUI.PropertyField(UIrect, property.FindPropertyRelative("backgroundManager"));
+            UIrect.y += EditorGUIUtility.singleLineHeight;
+            EditorGUI.PropertyField(UIrect, property.FindPropertyRelative("textEventManager"));
+            UIrect.y += EditorGUIUtility.singleLineHeight;
+            EditorGUI.PropertyField(UIrect, property.FindPropertyRelative("playerDataManager"));
+
+            EditorGUI.EndProperty();
+        }
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return EditorGUIUtility.singleLineHeight * 7;
         }
     }
 }

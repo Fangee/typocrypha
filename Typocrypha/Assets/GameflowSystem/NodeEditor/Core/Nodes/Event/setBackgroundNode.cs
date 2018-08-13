@@ -43,12 +43,12 @@ namespace TypocryphaGameflow
         #endregion
 
         #region Game
-        public override ProcessFlag process()
+        public override ProcessFlag process(GameManagers managers)
         {
             if (bgType == BgType.Sprite)
-                BackgroundEffects.main.setSpriteBG(bgSprite);
+                managers.backgroundManager.setSpriteBG(bgSprite);
             else
-                BackgroundEffects.main.setPrefabBG(bgPrefab);
+                managers.backgroundManager.setPrefabBG(bgPrefab);
             return ProcessFlag.Continue;
         }
         #endregion
