@@ -33,35 +33,12 @@ namespace TypocryphaGameflow
     [CustomEditor(typeof(CharacterData))]
     public class CharacterDataInspector : Editor
     {
+        CharacterData data;
+
         public override void OnInspectorGUI()
         {
-            GUILayout.Label("Character: " + target.name);
-        }
-    }
-
-    // Custom editor for CharacterData
-    public class CharacterDataEditor : EditorWindow
-    {
-        public CharacterData data;
-
-        [MenuItem("Window/Character Data Editor %#c")]
-        static void Init()
-        {
-            EditorWindow.GetWindow(typeof(CharacterDataEditor));
-        }
-
-        void OnEnable()
-        {
-            if (EditorPrefs.HasKey("ObjectPath"))
-            {
-                string objectPath = EditorPrefs.GetString("ObjectPath");
-                data = AssetDatabase.LoadAssetAtPath(objectPath, typeof(CharacterData)) as CharacterData;
-            }
-        }
-
-        void OnGUI()
-        {
-            HeaderGUI();
+            data = target as CharacterData;
+            GUILayout.Label("Character: " + data.name);
 
             EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
             if (data.aliases == null)
@@ -95,37 +72,9 @@ namespace TypocryphaGameflow
             {
                 EditorUtility.SetDirty(data);
             }
+
         }
 
-        void HeaderGUI()
-        {
-            GUILayout.BeginHorizontal();
-            if (data)
-            {
-                GUILayout.Label("Character: " + data.name);
-            }
-            else
-            {
-                GUILayout.Label("No Character Data Selected");
-            }
-
-            if (GUILayout.Button("Open Character Data"))
-            {
-                string absPath = EditorUtility.OpenFilePanel("Select Character Data", "", "");
-                if (absPath.StartsWith(Application.dataPath))
-                {
-                    string relPath = absPath.Substring(Application.dataPath.Length - "Assets".Length);
-                    data = AssetDatabase.LoadAssetAtPath(relPath, typeof(CharacterData)) as CharacterData;
-                    if (data)
-                    {
-                        EditorPrefs.SetString("ObjectPath", relPath);
-                    }
-                    EditorUtility.FocusProjectWindow();
-                    Selection.activeObject = data;
-                }
-            }
-            GUILayout.EndHorizontal();
-        }
 
         void NameSetGUI(string title, NameSet nameSet)
         {
@@ -135,22 +84,40 @@ namespace TypocryphaGameflow
             {
                 nameSet._items.Add(string.Empty);
             }
-            if (nameSet._items.Count > 0 && GUILayout.Button("-"))
-            {
-                nameSet._items.RemoveAt(nameSet._items.Count - 1);
-            }
             GUILayout.EndHorizontal();
+            EditorGUI.indentLevel = 1;
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("    Names");
+            GUILayout.EndHorizontal();
+            int toDelete = -1; // Item to delete; -1 if none chosen
+            int toAdd = -1; // Item after which to add; -1 if none chosen
             for (int i = 0; i < nameSet._items.Count; ++i)
             {
                 GUILayout.BeginHorizontal();
                 nameSet._items[i] = EditorGUILayout.TextField(nameSet._items[i]);
+                if (GUILayout.Button("+"))
+                {
+                    toAdd = i;
+                }
+                if (GUILayout.Button("-"))
+                {
+                    toDelete = i;
+                }
                 GUILayout.EndHorizontal();
             }
+            if (toAdd != -1)
+            {
+                nameSet._items.Insert(toAdd + 1, string.Empty);
+            }
+            if (toDelete != -1)
+            {
+                nameSet._items.RemoveAt(toDelete);
+            }
+            EditorGUI.indentLevel = 0;
         }
 
         void NameMapGUI(string title, NameMap nameMap)
         {
-
             GUILayout.BeginHorizontal();
             GUILayout.Label(title + ": " + nameMap._keys.Count);
             if (GUILayout.Button("+"))
@@ -158,19 +125,40 @@ namespace TypocryphaGameflow
                 nameMap._keys.Add(string.Empty);
                 nameMap._values.Add(null);
             }
-            if (nameMap._keys.Count > 0 && GUILayout.Button("-"))
-            {
-                nameMap._keys.RemoveAt(nameMap._keys.Count - 1);
-                nameMap._values.RemoveAt(nameMap._values.Count - 1);
-            }
             GUILayout.EndHorizontal();
+            EditorGUI.indentLevel = 1;
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("    Names");
+            GUILayout.Label("Sprites");
+            GUILayout.EndHorizontal();
+            int toDelete = -1; // Item to delete; -1 if none chosen
+            int toAdd = -1; // Item after which to add; -1 if none chosen
             for (int i = 0; i < nameMap._values.Count; ++i)
             {
                 GUILayout.BeginHorizontal();
                 nameMap._keys[i] = EditorGUILayout.TextField(nameMap._keys[i]);
                 nameMap._values[i] = EditorGUILayout.ObjectField(nameMap._values[i], typeof(Sprite), false) as Sprite;
+                if (GUILayout.Button("+"))
+                {
+                    toAdd = i;
+                }
+                if (GUILayout.Button("-"))
+                {
+                    toDelete = i;
+                }
                 GUILayout.EndHorizontal();
             }
+            if (toAdd != -1)
+            {
+                nameMap._keys.Insert(toAdd + 1, string.Empty);
+                nameMap._values.Insert(toAdd + 1, null);
+            }
+            if (toDelete != -1)
+            {
+                nameMap._keys.RemoveAt(toDelete);
+                nameMap._values.RemoveAt(toDelete);
+            }
+            EditorGUI.indentLevel = 0;
         }
     }
     #endregion
