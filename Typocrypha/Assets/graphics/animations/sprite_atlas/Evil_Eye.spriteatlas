@@ -3,11 +3,10 @@
 --- !u!687078895 &4343727234628468602
 SpriteAtlas:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Evil_Eye
   m_EditorData:
-    serializedVersion: 2
     textureSettings:
       serializedVersion: 2
       anisoLevel: 1
@@ -20,8 +19,7 @@ SpriteAtlas:
       crunchedCompression: 0
       sRGB: 0
     platformSettings:
-    - serializedVersion: 2
-      m_BuildTarget: DefaultTexturePlatform
+    - m_BuildTarget: DefaultTexturePlatform
       m_MaxTextureSize: 2048
       m_ResizeAlgorithm: 0
       m_TextureFormat: -1
@@ -31,7 +29,7 @@ SpriteAtlas:
       m_AllowsAlphaSplitting: 0
       m_Overridden: 0
       m_AndroidETC2FallbackOverride: 0
-    packingSettings:
+    packingParameters:
       serializedVersion: 2
       padding: 4
       blockOffset: 1
@@ -44,68 +42,68 @@ SpriteAtlas:
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: 61bf752046756a947b62c8da4715ff12, type: 3}
-  - {fileID: 21300000, guid: fe35be204603a614387a3c600056852e, type: 3}
-  - {fileID: 21300000, guid: 736e3e4026b39b7458cb772bf211089d, type: 3}
-  - {fileID: 21300000, guid: bfeb30c036897be4b812c0ea38323cb7, type: 3}
-  - {fileID: 21300000, guid: 09d946c05ba22b349b891239bc7e0c0c, type: 3}
   - {fileID: 21300000, guid: 5d960ed05cc456249acadd19cac9de35, type: 3}
-  - {fileID: 21300000, guid: d0bd0bf04d519f2419400d283bd17088, type: 3}
-  - {fileID: 21300000, guid: 2fa289622fc460946b7e6c384661f759, type: 3}
-  - {fileID: 21300000, guid: 9f3e0672a71cddb4d904d720096155fb, type: 3}
-  - {fileID: 21300000, guid: a1a5ab73c7cbc734b85d2eda615a9896, type: 3}
-  - {fileID: 21300000, guid: 6e180c736e7363c40b725ce1a9f9a8a1, type: 3}
+  - {fileID: 21300000, guid: 61bf752046756a947b62c8da4715ff12, type: 3}
   - {fileID: 21300000, guid: c7f2a5b55dae63b4a9fadce76bdac150, type: 3}
-  - {fileID: 21300000, guid: 620babd51957b44429838b70868f8e6e, type: 3}
-  - {fileID: 21300000, guid: 469a64f677b43ba4cb19ce6e8e5e0679, type: 3}
-  - {fileID: 21300000, guid: d54f9318e846eb24b9f5961d980d390f, type: 3}
-  - {fileID: 21300000, guid: 97b17b689a943c14d825496dc021f1cb, type: 3}
-  - {fileID: 21300000, guid: f65425c89c31f0045abafebbbb902d4e, type: 3}
-  - {fileID: 21300000, guid: d35ab839c700dae4280b2594ff5fcfb8, type: 3}
-  - {fileID: 21300000, guid: 597a20b9c8f21b34b92d5e9109e3faa0, type: 3}
-  - {fileID: 21300000, guid: d3f5fcd9e315c9645b5c48a0e240266d, type: 3}
-  - {fileID: 21300000, guid: 2996080a9114ada46a643a9edb60a7d9, type: 3}
-  - {fileID: 21300000, guid: 88e192aacb5b5744ba30926cdeefaed2, type: 3}
+  - {fileID: 21300000, guid: e516a5de6d7b41e488f39ae1e04ee39f, type: 3}
+  - {fileID: 21300000, guid: 09d946c05ba22b349b891239bc7e0c0c, type: 3}
+  - {fileID: 21300000, guid: 736e3e4026b39b7458cb772bf211089d, type: 3}
   - {fileID: 21300000, guid: b284408bce1ca5848ae4341654afb215, type: 3}
   - {fileID: 21300000, guid: b68342db82b0ac34da910589eb9e4620, type: 3}
-  - {fileID: 21300000, guid: 0e16b31c1371575448e941973b834b2e, type: 3}
-  - {fileID: 21300000, guid: 1e837ccc900aaf94da93c7389f383ff2, type: 3}
-  - {fileID: 21300000, guid: cb048e9d93e160a4c867739665fb9f88, type: 3}
-  - {fileID: 21300000, guid: e516a5de6d7b41e488f39ae1e04ee39f, type: 3}
-  - {fileID: 21300000, guid: fcbcfd4f12d43844fb8e2dfe41ae40f8, type: 3}
-  - {fileID: 21300000, guid: 217b309f18de3984f9f17e7cb867be49, type: 3}
+  - {fileID: 21300000, guid: 6e180c736e7363c40b725ce1a9f9a8a1, type: 3}
   - {fileID: 21300000, guid: 133793cf93e91a84cb886b2e3f4b476b, type: 3}
+  - {fileID: 21300000, guid: fcbcfd4f12d43844fb8e2dfe41ae40f8, type: 3}
+  - {fileID: 21300000, guid: a1a5ab73c7cbc734b85d2eda615a9896, type: 3}
+  - {fileID: 21300000, guid: 97b17b689a943c14d825496dc021f1cb, type: 3}
+  - {fileID: 21300000, guid: 597a20b9c8f21b34b92d5e9109e3faa0, type: 3}
+  - {fileID: 21300000, guid: fe35be204603a614387a3c600056852e, type: 3}
+  - {fileID: 21300000, guid: 88e192aacb5b5744ba30926cdeefaed2, type: 3}
+  - {fileID: 21300000, guid: bfeb30c036897be4b812c0ea38323cb7, type: 3}
+  - {fileID: 21300000, guid: 0e16b31c1371575448e941973b834b2e, type: 3}
+  - {fileID: 21300000, guid: 469a64f677b43ba4cb19ce6e8e5e0679, type: 3}
+  - {fileID: 21300000, guid: 2996080a9114ada46a643a9edb60a7d9, type: 3}
+  - {fileID: 21300000, guid: f65425c89c31f0045abafebbbb902d4e, type: 3}
+  - {fileID: 21300000, guid: d54f9318e846eb24b9f5961d980d390f, type: 3}
+  - {fileID: 21300000, guid: 620babd51957b44429838b70868f8e6e, type: 3}
+  - {fileID: 21300000, guid: d0bd0bf04d519f2419400d283bd17088, type: 3}
+  - {fileID: 21300000, guid: 217b309f18de3984f9f17e7cb867be49, type: 3}
+  - {fileID: 21300000, guid: 1e837ccc900aaf94da93c7389f383ff2, type: 3}
+  - {fileID: 21300000, guid: 2fa289622fc460946b7e6c384661f759, type: 3}
+  - {fileID: 21300000, guid: d3f5fcd9e315c9645b5c48a0e240266d, type: 3}
+  - {fileID: 21300000, guid: d35ab839c700dae4280b2594ff5fcfb8, type: 3}
+  - {fileID: 21300000, guid: cb048e9d93e160a4c867739665fb9f88, type: 3}
+  - {fileID: 21300000, guid: 9f3e0672a71cddb4d904d720096155fb, type: 3}
   m_PackedSpriteNamesToIndex:
-  - Evil_Eye_Cut_00082
-  - Evil_Eye_Cut_00071
-  - Evil_Eye_Cut_00058
-  - Evil_Eye_Cut_00076
-  - Evil_Eye_Cut_00084
   - Evil_Eye_Cut_00083
-  - Evil_Eye_Cut_00061
-  - Evil_Eye_Cut_00078
-  - Evil_Eye_Cut_00068
-  - Evil_Eye_Cut_00072
-  - Evil_Eye_Cut_00055
+  - Evil_Eye_Cut_00082
   - Evil_Eye_Cut_00081
-  - Evil_Eye_Cut_00075
-  - Evil_Eye_Cut_00077
-  - Evil_Eye_Cut_00066
-  - Evil_Eye_Cut_00073
-  - Evil_Eye_Cut_00074
-  - Evil_Eye_Cut_00079
-  - Evil_Eye_Cut_00070
-  - Evil_Eye_Cut_00062
-  - Evil_Eye_Cut_00067
-  - Evil_Eye_Cut_00065
+  - Evil_Eye_Cut_00080
+  - Evil_Eye_Cut_00084
+  - Evil_Eye_Cut_00058
   - Evil_Eye_Cut_00059
   - Evil_Eye_Cut_00054
-  - Evil_Eye_Cut_00064
-  - Evil_Eye_Cut_00063
-  - Evil_Eye_Cut_00069
-  - Evil_Eye_Cut_00080
-  - Evil_Eye_Cut_00057
-  - Evil_Eye_Cut_00060
+  - Evil_Eye_Cut_00055
   - Evil_Eye_Cut_00056
+  - Evil_Eye_Cut_00057
+  - Evil_Eye_Cut_00072
+  - Evil_Eye_Cut_00073
+  - Evil_Eye_Cut_00070
+  - Evil_Eye_Cut_00071
+  - Evil_Eye_Cut_00065
+  - Evil_Eye_Cut_00076
+  - Evil_Eye_Cut_00064
+  - Evil_Eye_Cut_00077
+  - Evil_Eye_Cut_00067
+  - Evil_Eye_Cut_00074
+  - Evil_Eye_Cut_00066
+  - Evil_Eye_Cut_00075
+  - Evil_Eye_Cut_00061
+  - Evil_Eye_Cut_00060
+  - Evil_Eye_Cut_00063
+  - Evil_Eye_Cut_00078
+  - Evil_Eye_Cut_00062
+  - Evil_Eye_Cut_00079
+  - Evil_Eye_Cut_00069
+  - Evil_Eye_Cut_00068
   m_Tag: Evil_Eye
   m_IsVariant: 0
