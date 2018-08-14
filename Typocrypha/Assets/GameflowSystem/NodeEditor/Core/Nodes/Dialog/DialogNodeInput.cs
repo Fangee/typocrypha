@@ -12,7 +12,9 @@ namespace TypocryphaGameflow
     [Node(false, "Dialog/Dialog Input", new System.Type[] { typeof(GameflowCanvas) })]
     public class DialogNodeInput : DialogNodeVN
     {
+        #region Editor
         new public const string ID = "Dialog Input Node";
+        public override string GetID { get { return ID; } }
         public override string Title { get { return "Dialog Input"; } }
 
         public string variableName;
@@ -61,5 +63,6 @@ namespace TypocryphaGameflow
             }
             GUILayout.EndVertical();
         }
+        #endregion
     }
 }

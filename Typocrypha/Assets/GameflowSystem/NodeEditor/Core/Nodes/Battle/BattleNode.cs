@@ -5,11 +5,9 @@ using NodeEditorFramework;
 
 namespace TypocryphaGameflow
 {
-    [Node(true, "Dialog/DialogBase", new System.Type[] { typeof(GameflowCanvas) })]
+    [Node(true, "Battle/BattleBase", new System.Type[] { typeof(GameflowCanvas) })]
     public abstract class BattleNode : BaseNodeIO
     {
-
-        public override bool AutoLayout { get { return true; } }
         public override bool AllowRecursion { get { return true; } }
 
         #region Game

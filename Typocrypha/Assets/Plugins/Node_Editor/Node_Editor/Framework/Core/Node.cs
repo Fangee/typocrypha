@@ -189,7 +189,7 @@ namespace NodeEditorFramework
 			if (string.IsNullOrEmpty (nodeID) || hostCanvas == null)
 				throw new ArgumentException ();
 			if (!NodeCanvasManager.CheckCanvasCompability (nodeID, hostCanvas.GetType ()))
-				throw new UnityException ("Cannot create Node with ID '" + nodeID + "' as it is not compatible with the current canavs type (" + hostCanvas.GetType ().ToString () + ")!");
+				throw new UnityException ("Cannot create Node with ID '" + nodeID + "' as it is not compatible with the current canvas type (" + hostCanvas.GetType ().ToString () + ")!");
 			if (!hostCanvas.CanAddNode (nodeID))
 				throw new UnityException ("Cannot create Node with ID '" + nodeID + "' on the current canvas of type (" + hostCanvas.GetType ().ToString () + ")!");
 
@@ -228,6 +228,76 @@ namespace NodeEditorFramework
 
 			return node;
 		}
+
+        /// <summary>
+        /// Creates a copy of the specified at pos on the current canvas, optionally auto-connecting the specified output to a matching input
+        /// </summary>
+        public static Node CreateCopy(Node toCopy, Vector2 pos, ConnectionPort connectingPort = null, bool silent = false)
+        {
+            return CreateCopy(toCopy, pos, NodeEditor.curNodeCanvas, connectingPort, silent);
+        }
+
+        /// <summary>
+        /// Creates a copy of the specified node at pos on the specified canvas, optionally auto-connecting the specified output to a matching input
+        /// silent disables any events
+        /// </summary>
+        public static Node CreateCopy(Node toCopy, Vector2 pos, NodeCanvas hostCanvas, ConnectionPort connectingPort = null, bool silent = false)
+        {
+            if (toCopy == null || hostCanvas == null)
+                throw new ArgumentException();
+            if (!NodeCanvasManager.CheckCanvasCompability(toCopy.GetID, hostCanvas.GetType()))
+                throw new UnityException("Cannot create Node with ID '" + toCopy.GetID + "' as it is not compatible with the current canvas type (" + hostCanvas.GetType().ToString() + ")!");
+            if (!hostCanvas.CanAddNode(toCopy.GetID))
+                throw new UnityException("Cannot create Node with ID '" + toCopy.GetID + "' on the current canvas of type (" + hostCanvas.GetType().ToString() + ")!");
+            Node node = ScriptableObject.Instantiate(toCopy);
+            //Clone static connection ports
+            foreach (ConnectionPortDeclaration portDecl in ConnectionPortManager.GetPortDeclarationEnumerator(node, true))
+            {
+                ConnectionPort port = (ConnectionPort)portDecl.portField.GetValue(node);
+                port = portDecl.portInfo.CreateNew(node);
+                portDecl.portField.SetValue(node, port);
+            }
+            //Clone dynamic connection ports
+            for (int i = 0; i < node.dynamicConnectionPorts.Count; ++i)
+            {
+                node.dynamicConnectionPorts[i] = ScriptableObject.Instantiate(node.dynamicConnectionPorts[i]);
+                node.dynamicConnectionPorts[i].body = node;
+                node.dynamicConnectionPorts[i].ClearConnections();
+            }
+            ConnectionPortManager.UpdateRepresentativePortLists(node);
+            //Clone child SOs
+            System.Func<ScriptableObject, ScriptableObject> copySOs = (ScriptableObject so) => ScriptableObject.Instantiate(so); ;
+            node.CopyScriptableObjects(copySOs);
+            if (node == null)
+                return null;
+
+            // Init node state
+            node.name = node.Title;
+            node.autoSize = node.DefaultSize;
+            node.position = pos;
+            ConnectionPortManager.UpdateConnectionPorts(node);
+
+            if (connectingPort != null)
+            { // Handle auto-connection and link the output to the first compatible input
+                for (int i = 0; i < node.connectionPorts.Count; i++)
+                {
+                    if (node.connectionPorts[i].TryApplyConnection(connectingPort, silent))
+                        break;
+                }
+            }
+
+            // Add node to host canvas
+            hostCanvas.nodes.Add(node);
+            if (!silent)
+            { // Callbacks
+                hostCanvas.OnNodeChange(connectingPort != null ? connectingPort.body : node);
+                NodeEditorCallbacks.IssueOnAddNode(node);
+                hostCanvas.Validate();
+                NodeEditor.RepaintClients();
+            }
+
+            return node;
+        }
 
 		/// <summary>
 		/// Deletes this Node from curNodeCanvas and the save file

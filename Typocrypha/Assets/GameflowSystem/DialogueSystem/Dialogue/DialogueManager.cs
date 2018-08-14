@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager main = null; // Global static reference
+    [HideInInspector]
     public TypocryphaGameflow.DialogNode curr_dialogue; // Current dialogue to be run
 
     public GameObject ChatView; // Chat view hiearchy

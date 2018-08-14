@@ -59,8 +59,8 @@ namespace NodeEditorFramework
 			NodeEditorState state = inputInfo.editorState;
 			if (state.focusedNode != null && NodeEditor.curNodeCanvas.CanAddNode (state.focusedNode.GetID)) 
 			{ // Create new node of same type
-				Node duplicatedNode = Node.Create (state.focusedNode.GetID, NodeEditor.ScreenToCanvasSpace (inputInfo.inputPos), state.connectKnob);
-				state.selectedNode = state.focusedNode = duplicatedNode;
+                Node duplicatedNode = Node.CreateCopy(state.focusedNode, NodeEditor.ScreenToCanvasSpace(inputInfo.inputPos), state.connectKnob, false);
+                state.selectedNode = state.focusedNode = duplicatedNode;
 				state.connectKnob = null;
 				inputInfo.inputEvent.Use ();
 			}

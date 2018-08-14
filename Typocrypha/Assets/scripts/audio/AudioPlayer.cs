@@ -70,22 +70,6 @@ public class AudioPlayer : MonoBehaviour {
 		ready = true;
 		Debug.Log ("finished loading audio");
 	}
-    //Currently has the Audio-adjustment keybinds (will remove when we get a settings GUI)
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Keypad8))
-            MusicVolume += 0.1F;
-        else if (Input.GetKeyDown(KeyCode.Keypad2))
-            MusicVolume -= 0.1F;
-        if (Input.GetKeyDown(KeyCode.Keypad9))
-            SfxVolume += 0.1F;
-        else if (Input.GetKeyDown(KeyCode.Keypad3))
-            SfxVolume -= 0.1F;
-        if (Input.GetKeyDown(KeyCode.Keypad7))
-            VoiceVolume += 0.1F;
-        else if (Input.GetKeyDown(KeyCode.Keypad1))
-            VoiceVolume -= 0.1F;
-    }
 
     // sets preset reservations
     void initReservations() {

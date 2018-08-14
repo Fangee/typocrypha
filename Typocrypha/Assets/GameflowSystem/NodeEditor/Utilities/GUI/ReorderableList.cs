@@ -22,8 +22,7 @@ namespace TypocryphaGameflow
                 {
                     string[] path = type.ToString().Split('.');
                     var name = path[path.Length - 1];
-                    menu.AddItem(new GUIContent(name),
-                    false, clickHandler, new MenuItemData(type, list));
+                    menu.AddItem(new GUIContent(name), false, clickHandler, new MenuItemData(type, list));
                 }
                 menu.Show(Event.current.mousePosition + Event.current.delta);   
             }
