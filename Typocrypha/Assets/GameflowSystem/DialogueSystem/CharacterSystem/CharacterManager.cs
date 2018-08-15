@@ -28,6 +28,7 @@ namespace TypocryphaGameflow
             }
         }
 
+        #region Character Control Node Handling
         // Applies a character control event to specified character
         public void characterControl(CharacterControlNode.EventData ev)
         {
@@ -71,6 +72,31 @@ namespace TypocryphaGameflow
             foreach (string del in names)
             {
                 characters.Remove(del);
+            }
+        }
+
+        //TODO: remove all characters
+        #endregion
+
+        // Highlight, set talk sfx for specified character (if in scene)
+        public void speak(string characterName)
+        {
+            Character chara;
+            if(characters.TryGetValue(DialogueParser.main.substituteMacros(characterName), out chara))
+            {
+                soleHighlight(chara);
+                AudioPlayer.main.setVoiceSFX(chara.data.talk_sfx);
+            }
+        }
+
+        // Highlight the specified character and un-highlight all other characters
+        void soleHighlight(Character chara)
+        {
+            chara.highlight = true;
+            foreach (Character c in characters.Values)
+            {
+                if (c != chara)
+                    c.highlight = false;
             }
         }
     }

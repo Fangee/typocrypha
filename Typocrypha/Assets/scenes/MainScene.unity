@@ -19000,6 +19000,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1663170417}
   - component: {fileID: 1663170418}
+  - component: {fileID: 1663170425}
   - component: {fileID: 1663170424}
   - component: {fileID: 1663170422}
   - component: {fileID: 1663170421}
@@ -19042,37 +19043,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a66e328932553e9409536a97ffac6cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curr_dialogue: {fileID: 0}
-  ChatView: {fileID: 2120598029}
-  ChatContent: {fileID: 965409674}
-  scroll_bar: {fileID: 1434939592}
-  VNView: {fileID: 261958433}
-  VNDialogueBox: {fileID: 1898592527}
-  VNSpeaker: {fileID: 340179479}
-  VNMCSprite: {fileID: 202969423}
-  VNCodecSprite: {fileID: 375218125}
-  ANView: {fileID: 1576722628}
-  ANContent: {fileID: 28611441}
-  player_ui: {fileID: 585812794}
-  input_field: {fileID: 86583221}
-  dialogue_box_prefab: {fileID: 1367198019291800, guid: be59032e3f3bd424c95f63e8f0860dd9,
-    type: 2}
-  an_dialouge_box_prefab: {fileID: 1598601082375312, guid: 53cfadcf77544f842a1fd01779131e55,
-    type: 2}
-  chr_spr_prefab: {fileID: 1817936430532596, guid: befc2fb59ddaa5248819fa1d6b09c8b6,
-    type: 2}
+  UIManager: {fileID: 1663170425}
   scroll_time: 0.15
   scroll_delay: 0.01
   scroll_scale: 0
   top_space: 16
-  input_display_choices: {fileID: 1797765262}
-  input_display_C: {fileID: 1092292710}
-  spacebar_icon_vn: {fileID: 602362909}
-  animator_spacebar_vn: {fileID: 602362912}
-  spacebar_icon_an: {fileID: 1076786473}
-  animator_spacebar_an: {fileID: 1076786476}
-  spacebar_icon_chat: {fileID: 285443320}
-  animator_spacebar_chat: {fileID: 285443323}
   pause_scroll: 0
   block_input: 0
   is_dump: 0
@@ -19177,6 +19152,41 @@ MonoBehaviour:
   characterPrefab: {fileID: 2042472542}
   allCharacterData:
   - {fileID: 11400000, guid: cdb6b1803b32e644d834077ab1722b7e, type: 2}
+--- !u!114 &1663170425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1663170416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be63dce3283d5043a3a271bfb31ed86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VNView: {fileID: 261958433}
+  VNDialogueBox: {fileID: 1898592527}
+  VNSpeaker: {fileID: 340179479}
+  VNMCSprite: {fileID: 202969423}
+  VNCodecSprite: {fileID: 375218125}
+  spacebar_icon_vn: {fileID: 602362909}
+  animator_spacebar_vn: {fileID: 602362912}
+  ANView: {fileID: 1576722628}
+  ANContent: {fileID: 28611441}
+  spacebar_icon_an: {fileID: 1076786473}
+  animator_spacebar_an: {fileID: 1076786476}
+  ChatView: {fileID: 2120598029}
+  ChatContent: {fileID: 965409674}
+  scroll_bar: {fileID: 1434939592}
+  spacebar_icon_chat: {fileID: 285443320}
+  animator_spacebar_chat: {fileID: 285443323}
+  player_ui: {fileID: 585812794}
+  input_field: {fileID: 86583221}
+  input_display_choices: {fileID: 1797765262}
+  input_display_C: {fileID: 1092292710}
+  dialogue_box_prefab: {fileID: 1367198019291800, guid: be59032e3f3bd424c95f63e8f0860dd9,
+    type: 2}
+  an_dialouge_box_prefab: {fileID: 1598601082375312, guid: 53cfadcf77544f842a1fd01779131e55,
+    type: 2}
 --- !u!1 &1665848707
 GameObject:
   m_ObjectHideFlags: 0

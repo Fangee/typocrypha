@@ -8,6 +8,9 @@ namespace TypocryphaGameflow
     // Visual representation of a character in a dialogue scene
     public class Character : MonoBehaviour
     {
+        public static Color dimColor = new Color(0.25f, 0.25f, 0.25f, 1);
+        public static Color highlightColor = new Color(1f, 1f, 1f, 1f);
+
         public CharacterData data; // Relevant data on character (sprites, etc)
         public SpriteRenderer body; // Body sprite
         public SpriteRenderer face; // Face sprite
@@ -37,11 +40,13 @@ namespace TypocryphaGameflow
                 _highlight = value;
                 if (_highlight)
                 {
-                    // HIGHLIGHT
+                    body.color = highlightColor;
+                    face.color = highlightColor;
                 }
                 else
                 {
-                    // DIM
+                    body.color = dimColor;
+                    face.color = dimColor;
                 }
             }
         }

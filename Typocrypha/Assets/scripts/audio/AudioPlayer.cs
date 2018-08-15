@@ -17,79 +17,100 @@ using UnityEngine.Audio;
 //public enum SFXType { UI, SPELL, BATTLE, SPEAKING, OTHER, size };
 
 // manages playing music and sfx
-public class AudioPlayer : MonoBehaviour {
-	public static AudioPlayer main = null; // static global ref
-	public bool ready; // are all the assets loaded?
-	public AudioSource music; // plays music
-	public Transform sfx; // contains sfx channels
-	public AudioMixerSnapshot bgm_full; // snapshot for full volume music
-	public AudioMixerSnapshot bgm_off; // snapshot for no music
+public class AudioPlayer : MonoBehaviour
+{
+    public static AudioPlayer main = null; // static global ref
+    public bool ready; // are all the assets loaded?
+    public AudioSource music; // plays music
+    public Transform sfx; // contains sfx channels
+    public AudioMixerSnapshot bgm_full; // snapshot for full volume music
+    public AudioMixerSnapshot bgm_off; // snapshot for no music
 
-	AudioSource[] sfx_channels; // sfx channels
-	bool[] channel_reserved; // is that channel reserved?
-	AssetBundle sfx_bundle;
-	AssetBundle music_bundle;
+    AudioSource[] sfx_channels; // sfx channels
+    bool[] channel_reserved; // is that channel reserved?
+    AssetBundle sfx_bundle;
+    AssetBundle music_bundle;
 
     public const int channel_voice = 3;
     public const int channel_spell_sfx = 4;
 
     // music volume (0 to 1)
-    public float MusicVolume {
+    public float MusicVolume
+    {
         get { return music.volume; }
         set { music.volume = Mathf.Clamp01(value); }
     }
 
     //SFX volume (-1 to 0.0) 
     private float sfx_volume = 1.0F;
-    public float SfxVolume {
+    public float SfxVolume
+    {
         get { return sfx_volume; }
         set { sfx_volume = Mathf.Clamp01(value); }
     }
 
     //Speech Volume (0 to 1)
-    public float VoiceVolume {
+    public float VoiceVolume
+    {
         get { return sfx_channels[channel_voice].volume; }
         set { sfx_channels[channel_voice].volume = Mathf.Clamp01(value); }
     }
 
-    void Awake() {
-		DontDestroyOnLoad(transform.gameObject);
-		if (main == null) main = this;
-		else GameObject.Destroy (gameObject); // avoid multiple copies
-		ready = false;
-	}
+    void Awake()
+    {
+        DontDestroyOnLoad(transform.gameObject);
+        if (main == null) main = this;
+        else GameObject.Destroy(gameObject); // avoid multiple copies
+        ready = false;
+    }
 
-	void Start() {
-		sfx_bundle = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "sfx"));
-		music_bundle = AssetBundle.LoadFromFile (System.IO.Path.Combine(Application.streamingAssetsPath, "music"));
-		sfx_channels = new AudioSource[sfx.childCount];
-		channel_reserved = new bool[sfx.childCount];
-		for (int i = 0; i < sfx.childCount; i++)  // put all sfx channels into array
-			sfx_channels [i] = sfx.GetChild (i).gameObject.GetComponent<AudioSource> ();
-		initReservations ();
-		ready = true;
-		Debug.Log ("finished loading audio");
-	}
+    void Start()
+    {
+        sfx_bundle = AssetBundle.LoadFromFile(System.IO.Path.Combine(Application.streamingAssetsPath, "sfx"));
+        music_bundle = AssetBundle.LoadFromFile(System.IO.Path.Combine(Application.streamingAssetsPath, "music"));
+        sfx_channels = new AudioSource[sfx.childCount];
+        channel_reserved = new bool[sfx.childCount];
+        for (int i = 0; i < sfx.childCount; i++)  // put all sfx channels into array
+            sfx_channels[i] = sfx.GetChild(i).gameObject.GetComponent<AudioSource>();
+        initReservations();
+        ready = true;
+        Debug.Log("finished loading audio");
+    }
 
     // sets preset reservations
-    void initReservations() {
-		channel_reserved [channel_voice] = true; // reserved for talking sfx
-        channel_reserved [channel_spell_sfx] = true;
-		AudioPlayer.main.setSFX (channel_voice, "speak_boop"); // put default talk sfx in channel 3
-	}
+    void initReservations()
+    {
+        channel_reserved[channel_voice] = true; // reserved for talking sfx
+        channel_reserved[channel_spell_sfx] = true;
+        AudioPlayer.main.setSFX(channel_voice, "speak_boop"); // put default talk sfx in channel 3
+    }
 
-	// sets specified sfx channel
-	public void setSFX(int channel, string name) {
-		name = name.Trim ();
-		if (name.CompareTo ("_") == 0) // skip if null song
-			return; 
-		if (name.CompareTo ("") == 0) { // set to no song
-			sfx_channels[channel].Stop();
-			sfx_channels[channel].clip = null;
-			return;
-		}
-		sfx_channels [channel].clip = sfx_bundle.LoadAsset<AudioClip> (name);
-	}
+    // sets specified sfx channel
+    public void setSFX(int channel, string name)
+    {
+        name = name.Trim();
+        if (name.CompareTo("_") == 0) // skip if null song
+            return;
+        if (name.CompareTo("") == 0)
+        { // set to no song
+            sfx_channels[channel].Stop();
+            sfx_channels[channel].clip = null;
+            return;
+        }
+        sfx_channels[channel].clip = sfx_bundle.LoadAsset<AudioClip>(name);
+    }
+
+    // sets specified sfx channel
+    public void setSFX(int channel, AudioClip sfx)
+    {
+        sfx_channels[channel].clip = sfx;
+    }
+
+    // sets the voice sfx channel (text scroll sfx)
+    public void setVoiceSFX(AudioClip sfx)
+    {
+        setSFX(channel_voice, sfx);
+    }
 
 	// play current sfx in channel
 	public void playSFX(int channel) {

@@ -23,7 +23,7 @@ public class DialogueBox : MonoBehaviour {
 	float text_pad; // Padding between text and dialogue box
 
 	// Initializes dialogue box and starts text scroll
-	public Coroutine dialogueBoxStart(TypocryphaGameflow.DialogNode data) {
+	public Coroutine dialogueBoxStart(DialogueItem lineData) {
 		text_pad = fx_text.rectTransform.offsetMin.y - fx_text.rectTransform.offsetMax.y;
 		// Initialize color effect to hide text
 		set_color = fx_text.gameObject.AddComponent<FXTextColor> ();
@@ -52,13 +52,8 @@ public class DialogueBox : MonoBehaviour {
         //	set_color.chars [1] += offset;
         //	// Set box height
         //	setBoxHeight ();
-        //} else 
-        if (data is TypocryphaGameflow.DialogNodeVN) {
-            // Display character sprites
-            //for (int i = 0; i < v_item.char_sprites.Length; ++i)
-            //    DialogueManager.main.displayCharacter(v_item.char_sprites[i], v_item.char_sprite_pos[i]);
-            fx_text.text = text;
-        }
+        //} 
+         fx_text.text = text;
         //else if (d_item.GetType() == typeof(DialogueItemAN))
         //{
         //    fx_text.text = text;
@@ -132,6 +127,6 @@ public class DialogueBox : MonoBehaviour {
 	// Sets dialogue box's height based on text. Also updates dialogue window height
 	void setBoxHeight() {
 		rect_tr.sizeDelta = new Vector2 (rect_tr.sizeDelta.x, text_pad + fx_text.preferredHeight);
-		DialogueManager.main.expandWindow (rect_tr.sizeDelta.y);
+		//DialogueManager.main.expandWindow (rect_tr.sizeDelta.y);
 	}
 }

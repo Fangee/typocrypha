@@ -438,14 +438,14 @@ public class TextEvents : MonoBehaviour {
 	// input: [0]: string, name of sprite to highlight
 	//        [1]: float, amount to highlight (multiplier to tint)
 	IEnumerator highlightCharacter(string[] opt) {
-		DialogueManager.main.highlightCharacter(opt[0], float.Parse(opt[1]));
+		//DialogueManager.main.highlightCharacter(opt[0], float.Parse(opt[1]));
 		yield return true;
 	}
 
 	// Highlights one character and unhighlights all others (0.5 greyscale)
 	// input: [0]: string, name of sprite to highlight
 	IEnumerator soleHighlight(string[] opt) {
-		DialogueManager.main.soleHighlight (opt [0]);
+		//DialogueManager.main.soleHighlight (opt [0]);
 		yield return true;
 	}
 
@@ -453,21 +453,21 @@ public class TextEvents : MonoBehaviour {
     // input: [0]: string, name of sprite to highlight
     IEnumerator soleHighlightCodec(string[] opt)
     {
-        DialogueManager.main.soleHighlightCodec();
+        //DialogueManager.main.soleHighlightCodec();
         yield return true;
     }
 
     // Removes a specific character from the scene
     // input: [0]: string, name of sprite to remove
     IEnumerator removeCharacter(string[] opt) {
-		DialogueManager.main.removeCharacter (opt [0]);
+		//DialogueManager.main.removeCharacter (opt [0]);
 		yield return true;
 	}
 
 	// Removes all characters from a scene
 	// input: NONE
 	IEnumerator removeAllCharacter(string[] opt) {
-		DialogueManager.main.removeAllCharacter ();
+		//DialogueManager.main.removeAllCharacter ();
 		yield return true;
 	}
 
@@ -537,14 +537,14 @@ public class TextEvents : MonoBehaviour {
 	// clears the chat and AN text logs
 	// input: [0]: [chat|an], 'chat' clears chat log, 'an' clears AN log
 	IEnumerator clearTextLog(string[] opt){
-		if (opt [0].CompareTo ("chat") == 0) {
-			Debug.Log ("chat log flushed");
-			DialogueManager.main.clearChatLog();
-		}
-		else if (opt [0].CompareTo ("an") == 0){
-			Debug.Log ("an log flushed");
-			DialogueManager.main.clearANLog();
-		}
+		//if (opt [0].CompareTo ("chat") == 0) {
+		//	Debug.Log ("chat log flushed");
+		//	DialogueManager.main.clearChatLog();
+		//}
+		//else if (opt [0].CompareTo ("an") == 0){
+		//	Debug.Log ("an log flushed");
+		//	DialogueManager.main.clearANLog();
+		//}
 		yield return true;
 	}
 

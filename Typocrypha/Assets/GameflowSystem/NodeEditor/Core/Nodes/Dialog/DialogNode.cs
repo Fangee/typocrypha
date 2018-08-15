@@ -23,7 +23,7 @@ namespace TypocryphaGameflow
         {
             //    player_ui.SetActive(false);
             managers.battleManager.setEnabled(false);
-            managers.dialogueManager.startDialogue(this);
+            managers.dialogueManager.startDialogue(new DialogueItem(characterName, text));
             return ProcessFlag.Wait;
         }
     }

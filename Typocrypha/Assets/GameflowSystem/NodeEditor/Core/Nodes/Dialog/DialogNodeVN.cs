@@ -64,10 +64,15 @@ namespace TypocryphaGameflow
         #endregion
 
         #region Game
-        //public override ProcessFlag process()
-        //{
-        //    throw new System.NotImplementedException();
-        //}
+        public override ProcessFlag process(GameManagers managers)
+        {
+            DialogueManager man = managers.dialogueManager;
+            man.UIManager.setViewMode(DialogUI.DialogViewType.VN);
+            //TODO: Set expression if necessary
+            managers.characterManager.speak(characterName);
+            man.startDialogue(new DialogueItem(characterName, text));
+            return ProcessFlag.Wait;
+        }
         #endregion
     }
 }
