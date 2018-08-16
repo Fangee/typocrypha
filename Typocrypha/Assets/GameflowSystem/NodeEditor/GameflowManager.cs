@@ -20,6 +20,8 @@ namespace TypocryphaGameflow
         }
         private void Start()
         {
+            managers.battleManager.setEnabled(false);
+            managers.dialogManager.setEnabled(false);
             StartCoroutine(waitForLoad());
         }
 
@@ -62,7 +64,7 @@ namespace TypocryphaGameflow
     [System.Serializable]
     public class GameManagers
     {
-        public DialogueManager dialogueManager;
+        public DialogManager dialogManager;
         public CharacterManager characterManager;
         public BattleManagerS battleManager;
         public BackgroundEffects backgroundManager;
@@ -82,7 +84,7 @@ namespace TypocryphaGameflow
 
             EditorGUI.LabelField(UIrect, new GUIContent("Managers"), new GUIStyle(GUIStyle.none) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold });
             UIrect.y += EditorGUIUtility.singleLineHeight;
-            EditorGUI.PropertyField(UIrect, property.FindPropertyRelative("dialogueManager"));
+            EditorGUI.PropertyField(UIrect, property.FindPropertyRelative("dialogManager"));
             UIrect.y += EditorGUIUtility.singleLineHeight;
             EditorGUI.PropertyField(UIrect, property.FindPropertyRelative("characterManager"));
             UIrect.y += EditorGUIUtility.singleLineHeight;

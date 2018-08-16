@@ -28,7 +28,7 @@ public class DialogueParser : MonoBehaviour {
 	}
 
 	// Parses dialogue item, returning updated text and modifying fields
-	public string parse(DialogueItem d_item, DialogueBox d_box) {
+	public string parse(DialogItem d_item, DialogBox d_box) {
 		//Debug.Log ("parse:" + d_item.text);
 		StringBuilder parsed = new StringBuilder(); // Processes string
 		string text = substituteMacros(d_item.text);
@@ -60,7 +60,7 @@ public class DialogueParser : MonoBehaviour {
 
 	// Parses an effect's starting tag, and adds it to the stack
 	// NEEDS TO ALSO PARSE PARAMETERS
-	void parseEffectStart(int start_pos, string text, StringBuilder parsed, DialogueBox d_box) {
+	void parseEffectStart(int start_pos, string text, StringBuilder parsed, DialogBox d_box) {
 		int end_pos = text.IndexOf ('|', start_pos) - 1;
 		string fx_name = text.Substring (start_pos, end_pos - start_pos + 1);
 		FXTextEffect text_effect = text_effect_map[fx_name].clone(d_box.fx_text.gameObject);
@@ -71,7 +71,7 @@ public class DialogueParser : MonoBehaviour {
 	}
 
 	// Parses an effect's ending tag, and matches with top of effect stack
-	void parseEffectEnd(int start_pos, string text, DialogueItem d_item, StringBuilder parsed) {
+	void parseEffectEnd(int start_pos, string text, DialogItem d_item, StringBuilder parsed) {
 		int end_pos = text.IndexOf ('\\', start_pos) - 1;
 		string fx_name = text.Substring (start_pos, end_pos - start_pos + 1);
 		FXTextEffect top = effect_stack.Pop ();
@@ -82,7 +82,7 @@ public class DialogueParser : MonoBehaviour {
 	}
 
 	// Parses a Text Event
-	int parseTextEvent(int start_pos, string text, DialogueItem d_item, StringBuilder parsed) {
+	int parseTextEvent(int start_pos, string text, DialogItem d_item, StringBuilder parsed) {
 		int end_pos = text.IndexOf (']', start_pos);
 		int eq_pos = text.IndexOf ('=', start_pos);
 		string evt;

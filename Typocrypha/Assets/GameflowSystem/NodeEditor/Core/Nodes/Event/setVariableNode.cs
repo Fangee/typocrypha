@@ -40,6 +40,7 @@ namespace TypocryphaGameflow
 
         public override ProcessFlag process(GameManagers managers)
         {
+            Debug.Log("Setting variable: " + variableName + " to " + value);
             managers.playerDataManager.setData(variableName, DialogueParser.main.substituteMacros(value));
             return ProcessFlag.Continue;
         }

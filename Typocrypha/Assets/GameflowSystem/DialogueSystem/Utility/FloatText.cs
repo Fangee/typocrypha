@@ -9,9 +9,9 @@ public class FloatText : MonoBehaviour {
 	}
 
 	IEnumerator startFloatTextCR(float x, float y, string text) {
-        DialogueItem d_item = new DialogueItem("","");//gameObject.AddComponent<DialogueItemAN>();
+        DialogItem d_item = new DialogItem(text);//gameObject.AddComponent<DialogueItemAN>();
 		transform.position = new Vector2 (x, y);
-		DialogueBox d_box = GetComponent<DialogueBox> ();
+		DialogBox d_box = GetComponent<DialogBox> ();
 		d_box.is_floating = true;
 		d_box.talk_sfx = false;
 		d_box.scroll_delay = 0.07f;

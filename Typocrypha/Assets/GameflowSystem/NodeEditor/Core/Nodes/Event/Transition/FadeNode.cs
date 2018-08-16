@@ -62,6 +62,7 @@ namespace TypocryphaGameflow {
         #region Game
         public override ProcessFlag process(GameManagers managers)
         {
+            Debug.Log(fadeType.ToString() + " for " + fadeTime + " seconds");
             string fadeTypeArg = "in";
             if (fadeType == FadeType.Fade_Out)
                 fadeTypeArg = "out";

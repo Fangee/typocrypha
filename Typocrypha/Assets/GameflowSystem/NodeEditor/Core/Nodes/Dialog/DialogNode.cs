@@ -19,12 +19,5 @@ namespace TypocryphaGameflow
         {
             return toNextOUT.connections[0].body as BaseNode;
         }
-        public override ProcessFlag process(GameManagers managers)
-        {
-            //    player_ui.SetActive(false);
-            managers.battleManager.setEnabled(false);
-            managers.dialogueManager.startDialogue(new DialogueItem(characterName, text));
-            return ProcessFlag.Wait;
-        }
     }
 }

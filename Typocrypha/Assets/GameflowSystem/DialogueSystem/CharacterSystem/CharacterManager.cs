@@ -78,6 +78,7 @@ namespace TypocryphaGameflow
         //TODO: remove all characters
         #endregion
 
+        #region Speaker Control
         // Highlight, set talk sfx for specified character (if in scene)
         public void speak(string characterName)
         {
@@ -87,6 +88,8 @@ namespace TypocryphaGameflow
                 soleHighlight(chara);
                 AudioPlayer.main.setVoiceSFX(chara.data.talk_sfx);
             }
+            //Else: have fallbacks?
+            //Else: default
         }
 
         // Highlight the specified character and un-highlight all other characters
@@ -99,5 +102,6 @@ namespace TypocryphaGameflow
                     c.highlight = false;
             }
         }
+        #endregion
     }
 }

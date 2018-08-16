@@ -66,11 +66,12 @@ namespace TypocryphaGameflow
         #region Game
         public override ProcessFlag process(GameManagers managers)
         {
-            DialogueManager man = managers.dialogueManager;
-            man.UIManager.setViewMode(DialogUI.DialogViewType.VN);
+            Debug.Log("VN: " + characterName + ": " + text);
+            managers.dialogManager.setEnabled(true);
+            managers.battleManager.setEnabled(false);
             //TODO: Set expression if necessary
             managers.characterManager.speak(characterName);
-            man.startDialogue(new DialogueItem(characterName, text));
+            managers.dialogManager.startDialogLine(DialogManager.DialogViewType.VN, new DialogItemVN(text, characterName, null, null));
             return ProcessFlag.Wait;
         }
         #endregion

@@ -46,9 +46,15 @@ namespace TypocryphaGameflow
         public override ProcessFlag process(GameManagers managers)
         {
             if (bgType == BgType.Sprite)
+            {
+                Debug.Log("Setting background to: " + bgSprite.name);
                 managers.backgroundManager.setSpriteBG(bgSprite);
+            }
             else
+            {
+                Debug.Log("Setting background to: " + bgPrefab.name);
                 managers.backgroundManager.setPrefabBG(bgPrefab);
+            }
             return ProcessFlag.Continue;
         }
         #endregion

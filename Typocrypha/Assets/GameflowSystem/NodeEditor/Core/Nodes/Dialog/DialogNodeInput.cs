@@ -64,5 +64,18 @@ namespace TypocryphaGameflow
             GUILayout.EndVertical();
         }
         #endregion
+
+        #region Game
+        public override ProcessFlag process(GameManagers managers)
+        {
+
+            base.process(managers);
+            if (showChoicePrompt)
+                managers.dialogManager.showInputPrompt(choicePromptText, variableName);
+            else
+                managers.dialogManager.showInputPrompt(null, variableName);
+            return ProcessFlag.Wait;
+        }
+        #endregion
     }
 }
