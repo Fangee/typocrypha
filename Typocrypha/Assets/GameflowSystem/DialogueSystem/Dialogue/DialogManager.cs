@@ -113,8 +113,6 @@ namespace TypocryphaGameflow
             input_field.ActivateInputField();
             //spacebar_icon_vn.SetActive(true);
             //curr_spacebar_animator.Play("anim_key_spacebar_no");
-            //if (d_item.input_display != null)
-            //    input_display = Instantiate(d_item.input_display, transform);
             if (prompts != null && prompts.Length > 0)
             {
                 populateChoices(prompts);
@@ -150,7 +148,6 @@ namespace TypocryphaGameflow
             input_field.gameObject.SetActive(false);
             input_display_choices.SetActive(false);
             input_field.text = "";
-            //Destroy(input_display);
             isInput = false;
             PlayerDataManager.main.setData(PlayerDataManager.defaultPromptKey, answer);
             if (!string.IsNullOrEmpty(variableToSaveTo))

@@ -106,11 +106,7 @@ public class DialogueManager : MonoBehaviour
         setEnabled(true);
 
         DialogBox d_box = null;
-        //else if (curr_dialogue.GetType() == typeof(DialogueItemChat)) {
-        //    //clearLog (ChatView);
-        //    GameObject d_obj = Instantiate(dialogue_box_prefab, ChatContent);
-        //    d_box = d_obj.GetComponent<DialogueBox>();
-        //} else if (curr_dialogue.GetType() == typeof(DialogueItemAN)) {
+        //else ifelse if (curr_dialogue.GetType() == typeof(DialogueItemAN)) {
         //    //clearLog (ANView);
         //    GameObject d_obj = Instantiate(an_dialouge_box_prefab, ANContent);
         //    d_box = d_obj.GetComponent<DialogueBox>();
@@ -160,8 +156,8 @@ public class DialogueManager : MonoBehaviour
         }
         TypocryphaGameflow.GameflowManager.main.next();
     }
- 
 
+    #region Move to new Manager
     // Forces next line
     public void forceNextLine()
     {
@@ -170,6 +166,7 @@ public class DialogueManager : MonoBehaviour
         //if (!nextLine() && !isInterrupt)
             finishDialogue();
     }
+    #endregion
 
     // Changes scroll delay of currently scrolling dialogue
     public void setScrollDelay(float delay)

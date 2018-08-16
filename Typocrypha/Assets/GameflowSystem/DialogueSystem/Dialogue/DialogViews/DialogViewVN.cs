@@ -25,10 +25,13 @@ public class DialogViewVN : DialogView
 
     public override DialogBox newDialog(DialogItem data)
     {
+        #region Check Arguments
         DialogItemVN item = data as DialogItemVN;
         if(item == null)
             throw new System.Exception("Incorrect Type of dialog Item for the VN view mode (requires DialogItemVN)");
-        nameText.text = item.speakerName;
+        #endregion
+
+        nameText.text = item.speakerName; //TODO ADD PARSING HERE?
         if(item.mcSprite != null)
             mcSprite.sprite = item.mcSprite;
         if (item.mcSprite != null)

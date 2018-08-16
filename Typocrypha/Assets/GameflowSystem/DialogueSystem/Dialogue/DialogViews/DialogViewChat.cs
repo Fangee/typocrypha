@@ -13,17 +13,31 @@ public class DialogViewChat : DialogView
 
     public override DialogBox newDialog(DialogItem data)
     {
-        //if (d_item.GetType () == typeof(DialogueItemChat)) {
-        //	DialogueItemChat c_item = (DialogueItemChat)d_item;
-        //	// Set icon
-        //	left_icon.sprite = c_item.left_icon;
-        //	right_icon.sprite = c_item.right_icon;
-        //	// Display appropriate icon
-        //	if (c_item.icon_side == IconSide.LEFT || c_item.icon_side == IconSide.BOTH)
-        //		left_icon.enabled = true;
-        //	if (c_item.icon_side == IconSide.RIGHT || c_item.icon_side == IconSide.BOTH)
-        //		right_icon.enabled = true;
-        //	// Add text with speaker's name, and offset text display
+        #region Check Arguments
+        DialogItemChat item = data as DialogItemChat;
+        if (item == null)
+            throw new System.Exception("Incorrect Type of dialog Item for the Chat view mode (requires DialogItemChat)");
+        #endregion
+
+        #region Instantiate and initialize new Dialog box
+        GameObject obj = GameObject.Instantiate(dialogBoxPrefab);
+        SpriteRenderer leftIcon = obj.transform.GetChild(1).GetComponent<SpriteRenderer>();
+        SpriteRenderer rightIcon = obj.transform.GetChild(2).GetComponent<SpriteRenderer>();
+        if (item.iconSide == IconSide.LEFT || item.iconSide == IconSide.BOTH)
+        {
+            leftIcon.sprite = item.leftIcon;
+            leftIcon.enabled = true;
+        }
+        if (item.iconSide == IconSide.RIGHT || item.iconSide == IconSide.BOTH)
+        {
+            rightIcon.sprite = item.rightIcon;
+            rightIcon.enabled = true;
+        }
+        DialogBox dialogBox = obj.GetComponent<DialogBox>();
+        #endregion
+
+        //MAY BE RELEVANT (USED TO BE IN THE DIALOG BOX)
+        //	// Add text with speaker's name, and offset text display (ADD TO ITEM's TEXT)
         //	int offset = 0;
         //	if (d_item.speaker_name != null && d_item.speaker_name.Length != 0) {
         //		text = d_item.speaker_name + "\n" + text;
@@ -35,7 +49,12 @@ public class DialogViewChat : DialogView
         //	// Set box height
         //	setBoxHeight ();
         //} 
-        throw new System.NotImplementedException();
+
+        //TODO ACTUAL INTEGRATION WITH CHAT WINDOW STUFF (SEE DEPRECATED DIALOGUE MANAGER - CHAT WINDOW CONTROLS region)
+        throw new System.NotImplementedException("Chat window integration not finished");
+
+        dialogBox.dialogueBoxStart(item);
+        return dialogBox;
     }
 
     public override void setEnabled(bool e)

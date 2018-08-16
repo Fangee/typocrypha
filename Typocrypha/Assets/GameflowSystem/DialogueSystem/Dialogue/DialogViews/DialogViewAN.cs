@@ -11,7 +11,23 @@ public class DialogViewAN : DialogView
 
     public override DialogBox newDialog(DialogItem data)
     {
-        throw new System.NotImplementedException();
+        #region Check Arguments
+        DialogItemAN item = data as DialogItemAN;
+        if (item == null)
+            throw new System.Exception("Incorrect Type of dialog Item for the AN view mode (requires DialogItemAN)");
+        #endregion
+
+        #region Instantiate and initialize new Dialog box
+        GameObject obj = GameObject.Instantiate(dialogBoxPrefab);
+        DialogBox dialogBox = obj.GetComponent<DialogBox>();
+        #endregion
+
+        //TODO ACTUAL INTEGRATION WITH AN VIEW STUFF
+
+        throw new System.NotImplementedException("AN view integration not finished");
+
+        dialogBox.dialogueBoxStart(item);
+        return dialogBox;
     }
 
     public override void setEnabled(bool e)
