@@ -12,8 +12,7 @@ namespace TypocryphaGameflow
         public override string GetID { get { return ID; } }
 
         public override string Title { get { return "VN Dialog"; } }
-        public override Vector2 MinSize { get { return new Vector2(300, 60); } }
-        public override bool AutoLayout { get { return true; } }
+        public override Vector2 MinSize { get { return new Vector2(250, 60); } }
 
         public string expression;
 
@@ -39,16 +38,16 @@ namespace TypocryphaGameflow
             EditorGUILayout.BeginVertical("Box");
             GUILayout.BeginHorizontal();
             GUILayout.Label(new GUIContent("Name", tooltip_name), labelStyle, GUILayout.Width(45f));
-            characterName = EditorGUILayout.TextField("", characterName, GUILayout.Width(235f));
+            characterName = EditorGUILayout.TextField("", characterName, GUILayout.Width(MinSize.x - 65));
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
             GUILayout.Label(new GUIContent("Expr", tooltip_expr), labelStyle, GUILayout.Width(45f));
-            expression = EditorGUILayout.TextField("", expression, GUILayout.Width(235f));
+            expression = EditorGUILayout.TextField("", expression, GUILayout.Width(MinSize.x - 65));
             GUILayout.EndHorizontal();
             GUILayout.Space(3);
             GUILayout.EndVertical();
 
-            GUILayout.Label(new GUIContent("Dialogue Text", tooltip_text), NodeEditorGUI.nodeLabelBoldCentered);
+            GUILayout.Label(new GUIContent("Dialog Text", tooltip_text), NodeEditorGUI.nodeLabelBoldCentered);
 
             GUILayout.BeginHorizontal();
             GUIStyle dialogTextStyle = new GUIStyle(EditorStyles.textArea);
