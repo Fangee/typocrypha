@@ -19,7 +19,8 @@ public class DialogBox : MonoBehaviour {
 	float text_pad; // Padding between text and dialogue box
 
 	// Initializes dialogue box and starts text scroll
-	public void dialogueBoxStart(DialogItem lineData) {
+	public void dialogueBoxStart(DialogItem lineData)
+    {
         // Remove old text effects
         FXTextEffect[] fx_arr = fx_text.gameObject.GetComponents<FXTextEffect>();
         foreach (FXTextEffect fx in fx_arr)
@@ -27,10 +28,10 @@ public class DialogBox : MonoBehaviour {
             fx_text.removeEffect(fx);
             Destroy(fx);
         }
-        //Initialize line data and parse text
+        // Initialize line data and parse text
         d_item = lineData;
         text = DialogueParser.main.parse(lineData, this);
-        //Initialize text padding
+        // Initialize text padding and set box height
         text_pad = fx_text.rectTransform.offsetMin.y - fx_text.rectTransform.offsetMax.y;
 		// Initialize color effect to hide text
 		set_color = fx_text.gameObject.AddComponent<FXTextColor> ();
@@ -49,7 +50,8 @@ public class DialogBox : MonoBehaviour {
 	}
 
 	// Dumps all remaining text
-	public IEnumerator dumpText(Ref<bool> finished) {
+	public IEnumerator dumpText(Ref<bool> finished)
+    {
 		TextEvents.main.stopEvents();
 		TextEvents.main.reset ();
 		yield return TextEvents.main.finishUp (d_item.text_events);
@@ -61,14 +63,16 @@ public class DialogBox : MonoBehaviour {
 	}
 
 	// Starts scrolling text
-	IEnumerator startTextScrollCR() {
+	IEnumerator startTextScrollCR()
+    {
 		yield return new WaitWhile (() => cr_scroll != null);
 		cr_scroll = StartCoroutine (textScrollCR ());
         cr_init = null;
 	}
 
 	// Scrolls text character by character
-	IEnumerator textScrollCR() {
+	IEnumerator textScrollCR()
+    {
 		Debug.Log (text);
 		int offset = set_color.chars [0];
 		int cnt = set_color.chars[0];
@@ -92,7 +96,8 @@ public class DialogBox : MonoBehaviour {
 	}
 
 	// Checks for and plays text events
-	IEnumerator checkEvents(int start_pos) {
+	IEnumerator checkEvents(int start_pos)
+    {
 		if (start_pos >= d_item.text_events.Length)
 			yield break;
 		List<TextEvent> evt_list = d_item.text_events [start_pos];
@@ -106,9 +111,10 @@ public class DialogBox : MonoBehaviour {
 		}
 	}
 
-	// Sets dialogue box's height based on text. Also updates dialogue window height
-	void setBoxHeight() {
+	// Sets dialogue box's height based on text. Returns new height
+	public float setBoxHeight()
+    {
 		rect_tr.sizeDelta = new Vector2 (rect_tr.sizeDelta.x, text_pad + fx_text.preferredHeight);
-		//DialogueManager.main.expandWindow (rect_tr.sizeDelta.y); (NEEDS REVAMP (IN AN/CHAT VIEW?)
-	}
+        return rect_tr.sizeDelta.y;
+    }
 }

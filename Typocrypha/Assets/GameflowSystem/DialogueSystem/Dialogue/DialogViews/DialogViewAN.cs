@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class DialogViewAN : DialogView
 {
-    public GameObject dialogBoxPrefab;
+    public GameObject dialogBoxPrefab; // Prefab for dialogue box
+    public GameObject screenFrame; // Screen frame object
     public RectTransform ANContent; // Content of scroll view
     public GameObject spacebar_icon_an; // Spacebar icon AN view
     public Animator animator_spacebar_an; // Spacebar icon key animator
@@ -18,13 +19,9 @@ public class DialogViewAN : DialogView
         #endregion
 
         #region Instantiate and initialize new Dialog box
-        GameObject obj = GameObject.Instantiate(dialogBoxPrefab);
+        GameObject obj = GameObject.Instantiate(dialogBoxPrefab, ANContent);
         DialogBox dialogBox = obj.GetComponent<DialogBox>();
         #endregion
-
-        //TODO ACTUAL INTEGRATION WITH AN VIEW STUFF
-
-        throw new System.NotImplementedException("AN view integration not finished");
 
         dialogBox.dialogueBoxStart(item);
         return dialogBox;
@@ -33,5 +30,12 @@ public class DialogViewAN : DialogView
     public override void setEnabled(bool e)
     {
         gameObject.SetActive(e);
+        screenFrame.SetActive(!e);
+    }
+
+    // Clear all AN dialogue
+    public void clearLog()
+    {
+        
     }
 }

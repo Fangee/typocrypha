@@ -5,11 +5,21 @@ using UnityEngine.UI;
 
 public class DialogViewChat : DialogView
 {
-    public GameObject dialogBoxPrefab;
+    public GameObject dialogBoxPrefab; // Prefab for dialogue box object
     public RectTransform ChatContent; // Content of chat scroll view (contains dialogue boxes)
-    public Scrollbar scroll_bar; // Scroll bar of chat dialogue window
+    public Scrollbar scrollBar; // Scroll bar of chat dialogue window
     public GameObject spacebar_icon_chat; // Spacebar icon CHAT view
     public Animator animator_spacebar_chat; // Spacebar icon key animator
+    public float defaultWindowHeight = 16f; // Default chat window height
+    public float scrollBarTime = 0.15f; // Time it takes to automatically update window
+
+    float windowHeight; // Height of chat content window
+    Coroutine slideScrollCR; // Coroutine for smoothly sliding scroll bar
+    
+    void Awake()
+    {
+        windowHeight = defaultWindowHeight;
+    }
 
     public override DialogBox newDialog(DialogItem data)
     {
@@ -20,9 +30,9 @@ public class DialogViewChat : DialogView
         #endregion
 
         #region Instantiate and initialize new Dialog box
-        GameObject obj = GameObject.Instantiate(dialogBoxPrefab);
-        SpriteRenderer leftIcon = obj.transform.GetChild(1).GetComponent<SpriteRenderer>();
-        SpriteRenderer rightIcon = obj.transform.GetChild(2).GetComponent<SpriteRenderer>();
+        GameObject obj = GameObject.Instantiate(dialogBoxPrefab, ChatContent);
+        Image leftIcon = obj.transform.Find("DialogueLeftIcon").GetComponent<Image>();
+        Image rightIcon = obj.transform.Find("DialogueRightIcon").GetComponent<Image>();
         if (item.iconSide == IconSide.LEFT || item.iconSide == IconSide.BOTH)
         {
             leftIcon.sprite = item.leftIcon;
@@ -36,29 +46,70 @@ public class DialogViewChat : DialogView
         DialogBox dialogBox = obj.GetComponent<DialogBox>();
         #endregion
 
-        //MAY BE RELEVANT (USED TO BE IN THE DIALOG BOX)
-        //	// Add text with speaker's name, and offset text display (ADD TO ITEM's TEXT)
-        //	int offset = 0;
-        //	if (d_item.speaker_name != null && d_item.speaker_name.Length != 0) {
-        //		text = d_item.speaker_name + "\n" + text;
-        //		offset += d_item.speaker_name.Length + 1;
-        //	}
-        //	fx_text.text = text;
-        //	set_color.chars [0] = offset;
-        //	set_color.chars [1] += offset;
-        //	// Set box height
-        //	setBoxHeight ();
-        //} 
-
-        //TODO ACTUAL INTEGRATION WITH CHAT WINDOW STUFF (SEE DEPRECATED DIALOGUE MANAGER - CHAT WINDOW CONTROLS region)
-        throw new System.NotImplementedException("Chat window integration not finished");
-
         dialogBox.dialogueBoxStart(item);
+        setWindowSize(dialogBox.setBoxHeight() + ChatContent.GetComponent<VerticalLayoutGroup>().spacing);
         return dialogBox;
     }
 
     public override void setEnabled(bool e)
     {
         gameObject.SetActive(e);
+        if (!e)
+        {
+            clearLog();
+        }
     }
+
+    // Remove all chat messages
+    public void clearLog()
+    {
+        bool skipSpacer = true; // Skip initial spacer object
+        foreach (Transform child in ChatContent)
+        {
+            if (skipSpacer)
+            {
+                skipSpacer = false;
+                continue;
+            }
+            Destroy(child.gameObject);
+        }
+        resetWindowSize();
+    }
+
+    #region chat window height management
+    // Increases window size to fit new dialogue box
+    void setWindowSize(float boxHeight)
+    {
+        windowHeight += boxHeight;
+        ChatContent.sizeDelta = new Vector2(ChatContent.sizeDelta.x, windowHeight);
+        stopSlideScroll();
+        slideScrollCR = StartCoroutine(slideScroll());
+    }
+    
+    // Resets height of chat window
+    void resetWindowSize()
+    {
+        windowHeight = defaultWindowHeight;
+        ChatContent.sizeDelta = new Vector2(ChatContent.sizeDelta.x, windowHeight);
+        stopSlideScroll();
+    }
+
+    // Stops slide adjustment of window
+    void stopSlideScroll()
+    {
+        if (slideScrollCR != null) StopCoroutine(slideScrollCR);
+    }
+
+    // Coroutine that smoothly slides scroll bar to bottom
+    IEnumerator slideScroll()
+    {
+        yield return new WaitUntil(() => scrollBar.value > Mathf.Epsilon);
+        float vel = 0;
+        while (scrollBar.value > Mathf.Epsilon)
+        {
+            scrollBar.value = Mathf.SmoothDamp(scrollBar.value, 0, ref vel, scrollBarTime);
+            yield return null;
+        }
+    }
+    #endregion
 }
