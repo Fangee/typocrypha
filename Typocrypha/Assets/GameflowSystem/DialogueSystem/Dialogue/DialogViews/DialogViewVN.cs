@@ -18,9 +18,9 @@ public class DialogViewVN : DialogView
     {
         GameObject obj = GameObject.Instantiate(dialogBoxPrefab, transform, false);
         dialogBox = obj.GetComponent<DialogBox>();
-        nameText = obj.GetComponentInChildren<FXText>();
-        mcSprite = obj.transform.GetChild(2).GetComponent<SpriteRenderer>();
-        codecSprite = obj.transform.GetChild(4).GetComponent<SpriteRenderer>();
+        nameText = obj.transform.Find("NameText").GetComponent<FXText>();
+        mcSprite = obj.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>();
+        codecSprite = obj.transform.Find("CodecSprite").GetComponent<SpriteRenderer>();
     }
 
     public override DialogBox newDialog(DialogItem data)
