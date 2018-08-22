@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38d08267ce4612e46b6285fa57b73434, type: 3}
+  m_Name: Illyia
+  m_EditorClassIdentifier: 
+  aliases:
+    _items:
+    - Illyia
+    - Lya
+    - i
+  poses:
+    _keys:
+    - Default
+    _values:
+    - {fileID: 21300000, guid: 87192c159aa1f5145994ec067499e03f, type: 3}
+  expressions:
+    _keys:
+    - Concerned
+    - Laughing
+    _values:
+    - {fileID: 21300000, guid: 1cb12cf2aa0f8354889a12975ba91660, type: 3}
+    - {fileID: 21300000, guid: 36725aa8120d6dd4695c00afc82975c9, type: 3}
+  codecs:
+    _keys:
+    - Battle
+    - Concerned
+    _values:
+    - {fileID: 21300000, guid: 39fe996ed4d550949ab90d49c276a10a, type: 3}
+    - {fileID: 21300000, guid: d236054b44201604eb0b8dfa6f46515f, type: 3}
+  chat_icon: {fileID: 21300000, guid: 63393d0a276169c4c93392e6f32404b1, type: 3}
+  talk_sfx: {fileID: 8300000, guid: 25a2b8a5142f06d4bba8c3253665d671, type: 3}

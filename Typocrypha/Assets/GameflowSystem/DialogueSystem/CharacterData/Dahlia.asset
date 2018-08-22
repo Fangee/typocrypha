@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38d08267ce4612e46b6285fa57b73434, type: 3}
+  m_Name: Dahlia
+  m_EditorClassIdentifier: 
+  aliases:
+    _items:
+    - Dahlia
+    - Darya
+    - d
+  poses:
+    _keys:
+    - Default
+    _values:
+    - {fileID: 21300000, guid: 85368b1116b9d71448f8abfd6e85d361, type: 3}
+  expressions:
+    _keys:
+    - Concerned
+    - Laughing
+    - Perish
+    - Unamused
+    _values:
+    - {fileID: 21300000, guid: 8ffd404dc48b57b4187711d4af420b6d, type: 3}
+    - {fileID: 21300000, guid: 5d2af10c79323b648862e1ec87a42829, type: 3}
+    - {fileID: 21300000, guid: b78015f2ff1af644f82496816f0d5bc6, type: 3}
+    - {fileID: 21300000, guid: ee7c9e3c78c6c75439e32ef0d8de5266, type: 3}
+  codecs:
+    _keys:
+    - Default
+    - Concerned
+    _values:
+    - {fileID: 21300000, guid: 624bae82c1577704796043d602af7d55, type: 3}
+    - {fileID: 21300000, guid: 868cf9423f4030a42a2995e577935b68, type: 3}
+  chat_icon: {fileID: 21300000, guid: d7a1fb6562d253a49aa57e44759094ea, type: 3}
+  talk_sfx: {fileID: 8300000, guid: ea659f5dfa7913240ab68b95e7fd22c5, type: 3}
