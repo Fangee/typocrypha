@@ -7,14 +7,15 @@ public enum Pronoun { FEMININE, INCLUSIVE, FIRSTNAME, MASCULINE };
 // container class for player info needed for cutscenes
 public class PlayerDataManager : MonoBehaviour {
 	public static PlayerDataManager main = null; // global static ref
-    public const string defaultPromptKey = "prompt";
+
 	public Sprite[] player_sprites; // all options for player sprites
 	public SpriteRenderer player_sprite_r; // where player sprite is rendered
     public Dictionary<string, string> player_data_map;
 
-    public string PlayerName { get { return getData("player-name"); } }
+    public string PlayerName { get { return getData("player-name"); } set {setData("player-name", value);} }
+    private const string lastInputKey = "prompt";
+    public string LastPlayerInput { get { return getData(lastInputKey); } set { setData(lastInputKey, value); } }
 	[HideInInspector] public Pronoun player_pronoun { get; set; }
-	[HideInInspector] public Sprite player_sprite { get; set; }
 
     private void Awake() {
         player_data_map = new Dictionary<string, string> { };
@@ -41,12 +42,6 @@ public class PlayerDataManager : MonoBehaviour {
         else
             player_data_map.Add(key, data);
     }
-
-    // set player's sprite and update image in dialogue box
-    public void setSprite(int ind) {
-		player_sprite = player_sprites [ind];
-		player_sprite_r.sprite = player_sprite;
-	}
 
 	// set player's pronoun
 	public void setPronoun(int ind) {

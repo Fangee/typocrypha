@@ -162,7 +162,7 @@ namespace TypocryphaGameflow
         {
             string value = string.Empty;
             if (exprType == controlExpressionType.Last_Input)
-                value = PlayerDataManager.main.getData(PlayerDataManager.defaultPromptKey);
+                value = PlayerDataManager.main.LastPlayerInput;
             else
                 value = PlayerDataManager.main.getData(variableName);
             foreach(var brCase in _cases)

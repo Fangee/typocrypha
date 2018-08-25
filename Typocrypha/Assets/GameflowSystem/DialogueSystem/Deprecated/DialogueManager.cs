@@ -10,7 +10,7 @@ public class DialogueManager : MonoBehaviour
 
     public float scroll_time; // Time it takes to automatically update window
     public float scroll_delay = 0.01f; // Time it takes for text to scroll 
-    public float scroll_scale; // Scroll delay multiplier
+    public float scroll_scale = 1f; // Scroll delay multiplier
     public float top_space; // Space between top of window and dialogue
 
     [HideInInspector] public bool pause_scroll; // Pause text scroll
@@ -39,7 +39,6 @@ public class DialogueManager : MonoBehaviour
         default_window_height = top_space;
         history = new List<DialogBox>();
         input = false;
-        scroll_scale = 1f;
     }
 
     void Update()
@@ -127,7 +126,7 @@ public class DialogueManager : MonoBehaviour
         // Add dialogue box to history (only really works for Chat items)
         history.Add(d_box);
         // Start scroll
-        d_box.scroll_delay = scroll_delay;
+        //d_box.scrollDelay = scroll_delay;
         //Coroutine d_box_init = d_box.dialogueBoxStart(lineData);
         //Prompt input if necessary
     }
@@ -171,7 +170,7 @@ public class DialogueManager : MonoBehaviour
     // Changes scroll delay of currently scrolling dialogue
     public void setScrollDelay(float delay)
     {
-        history[history.Count - 1].scroll_delay = delay;
+        //history[history.Count - 1].scrollDelay = delay;
     }
 
     #region chat window controls

@@ -149,7 +149,7 @@ namespace TypocryphaGameflow
             input_display_choices.SetActive(false);
             input_field.text = "";
             isInput = false;
-            PlayerDataManager.main.setData(PlayerDataManager.defaultPromptKey, answer);
+            PlayerDataManager.main.LastPlayerInput = answer;
             if (!string.IsNullOrEmpty(variableToSaveTo))
             {
                 PlayerDataManager.main.setData(variableToSaveTo, answer);

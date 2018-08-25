@@ -36,7 +36,7 @@ public class DialogViewVN : DialogView
             mcSprite.sprite = item.mcSprite;
         if (item.mcSprite != null)
             codecSprite.sprite = item.codecSprite;
-        dialogBox.dialogueBoxStart(item);
+        dialogBox.dialogBoxStart(item);
         return dialogBox;
     }
 

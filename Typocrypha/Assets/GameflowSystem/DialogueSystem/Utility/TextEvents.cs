@@ -126,7 +126,7 @@ public class TextEvents : MonoBehaviour {
 	// resets all the parameters that might have been changed
 	public void reset() {
 		main_camera.transform.position = new Vector3 (0,0,-10);
-		DialogueManager.main.pause_scroll = false;
+		DialogBox.PauseScroll = false;
 		DialogueManager.main.block_input = false;
 	}
 
@@ -195,9 +195,9 @@ public class TextEvents : MonoBehaviour {
 	// causes dialogue and cutscene to pause: it is recommended to also block
 	// input: [0]: float, length of pause
 	IEnumerator pause(string[] opt) {
-		DialogueManager.main.pause_scroll = true; // pause text scroll
+		DialogBox.PauseScroll = true; // pause text scroll
 		yield return new WaitForSeconds (float.Parse (opt [0]));
-		DialogueManager.main.pause_scroll = false;
+		DialogBox.PauseScroll = false;
 	}
 
 	// fades the screen in or out
@@ -338,14 +338,15 @@ public class TextEvents : MonoBehaviour {
 	// sets scroll delay of main dialogue text scroll (BROKEN)
 	// input: [0]: float, new delay amount in seconds
 	IEnumerator setScrollDelay(string[] opt) {
-		DialogueManager.main.setScrollDelay(float.Parse (opt [0]));
+        throw new System.NotImplementedException();
+		//DialogueManager.main.setScrollDelay(float.Parse (opt [0]));
 		yield return true;
 	}
 
-	// set scroll delay scale (BROKEN)
+	// set scroll delay scale
 	// input: [0]: float, new scroll scale amount
 	IEnumerator setScrollScale(string[] opt) {
-		DialogueManager.main.scroll_scale = float.Parse (opt [0]);
+		DialogBox.ScrollScale = float.Parse (opt [0]);
 		yield return true;
 	}
 		
@@ -497,7 +498,7 @@ public class TextEvents : MonoBehaviour {
 	// Sets name from last inputed text
 	// Input: NONE
 	IEnumerator setName(string[] opt) {
-		PlayerDataManager.main.setData("player-name", DialogueManager.main.answer);
+		PlayerDataManager.main.PlayerName = PlayerDataManager.main.LastPlayerInput;
 		yield return true;
 	}
 
@@ -507,7 +508,7 @@ public class TextEvents : MonoBehaviour {
     IEnumerator setInfo(string[] opt)
     {
         if (opt.Length == 1)
-            PlayerDataManager.main.setData(opt[0], DialogueManager.main.answer);
+            PlayerDataManager.main.setData(opt[0], PlayerDataManager.main.LastPlayerInput);
         else if (opt.Length == 2)
             PlayerDataManager.main.setData(opt[0], opt[1]);
         else

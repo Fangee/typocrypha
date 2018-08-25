@@ -14,15 +14,15 @@ public class FloatText : MonoBehaviour {
 		DialogBox d_box = GetComponent<DialogBox> ();
 		d_box.is_floating = true;
 		d_box.talk_sfx = false;
-		d_box.scroll_delay = 0.07f;
 		d_item.text = text;
 		d_box.d_item = d_item;
+        d_box.scrollDelay = 0.07f;
 		// parse effects and macros
 		d_box.text = DialogueParser.main.parse (d_item, d_box);
 		foreach(FXTextEffect text_effect in d_item.fx_text_effects)
 			d_box.fx_text.addEffect (text_effect);
 		// start text scroll
-		d_box.dialogueBoxStart (null);
+		d_box.dialogBoxStart (null);
 		// wait for dialogue to finish scrolling
 		yield return new WaitUntil (() => d_box.cr_scroll != null);
 		yield return new WaitWhile (() => d_box.cr_scroll != null);

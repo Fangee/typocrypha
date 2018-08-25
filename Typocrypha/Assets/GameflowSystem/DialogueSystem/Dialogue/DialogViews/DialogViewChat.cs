@@ -46,7 +46,7 @@ public class DialogViewChat : DialogView
         DialogBox dialogBox = obj.GetComponent<DialogBox>();
         #endregion
 
-        dialogBox.dialogueBoxStart(item);
+        dialogBox.dialogBoxStart(item);
         setWindowSize(dialogBox.setBoxHeight() + ChatContent.GetComponent<VerticalLayoutGroup>().spacing);
         return dialogBox;
     }

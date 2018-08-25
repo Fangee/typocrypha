@@ -16,11 +16,13 @@ public class Pause : MonoBehaviour {
 
 	public SetResolution resolution_script;
 
-	public MusicSlider slider_music;
-	public SfxSlider slider_sfx;
-	public ScrollSlider slider_scroll;
+    #region Slider UI
+    public Slider slider_music;
+	public Slider slider_sfx;
+	public Slider slider_scroll;
+    #endregion
 
-	public Sprite[] images_toggles;
+    public Sprite[] images_toggles;
 	public Sprite[] images_buttons;
 	public Image[] settings_toggles;
 	public Image[] settings_buttons;
@@ -62,10 +64,18 @@ public class Pause : MonoBehaviour {
 			pos_screenmode = 1;
 		else
 			pos_screenmode = 0;
+
+        #region Initialize Sliders
+        slider_music.onValueChanged.AddListener(delegate { AudioPlayer.main.MusicVolume = slider_music.value; });
+        slider_music.value = AudioPlayer.main.SfxVolume;
+        slider_sfx.onValueChanged.AddListener(delegate { AudioPlayer.main.SfxVolume = slider_sfx.value; } );
+        slider_sfx.value = AudioPlayer.main.SfxVolume;
+        slider_scroll.onValueChanged.AddListener(delegate { DialogBox.ScrollScale = 1.1f - slider_scroll.value; });
+        #endregion
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 		if (Input.GetKeyDown(pauseKey) && (block_pause == false))
         {
 			gamePause = !gamePause;
@@ -102,22 +112,22 @@ public class Pause : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.LeftArrow) && gamePause) {
 			switch(pos_menu_v){
 			case 0:
-				if(slider_music.slider.value != 0) AudioPlayer.main.playSFX ("sfx_type_key");
+				if(slider_music.value != 0) AudioPlayer.main.playSFX ("sfx_type_key");
 				else AudioPlayer.main.playSFX ("sfx_backspace");
-				slider_music.slider.value -= 0.1f;
-				slider_music.slider.value = Mathf.Max (slider_music.slider.value, 0.0f);
+				slider_music.value -= 0.1f;
+				slider_music.value = Mathf.Max (slider_music.value, 0.0f);
 				break;
 			case 1:
-				if(slider_sfx.slider.value != 0) AudioPlayer.main.playSFX ("sfx_type_key");
+				if(slider_sfx.value != 0) AudioPlayer.main.playSFX ("sfx_type_key");
 				else AudioPlayer.main.playSFX ("sfx_backspace");
-				slider_sfx.slider.value -= 0.1f;
-				slider_sfx.slider.value = Mathf.Max (slider_sfx.slider.value, 0.0f);
+				slider_sfx.value -= 0.1f;
+				slider_sfx.value = Mathf.Max (slider_sfx.value, 0.0f);
 				break;
 			case 2:
-				if(slider_scroll.slider.value != 0) AudioPlayer.main.playSFX ("sfx_type_key");
+				if(slider_scroll.value != 0) AudioPlayer.main.playSFX ("sfx_type_key");
 				else AudioPlayer.main.playSFX ("sfx_backspace");
-				slider_scroll.slider.value -= 0.1f;
-				slider_scroll.slider.value = Mathf.Max (slider_scroll.slider.value, 0.0f);
+				slider_scroll.value -= 0.1f;
+				slider_scroll.value = Mathf.Max (slider_scroll.value, 0.0f);
 				break;
 			case 3:
 				if (pos_resolution != 0)
@@ -142,22 +152,22 @@ public class Pause : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.RightArrow) && gamePause) {
 			switch (pos_menu_v) {
 			case 0:
-				if(slider_music.slider.value != 1) AudioPlayer.main.playSFX ("sfx_type_key");
+				if(slider_music.value != 1) AudioPlayer.main.playSFX ("sfx_type_key");
 				else AudioPlayer.main.playSFX ("sfx_backspace");
-				slider_music.slider.value += 0.1f;
-				slider_music.slider.value = Mathf.Min (slider_music.slider.value, 1.0f);
+				slider_music.value += 0.1f;
+				slider_music.value = Mathf.Min (slider_music.value, 1.0f);
 				break;
 			case 1:
-				if(slider_sfx.slider.value != 1) AudioPlayer.main.playSFX ("sfx_type_key");
+				if(slider_sfx.value != 1) AudioPlayer.main.playSFX ("sfx_type_key");
 				else AudioPlayer.main.playSFX ("sfx_backspace");
-				slider_sfx.slider.value += 0.1f;
-				slider_sfx.slider.value = Mathf.Min (slider_sfx.slider.value, 1.0f);
+				slider_sfx.value += 0.1f;
+				slider_sfx.value = Mathf.Min (slider_sfx.value, 1.0f);
 				break;
 			case 2:
-				if(slider_scroll.slider.value != 1) AudioPlayer.main.playSFX ("sfx_type_key");
+				if(slider_scroll.value != 1) AudioPlayer.main.playSFX ("sfx_type_key");
 				else AudioPlayer.main.playSFX ("sfx_backspace");
-				slider_scroll.slider.value += 0.1f;
-				slider_scroll.slider.value = Mathf.Min (slider_scroll.slider.value, 1.0f);
+				slider_scroll.value += 0.1f;
+				slider_scroll.value = Mathf.Min (slider_scroll.value, 1.0f);
 				break;
 			case 3:
 				if (pos_resolution != 9)
@@ -216,11 +226,11 @@ public class Pause : MonoBehaviour {
 		}
 
 		string newvalue;
-		newvalue = Mathf.RoundToInt(slider_music.slider.value * 100) + "%";
+		newvalue = Mathf.RoundToInt(slider_music.value * 100) + "%";
 		texts_toggles [0].text = newvalue;
-		newvalue = Mathf.RoundToInt(slider_sfx.slider.value * 100) + "%";
+		newvalue = Mathf.RoundToInt(slider_sfx.value * 100) + "%";
 		texts_toggles [1].text = newvalue;
-		newvalue = Mathf.RoundToInt(slider_scroll.slider.value * 100) + "%";
+		newvalue = Mathf.RoundToInt(slider_scroll.value * 100) + "%";
 		texts_toggles [2].text = newvalue;
 		selected_res = resolution_map[pos_resolution];
 		texts_toggles [3].text = selected_res [0] + " x " + selected_res [1];
@@ -258,10 +268,10 @@ public class Pause : MonoBehaviour {
 				new_arrow_pos = new Vector3 (arrowimg.rectTransform.localPosition.x, 268, arrowimg.rectTransform.localPosition.z);
 				arrowimg.rectTransform.localPosition = new_arrow_pos;
 				if (isRightArrow == 1) {
-					if (slider_music.slider.value == 1)
+					if (slider_music.value == 1)
 						arrowimg.rectTransform.localPosition = go_away;
 				} else {
-					if (slider_music.slider.value == 0)
+					if (slider_music.value == 0)
 						arrowimg.rectTransform.localPosition = go_away;
 				}
 				break;
@@ -269,10 +279,10 @@ public class Pause : MonoBehaviour {
 				new_arrow_pos = new Vector3 (arrowimg.rectTransform.localPosition.x, 188, arrowimg.rectTransform.localPosition.z);
 				arrowimg.rectTransform.localPosition = new_arrow_pos;
 				if (isRightArrow == 1) {
-					if (slider_sfx.slider.value == 1)
+					if (slider_sfx.value == 1)
 						arrowimg.rectTransform.localPosition = go_away;
 				} else {
-					if (slider_sfx.slider.value == 0)
+					if (slider_sfx.value == 0)
 						arrowimg.rectTransform.localPosition = go_away;
 				}
 				break;
@@ -280,10 +290,10 @@ public class Pause : MonoBehaviour {
 				new_arrow_pos = new Vector3 (arrowimg.rectTransform.localPosition.x, 108, arrowimg.rectTransform.localPosition.z);
 				arrowimg.rectTransform.localPosition = new_arrow_pos;
 				if (isRightArrow == 1) {
-					if (slider_scroll.slider.value == 1)
+					if (slider_scroll.value == 1)
 						arrowimg.rectTransform.localPosition = go_away;
 				} else {
-					if (slider_scroll.slider.value == 0)
+					if (slider_scroll.value == 0)
 						arrowimg.rectTransform.localPosition = go_away;
 				}
 				break;

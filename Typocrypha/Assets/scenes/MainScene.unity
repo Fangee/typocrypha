@@ -651,7 +651,6 @@ GameObject:
   m_Component:
   - component: {fileID: 49320116}
   - component: {fileID: 49320118}
-  - component: {fileID: 49320117}
   m_Layer: 0
   m_Name: ScrollSlider
   m_TagString: Untagged
@@ -680,18 +679,6 @@ RectTransform:
   m_AnchoredPosition: {x: 136, y: 0}
   m_SizeDelta: {x: 340, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &49320117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 49320115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 083d9b19e9ae0fd419d27b1eb2fcc575, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 49320118}
 --- !u!114 &49320118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8553,9 +8540,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block_pause: 0
   resolution_script: {fileID: 1149999595}
-  slider_music: {fileID: 1399568609}
-  slider_sfx: {fileID: 1500259170}
-  slider_scroll: {fileID: 49320117}
+  slider_music: {fileID: 1399568608}
+  slider_sfx: {fileID: 1500259171}
+  slider_scroll: {fileID: 49320118}
   images_toggles:
   - {fileID: 21300000, guid: d7c28d0110cdda148af1989ea76dc7db, type: 3}
   - {fileID: 21300000, guid: bf49ab25e4926734e95a4986f7363fd3, type: 3}
@@ -15761,7 +15748,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1399568607}
   - component: {fileID: 1399568608}
-  - component: {fileID: 1399568609}
   m_Layer: 0
   m_Name: MusicSlider
   m_TagString: Untagged
@@ -15849,18 +15835,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &1399568609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1399568606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8146d17dfd45604099fb6cb2a0fd024, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 1399568608}
 --- !u!1 &1406872515
 GameObject:
   m_ObjectHideFlags: 0
@@ -17013,7 +16987,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1500259169}
   - component: {fileID: 1500259171}
-  - component: {fileID: 1500259170}
   m_Layer: 0
   m_Name: SFXSlider
   m_TagString: Untagged
@@ -17042,18 +17015,6 @@ RectTransform:
   m_AnchoredPosition: {x: 136, y: 0}
   m_SizeDelta: {x: 340, y: 52}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1500259170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1500259168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9ff0b7169367614aadbf07fa65f9294, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 1500259171}
 --- !u!114 &1500259171
 MonoBehaviour:
   m_ObjectHideFlags: 0

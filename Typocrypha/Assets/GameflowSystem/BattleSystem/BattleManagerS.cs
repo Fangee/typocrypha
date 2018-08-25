@@ -347,14 +347,15 @@ public class BattleManagerS : MonoBehaviour {
     {
         sceneQueue.Add(interruptScene);
     }
-    //Play Dialogue scene from queue
+    //Play Dialogue scene from queue (CURRENTLY OUT OF DATE)
     public bool playSceneFromQueue()
     {
         if (sceneQueue.Count > 0)
         {
             setPause(true);
-            DialogueManager.main.setEnabled(true);
-            DialogueManager.main.startInterrupt(sceneQueue[0]);
+            //DialogueManager.main.setEnabled(true);
+            //DialogueManager.main.startInterrupt(sceneQueue[0]);
+            throw new System.NotImplementedException();
             sceneQueue.RemoveAt(0);
             return true;
         }
