@@ -52,14 +52,6 @@ namespace TypocryphaGameflow
                 next();
             //Else currNode.process() == BaseNode.ProcessFlag.Wait (wait for callback from BattleManager.cs or DialogueManager.cs to continue)
         }
-        // Jump to item
-        public void jump(GameObject targetGameFlowItem, bool goToNext = true)
-        {
-            Debug.Log("Gameflow: Jumping to " + targetGameFlowItem.name);
-            //curr_gameflow = targetGameFlowItem.transform.parent.GetComponent<Gameflow>();
-            //curr_gameflow.curr_item = targetGameFlowItem.transform.GetSiblingIndex() - 1;
-            //if (goToNext) next();
-        }
     }
     [System.Serializable]
     public class GameManagers

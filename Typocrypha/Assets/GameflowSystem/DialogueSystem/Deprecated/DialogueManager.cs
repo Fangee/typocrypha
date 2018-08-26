@@ -18,14 +18,14 @@ public class DialogueManager : MonoBehaviour
     [HideInInspector] public bool is_dump; // Is text being dumped?
     [HideInInspector] public string answer; // Player's input
 
-    float window_height; // Height of dialogue history
-    float default_window_height; // Default Height of dialogue history (to reset)
-    Coroutine slide_scroll_cr; // Coroutine that smoothly adjusts window
-    Coroutine dump_cr; // Coroutine that dumps text
+    //float window_height; // Height of dialogue history
+    //float default_window_height; // Default Height of dialogue history (to reset)
+    //Coroutine slide_scroll_cr; // Coroutine that smoothly adjusts window
+    //Coroutine dump_cr; // Coroutine that dumps text
     List<DialogBox> history; // List of all dialogue boxes
-    string stringEdit = "";
+    //string stringEdit = "";
 
-    bool input; // Are we waiting for input?
+    //bool input; // Are we waiting for input?
 
     private bool isInterrupt = false; //is this dialogue event a oneshot (interrupts, etc)
 
@@ -35,10 +35,7 @@ public class DialogueManager : MonoBehaviour
         else Destroy(this);
         pause_scroll = false;
         block_input = false;
-        window_height = top_space;
-        default_window_height = top_space;
         history = new List<DialogBox>();
-        input = false;
     }
 
     void Update()

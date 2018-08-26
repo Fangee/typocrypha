@@ -42,10 +42,10 @@ namespace TypocryphaGameflow
         {
             //Initialize the viewmode dictionary
             viewModes = new Dictionary<DialogViewType, DialogView>{
-            { DialogViewType.VN, VNView },
-            { DialogViewType.AN,  ANView },
-            { DialogViewType.Chat, ChatView },
-        };
+                { DialogViewType.VN, VNView },
+                { DialogViewType.AN,  ANView },
+                { DialogViewType.Chat, ChatView },
+            };
             //Get the individual choice prompts from the parent gameobject
             individual_choices = input_display_choices.GetChildren().ToArray();
             //Initialize in AN mode
@@ -70,6 +70,11 @@ namespace TypocryphaGameflow
         public void setEnabled(bool e)
         {
             enabled = e;
+        }
+
+        public void setPaused(bool p)
+        {
+
         }
         #endregion
 
