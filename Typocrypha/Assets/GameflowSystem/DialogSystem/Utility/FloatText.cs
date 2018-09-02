@@ -18,7 +18,7 @@ public class FloatText : MonoBehaviour {
 		d_box.d_item = d_item;
         d_box.scrollDelay = 0.07f;
 		// parse effects and macros
-		d_box.text = DialogueParser.main.parse (d_item, d_box);
+		d_box.text = DialogParser.main.parse (d_item, d_box);
 		foreach(FXTextEffect text_effect in d_item.fx_text_effects)
 			d_box.fx_text.addEffect (text_effect);
 		// start text scroll

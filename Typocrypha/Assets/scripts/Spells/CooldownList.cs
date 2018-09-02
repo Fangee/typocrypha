@@ -45,7 +45,7 @@ public class CooldownList : MonoBehaviour {
         while (curr_time.Obj < finish_time)
         {
 			yield return new WaitForEndOfFrame ();
-			yield return new WaitWhile (() => BattleManagerS.main.pause);
+			yield return new WaitWhile (() => BattleManagerS.main.battlePause);
 			curr_time.Obj += Time.deltaTime;
         }
         spells.Remove(c);

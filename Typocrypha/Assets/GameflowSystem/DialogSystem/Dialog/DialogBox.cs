@@ -39,7 +39,7 @@ public class DialogBox : MonoBehaviour {
         }
         // Initialize line data and parse text
         d_item = lineData;
-        text = DialogueParser.main.parse(lineData, this);
+        text = DialogParser.main.parse(lineData, this);
         // Initialize color effect to hide text
         set_color = fx_text.gameObject.AddComponent<FXTextColor>();
         set_color.color = fx_text.color;

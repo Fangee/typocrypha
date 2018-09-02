@@ -4,17 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
+public interface IPausable
+{
+    bool Paused { get; set; }
+}
+
 public class Pause : MonoBehaviour {
 	public static Pause main = null; // Global static reference
-	bool gamePause;
+    public TypocryphaGameflow.DialogManager dialogManager;
+    public BattleManagerS battleManager;
+
     Color dimCol;
     string pauseKey = "escape";
     GameObject hideChild;
-    bool battlePause = false; //saves battlemanager pause state
-    bool blockTextboxInput = false;
+
 	public bool block_pause = false;
 
 	public SetResolution resolution_script;
+
+    #region Pause Menu UI
 
     #region Slider UI
     public Slider slider_music;
@@ -29,20 +37,60 @@ public class Pause : MonoBehaviour {
 	public Text[] texts_toggles;
 	public Image[] toggle_arrows;
 	public GameObject select_instructions;
+    #endregion
 
-	int pos_menu_h = 0;
+    int pos_menu_h = 0;
 	int pos_menu_v = 0;
-	int pos_music;
-	int pos_sfx;
-	int pos_scroll;
 	int pos_resolution;
 	int pos_screenmode;
 	int[] selected_res;
 	Dictionary<int, int[]> resolution_map;
 
+    #region Pausing Code
+    private List<IPausable> toPause;
+    bool _pause;
+    public bool Paused
+    {
+        get { return _pause; }
+        set
+        {
+            if (_pause == value)
+                return;
+            _pause = value;
+            if (_pause) { pause(); }
+            else { unpause(); }
+        }
+    }
+    private void pause()
+    {
+        Time.timeScale = 0;
+        dimCol = BattleEffects.main.dimmer.color;
+        BattleEffects.main.setDim(true);
+        AudioPlayer.main.pauseSFX();
+        hideChild.SetActive(true);
+        foreach (IPausable p in toPause)
+            p.Paused = true;
+        //Cursor.visible = true;
+        //Cursor.lockState = CursorLockMode.None;
+        AudioPlayer.main.playSFX("sfx_scanner_open");
+    }
+    private void unpause()
+    {
+        Time.timeScale = 1;
+        BattleEffects.main.dimmer.color = dimCol;
+        AudioPlayer.main.unpauseSFX();
+        hideChild.SetActive(false);
+        foreach (IPausable p in toPause)
+            p.Paused = false;
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        AudioPlayer.main.playSFX("sfx_scanner_close");
+    }
+    #endregion
+
     void Start () {
 		if (main == null) main = this;
-        gamePause = false;
+        _pause = false;
         Time.timeScale = 1;
         hideChild = transform.GetChild(0).gameObject;
 		Cursor.visible = false;
@@ -64,7 +112,7 @@ public class Pause : MonoBehaviour {
 			pos_screenmode = 1;
 		else
 			pos_screenmode = 0;
-
+        toPause = new List<IPausable>{ dialogManager, battleManager };
         #region Initialize Sliders
         slider_music.onValueChanged.AddListener(delegate { AudioPlayer.main.MusicVolume = slider_music.value; });
         slider_music.value = AudioPlayer.main.SfxVolume;
@@ -77,39 +125,10 @@ public class Pause : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 		if (Input.GetKeyDown(pauseKey) && (block_pause == false))
-        {
-			gamePause = !gamePause;
-
-            if (gamePause)
-            {
-                Time.timeScale = 0;
-                battlePause = BattleManagerS.main.pause;
-                BattleManagerS.main.setPause(true);
-                dimCol = BattleEffects.main.dimmer.color;
-                BattleEffects.main.setDim(true);
-                blockTextboxInput = DialogueManager.main.block_input;
-                DialogueManager.main.block_input = true;
-                AudioPlayer.main.pauseSFX();
-				hideChild.SetActive (true);
-				//Cursor.visible = true;
-				//Cursor.lockState = CursorLockMode.None;
-				AudioPlayer.main.playSFX("sfx_scanner_open");
-            }
-            else
-            {
-                Time.timeScale = 1;
-                BattleManagerS.main.setPause(battlePause);
-                BattleEffects.main.dimmer.color = dimCol;
-                DialogueManager.main.block_input = blockTextboxInput;
-                AudioPlayer.main.unpauseSFX();
-				hideChild.SetActive (false);
-				//Cursor.visible = false;
-				//Cursor.lockState = CursorLockMode.Locked;
-				AudioPlayer.main.playSFX("sfx_scanner_close");
-            }
-        }
-
-		if (Input.GetKeyDown(KeyCode.LeftArrow) && gamePause) {
+			Paused = !Paused;
+        if (!Paused)
+            return;
+		if (Input.GetKeyDown(KeyCode.LeftArrow) && _pause) {
 			switch(pos_menu_v){
 			case 0:
 				if(slider_music.value != 0) AudioPlayer.main.playSFX ("sfx_type_key");
@@ -149,7 +168,7 @@ public class Pause : MonoBehaviour {
 			}
 
 		}
-		if (Input.GetKeyDown (KeyCode.RightArrow) && gamePause) {
+		if (Input.GetKeyDown (KeyCode.RightArrow) && _pause) {
 			switch (pos_menu_v) {
 			case 0:
 				if(slider_music.value != 1) AudioPlayer.main.playSFX ("sfx_type_key");
@@ -189,19 +208,19 @@ public class Pause : MonoBehaviour {
 			}
 		}
 			
-		if (Input.GetKeyDown (KeyCode.UpArrow) && gamePause) {
+		if (Input.GetKeyDown (KeyCode.UpArrow) && _pause) {
 			if(pos_menu_v != 0) AudioPlayer.main.playSFX ("sfx_enemy_select");
 			--pos_menu_v;
 			pos_menu_v = Mathf.Max (pos_menu_v, 0);
 			pos_menu_h = 0;
 		}
-		if (Input.GetKeyDown (KeyCode.DownArrow) && gamePause) {
+		if (Input.GetKeyDown (KeyCode.DownArrow) && _pause) {
 			if(pos_menu_v != 5) AudioPlayer.main.playSFX ("sfx_enemy_select");
 			++pos_menu_v;
 			pos_menu_v = Mathf.Min (pos_menu_v, 5);
 		}
 
-		if ((Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown (KeyCode.Return)) && gamePause) {
+		if ((Input.GetKeyDown (KeyCode.Space) || Input.GetKeyDown (KeyCode.Return)) && _pause) {
 			if (pos_menu_v == 5) {
 				if (pos_menu_h == 0) {
 					AudioPlayer.main.playSFX ("sfx_enter");
@@ -329,9 +348,5 @@ public class Pause : MonoBehaviour {
 
 	void ExitGame(){
 		Application.Quit ();
-	}
-
-	public bool isPaused(){
-		return gamePause;
 	}
 }

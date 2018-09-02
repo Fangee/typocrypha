@@ -6,8 +6,8 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 
 // Preprocesses all macros and effects in a dialogue item
-public class DialogueParser : MonoBehaviour {
-	public static DialogueParser main = null; // Global static reference
+public class DialogParser : MonoBehaviour {
+	public static DialogParser main = null; // Global static reference
 
 	Dictionary<string,FXTextEffect> text_effect_map;
 	Stack<FXTextEffect> effect_stack;

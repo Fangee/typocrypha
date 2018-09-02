@@ -8,7 +8,7 @@ public class BattleField {
     //Properties
 
     public ICaster Player { get { return player_arr[player_ind]; } }
-    public bool Pause { get { return callback.pause; } set { callback.pause = value; } }
+    public bool Pause { get { return callback.battlePause; } set { callback.battlePause = value; } }
 
     public enum FieldPosition
     {

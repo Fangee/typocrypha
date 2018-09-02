@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BattleManagerS : MonoBehaviour {
+public class BattleManagerS : MonoBehaviour, IPausable {
     public static BattleManagerS main = null;
     public Player player;
     public TrackTyping trackTyping;
@@ -25,8 +25,6 @@ public class BattleManagerS : MonoBehaviour {
 	public GameObject screenframe_vn;
 	public GameObject screenframe_battle;
 	public GameObject screenframe_eye;
-	//public SpriteRenderer dimmer; // sprite used to cover screen for fade/dim effects
-    [HideInInspector] public bool pause = true;
 
     [HideInInspector] public bool thirdEyeActive = false;
     private Coroutine thirdEyeCr = null;
@@ -39,6 +37,29 @@ public class BattleManagerS : MonoBehaviour {
     private List<SpellData> frenzySpells = new List<SpellData>();
 
     private BattleWave Wave { get { return waves[curr_wave]; } }
+
+    //Flag to pause during battle (for enemy attacks, etc (NOT FOR PAUSE MENU)
+    [HideInInspector] public bool battlePause = true;
+
+    #region IPausable
+    private bool _pause = false;
+    public bool Paused
+    {
+        get
+        {
+            return battlePause;
+        }
+
+        set
+        {
+            if (!enabled && !_pause)
+                return;
+            _pause = value;
+            trackTyping.enabled = !value;
+        }
+    }
+    #endregion
+
     private int curr_wave = -1;
     private bool wave_started = false;
     private BattleWave[] waves;
@@ -70,8 +91,8 @@ public class BattleManagerS : MonoBehaviour {
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.BackQuote)) // toggle pause
-            setPause(!pause);
-        if (pause) return;
+            Paused = !Paused;
+        if (battlePause) return;
         int old_ind = field.target_ind;
 
         //TARGET RETICULE CODE 
@@ -134,11 +155,6 @@ public class BattleManagerS : MonoBehaviour {
         trackTyping.enabled = e;
         player_ui.SetActive(e);
     }
-    public void setPause(bool p)
-    {
-        pause = p;
-        trackTyping.enabled = !p;
-    }
 
     #region Main Battle Flow
     // start battle scene
@@ -164,7 +180,7 @@ public class BattleManagerS : MonoBehaviour {
     IEnumerator finishBattlePrep()
     {
         // play battle transition
-		pause = true;
+		battlePause = true;
 		typocrypha_object.SetActive (false);
 		screenframe_vn.SetActive (false);
 		screenframe_eye.transform.localScale = new Vector3 (0, 0, 0);
@@ -204,7 +220,7 @@ public class BattleManagerS : MonoBehaviour {
     {
         //Moved from next wave coroutine
         yield return new WaitForSeconds(1f);
-        setPause(true);
+        Paused = true;
         resetInterruptData();
         Debug.Log("starting wave: " + Wave.Title);
         //Delete old enemies
@@ -226,7 +242,7 @@ public class BattleManagerS : MonoBehaviour {
             AudioPlayer.main.playMusic(Wave.Music);
         field.lastCaster = BattleField.FieldPosition.NONE;
         if (checkInterrupts() == false)
-            setPause(false);
+            Paused = false;
         wave_started = true;
     }
     // show victory screen after all waves are done
@@ -259,7 +275,7 @@ public class BattleManagerS : MonoBehaviour {
     // end the battle and transition to the next GameflowItem
     public void endBattle()
     {
-        setPause(true);
+        Paused = true;
         foreach (Enemy enemy in field.enemy_arr)
         {
             if (enemy != null) GameObject.Destroy(enemy.gameObject);
@@ -340,7 +356,7 @@ public class BattleManagerS : MonoBehaviour {
             nextWave();
         }
         else if (!checkInterrupts())
-            setPause(false);
+            Paused = false;
     }
     //Add Scene to trigger queue
     public void addSceneToQueue(GameObject interruptScene)
@@ -352,7 +368,7 @@ public class BattleManagerS : MonoBehaviour {
     {
         if (sceneQueue.Count > 0)
         {
-            setPause(true);
+            Paused = true;
             //DialogueManager.main.setEnabled(true);
             //DialogueManager.main.startInterrupt(sceneQueue[0]);
             throw new System.NotImplementedException();
@@ -523,7 +539,7 @@ public class BattleManagerS : MonoBehaviour {
         debugFrenzyCastTime.gameObject.SetActive(true);
         debugFrenzyCastInstructions.gameObject.SetActive(true);
         frenzySpells.Clear();
-        pause = true;//don't stop typing
+        battlePause = true;//don't stop typing
         //Play any fenzy cast start effects
         AudioPlayer.main.playSFX("sfx_slowmo_2");
         BattleEffects.main.setDim(true);
@@ -543,7 +559,7 @@ public class BattleManagerS : MonoBehaviour {
         d.isHit = true;
         d.setLocationData(field.enemy_arr[1], field.Player);
         d.vsElement = Elements.vsElement.NEUTRAL;
-        setPause(true);
+        Paused = true;
         BattleEffects.main.setDim(false);
         debugFrenzyCastTime.gameObject.SetActive(false);
         debugFrenzyCastInstructions.gameObject.SetActive(false);

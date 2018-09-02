@@ -57,11 +57,8 @@ public class TextEvents : MonoBehaviour {
 		evt_queue = new Queue<Coroutine> ();
 		text_event_map = new Dictionary<string, TextEventDel> {
 			{"screen-shake", screenShake},
-			{"block", block},
 			{"pause", pause},
 			{"fade", fade},
-			{"next", next},
-			{"next-delay", nextDelay},
 			{"center-text-scroll", centerTextScroll},
 			{"center-text-fade", centerTextFade},
 			{"play-sfx", playSFX},
@@ -71,7 +68,6 @@ public class TextEvents : MonoBehaviour {
 			{"stop-bgm", stopMusic},
 			{"fade-music", fadeMusic},
 			{"fade-bgm", fadeMusic},
-			{"set-scroll-delay", setScrollDelay},
 			{"set-scroll-scale", setScrollScale},
 			{"set-bg", setBG},
 			{"hide-text-box", hideTextBox},
@@ -81,8 +77,6 @@ public class TextEvents : MonoBehaviour {
             {"sole-highlight-codec", soleHighlightCodec},
 			{"remove-character", removeCharacter},
 			{"remove-all-character", removeAllCharacter},
-            {"evil-eye", evilEye},
-            {"prompt", prompt},
 			{"glitch", glitch},
 			{"set-name", setName},
             {"set-info", setInfo},
@@ -127,7 +121,6 @@ public class TextEvents : MonoBehaviour {
 	public void reset() {
 		main_camera.transform.position = new Vector3 (0,0,-10);
 		DialogBox.PauseScroll = false;
-		DialogueManager.main.block_input = false;
 	}
 
 	// finishes up persistent events that might have been skipped (like removing a character)
@@ -183,15 +176,6 @@ public class TextEvents : MonoBehaviour {
 		cam_tr.position = new Vector3(0,0,-10);
 	}
 		
-	// blocks or unblocks input
-	// input: [t|f], 't' blocks input until 'f' unblocks
-	IEnumerator block(string[] opt) {
-		if (opt [0].CompareTo ("t") == 0)
-			 DialogueManager.main.block_input = true;
-		else DialogueManager.main.block_input = false;
-		yield return true;
-	}
-
 	// causes dialogue and cutscene to pause: it is recommended to also block
 	// input: [0]: float, length of pause
 	IEnumerator pause(string[] opt) {
@@ -230,21 +214,6 @@ public class TextEvents : MonoBehaviour {
 				dimmer.color = new Color (r, g, b, alpha);
 			}
 		}
-	}
-
-	// forces next line of dialogue (SHOULD BE PLACED AT END OF LINE)
-	// input: none
-	IEnumerator next(string[] opt) {
-		DialogueManager.main.forceNextLine ();
-		yield return true;
-	}
-
-	// forces next line of dialogue after a delay
-	// input: [0]: float, delay time in seconds
-	IEnumerator nextDelay(string[] opt) {
-		Debug.Log ("nextDelay:" + opt[0]);
-		yield return new WaitForSeconds (float.Parse (opt [0]));
-		DialogueManager.main.forceNextLine ();
 	}
 
 	// NON_OPERATIONAL
@@ -335,14 +304,6 @@ public class TextEvents : MonoBehaviour {
 		yield return true;
 	}
 
-	// sets scroll delay of main dialogue text scroll (BROKEN)
-	// input: [0]: float, new delay amount in seconds
-	IEnumerator setScrollDelay(string[] opt) {
-        throw new System.NotImplementedException();
-		//DialogueManager.main.setScrollDelay(float.Parse (opt [0]));
-		yield return true;
-	}
-
 	// set scroll delay scale
 	// input: [0]: float, new scroll scale amount
 	IEnumerator setScrollScale(string[] opt) {
@@ -372,82 +333,21 @@ public class TextEvents : MonoBehaviour {
 		yield return true;
 	}
 
-	// DEPRECATED
-	// prompts player to enter something into TYPORCYPHA; resumes on enter
-	// input: [0]: string, type of prompt
-	IEnumerator prompt(string[] opt) {
-		/*
-		CutsceneManager.main.enabled = false;
-		dialogue_box.SetActive (false);
-		track_typing.enabled = true;
-		is_prompt = true;
-		GameObject display = null; // visual display for prompt (instructions, usually)
-		string type = opt [0].Trim ().ToLower ();
-
-		// initialize prompt
-		switch (type) {
-		case "sprite":
-			display = Instantiate (Resources.Load<GameObject> ("prefabs/PlayerSpriteChoice"));
-			break;
-		case "pronoun":
-			display = Instantiate (Resources.Load<GameObject> ("prefabs/PlayerPronounChoice"));
-			break;
-		}
-
-		while (is_prompt) {
-			// wait for uder to press ENTER
-			yield return new WaitWhile (() => is_prompt);
-			// check result
-			string choice = prompt_input.Trim ().ToLower ();
-			switch (type) {
-			case "name": // set name
-				// CHECK NAME PARAMETERS
-				PlayerDialogueInfo.main.player_name = prompt_input;
-				break;
-			case "sprite": // set sprite (choice between 'a' and 'b')
-				if (choice.CompareTo ("a") == 0) { PlayerDialogueInfo.main.setSprite (0); } 
-				else if (choice.CompareTo ("b") == 0) { PlayerDialogueInfo.main.setSprite (1); } 
-				else { 
-					// INDICATE BAD INPUT
-					is_prompt = true; // keep asking for input
-				}
-				break;
-			case "pronoun": // set pronoun (options go from 1-4)
-				if (choice.CompareTo("a") == 0) { PlayerDialogueInfo.main.setPronoun (0); }
-				else if (choice.CompareTo("b") == 0) { PlayerDialogueInfo.main.setPronoun (1); }
-				else if (choice.CompareTo("c") == 0) { PlayerDialogueInfo.main.setPronoun (2); }
-				else if (choice.CompareTo("d") == 0) { PlayerDialogueInfo.main.setPronoun (3); }
-				else {
-					// INDICATE BAD INPUT
-					is_prompt = true; // keep asking for input
-				}
-				break;
-			}
-		}
-
-		if (display != null) Destroy (display);
-		prompt_input = "";
-		track_typing.enabled = false;
-		dialogue_box.SetActive (true);
-		CutsceneManager.main.enabled = true;
-		CutsceneManager.main.forceNextLine ();
-		*/
-		yield return true;
-	}
-
 	// Allows for highlighting a character
 	// input: [0]: string, name of sprite to highlight
 	//        [1]: float, amount to highlight (multiplier to tint)
 	IEnumerator highlightCharacter(string[] opt) {
-		//DialogueManager.main.highlightCharacter(opt[0], float.Parse(opt[1]));
+        //DialogueManager.main.highlightCharacter(opt[0], float.Parse(opt[1]));
+        throw new System.NotImplementedException("Obsolete unless integrated with charactermanager");
 		yield return true;
 	}
 
 	// Highlights one character and unhighlights all others (0.5 greyscale)
 	// input: [0]: string, name of sprite to highlight
 	IEnumerator soleHighlight(string[] opt) {
-		//DialogueManager.main.soleHighlight (opt [0]);
-		yield return true;
+        //DialogueManager.main.soleHighlight (opt [0]);
+        throw new System.NotImplementedException("Obsolete unless integrated with charactermanager");
+        yield return true;
 	}
 
     // Highlights one character and unhighlights all others (0.5 greyscale)
@@ -455,28 +355,25 @@ public class TextEvents : MonoBehaviour {
     IEnumerator soleHighlightCodec(string[] opt)
     {
         //DialogueManager.main.soleHighlightCodec();
+        throw new System.NotImplementedException("Obsolete unless integrated with charactermanager");
         yield return true;
     }
 
     // Removes a specific character from the scene
     // input: [0]: string, name of sprite to remove
     IEnumerator removeCharacter(string[] opt) {
-		//DialogueManager.main.removeCharacter (opt [0]);
-		yield return true;
+        //DialogueManager.main.removeCharacter (opt [0]);
+        throw new System.NotImplementedException("Obsolete unless integrated with charactermanager");
+        yield return true;
 	}
 
 	// Removes all characters from a scene
 	// input: NONE
 	IEnumerator removeAllCharacter(string[] opt) {
-		//DialogueManager.main.removeAllCharacter ();
-		yield return true;
-	}
-
-	// NON_OPERATIONAL
-    IEnumerator evilEye(string[] opt) {
-        //AnimationPlayer.main.playAnimation("Evil_Eye", new Vector3(-5, 0, 0), 2f);
+        //DialogueManager.main.removeAllCharacter ();
+        throw new System.NotImplementedException("Obsolete unless integrated with charactermanager");
         yield return true;
-    }
+	}
 
 	// NON_OPERATIONAL
 	IEnumerator glitch(string[] opt)
@@ -538,15 +435,16 @@ public class TextEvents : MonoBehaviour {
 	// clears the chat and AN text logs
 	// input: [0]: [chat|an], 'chat' clears chat log, 'an' clears AN log
 	IEnumerator clearTextLog(string[] opt){
-		//if (opt [0].CompareTo ("chat") == 0) {
-		//	Debug.Log ("chat log flushed");
-		//	DialogueManager.main.clearChatLog();
-		//}
-		//else if (opt [0].CompareTo ("an") == 0){
-		//	Debug.Log ("an log flushed");
-		//	DialogueManager.main.clearANLog();
-		//}
-		yield return true;
+        //if (opt [0].CompareTo ("chat") == 0) {
+        //	Debug.Log ("chat log flushed");
+        //	DialogueManager.main.clearChatLog();
+        //}
+        //else if (opt [0].CompareTo ("an") == 0){
+        //	Debug.Log ("an log flushed");
+        //	DialogueManager.main.clearANLog();
+        //}
+        throw new System.NotImplementedException("Obsolete unless integrated with dialogManager, should be deprecated");
+        yield return true;
 	}
 
 	// scrolls floating text at a specific location

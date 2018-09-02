@@ -6,7 +6,8 @@ using UnityEngine.UI;
 namespace TypocryphaGameflow
 {
     //New Manager for Dialog scenes
-    public class DialogManager : MonoBehaviour
+    //TODO: Spacebar control, autoscroll
+    public class DialogManager : MonoBehaviour, IPausable
     {
         public enum DialogViewType
         {
@@ -14,6 +15,23 @@ namespace TypocryphaGameflow
             AN,
             Chat,
         }
+
+        #region IPausable
+        private bool _paused = true;
+        public bool Paused
+        {
+            get { return _paused; }
+            set
+            {
+                if (!enabled && !_paused)
+                    return;
+                _paused = value;
+                enabled = !value;
+                if (isInput)
+                    input_field.enabled = !value;
+            }
+        }
+        #endregion
 
         private DialogViewType currentMode;
         private Dictionary<DialogViewType, DialogView> viewModes;
@@ -70,11 +88,6 @@ namespace TypocryphaGameflow
         public void setEnabled(bool e)
         {
             enabled = e;
-        }
-
-        public void setPaused(bool p)
-        {
-
         }
         #endregion
 

@@ -24,7 +24,7 @@ public class BITimed : BattleInterruptTrigger{
         while (!finished)
         {
             yield return new WaitForEndOfFrame();
-            yield return new WaitWhile(() => BattleManagerS.main.pause);
+            yield return new WaitWhile(() => BattleManagerS.main.battlePause);
             curr_time += Time.deltaTime;
             if (curr_time > seconds)
                 finished = true;

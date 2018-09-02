@@ -175,7 +175,7 @@ public class Enemy : MonoBehaviour, ICaster {
     }
     IEnumerator formChangeGraphics()
     {
-        yield return new WaitWhile(() => BattleManagerS.main.pause);
+        yield return new WaitWhile(() => BattleManagerS.main.battlePause);
 		enemy_animator.Play("enemy_pixelate_in");
 		yield return new WaitForSeconds (1f);
 		change_sprite.changeSprite(sprite_bundle.LoadAsset<Sprite>(stats.sprite_path));
@@ -218,13 +218,13 @@ public class Enemy : MonoBehaviour, ICaster {
         atk_time = castManager.spellDict.getCastingTime(curr_spell, stats.speed);   //Get casting time
 		while (!is_dead) {
 			yield return new WaitForEndOfFrame ();
-			yield return new WaitWhile (() => BattleManagerS.main.pause);
+			yield return new WaitWhile (() => BattleManagerS.main.battlePause);
             while(is_stunned)//Stop attack loop from continuing while the enemy is stunned
             {
 				yield return new WaitForEndOfFrame();
 				transform.position = (Vector3)original_pos + (Vector3)(Random.insideUnitCircle * 0.05f);
 				enemy_sprite.material = material_glitch;
-				yield return new WaitWhile (() => BattleManagerS.main.pause);
+				yield return new WaitWhile (() => BattleManagerS.main.battlePause);
 				curr_stagger_time += Time.deltaTime;
                 if (curr_stagger_time >= stagger_time)//End stun if time up
                 {
@@ -240,7 +240,7 @@ public class Enemy : MonoBehaviour, ICaster {
 				enemy_animator.Play("enemy_swell_cast");
                 fullBarFX(); // notify player of full bar
                 yield return new WaitForSeconds(1f);
-                yield return new WaitWhile(() => BattleManagerS.main.pause);
+                yield return new WaitWhile(() => BattleManagerS.main.battlePause);
                 //Only attack if stunned, else perfect stagger
                 if (is_stunned)
                     attack_in_progress = false;

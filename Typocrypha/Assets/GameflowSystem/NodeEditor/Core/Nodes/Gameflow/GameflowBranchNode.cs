@@ -178,7 +178,7 @@ namespace TypocryphaGameflow
         private bool checkTextCase(string pattern, string value)
         {
             //(old answer leniency: answerString = answer.Trim().ToLower().Replace(".", string.Empty).Replace("?", string.Empty).Replace("!", string.Empty);
-            return value.Trim().ToLower() == DialogueParser.main.substituteMacros(pattern).Trim().ToLower();
+            return value.Trim().ToLower() == DialogParser.main.substituteMacros(pattern).Trim().ToLower();
         }
 
         public override ProcessFlag process(GameManagers managers)

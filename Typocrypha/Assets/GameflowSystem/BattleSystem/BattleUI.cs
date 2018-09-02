@@ -142,7 +142,7 @@ public class BattleUI : MonoBehaviour
         wave_transition_banner.GetComponent<Animator>().enabled = false;
         wave_title_text.GetComponent<Animator>().enabled = false;
         wave_transition_title.GetComponent<Animator>().enabled = false;
-		yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.Space) && !Pause.main.isPaused()));
+		yield return new WaitUntil(() => (Input.GetKeyDown(KeyCode.Space) && !Pause.main.Paused));
         wave_banner_text.GetComponent<Animator>().enabled = true;
         wave_transition_banner.GetComponent<Animator>().enabled = true;
         wave_title_text.GetComponent<Animator>().enabled = true;

@@ -83,7 +83,7 @@ namespace TypocryphaGameflow
         public void speak(string characterName)
         {
             Character chara;
-            if(characters.TryGetValue(DialogueParser.main.substituteMacros(characterName), out chara))
+            if(characters.TryGetValue(DialogParser.main.substituteMacros(characterName), out chara))
             {
                 soleHighlight(chara);
                 AudioPlayer.main.setVoiceSFX(chara.data.talk_sfx);

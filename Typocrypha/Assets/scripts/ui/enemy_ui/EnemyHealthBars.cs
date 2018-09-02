@@ -57,7 +57,7 @@ public class EnemyHealthBars : MonoBehaviour {
 			if (health_bars [i] != null) {
 				Enemy enemy = BattleManagerS.main.field.enemy_arr [i];
 				if (!enemy.Is_dead) {
-                    if (!BattleManagerS.main.pause) {
+                    if (!BattleManagerS.main.battlePause) {
                         health_bars[i].setValue(((float)enemy.Curr_hp / (float)enemy.Stats.max_hp));
                         health_bars[i].setAfterimage(((float)enemy.Curr_hp / (float)enemy.Stats.max_hp));
                     }
