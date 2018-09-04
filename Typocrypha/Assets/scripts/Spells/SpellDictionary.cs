@@ -575,6 +575,7 @@ public class SpellDictionary : MonoBehaviour
 }
 //A class containing the required data to cast a spell (with defined keyword composition)
 //Also contains associated methods like ToString()
+[System.Serializable]
 public class SpellData
 {
     //Make a new spelldata instance with root keyword root, element keyword prefix, and style keyword suffix
