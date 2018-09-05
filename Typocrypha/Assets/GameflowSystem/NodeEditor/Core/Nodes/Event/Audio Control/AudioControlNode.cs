@@ -18,12 +18,11 @@ namespace TypocryphaGameflow
         public override Vector2 MinSize { get { return new Vector2(200, 20); } }
 
         [SerializeField]
-        List<GUIUtilities.ReorderableListItem> _events;
-        public GUIUtilities.ReorderableItemList events = null;
+        List<GUIUtilities.ReorderableListItemBase> _events;
+        public GUIUtilities.ReorderableItemList<EventData> events = null;
         protected override void OnCreate()
         {
-            _events = new List<GUIUtilities.ReorderableListItem>();
-            _events.Add((GUIUtilities.ReorderableListItem)ScriptableObject.CreateInstance(typeof(PlayBgm)));
+            _events = new List<GUIUtilities.ReorderableListItemBase>();
         }
 
         public override ScriptableObject[] GetScriptableObjects()
@@ -34,13 +33,13 @@ namespace TypocryphaGameflow
         protected override void CopyScriptableObjects(Func<ScriptableObject, ScriptableObject> replaceSO)
         {
             for (int i = 0; i < _events.Count; ++i)
-                _events[i] = (GUIUtilities.ReorderableListItem)replaceSO(_events[i]);
+                _events[i] = (GUIUtilities.ReorderableListItemBase)replaceSO(_events[i]);
         }
 
         public override void NodeGUI()
         {
             if (events == null)
-                events = new GUIUtilities.ReorderableItemList(_events, true, true, new GUIContent("Events", ""));
+                events = new GUIUtilities.ReorderableItemList<EventData>(_events, true, true, new GUIContent("Events", ""));
             GUILayout.Space(5);
             GUILayout.BeginVertical("box");
             events.doLayoutList();
@@ -52,11 +51,8 @@ namespace TypocryphaGameflow
             throw new NotImplementedException();
         }
 
-        public abstract class EventData : GUIUtilities.ReorderableListItem
+        public abstract class EventData : GUIUtilities.ReorderableListItemBase
         {
-            public static IEnumerable<System.Type> subtypes = GUIUtilities.ReflectiveEnumerator.GetAllSubclassTypes<EventData>();
-            public override IEnumerable<Type> Subtypes { get { return subtypes; } }
-
             public override float getHeight(int index)
             {
                 return EditorGUIUtility.singleLineHeight + 1;
