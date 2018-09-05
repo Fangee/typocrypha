@@ -8,7 +8,7 @@ namespace TypocryphaGameflow
     public class StopBgm : AudioControlNode.EventData
     {
         public float fadeOut;
-        public override void doGUI(Rect rect, int index, IList list)
+        public override void doGUI(Rect rect)
         {
             Rect UIrect = new Rect(rect);
             UIrect.height = EditorGUIUtility.singleLineHeight;
@@ -17,7 +17,7 @@ namespace TypocryphaGameflow
             GUI.Label(new Rect(UIrect.position, new Vector2(60, EditorGUIUtility.singleLineHeight)), new GUIContent("Fade Time"), GUI.skin.label);
             fadeOut = EditorGUI.FloatField(new Rect(UIrect.position + new Vector2(65, 0), new Vector2(UIrect.width - 65, EditorGUIUtility.singleLineHeight)), fadeOut);
         }
-        public override float getHeight(int index)
+        public override float getHeight()
         {
             return EditorGUIUtility.singleLineHeight * 2 + 2;
         }

@@ -8,7 +8,7 @@ namespace TypocryphaGameflow
     public class PlaySfx : AudioControlNode.EventData
     {
         public AudioClip bgm;
-        public override void doGUI(Rect rect, int index, IList list)
+        public override void doGUI(Rect rect)
         {
             Rect UIrect = new Rect(rect);
             UIrect.height = EditorGUIUtility.singleLineHeight;
@@ -16,7 +16,7 @@ namespace TypocryphaGameflow
             UIrect.y += EditorGUIUtility.singleLineHeight + 1;
             bgm = EditorGUI.ObjectField(UIrect, bgm, typeof(AudioClip), false) as AudioClip;
         }
-        public override float getHeight(int index)
+        public override float getHeight()
         {
             return EditorGUIUtility.singleLineHeight * 2 + 2;
         }

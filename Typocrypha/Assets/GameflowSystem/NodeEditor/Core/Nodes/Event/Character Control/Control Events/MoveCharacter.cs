@@ -34,7 +34,7 @@ namespace TypocryphaGameflow
         }
 
         #region GUI
-        public override void doGUI(Rect rect, int index, IList list)
+        public override void doGUI(Rect rect)
         {
             Rect UIrect = new Rect(rect);
             UIrect.height = EditorGUIUtility.singleLineHeight;
@@ -55,7 +55,7 @@ namespace TypocryphaGameflow
             targetPos = EditorGUI.Vector2Field(UIrect, "", targetPos);
         }
 
-        public override float getHeight(int index)
+        public override float getHeight()
         {
             return EditorGUIUtility.singleLineHeight * (4 + addLines) + (4 + addLines);
         }

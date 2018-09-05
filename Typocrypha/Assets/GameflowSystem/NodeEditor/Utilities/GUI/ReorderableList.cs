@@ -10,77 +10,176 @@ namespace TypocryphaGameflow
 {
     namespace GUIUtilities
     {
+        #region List Item Abstract Classes
+
+        #region Scriptable Object Items
         //Inherit From this class to create a local abstract base type to inherit Reoderable List Items from
         //Only define Subtypes in the the local abstract base and inherit individual Items from the local abstract base
-        public abstract class ReorderableListItemBase : ScriptableObject
+        public abstract class ReorderableListSOBase : ScriptableObject
         {
-            public abstract void doGUI(Rect rect, int index, IList list);
-            public virtual float getHeight(int index) { return EditorGUIUtility.singleLineHeight; }
+            public abstract void doGUI(Rect rect);
+            public virtual float getHeight() { return EditorGUIUtility.singleLineHeight; }
         }
-        public abstract class ReorderableListItemNodeConnection : ReorderableListItemBase
+        public abstract class ReorderableListSOConnectionKnobBase : ReorderableListSOBase
         {
-            public int[] nodeIndices;
-        }
-        //Generic Reorderable list. 
-        //T: Should only be used with non-polymorphic types marked with the System.Serializable
-        public class ReorderableList<T>
-        {
-            public delegate void listItemGUI(T item, Rect rect, int index, IList list);
-            public delegate float elementHeightCalc(T item, int index);
-            public delegate void dropdownMenu();
-
-            public List<T> elements;
-            protected UnityEditorInternal.ReorderableList _list;
-            private listItemGUI doItemGUI;
-            private elementHeightCalc calcHeight = (item, index) => { return EditorGUIUtility.singleLineHeight; };
-            private dropdownMenu doAddMenu;
-
-            public ReorderableList() { }
-            public ReorderableList(List<T> elements, listItemGUI elementGUIFn, elementHeightCalc heightFn, GUIContent headerLabel, bool draggable, bool displayHeader, bool displayAddButton, bool displayRemoveButton)
+            public abstract MathUtils.IntRange KnobIndices { get; }
+            public abstract ConnectionKnobAttribute[] KnobAttributes { get; }
+            public virtual void SetConnectionKnobPositions(Node n, Rect rect)
             {
-                this.elements = elements;
-                this.doItemGUI = elementGUIFn;
-                if (heightFn != null)
-                    calcHeight = heightFn;
+                ((ConnectionKnob)n.dynamicConnectionPorts[KnobIndices.min]).SetPosition(rect.yMax + NodeEditorGUI.knobSize / 2);
+            }
+        }
+        #endregion
+
+        #region Serializable Class  Items
+        public abstract class ReorderableListItem
+        {
+            public virtual float Height { get { return EditorGUIUtility.singleLineHeight + 1; } }
+            public abstract void doGUI(Rect rect);
+        }
+        public abstract class ReorderableListItemConnectionKnob
+        {
+            public delegate void AddItemFn(int index);
+            public delegate void RmItemFn(int index);
+            public virtual float Height { get { return EditorGUIUtility.singleLineHeight + 1; } }
+            public abstract void doGUI(Rect rect, int index, AddItemFn addCallback, RmItemFn rmCallback);
+            public abstract MathUtils.IntRange KnobIndices { get; }
+            public abstract ConnectionKnobAttribute[] KnobAttributes { get; }
+            public virtual void SetConnectionKnobPositions(Node n, Rect rect)
+            {
+                ((ConnectionKnob)n.dynamicConnectionPorts[KnobIndices.min]).SetPosition(rect.yMax + (NodeEditorGUI.knobSize / 2) + 3);
+            }       
+        }
+        #endregion
+
+        #endregion
+
+        #region List Classes
+        //Generic Reorderable list. 
+        //T: Should only be used with non-polymorphic types marked with the System.Serializable attribute
+        public class ReorderableList<T> where T: ReorderableListItem
+        {
+            protected UnityEditorInternal.ReorderableList _list;
+            public ReorderableList(List<T> elements, bool draggable = true, bool displayHeader = false, GUIContent headerLabel = null, bool displayAddButton = true, bool displayRemoveButton = true)
+            {
                 _list = new UnityEditorInternal.ReorderableList(elements, typeof(T), draggable, displayHeader, displayAddButton, displayRemoveButton);
                 _list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
                 {
-                    if (index >= _list.list.Count)//Fixes error if .doGUI removes an element from the list
+                    if (index >= _list.count || _list.count <= 0)//Fixes error if .doGUI removes an element from the list
                         return;
-                    T element = (T)_list.list[index];
-                    doItemGUI(element, rect, index, _list.list);
+                    T element = _list.list[index] as T;
+                    element.doGUI(rect);
                 };
-                _list.elementHeightCallback = (index) => { return calcHeight(elements[index], index); };
+                _list.elementHeightCallback = (index) => { return elements[index].Height; };
                 _list.drawHeaderCallback = (Rect rect) => {
-                    EditorGUI.LabelField(rect, headerLabel, new GUIStyle(GUIStyle.none) { alignment = TextAnchor.MiddleCenter });
+                    EditorGUI.LabelField(rect, headerLabel, new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter });
                 };
                 _list.drawElementBackgroundCallback = (rect, index, active, focused) => {
-                    rect.height = calcHeight(elements[index], index);
+                    if (_list.count <= 0)
+                        return;
+                    rect.height = elements[index].Height;
                     Texture2D tex = new Texture2D(1, 1);
                     tex.SetPixel(0, 0, new Color(0.33f, 0.66f, 1f, 0.66f));
                     tex.Apply();
                     if (active)
                         GUI.DrawTexture(rect, tex as Texture);
                 };
-                _list.onCanRemoveCallback = (ReorderableList l) => {
-                    return l.count > 1;
+            }
+            public void doLayoutList()
+            {
+                _list.DoLayoutList();
+            }
+            public void doList(Rect rect)
+            {
+                _list.DoList(rect);
+            }
+        }
+        //Generic Reorderable list for list items that Have associated connection knobs. 
+        //T: Should only be used with non-polymorphic types marked with the System.Serializable attribute and inheriting ReorderableListItemConnectionKnob
+        public class ReorderableListConnectionKnob<T> where T : ReorderableListItemConnectionKnob
+        {
+            protected UnityEditorInternal.ReorderableList _list;
+            public ReorderableListConnectionKnob(Node node, List<T> elements, bool draggable = true, bool displayHeader = false, GUIContent headerLabel = null, bool displayAddButton = true, bool displayRemoveButton = true)
+            {
+                _list = new UnityEditorInternal.ReorderableList(elements, typeof(T), draggable, displayHeader, displayAddButton, displayRemoveButton);
+                _list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
+                {
+                    if (index >= _list.count || _list.count <= 0)//Fixes error if .doGUI removes an element from the list
+                        return;
+                    T element = _list.list[index] as T;
+                    element.doGUI(rect, index, (ind) => { AddItem(node, ind); }, (ind) => { removeItem(node, ind); } );
+                    if (Event.current.type == EventType.Repaint)
+                        element.SetConnectionKnobPositions(node, rect);
+                };
+                _list.elementHeightCallback = (index) => {
+                    if (index >= _list.count || _list.count <= 0)//Fixes error if .doGUI removes an element from the list
+                        return 0;
+                    return elements[index].Height;
+                };
+                _list.drawHeaderCallback = (Rect rect) => {
+                    EditorGUI.LabelField(rect, headerLabel, new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter });
+                };
+                _list.drawElementBackgroundCallback = (rect, index, active, focused) => {
+                    if (_list.count <= 0)
+                        return;
+                    rect.height = elements[index].Height;
+                    Texture2D tex = new Texture2D(1, 1);
+                    tex.SetPixel(0, 0, new Color(0.33f, 0.66f, 1f, 0.66f));
+                    tex.Apply();
+                    if (active)
+                        GUI.DrawTexture(rect, tex as Texture);
+                };
+                _list.onAddCallback = (ButtonRect) =>
+                {
+                    AddItem(node, _list.count);
+                };
+                _list.onCanAddCallback = (list) =>
+                {
+                    return (list.displayAdd = (list.count <= 0));
                 };
             }
-            public ReorderableList(List<T> elements, listItemGUI elementGUIFn, elementHeightCalc heightFn, string label, string tooltip, bool draggable, bool displayHeader, bool displayAddButton, bool displayRemoveButton) 
-                    : this(elements, elementGUIFn, heightFn, new GUIContent(label, tooltip), draggable, displayHeader, displayAddButton, displayRemoveButton)
-            {
 
-            }
-            public ReorderableList(List<T> elements, listItemGUI elementGUIFn, elementHeightCalc heightFn, GUIContent headerLabel, dropdownMenu addMenuFn, bool draggable, bool displayHeader)
-                : this(elements, elementGUIFn, heightFn, headerLabel, draggable, displayHeader, true, true)
+            public void AddItem(Node node, int index)
             {
-                this.doAddMenu = addMenuFn;
-                _list.onAddDropdownCallback = (Rect buttonRect, ReorderableList l) => { doAddMenu(); };
+                T item = System.Activator.CreateInstance(typeof(T), index) as T;
+                for(int i = item.KnobIndices.min; i <= item.KnobIndices.max; ++i)
+                {
+                    node.CreateConnectionKnob(item.KnobAttributes[i - item.KnobIndices.min], i);
+                }
+                _list.list.Insert(index, item);
+                CorrectNodeIndicesAfterInsert(item);
+            }
+            private void CorrectNodeIndicesAfterInsert(T insertedValue)
+            {
+                MathUtils.IntRange range = insertedValue.KnobIndices;
+                for (int i = 0; i < _list.count; ++i)
+                {
+                    T value = _list.list[i] as T;
+                    if (value != insertedValue && value.KnobIndices.min >= range.max)
+                        value.KnobIndices.shift(range.Count);
+                }
+            }
+            public void removeItem(Node node, int index)
+            {
+                MathUtils.IntRange range = (_list.list[index] as T).KnobIndices;
+                for(int i = 0; i < range.Count; ++i)
+                    node.DeleteConnectionPort(range.min);
+                _list.list.RemoveAt(index);
+                CorrectNodeIndicesAfterRemove(range);
+            }
+            private void CorrectNodeIndicesAfterRemove(MathUtils.IntRange range)
+            {
+                for (int i = 0; i < _list.count; ++i)
+                {
+                    T value = _list.list[i] as T;
+                    if (value.KnobIndices.min > range.max)
+                        value.KnobIndices.shift(range.Count * -1);
+                }
             }
 
             public void doLayoutList()
             {
-               _list.DoLayoutList();
+                _list.DoLayoutList();
             }
             public void doList(Rect rect)
             {
@@ -88,36 +187,33 @@ namespace TypocryphaGameflow
             }
         }
         //Specific reorderablelist implementation to be used with polymorphic scriptable objects that inherit from an abstract base that inherits from ReorderableItemBase
-        public class ReorderableItemList<T> where T: ReorderableListItemBase
+        public class ReorderableSOList<T> where T: ReorderableListSOBase
         {
             protected UnityEditorInternal.ReorderableList _list;
             private IEnumerable _subtypes;
-            public ReorderableItemList(List<T> elements, bool draggable = true, bool displayHeader = false, GUIContent headerLabel = null, bool displayAddButton = true, bool displayRemoveButton = true)
+            public ReorderableSOList(List<T> elements, bool draggable = true, bool displayHeader = false, GUIContent headerLabel = null, bool displayAddButton = true, bool displayRemoveButton = true)
             {
                 _list = new UnityEditorInternal.ReorderableList(elements, typeof(T), draggable, displayHeader, displayAddButton, displayRemoveButton);
                 _list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
                 {
-                    if (index >= _list.list.Count || _list.count <= 0)//Fixes error if .doGUI removes an element from the list
+                    if (index >= _list.count || _list.count <= 0)//Fixes error if .doGUI removes an element from the list
                         return;
                     T element = _list.list[index] as T;
-                    element.doGUI(rect, index, elements);
+                    element.doGUI(rect);
                 };
-                _list.elementHeightCallback = (index) => { return elements[index].getHeight(index); };
+                _list.elementHeightCallback = (index) => { return elements[index].getHeight(); };
                 _list.drawHeaderCallback = (Rect rect) => {
-                    EditorGUI.LabelField(rect, headerLabel, new GUIStyle(GUIStyle.none) { alignment = TextAnchor.MiddleCenter });
+                    EditorGUI.LabelField(rect, headerLabel, new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter });
                 };
                 _list.drawElementBackgroundCallback = (rect, index, active, focused) => {
                     if (_list.count <= 0)
                         return;
-                    rect.height = elements[index].getHeight(index);
+                    rect.height = elements[index].getHeight();
                     Texture2D tex = new Texture2D(1, 1);
                     tex.SetPixel(0, 0, new Color(0.33f, 0.66f, 1f, 0.66f));
                     tex.Apply();
                     if (active)
                         GUI.DrawTexture(rect, tex as Texture);
-                };
-                _list.onCanRemoveCallback = (ReorderableList l) => {
-                    return true;
                 };
                 if (displayAddButton)
                 {
@@ -154,5 +250,6 @@ namespace TypocryphaGameflow
                 _list.DoList(rect);
             }
         }
+        #endregion
     }
 }

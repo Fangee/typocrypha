@@ -20,7 +20,7 @@ namespace TypocryphaGameflow
 
         [SerializeField]
         List<EventData> _events;
-        public ReorderableItemList<EventData> events = null;
+        public ReorderableSOList<EventData> events = null;
         protected override void OnCreate()
         {
             _events = new List<EventData>();
@@ -40,7 +40,7 @@ namespace TypocryphaGameflow
         public override void NodeGUI()
         {
             if (events == null)
-                events = new ReorderableItemList<EventData>(_events, true, true, new GUIContent("Events", ""));
+                events = new ReorderableSOList<EventData>(_events, true, true, new GUIContent("Events", ""));
             GUILayout.Space(5);
             GUILayout.BeginVertical("box");
             events.doLayoutList();
@@ -52,9 +52,9 @@ namespace TypocryphaGameflow
             throw new NotImplementedException();
         }
 
-        public abstract class EventData : ReorderableListItemBase
+        public abstract class EventData : ReorderableListSOBase
         {
-            public override float getHeight(int index)
+            public override float getHeight()
             {
                 return EditorGUIUtility.singleLineHeight + 1;
             }

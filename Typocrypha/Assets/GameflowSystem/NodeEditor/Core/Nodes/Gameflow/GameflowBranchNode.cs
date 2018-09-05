@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
 using NodeEditorFramework;
+using TypocryphaGameflow.GUIUtilities;
+using TypocryphaGameflow.MathUtils;
 
 namespace TypocryphaGameflow
 {
@@ -27,19 +29,16 @@ namespace TypocryphaGameflow
         //Connection from previous node (INPUT)
         [ConnectionKnob("From Previous", Direction.In, "Gameflow", ConnectionCount.Multi, NodeSide.Left, 30)]
         public ConnectionKnob fromPreviousIN;
-        //Connect to default branch
+        //Connect to default branch (OUTPUT)
         [ConnectionKnob("To Default Branch", Direction.Out, "Gameflow", ConnectionCount.Single, NodeSide.Right, 30)]
         public ConnectionKnob toDefaultBranch;
 
         [SerializeField]
         List<BranchCaseData> _cases;
-        ReorderableList _list = null;
+        ReorderableListConnectionKnob<BranchCaseData> _list = null;
 
         public controlExpressionType exprType;
         public string variableName;
-
-        private ConnectionKnobAttribute dynaCreationAttribute
-            = new ConnectionKnobAttribute("To Branch Target", Direction.Out, "Gameflow", ConnectionCount.Single, NodeSide.Right);
 
         const string tooltip_branch_case = "The first case to evaluate to true (in decending order) will branch to the connected node. \nNote: macro variables may be evaluated in cases by using {varName} in text cases and \\{varName\\} in regex cases";
         const string tooltip_data = "Where to get the input string from. \"Input\" takes input from the last player input and \"Variable\" takes input from the variable with the given name";
@@ -48,7 +47,8 @@ namespace TypocryphaGameflow
         protected override void OnCreate()
         {
             _cases = new List<BranchCaseData>();
-            addListItem(_cases, 0);
+            _list = new ReorderableListConnectionKnob<BranchCaseData>(this, _cases, true, true, new GUIContent("Branch Cases", tooltip_branch_case), false, false);
+            _list.AddItem(this, 0);
             exprType = controlExpressionType.Last_Input;
             variableName = "variable-name";
         }
@@ -57,17 +57,7 @@ namespace TypocryphaGameflow
         {
             if (_list == null)
             {
-                _list = new ReorderableList(_cases, typeof(BranchCaseData), true, true, false, false);
-                _list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
-                {
-                    if (index >= _list.list.Count)//Fixes error if .doGUI removes an element from the list
-                        return;
-                    BranchCaseData element = (BranchCaseData)_list.list[index];
-                    listItemGUI(element, rect, index, _list.list);
-                };
-                _list.drawHeaderCallback = (Rect rect) => {
-                    EditorGUI.LabelField(rect, new GUIContent("Branch Cases", tooltip_branch_case), new GUIStyle(GUIStyle.none) { alignment = TextAnchor.MiddleCenter });
-                };
+                _list = new ReorderableListConnectionKnob<BranchCaseData>(this,_cases, true, true, new GUIContent("Branch Cases", tooltip_branch_case), false, false);
             }
             GUILayout.Space(5);
             EditorGUILayout.BeginVertical("Box");
@@ -80,76 +70,12 @@ namespace TypocryphaGameflow
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
             GUILayout.BeginVertical();
-            _list.DoLayoutList();
+            _list.doLayoutList();
             GUILayout.EndVertical();
             GUILayout.BeginVertical("Box");
             GUILayout.Label(new GUIContent("Default Branch", tooltip_branch_default), NodeEditorGUI.nodeLabelBoldCentered);
             toDefaultBranch.SetPosition();
             GUILayout.EndVertical();
-        }
-
-        private void listItemGUI(BranchCaseData item, Rect rect, int index, IList list)
-        {
-            float xOffset = 0;
-            Rect UIrect = new Rect(rect.x, rect.y + 2, 60, EditorGUIUtility.singleLineHeight);
-            item.type = (BranchCaseData.CaseType)EditorGUI.EnumPopup(UIrect, GUIContent.none, item.type);
-
-            xOffset += (UIrect.width + 2);
-            UIrect = new Rect(rect.x + xOffset, rect.y + 1, 170, EditorGUIUtility.singleLineHeight);
-            item.pattern = EditorGUI.TextField(UIrect, item.pattern);
-            xOffset += (UIrect.width + 2);
-            UIrect = new Rect(rect.x + xOffset, rect.y + 1, 20, EditorGUIUtility.singleLineHeight);
-            if (list.Count > 1 && GUI.Button(UIrect, "‒"))
-            {
-                removeListItem(list, index);
-                return;
-            }
-            xOffset += (UIrect.width + 2);
-            UIrect = new Rect(rect.x + xOffset, rect.y + 1, 20, EditorGUIUtility.singleLineHeight);
-            if (GUI.Button(UIrect, "+"))
-            {
-                //list.Insert(index + 1, new BranchCaseData());
-                addListItem(list, index + 1);
-            }
-            if (Event.current.type != EventType.Repaint)//Only paint GUI during repaint (not layout)
-                return;
-            ((ConnectionKnob)dynamicConnectionPorts[item.portIndex]).SetPosition(rect.yMax + NodeEditorGUI.knobSize / 2);
-        }
-
-        private void addListItem(IList list, int index)
-        {
-            CreateConnectionKnob(dynaCreationAttribute, index);
-            BranchCaseData value = new BranchCaseData(index);
-            list.Insert(index, value);
-            CorrectNodeIndicesAfterInsert(list, index, value.portIndex);
-        }
-
-        private void CorrectNodeIndicesAfterInsert(IList list, int index, int portIndex)
-        {
-            for (int i = 0; i < list.Count; ++i)
-            {
-                BranchCaseData b = (BranchCaseData)list[i];
-                if (i != index && b.portIndex >= portIndex)
-                    b.portIndex++;
-            }
-        }
-
-        private void removeListItem(IList list, int index)
-        {
-            int portIndex = ((BranchCaseData)list[index]).portIndex;
-            DeleteConnectionPort(portIndex);
-            list.RemoveAt(index);
-            CorrectNodeIndicesAfterRemove(list, portIndex);
-        }
-
-        private void CorrectNodeIndicesAfterRemove(IList list, int portIndex)
-        {
-            for (int i = 0; i < list.Count; ++i)
-            {
-                BranchCaseData b = (BranchCaseData)list[i];
-                if (b.portIndex > portIndex)
-                    b.portIndex--;
-            }
         }
 
         #endregion
@@ -167,7 +93,7 @@ namespace TypocryphaGameflow
                 if (brCase.type == BranchCaseData.CaseType.Regex)
                     throw new System.NotImplementedException();
                 else if (checkTextCase(brCase.pattern, value))//brCase.type == BranchCaseData.CaseType.Text
-                    return dynamicConnectionPorts[brCase.portIndex].connection(0).body as BaseNode;
+                    return dynamicConnectionPorts[brCase.KnobIndices.min].connection(0).body as BaseNode;
             }
             return toDefaultBranch.connection(0).body as BaseNode;
         }
@@ -186,20 +112,48 @@ namespace TypocryphaGameflow
         #endregion
 
         [System.Serializable]
-        class BranchCaseData
+        class BranchCaseData : ReorderableListItemConnectionKnob
         {
             public enum CaseType
             {
                 Text,
                 Regex
             }
-            public BranchCaseData(int portIndex)
-            {
-                this.portIndex = portIndex;
-            }  
+            private static ConnectionKnobAttribute[] _knobAttributes =
+                new ConnectionKnobAttribute[] { new ConnectionKnobAttribute("To Branch Target", Direction.Out, "Gameflow", ConnectionCount.Single, NodeSide.Right) };
+            public override ConnectionKnobAttribute[] KnobAttributes { get { return _knobAttributes; } }
+            [SerializeField]
+            private IntRange _knobIndices;
+            public override IntRange KnobIndices { get { return _knobIndices; } }
             public string pattern =  string.Empty;
             public CaseType type = CaseType.Text;
-            public int portIndex;
+
+            public BranchCaseData(int portIndex)
+            {
+                _knobIndices = new IntRange(portIndex);
+            }
+            public override void doGUI(Rect rect, int index, AddItemFn addCallback, RmItemFn rmCallback)
+            {
+                float xOffset = 0;
+                Rect UIrect = new Rect(rect.x, rect.y + 2, 60, EditorGUIUtility.singleLineHeight);
+                type = (CaseType)EditorGUI.EnumPopup(UIrect, GUIContent.none, type);
+                xOffset += (UIrect.width + 2);
+                UIrect = new Rect(rect.x + xOffset, rect.y + 1, 170, EditorGUIUtility.singleLineHeight);
+                pattern = EditorGUI.TextField(UIrect, pattern);
+                xOffset += (UIrect.width + 2);
+                UIrect = new Rect(rect.x + xOffset, rect.y + 1, 20, EditorGUIUtility.singleLineHeight);
+                if (index >= 1 && GUI.Button(UIrect, "‒"))
+                {
+                    rmCallback(index);
+                    return;
+                }
+                xOffset += (UIrect.width + 2);
+                UIrect = new Rect(rect.x + xOffset, rect.y + 1, 20, EditorGUIUtility.singleLineHeight);
+                if (GUI.Button(UIrect, "+"))
+                {
+                    addCallback(index + 1);
+                }
+            }
         }
     }
 }
