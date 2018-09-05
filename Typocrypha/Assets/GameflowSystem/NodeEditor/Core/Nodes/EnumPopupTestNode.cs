@@ -27,7 +27,7 @@ namespace TypocryphaGameflow
         }
         public override void NodeGUI()
         {
-            test = (Test)GUIUtilities.OverlayEnumPopup(test);
+            test = (Test)GUIUtilities.EnumDrawer.OverlayEnumPopup(test);
         }
     }
 }

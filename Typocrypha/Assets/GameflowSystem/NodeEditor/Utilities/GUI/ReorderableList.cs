@@ -8,7 +8,7 @@ using NodeEditorFramework.Utilities;
 
 namespace TypocryphaGameflow
 {
-    public static partial class GUIUtilities
+    namespace GUIUtilities
     {
         //Inherit From this class to create a local abstract base type to inherit Reoderable List Items from
         //Only define Subtypes in the the local abstract base and inherit individual Items from the local abstract base
@@ -92,14 +92,14 @@ namespace TypocryphaGameflow
         {
             protected UnityEditorInternal.ReorderableList _list;
             private IEnumerable _subtypes;
-            public ReorderableItemList(List<ReorderableListItemBase> elements, bool draggable = true, bool displayHeader = false, GUIContent headerLabel = null, bool displayAddButton = true, bool displayRemoveButton = true)
+            public ReorderableItemList(List<T> elements, bool draggable = true, bool displayHeader = false, GUIContent headerLabel = null, bool displayAddButton = true, bool displayRemoveButton = true)
             {
-                _list = new UnityEditorInternal.ReorderableList(elements, typeof(ReorderableListItemBase), draggable, displayHeader, displayAddButton, displayRemoveButton);
+                _list = new UnityEditorInternal.ReorderableList(elements, typeof(T), draggable, displayHeader, displayAddButton, displayRemoveButton);
                 _list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
                 {
                     if (index >= _list.list.Count || _list.count <= 0)//Fixes error if .doGUI removes an element from the list
                         return;
-                    ReorderableListItemBase element = (ReorderableListItemBase)_list.list[index];
+                    T element = _list.list[index] as T;
                     element.doGUI(rect, index, elements);
                 };
                 _list.elementHeightCallback = (index) => { return elements[index].getHeight(index); };

@@ -5,6 +5,7 @@ using UnityEditor;
 using NodeEditorFramework;
 
 using System;
+using TypocryphaGameflow.GUIUtilities;
 
 namespace TypocryphaGameflow
 {
@@ -18,11 +19,11 @@ namespace TypocryphaGameflow
         public override Vector2 MinSize { get { return new Vector2(200, 20); } }
 
         [SerializeField]
-        List<GUIUtilities.ReorderableListItemBase> _events;
-        public GUIUtilities.ReorderableItemList<EventData> events = null;
+        List<EventData> _events;
+        public ReorderableItemList<EventData> events = null;
         protected override void OnCreate()
         {
-            _events = new List<GUIUtilities.ReorderableListItemBase>();
+            _events = new List<EventData>();
         }
 
         public override ScriptableObject[] GetScriptableObjects()
@@ -33,13 +34,13 @@ namespace TypocryphaGameflow
         protected override void CopyScriptableObjects(Func<ScriptableObject, ScriptableObject> replaceSO)
         {
             for (int i = 0; i < _events.Count; ++i)
-                _events[i] = (GUIUtilities.ReorderableListItemBase)replaceSO(_events[i]);
+                _events[i] = (EventData)replaceSO(_events[i]);
         }
 
         public override void NodeGUI()
         {
             if (events == null)
-                events = new GUIUtilities.ReorderableItemList<EventData>(_events, true, true, new GUIContent("Events", ""));
+                events = new ReorderableItemList<EventData>(_events, true, true, new GUIContent("Events", ""));
             GUILayout.Space(5);
             GUILayout.BeginVertical("box");
             events.doLayoutList();
@@ -51,7 +52,7 @@ namespace TypocryphaGameflow
             throw new NotImplementedException();
         }
 
-        public abstract class EventData : GUIUtilities.ReorderableListItemBase
+        public abstract class EventData : ReorderableListItemBase
         {
             public override float getHeight(int index)
             {

@@ -35,7 +35,6 @@ namespace TypocryphaGameflow
         List<BranchCaseData> _cases;
         ReorderableList _list = null;
 
-        protected static GUIStyle labelStyle = new GUIStyle();
         public controlExpressionType exprType;
         public string variableName;
 
@@ -70,15 +69,13 @@ namespace TypocryphaGameflow
                     EditorGUI.LabelField(rect, new GUIContent("Branch Cases", tooltip_branch_case), new GUIStyle(GUIStyle.none) { alignment = TextAnchor.MiddleCenter });
                 };
             }
-            labelStyle.normal.textColor = Color.white;
-
             GUILayout.Space(5);
             EditorGUILayout.BeginVertical("Box");
             GUILayout.Label(new GUIContent("Data to Test", tooltip_data), NodeEditorGUI.nodeLabelBoldCentered);
             GUILayout.BeginHorizontal();
-            exprType = (controlExpressionType)EditorGUILayout.EnumPopup(exprType, GUILayout.Width(75f));
+            exprType = (controlExpressionType)EditorGUILayout.EnumPopup(exprType, GUILayout.Width(80f));
             if(exprType == controlExpressionType.Variable)
-                variableName = EditorGUILayout.TextField("", variableName, GUILayout.Width(205f));
+                variableName = EditorGUILayout.TextField("", variableName, GUILayout.Width(200f));
             GUILayout.Space(5);
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
@@ -114,7 +111,7 @@ namespace TypocryphaGameflow
                 //list.Insert(index + 1, new BranchCaseData());
                 addListItem(list, index + 1);
             }
-            if (!(Event.current.type == EventType.Repaint))//Only paint GUI during repaint (not layout)
+            if (Event.current.type != EventType.Repaint)//Only paint GUI during repaint (not layout)
                 return;
             ((ConnectionKnob)dynamicConnectionPorts[item.portIndex]).SetPosition(rect.yMax + NodeEditorGUI.knobSize / 2);
         }

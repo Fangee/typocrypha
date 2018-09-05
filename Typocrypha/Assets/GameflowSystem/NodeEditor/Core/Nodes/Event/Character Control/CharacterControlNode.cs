@@ -5,6 +5,7 @@ using UnityEditor;
 using NodeEditorFramework;
 
 using System;
+using TypocryphaGameflow.GUIUtilities;
 
 namespace TypocryphaGameflow
 {
@@ -18,11 +19,11 @@ namespace TypocryphaGameflow
         public override Vector2 MinSize { get { return new Vector2(150, 20); } }
 
         [SerializeField]
-        List<GUIUtilities.ReorderableListItemBase> _events;
-        public GUIUtilities.ReorderableItemList<EventData> events = null;
+        List<EventData> _events;
+        public ReorderableItemList<EventData> events = null;
         protected override void OnCreate()
         {
-            _events = new List<GUIUtilities.ReorderableListItemBase>();
+            _events = new List<EventData>();
         }
 
         public override ScriptableObject[] GetScriptableObjects()
@@ -39,7 +40,7 @@ namespace TypocryphaGameflow
         public override void NodeGUI()
         {
             if (events == null)
-                events = new GUIUtilities.ReorderableItemList<EventData>(_events, true, true, new GUIContent("Events", ""));
+                events = new ReorderableItemList<EventData>(_events, true, true, new GUIContent("Events", ""));
             GUILayout.Space(5);
             GUILayout.BeginVertical("box");
             events.doLayoutList();
@@ -55,12 +56,10 @@ namespace TypocryphaGameflow
             return ProcessFlag.Continue;
         }
 
-        public abstract class EventData : GUIUtilities.ReorderableListItemBase
+        public abstract class EventData : ReorderableListItemBase
         {
             public string characterName = "name";
-
             public abstract void characterControl(Character character); // Apply character control event
-
             public override float getHeight(int index)
             {
                 return base.getHeight(index) * 2;
