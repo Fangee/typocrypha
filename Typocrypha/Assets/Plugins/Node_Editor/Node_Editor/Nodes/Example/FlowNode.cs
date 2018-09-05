@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NodeEditorFramework.Standard
 {
-	[Node (false, "Example/Flow Node")]
+	[Node (false, "Example/Flow Node", new System.Type[] { typeof(GraphCanvasType) })]
 	public class FlowNode : Node 
 	{
 		public const string ID = "flowNode";

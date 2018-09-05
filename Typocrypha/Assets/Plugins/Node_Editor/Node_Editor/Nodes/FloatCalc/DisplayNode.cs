@@ -2,7 +2,7 @@
 
 namespace NodeEditorFramework.Standard
 {
-	[Node (false, "Float/Display")]
+	[Node (false, "Float/Display", new System.Type[] { typeof(CalculationCanvasType), typeof(GraphCanvasType) })]
 	public class DisplayNode : Node 
 	{
 		public const string ID = "displayNode";

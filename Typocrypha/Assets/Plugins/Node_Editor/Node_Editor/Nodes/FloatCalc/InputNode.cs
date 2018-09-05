@@ -4,7 +4,7 @@ using NodeEditorFramework.Utilities;
 namespace NodeEditorFramework.Standard
 {
 	[System.Serializable]
-	[Node(false, "Float/Input")]
+	[Node(false, "Float/Input", new System.Type[] { typeof(CalculationCanvasType), typeof(GraphCanvasType) })]
 	public class InputNode : Node
 	{
 		public const string ID = "inputNode";
