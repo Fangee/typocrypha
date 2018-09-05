@@ -16,8 +16,6 @@ namespace TypocryphaGameflow
         public override string Title { get { return "Chat Dialog"; } }
         public override Vector2 MinSize { get { return new Vector2(250, 60); } }
 
-        protected static GUIStyle labelStyle = new GUIStyle();
-
         public Sprite leftIcon;
         public Sprite rightIcon;
 
@@ -34,11 +32,10 @@ namespace TypocryphaGameflow
 
         public override void NodeGUI()
         {
-            labelStyle.normal.textColor = Color.white;
             GUILayout.Space(5);
             GUILayout.BeginVertical("Box");
             GUILayout.BeginHorizontal();
-            GUILayout.Label(new GUIContent("Name", tooltip_name), labelStyle, GUILayout.Width(45f));
+            GUILayout.Label(new GUIContent("Name", tooltip_name), NodeEditorGUI.nodeLabel, GUILayout.Width(45f));
             characterName = EditorGUILayout.TextField("", characterName, GUILayout.Width(MinSize.x - 65));
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();

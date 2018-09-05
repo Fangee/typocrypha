@@ -17,8 +17,8 @@ namespace TypocryphaGameflow
             UIrect.y += EditorGUIUtility.singleLineHeight + 1;
             bgm = EditorGUI.ObjectField(UIrect, bgm, typeof(AudioClip), false) as AudioClip;
             UIrect.y += EditorGUIUtility.singleLineHeight + 1;
-            GUI.Label(new Rect(UIrect.position, new Vector2(60, EditorGUIUtility.singleLineHeight)), new GUIContent("Fade Time"), GUIStyle.none);
-            fadeIn = EditorGUI.FloatField(new Rect(UIrect.position + new Vector2(60,0), new Vector2(UIrect.width - 65, EditorGUIUtility.singleLineHeight)), fadeIn);
+            GUI.Label(new Rect(UIrect.position, new Vector2(60, EditorGUIUtility.singleLineHeight)), new GUIContent("Fade Time"), GUI.skin.label);
+            fadeIn = EditorGUI.FloatField(new Rect(UIrect.position + new Vector2(65,0), new Vector2(UIrect.width - 65, EditorGUIUtility.singleLineHeight)), fadeIn);
         }
         public override float getHeight(int index)
         {

@@ -16,8 +16,6 @@ namespace TypocryphaGameflow
         public override string Title { get { return "AN Dialog"; } }
         public override Vector2 MinSize { get { return new Vector2(250, 60); } }
 
-        protected static GUIStyle labelStyle = new GUIStyle();
-
         #region Tooltip Strings
         private const string tooltip_name = "The speaking character's name (optional). Used to set speaking sfx if not overriden by text events";
         protected const string tooltip_text = "The text to be displayed. Can substitute text macros using {macro-name,args}, and call text events using [event-name,args]";
@@ -31,11 +29,10 @@ namespace TypocryphaGameflow
 
         public override void NodeGUI()
         {
-            labelStyle.normal.textColor = Color.white;
             GUILayout.Space(5);
             EditorGUILayout.BeginVertical("Box");
             GUILayout.BeginHorizontal();
-            GUILayout.Label(new GUIContent("Name", tooltip_name), labelStyle, GUILayout.Width(45f));
+            GUILayout.Label(new GUIContent("Name", tooltip_name), NodeEditorGUI.nodeLabel, GUILayout.Width(45f));
             characterName = EditorGUILayout.TextField("", characterName, GUILayout.Width(MinSize.x - 65));
             GUILayout.EndHorizontal();
             GUILayout.Space(3);

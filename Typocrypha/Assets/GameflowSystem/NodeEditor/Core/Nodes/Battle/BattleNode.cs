@@ -11,17 +11,6 @@ namespace TypocryphaGameflow
         public override bool AllowRecursion { get { return true; } }
 
         #region Game
-        public override BaseNode next()
-        {
-            return toNextOUT.connections[0].body as BaseNode;
-        }
-        public override ProcessFlag process(GameManagers managers)
-        {
-            //    player_ui.SetActive(false);
-            managers.battleManager.setEnabled(false);
-            //BattleManagerS.main.startBattle(this);
-            return ProcessFlag.Wait;
-        }
         #endregion
     }
 }

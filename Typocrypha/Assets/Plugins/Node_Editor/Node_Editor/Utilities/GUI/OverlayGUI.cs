@@ -106,7 +106,7 @@ namespace NodeEditorFramework.Utilities
 			expandRight = ResourceManager.LoadTexture ("Textures/expandRight.png");
 			itemHeight = GUI.skin.label.CalcHeight (new GUIContent ("text"), 100);
 			
-			selectedLabel = new GUIStyle (GUI.skin.label);
+			selectedLabel = new GUIStyle(GUI.skin.label);
 			selectedLabel.normal.background = RTEditorGUI.ColorToTex (1, new Color (0.4f, 0.4f, 0.4f));
 		}
 
@@ -253,7 +253,7 @@ namespace NodeEditorFramework.Utilities
 					selectedPath = item.path;
 
 				bool selected = selectedPath == item.path || selectedPath.Contains (item.path + "/");
-				GUI.Label (labelRect, item.content, selected? NodeEditorGUI.nodeLabelSelected : NodeEditorGUI.nodeLabel);
+				GUI.Label (labelRect, item.content, selected? NodeEditorGUI.nodeLabelSelected : NodeEditorGUI.nodeLabelLight);
 				
 				if (item.group) 
 				{

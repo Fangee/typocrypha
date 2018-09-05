@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using NodeEditorFramework.Utilities;
 
 namespace NodeEditorFramework 
@@ -33,8 +34,9 @@ namespace NodeEditorFramework
 		public static GUIStyle nodeLabelBoldCentered;
 		public static GUIStyle nodeLabelLeft;
 		public static GUIStyle nodeLabelRight;
+        public static GUIStyle nodeLabelLight;
 
-		public static GUIStyle nodeBox;
+        public static GUIStyle nodeBox;
 		public static GUIStyle nodeBoxBold;
 
 		public static GUIStyle toolbar;
@@ -56,36 +58,41 @@ namespace NodeEditorFramework
 			if (!Background || !AALineTex || !GUIBox || !GUIButton || !GUIToolbar || !GUIToolbarButton)
 				return false;
 
-			// Skin & Styles
-			nodeSkin = Object.Instantiate (GUI.skin);
+            // Skin & Styles
+            nodeSkin = Object.Instantiate(GUI.skin);
 			GUI.skin = nodeSkin;
+
+            //Set Custom Styles dark color only if on pro skin
+            Color textColor = EditorGUIUtility.isProSkin ? NE_TextColor : new Color(0.1f, 0.1f, 0.1f);
 
 			foreach (GUIStyle style in GUI.skin)
 			{
 				style.fontSize = 11;
-				//style.normal.textColor = style.active.textColor = style.focused.textColor = style.hover.textColor = NE_TextColor;
-			}
+            }
 
-			// Label
-			nodeSkin.label.normal.textColor = NE_TextColor;
+            // Label
+            nodeSkin.label.normal.textColor = textColor;
 			nodeLabel = nodeSkin.label;
 			nodeLabelBold = new GUIStyle (nodeLabel) { fontStyle = FontStyle.Bold };
 			nodeLabelSelected = new GUIStyle (nodeLabel);
 			nodeLabelSelected.normal.background = RTEditorGUI.ColorToTex (1, NE_LightColor);
+            nodeLabelSelected.normal.textColor = NE_TextColor;
 			nodeLabelCentered = new GUIStyle (nodeLabel) { alignment = TextAnchor.MiddleCenter };
 			nodeLabelBoldCentered = new GUIStyle (nodeLabelBold) { alignment = TextAnchor.MiddleCenter };
 			nodeLabelLeft = new GUIStyle (nodeLabel) { alignment = TextAnchor.MiddleLeft };
 			nodeLabelRight = new GUIStyle (nodeLabel) { alignment = TextAnchor.MiddleRight };
+            nodeLabelLight = new GUIStyle(nodeLabel);
+            nodeLabelLight.normal.textColor = NE_TextColor;
 
-			// Box
-			nodeSkin.box.normal.background = GUIBox;
-			nodeSkin.box.normal.textColor = NE_TextColor;
-			nodeSkin.box.active.textColor = NE_TextColor;
+            // Box
+            nodeSkin.box.normal.background = GUIBox;
+            nodeSkin.box.normal.textColor = textColor;
+            nodeSkin.box.active.textColor = textColor;
 			nodeBox = nodeSkin.box;
 			nodeBoxBold = new GUIStyle (nodeBox) { fontStyle = FontStyle.Bold };
 
-			// Button
-			nodeSkin.button.normal.textColor = NE_TextColor;
+            // Button
+            nodeSkin.button.normal.textColor = textColor;
 			nodeSkin.button.normal.background = GUIButton;
 
 			// Toolbar

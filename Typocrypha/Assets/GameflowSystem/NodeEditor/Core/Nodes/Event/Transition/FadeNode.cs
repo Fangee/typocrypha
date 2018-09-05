@@ -22,8 +22,6 @@ namespace TypocryphaGameflow {
         public override Vector2 MinSize { get { return new Vector2(150, 60); } }
         public override bool AutoLayout { get { return true; } }
 
-        GUIStyle labelStyle = new GUIStyle();
-
         public FadeType fadeType;
         public float fadeTime;
         public Color fadeColor;
@@ -40,12 +38,11 @@ namespace TypocryphaGameflow {
 
         public override void NodeGUI()
         {
-            labelStyle.normal.textColor = Color.white;
             GUILayout.Space(5);
             GUILayout.BeginVertical("box");
             fadeType = (FadeType)EditorGUILayout.EnumPopup(fadeType);
             GUILayout.BeginHorizontal();
-            GUILayout.Label(new GUIContent("Fade Time", tooltip_fadeTime), labelStyle, GUILayout.Width(65f));
+            GUILayout.Label(new GUIContent("Fade Time", tooltip_fadeTime), NodeEditorGUI.nodeLabel, GUILayout.Width(65f));
             GUILayout.Space(3);
             fadeTime = EditorGUILayout.FloatField(fadeTime, GUILayout.Width(72));
             GUILayout.EndHorizontal();

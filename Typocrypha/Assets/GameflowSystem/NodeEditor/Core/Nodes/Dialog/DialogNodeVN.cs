@@ -16,8 +16,6 @@ namespace TypocryphaGameflow
 
         public string expression;
 
-        protected static GUIStyle labelStyle = new GUIStyle();
-
         #region Tooltip Strings
         private const string tooltip_name = "The speaking character's name. Used to set speaking sfx and sprite highlighting if not overriden by text events";
         private const string tooltip_expr = "The speaking character's expression. Only needs to be set if the expression should be changed";
@@ -33,15 +31,14 @@ namespace TypocryphaGameflow
 
         public override void NodeGUI()
         {
-            labelStyle.normal.textColor = Color.white;
             GUILayout.Space(5);
             EditorGUILayout.BeginVertical("Box");
             GUILayout.BeginHorizontal();
-            GUILayout.Label(new GUIContent("Name", tooltip_name), labelStyle, GUILayout.Width(45f));
+            GUILayout.Label(new GUIContent("Name", tooltip_name), GUILayout.Width(45f));
             characterName = EditorGUILayout.TextField("", characterName, GUILayout.Width(MinSize.x - 65));
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
-            GUILayout.Label(new GUIContent("Expr", tooltip_expr), labelStyle, GUILayout.Width(45f));
+            GUILayout.Label(new GUIContent("Expr", tooltip_expr), NodeEditorGUI.nodeLabelLeft, GUILayout.Width(45f));
             expression = EditorGUILayout.TextField("", expression, GUILayout.Width(MinSize.x - 65));
             GUILayout.EndHorizontal();
             GUILayout.Space(3);
