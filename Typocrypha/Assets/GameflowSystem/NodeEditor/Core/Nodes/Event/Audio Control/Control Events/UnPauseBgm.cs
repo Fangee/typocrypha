@@ -13,9 +13,12 @@ namespace TypocryphaGameflow
             UIrect.height = EditorGUIUtility.singleLineHeight;
             GUI.Label(UIrect, new GUIContent("Unpause Bgm", ""), new GUIStyle(GUIStyle.none) { alignment = TextAnchor.MiddleCenter });
         }
-        public override float getHeight()
+        public override float Height
         {
-            return EditorGUIUtility.singleLineHeight * 1 + 1;
+            get
+            {
+                return EditorGUIUtility.singleLineHeight * 1 + 1;
+            }
         }
     }
 }

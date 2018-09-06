@@ -25,9 +25,12 @@ namespace TypocryphaGameflow
             UIrect.y += EditorGUIUtility.singleLineHeight + 1;
             expression = EditorGUI.TextField(UIrect, expression);
         }
-        public override float getHeight()
+        public override float Height
         {
-            return EditorGUIUtility.singleLineHeight * 3 + 3;
+            get
+            {
+                return EditorGUIUtility.singleLineHeight * 3 + 3;
+            }
         }
         #endregion
     }

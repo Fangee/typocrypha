@@ -60,9 +60,12 @@ namespace TypocryphaGameflow
         {
             public string characterName = "name";
             public abstract void characterControl(Character character); // Apply character control event
-            public override float getHeight()
+            public override float Height
             {
-                return base.getHeight() * 2;
+                get
+                {
+                    return base.Height * 2;
+                }
             }
         }
     }

@@ -31,9 +31,12 @@ namespace TypocryphaGameflow
             UIrect.y += EditorGUIUtility.singleLineHeight + 1;
             pos = EditorGUI.Vector2Field(UIrect, "", pos);
         }
-        public override float getHeight()
+        public override float Height
         {
-            return EditorGUIUtility.singleLineHeight * 5 + 5;
+            get
+            {
+                return EditorGUIUtility.singleLineHeight * 5 + 5;
+            }
         }
         #endregion
     }

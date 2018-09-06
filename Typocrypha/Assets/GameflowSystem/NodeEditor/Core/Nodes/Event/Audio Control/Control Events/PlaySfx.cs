@@ -16,9 +16,12 @@ namespace TypocryphaGameflow
             UIrect.y += EditorGUIUtility.singleLineHeight + 1;
             bgm = EditorGUI.ObjectField(UIrect, bgm, typeof(AudioClip), false) as AudioClip;
         }
-        public override float getHeight()
+        public override float Height
         {
-            return EditorGUIUtility.singleLineHeight * 2 + 2;
+            get
+            {
+                return EditorGUIUtility.singleLineHeight * 2 + 2;
+            }
         }
     }
 }

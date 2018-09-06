@@ -54,9 +54,12 @@ namespace TypocryphaGameflow
 
         public abstract class EventData : ReorderableListSOBase
         {
-            public override float getHeight()
+            public override float Height
             {
-                return EditorGUIUtility.singleLineHeight + 1;
+                get
+                {
+                    return EditorGUIUtility.singleLineHeight + 1;
+                }
             }
         }
     }

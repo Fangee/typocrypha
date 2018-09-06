@@ -20,9 +20,12 @@ namespace TypocryphaGameflow
             GUI.Label(new Rect(UIrect.position, new Vector2(60, EditorGUIUtility.singleLineHeight)), new GUIContent("Fade Time"), GUI.skin.label);
             fadeIn = EditorGUI.FloatField(new Rect(UIrect.position + new Vector2(65,0), new Vector2(UIrect.width - 65, EditorGUIUtility.singleLineHeight)), fadeIn);
         }
-        public override float getHeight()
+        public override float Height
         {
-            return EditorGUIUtility.singleLineHeight * 3 + 2;
+            get
+            {
+                return EditorGUIUtility.singleLineHeight * 3 + 2;
+            }
         }
     }
 }
