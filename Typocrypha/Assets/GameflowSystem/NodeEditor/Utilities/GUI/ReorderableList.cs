@@ -22,11 +22,11 @@ namespace TypocryphaGameflow
         }
         public abstract class ReorderableListSOConnectionKnobBase : ReorderableListSOBase
         {
-            public abstract MathUtils.IntRange KnobIndices { get; }
+            public abstract MathUtils.IntRange knobIndices { get; }
             public abstract ConnectionKnobAttribute[] KnobAttributes { get; }
             public virtual void SetConnectionKnobPositions(Node n, Rect rect)
             {
-                ((ConnectionKnob)n.dynamicConnectionPorts[KnobIndices.min]).SetPosition(rect.yMax + NodeEditorGUI.knobSize / 2);
+                ((ConnectionKnob)n.dynamicConnectionPorts[knobIndices.min]).SetPosition(rect.yMax + NodeEditorGUI.knobSize / 2);
             }
         }
         #endregion
@@ -39,15 +39,23 @@ namespace TypocryphaGameflow
         }
         public abstract class ReorderableListItemConnectionKnob
         {
+            #region Standard ConnectionKnob Attributes
+            protected static ConnectionKnobAttribute KnobAttributeOUT = new ConnectionKnobAttribute("OUT", Direction.Out, "Gameflow", ConnectionCount.Single, NodeSide.Right);
+            protected static ConnectionKnobAttribute KnobAttributeIN = new ConnectionKnobAttribute("IN", Direction.In, "Gameflow", ConnectionCount.Multi, NodeSide.Left);
+            #endregion
+
+            #region Delegates
             public delegate void AddItemFn(int index);
             public delegate void RmItemFn(int index);
+            #endregion
+
+            public MathUtils.IntRange knobIndices;
+            public abstract ConnectionKnobAttribute[] KnobAttributes { get; }
             public virtual float Height { get { return EditorGUIUtility.singleLineHeight + 1; } }
             public abstract void doGUI(Rect rect, int index, AddItemFn addCallback, RmItemFn rmCallback);
-            public abstract MathUtils.IntRange KnobIndices { get; }
-            public abstract ConnectionKnobAttribute[] KnobAttributes { get; }
             public virtual void SetConnectionKnobPositions(Node n, Rect rect)
             {
-                ((ConnectionKnob)n.dynamicConnectionPorts[KnobIndices.min]).SetPosition(rect.yMax + (NodeEditorGUI.knobSize / 2) + 3);
+                ((ConnectionKnob)n.dynamicConnectionPorts[knobIndices.min]).SetPosition(rect.yMin + (NodeEditorGUI.knobSize * 2) - 3);
             }       
         }
         #endregion
@@ -120,7 +128,7 @@ namespace TypocryphaGameflow
                     EditorGUI.LabelField(rect, headerLabel, new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter });
                 };
                 _list.drawElementBackgroundCallback = (rect, index, active, focused) => {
-                    if (_list.count <= 0)
+                    if (index >= _list.count || _list.count <= 0)
                         return;
                     rect.height = elements[index].Height;
                     Texture2D tex = new Texture2D(1, 1);
@@ -133,49 +141,55 @@ namespace TypocryphaGameflow
                 {
                     AddItem(node, _list.count);
                 };
-                _list.onCanAddCallback = (list) =>
-                {
-                    return (list.displayAdd = (list.count <= 0));
-                };
             }
-
+            
+            #region Adding And Removing Elements
             public void AddItem(Node node, int index)
             {
-                T item = System.Activator.CreateInstance(typeof(T), index) as T;
-                for(int i = item.KnobIndices.min; i <= item.KnobIndices.max; ++i)
+                T item = System.Activator.CreateInstance<T>();
+                int knobsBeforeItem = getNumKnobsBeforeIndex(index);
+                item.knobIndices = new MathUtils.IntRange(knobsBeforeItem, knobsBeforeItem + item.KnobAttributes.Length - 1);
+                for(int i = item.knobIndices.min; i <= item.knobIndices.max; ++i)
                 {
-                    node.CreateConnectionKnob(item.KnobAttributes[i - item.KnobIndices.min], i);
+                    node.CreateConnectionKnob(item.KnobAttributes[i - item.knobIndices.min], i);
                 }
                 _list.list.Insert(index, item);
                 CorrectNodeIndicesAfterInsert(item);
+                _list.displayAdd = false;
             }
             private void CorrectNodeIndicesAfterInsert(T insertedValue)
             {
-                MathUtils.IntRange range = insertedValue.KnobIndices;
+                MathUtils.IntRange range = insertedValue.knobIndices;
                 for (int i = 0; i < _list.count; ++i)
                 {
                     T value = _list.list[i] as T;
-                    if (value != insertedValue && value.KnobIndices.min >= range.max)
-                        value.KnobIndices.shift(range.Count);
+                    if (value != insertedValue && value.knobIndices.min >= range.min)
+                        value.knobIndices.shift(range.Count);
                 }
+            }
+            private int getNumKnobsBeforeIndex(int index)
+            {
+                return index <= 0 ? 0 : index * (_list.list[0] as T).knobIndices.Count;
             }
             public void removeItem(Node node, int index)
             {
-                MathUtils.IntRange range = (_list.list[index] as T).KnobIndices;
+                MathUtils.IntRange range = (_list.list[index] as T).knobIndices;
                 for(int i = 0; i < range.Count; ++i)
                     node.DeleteConnectionPort(range.min);
                 _list.list.RemoveAt(index);
                 CorrectNodeIndicesAfterRemove(range);
+                _list.displayAdd = _list.count <= 0;
             }
             private void CorrectNodeIndicesAfterRemove(MathUtils.IntRange range)
             {
                 for (int i = 0; i < _list.count; ++i)
                 {
                     T value = _list.list[i] as T;
-                    if (value.KnobIndices.min > range.max)
-                        value.KnobIndices.shift(range.Count * -1);
+                    if (value.knobIndices.min > range.max)
+                        value.knobIndices.shift(range.Count * -1);
                 }
             }
+            #endregion
 
             public void doLayoutList()
             {

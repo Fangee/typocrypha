@@ -93,7 +93,7 @@ namespace TypocryphaGameflow
                 if (brCase.type == BranchCaseData.CaseType.Regex)
                     throw new System.NotImplementedException();
                 else if (checkTextCase(brCase.pattern, value))//brCase.type == BranchCaseData.CaseType.Text
-                    return dynamicConnectionPorts[brCase.KnobIndices.min].connection(0).body as BaseNode;
+                    return dynamicConnectionPorts[brCase.knobIndices.min].connection(0).body as BaseNode;
             }
             return toDefaultBranch.connection(0).body as BaseNode;
         }
@@ -119,19 +119,13 @@ namespace TypocryphaGameflow
                 Text,
                 Regex
             }
-            private static ConnectionKnobAttribute[] _knobAttributes =
-                new ConnectionKnobAttribute[] { new ConnectionKnobAttribute("To Branch Target", Direction.Out, "Gameflow", ConnectionCount.Single, NodeSide.Right) };
+
+            private static ConnectionKnobAttribute[] _knobAttributes = new ConnectionKnobAttribute[] { KnobAttributeOUT };
             public override ConnectionKnobAttribute[] KnobAttributes { get { return _knobAttributes; } }
-            [SerializeField]
-            private IntRange _knobIndices;
-            public override IntRange KnobIndices { get { return _knobIndices; } }
+
             public string pattern =  string.Empty;
             public CaseType type = CaseType.Text;
 
-            public BranchCaseData(int portIndex)
-            {
-                _knobIndices = new IntRange(portIndex);
-            }
             public override void doGUI(Rect rect, int index, AddItemFn addCallback, RmItemFn rmCallback)
             {
                 float xOffset = 0;
@@ -142,7 +136,7 @@ namespace TypocryphaGameflow
                 pattern = EditorGUI.TextField(UIrect, pattern);
                 xOffset += (UIrect.width + 2);
                 UIrect = new Rect(rect.x + xOffset, rect.y + 1, 20, EditorGUIUtility.singleLineHeight);
-                if (index >= 1 && GUI.Button(UIrect, "‒"))
+                if (GUI.Button(UIrect, "‒"))
                 {
                     rmCallback(index);
                     return;
