@@ -57,7 +57,7 @@ public class EnemyS : MonoBehaviour
 	public GameObject chargeBar;
 	
 	// AI State
-	public EnemyAI AI; // decides next spell to use
+	public EnemyAI AI;
 	
 	// Setup function
 	public void Setup()
@@ -71,6 +71,6 @@ public class EnemyS : MonoBehaviour
 		// Sets properies
 		health = enemyData.maxHP;
 		stagger = enemyData.maxStagger;
-		//charge = ask later
+		charge = 0;
 	}
 }
