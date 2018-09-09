@@ -26,6 +26,7 @@ public class PreTitle : MonoBehaviour {
 	Coroutine blink_caret; // blinks caret
 
 	void Awake () {
+        Time.timeScale = 1;
 		input_ready = false;
 		alpha_space = new Regex ("[ a-zA-Z]");
 		buffer = "";
