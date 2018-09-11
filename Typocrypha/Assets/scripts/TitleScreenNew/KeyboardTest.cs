@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +19,12 @@ public class KeyboardTest : MonoBehaviour
 	// Text to be placed in scrolling text boxes
 	public string instructionText;
 	public string testPhraseText;
+	
+	void Awake()
+	{
+		Time.timeScale = 1; // for some reason it only wants to print 1 character unless i copy this from
+							// the previous title screen script
+	}
 	
 	void Start() 
 	{
