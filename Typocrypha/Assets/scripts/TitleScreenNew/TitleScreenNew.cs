@@ -10,6 +10,7 @@ public class TitleScreenNew : MonoBehaviour
 	// text box property
 	// or maybe string property and just create the text box in script might be less painful
 	// OnClick()
+	// or just make unity events somehow
 	
 	void Start() 
 	{
