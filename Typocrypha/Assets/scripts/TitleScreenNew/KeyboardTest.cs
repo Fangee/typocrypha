@@ -14,9 +14,14 @@ public class KeyboardTest : MonoBehaviour
 	public Text testPhrase;
 	public InputField inputField;
 	
-	// Reference to necessary scripts
+	// References to necessary game objects
+	public GameObject titleScreenObj;
+	public GameObject dimmer;
+	
+	// References to necessary scripts
 	public TitleScreenNew titleScreen;
 	public TextScroll textScroll;
+	public TextEvents textEvents;
 	
 	// Reference to Audio Player
 	public AudioPlayer audioPlayer;
@@ -28,6 +33,9 @@ public class KeyboardTest : MonoBehaviour
 	// Variable for the case insensitive string comparison type
 	private StringComparison caseInsensitive;
 	
+	// Screen fade options
+	private string[] options = new string[5];
+	
 	void Awake()
 	{
 		Time.timeScale = 1; // for some reason it only wants to print 1 character unless i copy this from
@@ -36,6 +44,10 @@ public class KeyboardTest : MonoBehaviour
 		// Get the enum of types of string comparisons and set the caseInsensitive variable		
 		StringComparison[] comparisons = (StringComparison[]) Enum.GetValues(typeof(StringComparison));
 		caseInsensitive = comparisons[5];
+		
+		// Enable dimmer and disable title screen
+		dimmer.SetActive(true);
+		titleScreenObj.SetActive(false);
 	}
 	
 	void Start() 
@@ -45,6 +57,13 @@ public class KeyboardTest : MonoBehaviour
 		audioPlayer.setSFX(1, "sfx_enter");
 		audioPlayer.setSFX(2, "sfx_enter_bad");
 		
+		// Set options for screen fades
+		options[0] = "in"; // in vs out
+		options[1] = "0.5"; // length of fade in seconds
+		options[2] = "0"; // rgb values, (0, 0, 0) = black
+		options[3] = "0";
+		options[4] = "0"; 
+		
 		StartCoroutine(KeyboardTestSequence());
 	}
 		
@@ -52,6 +71,8 @@ public class KeyboardTest : MonoBehaviour
 	private IEnumerator KeyboardTestSequence()
 	{
 		// Fade in
+		StartCoroutine(textEvents.fade(options));
+		yield return new WaitForSeconds(1.0f);
 		
 		// Scroll Text
 		textScroll.startPrint(instructionText, instructions);
@@ -64,6 +85,21 @@ public class KeyboardTest : MonoBehaviour
 		// Activate input field and put it into focus
 		inputField.enabled = true;
 		inputField.Select();
+	}
+	
+	// Fade out screen and go to title screen
+	private IEnumerator TitleScreenTransition()
+	{
+		// Flash input text 4 times
+		
+		// Fade out
+		options[0] = "out";
+		options[1] = "1";
+		StartCoroutine(textEvents.fade(options));
+		yield return new WaitForSeconds(1.5f);	
+				
+		// Start Title Screen script
+		titleScreen.enabled = true;
 	}
 	
 	// EVENT FUNCTIONS
@@ -81,8 +117,8 @@ public class KeyboardTest : MonoBehaviour
 		{
 			audioPlayer.playSFX(1);
 			
-			// fade out
-			// go to next screen
+			// Transition to title screen
+			StartCoroutine(TitleScreenTransition());
 		}
 		else // Player did not type phrase correctly
 		{ 

@@ -190,7 +190,7 @@ public class TextEvents : MonoBehaviour {
 	//        [2]: float, red color component
 	//        [3]: float, green color component
 	//        [4]: float, blue color component
-	IEnumerator fade(string[] opt) {
+	public IEnumerator fade(string[] opt) {
 		float fade_time = float.Parse (opt [1]);
 		float r = float.Parse (opt [2]);
 		float g = float.Parse (opt [3]);
