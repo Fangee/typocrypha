@@ -56,7 +56,7 @@ namespace TypocryphaGameflow
             return ProcessFlag.Continue;
         }
 
-        public abstract class EventData : ReorderableListSOBase
+        public abstract class EventData : ReorderableSOList<EventData>.ListItem
         {
             public string characterName = "name";
             public abstract void characterControl(Character character); // Apply character control event
@@ -64,7 +64,7 @@ namespace TypocryphaGameflow
             {
                 get
                 {
-                    return base.Height * 2;
+                    return lineHeight * 2;
                 }
             }
         }

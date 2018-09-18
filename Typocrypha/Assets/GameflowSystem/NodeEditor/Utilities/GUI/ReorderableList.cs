@@ -10,72 +10,14 @@ namespace TypocryphaGameflow
 {
     namespace GUIUtilities
     {
-        #region List Item Abstract Classes
-
-        #region Serializable Class Items
-        public abstract class ReorderableListItem
-        {
-            public virtual float Height { get { return EditorGUIUtility.singleLineHeight + 1; } }
-            public abstract void doGUI(Rect rect);
-        }
-        public abstract class ReorderableListItemConnectionKnob
-        {
-            #region Standard ConnectionKnob Attributes
-            protected static ConnectionKnobAttribute KnobAttributeOUT = new ConnectionKnobAttribute("OUT", Direction.Out, "Gameflow", ConnectionCount.Single, NodeSide.Right);
-            protected static ConnectionKnobAttribute KnobAttributeIN = new ConnectionKnobAttribute("IN", Direction.In, "Gameflow", ConnectionCount.Multi, NodeSide.Left);
-            #endregion
-
-            #region Delegates
-            public delegate void AddItemFn(int index);
-            public delegate void RmItemFn(int index);
-            #endregion
-
-            public MathUtils.IntRange knobIndices;
-            public abstract ConnectionKnobAttribute[] KnobAttributes { get; }
-            public virtual float Height { get { return EditorGUIUtility.singleLineHeight + 1; } }
-            public abstract void doGUI(Rect rect, int index, AddItemFn addCallback, RmItemFn rmCallback);
-            public virtual void SetConnectionKnobPositions(Node n, Rect rect)
-            {
-                ((ConnectionKnob)n.dynamicConnectionPorts[knobIndices.min]).SetPosition(rect.yMin + (NodeEditorGUI.knobSize * 2) - 3);
-            }       
-        }
-        #endregion
-
-        #region Scriptable Object Items
-        //Inherit From this class to create a local abstract base type to inherit Reoderable List SO Items from
-        //Only define Subtypes in the the local abstract base and inherit individual Items from the local abstract base
-        public abstract class ReorderableListSOBase : ScriptableObject
-        {
-            public abstract void doGUI(Rect rect);
-            public virtual float Height { get { return EditorGUIUtility.singleLineHeight; } }
-        }
-        //Inherit From this class to create a local abstract base type to inherit Reoderable List SO Items (with connection knobs) from
-        //Only define Subtypes in the the local abstract base and inherit individual Items from the local abstract base
-        public abstract class ReorderableListSOConnectionKnobBase : ReorderableListSOBase
-        {
-            #region Standard ConnectionKnob Attributes
-            protected static ConnectionKnobAttribute KnobAttributeOUT = new ConnectionKnobAttribute("OUT", Direction.Out, "Gameflow", ConnectionCount.Single, NodeSide.Right);
-            protected static ConnectionKnobAttribute KnobAttributeIN = new ConnectionKnobAttribute("IN", Direction.In, "Gameflow", ConnectionCount.Multi, NodeSide.Left);
-            #endregion
-
-            public MathUtils.IntRange knobIndices;
-            public abstract ConnectionKnobAttribute[] KnobAttributes { get; }
-            public virtual void SetConnectionKnobPositions(Node n, Rect rect)
-            {
-                ((ConnectionKnob)n.dynamicConnectionPorts[knobIndices.min]).SetPosition(rect.yMax + NodeEditorGUI.knobSize / 2);
-            }
-        }
-        #endregion
-
-        #endregion
-
         #region List Classes
 
         #region Serializable Class Lists
         //Generic Reorderable list. 
         //T: Should only be used with non-polymorphic types marked with the System.Serializable attribute
-        public class ReorderableList<T> where T: ReorderableListItem
+        public class ReorderableList<T> where T: ReorderableList<T>.ListItem
         {
+            public float Height { get { return _list.GetHeight(); } }
             protected UnityEditorInternal.ReorderableList _list;
             public ReorderableList(List<T> elements, bool draggable = true, bool displayHeader = false, GUIContent headerLabel = null, bool displayAddButton = true, bool displayRemoveButton = true)
             {
@@ -110,11 +52,21 @@ namespace TypocryphaGameflow
             {
                 _list.DoList(rect);
             }
+
+            #region List Item
+            public abstract class ListItem
+            {
+                protected static float lineHeight = EditorGUIUtility.singleLineHeight + 1;
+                public abstract float Height { get; }
+                public abstract void doGUI(Rect rect);
+            }
+            #endregion
         }
         //Generic Reorderable list for list items that Have associated connection knobs. 
         //T: Should only be used with non-polymorphic types marked with the System.Serializable attribute and inheriting ReorderableListItemConnectionKnob
-        public class ReorderableListConnectionKnob<T> where T : ReorderableListItemConnectionKnob
+        public class ReorderableListConnectionKnob<T> where T : ReorderableListConnectionKnob<T>.ListItem
         {
+            public float Height { get { return _list.GetHeight(); } }
             protected UnityEditorInternal.ReorderableList _list;
             public ReorderableListConnectionKnob(Node node, List<T> elements, bool draggable = true, bool displayHeader = false, GUIContent headerLabel = null, bool displayAddButton = true, bool displayRemoveButton = true)
             {
@@ -208,13 +160,37 @@ namespace TypocryphaGameflow
             {
                 _list.DoList(rect);
             }
+
+            #region List Item
+            public abstract class ListItem
+            {
+                #region Standard ConnectionKnob Attributes
+                protected static ConnectionKnobAttribute KnobAttributeOUT = new ConnectionKnobAttribute("OUT", Direction.Out, "Gameflow", ConnectionCount.Single, NodeSide.Right);
+                protected static ConnectionKnobAttribute KnobAttributeIN = new ConnectionKnobAttribute("IN", Direction.In, "Gameflow", ConnectionCount.Multi, NodeSide.Left);
+                #endregion
+
+                #region Delegates
+                public delegate void AddItemFn(int index);
+                public delegate void RmItemFn(int index);
+                #endregion
+
+                protected static float lineHeight = EditorGUIUtility.singleLineHeight + 1;
+
+                public MathUtils.IntRange knobIndices;
+                public abstract ConnectionKnobAttribute[] KnobAttributes { get; }
+                public abstract float Height { get; }
+                public abstract void doGUI(Rect rect, int index, AddItemFn addCallback, RmItemFn rmCallback);
+                public abstract void SetConnectionKnobPositions(Node n, Rect rect);
+            }
+            #endregion
         }
         #endregion
 
         #region Scriptable Object Class Lists
         //Specific reorderablelist implementation to be used with polymorphic scriptable objects that inherit from an abstract base that inherits from ReorderableListSOBase
-        public class ReorderableSOList<T> where T: ReorderableListSOBase
+        public class ReorderableSOList<T> where T: ReorderableSOList<T>.ListItem
         {
+            public float Height { get { return _list.GetHeight(); } }
             protected UnityEditorInternal.ReorderableList _list;
             private IEnumerable _subtypes;
             public ReorderableSOList(List<T> elements, bool draggable = true, bool displayHeader = false, GUIContent headerLabel = null, bool displayAddButton = true, bool displayRemoveButton = true)
@@ -275,10 +251,22 @@ namespace TypocryphaGameflow
             {
                 _list.DoList(rect);
             }
+
+            #region List Item
+            //Inherit From this class to create a local abstract base type to inherit Reoderable List SO Items from
+            //Only define Subtypes in the the local abstract base and inherit individual Items from the local abstract base
+            public abstract class ListItem : ScriptableObject
+            {
+                protected static float lineHeight = EditorGUIUtility.singleLineHeight + 1;
+                public abstract void doGUI(Rect rect);
+                public abstract float Height { get; }
+            }
+            #endregion
         }
         //Specific reorderablelist implementation to be used with polymorphic scriptable objects that inherit from an abstract base that inherits from ReorderableListSOBaseConnectionKnob
-        public class ReorderableSOListConnectionKnob<T> where T : ReorderableListSOConnectionKnobBase
+        public class ReorderableSOListConnectionKnob<T> where T : ReorderableSOListConnectionKnob<T>.ListItem
         {
+            public float Height { get { return _list.GetHeight(); } }
             protected UnityEditorInternal.ReorderableList _list;
             private IEnumerable _subtypes;
             public ReorderableSOListConnectionKnob(Node node, List<T> elements, bool draggable = true, bool displayHeader = false, GUIContent headerLabel = null, bool displayAddButton = true, bool displayRemoveButton = true)
@@ -315,6 +303,10 @@ namespace TypocryphaGameflow
                         doAddMenu(node);
                     };
                 }
+                _list.onRemoveCallback = (list) =>
+                {
+                    removeItem(node, list.index);
+                };
             }
             private void doAddMenu(Node toAddTo)
             {
@@ -345,7 +337,6 @@ namespace TypocryphaGameflow
                 }
                 _list.list.Insert(index, item);
                 CorrectNodeIndicesAfterInsert(item);
-                _list.displayAdd = false;
             }
             private void CorrectNodeIndicesAfterInsert(T insertedValue)
             {
@@ -364,7 +355,7 @@ namespace TypocryphaGameflow
                 int count = 0;
                 for (int i = 0; i < index; ++i)
                 {
-                    count += (_list.list[index] as T).knobIndices.Count;
+                    count += (_list.list[i] as T).knobIndices.Count;
                 }
                 return count;
             }
@@ -375,7 +366,6 @@ namespace TypocryphaGameflow
                     node.DeleteConnectionPort(range.min);
                 _list.list.RemoveAt(index);
                 CorrectNodeIndicesAfterRemove(range);
-                _list.displayAdd = _list.count <= 0;
             }
             private void CorrectNodeIndicesAfterRemove(MathUtils.IntRange range)
             {
@@ -407,6 +397,26 @@ namespace TypocryphaGameflow
                     this.addTo = addTo;
                 }
             }
+
+            #region List Item
+            //Inherit From this class to create a local abstract base type to inherit Reoderable List SO Items (with connection knobs) from
+            //Only define Subtypes in the the local abstract base and inherit individual Items from the local abstract base
+            public abstract class ListItem : ReorderableSOList<T>.ListItem
+            {
+                #region Standard ConnectionKnob Attributes
+                protected static ConnectionKnobAttribute KnobAttributeOUT = new ConnectionKnobAttribute("OUT", Direction.Out, "Gameflow", ConnectionCount.Single, NodeSide.Right);
+                protected static ConnectionKnobAttribute KnobAttributeIN = new ConnectionKnobAttribute("IN", Direction.In, "Gameflow", ConnectionCount.Multi, NodeSide.Left);
+                protected static void SetSingleConnectionKnob(ListItem item, Node n, Rect rect)
+                {
+                    ((ConnectionKnob)n.dynamicConnectionPorts[item.knobIndices.min]).SetPosition(rect.yMin + (NodeEditorGUI.knobSize * 2) - 3);
+                }
+                #endregion
+
+                public MathUtils.IntRange knobIndices;
+                public abstract ConnectionKnobAttribute[] KnobAttributes { get; }
+                public abstract void SetConnectionKnobPositions(Node n, Rect rect);
+            }
+            #endregion
         }
         #endregion
 

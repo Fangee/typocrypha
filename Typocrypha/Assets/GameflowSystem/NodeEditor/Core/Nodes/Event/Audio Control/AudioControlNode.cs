@@ -52,7 +52,7 @@ namespace TypocryphaGameflow
             throw new NotImplementedException();
         }
 
-        public abstract class EventData : ReorderableListSOBase
+        public abstract class EventData : ReorderableSOList<EventData>.ListItem
         {
             public override float Height
             {

@@ -112,7 +112,7 @@ namespace TypocryphaGameflow
         #endregion
 
         [System.Serializable]
-        class BranchCaseData : ReorderableListItemConnectionKnob
+        class BranchCaseData : ReorderableListConnectionKnob<BranchCaseData>.ListItem
         {
             public enum CaseType
             {
@@ -122,6 +122,7 @@ namespace TypocryphaGameflow
 
             private static ConnectionKnobAttribute[] _knobAttributes = new ConnectionKnobAttribute[] { KnobAttributeOUT };
             public override ConnectionKnobAttribute[] KnobAttributes { get { return _knobAttributes; } }
+            public override float Height { get { return lineHeight; } }
 
             public string pattern =  string.Empty;
             public CaseType type = CaseType.Text;
@@ -148,6 +149,10 @@ namespace TypocryphaGameflow
                     addCallback(index + 1);
                 }
             }
-        }
+            public override void SetConnectionKnobPositions(Node n, Rect rect)
+            {
+                ((ConnectionKnob) n.dynamicConnectionPorts[knobIndices.min]).SetPosition(rect.yMin + (NodeEditorGUI.knobSize* 2) - 3);
+            }
+    }
     }
 }

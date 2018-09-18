@@ -21,7 +21,7 @@ namespace TypocryphaGameflow
         {
             get
             {
-                return EditorGUIUtility.singleLineHeight * 2 + 2;
+                return lineHeight * 2;
             }
         }
     }
