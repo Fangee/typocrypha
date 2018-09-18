@@ -20,6 +20,9 @@ public class TitleScreenNew : MonoBehaviour
 	// References to necessary scripts
 	public TextEvents textEvents;
 	
+	// Reference to Audio Player
+	public AudioPlayer audioPlayer;
+	
 	// Properties for navigating the menu
 	private int index;
 	private int top;
@@ -46,6 +49,13 @@ public class TitleScreenNew : MonoBehaviour
 	
 	void Start() 
 	{
+		// Play BGM
+		audioPlayer.playMusic("bgm_title_loop");
+		
+		// Set SFX channels
+		audioPlayer.setSFX(0, "sfx_enemy_select");
+		audioPlayer.setSFX(1, "sfx_enter");
+		
 		// Populate menu options array
 		menuOptions[0] = continueObj;
 		menuOptions[1] = loadGame;
@@ -94,6 +104,8 @@ public class TitleScreenNew : MonoBehaviour
 		// Player presses up
 		if(Input.GetKeyDown("up"))
 		{
+            audioPlayer.playSFX(0);
+
 			// Move the index up
 			previous = index;
 			index -= 1;
@@ -111,6 +123,8 @@ public class TitleScreenNew : MonoBehaviour
 		// Player pressed down
 		if(Input.GetKeyDown("down"))
 		{
+			audioPlayer.playSFX(0);
+		
 			// Move the index down
 			previous = index;
 			index += 1;
@@ -128,6 +142,8 @@ public class TitleScreenNew : MonoBehaviour
 		// Player presses enter
 		if(Input.GetKeyDown("return") || Input.GetKeyDown("enter"))
 		{
+			audioPlayer.playSFX(1);
+			
 			// Call appropriate function based on which menu option is currently selected
 			switch(index)
 			{
@@ -207,8 +223,3 @@ public class TitleScreenNew : MonoBehaviour
 		Debug.Log("Quit Pressed");
 	}
 }
-
-// still to do: SFX
-// see if audio manager is loading too slow or something
-// remove keytest skip
-// maybe add comments on how to add menu options

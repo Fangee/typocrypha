@@ -125,7 +125,7 @@ public class KeyboardTest : MonoBehaviour
 	public void CheckInput(string input)
 	{
 		// if the player typed the phrase correctly (ignoring case)
-		if(String.Equals(testPhraseText, input, caseInsensitive) || String.Equals("s", input))
+		if(String.Equals(testPhraseText, input, caseInsensitive))
 		{
 			audioPlayer.playSFX(1);
 			
