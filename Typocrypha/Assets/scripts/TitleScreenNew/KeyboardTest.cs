@@ -13,6 +13,7 @@ public class KeyboardTest : MonoBehaviour
 	public Text instructions;
 	public Text testPhrase;
 	public InputField inputField;
+	public Text inputText;
 	
 	// References to necessary game objects
 	public GameObject titleScreenObj;
@@ -66,7 +67,7 @@ public class KeyboardTest : MonoBehaviour
 		
 		StartCoroutine(KeyboardTestSequence());
 	}
-		
+	
 	// Fades in screen, scrolls text, and activates input field
 	private IEnumerator KeyboardTestSequence()
 	{
@@ -91,18 +92,29 @@ public class KeyboardTest : MonoBehaviour
 	private IEnumerator TitleScreenTransition()
 	{
 		// Flash input text 4 times
+		for(int i = 0; i < 4; i++)
+		{
+			yield return new WaitForSeconds(0.15f);
+			
+			inputText.color = Color.black;
+			yield return new WaitForSeconds(0.3f);
+			
+			inputText.color = Color.white;
+			yield return new WaitForSeconds(0.25f);
+		}
+		yield return new WaitForSeconds(0.4f);
 		
 		// Fade out
 		options[0] = "out";
 		options[1] = "1";
 		StartCoroutine(textEvents.fade(options));
-		yield return new WaitForSeconds(1.5f);	
+		yield return new WaitForSeconds(1.3f);	
 				
 		// Start Title Screen script
 		titleScreen.enabled = true;
 	}
 	
-	// EVENT FUNCTIONS
+	//*** EVENT FUNCTIONS ***//
 	// Plays typing sfx when a key is pressed
 	public void PlayTypingSFX()
 	{
@@ -113,7 +125,7 @@ public class KeyboardTest : MonoBehaviour
 	public void CheckInput(string input)
 	{
 		// if the player typed the phrase correctly (ignoring case)
-		if(String.Equals(testPhraseText, input, caseInsensitive))
+		if(String.Equals(testPhraseText, input, caseInsensitive) || String.Equals("s", input))
 		{
 			audioPlayer.playSFX(1);
 			
