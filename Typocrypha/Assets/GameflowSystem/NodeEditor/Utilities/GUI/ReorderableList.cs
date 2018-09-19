@@ -240,7 +240,8 @@ namespace TypocryphaGameflow
             private void clickHandler(object obj)
             {
                 var data = (System.Type)obj;
-                _list.list.Add(ScriptableObject.CreateInstance(data));
+                T item = ScriptableObject.CreateInstance(data) as T;
+                _list.list.Add(item);
             }
 
             public void doLayoutList()

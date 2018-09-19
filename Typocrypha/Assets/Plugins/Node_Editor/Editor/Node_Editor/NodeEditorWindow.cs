@@ -39,24 +39,25 @@ namespace NodeEditorFramework.Standard
 			return _editor;
 		}
 
-		/*
-		/// <summary>
-		/// Assures that the canvas is opened when double-clicking a canvas asset
-		/// </summary>
-		[UnityEditor.Callbacks.OnOpenAsset(1)]
-		private static bool AutoOpenCanvas(int instanceID, int line)
-		{
-			if (Selection.activeObject != null && Selection.activeObject is NodeCanvas)
-			{
-				string NodeCanvasPath = AssetDatabase.GetAssetPath(instanceID);
-				OpenNodeEditor().canvasCache.LoadNodeCanvas(NodeCanvasPath);
-				return true;
-			}
-			return false;
-		}
-		*/
-			
-		private void OnEnable()
+        /*
+		/ <summary>
+		/ Assures that the canvas is opened when double-clicking a canvas asset
+		/ </summary>
+        */
+        [UnityEditor.Callbacks.OnOpenAsset(1)]
+        private static bool AutoOpenCanvas(int instanceID, int line)
+        {
+            if (Selection.activeObject != null && Selection.activeObject is NodeCanvas)
+            {
+                string NodeCanvasPath = AssetDatabase.GetAssetPath(instanceID);
+                OpenNodeEditor().canvasCache.LoadNodeCanvas(NodeCanvasPath);
+                return true;
+            }
+            return false;
+        }
+
+
+        private void OnEnable()
 		{
 			_editor = this;
 			NormalReInit();

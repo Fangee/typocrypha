@@ -46,21 +46,24 @@ namespace TypocryphaGameflow
             List<ScriptableObject> ret = new List<ScriptableObject>();
             ret.AddRange(_events.ToArray());
             foreach (BattleEvent e in _events)
-                ret.AddRange(e.getScriptableObjects());
+                ret.AddRange(e._conditions.ToArray());
             return ret.ToArray();
-            //TRY ADDING TO INDIVIDUAL SUB ASSET HERE
         }
 
         protected override void CopyScriptableObjects(Func<ScriptableObject, ScriptableObject> replaceSO)
         {
             for (int i = 0; i < _events.Count; ++i)
             {
-                for(int j = 0; j < _events[i].getScriptableObjects().Length; ++j)
+                List<BattleEventCondition> sublist = new List<BattleEventCondition>();
+                for (int j = 0; j < _events[i]._conditions.Count; ++j)
                 {
-                    ScriptableObject so = _events[i].getScriptableObjects()[j];
+                    ScriptableObject so = _events[i]._conditions[j];
                     so = replaceSO(so);
+                    sublist.Add(so as BattleEventCondition);
                 }
                 _events[i] = (BattleEvent)replaceSO(_events[i]);
+                _events[i]._conditions.Clear();
+                _events[i]._conditions.AddRange(sublist);
             }
         }
 
@@ -144,7 +147,7 @@ namespace TypocryphaGameflow
             protected abstract GUIContent TitleLabel { get; }
 
             [SerializeField]
-            private List<BattleEventCondition> _conditions = new List<BattleEventCondition>();
+            public List<BattleEventCondition> _conditions = new List<BattleEventCondition>();
             public ReorderableSOList<BattleEventCondition> conditions = null;
 
             public abstract bool processEvent(BattleField field, BattleDataTracker battleData);
@@ -165,10 +168,6 @@ namespace TypocryphaGameflow
                 conditionOperator = (ConditionOperator)EditorGUI.EnumPopup(UIrect, conditionOperator);
                 Rect ListRect = new Rect(rect) { y = UIrect.y + lineHeight, height = conditions.Height };
                 conditions.doList(ListRect);
-            }
-            public ScriptableObject[] getScriptableObjects()
-            {
-                return _conditions.ToArray();
             }
         }
 

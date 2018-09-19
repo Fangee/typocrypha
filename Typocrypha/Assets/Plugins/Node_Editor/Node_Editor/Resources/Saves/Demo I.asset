@@ -602,18 +602,26 @@ MonoBehaviour:
   fromPreviousIN: {fileID: 114344675162332082}
   toDefaultBranch: {fileID: 114304716933412648}
   _cases:
-  - pattern: Red
+  - knobIndices:
+      min: 0
+      max: 0
+    pattern: Red
     type: 0
-    portIndex: 0
-  - pattern: Blue
+  - knobIndices:
+      min: 0
+      max: 0
+    pattern: Blue
     type: 0
-    portIndex: 1
-  - pattern: Yellow
+  - knobIndices:
+      min: 0
+      max: 0
+    pattern: Yellow
     type: 0
-    portIndex: 2
-  - pattern: Green
+  - knobIndices:
+      min: 0
+      max: 0
+    pattern: Green
     type: 0
-    portIndex: 3
   exprType: 1
   variableName: 
 --- !u!114 &114344404771417996
@@ -716,12 +724,16 @@ MonoBehaviour:
   fromPreviousIN: {fileID: 114775373028140024}
   toDefaultBranch: {fileID: 114462023430367560}
   _cases:
-  - pattern: blue
+  - knobIndices:
+      min: 0
+      max: 0
+    pattern: blue
     type: 0
-    portIndex: 0
-  - pattern: green
+  - knobIndices:
+      min: 0
+      max: 0
+    pattern: green
     type: 0
-    portIndex: 1
   exprType: 0
   variableName: favorite-color
 --- !u!114 &114466923754483422
