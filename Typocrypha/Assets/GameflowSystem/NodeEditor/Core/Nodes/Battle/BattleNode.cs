@@ -9,8 +9,5 @@ namespace TypocryphaGameflow
     public abstract class BattleNode : BaseNodeIO
     {
         public override bool AllowRecursion { get { return true; } }
-
-        #region Game
-        #endregion
     }
 }

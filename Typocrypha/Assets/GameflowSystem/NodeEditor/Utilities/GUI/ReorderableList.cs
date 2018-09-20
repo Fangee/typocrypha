@@ -31,7 +31,7 @@ namespace TypocryphaGameflow
                 };
                 _list.elementHeightCallback = (index) => { return elements[index].Height; };
                 _list.drawHeaderCallback = (Rect rect) => {
-                    EditorGUI.LabelField(rect, headerLabel, new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter });
+                    EditorGUI.LabelField(rect, headerLabel, new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold });
                 };
                 _list.drawElementBackgroundCallback = (rect, index, active, focused) => {
                     if (_list.count <= 0)
@@ -205,7 +205,7 @@ namespace TypocryphaGameflow
                 };
                 _list.elementHeightCallback = (index) => { return elements[index].Height; };
                 _list.drawHeaderCallback = (Rect rect) => {
-                    EditorGUI.LabelField(rect, headerLabel, new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter });
+                    EditorGUI.LabelField(rect, headerLabel, new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold });
                 };
                 _list.drawElementBackgroundCallback = (rect, index, active, focused) => {
                     if (_list.count <= 0)
@@ -284,7 +284,7 @@ namespace TypocryphaGameflow
                 };
                 _list.elementHeightCallback = (index) => { return elements[index].Height; };
                 _list.drawHeaderCallback = (Rect rect) => {
-                    EditorGUI.LabelField(rect, headerLabel, new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter });
+                    EditorGUI.LabelField(rect, headerLabel, new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold });
                 };
                 _list.drawElementBackgroundCallback = (rect, index, active, focused) => {
                     if (_list.count <= 0)
@@ -330,14 +330,22 @@ namespace TypocryphaGameflow
             public void AddItem(Node node, System.Type type, int index)
             {
                 T item = ScriptableObject.CreateInstance(type) as T;
-                int knobsBeforeItem = getNumKnobsBeforeIndex(index);
-                item.knobIndices = new MathUtils.IntRange(knobsBeforeItem, knobsBeforeItem + item.KnobAttributes.Length - 1);
-                for (int i = item.knobIndices.min; i <= item.knobIndices.max; ++i)
+                if(item.KnobAttributes.Length > 0)
                 {
-                    node.CreateConnectionKnob(item.KnobAttributes[i - item.knobIndices.min], i);
+                    int knobsBeforeItem = getNumKnobsBeforeIndex(index);
+                    item.knobIndices = new MathUtils.IntRange(knobsBeforeItem, knobsBeforeItem + item.KnobAttributes.Length - 1);
+                    for (int i = item.knobIndices.min; i <= item.knobIndices.max; ++i)
+                    {
+                        node.CreateConnectionKnob(item.KnobAttributes[i - item.knobIndices.min], i);
+                    }
+                    _list.list.Insert(index, item);
+                    CorrectNodeIndicesAfterInsert(item);
                 }
-                _list.list.Insert(index, item);
-                CorrectNodeIndicesAfterInsert(item);
+                else
+                {
+                    item.knobIndices = new MathUtils.IntRange(-1);
+                    _list.list.Insert(index, item);
+                }
             }
             private void CorrectNodeIndicesAfterInsert(T insertedValue)
             {
@@ -362,11 +370,17 @@ namespace TypocryphaGameflow
             }
             public void removeItem(Node node, int index)
             {
-                MathUtils.IntRange range = (_list.list[index] as T).knobIndices;
-                for (int i = 0; i < range.Count; ++i)
-                    node.DeleteConnectionPort(range.min);
-                _list.list.RemoveAt(index);
-                CorrectNodeIndicesAfterRemove(range);
+                MathUtils.IntRange knobIndices = (_list.list[index] as T).knobIndices;
+                if (knobIndices.Count > 0)
+                {
+                    for (int i = 0; i < knobIndices.Count; ++i)
+                        node.DeleteConnectionPort(knobIndices.min);
+                    _list.list.RemoveAt(index);
+                    CorrectNodeIndicesAfterRemove(knobIndices);
+                }
+                else
+                    _list.list.RemoveAt(index);
+
             }
             private void CorrectNodeIndicesAfterRemove(MathUtils.IntRange range)
             {

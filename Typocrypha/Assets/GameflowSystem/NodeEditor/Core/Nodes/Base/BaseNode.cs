@@ -20,6 +20,6 @@ namespace TypocryphaGameflow
     public class GameflowType : ConnectionKnobStyle //: IConnectionTypeDeclaration
     {
         public override string Identifier { get { return "Gameflow"; } }
-        public override Color Color { get { return Color.cyan; } }
+        public override Color Color { get { return Color.white; } }
     }
 }
