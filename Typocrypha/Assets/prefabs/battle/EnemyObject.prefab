@@ -55,6 +55,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224553290969381154}
+  - component: {fileID: 114795244995038768}
   m_Layer: 5
   m_Name: Health
   m_TagString: Untagged
@@ -650,12 +651,28 @@ MonoBehaviour:
   blocked: 0
   enemyData: {fileID: 11400000, guid: cb90bedfc1cc41a4b88c66cdbf3d0e10, type: 2}
   spriteImage: {fileID: 114153323576490130}
-  animator: {fileID: 0}
   healthUI: {fileID: 1259066817076926}
   chargeUI: {fileID: 1887905657316760}
   staggerUI: {fileID: 1481350274242286}
   enemyName: {fileID: 114968031083072052}
   spellName: {fileID: 114884529924661572}
+--- !u!114 &114795244995038768
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1259066817076926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ab3915ff543981429f4e181bede1943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: {fileID: 224706526515565892}
+  shadow: {fileID: 224344864048857492}
+  delay: 0
+  shadowDelay: 0.5
+  time: 0
+  shadowTime: 0.5
 --- !u!114 &114884529924661572
 MonoBehaviour:
   m_ObjectHideFlags: 1

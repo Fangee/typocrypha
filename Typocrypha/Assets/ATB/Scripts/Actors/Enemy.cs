@@ -22,16 +22,17 @@ namespace ATB
         public EnemyAI AI;
 
         // Propertes 
-        private int _health; // health property field
+        private int _health; // current health property field
         public int health
         {
             get
             {
-                return _health; // returns field
+                return _health;
             }
             set
             {
-                _health = value; // allocates field
+                _health = value;
+                healthUI.GetComponent<ShadowBar>().curr = (float)_health / (float)enemyData.maxHP;
             }
         }
 
@@ -111,6 +112,12 @@ namespace ATB
         public void staggerEnemy()
         {
             stagger--;
+        }
+
+        // TESTING: Damage enemy by 5
+        public void damageEnemy()
+        {
+            health -= 50;
         }
     }
 }
