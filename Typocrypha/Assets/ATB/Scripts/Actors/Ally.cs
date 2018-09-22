@@ -28,14 +28,19 @@ namespace ATB
 
         void Start()
         {
-            currMP = 0f;
-            StartCoroutine(chargeMP());
+            Setup();
         }
 
         void Update()
         {
             if (Input.GetKeyDown(allyKey))
                 castMenu();
+        }
+
+        public override void Setup()
+        {
+            currMP = 0f;
+            StartCoroutine(chargeMP());
         }
 
         // Charges MP (ticks based on fixed update loop)

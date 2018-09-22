@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ATB
 {
     // Baseclass for entities with state in the ATB system
-    public class Actor : MonoBehaviour
+    public abstract class Actor : MonoBehaviour
     {
         public Animator stateMachine; // ATB state machine: Uses Unity animation system
         [HideInInspector]public StateType currStateType; // Current state type state machine is in
@@ -20,5 +20,7 @@ namespace ATB
         }
         [HideInInspector]public bool blocked; // Can this actor send messages to the ATB system?
 
+        // Initialization function
+        public abstract void Setup();
     }
 }

@@ -89,11 +89,11 @@ namespace ATB
 
         void Start()
         {
-            Setup(); // FOR TESTING
+            Setup(); // TESTING
         }
 
         // Setup function
-        public void Setup()
+        public override void Setup()
         {
             // Sets properties from enemy data
             health = enemyData.maxHP;
@@ -117,7 +117,7 @@ namespace ATB
         // TESTING: Damage enemy by 5
         public void damageEnemy()
         {
-            health -= 50;
+            health -= 30;
         }
     }
 }
