@@ -30,10 +30,7 @@ public class KeyboardTest : MonoBehaviour
 	// Text to be placed in scrolling text boxes
 	public string instructionText;
 	public string testPhraseText;
-	
-	// Variable for the case insensitive string comparison type
-	private StringComparison caseInsensitive;
-	
+		
 	// Screen fade options
 	private string[] options = new string[5];
 	
@@ -41,10 +38,6 @@ public class KeyboardTest : MonoBehaviour
 	{
 		Time.timeScale = 1; // for some reason it only wants to print 1 character unless i copy this from
 							// the previous title screen script
-							
-		// Get the enum of types of string comparisons and set the caseInsensitive variable		
-		StringComparison[] comparisons = (StringComparison[]) Enum.GetValues(typeof(StringComparison));
-		caseInsensitive = comparisons[5];
 		
 		// Enable dimmer and disable title screen
 		dimmer.SetActive(true);
@@ -57,6 +50,7 @@ public class KeyboardTest : MonoBehaviour
 		audioPlayer.setSFX(0, "sfx_type_key");
 		audioPlayer.setSFX(1, "sfx_enter");
 		audioPlayer.setSFX(2, "sfx_enter_bad");
+		audioPlayer.setSFX(5, "sfx_backspace");
 		
 		// Set options for screen fades
 		options[0] = "in"; // in vs out
@@ -66,6 +60,16 @@ public class KeyboardTest : MonoBehaviour
 		options[4] = "0"; 
 		
 		StartCoroutine(KeyboardTestSequence());
+	}
+	
+	void Update()
+	{
+		// Whenever the player types
+		if(Input.anyKeyDown && inputField.enabled)
+		{
+			// Called in update now instead of InputField.OnValueChanged() to prevent looping with ConvertCaps()
+			PlayTypingSFX();
+		}
 	}
 	
 	// Fades in screen, scrolls text, and activates input field
@@ -114,18 +118,37 @@ public class KeyboardTest : MonoBehaviour
 		titleScreen.enabled = true;
 	}
 	
-	//*** EVENT FUNCTIONS ***//
 	// Plays typing sfx when a key is pressed
 	public void PlayTypingSFX()
 	{
-		audioPlayer.playSFX(0);
+		// Player pressed the backspace key
+		if(Input.GetKeyDown("backspace") || Input.GetKeyDown("delete"))
+		{
+			// Play backspace sound
+			audioPlayer.playSFX(5);
+		}
+		// Player pressed a letter key
+		else if(!Input.GetKeyDown("enter") && !Input.GetKeyDown("return") 
+			 && !Input.GetKeyDown("right shift") && !Input.GetKeyDown("left shift"))
+		{
+			// Play typing sound
+			audioPlayer.playSFX(0);
+		}
 	}
 	
-	// Checks to see if the input is correct
-	public void CheckInput(string input)
+	//*** EVENT FUNCTIONS ***//
+	// Converts all input to capital letters
+	public void ConvertCaps()
 	{
-		// if the player typed the phrase correctly (ignoring case)
-		if(String.Equals(testPhraseText, input, caseInsensitive))
+		// Change input to uppercase
+		inputField.text = inputField.text.ToUpper();
+	}
+
+	// Checks to see if the input is correct
+	public void CheckInput()
+	{
+		// if the player typed the phrase correctly
+		if(String.Equals(testPhraseText, inputField.text))
 		{
 			audioPlayer.playSFX(1);
 			
