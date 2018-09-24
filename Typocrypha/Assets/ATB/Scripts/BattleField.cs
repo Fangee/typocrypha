@@ -12,6 +12,8 @@ namespace ATB
         public ATB.Enemy[] enemies;
         [HideInInspector] public List<Actor> allActors;
 
+        public CastBar castBar; // Input for player cast spells
+
         void Start()
         {
             allActors = new List<Actor>();

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace ATB
 {
@@ -11,7 +12,7 @@ namespace ATB
         // UI Objects
         public GameObject healthUI; // health bar
 
-        // Propertes 
+        // Propertes
         private int _health; // current health property field
         public int health
         {
