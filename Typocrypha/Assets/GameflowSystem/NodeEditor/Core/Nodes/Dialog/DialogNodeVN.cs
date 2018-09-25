@@ -64,7 +64,8 @@ namespace TypocryphaGameflow
         {
             Debug.Log("VN: " + characterName + ": " + text);
             managers.dialogManager.setEnabled(true);
-            managers.battleManager.setEnabled(false);
+            //managers.battleManager.setEnabled(false);
+            //TODO: Switching to battle
             //TODO: Set expression if necessary
             managers.characterManager.speak(characterName);
             managers.dialogManager.startDialogLine(DialogManager.DialogViewType.VN, new DialogItemVN(text, characterName, null, null));

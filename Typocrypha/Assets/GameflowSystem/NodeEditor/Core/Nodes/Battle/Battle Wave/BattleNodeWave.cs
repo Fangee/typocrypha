@@ -112,7 +112,8 @@ namespace TypocryphaGameflow
         #region Game
         public override ProcessFlag process(GameManagers managers)
         {
-            throw new NotImplementedException();
+            managers.waveManager.startWave(this);
+            return ProcessFlag.Wait;
         }
         #endregion
 

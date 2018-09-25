@@ -57,7 +57,8 @@ namespace TypocryphaGameflow
         {
             Debug.Log("AN: " + text);
             managers.dialogManager.setEnabled(true);
-            managers.battleManager.setEnabled(false);
+            //managers.battleManager.setEnabled(false);
+            //TODO: switching between dialog and battle
             //TODO: Set expression if necessary
             managers.characterManager.speak(characterName);
             managers.dialogManager.startDialogLine(DialogManager.DialogViewType.AN, new DialogItemAN(text));
