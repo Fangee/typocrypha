@@ -34,7 +34,11 @@ namespace TypocryphaGameflow
         {
             GameObject waveTransition = Instantiate(waveTransitionPrefab, waveTransitionCanvas.transform);
             waveTransition.transform.Find("WaveBannerText").GetComponent<Text>().text = DialogParser.main.substituteMacros(waveData.waveTitle);
-            waveTransition.transform.Find("WaveTitleText").GetComponent<Text>().text = "Wave " + ++waveNum + "/ " + totalWaves; ;
+            waveTransition.transform.Find("WaveTitleText").GetComponent<Text>().text = "Wave " + ++waveNum + "/ " + totalWaves;
+        }
+        public void startCombat()
+        {
+            Debug.Log("Battle COntinues");
         }
     }
 
