@@ -4,24 +4,29 @@ using UnityEngine;
 
 namespace ATB
 {
-    public class Ally : Actor
+    // Allys that help the player in battle with ally casting
+    public class Ally : Caster
     {
-        public string allyName; // Name of this type of enemy
-        public float maxMP; // Max possible MP
-        public float MPRechargeRate; // Rate (per second) of MP recharge
-        public float castCost; // MP cost of spell
-        public RectTransform mpBar; // MP bar transform (for showing progress)
-        float _currMP; // Current MP
-        public float currMP
+        // ALLY DATA SCRIPTABLE OBJECT
+        public float maxMP; // TESTING: Max possible MP
+        public float MPRechargeRate; // TESTING: Rate (per second) of MP recharge
+        public float castCost; // TESTING: MP cost of spell 
+
+        // UI Objects
+        public GameObject mpUI; // MP bar
+
+        // Properties
+        float _mp; // Current MP
+        public float mp
         {
             get
             {
-                return _currMP;
+                return _mp;
             }
             set
             {
-                _currMP = value;
-                mpBar.localScale = new Vector3(_currMP/maxMP, mpBar.localScale.y, 1f);
+                _mp = value;
+                mpUI.GetComponent<ShadowBar>().curr = value / maxMP;
             }
         }
         public KeyCode allyKey; // Key pressed to activate this ally
@@ -33,27 +38,29 @@ namespace ATB
 
         void Update()
         {
-            if (Input.GetKeyDown(allyKey))
-                castMenu();
+            if (Input.GetKeyDown(allyKey)) castMenu();
         }
 
+        // Setup function
         public override void Setup()
         {
-            currMP = 0f;
-            StartCoroutine(chargeMP());
+            castBar.hidden = true;
+            castBar.focus = false;
+            mp = 0;
+            StartCoroutine(chargeMPCR());
         }
 
         // Charges MP (ticks based on fixed update loop)
-        IEnumerator chargeMP()
+        IEnumerator chargeMPCR()
         {
             yield return new WaitForSeconds(1f); // TESTING: start up time
             float step = MPRechargeRate * Time.fixedDeltaTime; // Amount updated per frame
             for (;;)
             {
-                if (currMP + step > maxMP)
-                    currMP = maxMP;
-                else if (!pause && currStateType == StateType.allyCharge && currMP < maxMP)
-                    currMP += step;     
+                if (mp + step > maxMP)
+                    mp = maxMP;
+                else if (!pause && currStateType == StateType.allyCharge && mp < maxMP)
+                    mp += step;     
                 yield return new WaitForSeconds(Time.fixedDeltaTime);
             }
         }
@@ -73,7 +80,7 @@ namespace ATB
         }
 
         // Cast selected ally spell
-        public void cast()
+        public void allyCast()
         {
             ATBManager.sendATBMessage(MessageType.cast, currStateType,
                 stateMachine.GetCurrentAnimatorStateInfo(0).fullPathHash, this);

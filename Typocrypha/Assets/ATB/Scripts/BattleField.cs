@@ -11,17 +11,22 @@ namespace ATB
         public Ally[] allies;
         public ATB.Enemy[] enemies;
         [HideInInspector] public List<Actor> allActors;
-
-        public CastBar castBar; // Input for player cast spells
+        [HideInInspector] public List<Caster> allCasters;
 
         void Start()
         {
             allActors = new List<Actor>();
             if (player != null)
+            {
                 allActors.Add(player);
+                allCasters.Add(player);
+            }
             foreach (Ally ally in allies)
+            {
                 allActors.Add(ally);
-            foreach (ATB.Enemy enemy in enemies)
+                allCasters.Add(ally);
+            }
+            foreach (Enemy enemy in enemies)
                 allActors.Add(enemy);
         }
     }

@@ -20,6 +20,8 @@ namespace ATB
         // Pause all other actors, begin enemy's cast state
         static void enemyEnterCast(ATBMessage message, BattleField battleField)
         {
+            foreach (Caster caster in battleField.allCasters)
+                caster.castBar.focus = false;
             enterSolo(message.actor, battleField);
             exitDefault(message, battleField);
         }

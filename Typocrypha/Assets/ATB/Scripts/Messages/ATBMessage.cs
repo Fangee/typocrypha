@@ -106,21 +106,8 @@ namespace ATB
         // Give actor solo activity (the only actor unpaused)
         public static void enterSolo(Actor soloActor, BattleField battleField)
         {
-            // Pause all other actors and block all other enemies
-            foreach (Actor actor in battleField.allActors)
-            {
-                if (actor != soloActor)
-                {
-                    actor.pause = true;
-                    if (actor.GetType() == typeof(global::Enemy))
-                        actor.blocked = true;
-                }
-            }
-            // Unpause and unblock self
-            soloActor.pause = false;
-            soloActor.blocked = false;
-            // Push onto the solo stack
-            soloStack.Push(soloActor);
+            solo(soloActor, battleField); // Pause all other actors
+            soloStack.Push(soloActor); // Push onto the solo stack
         }
 
         // End actor's solo activity of actor at top of the stack
@@ -131,30 +118,25 @@ namespace ATB
             if (soloStack.Count == 0)
             {
                 foreach (Actor actor in battleField.allActors)
-                {
                     actor.pause = false;
-                    actor.blocked = false;
-                }
+                battleField.player.castBar.hidden = false;
+                battleField.player.castBar.focus = true;
             }
             // Otherwise, give next actor in stack solo status
             else
             {
-                foreach (Actor actor in battleField.allActors)
-                {
-                    if (actor != soloStack.Peek())
-                    {
-                        actor.pause = true;
-                        if (actor.GetType() == typeof(global::Enemy))
-                            actor.blocked = true;
-                    }
-                    else
-                    {
-                        actor.pause = false;
-                        actor.blocked = false;
-                    }
-                }
+                solo(soloStack.Peek(), battleField); // Pause all other actors
             }
+        }
 
+        // Pause all other actors other than solo
+        static void solo(Actor soloActor, BattleField battleField)
+        {
+            // Pause all other actors
+            foreach (Actor actor in battleField.allActors)
+                if (actor != soloActor) actor.pause = true;
+            // Unpause self
+            soloActor.pause = false;
         }
     }
 }

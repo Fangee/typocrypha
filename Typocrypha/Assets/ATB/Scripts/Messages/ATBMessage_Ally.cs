@@ -13,8 +13,8 @@ namespace ATB
             eventMap.Add(new ATBMessageSig(MessageType.castMenu, StateType.allyCharge), allyMenu);
             eventMap.Add(new ATBMessageSig(MessageType.cast, StateType.allyMenu), allyEnterCast);
             eventMap.Add(new ATBMessageSig(MessageType.exit, StateType.allyBeforeCast), allyCast);
-            eventMap.Add(new ATBMessageSig(MessageType.exit, StateType.allyAfterCast), exitCast);
-            eventMap.Add(new ATBMessageSig(MessageType.exit, StateType.allyMenu), exitCast);
+            eventMap.Add(new ATBMessageSig(MessageType.exit, StateType.allyAfterCast), exitAllyCast);
+            eventMap.Add(new ATBMessageSig(MessageType.exit, StateType.allyMenu), exitAllyCast);
         }
 
         // Check cast conditions, open cast menu
@@ -23,19 +23,18 @@ namespace ATB
             Ally ally = (Ally)message.actor;
             Player player = battleField.player;
             // Check MP cost
-            if (ally.currMP < ally.castCost) return;
+            if (ally.mp < ally.castCost) return;
             bool cast = false;
             // Check activation timing: right before player casts
             if (player.currStateType == StateType.playerBeforeCast)
             {
-                player.pause = true; // Pause player
                 cast = true;
             }
             // Check activation timing: right after player casts
             if (player.currStateType == StateType.playerAfterCast)
             {
-                exitSolo(battleField);
-                player.stateMachine.Play("Idle");
+                //exitSolo(battleField);
+                //player.stateMachine.Play("Idle");
                 cast = true;
             }
             foreach (Enemy enemy in battleField.enemies)
@@ -48,8 +47,8 @@ namespace ATB
                 // Check activation timing: right after an enemy casts
                 if (enemy.currStateType == StateType.enemyAfterCast)
                 {
-                    exitSolo(battleField);
-                    enemy.stateMachine.Play("Charge");
+                    //exitSolo(battleField);
+                    //enemy.stateMachine.Play("Charge");
                     cast = true;
                 }
             }
@@ -59,8 +58,8 @@ namespace ATB
                 // Check activation timing: right after other ally casts
                 if (otherAlly.currStateType == StateType.allyAfterCast)
                 {
-                    exitSolo(battleField);
-                    otherAlly.stateMachine.Play("Charge");
+                    //exitSolo(battleField);
+                    //otherAlly.stateMachine.Play("Charge");
                     cast = true;
                 }
             }
@@ -70,12 +69,17 @@ namespace ATB
                 // Go to menu state 
                 ally.stateMachine.Play("Menu");
                 enterSolo(ally, battleField);
+                // Activate ally's cast bar
+                ally.castBar.enterSolo();
+                ally.castBar.focus = true;
             }
         }
 
         // Start ally's cast sequence
         static void allyEnterCast(ATBMessage message, BattleField battleField)
         {
+            Ally ally = (Ally)message.actor;
+            ally.castBar.focus = false; // Disable typing in ally's cast bar
             message.actor.stateMachine.Play("BeforeCast");
         }
 
@@ -83,10 +87,19 @@ namespace ATB
         static void allyCast(ATBMessage message, BattleField battleField)
         {
             Ally ally = (Ally)message.actor;
-            // Reduce mana (COULD ALSO PUT THIS IN BEFORECAST STATE)
-            ally.currMP -= ally.castCost;
+            ally.mp -= ally.castCost; // Reduce mana (COULD ALSO PUT THIS IN BEFORECAST STATE)
             // PUT EFFECTS HERE
+            Debug.Log("Ally casts:" + ally.castBar.input.text);
             exitDefault(message, battleField);
+        }
+
+        // Exit ally cast sequence
+        static void exitAllyCast(ATBMessage message, BattleField battleField)
+        {
+            Ally ally = (Ally)message.actor;
+            ally.castBar.clear();
+            ally.castBar.exitSolo();
+            exitCast(message, battleField);
         }
     }
 }

@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 namespace ATB
 {
-    public class Player : Actor
+    // Player caster
+    public class Player : Caster
     {
-        // PLAYER STATS?
+        // PLAYER DATA
 
         // UI Objects
         public GameObject healthUI; // health bar
@@ -35,7 +36,16 @@ namespace ATB
         // Setup function
         public override void Setup()
         {
+            castBar.hidden = false;
+            castBar.focus = true;
             health = 200;
+        }
+
+        // Called when pause is set
+        public new void OnSetPause(bool value)
+        {
+            base.OnSetPause(value);
+            blocked = value;
         }
 
         // Player attempts to cast a spell (the spell typed out in cast bar)

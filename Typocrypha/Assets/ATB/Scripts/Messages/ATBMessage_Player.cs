@@ -19,7 +19,8 @@ namespace ATB
         static void playerEnterCast(ATBMessage message, BattleField battleField)
         {
             enterSolo(message.actor, battleField);
-            battleField.castBar.input.interactable = false;
+            battleField.player.castBar.enterSolo();
+            battleField.player.castBar.focus = false;
             // Go to cast pause state (beginning of cast sequence)
             message.actor.stateMachine.Play("BeforeCast");
         }
@@ -27,7 +28,7 @@ namespace ATB
         // Play player spell cast effects; apply effects to targets
         static void playerCast(ATBMessage message, BattleField battleField)
         {
-            Debug.Log("Player casts:" + battleField.castBar.input.text);
+            Debug.Log("Player casts:" + battleField.player.castBar.input.text);
             // PUT EFFECTS HERE
             exitDefault(message, battleField);
         }
@@ -35,8 +36,8 @@ namespace ATB
         // Exit out of player cast sequence
         static void playerExitCast(ATBMessage message, BattleField battleField)
         {
-            battleField.castBar.input.interactable = true;
-            battleField.castBar.input.text = "";
+            battleField.player.castBar.clear();
+            battleField.player.castBar.exitSolo();
             exitCast(message, battleField);
         }
     }

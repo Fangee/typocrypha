@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace ATB
 {
+    // Enemies that the player fights against
     public class Enemy : Actor
     {
         // Container for enemy data
@@ -21,7 +22,6 @@ namespace ATB
         // AI State
         public EnemyAI AI;
 
-        // Propertes 
         private int _health; // current health property field
         public int health
         {
@@ -106,6 +106,13 @@ namespace ATB
 
             // TESTING
             chargeTime = 5f;
+        }
+
+        // Called when pause is set
+        public new void OnSetPause(bool value)
+        {
+            base.OnSetPause(value);
+            blocked = value;
         }
 
         // TESTING: Stagger this enemy by 1
