@@ -11,11 +11,11 @@ public class TargetReticule : MonoBehaviour
     public SpriteRenderer left_arrow;  // left arrow key sprite
     public SpriteRenderer right_arrow; // right arrow key sprite
     public SpriteRenderer no_target;   // displayed when no active target
-	public Scouter scouter; //script for targeting info
+	public Scouter scouter; // script for targeting info
 
     float base_r_speed; // base rotation speed
-    float r_speed; // actual speed of rotation
-    Vector2 vel; // velocity of target
+    float r_speed; // actual current speed of rotation
+    Vector2 vel; // velocity of target reticule
 
     public float def_r_speed = 0.15f; // default speed of rotation
     public float slow_r_speed = 0.01f; // default slow rotation speed 
@@ -23,8 +23,8 @@ public class TargetReticule : MonoBehaviour
     public float smooth_time = 0.15f; // time it takes for target to reach position
     public float h_r_scale = 8f; // scaling factor from horizontal speed to rotation speed
 
-    private bool scoutVisible = false; //for when scouter is shown
-    private Vector2 target_destination_pos; // position of target ret
+    private bool scoutVisible = false; // for when scouter is shown
+    private Vector2 target_destination_pos; // position target reticule is going to
 
     void Start()
     {
@@ -44,7 +44,7 @@ public class TargetReticule : MonoBehaviour
         r_speed = base_r_speed + vel.magnitude / h_r_scale;
     }
 
-    //reveals info on enemy
+    // reveals info on enemy
     public void showScouter()
     {
         scouter.show();
@@ -52,7 +52,7 @@ public class TargetReticule : MonoBehaviour
         updateArrows();
     }
 
-    //hide enemy info
+    // hide enemy info
     public void hideScouter(bool hideImmeadiate = false)
     {
         if (hideImmeadiate)
