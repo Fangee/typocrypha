@@ -11,24 +11,41 @@ public class TextOption : MenuOption
 	// Reference to text object
 	public Text text;
 	
-	// Variable for default text
-	private string defaultText;
+	// Color to be changed to when selected
+	public Color highlightColor;
 	
-	void Start()
+	// Default value variables
+	private string defaultText;
+	private Color defaultColor;
+	
+	void Awake()
 	{
-		// Save default text
+		// Set flags
+		confirmable = true;
+		slidable = false;
+		
+		// Save default values
 		defaultText = text.text;
+		defaultColor = text.color;
 	}
 	
 	// Called when the option is selected
 	public override void OnSelect(BaseEventData eventData) 
 	{
-		Debug.Log("select: " + defaultText);
+		// Change color to highlight color
+		text.color = highlightColor;
+		
+		// Add cursor arrows around text
+		text.text = "> " + defaultText + " <";
 	}
 	
 	// Called when the option is deselected
 	public override void OnDeselect(BaseEventData eventData) 
 	{
-		Debug.Log("deselect: " + defaultText);
+		// Revert color back to original
+		text.color = defaultColor;
+		
+		// Remove arrows around text
+		text.text = defaultText;
 	}
 }

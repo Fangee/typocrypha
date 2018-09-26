@@ -11,6 +11,10 @@ abstract public class MenuOption : Selectable, ISelectHandler, IDeselectHandler
 	// Function that is called when the option is pressed
 	public UnityEvent OnConfirm;
 	
+	// Variables for type of menu option
+	[HideInInspector] public bool confirmable;
+	[HideInInspector] public bool slidable;
+	
 	// Called when the option is selected
 	abstract public void OnSelect(BaseEventData eventData);
 	
