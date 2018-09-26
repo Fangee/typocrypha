@@ -20,7 +20,7 @@ namespace ATB
         public abstract void Setup();
 
         // Called when pause is set
-        public void OnSetPause(bool value)
+        public virtual void OnSetPause(bool value)
         {
             if (value) stateMachine.speed = 0f;
             else stateMachine.speed = 1f;

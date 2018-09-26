@@ -8,12 +8,6 @@ namespace ATB
     public abstract class Caster : Actor
     {
         public CastBar castBar; // This caster's cast bar
-
-        // Called when pause is set
-        public new void OnSetPause(bool value)
-        {
-            base.OnSetPause(value);
-        }
     }
 }
 

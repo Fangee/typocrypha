@@ -109,7 +109,7 @@ namespace ATB
         }
 
         // Called when pause is set
-        public new void OnSetPause(bool value)
+        public override void OnSetPause(bool value)
         {
             base.OnSetPause(value);
             blocked = value;

@@ -13,16 +13,14 @@ namespace ATB
         // Stack for showing only 1 castbar at once
         static Stack<CastBar> soloStack = new Stack<CastBar>();
         // Puts bar in/out focus for typing
-        bool _focus;
         public bool focus
         {
             get
             {
-                return _focus;
+                return input.isFocused;
             }
             set
             {
-                _focus = value;
                 input.interactable = true;
                 if (value)
                 {
@@ -31,11 +29,9 @@ namespace ATB
                 }
                 else
                 {
-                    Debug.Log("Defocus");
                     input.DeactivateInputField();
                 }
                 input.interactable = value;
-                input.readOnly = !value;
             }
         }
         // Shows/hides castbar
