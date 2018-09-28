@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BIEnemyIsStunned : BattleInterruptTrigger
 {
-    public override bool checkTrigger(BattleField state)
+    public override bool checkTrigger(Battlefield state)
     {
         foreach (CastData d in state.last_enemy_cast)
 			if (d.isStun) return true;

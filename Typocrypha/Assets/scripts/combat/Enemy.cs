@@ -38,6 +38,8 @@ public class Enemy : MonoBehaviour, ICaster {
     public Transform Transform { get { return transform; } }
     private int position; //position in battle field
     public int Position { get { return position; } set { position = value; } }
+    private int _target; //Position in player_arr (BattleManager.cs) that this enemy is currently targeting
+    public int TargetPosition { get { return _target; } set { _target = value; } }
     public CasterStats Stats
     {
         get
@@ -58,7 +60,6 @@ public class Enemy : MonoBehaviour, ICaster {
             curr_hp = value;
         }
     }
-    public int Curr_shield { get { return curr_shield; } set { curr_shield = value; } }
     public int Curr_stagger { get { return curr_stagger; } set { curr_stagger = value; } }
     public bool Is_stunned { get { return is_stunned; } }
     public bool Is_dead { get { return is_dead; } }
@@ -75,7 +76,7 @@ public class Enemy : MonoBehaviour, ICaster {
 
     public bool attack_in_progress = false;
 
-    public BattleField field; // the field the enemy is located in (battle state)
+    public Battlefield field; // the field the enemy is located in (battle state)
     public CastManager castManager;
     public EnemyChargeBars bars;
 	public SpriteRenderer enemy_sprite; // this enemy's sprite
@@ -99,10 +100,8 @@ public class Enemy : MonoBehaviour, ICaster {
 	bool is_done; // is enemy done dying (playing death animation)?
     bool is_stunned; // is the enemy stunned?
     bool was_hit = false; //the enemy was hit in the pause and needs state update
-    int target; //Position in player_arr (BattleManager.cs) that this enemy is currently targeting
     SpellData curr_spell = null; //A reference to the current spell
 	int curr_hp; // current amount of health
-    int curr_shield; //current amount of shield
     int curr_stagger; //current amount of stagger
     public float stagger_time; //The time an enemy's stun will last
 	float curr_stagger_time; // current time staggered
@@ -129,7 +128,6 @@ public class Enemy : MonoBehaviour, ICaster {
 		stats = i_stats;
         //Initialize combat values
 		Curr_hp = stats.max_hp;
-        Curr_shield = stats.max_shield;
         stagger_time = (stats.max_stagger * stagger_mult_constant) + stagger_add_constant;
         Curr_stagger = stats.max_stagger;
 		curr_time = 0;
@@ -158,7 +156,6 @@ public class Enemy : MonoBehaviour, ICaster {
         if (resetCurrent)
         {
             Curr_hp = stats.max_hp;
-            Curr_shield = stats.max_shield;
             Curr_stagger = stats.max_stagger;
             stagger_time = (stats.max_stagger * stagger_mult_constant) + stagger_add_constant;
         }
@@ -214,7 +211,7 @@ public class Enemy : MonoBehaviour, ICaster {
 	IEnumerator attackRoutine() {
 		Vector3 original_pos = transform.position;
         curr_stagger_time = 0F;
-		curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target).clone();   //Initialize with current spell
+		curr_spell = AI.getNextSpell(stats.spells, field.enemies, position, field.allies, out _target).clone();   //Initialize with current spell
         atk_time = curr_spell.getCastingTime(castManager.spellDict, stats.speed);   //Get casting time
 		while (!is_dead) {
 			yield return new WaitForEndOfFrame ();
@@ -247,9 +244,9 @@ public class Enemy : MonoBehaviour, ICaster {
                 else
                     attackPlayer (curr_spell);
                 //Update state (will move to make it so that state change can interrupt cast)
-				AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.AFTER_CAST);
+				AI.updateState(field.enemies, position, field.allies, EnemyAI.Update_Case.AFTER_CAST);
                 //Get next spell from AI
-				curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target).clone();
+				curr_spell = AI.getNextSpell(stats.spells, field.enemies, position, field.allies, out _target).clone();
                 atk_time = curr_spell.getCastingTime(castManager.spellDict, stats.speed);//get new casting time
                 curr_time = 0;
 				enemy_animator.Play("enemy_idle");
@@ -290,7 +287,7 @@ public class Enemy : MonoBehaviour, ICaster {
     // pause battle, attack player with specified spell
     void attackPlayer(SpellData s) {
         Debug.Log(stats.name + " casts " + s.ToString());
-        castManager.enemyCast(castManager.spellDict, s, position, target);
+        castManager.enemyCast(castManager.spellDict, s, this);
 	}
 
 	// be attacked by the player
@@ -316,7 +313,7 @@ public class Enemy : MonoBehaviour, ICaster {
         bars.Charge_bars[position].gameObject.transform.GetChild(0).GetComponent<Image>().color = new Color(13.0f/255.0f, 207.0f/255.0f, 223.0f/255.0f);
         is_stunned = false;
         Curr_stagger = stats.max_stagger;
-		AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.UNSTUN);
+		AI.updateState(field.enemies, position, field.allies, EnemyAI.Update_Case.UNSTUN);
     }
 
     //Updates opacity and death (after pause in battlemanager)
@@ -325,7 +322,7 @@ public class Enemy : MonoBehaviour, ICaster {
         //Update AI if hit (may drop hp to zero)
         if (was_hit)
         {
-			AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.WAS_HIT);
+			AI.updateState(field.enemies, position, field.allies, EnemyAI.Update_Case.WAS_HIT);
             if (curr_stagger <= 0 && is_stunned == false)
                 stun();
             was_hit = false;

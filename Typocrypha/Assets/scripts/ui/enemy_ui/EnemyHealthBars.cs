@@ -55,7 +55,7 @@ public class EnemyHealthBars : MonoBehaviour {
 		if (!BattleManagerS.main.enabled) return;
 		for (int i = 0; i < 3; i++) {
 			if (health_bars [i] != null) {
-				Enemy enemy = BattleManagerS.main.field.enemy_arr [i];
+				Enemy enemy = BattleManagerS.main.field.enemies [i];
 				if (!enemy.Is_dead) {
                     if (!BattleManagerS.main.battlePause) {
                         health_bars[i].setValue(((float)enemy.Curr_hp / (float)enemy.Stats.max_hp));
@@ -72,7 +72,7 @@ public class EnemyHealthBars : MonoBehaviour {
 
 	// function that gradually lowers the HP bar
 	public IEnumerator gradualUpdateDamage(int enemyIndex, float damage){
-		Enemy enemy = BattleManagerS.main.field.enemy_arr [enemyIndex];
+		Enemy enemy = BattleManagerS.main.field.enemies [enemyIndex];
         if (enemy == null || enemy.Is_dead)
             yield break;
 		float old_x = health_bars [enemyIndex].getBarLocalScale().x;

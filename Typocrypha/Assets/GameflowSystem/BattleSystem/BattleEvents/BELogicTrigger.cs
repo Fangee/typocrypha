@@ -9,7 +9,7 @@ public class BELogicTrigger : BattleEventTrigger {
     public Operators.LogicalOperator LogicalOperator;
     public BattleEventTrigger[] Operands;
 
-    public override bool checkTrigger(BattleField state)
+    public override bool checkTrigger(Battlefield state)
     {
         switch (LogicalOperator)
         {
@@ -65,7 +65,7 @@ public class BELogicTrigger : BattleEventTrigger {
         throw new System.Exception("BELogicTrigger: Logical Error, switch covers all cases");
     }
 
-    public override bool onTrigger(BattleField state)
+    public override bool onTrigger(Battlefield state)
     {
         triggered = true;
         return EventToTrigger.onTrigger(state);

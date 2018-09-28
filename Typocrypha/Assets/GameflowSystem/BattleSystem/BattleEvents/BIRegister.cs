@@ -6,7 +6,7 @@ public class BIRegister : BattleInterruptTrigger
 {
     public Spell.WordType wordType = Spell.WordType.ANY;
     public string wordMustBe = string.Empty;
-    public override bool checkTrigger(BattleField state)
+    public override bool checkTrigger(Battlefield state)
     {
         switch (wordType)
         {

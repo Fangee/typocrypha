@@ -41,7 +41,6 @@ public class Ally : MonoBehaviour, ICaster {
 
     private float gauge_value;
     public int Curr_hp { get { return Mathf.CeilToInt(gauge_value); } set { gauge_value = Mathf.Clamp(value, 0, stats.max_hp); } }
-    public int Curr_shield { get { return 0; } set { } }
     private int curr_stagger;
     public int Curr_stagger { get { return curr_stagger; } set { curr_stagger = value; } }
 
@@ -52,6 +51,19 @@ public class Ally : MonoBehaviour, ICaster {
 
     public ICasterType CasterType { get { return ICasterType.NPC_ALLY; } }
 
+    private int _target = 1;
+    public int TargetPosition
+    {
+        get
+        {
+            return _target;
+        }
+
+        set
+        {
+            _target = value;
+        }
+    }
 
     public void damage(CastData data, int d, int element, ICaster caster, bool crit, bool reflect = false)
     {
@@ -71,7 +83,6 @@ public class Ally : MonoBehaviour, ICaster {
     {
         this.stats = stats;
         gauge_value = stats.max_hp /2;
-        Curr_shield = stats.max_shield;
         stagger_time = (stats.max_stagger * stagger_mult_constant) + stagger_add_constant;
         Curr_stagger = stats.max_stagger;
         StartCoroutine(charge());
@@ -133,8 +144,6 @@ public class Ally : MonoBehaviour, ICaster {
     {    
         return Mathf.Clamp01(gauge_value / stats.max_hp); 
     }
-
-    public int target = 1;
 
     // Use this for initialization
     void Start () {

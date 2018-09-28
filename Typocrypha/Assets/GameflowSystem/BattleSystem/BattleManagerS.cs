@@ -16,7 +16,7 @@ public class BattleManagerS : MonoBehaviour, IPausable {
     public AllyDatabase allyData;
     public GameObject enemy_prefab; // prefab for enemy object
     public GameObject ally_prefab; //prefab for ally object
-    public BattleField field;
+    public Battlefield field;
 	public GameObject typocrypha_object;
 	public Animator typocrypha_animator; // animator for typocrypha object
     public Text debugThirdEyeCharge;
@@ -80,9 +80,9 @@ public class BattleManagerS : MonoBehaviour, IPausable {
 
     private void Start()
     {
-        field = new BattleField(this);
+        field = new Battlefield(this);
         castManager.Field = field;
-        field.player_arr[1] = player;
+        field.allies[1] = player;
     }
 
     // check if player switches targets or attacks
@@ -91,13 +91,13 @@ public class BattleManagerS : MonoBehaviour, IPausable {
         if (Input.GetKeyDown(KeyCode.BackQuote)) // toggle pause
             Paused = !Paused;
         if (battlePause) return;
-        int old_ind = field.target_ind;
+        int old_ind = field.Player.TargetPosition;
 
         //TARGET RETICULE CODE 
 
         // move target left or right
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) --field.target_ind;
-        if (Input.GetKeyDown(KeyCode.RightArrow)) ++field.target_ind;
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) --field.Player.TargetPosition;
+        if (Input.GetKeyDown(KeyCode.RightArrow)) ++field.Player.TargetPosition;
 
         // third eye stuff
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift) && !thirdEyeActive)
@@ -112,12 +112,11 @@ public class BattleManagerS : MonoBehaviour, IPausable {
             currThirdEyeCharge = Mathf.Min(currThirdEyeCharge + 0.03f, maxThirdEyeCharge);
         debugThirdEyeCharge.text = ((currThirdEyeCharge / maxThirdEyeCharge) * 10).ToString();
         // fix if target is out of bounds
-        if (field.target_ind < 0) field.target_ind = 0;
-        if (field.target_ind > 2) field.target_ind = 2;
+        field.Player.TargetPosition = Mathf.Clamp(field.Player.TargetPosition, 0, 2);
         // check if target was actually moved
-        if (old_ind != field.target_ind)
+        if (old_ind != field.Player.TargetPosition)
         {
-            uiManager.setTarget(field.target_ind);
+            uiManager.setTarget(field.Player.TargetPosition);
         }
         //SPELLBOOK CODE
 
@@ -171,7 +170,7 @@ public class BattleManagerS : MonoBehaviour, IPausable {
         curr_wave = -1;
         waves = new_battle.GetComponents<BattleWave>();
         //Reset target
-		field.target_ind = 1;
+		field.Player.TargetPosition = 1;
         StartCoroutine(finishBattlePrep());
     }
     // finishes up battle start and effects
@@ -238,7 +237,7 @@ public class BattleManagerS : MonoBehaviour, IPausable {
         //Play music if applicable (BUG HERE WHERE LOADING MUSIC CAUSES LAG)
         if (Wave.Music != string.Empty)
             AudioPlayer.main.playMusic(Wave.Music);
-        field.lastCaster = BattleField.FieldPosition.NONE;
+        field.lastCaster = Battlefield.FieldPosition.NONE;
         if (checkInterrupts() == false)
             Paused = false;
         wave_started = true;
@@ -274,7 +273,7 @@ public class BattleManagerS : MonoBehaviour, IPausable {
     public void endBattle()
     {
         Paused = true;
-        foreach (Enemy enemy in field.enemy_arr)
+        foreach (Enemy enemy in field.enemies)
         {
             if (enemy != null) GameObject.Destroy(enemy.gameObject);
         }
@@ -303,7 +302,7 @@ public class BattleManagerS : MonoBehaviour, IPausable {
         StopAllCoroutines();
         castManager.StopAllCoroutines();
         uiManager.StopAllCoroutines();
-        foreach (Enemy enemy in field.enemy_arr)
+        foreach (Enemy enemy in field.enemies)
         {
             if (enemy != null) GameObject.Destroy(enemy.gameObject);
         }
@@ -323,12 +322,12 @@ public class BattleManagerS : MonoBehaviour, IPausable {
     //Update Enemies and Check for death
     public void updateEnemies()
     {
-        for (int i = 0; i < field.enemy_arr.Length; i++)
+        for (int i = 0; i < field.enemies.Length; i++)
         {
-            if (field.enemy_arr[i] != null && !field.enemy_arr[i].Is_dead)
+            if (field.enemies[i] != null && !field.enemies[i].Is_dead)
             {
-                field.enemy_arr[i].updateCondition();
-                if (field.enemy_arr[i].Is_dead)
+                field.enemies[i].updateCondition();
+                if (field.enemies[i].Is_dead)
                     ++field.curr_dead;
             }
         }
@@ -367,15 +366,15 @@ public class BattleManagerS : MonoBehaviour, IPausable {
     }
     public void postInterrupt()
     {
-        for (int i = 0; i < field.enemy_arr.Length; i++)
+        for (int i = 0; i < field.enemies.Length; i++)
         {
-            Enemy e = field.enemy_arr[i];
+            Enemy e = field.enemies[i];
             if (e != null && !e.Is_dead)
             {
-                e.AI.updateState(field.enemy_arr, e.Position, field.player_arr, EnemyAI.Update_Case.AFTER_INTERRUPT);
+                e.AI.updateState(field.enemies, e.Position, field.allies, EnemyAI.Update_Case.AFTER_INTERRUPT);
             }
         }
-        field.lastCaster = BattleField.FieldPosition.NONE;
+        field.lastCaster = Battlefield.FieldPosition.NONE;
         checkInterrupts();
     }
 
@@ -384,7 +383,7 @@ public class BattleManagerS : MonoBehaviour, IPausable {
 		if (wave.Enemy1 != string.Empty) {
 			createEnemy (0, wave.Enemy1);
             AudioPlayer.main.playSFX ("sfx_blight_hit");
-			AnimationPlayer.main.playAnimation("anim_element_reflect", field.enemy_arr[0].Transform.position, 2f);
+			AnimationPlayer.main.playAnimation("anim_element_reflect", field.enemies[0].Transform.position, 2f);
 			yield return new WaitForSeconds(0.4f);
 		} else {
             createDummyEnemy(0);
@@ -392,7 +391,7 @@ public class BattleManagerS : MonoBehaviour, IPausable {
 		if (wave.Enemy2 != string.Empty) {
 			createEnemy (1, wave.Enemy2);
 			AudioPlayer.main.playSFX ("sfx_blight_hit");
-			AnimationPlayer.main.playAnimation("anim_element_reflect", field.enemy_arr[1].Transform.position, 2f);
+			AnimationPlayer.main.playAnimation("anim_element_reflect", field.enemies[1].Transform.position, 2f);
 			yield return new WaitForSeconds(0.4f);
 		} else {
             createDummyEnemy(1);
@@ -400,7 +399,7 @@ public class BattleManagerS : MonoBehaviour, IPausable {
         if (wave.Enemy3 != string.Empty) {
 			createEnemy (2, wave.Enemy3);
 			AudioPlayer.main.playSFX ("sfx_blight_hit");
-			AnimationPlayer.main.playAnimation("anim_element_reflect", field.enemy_arr[2].Transform.position, 2f);
+			AnimationPlayer.main.playAnimation("anim_element_reflect", field.enemies[2].Transform.position, 2f);
 			yield return new WaitForSeconds(0.4f);
 		}
         else {
@@ -424,7 +423,7 @@ public class BattleManagerS : MonoBehaviour, IPausable {
         uiManager.charge_bars.makeChargeMeter(i, bar_pos);
         uiManager.stagger_bars.makeStaggerMeter(i, bar_pos);
         uiManager.health_bars.makeHealthMeter(i, bar_pos);
-        field.enemy_arr[i] = enemy;
+        field.enemies[i] = enemy;
 		enemy.enemy_animator.Play ("enemy_spawn_in");
         uiManager.updateUI();
     }
@@ -436,7 +435,7 @@ public class BattleManagerS : MonoBehaviour, IPausable {
         Vector3 enemy_pos = new Vector3(i * BattleUI.enemy_spacing, BattleUI.enemy_y_offset, 0);
         dummy.transform.localPosition = enemy_pos;
         dummy.dummy();
-        field.enemy_arr[i] = dummy;
+        field.enemies[i] = dummy;
     }
 
     private bool checkInterrupts()
@@ -545,7 +544,7 @@ public class BattleManagerS : MonoBehaviour, IPausable {
         }
         CastData d = new CastData();
         d.isHit = true;
-        d.setLocationData(field.enemy_arr[1], field.Player);
+        d.setLocationData(field.enemies[1], field.Player);
         d.vsElement = Elements.vsElement.NEUTRAL;
         Paused = true;
         BattleEffects.main.setDim(false);
@@ -559,7 +558,7 @@ public class BattleManagerS : MonoBehaviour, IPausable {
 		AudioPlayer.main.playSFX("sfx_stagger");
 		AudioPlayer.main.playSFX("sfx_astral_hit");
 		AudioPlayer.main.playSFX("sfx_blight_hit");
-		field.enemy_arr[1].Curr_hp = 0;
+		field.enemies[1].Curr_hp = 0;
 		AnimationPlayer.main.playScreenEffect ("mega_slash");
 		yield return new WaitForSeconds (2f);
 		frenzyCastActive = false;

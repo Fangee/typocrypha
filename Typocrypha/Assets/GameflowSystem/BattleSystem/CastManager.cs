@@ -12,13 +12,13 @@ public class CastManager : MonoBehaviour
     public BattleUI uiManager;
     public ChatDatabase chat; //Database containing chat lines
 
-    [HideInInspector] public BattleField Field { get { return field; } set { field = value; } }
-    private BattleField field;
+    [HideInInspector] public Battlefield Field { get { return field; } set { field = value; } }
+    private Battlefield field;
 
     //CASTING CODE//---------------------------------------------------------------------------------------------------------------------------------------//
 
     //Pre: spell.isValid() = true
-    public List<CastData> cast(SpellData spell, BattleField field, ICaster caster, int targetPosition, out List<Transform> noTargetPositions)
+    public List<CastData> cast(SpellData spell, Battlefield field, ICaster caster, out List<Transform> noTargetPositions)
     {
         noTargetPositions = new List<Transform>();
         Spell s = spellDict.getRoot(spell.root);
@@ -44,7 +44,7 @@ public class CastManager : MonoBehaviour
             ++wordCount;
         }
         c.Modify(e, st);
-        List<ICaster> toCastAt = c.target(field, caster, targetPosition);
+        List<ICaster> toCastAt = c.target(field, caster);
         List<CastData> data = new List<CastData>();
         foreach (ICaster target in toCastAt)
         {
@@ -95,7 +95,7 @@ public class CastManager : MonoBehaviour
                 return false;
             }
             ++field.num_player_attacks;
-            targetPattern = spellDict.getTargetPattern(s, field, field.Player, field.target_ind);
+            targetPattern = spellDict.getTargetPattern(s, field, field.Player);
             message = chat.getLine(field.Player.Stats.ChatDatabaseID);
             preCastEffects(targetPattern, field.Player, s, message);
             AudioPlayer.main.playSFX("sfx_enter");
@@ -125,8 +125,8 @@ public class CastManager : MonoBehaviour
         startCooldown(s, field.Player);
         List<CastData> data;
         List<Transform> noTargetPositions;
-        data = cast(s, field, caster, field.target_ind, out noTargetPositions);
-        processCast(data, s, noTargetPositions, BattleField.FieldPosition.PLAYER);
+        data = cast(s, field, caster, out noTargetPositions);
+        processCast(data, s, noTargetPositions, Battlefield.FieldPosition.PLAYER);
 
         yield return new WaitForSeconds(1.1f);
 
@@ -135,36 +135,36 @@ public class CastManager : MonoBehaviour
 		uiManager.setEnabledGauges (true);
 
         postCastEffects();
-        field.lastCaster = BattleField.FieldPosition.PLAYER;
+        field.lastCaster = Battlefield.FieldPosition.PLAYER;
         //Updates field.Pause if necessary
         field.update();
     }
 
     //Casts from an enemy position: calls processCast on results
-    public void enemyCast(SpellDictionary dict, SpellData s, int position, int target)
+    public void enemyCast(SpellDictionary dict, SpellData s, Enemy enemy)
     {
         field.breakThirdEye();
         field.Pause = true; // parent.pause battle for attack
         AudioPlayer.main.playSFX("sfx_enemy_cast");
-		AnimationPlayer.main.playAnimation("anim_spell_empower", field.enemy_arr[position].Transform.position, 2f);
-        Pair<bool[], bool[]> targetPattern = spellDict.getTargetPattern(s, field, field.enemy_arr[position], target);
-        preCastEffects(targetPattern, field.enemy_arr[position], s, chat.getLine(field.enemy_arr[position].Stats.ChatDatabaseID));
-		BattleEffects.main.setDim(true, field.enemy_arr[position].enemy_sprite);
-        StartCoroutine(enemy_pause_cast(dict, s, position, target));
+		AnimationPlayer.main.playAnimation("anim_spell_empower", enemy.Transform.position, 2f);
+        Pair<bool[], bool[]> targetPattern = spellDict.getTargetPattern(s, field, enemy);
+        preCastEffects(targetPattern, enemy, s, chat.getLine(enemy.Stats.ChatDatabaseID));
+		BattleEffects.main.setDim(true, enemy.enemy_sprite);
+        StartCoroutine(enemy_pause_cast(dict, s, enemy));
     }
 
-    private IEnumerator enemy_pause_cast(SpellDictionary dict, SpellData s, int position, int target)
+    private IEnumerator enemy_pause_cast(SpellDictionary dict, SpellData s, Enemy enemy)
     {
         uiManager.setEnabledGauges (false);
 
-		BattleEffects.main.setDim(true, field.enemy_arr[position].enemy_sprite);
+		BattleEffects.main.setDim(true, enemy.enemy_sprite);
 
         yield return new WaitForSeconds(1f);
 
-        field.enemy_arr[position].startSwell();
+        enemy.startSwell();
         List<Transform> noTargetPositions;
-        List<CastData> data = cast(s, field, field.enemy_arr[position], target, out noTargetPositions);
-        processCast(data, s, noTargetPositions, (BattleField.FieldPosition)position);
+        List<CastData> data = cast(s, field, enemy, out noTargetPositions);
+        processCast(data, s, noTargetPositions, (Battlefield.FieldPosition)enemy.Position);
 
         yield return new WaitForSeconds(1f);
 
@@ -172,21 +172,21 @@ public class CastManager : MonoBehaviour
 
         postCastEffects();
 
-        field.enemy_arr[position].attack_in_progress = false;
-        field.lastCaster = (BattleField.FieldPosition)position;
+        enemy.attack_in_progress = false;
+        field.lastCaster = (Battlefield.FieldPosition)enemy.Position;
         field.update();
     }
 
     //Method for processing CastData (most effects now happen in SpellEffects.cs)
     //Called by Cast in the SUCCESS CastStatus case, possibly on BOTCH in the future
-    private void processCast(List<CastData> data, SpellData s, List<Transform> noTargetPositions, BattleField.FieldPosition casterPos)
+    private void processCast(List<CastData> data, SpellData s, List<Transform> noTargetPositions, Battlefield.FieldPosition casterPos)
     {
-        if (casterPos == BattleField.FieldPosition.PLAYER)
+        if (casterPos == Battlefield.FieldPosition.PLAYER)
         {
             field.last_player_cast = data;
             field.last_player_spell = s;
         }
-        else if (BattleField.isEnemy(casterPos))
+        else if (Battlefield.isEnemy(casterPos))
         {
             field.last_enemy_cast = data;
             field.last_enemy_spell = s;
@@ -247,8 +247,8 @@ public class CastManager : MonoBehaviour
         //uiManager.battle_log.stop();
         for (int i = 0; i < 3; ++i)
         {
-            if (field.enemy_arr[i] != null)
-                field.enemy_arr[i].enemy_sprite.sortingOrder = BattleEffects.dim_layer;
+            if (field.enemies[i] != null)
+                field.enemies[i].enemy_sprite.sortingOrder = BattleEffects.dim_layer;
         }
         uiManager.target_ret.SetActive(true); // enable / make target reticule appear after a cast
         BattleEffects.main.setDim(false);
@@ -260,7 +260,7 @@ public class CastManager : MonoBehaviour
         for (int i = 0; i < 3; ++i)
         {
             if (enemy_r[i])
-                field.enemy_arr[i].enemy_sprite.sortingOrder = BattleEffects.undim_layer;
+                field.enemies[i].enemy_sprite.sortingOrder = BattleEffects.undim_layer;
         }
     }
     //Lowers the targets (array val = true) below the dimmer level
@@ -269,16 +269,16 @@ public class CastManager : MonoBehaviour
         for (int i = 0; i < 3; ++i)
         {
             if (enemy_r[i])
-                field.enemy_arr[i].enemy_sprite.sortingOrder = BattleEffects.dim_layer;
+                field.enemies[i].enemy_sprite.sortingOrder = BattleEffects.dim_layer;
         }
     }
 
     //returns the position of ally with specified name (if in battle)
     private int getAllyPosition(string name)
     {
-        if (field.player_arr[0] != null && field.player_arr[0].Stats.name.ToLower() == name.ToLower())
+        if (field.allies[0] != null && field.allies[0].Stats.name.ToLower() == name.ToLower())
             return 0;
-        if (field.player_arr[2] != null && field.player_arr[2].Stats.name.ToLower() == name.ToLower())
+        if (field.allies[2] != null && field.allies[2].Stats.name.ToLower() == name.ToLower())
             return 2;
         return -1;
     }

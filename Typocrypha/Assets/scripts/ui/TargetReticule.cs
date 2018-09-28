@@ -82,33 +82,20 @@ public class TargetReticule : MonoBehaviour
     public void updateTarget(Vector2 destination)
     {
         // don't update if battle not set up yet
-        if (BattleManagerS.main.field.target_ind >= BattleManagerS.main.field.enemy_arr.Length) return;
-		target_destination_pos = destination;
-		// update arrows
-        updateArrows();
-        // check if no enemy targeted
-        if (BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind] == null || BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind].Is_done)
-        {
-            no_target.enabled = true;
-            base_r_speed = 0f;
-        }
-        else
-        {
-            no_target.enabled = false;
-            base_r_speed = def_r_speed;
-        }
-        scouter.updateInfo();
+        if (BattleManagerS.main.field.Player.TargetPosition >= BattleManagerS.main.field.enemies.Length) return;
+        target_destination_pos = destination;
+        updateTarget();
     }
 
     // updates target based on targetted enemy
     public void updateTarget()
     {
         // don't update if battle not set up yet
-        if (BattleManagerS.main.field.target_ind >= BattleManagerS.main.field.enemy_arr.Length) return;
+        if (BattleManagerS.main.field.Player.TargetPosition >= BattleManagerS.main.field.enemies.Length) return;
         // update arrows
         updateArrows();
         // check if no enemy targeted
-        if (BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind] == null || BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind].Is_done)
+        if (BattleManagerS.main.field.enemies[BattleManagerS.main.field.Player.TargetPosition] == null || BattleManagerS.main.field.enemies[BattleManagerS.main.field.Player.TargetPosition].Is_done)
         {
             no_target.enabled = true;
             base_r_speed = 0f;
@@ -129,7 +116,7 @@ public class TargetReticule : MonoBehaviour
             right_arrow.enabled = false;
             return;
         }
-        switch (BattleManagerS.main.field.target_ind)
+        switch (BattleManagerS.main.field.Player.TargetPosition)
         {
             case 0:
                 left_arrow.enabled = false;
@@ -143,9 +130,6 @@ public class TargetReticule : MonoBehaviour
                 left_arrow.enabled = true;
                 right_arrow.enabled = false;
                 break;
-        }
-        if (BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind] == null || BattleManagerS.main.field.enemy_arr[BattleManagerS.main.field.target_ind].Is_done)
-        {
         }
     }
 }

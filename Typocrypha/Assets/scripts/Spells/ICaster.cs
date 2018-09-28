@@ -16,10 +16,10 @@ public interface ICaster
 {
     Transform Transform { get; }
     int Position { get; set; }
+    int TargetPosition { get; set; }
     CasterStats Stats { get; }
     BuffDebuff BuffDebuff { get; }
     int Curr_hp { get; set; }
-    int Curr_shield { get; set; }
     int Curr_stagger { get; set; }
     bool Is_stunned { get; }
     bool Is_dead { get; }

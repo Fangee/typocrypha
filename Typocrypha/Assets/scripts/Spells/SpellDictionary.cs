@@ -273,18 +273,18 @@ public class SpellDictionary : MonoBehaviour
         return ret;
     }
     //Return the targeting pattern
-    public Pair<bool[], bool[]> getTargetPattern(SpellData data, BattleField field, ICaster caster, int targetPos)
+    public Pair<bool[], bool[]> getTargetPattern(SpellData data, Battlefield field, ICaster caster)
     {
         if (!string.IsNullOrEmpty(data.style) || !styles[data.style].isTarget)
         {
-            return rootWords[data.root].targetData.toArrayPair(field, caster, targetPos);
+            return rootWords[data.root].targetData.toArrayPair(field, caster);
         }
         else
         {
             TargetData t = new TargetData(false);
             t.copyFrom(rootWords[data.root].targetData);
             styles[data.style].targets.modify(t);
-            return t.toArrayPair(field, caster, targetPos);
+            return t.toArrayPair(field, caster);
         }
     }
 }

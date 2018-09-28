@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Encapsulates battle info
-public class BattleField {
+public class Battlefield {
 
     //Properties
 
-    public ICaster Player { get { return player_arr[player_ind]; } }
+    private int player_ind = 1;
+    public ICaster Player { get { return allies[player_ind]; } }
     public bool Pause { get { return callback.battlePause; } set { callback.battlePause = value; } }
 
     public enum FieldPosition
@@ -28,9 +29,9 @@ public class BattleField {
         if (index > 0)
         {
             if (index < 3)
-                target = enemy_arr[index];
+                target = enemies[index];
             else
-                target = player_arr[index - 3];
+                target = allies[index - 3];
         }
         return target;
     }
@@ -41,12 +42,10 @@ public class BattleField {
 
     //BattleField data
 
-	[HideInInspector] public Enemy[] enemy_arr = new Enemy[3]; // array of Enemy components (size 3)
-	[HideInInspector] public int target_ind = 1; // index of currently targeted enemy
-	[HideInInspector] public ICaster[] player_arr = { null, null, null }; // array of Player and allies (size 3)
-	[HideInInspector] public int player_ind = 1;
-	[HideInInspector] public int enemy_count = 0; // number of enemies in battle
-	[HideInInspector] public int curr_dead = 0;
+	public Enemy[] enemies = new Enemy[3]; // array of Enemy components (size 3)
+	public ICaster[] allies = { null, null, null }; // array of Player and allies (size 3)
+	public int enemy_count = 0; // number of enemies in battle
+	public int curr_dead = 0;
 
     //Interrupt stuff
 
@@ -63,7 +62,7 @@ public class BattleField {
 
     private BattleManagerS callback;
 
-    public BattleField(BattleManagerS callback)
+    public Battlefield(BattleManagerS callback)
     {
         this.callback = callback;
     }

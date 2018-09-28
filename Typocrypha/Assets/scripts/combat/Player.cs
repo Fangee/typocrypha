@@ -50,6 +50,8 @@ public class Player : MonoBehaviour, ICaster
     public Transform Transform { get { return transform; } }
     private int position = 1; //position in battle field
     public int Position { get { return position; } set { position = value; } }
+    private int _target = 1;
+    public int TargetPosition { get { return _target; } set { _target = value; } }
     PlayerStats stats;
     public CasterStats Stats { get { return stats; } }
     BuffDebuff buffDebuff = new BuffDebuff();
@@ -63,17 +65,6 @@ public class Player : MonoBehaviour, ICaster
         set
         {
             curr_hp = value;
-        }
-    }
-    public int Curr_shield
-    {
-        get
-        {
-            return curr_shield;
-        }
-        set
-        {
-            curr_shield = value;
         }
     }
     public int Curr_stagger
@@ -95,17 +86,9 @@ public class Player : MonoBehaviour, ICaster
     public ICasterType CasterType { get {return ICasterType.PLAYER; } }
 
     //Fields
-
 	int curr_hp = 200;
-    int curr_shield = 0;
     bool is_dead = false;
 	string last_cast = ""; // last casted spell
-
-    //READ ONLY PROPERTIES
-
- 
-
-    //READ/WRITE PROPERTIES
 
     public string Last_cast
     {
@@ -119,18 +102,12 @@ public class Player : MonoBehaviour, ICaster
         }
     }
 
-    //Public Methods
-
-
     //Restores player's HP and Shields to Maximum
     public void restoreToFull()
     {
         curr_hp = Stats.max_hp;
-        curr_shield = Stats.max_shield;
         is_dead = false;
     }
-
-    //ICaster interface overrides
 
     //Damage player
     public void damage(CastData data, int baseDmg, int element, ICaster caster, bool crit, bool reflect = false)

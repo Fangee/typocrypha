@@ -23,7 +23,7 @@ namespace TypocryphaGameflow
             HealthBelow = EditorGUI.IntField(new Rect(UIRect) { width = UIRect.width - labelWidth + 1, x = UIRect.x + labelWidth + 1}, HealthBelow);
         }
 
-        public override bool EvaluateCondition(BattleField field, BattleDataTracker battleData)
+        public override bool EvaluateCondition(Battlefield field, BattleDataTracker battleData)
         {
             return field.Player.Curr_hp < HealthBelow;
         }

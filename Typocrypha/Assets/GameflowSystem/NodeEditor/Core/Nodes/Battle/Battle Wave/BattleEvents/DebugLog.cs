@@ -21,7 +21,7 @@ namespace TypocryphaGameflow
             doConditionListGUI(UIRect);
         }
 
-        public override bool processEvent(BattleField field, BattleDataTracker battleData)
+        public override bool processEvent(Battlefield field, BattleDataTracker battleData)
         {
             Debug.Log(message);
             return false;

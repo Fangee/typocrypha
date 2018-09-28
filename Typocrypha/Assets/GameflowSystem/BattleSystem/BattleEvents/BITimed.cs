@@ -7,7 +7,7 @@ public class BITimed : BattleInterruptTrigger{
     private float curr_time;
     private bool finished = false;
     private bool started = false;
-    public override bool checkTrigger(BattleField state)
+    public override bool checkTrigger(Battlefield state)
     {
         if (seconds == 0)
             return true;

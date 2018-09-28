@@ -129,14 +129,14 @@ namespace TypocryphaGameflow
             public override void SetConnectionKnobPositions(Node n, Rect rect) { return; }
 
             #region Eval Fn Map and Functions
-            private delegate bool ConditionEvalFn(List<BattleEventCondition> conditions, BattleField field, BattleDataTracker battleData);
+            private delegate bool ConditionEvalFn(List<BattleEventCondition> conditions, Battlefield field, BattleDataTracker battleData);
             private static Dictionary<ConditionOperator, ConditionEvalFn> EvalFnMap = new Dictionary<ConditionOperator, ConditionEvalFn>
             {
                 {ConditionOperator.AND, ANDEval },
                 {ConditionOperator.OR, OREval },
                 {ConditionOperator.Equation, EquationEval }
             };
-            private static bool ANDEval(List<BattleEventCondition> conditions, BattleField field, BattleDataTracker battleData)
+            private static bool ANDEval(List<BattleEventCondition> conditions, Battlefield field, BattleDataTracker battleData)
             {
                 foreach (var c in conditions)
                 {
@@ -146,7 +146,7 @@ namespace TypocryphaGameflow
                 }
                 return true;
             }
-            private static bool OREval(List<BattleEventCondition> conditions, BattleField field, BattleDataTracker battleData)
+            private static bool OREval(List<BattleEventCondition> conditions, Battlefield field, BattleDataTracker battleData)
             {
                 foreach (var c in conditions)
                 {
@@ -156,7 +156,7 @@ namespace TypocryphaGameflow
                 }
                 return false;
             }
-            private static bool EquationEval(List<BattleEventCondition> conditions, BattleField field, BattleDataTracker battleData)
+            private static bool EquationEval(List<BattleEventCondition> conditions, Battlefield field, BattleDataTracker battleData)
             {
                 throw new System.NotImplementedException("Equation Evaluation not yet implemented");
             }
@@ -171,8 +171,8 @@ namespace TypocryphaGameflow
             public List<BattleEventCondition> _conditions = new List<BattleEventCondition>();
             public ReorderableSOList<BattleEventCondition> conditions = null;
 
-            public abstract bool processEvent(BattleField field, BattleDataTracker battleData);
-            public bool checkConditions(BattleField field, BattleDataTracker battleData)
+            public abstract bool processEvent(Battlefield field, BattleDataTracker battleData);
+            public bool checkConditions(Battlefield field, BattleDataTracker battleData)
             {
                 if (!stopChecking && EvalFnMap[conditionOperator](_conditions, field, battleData))
                     return processEvent(field, battleData);
@@ -214,7 +214,7 @@ namespace TypocryphaGameflow
         {
             public bool invert = false;
             protected abstract GUIContent TitleLabel { get; }
-            public abstract bool EvaluateCondition(BattleField field, BattleDataTracker battleData);
+            public abstract bool EvaluateCondition(Battlefield field, BattleDataTracker battleData);
             protected Rect doHeaderGUI(Rect rect)
             {
                 Rect UIRect = new Rect(rect) { height = EditorGUIUtility.singleLineHeight};

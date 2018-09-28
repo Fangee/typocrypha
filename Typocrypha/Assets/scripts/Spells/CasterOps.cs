@@ -79,19 +79,6 @@ public static class CasterOps
         //Apply stun damage mod (if stunned)
         if (is_stunned)
             dMod *= (1.25F + (0.25F * staggerDamage));
-        //Apply shield
-        if (target.Curr_shield > 0)
-        {
-            if (target.Curr_shield - dMod < 0)//Shield breaks
-            {
-                target.Curr_shield = 0;
-                target.Curr_hp -= Mathf.CeilToInt(dMod - target.Curr_shield);
-                if (staggerDamage >= 1 && is_stunned == false)
-                    target.Curr_stagger--;
-            }
-            else
-                target.Curr_shield -= Mathf.CeilToInt(dMod);
-        }
         else
         {
             target.Curr_hp -= Mathf.CeilToInt(dMod);

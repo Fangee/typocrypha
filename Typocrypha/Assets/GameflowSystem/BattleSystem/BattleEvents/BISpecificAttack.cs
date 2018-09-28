@@ -5,8 +5,8 @@ using UnityEngine;
 public class BISpecificAttack : BattleInterruptTrigger
 {
     public int numAttacks = 1;
-    public BattleField.FieldPosition caster = BattleField.FieldPosition.ANY;
-    public BattleField.FieldPosition target = BattleField.FieldPosition.ANY;
+    public Battlefield.FieldPosition caster = Battlefield.FieldPosition.ANY;
+    public Battlefield.FieldPosition target = Battlefield.FieldPosition.ANY;
     public string rootKeywordIs = string.Empty;
     public string elementKeywordIs = string.Empty;
     public string styleKeywordIs = string.Empty;
@@ -19,19 +19,19 @@ public class BISpecificAttack : BattleInterruptTrigger
 
     private int curr_attacks = 0;
 
-    public override bool checkTrigger(BattleField state)
+    public override bool checkTrigger(Battlefield state)
     {
         bool ret = false;
-        if (caster == BattleField.FieldPosition.PLAYER && state.lastCaster == BattleField.FieldPosition.PLAYER)
+        if (caster == Battlefield.FieldPosition.PLAYER && state.lastCaster == Battlefield.FieldPosition.PLAYER)
             ret = checkCast(state, state.last_player_cast, state.last_player_spell);
-        else if ((caster == BattleField.FieldPosition.LEFT || caster == BattleField.FieldPosition.MIDDLE || caster == BattleField.FieldPosition.RIGHT) 
-                    && (state.lastCaster == BattleField.FieldPosition.LEFT || state.lastCaster == BattleField.FieldPosition.MIDDLE || state.lastCaster == BattleField.FieldPosition.RIGHT))
+        else if ((caster == Battlefield.FieldPosition.LEFT || caster == Battlefield.FieldPosition.MIDDLE || caster == Battlefield.FieldPosition.RIGHT) 
+                    && (state.lastCaster == Battlefield.FieldPosition.LEFT || state.lastCaster == Battlefield.FieldPosition.MIDDLE || state.lastCaster == Battlefield.FieldPosition.RIGHT))
             ret = checkCast(state, state.last_enemy_cast, state.last_enemy_spell);
-        else if (caster == BattleField.FieldPosition.ANY && state.lastCaster != BattleField.FieldPosition.NONE)
+        else if (caster == Battlefield.FieldPosition.ANY && state.lastCaster != Battlefield.FieldPosition.NONE)
             ret = checkCast(state, state.last_player_cast, state.last_player_spell) || checkCast(state, state.last_enemy_cast, state.last_enemy_spell);
         return (ret && (++curr_attacks >= numAttacks));
     }
-    protected bool checkCast(BattleField state, List<CastData> dataToCheck, SpellData spellToCheck)
+    protected bool checkCast(Battlefield state, List<CastData> dataToCheck, SpellData spellToCheck)
     {
         if (spellToCheck == null ||
             (!string.IsNullOrEmpty(rootKeywordIs) && (rootKeywordIs != spellToCheck.root)) ||
@@ -40,14 +40,14 @@ public class BISpecificAttack : BattleInterruptTrigger
             return false;
         if (dataToCheck == null || dataToCheck.Count <= 0)
             return false;
-        if (caster != BattleField.FieldPosition.ANY && (dataToCheck[0].Caster != state.getCasterFromFieldPosition(caster)))
+        if (caster != Battlefield.FieldPosition.ANY && (dataToCheck[0].Caster != state.getCasterFromFieldPosition(caster)))
             return false;
         ICaster targetToCheck = state.getCasterFromFieldPosition(target);
-        if (targetToCheck == null && target != BattleField.FieldPosition.ANY)
+        if (targetToCheck == null && target != Battlefield.FieldPosition.ANY)
             return false;
         foreach (CastData d in dataToCheck)
         {
-            if (target == BattleField.FieldPosition.ANY || d.Target == targetToCheck)
+            if (target == Battlefield.FieldPosition.ANY || d.Target == targetToCheck)
             {
                 bool element = (elementMustBe == Elements.Element.ANY) || ((int)elementMustBe == d.element || (elementMustBe == Elements.Element.NOTNULL && d.element != Elements.@null));
                 bool hit = (!spellMustHit) || d.isHit;
@@ -58,7 +58,7 @@ public class BISpecificAttack : BattleInterruptTrigger
                 bool result = (element && hit && crit && stun && dmg && elemVs);
                 if (result)
                     return true;
-                else if (target == BattleField.FieldPosition.ANY)
+                else if (target == Battlefield.FieldPosition.ANY)
                     continue;
                 return false;
             }

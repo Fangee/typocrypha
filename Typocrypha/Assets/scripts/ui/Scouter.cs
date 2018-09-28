@@ -63,7 +63,7 @@ public class Scouter : MonoBehaviour {
     public void updateInfo() {
         if (left == null) return; //not sure why left/right are null at start of battle, but this stops it from doing garbage
         //Targeted enemy
-        Enemy foe = field.field.enemy_arr[field.field.target_ind];
+        Enemy foe = field.field.enemies[field.field.Player.TargetPosition];
         //Check if enemy exists
         if (foe == null || foe.Is_dead)
         {

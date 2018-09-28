@@ -9,7 +9,7 @@ namespace TypocryphaGameflow
     public class WaveManager : MonoBehaviour
     {
 
-        public BattleField field;
+        public Battlefield field;
         public GameObject enemyPrefab;
         public GameObject allyPrefab;
         public GameObject waveTransitionPrefab;

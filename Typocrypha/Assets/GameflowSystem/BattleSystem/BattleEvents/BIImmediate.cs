@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BIImmediate : BattleInterruptTrigger
 {
-    public override bool checkTrigger(BattleField state)
+    public override bool checkTrigger(Battlefield state)
     {
         return true;
     }

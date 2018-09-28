@@ -18,7 +18,7 @@ namespace TypocryphaGameflow
             doConditionListGUI(doHeaderGUI(rect));
         }
 
-        public override bool processEvent(BattleField field, BattleDataTracker battleData)
+        public override bool processEvent(Battlefield field, BattleDataTracker battleData)
         {
             throw new System.NotImplementedException("Goto Battle Interrupt");
             return true;

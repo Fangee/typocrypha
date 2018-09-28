@@ -68,14 +68,14 @@ public abstract class Spell
     }
     //Returns target pattern of spell as a List of ICasters
     //Precondition: modify() has been appropriately called on this spell
-    public List<ICaster> target(BattleField field, ICaster caster, int targetPos)
+    public List<ICaster> target(Battlefield field, ICaster caster)
     {
         List<ICaster> castAt = new List<ICaster>();
-        ICaster[] targets = caster.CasterType == ICasterType.ENEMY ? field.player_arr : field.enemy_arr;
-        ICaster[] allies = caster.CasterType == ICasterType.ENEMY ? field.enemy_arr : field.player_arr;
+        ICaster[] targets = caster.CasterType == ICasterType.ENEMY ? field.allies : field.enemies;
+        ICaster[] allies = caster.CasterType == ICasterType.ENEMY ? field.enemies : field.allies;
         int i = 1;
         if (targetData.targeted)//If spell is cursor-dependant
-            i += (targetPos - 1);
+            i += (caster.TargetPosition - 1);
         if (targetData.enemyM)//Middle enemy
             castAt.Add(targets[i]);
         i--;
@@ -371,15 +371,15 @@ public class TargetData
                 targeted = true;
         }
     }
-    public Pair<bool[], bool[]> toArrayPair(BattleField field, ICaster caster, int targetPos)
+    public Pair<bool[], bool[]> toArrayPair(Battlefield field, ICaster caster)
     {
         bool[] enemy_r = { false, false, false };
         bool[] ally_r = { false, false, false };
-        ICaster[] targets = caster.CasterType == ICasterType.ENEMY ? field.player_arr : field.enemy_arr;
-        ICaster[] allies = caster.CasterType == ICasterType.ENEMY ? field.enemy_arr : field.player_arr;
+        ICaster[] targets = caster.CasterType == ICasterType.ENEMY ? field.allies : field.enemies;
+        ICaster[] allies = caster.CasterType == ICasterType.ENEMY ? field.enemies : field.allies;
         int i = 1;
         if (targeted)//If spell is cursor-dependant
-            i += (targetPos - 1);
+            i += (caster.TargetPosition - 1);
         if (enemyM && targets[i] != null && !targets[i].Is_dead)//Middle enemy
             enemy_r[i] = true;
         i--;

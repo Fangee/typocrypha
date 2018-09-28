@@ -14,7 +14,7 @@ public class BattleEventManager : BattleEventTrigger
         nonTriggeredEvents.AddRange(BattleEvents);
     }
 
-    public override bool checkTrigger(BattleField state)
+    public override bool checkTrigger(Battlefield state)
     {
         bool ret = false;
         foreach (BattleEventTrigger e in nonTriggeredEvents)
@@ -27,7 +27,7 @@ public class BattleEventManager : BattleEventTrigger
         }
         return ret;
     }
-    public override bool onTrigger(BattleField state)
+    public override bool onTrigger(Battlefield state)
     {
         foreach(BattleEventTrigger e in toTrigger)
         {

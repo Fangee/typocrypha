@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BINoTargetRepeatNum : BattleInterruptRepeatAfterNum {
-    public override bool checkTrigger(BattleField state)
+    public override bool checkTrigger(Battlefield state)
     {
-        if (state.lastCaster != BattleField.FieldPosition.PLAYER)
+        if (state.lastCaster != Battlefield.FieldPosition.PLAYER)
             return false;
         return state.last_player_cast.Count == 0;
     }
