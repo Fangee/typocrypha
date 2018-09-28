@@ -604,15 +604,21 @@ MonoBehaviour:
   fromPreviousIN: {fileID: 114520238367242108}
   waveTitle: 
   music: {fileID: 0}
-  enemyL: 
-  enemyM: 
-  enemyR: 
-  allyL: 
-  allyR: 
+  enemyData: []
+  allyData: []
   _events:
-  - {fileID: 114670559231067384}
-  - {fileID: 114394261578142096}
-  - {fileID: 114708051636614334}
+  - conditionOperator: 0
+    _conditions: []
+    _functions: []
+    node: {fileID: 0}
+  - conditionOperator: 0
+    _conditions: []
+    _functions: []
+    node: {fileID: 0}
+  - conditionOperator: 0
+    _conditions: []
+    _functions: []
+    node: {fileID: 0}
 --- !u!114 &114244535989609628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1076,10 +1082,6 @@ MonoBehaviour:
   knobIndices:
     min: 1
     max: 1
-  conditionOperator: 0
-  _conditions:
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &114404019184036132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1566,9 +1568,6 @@ MonoBehaviour:
   knobIndices:
     min: 0
     max: 0
-  conditionOperator: 0
-  _conditions:
-  - {fileID: 0}
 --- !u!114 &114673570777299492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1661,8 +1660,6 @@ MonoBehaviour:
   knobIndices:
     min: 2
     max: 2
-  conditionOperator: 2
-  _conditions: []
 --- !u!114 &114721987664117448
 MonoBehaviour:
   m_ObjectHideFlags: 1

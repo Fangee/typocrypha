@@ -38,7 +38,7 @@ namespace TypocryphaGameflow
         }
         public void startCombat()
         {
-            Debug.Log("Battle COntinues");
+            Debug.Log("Battle Continues");
         }
     }
 

@@ -7,7 +7,7 @@ using NodeEditorFramework;
 namespace TypocryphaGameflow
 {
 
-    public class CheckHealth : BattleNodeWave.BattleEventCondition
+    public class CheckHealth : BattleEvent.Condition
     {
         public override float Height { get { return lineHeight * 2; } }
         private static GUIContent _titleLabel = new GUIContent("Check Health", "TODO: Tooltip");

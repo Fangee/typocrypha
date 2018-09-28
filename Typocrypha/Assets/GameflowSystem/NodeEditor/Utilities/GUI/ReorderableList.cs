@@ -17,6 +17,11 @@ namespace TypocryphaGameflow
         //T: Should only be used with non-polymorphic types marked with the System.Serializable attribute
         public class ReorderableList<T> where T: ReorderableList<T>.ListItem
         {
+            #region Callbacks
+            public delegate void processAddedItemCallback(T addedItem);
+            public processAddedItemCallback processAddedItem = (T) => { return; };
+            #endregion
+
             public float Height { get { return _list.GetHeight(); } }
             protected UnityEditorInternal.ReorderableList _list;
             public ReorderableList(List<T> elements, bool draggable = true, bool displayHeader = false, GUIContent headerLabel = null, bool displayAddButton = true, bool displayRemoveButton = true)
@@ -42,6 +47,12 @@ namespace TypocryphaGameflow
                     tex.Apply();
                     if (active)
                         GUI.DrawTexture(rect, tex as Texture);
+                };
+                _list.onAddCallback = (list) =>
+                {
+                    T item = System.Activator.CreateInstance<T>();
+                    processAddedItem(item);
+                    elements.Insert(elements.Count, item);
                 };
             }
             public void doLayoutList()
@@ -190,10 +201,15 @@ namespace TypocryphaGameflow
         //Specific reorderablelist implementation to be used with polymorphic scriptable objects that inherit from an abstract base that inherits from ReorderableListSOBase
         public class ReorderableSOList<T> where T: ReorderableSOList<T>.ListItem
         {
+            #region Callbacks
+            public delegate void processAddedItemCallback(T addedItem);
+            public processAddedItemCallback processAddedItem = (T) => { return; };
+            #endregion
+
             public float Height { get { return _list.GetHeight(); } }
             protected UnityEditorInternal.ReorderableList _list;
             private IEnumerable _subtypes;
-            public ReorderableSOList(List<T> elements, bool draggable = true, bool displayHeader = false, GUIContent headerLabel = null, bool displayAddButton = true, bool displayRemoveButton = true)
+            public ReorderableSOList(List<T> elements, bool draggable = true, bool displayHeader = false, GUIContent headerLabel = null, bool displayAddButton = true, bool useDopdownMenu = true, bool displayRemoveButton = true)
             {
                 _list = new UnityEditorInternal.ReorderableList(elements, typeof(T), draggable, displayHeader, displayAddButton, displayRemoveButton);
                 _list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
@@ -219,11 +235,23 @@ namespace TypocryphaGameflow
                 };
                 if (displayAddButton)
                 {
-                    _subtypes = ReflectiveEnumerator.GetAllSubclassTypes<T>();
-                    _list.onAddDropdownCallback = (buttonRect, list) =>
+                    if(useDopdownMenu)
                     {
-                        doAddMenu();
-                    };
+                        _subtypes = ReflectiveEnumerator.GetAllSubclassTypes<T>();
+                        _list.onAddDropdownCallback = (buttonRect, list) =>
+                        {
+                            doAddMenu();
+                        };
+                    }
+                    else
+                    {
+                        _list.onAddDropdownCallback = (buttonRect, list) =>
+                        {
+                            T item = ScriptableObject.CreateInstance<T>();
+                            processAddedItem(item);
+                            elements.Insert(elements.Count, item);
+                        };
+                    }
                 }
             }
             private void doAddMenu()
@@ -241,6 +269,7 @@ namespace TypocryphaGameflow
             {
                 var data = (System.Type)obj;
                 T item = ScriptableObject.CreateInstance(data) as T;
+                processAddedItem(item);
                 _list.list.Add(item);
             }
 
@@ -364,7 +393,8 @@ namespace TypocryphaGameflow
                 int count = 0;
                 for (int i = 0; i < index; ++i)
                 {
-                    count += (_list.list[i] as T).knobIndices.Count;
+                    T item = (_list.list[i] as T);
+                    count += item.knobIndices.min == -1 ? 0 : item.knobIndices.Count;
                 }
                 return count;
             }

@@ -23,9 +23,8 @@ namespace TypocryphaGameflow
         public EnemyData[] enemyData;
         public AllyData[] allyData;
 
-        [SerializeField]
-        private List<BattleEvent> _events;
-        public ReorderableSOListConnectionKnob<BattleEvent> battleEvents;
+        [SerializeField] private List<BattleEvent> _events;
+        public ReorderableSOList<BattleEvent> battleEvents;
 
         #region Tooltip Strings
         private static string tooltip_music = "Music to play. Leave as None to keep the previous music playing";
@@ -44,7 +43,10 @@ namespace TypocryphaGameflow
             List<ScriptableObject> ret = new List<ScriptableObject>();
             ret.AddRange(_events.ToArray());
             foreach (BattleEvent e in _events)
+            {
                 ret.AddRange(e._conditions.ToArray());
+                ret.AddRange(e._functions.ToArray());
+            }
             return ret.ToArray();
         }
 
@@ -52,23 +54,40 @@ namespace TypocryphaGameflow
         {
             for (int i = 0; i < _events.Count; ++i)
             {
-                List<BattleEventCondition> sublist = new List<BattleEventCondition>();
+                List<BattleEvent.Condition> conditionObjs = new List<BattleEvent.Condition>();
+                List<BattleEvent.Function> functionObjs = new List<BattleEvent.Function>();
                 for (int j = 0; j < _events[i]._conditions.Count; ++j)
                 {
                     ScriptableObject so = _events[i]._conditions[j];
                     so = replaceSO(so);
-                    sublist.Add(so as BattleEventCondition);
+                    conditionObjs.Add(so as BattleEvent.Condition);
                 }
-                _events[i] = (BattleEvent)replaceSO(_events[i]);
+                for(int j = 0; j <_events[i]._functions.Count; ++j)
+                {
+                    ScriptableObject so = _events[i]._functions[j];
+                    so = replaceSO(so);
+                    functionObjs.Add(so as BattleEvent.Function);
+                }
+                _events[i] = replaceSO(_events[i]) as BattleEvent;
+                _events[i].node = this;
                 _events[i]._conditions.Clear();
-                _events[i]._conditions.AddRange(sublist);
+                _events[i]._conditions.AddRange(conditionObjs);
+                _events[i]._functions.Clear();
+                _events[i]._functions.AddRange(functionObjs);
+
             }
         }
 
         public override void NodeGUI()
         {
             if (battleEvents == null)
-                battleEvents = new ReorderableSOListConnectionKnob<BattleEvent>(this, _events, true, true, new GUIContent("Battle Events", " "));
+            {
+                battleEvents = new ReorderableSOList<BattleEvent>(_events, true, true, new GUIContent("Battle Events", " "), true, false);
+                battleEvents.processAddedItem = (item) =>
+                {
+                    item.node = this;
+                };
+            }
 
             #region Wave Transition GUI
             GUILayout.Space(4);
@@ -116,115 +135,5 @@ namespace TypocryphaGameflow
             return ProcessFlag.Wait;
         }
         #endregion
-
-        public abstract class BattleEvent : ReorderableSOListConnectionKnob<BattleEvent>.ListItem
-        {
-            public enum ConditionOperator
-            {
-                AND,
-                OR,
-                Equation
-            }
-            public override ConnectionKnobAttribute[] KnobAttributes { get { return new ConnectionKnobAttribute[0]; } }
-            public override void SetConnectionKnobPositions(Node n, Rect rect) { return; }
-
-            #region Eval Fn Map and Functions
-            private delegate bool ConditionEvalFn(List<BattleEventCondition> conditions, Battlefield field, BattleDataTracker battleData);
-            private static Dictionary<ConditionOperator, ConditionEvalFn> EvalFnMap = new Dictionary<ConditionOperator, ConditionEvalFn>
-            {
-                {ConditionOperator.AND, ANDEval },
-                {ConditionOperator.OR, OREval },
-                {ConditionOperator.Equation, EquationEval }
-            };
-            private static bool ANDEval(List<BattleEventCondition> conditions, Battlefield field, BattleDataTracker battleData)
-            {
-                foreach (var c in conditions)
-                {
-                    bool expr = c.EvaluateCondition(field, battleData);
-                    if (c.invert ? expr : !expr)
-                        return false;
-                }
-                return true;
-            }
-            private static bool OREval(List<BattleEventCondition> conditions, Battlefield field, BattleDataTracker battleData)
-            {
-                foreach (var c in conditions)
-                {
-                    bool expr = c.EvaluateCondition(field, battleData);
-                    if (c.invert ? !expr : expr)
-                        return true;
-                }
-                return false;
-            }
-            private static bool EquationEval(List<BattleEventCondition> conditions, Battlefield field, BattleDataTracker battleData)
-            {
-                throw new System.NotImplementedException("Equation Evaluation not yet implemented");
-            }
-            #endregion
-
-            public ConditionOperator conditionOperator = ConditionOperator.AND;
-            protected bool stopChecking = false;
-
-            protected abstract GUIContent TitleLabel { get; }
-
-            [SerializeField]
-            public List<BattleEventCondition> _conditions = new List<BattleEventCondition>();
-            public ReorderableSOList<BattleEventCondition> conditions = null;
-
-            public abstract bool processEvent(Battlefield field, BattleDataTracker battleData);
-            public bool checkConditions(Battlefield field, BattleDataTracker battleData)
-            {
-                if (!stopChecking && EvalFnMap[conditionOperator](_conditions, field, battleData))
-                    return processEvent(field, battleData);
-                return false;
-            }
-
-            #region Helper GUI Methods and properties
-            protected Rect doHeaderGUI(Rect UIRect)
-            {
-                Rect headerRect = new Rect(UIRect) { height = EditorGUIUtility.singleLineHeight };
-                GUI.Label(headerRect, TitleLabel, NodeEditorGUI.nodeLabelCentered);
-                headerRect.y += lineHeight;
-                return headerRect;
-            }
-            protected Rect doConditionListGUI(Rect UIRect)
-            {
-                if (_conditions.Count > 1)
-                {
-                    conditionOperator = (ConditionOperator)EditorGUI.EnumPopup(UIRect, conditionOperator);
-                    UIRect.y += lineHeight;
-                }
-                conditions.doList(new Rect(UIRect) { height = conditions.Height });
-                return new Rect(UIRect) { y = UIRect.y + conditions.Height, height = EditorGUIUtility.singleLineHeight };
-            }
-            protected float HeaderHeight { get { return lineHeight; } }
-            protected float ConditionListHeight
-            {
-                get
-                {
-                    if (conditions == null)
-                        conditions = new ReorderableSOList<BattleEventCondition>(_conditions, true, true, new GUIContent("Conditions", ""));
-                    return conditions.Height + (_conditions.Count > 1 ? lineHeight : 0);
-                }
-            }
-            #endregion
-        }
-
-        public abstract class BattleEventCondition : ReorderableSOList<BattleEventCondition>.ListItem
-        {
-            public bool invert = false;
-            protected abstract GUIContent TitleLabel { get; }
-            public abstract bool EvaluateCondition(Battlefield field, BattleDataTracker battleData);
-            protected Rect doHeaderGUI(Rect rect)
-            {
-                Rect UIRect = new Rect(rect) { height = EditorGUIUtility.singleLineHeight};
-                GUI.Label(new Rect(UIRect) { width = EditorGUIUtility.labelWidth }, TitleLabel, NodeEditorGUI.nodeLabelBold);
-                GUI.Label(new Rect(UIRect) { x = rect.x + (0.825f * rect.width), width = 30 }, new GUIContent("NOT", "TODO: Tooltip"), GUI.skin.label);
-                invert = EditorGUI.Toggle(new Rect(UIRect) { x = rect.x + 30 + (0.825f * rect.width), width = 20 }, invert);
-                UIRect.y += lineHeight;
-                return UIRect;
-            }
-        }
-  
     }
 }

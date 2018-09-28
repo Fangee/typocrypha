@@ -23,7 +23,7 @@ public abstract class Spell
         else if (type.CompareTo("shield") == 0)
             return new ShieldSpell();
         else
-            throw new System.NotImplementedException();
+            throw new System.NotImplementedException("Spell type: " + type + " does not exist");
     }
 
     //public methods
