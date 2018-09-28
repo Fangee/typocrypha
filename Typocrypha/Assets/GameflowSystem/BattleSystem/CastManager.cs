@@ -23,55 +23,40 @@ public class CastManager : MonoBehaviour
         SpellData s;
         string message = "";
         //Send spell, Enemy state, and target index to parser and caster
-        CastStatus status = spellDict.parse(spell.ToLower(), out s);
+        CastParser.ParseResults status = CastParser.parse(spell.ToLower().Split(' '), spellDict, out s);
         Pair<bool[], bool[]> targetPattern = null;
         callback.clearBuffer();
-        switch (status)
+        if(status == CastParser.ParseResults.Valid)
         {
-            case CastStatus.SUCCESS:
-                ++field.num_player_attacks;
-                targetPattern = spellDict.getTargetPattern(s, field.enemy_arr, field.target_ind, field.player_arr, field.player_ind);
-                message = chat.getLine(field.Player.Stats.ChatDatabaseID);
-                preCastEffects(targetPattern, field.Player, s, message);
-                AudioPlayer.main.playSFX("sfx_enter");
-				AudioPlayer.main.playSFX ("sfx_player_cast");
-				AudioPlayer.main.playSFX ("sfx_cast", 0.35f);
-				AnimationPlayer.main.playAnimation("anim_spell_empower", field.Player.Transform.position, 2f);
-                StartCoroutine(pauseAttackCurrent(s, field.Player));
-                return true; //Clear the casting buffer
-            case CastStatus.BOTCH:
-                //diplay.playBotchEffects
-                spellEffects.popp.spawnSprite("popups_invalid", 1.0F, field.Player.Transform.position - new Vector3(0, 0.375f, 0));
-                AudioPlayer.main.playSFX("sfx_enter_bad");
-                return true; //Clear the casting buffer
-            case CastStatus.FIZZLE:
-                //diplay.playBotchEffects
-                spellEffects.popp.spawnSprite("popups_invalid", 1.0F, field.Player.Transform.transform.position - new Vector3(0, 0.375f, 0));
-                AudioPlayer.main.playSFX("sfx_enter_bad");
-                return true; //Clear the casting buffer
-            case CastStatus.ONCOOLDOWN:
-                //display.playOnCooldownEffects
-                spellEffects.popp.spawnSprite("popups_oncooldown", 1.0F, field.Player.Transform.position - new Vector3(0, 0.375f, 0));
-                AudioPlayer.main.playSFX("sfx_enter_bad");
-                return false;
-            case CastStatus.COOLDOWNFULL:
+            if (cooldown.isFull())
+            {
                 //diplay.playCooldownFullEffects
                 spellEffects.popp.spawnSprite("popups_cooldownfull", 1.0F, field.Player.Transform.position - new Vector3(0, 0.375f, 0));
                 AudioPlayer.main.playSFX("sfx_enter_bad");
                 return false;
-            case CastStatus.ALLYSPELL:
-                int allyPos = getAllyPosition(s.root);
-                if (allyPos == -1 || field.player_arr[allyPos].Is_stunned || !((Ally)field.player_arr[allyPos]).tryCast())//display.playAllyNotHereEffects
-                    break;
-                targetPattern = spellDict.getTargetPattern(s, field.enemy_arr, field.target_ind, field.player_arr, allyPos);
-                message = chat.getLine(field.player_arr[allyPos].Stats.ChatDatabaseID);
-                preCastEffects(targetPattern, field.player_arr[allyPos], s, message);
-                StartCoroutine(pauseAttackCurrent(s, field.player_arr[allyPos]));
-                return true; //Clear the casting buffer
-            default:
+            }
+            else if (cooldown.isOnCooldown(s))
+            {
+                //display.playOnCooldownEffects
+                spellEffects.popp.spawnSprite("popups_oncooldown", 1.0F, field.Player.Transform.position - new Vector3(0, 0.375f, 0));
+                AudioPlayer.main.playSFX("sfx_enter_bad");
                 return false;
+            }
+            ++field.num_player_attacks;
+            targetPattern = spellDict.getTargetPattern(s, field.enemy_arr, field.target_ind, field.player_arr, field.player_ind);
+            message = chat.getLine(field.Player.Stats.ChatDatabaseID);
+            preCastEffects(targetPattern, field.Player, s, message);
+            AudioPlayer.main.playSFX("sfx_enter");
+            AudioPlayer.main.playSFX("sfx_player_cast");
+            AudioPlayer.main.playSFX("sfx_cast", 0.35f);
+            AnimationPlayer.main.playAnimation("anim_spell_empower", field.Player.Transform.position, 2f);
+            StartCoroutine(pauseAttackCurrent(s, field.Player));
+            return true; //Clear the casting buffer
         }
-        return false;
+        //diplay.playBotchEffects
+        spellEffects.popp.spawnSprite("popups_invalid", 1.0F, field.Player.Transform.position - new Vector3(0, 0.375f, 0));
+        AudioPlayer.main.playSFX("sfx_enter_bad");
+        return true; //Clear the casting buffer
     }
 
     IEnumerator pauseAttackCurrent(SpellData s, ICaster caster)
@@ -249,28 +234,19 @@ public class CastManager : MonoBehaviour
     //Starts cooldown of spell
     private void startCooldown(SpellData data, ICaster castingPlayer)
     {
-        float cooldownTime = spellDict.getCastingTime(data, castingPlayer.Stats.speed);
-        spellDict.getSpell(data).startCooldown(cooldown, data.root, cooldownTime);
+        float cooldownTime = data.getCastingTime(spellDict, castingPlayer.Stats.speed);
+        cooldown.add(data, cooldownTime);
     }
 
     //Utility
 
-    //Returns valid spelldata if the string is a valid spell, or null if not
-    public SpellData isValidSpell(string spell)
-    {
-        SpellData s = null;
-        CastStatus status = spellDict.parse(spell, out s);
-        if (status == CastStatus.SUCCESS || status == CastStatus.ONCOOLDOWN || status == CastStatus.COOLDOWNFULL)
-            return s;
-        return null;
-    }
     //Play a spell animation without really doing anything
     public IEnumerator playSpellEffects(SpellData s, CastData dummyValues)
     {
         dummyValues.animData = spellDict.getAnimData(s);
         dummyValues.sfxData = spellDict.getSfxData(s);
         dummyValues.element = Elements.fromString(s.element);
-        dummyValues.damageInflicted = spellDict.getSpell(s).power * 2;
+        dummyValues.damageInflicted = spellDict.getRoot(s).power * 2;
         yield return StartCoroutine(spellEffects.playEffects(dummyValues, s));
     }
 

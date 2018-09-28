@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// enum for how a cast went (successful cast, botched, fizzled, etc)
-public enum CastStatus { SUCCESS, BOTCH, FIZZLE, ONCOOLDOWN, COOLDOWNFULL, ALLYSPELL };
-public enum WordType { ROOT, STYLE, ELEMENT };
 
 //Stores all the spell info and contains methods to parse and cast spells from player input
 //Currently does not actually support player or enemy casting, but has parsing
 public class SpellDictionary : MonoBehaviour
 {
+    //Dictionaries containing spells associated with keywords
+    private Dictionary<string, Spell> rootWords = new Dictionary<string, Spell>();
+    private Dictionary<string, ElementMod> elements = new Dictionary<string, ElementMod>();
+    private Dictionary<string, StyleMod> styles = new Dictionary<string, StyleMod>();
 
-    public CooldownList cooldown;
-
+    #region Building (TO BE DEPRECATED)
     //Loads the spell dictionary at the beginning of the game
     public void Start()
     {
@@ -151,7 +151,7 @@ public class SpellDictionary : MonoBehaviour
                     s.modFlag = Spell.ModFlags.NORMAL;
                     break;
             }
-            spells.Add(key, s);
+            rootWords.Add(key, s);
             i++;
         }
         //read in element keywords
@@ -210,150 +210,15 @@ public class SpellDictionary : MonoBehaviour
             i++;
         }
     }
+    #endregion
 
-    //parses input spell, and returns an appropriate CastStatus code and a built (possibly null, possibly invalid Spelldata)
-    public CastStatus parse(string spell, out SpellData s)
-    {
-        char[] delim = { ' ' };
-        string[] lines = spell.Split(delim);
-        CastStatus status;
-        if (lines.Length == 1)
-        {
-            string first = lines[0].Trim();
-            if (spells.ContainsKey(first))
-            {
-                s = new SpellData(first);
-                status = CastStatus.SUCCESS;
-            }
-            else
-            {
-                s = new SpellData("b", null, null);
-                status = CastStatus.BOTCH;
-            }
-        }
-        else if (lines.Length == 2)
-        {
-            string first = lines[0].Trim();
-            string second = lines[1].Trim();
-            if (spells.ContainsKey(first))
-            {
-                if (styles.ContainsKey(second))
-                {
-                    s = new SpellData(first, null, second);
-                    status = CastStatus.SUCCESS;
-                }
-                else
-                {
-                    s = new SpellData(first, null, "b");
-                    status = CastStatus.BOTCH;
-                }
-            }
-            else if (spells.ContainsKey(second))
-            {
-                if (elements.ContainsKey(first))
-                {
-                    s = new SpellData(second, first, null);
-                    status = CastStatus.SUCCESS;
-                }
-                else
-                {
-                    s = new SpellData(second, "b", null);
-                    status = CastStatus.BOTCH;
-                }
-            }
-            else
-            {
-                s = new SpellData("b", "b", null);
-                status = CastStatus.BOTCH;
-            }
-        }
-        else if (lines.Length == 3)
-        {
-            string elem = lines[0].Trim();
-            string root = lines[1].Trim();
-            string style = lines[2].Trim();
-            if (spells.ContainsKey(root))
-            {
-                if (elements.ContainsKey(elem))
-                {
-                    if (styles.ContainsKey(style))
-                    {
-                        s = new SpellData(root, elem, style);
-                        status = CastStatus.SUCCESS;
-                    }
-                    else
-                    {
-                        s = new SpellData(root, elem, "b");
-                        status = CastStatus.BOTCH;
-                    }
-                }
-                else if (styles.ContainsKey(style))
-                {
-                    s = new SpellData(root, "b", style);
-                    status = CastStatus.BOTCH;
-                }
-                else
-                {
-                    s = new SpellData(root, "b", "b");
-                    status = CastStatus.BOTCH;
-                }
-            }
-            else if (elements.ContainsKey(elem))
-            {
-                if (styles.ContainsKey(style))
-                {
-                    s = new SpellData("b", elem, style);
-                    status = CastStatus.BOTCH;
-                }
-                else
-                {
-                    s = new SpellData("b", elem, "b");
-                    status = CastStatus.BOTCH;
-                }
-            }
-            else if (styles.ContainsKey(style))
-            {
-                s = new SpellData("b", "b", style);
-                status = CastStatus.BOTCH;
-            }
-            else
-            {
-                s = new SpellData("b", "b", "b");
-                status = CastStatus.BOTCH;
-            }
-        }
-        else
-        {
-            s = new SpellData("FIZZLE");
-            status = CastStatus.FIZZLE;
-        }
-        //Get Cooldown
-        if (status == CastStatus.SUCCESS)
-        {
-            if (cooldown.isFull())
-            {
-                return CastStatus.COOLDOWNFULL;
-            }
-            else if (isOnCooldown(s))
-            {
-                return CastStatus.ONCOOLDOWN;
-            }
-            else if (spells[s.root].type.Contains(allyString))
-            {
-                return CastStatus.ALLYSPELL;
-            }
-            else
-                return CastStatus.SUCCESS;
-        }
-        else
-            return status;
-    }
+    #region Casting (TO BE RELOCATED)
     //Casts spell from NPC (enemy or ally)
     public List<CastData> cast(SpellData spell, ICaster[] targets, int selected, ICaster[] allies, int position, out List<Transform> noTargetPositions)
     {
         noTargetPositions = new List<Transform>();
         ICaster caster = allies[position];
-        Spell s = spells[spell.root];
+        Spell s = rootWords[spell.root];
         Spell c = createSpellFromType(s.type);
         s.copyInto(c);
         int wordCount = 1;
@@ -404,41 +269,35 @@ public class SpellDictionary : MonoBehaviour
     {
         return null;
     }
-    //Gets casting time of input spell
-    public float getCastingTime(SpellData s, float speed)
+    #endregion
+
+    #region Dicitonary Management
+    public bool containsRoot(string word)
     {
-        float time = spells[s.root].cooldown;
-        if (s.element != null && s.style != null)
-        {
-            float baseTime = time;
-            time *= elements[s.element].cooldownModM;
-            time += (baseTime * styles[s.style].cooldownModM) - baseTime;
-            time += elements[s.element].cooldownMod;
-            time += styles[s.style].cooldownMod;
-        }
-        else if (s.element != null)
-        {
-            time *= elements[s.element].cooldownModM;
-            time += elements[s.element].cooldownMod;
-        }
-        else if (s.style != null)
-        {
-            time *= styles[s.style].cooldownModM;
-            time += styles[s.style].cooldownMod;
-        }
-        return time / speed;
+        return rootWords.ContainsKey(word);
     }
-    //Return cooldown of spell
-    //Pre: spell is on cooldown
-    public float getTimeLeft(SpellData data)
+    public bool containsElement(string word)
     {
-        Spell s = spells[data.root];
-        return s.TimeLeft;
+        return elements.ContainsKey(word);
     }
-    public Spell getSpell(SpellData data)
+    public bool containsStyle(string word)
     {
-        return spells[data.root];
+        return styles.ContainsKey(word);
     }
+    public Spell getRoot(SpellData data)
+    {
+        return rootWords[data.root];
+    }
+    public ElementMod getElementMod(SpellData data)
+    {
+        return elements[data.element];
+    }
+    public StyleMod getStyleMod(SpellData data)
+    {
+        return styles[data.style];
+    }
+    #endregion
+
     //Get an array holding the animation data array for a given SpellData
     public string[] getAnimData(SpellData data)
     {
@@ -446,7 +305,7 @@ public class SpellDictionary : MonoBehaviour
         if (data.style != null)
             ret[0] = styles[data.style].animationID;
         if (data.root != null)
-            ret[1] = spells[data.root].animationID;
+            ret[1] = rootWords[data.root].animationID;
         if (data.element != null)
             ret[2] = elements[data.element].animationID;
         return ret;
@@ -458,7 +317,7 @@ public class SpellDictionary : MonoBehaviour
         if (data.style != null)
             ret[0] = styles[data.style].sfxID;
         if (data.root != null)
-            ret[1] = spells[data.root].sfxID;
+            ret[1] = rootWords[data.root].sfxID;
         if (data.element != null)
             ret[2] = elements[data.element].sfxID;
         return ret;
@@ -468,51 +327,36 @@ public class SpellDictionary : MonoBehaviour
     {
         if (data.style == null || !styles[data.style].isTarget)
         {
-            return spells[data.root].targetData.toArrayPair(targets, selected, allies, position);
+            return rootWords[data.root].targetData.toArrayPair(targets, selected, allies, position);
         }
         else
         {
             TargetData t = new TargetData(false);
-            t.copyFrom(spells[data.root].targetData);
+            t.copyFrom(rootWords[data.root].targetData);
             styles[data.style].targets.modify(t);
             return t.toArrayPair(targets, selected, allies, position);
         }
     }
 
-    //SPELLBOOK MANAGEMENT
+    #region SpellBook Management (TO BE RELOCATED)
 
     //Registeres all keywords in Spelldata s if unregistered
     //Returns bool[elem,root,style] (true if successful register, false if already registered
     //Pre: s is a valid spell
     public bool[] safeRegister(SpellBook spellBook, SpellData s)
     {
-        bool[] results = { false, false, false };
-        if (spellBook.isNotRegistered(s.root))
-        {
-            spellBook.register(s.root, regType(s.root), spells[s.root].description);
-            results[1] = true;
-        }
-        if (s.element != null && spellBook.isNotRegistered(s.element))
-        {
-            spellBook.register(s.element, "element", elements[s.element].description);
-            results[0] = true;
-        }
-        if (s.style != null && spellBook.isNotRegistered(s.style))
-        {
-            spellBook.register(s.style, "style", styles[s.style].description);
-            results[2] = true;
-        }
-        return results;
+        return new bool[] { safeRegister(spellBook, s.element), safeRegister(spellBook, s.root), safeRegister(spellBook, s.style) };
     }
     //Registers individual keyword
-    //Pre: s != null
     public bool safeRegister(SpellBook spellBook, string word)
     {
+        if (string.IsNullOrEmpty(word))
+            return false;
         if (spellBook.isNotRegistered(word))
         {
-            if (spells.ContainsKey(word))
+            if (rootWords.ContainsKey(word))
             {
-                spellBook.register(word, regType(word), spells[word].description);
+                spellBook.register(word, rootWords[word].type, rootWords[word].description);
                 return true;
             }
             else if (elements.ContainsKey(word))
@@ -528,17 +372,12 @@ public class SpellDictionary : MonoBehaviour
         return false;
     }
 
-    //PRIVATE//--------------------------------------------------------------------------------------------------------------------------------------------//
-
-    private const int seperatorInd = 7; //Index of '/' seperator in ally spells
-    private const string allyString = "friend"; //String before '/' in ally spells
+    #endregion
 
     //Helper method for cloning appropriately typed spells
     private Spell createSpellFromType(string type)
     {
-        if (type.Contains(allyString))
-            return createSpellFromType(type.Substring(seperatorInd));
-        else if (type.CompareTo("attack") == 0)
+        if (type.CompareTo("attack") == 0)
             return new AttackSpell();
         else if (type.CompareTo("buff") == 0)
             return new BuffSpell();
@@ -549,35 +388,16 @@ public class SpellDictionary : MonoBehaviour
         else
             throw new System.NotImplementedException();
     }
-    //Get proper spell type for registry (needed for ally spells)
-    private string regType(string root)
-    {
-        if (spells[root].type.Contains(allyString))
-            return allyString;
-        return spells[root].type;
-    }
-    //Returns if spell s is on cooldown
-    //Pre: coolDownList is not full
-    private bool isOnCooldown(SpellData s)
-    {
-        Spell spell = spells[s.root];//Get root keyword from dictionary
-        if (spell.IsOnCooldown)//Casting fails if root is on cooldown
-        {
-            return true;
-        }
-        return false;
-    }
-
-    //Dictionaries containing spells associated with keywords
-    private Dictionary<string, Spell> spells = new Dictionary<string, Spell>();
-    private Dictionary<string, ElementMod> elements = new Dictionary<string, ElementMod>();
-    private Dictionary<string, StyleMod> styles = new Dictionary<string, StyleMod>();
 }
 //A class containing the required data to cast a spell (with defined keyword composition)
 //Also contains associated methods like ToString()
 [System.Serializable]
 public class SpellData
 {
+    public string root;
+    public string element;
+    public string style;
+
     //Make a new spelldata instance with root keyword root, element keyword prefix, and style keyword suffix
     public SpellData(string root, string prefix = null, string suffix = null)
     {
@@ -585,9 +405,14 @@ public class SpellData
         element = prefix;
         style = suffix;
     }
-    public string root;
-    public string element;
-    public string style;
+    //Set the spellData all at once
+    public SpellData setData(string root, string prefix = null, string suffix = null)
+    {
+        this.root = root;
+        element = prefix;
+        style = suffix;
+        return this;
+    }
     //Returns a string representation of the spell (Display mode, with "-" delimiters and all caps)
     public override string ToString()
     {
@@ -610,6 +435,38 @@ public class SpellData
         if (index == 2)
             return element;
         throw new System.Exception("Not a valid spell index");
+    }
+    //Returns the casting time of the spell
+    //Gets casting time of input spell
+    public float getCastingTime(SpellDictionary dict, float speed)
+    {
+        float time = dict.getRoot(this).cooldown;
+        float baseTime = time;
+        if (element != null)
+        {
+            ElementMod e = dict.getElementMod(this);
+            time += e.cooldownMod + (baseTime * e.cooldownModM);
+        }
+        if (style != null)
+        {
+            StyleMod s = dict.getStyleMod(this);
+            time += s.cooldownMod + (baseTime * s.cooldownModM);
+            if (element != null)
+                time -= baseTime;
+        }
+        return time / speed;
+    }
+    //Static isValid
+    public static bool isValid(SpellData s, SpellDictionary d)
+    {
+        return s.isValid(d);
+    }
+    //Returns if the spelldata represents a valid spell
+    public bool isValid(SpellDictionary dict)
+    {
+        return dict.containsRoot(root) 
+                && string.IsNullOrEmpty(element) ? true : dict.containsElement(element) 
+                && string.IsNullOrEmpty(style) ? true : dict.containsStyle(style);
     }
     //Returns a copy of this spellData
     public SpellData clone()

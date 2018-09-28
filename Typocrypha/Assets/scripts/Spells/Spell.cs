@@ -15,12 +15,6 @@ public abstract class Spell
 
     //Casts this spell at selected target (at targets[selected])
     public abstract CastData cast(ICaster target, ICaster caster);
-    //Starts spell cooldown using coroutine support from the Timer class 
-    public void startCooldown(CooldownList l, string name, float time)
-    {
-        finish_time = time;
-        l.add(name, time, curr_time, isNotOnCooldown);
-    }
     //Apllies prefix and suffix to spell. both arguments can be null (if no prefix or suffix)
     public void Modify(ElementMod e, StyleMod s)
     {
@@ -179,32 +173,6 @@ public abstract class Spell
     public string type = "null";        //Spell's effect type (attack, shield, heal, etc.)
     public TargetData targetData;       //Spell's targeting data
     public ModFlags modFlag;            //Shows how to modify this spell
-
-    //Cooldown properties
-
-    //bool ref for passing to CooldownList
-    Ref<bool> isNotOnCooldown = new Ref<bool>(true);
-    //Returns true is on cooldown, false otherwise
-    public bool IsOnCooldown
-    {
-        get
-        {
-            return !isNotOnCooldown.Obj;
-        }
-
-        set
-        {
-            isNotOnCooldown.Obj = !value;
-        }
-    }
-    //float ref for passing to CooldownList
-    Ref<float> curr_time = new Ref<float>(0.0F);
-    //How many seconds to finish spell
-    float finish_time = 0.0F;
-    public float TimeLeft
-    {
-        get { return finish_time - curr_time.Obj; }
-    }
 }
 //Spells that attempt to do damage to opposing entities (or self and/or allies)
 //Can have a chance to buff/debuff

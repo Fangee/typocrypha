@@ -215,7 +215,7 @@ public class Enemy : MonoBehaviour, ICaster {
 		Vector3 original_pos = transform.position;
         curr_stagger_time = 0F;
 		curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target).clone();   //Initialize with current spell
-        atk_time = castManager.spellDict.getCastingTime(curr_spell, stats.speed);   //Get casting time
+        atk_time = curr_spell.getCastingTime(castManager.spellDict, stats.speed);   //Get casting time
 		while (!is_dead) {
 			yield return new WaitForEndOfFrame ();
 			yield return new WaitWhile (() => BattleManagerS.main.battlePause);
@@ -250,7 +250,7 @@ public class Enemy : MonoBehaviour, ICaster {
 				AI.updateState(field.enemy_arr, position, field.player_arr, EnemyAI.Update_Case.AFTER_CAST);
                 //Get next spell from AI
 				curr_spell = AI.getNextSpell(stats.spells, field.enemy_arr, position, field.player_arr, out target).clone();
-                atk_time = castManager.spellDict.getCastingTime(curr_spell, stats.speed);//get new casting time
+                atk_time = curr_spell.getCastingTime(castManager.spellDict, stats.speed);//get new casting time
                 curr_time = 0;
 				enemy_animator.Play("enemy_idle");
             }

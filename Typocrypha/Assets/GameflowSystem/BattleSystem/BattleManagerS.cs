@@ -296,17 +296,7 @@ public class BattleManagerS : MonoBehaviour, IPausable {
     public void handleSpellCast(string spell, TrackTyping callback)
     {
 		uiManager.updateUI(); // Update Tab buffer UI
-		if (frenzyCastActive) {
-			SpellData s = castManager.isValidSpell (spell);
-			if (s != null) {
-				frenzySpells.Add (s);
-				AudioPlayer.main.playSFX ("sfx_enter");
-			} else
-				AudioPlayer.main.playSFX ("sfx_enter_bad");
-			trackTyping.clearBuffer ();
-		} else {
-			castManager.attackCurrent (spell, callback);
-		}
+        castManager.attackCurrent (spell, callback);
     }
     //Handle player death
     public void playerDeath()
