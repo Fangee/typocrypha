@@ -48,15 +48,10 @@ public class Battlefield {
 	public int curr_dead = 0;
 
     //Interrupt stuff
-
-	[HideInInspector] public System.DateTime time_started; // time battle started
-    [HideInInspector] public FieldPosition lastCaster = FieldPosition.NONE;
-    [HideInInspector] public List<CastData> last_enemy_cast; // last performed cast action
-    [HideInInspector] public List<CastData> last_player_cast;
-	[HideInInspector] public SpellData last_enemy_spell; // last performed spell
-    [HideInInspector] public SpellData last_player_spell; // last performed spell
-    [HideInInspector] public bool[] last_register; // last spell register status
-	[HideInInspector] public int num_player_attacks; // number of player attacks from beginning of battle
+    [HideInInspector] public ICaster lastCaster = null;
+    [HideInInspector] public List<CastData> lastCast; // last performed cast action
+	[HideInInspector] public SpellData lastSpell; // last performed spell
+    [HideInInspector] public bool[] lastRegister; // last spell register status
 
     //CALLBACK FUNCTIONS
 

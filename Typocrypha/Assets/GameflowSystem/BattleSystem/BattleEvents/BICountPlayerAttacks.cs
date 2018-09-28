@@ -7,6 +7,7 @@ public class BICountPlayerAttacks : BattleInterruptTrigger {
     public int triggerAfterXAttacks;
     public override bool checkTrigger(Battlefield state)
     {
-        return state.num_player_attacks >= triggerAfterXAttacks;
+        throw new System.NotImplementedException("obsolete");
+        //return state.num_player_attacks >= triggerAfterXAttacks;
     }
 }

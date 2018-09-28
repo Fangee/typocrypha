@@ -11,35 +11,35 @@ public class BIRegister : BattleInterruptTrigger
         switch (wordType)
         {
             case Spell.WordType.ANY:
-                if((state.last_register[0] || state.last_register[1] || state.last_register[2]))
+                if((state.lastRegister[0] || state.lastRegister[1] || state.lastRegister[2]))
                 {
                     if (string.IsNullOrEmpty(wordMustBe))
                         return true;
-                    return (state.last_enemy_spell.root == wordMustBe) || (state.last_enemy_spell.element == wordMustBe) || (state.last_enemy_spell.style == wordMustBe) || (state.last_player_spell.root == wordMustBe) || (state.last_player_spell.element == wordMustBe) || (state.last_player_spell.style == wordMustBe);
+                    return (state.lastSpell.root == wordMustBe) || (state.lastSpell.element == wordMustBe) || (state.lastSpell.style == wordMustBe) || (state.lastSpell.root == wordMustBe) || (state.lastSpell.element == wordMustBe) || (state.lastSpell.style == wordMustBe);
                 }
                 return false;
             case Spell.WordType.ROOT:
-                if (state.last_register[1])
+                if (state.lastRegister[1])
                 {
                     if (string.IsNullOrEmpty(wordMustBe))
                         return true;
-                    return (wordMustBe == state.last_enemy_spell.root) || (wordMustBe == state.last_player_spell.root);
+                    return (wordMustBe == state.lastSpell.root) || (wordMustBe == state.lastSpell.root);
                 }
                 return false;
             case Spell.WordType.ELEMENT:
-                if (state.last_register[0])
+                if (state.lastRegister[0])
                 {
                     if (string.IsNullOrEmpty(wordMustBe))
                         return true;
-                    return (wordMustBe == state.last_enemy_spell.element) || (wordMustBe == state.last_player_spell.element);
+                    return (wordMustBe == state.lastSpell.element) || (wordMustBe == state.lastSpell.element);
                 }
                 return false;
             case Spell.WordType.STYLE:
-                if (state.last_register[2])
+                if (state.lastRegister[2])
                 {
                     if (string.IsNullOrEmpty(wordMustBe))
                         return true;
-                    return (wordMustBe == state.last_enemy_spell.style) || (wordMustBe == state.last_enemy_spell.style);
+                    return (wordMustBe == state.lastSpell.style) || (wordMustBe == state.lastSpell.style);
                 }
                 return false;
         }

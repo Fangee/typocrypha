@@ -6,8 +6,8 @@ public class BINoTarget : BattleInterruptTrigger
 {
     public override bool checkTrigger(Battlefield state)
     {
-        if (state.lastCaster != Battlefield.FieldPosition.PLAYER)
+        if (state.lastCaster.CasterType != ICasterType.PLAYER)
             return false;
-        return state.last_player_cast.Count == 0;
+        return state.lastCast.Count == 0;
     }
 }

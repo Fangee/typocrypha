@@ -23,7 +23,6 @@ public class TextMacros : MonoBehaviour {
             {"i", macroInfo},
             {"v", macroInfo},
             {"last-cast", macroLastCast},
-            {"last-cast-enemy", macroLastCastEnemy},
             {"time", macroTime},
 			{"c", macroColor},
 			{"t", macroSetTalkSfx},
@@ -106,29 +105,14 @@ public class TextMacros : MonoBehaviour {
 	string macroLastCast(string[] opt) {
         string ret = string.Empty;
 		switch (opt [0]) {
-		    case "elem":  ret = BattleManagerS.main.field.last_player_spell.element.ToUpper(); break;
-		    case "root":  ret =  BattleManagerS.main.field.last_player_spell.root.ToUpper(); break;
-		    case "style": ret = BattleManagerS.main.field.last_player_spell.style.ToUpper(); break;
-            case "all": ret = BattleManagerS.main.field.last_player_spell.ToString(); break;
+		    case "elem":  ret = BattleManagerS.main.field.lastSpell.element.ToUpper(); break;
+		    case "root":  ret =  BattleManagerS.main.field.lastSpell.root.ToUpper(); break;
+		    case "style": ret = BattleManagerS.main.field.lastSpell.style.ToUpper(); break;
+            case "all": ret = BattleManagerS.main.field.lastSpell.ToString(); break;
             default:      return "error: bad spell substitute macro argument";	
 		}
 		return "<color=" + color_map["spell"] + ">" + ret + "</color>";
 	}
-
-    // substitutes last cast spell's attributes
-    // input: [0]: string, "elem","root","style" : specifies which part of spell to display (or "all" for whole spell)
-    string macroLastCastEnemy(string[] opt) {
-        string ret = string.Empty;
-        switch (opt[0])
-        {
-            case "elem": ret = BattleManagerS.main.field.last_enemy_spell.element.ToUpper(); break;
-            case "root": ret = BattleManagerS.main.field.last_enemy_spell.root.ToUpper(); break;
-            case "style": ret = BattleManagerS.main.field.last_enemy_spell.style.ToUpper(); break;
-            case "all": ret = BattleManagerS.main.field.last_enemy_spell.ToString(); break;
-            default: return "error: bad spell substitute macro argument";
-        }
-        return "<color=" + color_map["spell"] + ">" + ret + "</color>";
-    }
 
     // substitutes with current time
     // input: NONE

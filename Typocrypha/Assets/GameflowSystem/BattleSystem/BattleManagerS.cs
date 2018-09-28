@@ -237,7 +237,7 @@ public class BattleManagerS : MonoBehaviour, IPausable {
         //Play music if applicable (BUG HERE WHERE LOADING MUSIC CAUSES LAG)
         if (Wave.Music != string.Empty)
             AudioPlayer.main.playMusic(Wave.Music);
-        field.lastCaster = Battlefield.FieldPosition.NONE;
+        field.lastCaster = null;
         if (checkInterrupts() == false)
             Paused = false;
         wave_started = true;
@@ -374,7 +374,7 @@ public class BattleManagerS : MonoBehaviour, IPausable {
                 e.AI.updateState(field.enemies, e.Position, field.allies, EnemyAI.Update_Case.AFTER_INTERRUPT);
             }
         }
-        field.lastCaster = Battlefield.FieldPosition.NONE;
+        field.lastCaster = null;
         checkInterrupts();
     }
 
@@ -456,20 +456,12 @@ public class BattleManagerS : MonoBehaviour, IPausable {
 
     private void resetInterruptData()
     {
-
-        field.time_started = System.DateTime.Now; // time battle started
-        if (field.last_enemy_cast != null)
-            field.last_enemy_cast.Clear(); // last performed cast action
+        if (field.lastCast != null)
+            field.lastCast.Clear(); // last performed cast action
         else
-            field.last_enemy_cast = new List<CastData>();
-        field.last_enemy_spell = new SpellData(""); // last performed spell
-        if (field.last_player_cast != null)
-            field.last_player_cast.Clear(); // last performed cast action
-        else
-            field.last_player_cast = new List<CastData>();
-        field.last_enemy_spell = new SpellData(""); // last performed spell
-        field.last_register = new bool[3] { false, false, false }; // last spell register status
-        field.num_player_attacks = 0; // number of player attacks from beginning of battle
+            field.lastCast = new List<CastData>();
+        field.lastSpell = new SpellData(""); // last performed spell
+        field.lastRegister = new bool[3] { false, false, false }; // last spell register status
     }
 
     //Extra stuff

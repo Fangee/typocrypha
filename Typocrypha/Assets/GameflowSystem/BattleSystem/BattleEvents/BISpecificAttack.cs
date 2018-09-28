@@ -22,13 +22,13 @@ public class BISpecificAttack : BattleInterruptTrigger
     public override bool checkTrigger(Battlefield state)
     {
         bool ret = false;
-        if (caster == Battlefield.FieldPosition.PLAYER && state.lastCaster == Battlefield.FieldPosition.PLAYER)
-            ret = checkCast(state, state.last_player_cast, state.last_player_spell);
-        else if ((caster == Battlefield.FieldPosition.LEFT || caster == Battlefield.FieldPosition.MIDDLE || caster == Battlefield.FieldPosition.RIGHT) 
-                    && (state.lastCaster == Battlefield.FieldPosition.LEFT || state.lastCaster == Battlefield.FieldPosition.MIDDLE || state.lastCaster == Battlefield.FieldPosition.RIGHT))
-            ret = checkCast(state, state.last_enemy_cast, state.last_enemy_spell);
-        else if (caster == Battlefield.FieldPosition.ANY && state.lastCaster != Battlefield.FieldPosition.NONE)
-            ret = checkCast(state, state.last_player_cast, state.last_player_spell) || checkCast(state, state.last_enemy_cast, state.last_enemy_spell);
+        //if (caster == Battlefield.FieldPosition.PLAYER && state.lastCaster.CasterType == ICasterType.PLAYER)
+        //    ret = checkCast(state, state.lastCast, state.lastSpell);
+        //else if ((caster == Battlefield.FieldPosition.LEFT || caster == Battlefield.FieldPosition.MIDDLE || caster == Battlefield.FieldPosition.RIGHT) 
+        //            && (state.lastCaster.Position == Battlefield.FieldPosition.LEFT || state.lastCaster == Battlefield.FieldPosition.MIDDLE || state.lastCaster == Battlefield.FieldPosition.RIGHT))
+        //    ret = checkCast(state, state.last_enemy_cast, state.last_enemy_spell);
+        //else if (caster == Battlefield.FieldPosition.ANY && state.lastCaster != Battlefield.FieldPosition.NONE)
+        //    ret = checkCast(state, state.last_player_cast, state.last_player_spell) || checkCast(state, state.last_enemy_cast, state.last_enemy_spell);
         return (ret && (++curr_attacks >= numAttacks));
     }
     protected bool checkCast(Battlefield state, List<CastData> dataToCheck, SpellData spellToCheck)

@@ -94,7 +94,6 @@ public class CastManager : MonoBehaviour
                 AudioPlayer.main.playSFX("sfx_enter_bad");
                 return false;
             }
-            ++field.num_player_attacks;
             targetPattern = spellDict.getTargetPattern(s, field, field.Player);
             message = chat.getLine(field.Player.Stats.ChatDatabaseID);
             preCastEffects(targetPattern, field.Player, s, message);
@@ -126,7 +125,7 @@ public class CastManager : MonoBehaviour
         List<CastData> data;
         List<Transform> noTargetPositions;
         data = cast(s, field, caster, out noTargetPositions);
-        processCast(data, s, noTargetPositions, Battlefield.FieldPosition.PLAYER);
+        processCast(data, s, noTargetPositions);
 
         yield return new WaitForSeconds(1.1f);
 
@@ -135,7 +134,7 @@ public class CastManager : MonoBehaviour
 		uiManager.setEnabledGauges (true);
 
         postCastEffects();
-        field.lastCaster = Battlefield.FieldPosition.PLAYER;
+        field.lastCaster = null;
         //Updates field.Pause if necessary
         field.update();
     }
@@ -164,7 +163,7 @@ public class CastManager : MonoBehaviour
         enemy.startSwell();
         List<Transform> noTargetPositions;
         List<CastData> data = cast(s, field, enemy, out noTargetPositions);
-        processCast(data, s, noTargetPositions, (Battlefield.FieldPosition)enemy.Position);
+        processCast(data, s, noTargetPositions);
 
         yield return new WaitForSeconds(1f);
 
@@ -173,24 +172,16 @@ public class CastManager : MonoBehaviour
         postCastEffects();
 
         enemy.attack_in_progress = false;
-        field.lastCaster = (Battlefield.FieldPosition)enemy.Position;
+        field.lastCaster = enemy;
         field.update();
     }
 
     //Method for processing CastData (most effects now happen in SpellEffects.cs)
     //Called by Cast in the SUCCESS CastStatus case, possibly on BOTCH in the future
-    private void processCast(List<CastData> data, SpellData s, List<Transform> noTargetPositions, Battlefield.FieldPosition casterPos)
+    private void processCast(List<CastData> data, SpellData s, List<Transform> noTargetPositions)
     {
-        if (casterPos == Battlefield.FieldPosition.PLAYER)
-        {
-            field.last_player_cast = data;
-            field.last_player_spell = s;
-        }
-        else if (Battlefield.isEnemy(casterPos))
-        {
-            field.last_enemy_cast = data;
-            field.last_enemy_spell = s;
-        }
+        field.lastCast = data;
+        field.lastSpell = s;
 		uiManager.battle_log.stop ();
         float delay = 0;
         foreach(Transform t in noTargetPositions)
@@ -217,7 +208,7 @@ public class CastManager : MonoBehaviour
         bool[] regData = spellBook.safeRegister(spellDict, s);
         if (regData[0] || regData[1] || regData[2])
             StartCoroutine(learnSFX());
-        field.last_register = regData;
+        field.lastRegister = regData;
         //Process regData (for register graphics) here. 
         //format is bool [3], where regData[0] is true if s.element is new, regData[1] is true if s.root is new, and regData[2] is true if s.style is new
     }
