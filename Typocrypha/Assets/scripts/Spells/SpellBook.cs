@@ -6,26 +6,31 @@ using System;
 
 //Class that contains and organizes the keyword and description data of the spells known by the player
 //IMPROVE PAGE SYSTEM, NEEDS IMPROVEMENT
-public class SpellBook : MonoBehaviour {
-
-    //UI text objects
-
-    public Text pageTitle;
-    public GameObject upArrow;
-    public GameObject downArrow;
-    private Text[] entryNames = new Text[pageSize];
-    private Text[] descritptions = new Text[pageSize];
-
+public class SpellBook : MonoBehaviour
+{
     //Private constants
     private const int pageSize = 5;     //Number of entries per page
     private const int entryLength = 2;  //Data fields per entry
     private const string titleString = "SPELLBOOK - ";
     private const string emptyEntryText = "";
 
-	// Use this for initialization
-	void Start () {
-        //Build() or build in loadgameflow or load_file or something
-		for(int i = 0; i < pageSize; i++)
+    //UI text objects
+    public Text pageTitle;
+    public GameObject upArrow;
+    public GameObject downArrow;
+    private Text[] entryNames = new Text[pageSize];
+    private Text[] descritptions = new Text[pageSize];
+
+    private int typeIndex = 0;
+    private int pageIndex = 0;
+    private List<SpellbookList> data = new List<SpellbookList>();
+    private Dictionary<string, SpellbookList> typeLog = new Dictionary<string, SpellbookList>();
+    private HashSet<string> wordLog = new HashSet<string>();
+
+    // Use this for initialization
+    void Start()
+    {
+        for (int i = 0; i < pageSize; i++)
         {
             entryNames[i] = gameObject.transform.GetChild(i).GetComponent<Text>();
             descritptions[i] = gameObject.transform.GetChild(i).GetChild(0).GetComponent<Text>();
@@ -33,39 +38,53 @@ public class SpellBook : MonoBehaviour {
             descritptions[i].text = emptyEntryText;
         }
         updatePage();
-	}
-	
-	// Update is called once per frame
-	void Update () {
     }
 
+    #region Registration
     //Returns true if registered, false if not
-    public bool isNotRegistered(string word)
+    public bool isRegistered(string word)
     {
-        if (wordLog.ContainsKey(word))
-            return false;
-        return true;
+        return wordLog.Contains(word);
     }
-
-    //Inserts spell into spellbook
-    //returns true if success, false if spellbook already contains this keyword
-    //Pre: this.isRegistered(word) has been called
-    public void register(string word, string type, string description)
+    //Registeres all keywords in Spelldata s if they are unregistered and valid spell words in the given SpellDictionary
+    //Returns bool[elem,root,style] (true if successful register, false if already registered)
+    public bool[] safeRegister(SpellDictionary dict, SpellData s)
     {
-        string add = word;
-        //if (type == "element")
-        //    add = word + "-";
-        //else if (type == "style")
-        //    add = "-" + word;
-        //else if (type == "friend")
-        //    add = word;
-        //else
-        //    add = "-" + word + "-";
+        return new bool[] { safeRegister(dict, s.element), safeRegister(dict, s.root), safeRegister(dict, s.style) };
+    }
+    //Registers individual keyword if it is unregistered and is a valid spellword in the given dictionary
+    public bool safeRegister(SpellDictionary dict, string word)
+    {
+        if (string.IsNullOrEmpty(word))
+            return false;
+        if (!isRegistered(word))
+        {
+            if (dict.containsRoot(word))
+            {
+                Spell root = dict.getRoot(word);
+                register(word, root.type, root.description);
+                return true;
+            }
+            else if (dict.containsElement(word))
+            {
+                register(word, "element", dict.getElementMod(word).description);
+                return true;
+            }
+            else if (dict.containsStyle(word))
+            {
+                register(word, "style", dict.getStyleMod(word).description);
+            }
+        }
+        return false;
+    }
+    //Inserts spell into spellbook (with description string)
+    private void register(string word, string type, string description)
+    {
         if (typeLog.ContainsKey(type))
         {
-            SpellbookList l = typeLog[type]; 
-            l.Add(new SpellbookEntry(add, description));
-            wordLog.Add(add, true);
+            SpellbookList l = typeLog[type];
+            l.Add(new SpellbookEntry(word, description));
+            wordLog.Add(word);
             l.Sort();
         }
         else
@@ -74,22 +93,17 @@ public class SpellBook : MonoBehaviour {
             l.type = type;
             data.Add(l);
             typeLog.Add(type, l);
-            l.Add(new SpellbookEntry(add, description));
-            wordLog.Add(word, true);
+            l.Add(new SpellbookEntry(word, description));
+            wordLog.Add(word);
             l.Sort();
             data.Sort();
         }
         updatePage();
         Debug.Log(word.ToUpper() + " was registered to the spellbook");
     }
+    #endregion
 
-    //Build from string data (for saving/loading)
-    //Sets current page to 0, and initializes currentPageLength
-    public void build(string[,,] words)
-    {
-        throw new System.NotImplementedException();
-    }
-
+    #region Paging and Page Rendering
     //Goes to next page of spellbook (if one exists)
     //Returns true on success, false on failure (no next page)
     public bool nextPage()
@@ -115,7 +129,7 @@ public class SpellBook : MonoBehaviour {
     {
         if (data.Count <= 0)
             return false;
-        if(pageIndex - pageSize < 0)
+        if (pageIndex - pageSize < 0)
         {
             if (typeIndex <= 0)
                 return false;
@@ -146,7 +160,7 @@ public class SpellBook : MonoBehaviour {
         SpellbookList current = data[typeIndex];
         pageTitle.text = titleString + current.type.ToUpper() + " " + (pageIndex / pageSize + 1);
         int j = pageIndex;
-        for(int i = 0; i < pageSize; i++)
+        for (int i = 0; i < pageSize; i++)
         {
             if (j < current.Count)
             {
@@ -178,12 +192,7 @@ public class SpellBook : MonoBehaviour {
             return false;
         return true;
     }
-
-    private int typeIndex = 0;
-    private int pageIndex = 0;
-    private List<SpellbookList> data = new List<SpellbookList>();
-    private Dictionary<string, SpellbookList> typeLog = new Dictionary<string, SpellbookList>();
-    private Dictionary<string, bool> wordLog = new Dictionary<string, bool>();
+    #endregion
 
     //Private entry class. sorts based on Compare function
     private class SpellbookEntry : IComparable<SpellbookEntry>

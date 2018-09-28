@@ -17,6 +17,58 @@ public class CastManager : MonoBehaviour
 
     //CASTING CODE//---------------------------------------------------------------------------------------------------------------------------------------//
 
+    //Pre: spell.isValid() = true
+    public List<CastData> cast(SpellData spell, BattleField field, ICaster caster, int targetPosition, out List<Transform> noTargetPositions)
+    {
+        noTargetPositions = new List<Transform>();
+        Spell s = spellDict.getRoot(spell.root);
+        Spell c = Spell.createSpellFromType(s.type);
+        s.copyInto(c);
+        int wordCount = 1;
+        string[] animData = { null, s.animationID, null };
+        string[] sfxData = { null, s.sfxID, null };
+        ElementMod e = null;
+        StyleMod st = null;
+        if (!string.IsNullOrEmpty(spell.element))
+        {
+            e = spellDict.getElementMod(spell.element);
+            sfxData[2] = e.sfxID;
+            animData[2] = e.animationID;
+            ++wordCount;
+        }
+        if (!string.IsNullOrEmpty(spell.style))
+        {
+            st = spellDict.getStyleMod(spell.style);
+            sfxData[0] = st.sfxID;
+            animData[0] = st.animationID;
+            ++wordCount;
+        }
+        c.Modify(e, st);
+        List<ICaster> toCastAt = c.target(field, caster, targetPosition);
+        List<CastData> data = new List<CastData>();
+        foreach (ICaster target in toCastAt)
+        {
+            if (target == null)
+                continue;
+            if (target.Is_dead)
+            {
+                noTargetPositions.Add(target.Transform);
+                continue;
+            }
+            CastData castData = c.cast(target, caster);
+            animData.CopyTo(castData.animData, 0);
+            sfxData.CopyTo(castData.sfxData, 0);
+            castData.wordCount = wordCount;
+            if (castData.repel == true)
+                castData.setLocationData(caster, target);
+            else
+                castData.setLocationData(target, caster);
+            data.Add(castData);
+        }
+        return data;
+    }
+
+
     // attack currently targeted enemy with spell
     public bool attackCurrent(string spell, TrackTyping callback)
     {
@@ -43,7 +95,7 @@ public class CastManager : MonoBehaviour
                 return false;
             }
             ++field.num_player_attacks;
-            targetPattern = spellDict.getTargetPattern(s, field.enemy_arr, field.target_ind, field.player_arr, field.player_ind);
+            targetPattern = spellDict.getTargetPattern(s, field, field.Player, field.target_ind);
             message = chat.getLine(field.Player.Stats.ChatDatabaseID);
             preCastEffects(targetPattern, field.Player, s, message);
             AudioPlayer.main.playSFX("sfx_enter");
@@ -73,7 +125,7 @@ public class CastManager : MonoBehaviour
         startCooldown(s, field.Player);
         List<CastData> data;
         List<Transform> noTargetPositions;
-        data = spellDict.cast(s, field.enemy_arr, field.target_ind, field.player_arr, caster.Position, out noTargetPositions);
+        data = cast(s, field, caster, field.target_ind, out noTargetPositions);
         processCast(data, s, noTargetPositions, BattleField.FieldPosition.PLAYER);
 
         yield return new WaitForSeconds(1.1f);
@@ -95,7 +147,7 @@ public class CastManager : MonoBehaviour
         field.Pause = true; // parent.pause battle for attack
         AudioPlayer.main.playSFX("sfx_enemy_cast");
 		AnimationPlayer.main.playAnimation("anim_spell_empower", field.enemy_arr[position].Transform.position, 2f);
-        Pair<bool[], bool[]> targetPattern = spellDict.getTargetPattern(s, field.player_arr, target, field.enemy_arr, position);
+        Pair<bool[], bool[]> targetPattern = spellDict.getTargetPattern(s, field, field.enemy_arr[position], target);
         preCastEffects(targetPattern, field.enemy_arr[position], s, chat.getLine(field.enemy_arr[position].Stats.ChatDatabaseID));
 		BattleEffects.main.setDim(true, field.enemy_arr[position].enemy_sprite);
         StartCoroutine(enemy_pause_cast(dict, s, position, target));
@@ -111,7 +163,7 @@ public class CastManager : MonoBehaviour
 
         field.enemy_arr[position].startSwell();
         List<Transform> noTargetPositions;
-        List<CastData> data = dict.cast(s, field.player_arr, target, field.enemy_arr, position, out noTargetPositions);
+        List<CastData> data = cast(s, field, field.enemy_arr[position], target, out noTargetPositions);
         processCast(data, s, noTargetPositions, (BattleField.FieldPosition)position);
 
         yield return new WaitForSeconds(1f);
@@ -162,7 +214,7 @@ public class CastManager : MonoBehaviour
                 EnemyIntel.main.learnIntel(d.Caster.Stats.name, d.element);
         }
         //Register unregistered keywords here
-        bool[] regData = spellDict.safeRegister(spellBook, s);
+        bool[] regData = spellBook.safeRegister(spellDict, s);
         if (regData[0] || regData[1] || regData[2])
             StartCoroutine(learnSFX());
         field.last_register = regData;

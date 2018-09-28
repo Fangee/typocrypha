@@ -11,6 +11,21 @@ public abstract class Spell
     public enum ModFlags { NORMAL, NO_ELEMENT, NO_STYLE, NO_TARGETING, NO_MODIFICATION}
     public enum WordType { ANY = -1, ROOT, ELEMENT, STYLE}
 
+    //Helper method for cloning appropriately typed spells
+    public static Spell createSpellFromType(string type)
+    {
+        if (type.CompareTo("attack") == 0)
+            return new AttackSpell();
+        else if (type.CompareTo("buff") == 0)
+            return new BuffSpell();
+        else if (type.CompareTo("heal") == 0)
+            return new HealSpell();
+        else if (type.CompareTo("shield") == 0)
+            return new ShieldSpell();
+        else
+            throw new System.NotImplementedException();
+    }
+
     //public methods
 
     //Casts this spell at selected target (at targets[selected])
@@ -53,12 +68,14 @@ public abstract class Spell
     }
     //Returns target pattern of spell as a List of ICasters
     //Precondition: modify() has been appropriately called on this spell
-    public List<ICaster> target(ICaster[] targets, int selected, ICaster[] allies, int position)
+    public List<ICaster> target(BattleField field, ICaster caster, int targetPos)
     {
         List<ICaster> castAt = new List<ICaster>();
+        ICaster[] targets = caster.CasterType == ICasterType.ENEMY ? field.player_arr : field.enemy_arr;
+        ICaster[] allies = caster.CasterType == ICasterType.ENEMY ? field.enemy_arr : field.player_arr;
         int i = 1;
         if (targetData.targeted)//If spell is cursor-dependant
-            i += (selected - 1);
+            i += (targetPos - 1);
         if (targetData.enemyM)//Middle enemy
             castAt.Add(targets[i]);
         i--;
@@ -69,7 +86,7 @@ public abstract class Spell
             castAt.Add(targets[i]);
         i = 1;
         if (targetData.selfCenter)//If spell is not cursor-dependant
-            i += (position - 1);
+            i += (caster.Position - 1);
         if (targetData.allyM)//Middle ally
             castAt.Add(allies[i]);
         i--;
@@ -354,13 +371,15 @@ public class TargetData
                 targeted = true;
         }
     }
-    public Pair<bool[], bool[]> toArrayPair(ICaster[] targets, int selected, ICaster[] allies, int position)
+    public Pair<bool[], bool[]> toArrayPair(BattleField field, ICaster caster, int targetPos)
     {
         bool[] enemy_r = { false, false, false };
         bool[] ally_r = { false, false, false };
+        ICaster[] targets = caster.CasterType == ICasterType.ENEMY ? field.player_arr : field.enemy_arr;
+        ICaster[] allies = caster.CasterType == ICasterType.ENEMY ? field.enemy_arr : field.player_arr;
         int i = 1;
         if (targeted)//If spell is cursor-dependant
-            i += (selected - 1);
+            i += (targetPos - 1);
         if (enemyM && targets[i] != null && !targets[i].Is_dead)//Middle enemy
             enemy_r[i] = true;
         i--;
@@ -371,7 +390,7 @@ public class TargetData
             enemy_r[i] = true;
         i = 1;
         if (selfCenter)//If spell is not cursor-dependant
-            i += (position - 1);
+            i += (caster.Position - 1);
         if (allyM && allies[i] != null && !allies[i].Is_dead)//Middle ally
             ally_r[i] = true;
         i--;

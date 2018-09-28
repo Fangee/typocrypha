@@ -27,12 +27,10 @@ public class BattleManagerS : MonoBehaviour, IPausable {
 	public GameObject screenframe_eye;
 
     [HideInInspector] public bool thirdEyeActive = false;
-    private Coroutine thirdEyeCr = null;
     private const float maxThirdEyeCharge = 10.5f;
     private float currThirdEyeCharge = maxThirdEyeCharge;
 
     [HideInInspector] public bool frenzyCastActive = false;
-    private Coroutine frenzyCastCr = null;
     private const float frenzyCastTime = 20f;
     private List<SpellData> frenzySpells = new List<SpellData>();
 
@@ -533,7 +531,7 @@ public class BattleManagerS : MonoBehaviour, IPausable {
         //Play any fenzy cast start effects
         AudioPlayer.main.playSFX("sfx_slowmo_2");
         BattleEffects.main.setDim(true);
-        frenzyCastCr = StartCoroutine(frenzyCast());
+        StartCoroutine(frenzyCast());
     }
     private IEnumerator frenzyCast()
     {

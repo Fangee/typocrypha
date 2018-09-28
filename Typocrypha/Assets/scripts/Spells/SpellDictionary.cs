@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-//Stores all the spell info and contains methods to parse and cast spells from player input
-//Currently does not actually support player or enemy casting, but has parsing
 public class SpellDictionary : MonoBehaviour
 {
     //Dictionaries containing spells associated with keywords
@@ -48,7 +45,7 @@ public class SpellDictionary : MonoBehaviour
                 break;
             }
             string type = cols[++ind].Trim();
-            Spell s = createSpellFromType(type);
+            Spell s = Spell.createSpellFromType(type);
             s.name = key;
             s.type = type;
             s.description = cols[++ind].Trim().Replace("\"", string.Empty);
@@ -212,65 +209,6 @@ public class SpellDictionary : MonoBehaviour
     }
     #endregion
 
-    #region Casting (TO BE RELOCATED)
-    //Casts spell from NPC (enemy or ally)
-    public List<CastData> cast(SpellData spell, ICaster[] targets, int selected, ICaster[] allies, int position, out List<Transform> noTargetPositions)
-    {
-        noTargetPositions = new List<Transform>();
-        ICaster caster = allies[position];
-        Spell s = rootWords[spell.root];
-        Spell c = createSpellFromType(s.type);
-        s.copyInto(c);
-        int wordCount = 1;
-        string[] animData = { null, s.animationID, null };
-        string[] sfxData = { null, s.sfxID, null };
-        ElementMod e = null;
-        StyleMod st = null;
-        if (spell.element != null)
-        {
-            e = elements[spell.element];
-            sfxData[2] = e.sfxID;
-            animData[2] = e.animationID;
-            ++wordCount;
-        }
-        if (spell.style != null)
-        {
-            st = styles[spell.style];
-            sfxData[0] = st.sfxID;
-            animData[0] = st.animationID;
-            ++wordCount;
-        }
-        c.Modify(e, st);
-        List<ICaster> toCastAt = c.target(targets, selected, allies, position);
-        List<CastData> data = new List<CastData>();
-        foreach (ICaster target in toCastAt)
-        {
-            if (target == null)
-                continue;
-            if (target.Is_dead)
-            {
-                noTargetPositions.Add(target.Transform);
-                continue;
-            }
-            CastData castData = c.cast(target, caster);
-            animData.CopyTo(castData.animData, 0);
-            sfxData.CopyTo(castData.sfxData, 0);
-            castData.wordCount = wordCount;
-            if (castData.repel == true)
-                castData.setLocationData(caster, target);
-            else
-                castData.setLocationData(target, caster);
-            data.Add(castData);
-        }
-        return data;
-    }
-    //Will contain method for botching a spell
-    public List<CastData> botch(SpellData s, ICaster[] targets, int selected, ICaster[] allies, int position)
-    {
-        return null;
-    }
-    #endregion
-
     #region Dicitonary Management
     public bool containsRoot(string word)
     {
@@ -288,13 +226,25 @@ public class SpellDictionary : MonoBehaviour
     {
         return rootWords[data.root];
     }
+    public Spell getRoot(string word)
+    {
+        return rootWords[word];
+    }
     public ElementMod getElementMod(SpellData data)
     {
         return elements[data.element];
     }
+    public ElementMod getElementMod(string word)
+    {
+        return elements[word];
+    }
     public StyleMod getStyleMod(SpellData data)
     {
         return styles[data.style];
+    }
+    public StyleMod getStyleMod(string word)
+    {
+        return styles[word];
     }
     #endregion
 
@@ -323,70 +273,19 @@ public class SpellDictionary : MonoBehaviour
         return ret;
     }
     //Return the targeting pattern
-    public Pair<bool[], bool[]> getTargetPattern(SpellData data, ICaster[] targets, int selected, ICaster[] allies, int position)
+    public Pair<bool[], bool[]> getTargetPattern(SpellData data, BattleField field, ICaster caster, int targetPos)
     {
-        if (data.style == null || !styles[data.style].isTarget)
+        if (!string.IsNullOrEmpty(data.style) || !styles[data.style].isTarget)
         {
-            return rootWords[data.root].targetData.toArrayPair(targets, selected, allies, position);
+            return rootWords[data.root].targetData.toArrayPair(field, caster, targetPos);
         }
         else
         {
             TargetData t = new TargetData(false);
             t.copyFrom(rootWords[data.root].targetData);
             styles[data.style].targets.modify(t);
-            return t.toArrayPair(targets, selected, allies, position);
+            return t.toArrayPair(field, caster, targetPos);
         }
-    }
-
-    #region SpellBook Management (TO BE RELOCATED)
-
-    //Registeres all keywords in Spelldata s if unregistered
-    //Returns bool[elem,root,style] (true if successful register, false if already registered
-    //Pre: s is a valid spell
-    public bool[] safeRegister(SpellBook spellBook, SpellData s)
-    {
-        return new bool[] { safeRegister(spellBook, s.element), safeRegister(spellBook, s.root), safeRegister(spellBook, s.style) };
-    }
-    //Registers individual keyword
-    public bool safeRegister(SpellBook spellBook, string word)
-    {
-        if (string.IsNullOrEmpty(word))
-            return false;
-        if (spellBook.isNotRegistered(word))
-        {
-            if (rootWords.ContainsKey(word))
-            {
-                spellBook.register(word, rootWords[word].type, rootWords[word].description);
-                return true;
-            }
-            else if (elements.ContainsKey(word))
-            {
-                spellBook.register(word, "element", elements[word].description);
-                return true;
-            }
-            else if (styles.ContainsKey(word))
-            {
-                spellBook.register(word, "style", styles[word].description);
-            }
-        }
-        return false;
-    }
-
-    #endregion
-
-    //Helper method for cloning appropriately typed spells
-    private Spell createSpellFromType(string type)
-    {
-        if (type.CompareTo("attack") == 0)
-            return new AttackSpell();
-        else if (type.CompareTo("buff") == 0)
-            return new BuffSpell();
-        else if (type.CompareTo("heal") == 0)
-            return new HealSpell();
-        else if (type.CompareTo("shield") == 0)
-            return new ShieldSpell();
-        else
-            throw new System.NotImplementedException();
     }
 }
 //A class containing the required data to cast a spell (with defined keyword composition)
@@ -417,11 +316,11 @@ public class SpellData
     public override string ToString()
     {
         string result;
-        if (element != null)
+        if (!string.IsNullOrEmpty(element))
             result = element + "-" + root;
         else
             result = root;
-        if (style != null)
+        if (!string.IsNullOrEmpty(style))
             result += ("-" + style);
         return result.ToUpper();
     }
@@ -437,21 +336,20 @@ public class SpellData
         throw new System.Exception("Not a valid spell index");
     }
     //Returns the casting time of the spell
-    //Gets casting time of input spell
     public float getCastingTime(SpellDictionary dict, float speed)
     {
-        float time = dict.getRoot(this).cooldown;
+        float time = dict.getRoot(root).cooldown;
         float baseTime = time;
-        if (element != null)
+        if (!string.IsNullOrEmpty(element))
         {
-            ElementMod e = dict.getElementMod(this);
+            ElementMod e = dict.getElementMod(element);
             time += e.cooldownMod + (baseTime * e.cooldownModM);
         }
-        if (style != null)
+        if (!string.IsNullOrEmpty(style))
         {
-            StyleMod s = dict.getStyleMod(this);
+            StyleMod s = dict.getStyleMod(style);
             time += s.cooldownMod + (baseTime * s.cooldownModM);
-            if (element != null)
+            if (!string.IsNullOrEmpty(element))
                 time -= baseTime;
         }
         return time / speed;
