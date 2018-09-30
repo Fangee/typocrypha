@@ -5,7 +5,7 @@ using UnityEngine;
 public class BattleDataTracker {
 
     [HideInInspector] public System.DateTime time_started; // time battle started
-    [HideInInspector] public Battlefield.FieldPosition lastCaster = Battlefield.FieldPosition.NONE;
+    [HideInInspector] public Battlefield.Position lastCaster = Battlefield.Position.NONE;
     [HideInInspector] public List<CastData> last_enemy_cast; // last performed cast action
     [HideInInspector] public List<CastData> last_player_cast;
     [HideInInspector] public SpellData last_enemy_spell; // last performed spell

@@ -11,7 +11,7 @@ public class Battlefield {
     public ICaster Player { get { return allies[player_ind]; } }
     public bool Pause { get { return callback.battlePause; } set { callback.battlePause = value; } }
 
-    public enum FieldPosition
+    public enum Position
     {
         NONE = -2,
         ANY = -1,
@@ -22,26 +22,17 @@ public class Battlefield {
         PLAYER,
         ALLYRIGHT,
     }
-    public ICaster getCasterFromFieldPosition(FieldPosition pos)
+    public ICaster getCaster(Position pos)
     {
-        int index = (int)pos;
-        ICaster target = null;
-        if (index > 0)
-        {
-            if (index < 3)
-                target = enemies[index];
-            else
-                target = allies[index - 3];
-        }
-        return target;
+        return casters[pos];
     }
-    public static bool isEnemy(FieldPosition pos)
+    public static bool isEnemy(Position pos)
     {
-        return (pos == FieldPosition.LEFT || pos == FieldPosition.MIDDLE || pos == FieldPosition.RIGHT);
+        return (pos == Position.LEFT || pos == Position.MIDDLE || pos == Position.RIGHT);
     }
 
     //BattleField data
-
+    private Dictionary<Position, ICaster> casters = null
 	public Enemy[] enemies = new Enemy[3]; // array of Enemy components (size 3)
 	public ICaster[] allies = { null, null, null }; // array of Player and allies (size 3)
 	public int enemy_count = 0; // number of enemies in battle

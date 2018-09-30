@@ -1,28 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu] // attribute allows creation of EnemyData assets in unity editor
 public class EnemyData : ScriptableObject
 {
 	// Enemy sprite
-	public Sprite sprite;
-	
-	// Stats
-	public int maxHP;
-	public int maxStagger;
-	public float atk;
-	public float def;
-	public float spd;
-	public float acc;
-	public float evade;
-	
-	// Type Weaknesses/Resistances
-	public float vsNull;
-	public float vsFire;
-	public float vsIce;
-	public float vsVolt;
-	
+	public Image image;
+
+    public Casting.CasterStats stats;
+		
 	// AI settings
 	public string AIType;
 	public string[] AIParameters;

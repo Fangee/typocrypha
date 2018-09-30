@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ATB2
 {
-    public class Enemy : Actor
+    public partial class Enemy : Actor
     {
         // UI Objects
         public GameObject healthUI;
@@ -27,11 +27,6 @@ namespace ATB2
         public float chargeTime; // TESTING: amount of time required to charge currently charging spell
 
         Coroutine chargeCRObj; // Coroutine that charges spells
-
-        public override void Setup()
-        {
-            throw new System.NotImplementedException();
-        }
 
         // Start charging current spell (unless old progress is saved)
         public void startCharge()

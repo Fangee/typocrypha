@@ -5,8 +5,8 @@ using UnityEngine;
 public class BISpecificAttack : BattleInterruptTrigger
 {
     public int numAttacks = 1;
-    public Battlefield.FieldPosition caster = Battlefield.FieldPosition.ANY;
-    public Battlefield.FieldPosition target = Battlefield.FieldPosition.ANY;
+    public Battlefield.Position caster = Battlefield.Position.ANY;
+    public Battlefield.Position target = Battlefield.Position.ANY;
     public string rootKeywordIs = string.Empty;
     public string elementKeywordIs = string.Empty;
     public string styleKeywordIs = string.Empty;
@@ -40,14 +40,14 @@ public class BISpecificAttack : BattleInterruptTrigger
             return false;
         if (dataToCheck == null || dataToCheck.Count <= 0)
             return false;
-        if (caster != Battlefield.FieldPosition.ANY && (dataToCheck[0].Caster != state.getCasterFromFieldPosition(caster)))
+        if (caster != Battlefield.Position.ANY && (dataToCheck[0].Caster != state.getCasterFromFieldPosition(caster)))
             return false;
         ICaster targetToCheck = state.getCasterFromFieldPosition(target);
-        if (targetToCheck == null && target != Battlefield.FieldPosition.ANY)
+        if (targetToCheck == null && target != Battlefield.Position.ANY)
             return false;
         foreach (CastData d in dataToCheck)
         {
-            if (target == Battlefield.FieldPosition.ANY || d.Target == targetToCheck)
+            if (target == Battlefield.Position.ANY || d.Target == targetToCheck)
             {
                 bool element = (elementMustBe == Elements.Element.ANY) || ((int)elementMustBe == d.element || (elementMustBe == Elements.Element.NOTNULL && d.element != Elements.@null));
                 bool hit = (!spellMustHit) || d.isHit;
@@ -58,7 +58,7 @@ public class BISpecificAttack : BattleInterruptTrigger
                 bool result = (element && hit && crit && stun && dmg && elemVs);
                 if (result)
                     return true;
-                else if (target == Battlefield.FieldPosition.ANY)
+                else if (target == Battlefield.Position.ANY)
                     continue;
                 return false;
             }

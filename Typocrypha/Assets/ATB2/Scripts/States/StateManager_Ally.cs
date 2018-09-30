@@ -57,6 +57,7 @@ namespace ATB2
             {
                 cast = true;
             }
+
             if (cast)
             {
                 enterSolo(ally);

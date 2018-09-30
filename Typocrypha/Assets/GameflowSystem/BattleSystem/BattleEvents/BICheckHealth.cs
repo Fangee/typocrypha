@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BICheckHealth : BattleInterruptTrigger {
-    public Battlefield.FieldPosition whoToCheck;
+    public Battlefield.Position whoToCheck;
     public float healthRatio;
 
     public override bool checkTrigger(Battlefield state)

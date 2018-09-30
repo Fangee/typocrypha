@@ -33,6 +33,12 @@ namespace TypocryphaGameflow
             {
                 return (item >= min) && (item <= max);
             }
+            public int clamp(int value)
+            {
+                if(value <= max)
+                    return value >= min ? value : min;
+                return max;
+            }
             public void shift(int shiftBy)
             {
                 min += shiftBy;
