@@ -18,7 +18,7 @@ namespace ATB2
         // Sent when ally cast is triggered
         public void allyMenu(StateEventArgs args)
         {
-            if (soloStack.Count == 0)
+            if (soloStack.Count == 0 || args.actor.isCurrentState("CastDisabled"))
                 return;
             Ally ally = (Ally)args.actor;
             bool cast = false;
@@ -63,7 +63,7 @@ namespace ATB2
         }
 
         // End ally's cast sequence
-        // Send when ally esits AfterCast state
+        // Send when ally endtes CastDisabled state
         public void allyEndCast(StateEventArgs args)
         {
             Ally ally = (Ally)args.actor;
