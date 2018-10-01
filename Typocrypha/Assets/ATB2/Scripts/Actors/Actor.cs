@@ -27,6 +27,7 @@ namespace ATB2
                 stateMachine.speed = value ? 0f : 1f;
             }
         }
+        public bool isCast; // Is the actor in cast sequence? Isn't unset until all chains are finished.
 
         // Call to do initial setup on actor
         public abstract void Setup();

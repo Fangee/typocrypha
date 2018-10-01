@@ -18,7 +18,7 @@ namespace ATB2
         // Sent when ally cast is triggered
         public void allyMenu(StateEventArgs args)
         {
-            if (soloStack.Count == 0 || args.actor.isCurrentState("CastDisabled"))
+            if (soloStack.Count == 0 || args.actor.isCurrentState("CastDisabled") || args.actor.isCast)
                 return;
             Ally ally = (Ally)args.actor;
             bool cast = false;
@@ -40,6 +40,7 @@ namespace ATB2
                 enterSolo(ally);
                 CastBar.enterSolo(ally.castBar);
                 ally.castBar.focus = true;
+                ally.isCast = true;
                 args.actor.stateMachine.Play("AllyMenu");
             }
         }

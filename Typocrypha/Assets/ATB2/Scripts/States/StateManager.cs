@@ -73,6 +73,8 @@ namespace ATB2
             {
                 setPauseAll(false);
                 CastBar.MainBar.focus = true;
+                foreach (Actor actor in battleField.actorsToAdd)
+                    actor.isCast = false;
             }
             // Otherwise, give solo to next in stack
             else
