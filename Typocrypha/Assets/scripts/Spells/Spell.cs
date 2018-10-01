@@ -71,11 +71,11 @@ public abstract class Spell
     public List<ICaster> target(Battlefield field, ICaster caster)
     {
         List<ICaster> castAt = new List<ICaster>();
-        ICaster[] targets = caster.CasterType == ICasterType.ENEMY ? field.allies : field.enemies;
-        ICaster[] allies = caster.CasterType == ICasterType.ENEMY ? field.enemies : field.allies;
+        ICaster[] targets = caster.CasterType == ICasterType.ENEMY ? field.BottomRow : field.TopRow;
+        ICaster[] allies = caster.CasterType == ICasterType.ENEMY ? field.TopRow : field.BottomRow;
         int i = 1;
         if (targetData.targeted)//If spell is cursor-dependant
-            i += (caster.TargetPosition - 1);
+            i += ((int)(caster.TargetPos) - 1);
         if (targetData.enemyM)//Middle enemy
             castAt.Add(targets[i]);
         i--;
@@ -86,7 +86,7 @@ public abstract class Spell
             castAt.Add(targets[i]);
         i = 1;
         if (targetData.selfCenter)//If spell is not cursor-dependant
-            i += (caster.Position - 1);
+            i += ((int)caster.FieldPos - 1);
         if (targetData.allyM)//Middle ally
             castAt.Add(allies[i]);
         i--;
@@ -123,13 +123,13 @@ public abstract class Spell
     //ONLY CALL IN CAST (or after spell has been been properly modified with Modify())
     protected virtual bool hitCheck(CastData data, ICaster target, ICaster caster, bool checkStun = false)
     {
-        if (checkStun && target.Is_stunned)
+        if (checkStun && target.Stunned)
         {
             data.isHit = true;
             return true;
         }
 
-        int chance = Mathf.CeilToInt(hitPercentage * caster.Stats.getModAcc(caster.BuffDebuff)) - target.Stats.getModEvade(target.BuffDebuff);
+        int chance = 0;//Mathf.CeilToInt(hitPercentage * caster.Stats.getModAcc(caster.BuffDebuff)) - target.Stats.getModEvade(target.BuffDebuff);
         if((Random.Range(0.0F, 1F) * 100) <= chance)
         {
             data.isHit = true;
@@ -143,7 +143,7 @@ public abstract class Spell
     //ONLY CALL IN CAST (or after spell has been been properly modified with Modify())
     protected virtual bool critCheck(CastData data, ICaster target, ICaster caster, out int newPower)
     {
-        float accBonus = Mathf.Clamp(((caster.Stats.getModAcc(caster.BuffDebuff) -1) * (1 - (target.Stats.getModEvade(target.BuffDebuff) * 0.01F))) * 0.2F, 0, 2) * 10;
+        float accBonus = 0;//Mathf.Clamp(((caster.Stats.getModAcc(caster.BuffDebuff) -1) * (1 - (target.Stats.getModEvade(target.BuffDebuff) * 0.01F))) * 0.2F, 0, 2) * 10;
         float chance = critPercentage + accBonus;
         if ((Random.Range(0.0F, 1F) * 100) <= chance)
         {
@@ -170,7 +170,7 @@ public abstract class Spell
     //Inflects buff/debuff on target
     protected void inflictBuff(ICaster target, ICaster caster, float mod)
     {
-        target.BuffDebuff.modify(buff.multiply(Mathf.CeilToInt(mod)));
+      //  target.BuffDebuff.modify(buff.multiply(Mathf.CeilToInt(mod)));
     }
 
     //public fields
@@ -203,7 +203,7 @@ public class AttackSpell : Spell
         {
             int powerMod;
             bool crit = critCheck(data, target, caster, out powerMod);                
-            target.damage(data, powerMod, element, caster, crit);
+            //target.damage(data, powerMod, element, caster, crit);
             if (buff != null)
                 buffCheck(data, target, caster, powerMod);
         }
@@ -226,7 +226,7 @@ public class BuffSpell : Spell
     }
     protected override bool buffCheck(CastData data, ICaster target, ICaster caster, int powerMod)
     {
-        Elements.vsElement vs = target.Stats.getModVsElement(target.BuffDebuff, element);
+        Elements.vsElement vs = Elements.vsElement.ANY;//target.Stats.getModVsElement(target.BuffDebuff, element);
         switch (vs)
         {
             case Elements.vsElement.REPEL:
@@ -375,29 +375,29 @@ public class TargetData
     {
         bool[] enemy_r = { false, false, false };
         bool[] ally_r = { false, false, false };
-        ICaster[] targets = caster.CasterType == ICasterType.ENEMY ? field.allies : field.enemies;
-        ICaster[] allies = caster.CasterType == ICasterType.ENEMY ? field.enemies : field.allies;
+        ICaster[] targets = caster.CasterType == ICasterType.ENEMY ? field.TopRow : field.BottomRow;
+        ICaster[] allies = caster.CasterType == ICasterType.ENEMY ? field.BottomRow : field.TopRow;
         int i = 1;
         if (targeted)//If spell is cursor-dependant
-            i += (caster.TargetPosition - 1);
-        if (enemyM && targets[i] != null && !targets[i].Is_dead)//Middle enemy
+            i += ((int)caster.TargetPos - 1);
+        if (enemyM && targets[i] != null && !targets[i].Dead)//Middle enemy
             enemy_r[i] = true;
         i--;
-        if (i >= 0 && enemyL && targets[i] != null && !targets[i].Is_dead)//Left enemy
+        if (i >= 0 && enemyL && targets[i] != null && !targets[i].Dead)//Left enemy
             enemy_r[i] = true;
         i += 2;
-        if (i <= 2 && enemyR && targets[i] != null && !targets[i].Is_dead)//Right enemy
+        if (i <= 2 && enemyR && targets[i] != null && !targets[i].Dead)//Right enemy
             enemy_r[i] = true;
         i = 1;
         if (selfCenter)//If spell is not cursor-dependant
-            i += (caster.Position - 1);
-        if (allyM && allies[i] != null && !allies[i].Is_dead)//Middle ally
+            i += ((int)caster.FieldPos - 1);
+        if (allyM && allies[i] != null && !allies[i].Dead)//Middle ally
             ally_r[i] = true;
         i--;
-        if (i >= 0 && allyL && allies[i] != null && !allies[i].Is_dead)//Left ally
+        if (i >= 0 && allyL && allies[i] != null && !allies[i].Dead)//Left ally
             ally_r[i] = true;
         i += 2;
-        if (i <= 2 && allyR && allies[i] != null && !allies[i].Is_dead)//Right ally
+        if (i <= 2 && allyR && allies[i] != null && !allies[i].Dead)//Right ally
             ally_r[i] = true;
         return new Pair<bool[], bool[]>(enemy_r, ally_r);
     }

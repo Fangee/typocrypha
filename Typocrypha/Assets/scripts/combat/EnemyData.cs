@@ -9,7 +9,7 @@ public class EnemyData : ScriptableObject
 	// Enemy sprite
 	public Image image;
 
-    public Casting.CasterStats stats;
+    public CasterStats stats;
 		
 	// AI settings
 	public string AIType;

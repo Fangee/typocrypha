@@ -63,30 +63,30 @@ public class Scouter : MonoBehaviour {
     public void updateInfo() {
         if (left == null) return; //not sure why left/right are null at start of battle, but this stops it from doing garbage
         //Targeted enemy
-        Enemy foe = field.field.enemies[field.field.Player.TargetPosition];
-        //Check if enemy exists
-        if (foe == null || foe.Is_dead)
-        {
-            //You're not looking at anything you absolute moron
-            left.text = "..\n..\n..\n..\n..";
-            right.text = "..\n..\n..\n..\n..\n..";
-        }
-        else
-        {
-            //Get those numbers
-            left.text = 
-                displayBuff(foe.BuffDebuff.attack)      + "\n" +
-                displayBuff(foe.BuffDebuff.defense)     + "\n" +
-                displayBuff(foe.BuffDebuff.speed)       + "\n" +
-                displayBuff(foe.BuffDebuff.accuracy)    + "\n" +
-                displayBuff(foe.BuffDebuff.evasion);
-            right.text = 
-                displayMod(foe, Elements.@null)   + "\n" +
-                displayMod(foe, Elements.fire)    + "\n" +
-                displayMod(foe, Elements.ice)     + "\n" +
-                displayMod(foe, Elements.volt)    + "\n" + "\n";
+        //Enemy foe = field.field.enemies[field.field.Player.TargetPosition];
+        ////Check if enemy exists
+        //if (foe == null || foe.Is_dead)
+        //{
+        //    //You're not looking at anything you absolute moron
+        //    left.text = "..\n..\n..\n..\n..";
+        //    right.text = "..\n..\n..\n..\n..\n..";
+        //}
+        //else
+        //{
+        //    //Get those numbers
+        //    left.text = 
+        //        displayBuff(foe.BuffDebuff.attack)      + "\n" +
+        //        displayBuff(foe.BuffDebuff.defense)     + "\n" +
+        //        displayBuff(foe.BuffDebuff.speed)       + "\n" +
+        //        displayBuff(foe.BuffDebuff.accuracy)    + "\n" +
+        //        displayBuff(foe.BuffDebuff.evasion);
+        //    right.text = 
+        //        displayMod(foe, Elements.@null)   + "\n" +
+        //        displayMod(foe, Elements.fire)    + "\n" +
+        //        displayMod(foe, Elements.ice)     + "\n" +
+        //        displayMod(foe, Elements.volt)    + "\n" + "\n";
            
-        }
+        //}
     }
 
     //deals with signs
@@ -97,11 +97,11 @@ public class Scouter : MonoBehaviour {
     }
 
     //shorten the modifier strings
-    private string displayMod(Enemy foe, int element) {
+    private string displayMod(ATB2.Enemy foe, int element) {
 
-        if (EnemyIntel.main.hasIntel(foe.Stats.name, element))
+        if (EnemyIntel.main.hasIntel(foe.name, element))
         {
-            Elements.vsElement modifier = Elements.getLevel(foe.Stats.vsElement[element]);
+            Elements.vsElement modifier = Elements.vsElement.ANY;//Elements.getLevel(foe.Stats.vsElement[element]);
             switch (modifier)
             {
                 case Elements.vsElement.REPEL:

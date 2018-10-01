@@ -1,13 +1,12 @@
 ﻿
 using System.Collections;
 using System.Collections.Generic;
-using Casting;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace ATB2
 {
-    public partial class Enemy : Casting.ICaster
+    public partial class Enemy : ICaster
     {
         // Container for enemy data
         public EnemyData enemyData;
@@ -41,14 +40,16 @@ namespace ATB2
                 _stagger = Mathf.Clamp(value, 0, Stats.maxStagger);
             }
         }
+        public string Name { get { return enemyData.name; } }
+        public Vector3 WorldPos { get { return transform.position; } set { transform.position = value; } }
         private Battlefield.Position _position;
-        public Battlefield.Position Position { get { return _position; } set { _position = value >= 0 ? value : _position; } }
+        public Battlefield.Position FieldPos { get { return _position; } set { _position = value >= 0 ? value : _position; } }
         private Battlefield.Position _target;
-        public Battlefield.Position TargetPosition { get { return _target; } set { _target = value >= 0 ? value : _target; } }
-        public Casting.CasterStats Stats { get { return enemyData.stats; } }
+        public Battlefield.Position TargetPos { get { return _target; } set { _target = value >= 0 ? value : _target; } }
+        public CasterStats Stats { get { return enemyData.stats; } }
         public bool Stunned { get { return isCurrentState("Stunned"); } }
         public bool Dead { get { return Health <= 0; } }
-        public Casting.ICasterType CasterType { get { return Casting.ICasterType.ENEMY; } } 
+        public ICasterType CasterType { get { return ICasterType.ENEMY; } } 
         #endregion
 
         // UI Objects 

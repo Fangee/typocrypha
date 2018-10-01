@@ -40,9 +40,9 @@ public class BISpecificAttack : BattleInterruptTrigger
             return false;
         if (dataToCheck == null || dataToCheck.Count <= 0)
             return false;
-        if (caster != Battlefield.Position.ANY && (dataToCheck[0].Caster != state.getCasterFromFieldPosition(caster)))
+        if (caster != Battlefield.Position.ANY && (dataToCheck[0].Caster != state.getCaster(caster)))
             return false;
-        ICaster targetToCheck = state.getCasterFromFieldPosition(target);
+        ICaster targetToCheck = state.getCaster(target);
         if (targetToCheck == null && target != Battlefield.Position.ANY)
             return false;
         foreach (CastData d in dataToCheck)

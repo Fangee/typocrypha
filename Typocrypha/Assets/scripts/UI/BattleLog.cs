@@ -80,7 +80,7 @@ public class BattleLog : MonoBehaviour {
 			talkBox.color = playerColor;
 			battleLogSubText[1].text = "PLAYER CASTS " + ele;
 		}
-		else if (caster == ICasterType.NPC_ALLY)
+		else if (caster == ICasterType.ALLY)
 		{
 			castBox.color = allyColor;
 			talkBox.color = allyColor;

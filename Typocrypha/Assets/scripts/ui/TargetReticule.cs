@@ -82,7 +82,7 @@ public class TargetReticule : MonoBehaviour
     public void updateTarget(Vector2 destination)
     {
         // don't update if battle not set up yet
-        if (BattleManagerS.main.field.Player.TargetPosition >= BattleManagerS.main.field.enemies.Length) return;
+        //if (BattleManagerS.main.field.Player.TargetPosition >= BattleManagerS.main.field.enemies.Length) return;
         target_destination_pos = destination;
         updateTarget();
     }
@@ -91,16 +91,16 @@ public class TargetReticule : MonoBehaviour
     public void updateTarget()
     {
         // don't update if battle not set up yet
-        if (BattleManagerS.main.field.Player.TargetPosition >= BattleManagerS.main.field.enemies.Length) return;
+        //if (BattleManagerS.main.field.Player.TargetPosition >= BattleManagerS.main.field.enemies.Length) return;
         // update arrows
         updateArrows();
         // check if no enemy targeted
-        if (BattleManagerS.main.field.enemies[BattleManagerS.main.field.Player.TargetPosition] == null || BattleManagerS.main.field.enemies[BattleManagerS.main.field.Player.TargetPosition].Is_done)
-        {
-            no_target.enabled = true;
-            base_r_speed = 0f;
-        }
-        else
+        //if (BattleManagerS.main.field.enemies[BattleManagerS.main.field.Player.TargetPosition] == null || BattleManagerS.main.field.enemies[BattleManagerS.main.field.Player.TargetPosition].Is_done)
+        //{
+        //    no_target.enabled = true;
+        //    base_r_speed = 0f;
+        //}
+        //else
         {
             no_target.enabled = false;
             base_r_speed = def_r_speed;
@@ -116,20 +116,20 @@ public class TargetReticule : MonoBehaviour
             right_arrow.enabled = false;
             return;
         }
-        switch (BattleManagerS.main.field.Player.TargetPosition)
+        switch (BattleManagerS.main.field.Player.TargetPos)
         {
-            case 0:
-                left_arrow.enabled = false;
-                right_arrow.enabled = true;
-                break;
-            case 1:
-                left_arrow.enabled = true;
-                right_arrow.enabled = true;
-                break;
-            case 2:
-                left_arrow.enabled = true;
-                right_arrow.enabled = false;
-                break;
+            //case 0:
+            //    left_arrow.enabled = false;
+            //    right_arrow.enabled = true;
+            //    break;
+            //case 1:
+            //    left_arrow.enabled = true;
+            //    right_arrow.enabled = true;
+            //    break;
+            //case 2:
+            //    left_arrow.enabled = true;
+            //    right_arrow.enabled = false;
+            //    break;
         }
     }
 }

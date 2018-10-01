@@ -111,10 +111,10 @@ public class StatusBurn : StatusEffect
 
     public override string processKey(char key)
     {
-		if (p.Curr_hp - dmg <= 0) {
-			p.Curr_hp = 1;
+		if (p.Health - dmg <= 0) {
+			p.Health = 1;
 		} else {
-			p.Curr_hp -= dmg;
+			p.Health -= dmg;
 		}
 		string popText = ("<color=red>" + key + "</color> <color=orange>BURN</color>").ToUpper ();
 		player_popper.spawnText (popText, 1.0f, new Vector3(0.0f,0.0f,0.0f));

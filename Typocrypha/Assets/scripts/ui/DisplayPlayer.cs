@@ -10,8 +10,8 @@ public class DisplayPlayer : MonoBehaviour {
 	public BarMeter health_bar; // health bar
 
 	void Update () {
-		health_text.text = (Player.main.Curr_hp).ToString ();
+		health_text.text = (Player.main.Health).ToString ();
 		name_text.text = PlayerDataManager.main.PlayerName.ToString ().ToUpper ();
-		health_bar.setValue ((float)(Player.main.Curr_hp)/(Player.main.Stats.max_hp+Player.main.Stats.max_shield));
+		health_bar.setValue ((float)(Player.main.Health)/(Player.main.Stats.maxHP));
 	}
 }

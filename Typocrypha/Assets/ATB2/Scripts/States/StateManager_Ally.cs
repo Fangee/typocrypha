@@ -18,36 +18,14 @@ namespace ATB2
         // Sent when ally cast is triggered
         public void allyMenu(StateEventArgs args)
         {
+            if (soloStack.Count == 0)
+                return;
             Ally ally = (Ally)args.actor;
-
             bool cast = false;
-            // Check activation timing
-            if (battleField.player.isCurrentState("BeforeCast"))
-            {
+            if (soloStack.Peek().isCurrentState("BeforeCast"))
                 cast = true;
-            }
-            if (battleField.player.isCurrentState("AfterCast"))
-            {
+            if (soloStack.Peek().isCurrentState("AfterCast"))
                 cast = true;
-            }
-            foreach (Ally otherAlly in battleField.allies)
-            {
-                if (otherAlly.isCurrentState("AfterCast"))
-                {
-                    cast = true;
-                }
-            }
-            foreach (Enemy enemy in battleField.enemies)
-            {
-                if (enemy.isCurrentState("BeforeCast"))
-                {
-                    cast = true;
-                }
-                if (enemy.isCurrentState("AfterCast"))
-                {
-                    cast = true;
-                }
-            }
             // Check Mana
             if (ally.mana < ally.manaCost)
             {
@@ -57,7 +35,6 @@ namespace ATB2
             {
                 cast = true;
             }
-
             if (cast)
             {
                 enterSolo(ally);

@@ -8,7 +8,7 @@ namespace ATB2
     public partial class StateManager : MonoBehaviour
     {
         // Overall battle state
-        public BattleField battleField;
+        public Battlefield battleField;
         // Events sent
         static List<StateEventObj> eventQueue = new List<StateEventObj>(); 
         // Stack for managing when actors have solo activity (casting)
@@ -45,21 +45,21 @@ namespace ATB2
         // Set the pause value of all actors
         void setPauseAll(bool value)
         {
-            foreach (Actor actor in battleField.allActors)
+            foreach (Actor actor in battleField.Actors)
                 actor.pause = value;
-        }
-
-        // Pause all other actors except passed actor
-        void soloPause(Actor soloActor)
-        {
-            setPauseAll(true);
-            soloActor.pause = false;
         }
 
         // Enter solo mode for this actor
         void enterSolo(Actor soloActor)
         {
-            soloPause(soloActor);
+            if (soloStack.Count == 0)
+            {
+                setPauseAll(true);
+                CastBar.MainBar.focus = false;
+            }
+            else
+                soloStack.Peek().pause = true;
+            soloActor.pause = false;
             soloStack.Push(soloActor);
         }
 
@@ -72,13 +72,13 @@ namespace ATB2
             if (soloStack.Count == 0)
             {
                 setPauseAll(false);
-                battleField.player.castBar.hidden = false;
-                battleField.player.castBar.focus = false;
+                CastBar.MainBar.focus = true;
             }
             // Otherwise, give solo to next in stack
             else
             {
-                soloPause(soloStack.Peek());
+                soloActor.pause = true;
+                soloStack.Peek().pause = false;
             }
         }
     }

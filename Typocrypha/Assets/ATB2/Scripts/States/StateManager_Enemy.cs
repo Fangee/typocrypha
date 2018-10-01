@@ -26,7 +26,6 @@ namespace ATB2
         public void enemyStartCast(StateEventArgs args)
         {
             enterSolo(args.actor); // Enter solo, pausing all other actors
-            battleField.player.castBar.focus = false;
         }
 
         // Apply enemy's cast effects
@@ -41,7 +40,6 @@ namespace ATB2
         public void enemyEndCast(StateEventArgs args)
         {
             exitSolo(args.actor); // Exit solo mode
-            battleField.player.castBar.focus = true;
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using ATB2;
 public class CastManager : MonoBehaviour
 {
 
@@ -50,11 +50,11 @@ public class CastManager : MonoBehaviour
         {
             if (target == null)
                 continue;
-            if (target.Is_dead)
-            {
-                noTargetPositions.Add(target.Transform);
-                continue;
-            }
+            //if (target.Is_dead)
+            //{
+            //    noTargetPositions.Add(target.Transform);
+            //    continue;
+            //}
             CastData castData = c.cast(target, caster);
             animData.CopyTo(castData.animData, 0);
             sfxData.CopyTo(castData.sfxData, 0);
@@ -83,36 +83,36 @@ public class CastManager : MonoBehaviour
             if (cooldown.isFull())
             {
                 //diplay.playCooldownFullEffects
-                spellEffects.popp.spawnSprite("popups_cooldownfull", 1.0F, field.Player.Transform.position - new Vector3(0, 0.375f, 0));
+                //spellEffects.popp.spawnSprite("popups_cooldownfull", 1.0F, field.Player.Transform.position - new Vector3(0, 0.375f, 0));
                 AudioPlayer.main.playSFX("sfx_enter_bad");
                 return false;
             }
             else if (cooldown.isOnCooldown(s))
             {
                 //display.playOnCooldownEffects
-                spellEffects.popp.spawnSprite("popups_oncooldown", 1.0F, field.Player.Transform.position - new Vector3(0, 0.375f, 0));
+                //spellEffects.popp.spawnSprite("popups_oncooldown", 1.0F, field.Player.Transform.position - new Vector3(0, 0.375f, 0));
                 AudioPlayer.main.playSFX("sfx_enter_bad");
                 return false;
             }
             targetPattern = spellDict.getTargetPattern(s, field, field.Player);
-            message = chat.getLine(field.Player.Stats.ChatDatabaseID);
+            //message = chat.getLine(field.Player.Stats.ChatDatabaseID);
             preCastEffects(targetPattern, field.Player, s, message);
             AudioPlayer.main.playSFX("sfx_enter");
             AudioPlayer.main.playSFX("sfx_player_cast");
             AudioPlayer.main.playSFX("sfx_cast", 0.35f);
-            AnimationPlayer.main.playAnimation("anim_spell_empower", field.Player.Transform.position, 2f);
+            //AnimationPlayer.main.playAnimation("anim_spell_empower", field.Player.Transform.position, 2f);
             StartCoroutine(pauseAttackCurrent(s, field.Player));
             return true; //Clear the casting buffer
         }
         //diplay.playBotchEffects
-        spellEffects.popp.spawnSprite("popups_invalid", 1.0F, field.Player.Transform.position - new Vector3(0, 0.375f, 0));
+        //spellEffects.popp.spawnSprite("popups_invalid", 1.0F, field.Player.Transform.position - new Vector3(0, 0.375f, 0));
         AudioPlayer.main.playSFX("sfx_enter_bad");
         return true; //Clear the casting buffer
     }
 
     IEnumerator pauseAttackCurrent(SpellData s, ICaster caster)
     {
-        field.Pause = true;
+        //field.Pause = true;
 
 		uiManager.setEnabledGauges (false);
 
@@ -136,19 +136,19 @@ public class CastManager : MonoBehaviour
         postCastEffects();
         field.lastCaster = null;
         //Updates field.Pause if necessary
-        field.update();
+       // field.update();
     }
 
     //Casts from an enemy position: calls processCast on results
     public void enemyCast(SpellDictionary dict, SpellData s, Enemy enemy)
     {
-        field.breakThirdEye();
-        field.Pause = true; // parent.pause battle for attack
+        //field.breakThirdEye();
+        //field.Pause = true; // parent.pause battle for attack
         AudioPlayer.main.playSFX("sfx_enemy_cast");
-		AnimationPlayer.main.playAnimation("anim_spell_empower", enemy.Transform.position, 2f);
+		//AnimationPlayer.main.playAnimation("anim_spell_empower", enemy.Transform.position, 2f);
         Pair<bool[], bool[]> targetPattern = spellDict.getTargetPattern(s, field, enemy);
-        preCastEffects(targetPattern, enemy, s, chat.getLine(enemy.Stats.ChatDatabaseID));
-		BattleEffects.main.setDim(true, enemy.enemy_sprite);
+       // preCastEffects(targetPattern, enemy, s, chat.getLine(enemy.Stats.ChatDatabaseID));
+		//BattleEffects.main.setDim(true, enemy.enemy_sprite);
         StartCoroutine(enemy_pause_cast(dict, s, enemy));
     }
 
@@ -156,11 +156,11 @@ public class CastManager : MonoBehaviour
     {
         uiManager.setEnabledGauges (false);
 
-		BattleEffects.main.setDim(true, enemy.enemy_sprite);
+		//BattleEffects.main.setDim(true, enemy.enemy_sprite);
 
         yield return new WaitForSeconds(1f);
 
-        enemy.startSwell();
+        //enemy.startSwell();
         List<Transform> noTargetPositions;
         List<CastData> data = cast(s, field, enemy, out noTargetPositions);
         processCast(data, s, noTargetPositions);
@@ -171,9 +171,9 @@ public class CastManager : MonoBehaviour
 
         postCastEffects();
 
-        enemy.attack_in_progress = false;
-        field.lastCaster = enemy;
-        field.update();
+        //enemy.attack_in_progress = false;
+        //field.lastCaster = enemy;
+        //field.update();
     }
 
     //Method for processing CastData (most effects now happen in SpellEffects.cs)
@@ -200,9 +200,9 @@ public class CastManager : MonoBehaviour
                 continue;
             //Learn intel if applicable
             if (d.Target.CasterType == ICasterType.ENEMY)
-                EnemyIntel.main.learnIntel(d.Target.Stats.name, d.element);
+                EnemyIntel.main.learnIntel(d.Target.Name, d.element);
             else if (d.Caster.CasterType == ICasterType.ENEMY && d.Target.CasterType == ICasterType.PLAYER && d.repel)
-                EnemyIntel.main.learnIntel(d.Caster.Stats.name, d.element);
+                EnemyIntel.main.learnIntel(d.Caster.Name, d.element);
         }
         //Register unregistered keywords here
         bool[] regData = spellBook.safeRegister(spellDict, s);
@@ -214,14 +214,15 @@ public class CastManager : MonoBehaviour
     }
     private IEnumerator learnSFX()
     {
-        yield return new WaitWhile(() => field.Pause);
+        //yield return new WaitWhile(() => field.Pause);
         AudioPlayer.main.playSFX("sfx_learn_spell_battle");
+        yield break;
     }
     //Effects that happen before any actor casts
     private void preCastEffects(Pair<bool[], bool[]> targetPattern, ICaster caster, SpellData cast, string message)
     {
         BattleEffects.main.setDim(true);
-		uiManager.battle_log.log(cast, caster.CasterType, message, caster.Stats.name, caster.Transform.position);
+		//uiManager.battle_log.log(cast, caster.CasterType, message, caster.Stats.name, caster.Transform.position);
         if (targetPattern != null)
         {
             if (caster.CasterType == ICasterType.ENEMY)
@@ -235,12 +236,12 @@ public class CastManager : MonoBehaviour
     //effects that hafter after any actor casts
     private void postCastEffects()
     {
-        //uiManager.battle_log.stop();
-        for (int i = 0; i < 3; ++i)
-        {
-            if (field.enemies[i] != null)
-                field.enemies[i].enemy_sprite.sortingOrder = BattleEffects.dim_layer;
-        }
+        ////uiManager.battle_log.stop();
+        //for (int i = 0; i < 3; ++i)
+        //{
+        //    if (field.enemies[i] != null)
+        //        field.enemies[i].enemy_sprite.sortingOrder = BattleEffects.dim_layer;
+        //}
         uiManager.target_ret.SetActive(true); // enable / make target reticule appear after a cast
         BattleEffects.main.setDim(false);
     }
@@ -248,36 +249,36 @@ public class CastManager : MonoBehaviour
     //Raises the targets (array val = true) above the dimmer level
     private void raiseTargets(bool[] enemy_r, bool[] player_r)
     {
-        for (int i = 0; i < 3; ++i)
-        {
-            if (enemy_r[i])
-                field.enemies[i].enemy_sprite.sortingOrder = BattleEffects.undim_layer;
-        }
+        //for (int i = 0; i < 3; ++i)
+        //{
+        //    if (enemy_r[i])
+        //        field.enemies[i].enemy_sprite.sortingOrder = BattleEffects.undim_layer;
+        //}
     }
     //Lowers the targets (array val = true) below the dimmer level
     private void lowerTargets(bool[] enemy_r, bool[] player_r)
     {
-        for (int i = 0; i < 3; ++i)
-        {
-            if (enemy_r[i])
-                field.enemies[i].enemy_sprite.sortingOrder = BattleEffects.dim_layer;
-        }
+        //for (int i = 0; i < 3; ++i)
+        //{
+        //    if (enemy_r[i])
+        //        field.enemies[i].enemy_sprite.sortingOrder = BattleEffects.dim_layer;
+        //}
     }
 
     //returns the position of ally with specified name (if in battle)
     private int getAllyPosition(string name)
     {
-        if (field.allies[0] != null && field.allies[0].Stats.name.ToLower() == name.ToLower())
-            return 0;
-        if (field.allies[2] != null && field.allies[2].Stats.name.ToLower() == name.ToLower())
-            return 2;
+        //if (field.allies[0] != null && field.allies[0].Stats.name.ToLower() == name.ToLower())
+        //    return 0;
+        //if (field.allies[2] != null && field.allies[2].Stats.name.ToLower() == name.ToLower())
+        //    return 2;
         return -1;
     }
 
     //Starts cooldown of spell
     private void startCooldown(SpellData data, ICaster castingPlayer)
     {
-        float cooldownTime = data.getCastingTime(spellDict, castingPlayer.Stats.speed);
+        float cooldownTime = data.getCastingTime(spellDict, castingPlayer.Stats.Spd);
         cooldown.add(data, cooldownTime);
     }
 

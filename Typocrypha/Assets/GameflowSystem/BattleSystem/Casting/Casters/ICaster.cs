@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Casting
-{
     public enum ICasterType
     {
         INVALID,
         PLAYER,
         ENEMY,
-        NPC_ALLY,
+        ALLY,
     }
     public interface ICaster
     {
-        Battlefield.Position Position { get; set; }
-        Battlefield.Position TargetPosition { get; set; }
+        string Name { get; }
+        Vector3 WorldPos { get; set; }
+        Battlefield.Position FieldPos { get; set; }
+        Battlefield.Position TargetPos { get; set; }
         CasterStats Stats { get; }
         int Health { get; set; }
         int Stagger { get; set; }
@@ -22,5 +22,3 @@ namespace Casting
         bool Dead { get; }
         ICasterType CasterType { get; }
     }
-
-}

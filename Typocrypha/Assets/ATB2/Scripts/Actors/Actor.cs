@@ -24,15 +24,8 @@ namespace ATB2
             }
             set
             {
-                onSetPause(value);
+                stateMachine.speed = value ? 0f : 1f;
             }
-        }
-
-        // Called when the pause property is set
-        protected void onSetPause(bool value)
-        {
-            if (value) stateMachine.speed = 0f;
-            else       stateMachine.speed = 1f;
         }
 
         // Call to do initial setup on actor

@@ -25,7 +25,7 @@ namespace TypocryphaGameflow
 
         public override bool EvaluateCondition(Battlefield field, BattleDataTracker battleData)
         {
-            return field.Player.Curr_hp < HealthBelow;
+            return field.Player.Health < HealthBelow;
         }
     }
 

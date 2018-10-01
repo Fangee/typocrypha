@@ -5,19 +5,19 @@ using UnityEngine.UI;
 //Class containing Player stat data (structs are pass by value)
 //Can be used to set player stats or construct a new player with given stats
 //Can also be used as a stat buff/debuff modifier with CasterStats.modify;
-public class PlayerStats : CasterStats
-{
-    public PlayerStats() : base("Player", "ignore this", 200, 0, -1, 1F, 0.1F, 1F, 1F, 4, new float[Elements.count])
-    {
-        for (int i = 0; i < Elements.count; i++)
-        {
-            vsElement[i] = 1.0F;
-        }
-        chatID = "player_1";
-    }
-    private string chatID;
-    public override string ChatDatabaseID { get { return chatID; } }
-}
+//public class PlayerStats : CasterStats
+//{
+//    public PlayerStats() : base("Player", "ignore this", 200, 0, -1, 1F, 0.1F, 1F, 1F, 4, new float[Elements.count])
+//    {
+//        for (int i = 0; i < Elements.count; i++)
+//        {
+//            vsElement[i] = 1.0F;
+//        }
+//        chatID = "player_1";
+//    }
+//    private string chatID;
+//    public override string ChatDatabaseID { get { return chatID; } }
+//}
 
 //Contains Static referrence to global Player (Player.main)
 public class Player : MonoBehaviour, ICaster
@@ -38,25 +38,26 @@ public class Player : MonoBehaviour, ICaster
     //Construct player with default stats
     public Player()
     {
-        stats = new PlayerStats();
+        stats = new CasterStats();
     }
     //Construct player with specified stats
-    public Player(PlayerStats i_stats)
+    public Player(CasterStats i_stats)
     {
         stats = i_stats;
     }
 
     //ICaster Poroperties
-    public Transform Transform { get { return transform; } }
-    private int position = 1; //position in battle field
-    public int Position { get { return position; } set { position = value; } }
-    private int _target = 1;
-    public int TargetPosition { get { return _target; } set { _target = value; } }
-    PlayerStats stats;
+    public string Name { get; set; }
+    public Vector3 WorldPos { get { return transform.position; } set { transform.position = value; } }
+    private Battlefield.Position _position;
+    public Battlefield.Position FieldPos { get { return _position; } set { _position = value >= 0 ? value : _position; } }
+    private Battlefield.Position _target;
+    public Battlefield.Position TargetPos { get { return _target; } set { _target = value >= 0 ? value : _target; } }
+    CasterStats stats;
     public CasterStats Stats { get { return stats; } }
     BuffDebuff buffDebuff = new BuffDebuff();
     public BuffDebuff BuffDebuff { get { return buffDebuff; } }
-    public int Curr_hp
+    public int Health
     {
         get
         {
@@ -67,7 +68,7 @@ public class Player : MonoBehaviour, ICaster
             curr_hp = value;
         }
     }
-    public int Curr_stagger
+    public int Stagger
     {
         get
         {
@@ -75,8 +76,8 @@ public class Player : MonoBehaviour, ICaster
         }
         set { return; }
     }
-    public bool Is_stunned { get { return false; } }
-    public bool Is_dead
+    public bool Stunned { get { return false; } }
+    public bool Dead
     {
         get
         {
@@ -105,7 +106,7 @@ public class Player : MonoBehaviour, ICaster
     //Restores player's HP and Shields to Maximum
     public void restoreToFull()
     {
-        curr_hp = Stats.max_hp;
+        curr_hp = Stats.maxHP;
         is_dead = false;
     }
 
@@ -120,7 +121,7 @@ public class Player : MonoBehaviour, ICaster
         if (damaged && element != Elements.@null) {
             status_manager.inflictCondition(this, element, 0, data.damageInflicted);
 		}
-        if (Curr_hp <= 0)
+        if (Health <= 0)
         { // check if killed
             Debug.Log("Player" + " has been slain!");
             is_dead = true;

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using ATB2;
 //Base class For enemy AI.
 //Enemy AI has two abstract methods: getNextSpell(), and updateState()
 //getNextSpell() returns the next spell for the enemy to cast and sets the target in out int target
@@ -135,7 +135,7 @@ public class HealthLowAI1 : EnemyAI
     public override void updateState(Enemy[] allies, int position, ICaster[] player_arr, Update_Case flag)
     {
         Enemy self = allies[position];
-        int curr_hp = Mathf.CeilToInt(((float)self.Curr_hp / self.Stats.max_hp) * 100);
+        int curr_hp = Mathf.CeilToInt(((float)self.Health / self.Stats.maxHP) * 100);
         if (curr_hp < criticalThresh)
             state = AI_State.HEALTH_CRITICAL;
         else if (curr_hp < lowThresh)
@@ -170,14 +170,14 @@ public class FormChangeAI1 : EnemyAI
     public override void updateState(Enemy[] allies, int position, ICaster[] player_arr, Update_Case flag)
     {
         baseAI.updateState(allies, position, player_arr, flag);
-        if(!hasChanged && flag == Update_Case.WAS_HIT)
-        {
-            allies[position].setStats(EnemyDatabase.main.getData(nextForm), resetHealthandStagger);
-            if(resetAttack)
-                allies[position].resetAttack();
-            allies[position].changeForm();
-            hasChanged = true;
-        }
+        //if(!hasChanged && flag == Update_Case.WAS_HIT)
+        //{
+        //    allies[position].setStats(EnemyDatabase.main.getData(nextForm), resetHealthandStagger);
+        //    if(resetAttack)
+        //        allies[position].resetAttack();
+        //    allies[position].changeForm();
+        //    hasChanged = true;
+        //}
     }
 }
 //Doppleganger Unique AI
@@ -189,8 +189,8 @@ public class DoppelgangerAI1 : EnemyAI
     readonly string[] colors = { "RED", "BLUE", "YELLOW" };
     public DoppelgangerAI1(Enemy self)
     {
-        state = AI_State.NORMAL;
-        self.stagger_time = 2;
+        //state = AI_State.NORMAL;
+        //self.stagger_time = 2;
     }
     public override SpellData getNextSpell(EnemySpellList spells, Enemy[] allies, int position, ICaster[] player_arr, out int target)
     {
@@ -209,89 +209,89 @@ public class DoppelgangerAI1 : EnemyAI
 
     public override void updateState(Enemy[] allies, int position, ICaster[] player_arr, Update_Case flag)
     {
-        Debug.Log("updating doppel AI state: attack in prog = " + allies[position].attack_in_progress + " " + flag.ToString());
-        if(form <= 3)
-        {
-            if (flag == Update_Case.AFTER_CAST)
-            {
-                numAttacks++;
-                if (numAttacks > 3)
-                    state = AI_State.CHARGE_MAX;
-                else
-                    state = AI_State.NORMAL;
-            }
-            else if(flag == Update_Case.UNSTUN)
-            {
-                if(form == 1)
-                {
-                    state = AI_State.NORMAL;
-                    allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (YELLOW)"), true);
-                    allies[position].stagger_time = 2f;
-                    allies[position].changeForm();
-                    allies[position].resetAttack();
-                }
-                else if(form == 2)
-                {
-                    state = AI_State.NORMAL;
-                    allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (RED)"), true);
-                    allies[position].stagger_time = 2f;
-                    allies[position].changeForm();
-                    allies[position].resetAttack();
-                }
-                else if(form == 3)
-                {
-                    state = AI_State.ATTACK_SPECIAL;
-                    allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (???)"), true);
-                    allies[position].stagger_time = 2f;
-                    changeToRandomColor(allies[position]);
-                    allies[position].resetAttack();
-                }
-                ++form;
-            }
-        }
-        else if(form == 4)
-        {
-            if (flag == Update_Case.UNSTUN)
-            {
-                state = AI_State.NORMAL;
-                allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (GRAY)"), true);
-                allies[position].stagger_time = 10f;
-                allies[position].resetAttack();
-                allies[position].changeForm();
-                ++form;
-            }
-            else if (flag == Update_Case.AFTER_CAST)
-            {
-                changeToRandomColor(allies[position]);
-            }
-            else if(flag == Update_Case.WAS_HIT)// was hit
-            {
-                if (allies[position].attack_in_progress)
-                    return;
-                changeToRandomColor(allies[position]);
-                switch (color)
-                {
-                    case "RED":
-                        allies[position].getCurrSpell().element = "agni";
-                        break;
-                    case "BLUE":
-                        allies[position].getCurrSpell().element = "cryo";
-                        break;
-                    case "YELLOW":
-                        allies[position].getCurrSpell().element = "veld";
-                        break;
-                    default:
-                        throw new System.Exception("Doppleganger is invalid color");
-                }
-            }
-        }
-        else if(form == 5)
-        {
-            //if(flag == Update_Case.UNSTUN)
-            //{
-            //    allies[position].Curr_hp = 0;
-            //}
-        }
+        //Debug.Log("updating doppel AI state: attack in prog = " + allies[position].attack_in_progress + " " + flag.ToString());
+        //if(form <= 3)
+        //{
+        //    if (flag == Update_Case.AFTER_CAST)
+        //    {
+        //        numAttacks++;
+        //        if (numAttacks > 3)
+        //            state = AI_State.CHARGE_MAX;
+        //        else
+        //            state = AI_State.NORMAL;
+        //    }
+        //    else if(flag == Update_Case.UNSTUN)
+        //    {
+        //        if(form == 1)
+        //        {
+        //            state = AI_State.NORMAL;
+        //            allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (YELLOW)"), true);
+        //            allies[position].stagger_time = 2f;
+        //            allies[position].changeForm();
+        //            allies[position].resetAttack();
+        //        }
+        //        else if(form == 2)
+        //        {
+        //            state = AI_State.NORMAL;
+        //            allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (RED)"), true);
+        //            allies[position].stagger_time = 2f;
+        //            allies[position].changeForm();
+        //            allies[position].resetAttack();
+        //        }
+        //        else if(form == 3)
+        //        {
+        //            state = AI_State.ATTACK_SPECIAL;
+        //            allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (???)"), true);
+        //            allies[position].stagger_time = 2f;
+        //            changeToRandomColor(allies[position]);
+        //            allies[position].resetAttack();
+        //        }
+        //        ++form;
+        //    }
+        //}
+        //else if(form == 4)
+        //{
+        //    if (flag == Update_Case.UNSTUN)
+        //    {
+        //        state = AI_State.NORMAL;
+        //        allies[position].setStats(EnemyDatabase.main.getData("Doppelganger (GRAY)"), true);
+        //        allies[position].stagger_time = 10f;
+        //        allies[position].resetAttack();
+        //        allies[position].changeForm();
+        //        ++form;
+        //    }
+        //    else if (flag == Update_Case.AFTER_CAST)
+        //    {
+        //        changeToRandomColor(allies[position]);
+        //    }
+        //    else if(flag == Update_Case.WAS_HIT)// was hit
+        //    {
+        //        if (allies[position].attack_in_progress)
+        //            return;
+        //        changeToRandomColor(allies[position]);
+        //        switch (color)
+        //        {
+        //            case "RED":
+        //                allies[position].getCurrSpell().element = "agni";
+        //                break;
+        //            case "BLUE":
+        //                allies[position].getCurrSpell().element = "cryo";
+        //                break;
+        //            case "YELLOW":
+        //                allies[position].getCurrSpell().element = "veld";
+        //                break;
+        //            default:
+        //                throw new System.Exception("Doppleganger is invalid color");
+        //        }
+        //    }
+        //}
+        //else if(form == 5)
+        //{
+        //    //if(flag == Update_Case.UNSTUN)
+        //    //{
+        //    //    allies[position].Curr_hp = 0;
+        //    //}
+        //}
     }
 
     private void changeToRandomColor(Enemy self)
@@ -300,12 +300,12 @@ public class DoppelgangerAI1 : EnemyAI
         while(colors[randomIndex] == color)
             randomIndex = Random.Range(0, colors.Length);
         color = colors[randomIndex];
-        EnemyStats formStats = EnemyDatabase.main.getData("Doppelganger (" + color + ")");
-        ((EnemyStats)self.Stats).sprite_path = formStats.sprite_path;
-        self.Stats.vsElement = formStats.vsElement;
-        self.Stats.vsElement[0] = 0;
-        ((EnemyStats)self.Stats).spells = formStats.spells;
-        self.changeForm();
+        //EnemyStats formStats = EnemyDatabase.main.getData("Doppelganger (" + color + ")");
+        //((EnemyStats)self.Stats).sprite_path = formStats.sprite_path;
+        //self.Stats.vsElement = formStats.vsElement;
+        //self.Stats.vsElement[0] = 0;
+        //((EnemyStats)self.Stats).spells = formStats.spells;
+        //self.changeForm();
     }
 }
 
@@ -321,9 +321,9 @@ public class DoppelFriendAI1 : AttackerAI1
     {
         if(flag == Update_Case.AFTER_INTERRUPT && !changed && PlayerDataManager.main.getData("doppel-fr-transform") == "true")
         {
-            allies[position].setStats(EnemyDatabase.main.getData(nextForm), true);
-            allies[position].changeForm();
-            allies[position].resetAttack();
+            //allies[position].setStats(EnemyDatabase.main.getData(nextForm), true);
+            //allies[position].changeForm();
+            //allies[position].resetAttack();
         }
 
     }

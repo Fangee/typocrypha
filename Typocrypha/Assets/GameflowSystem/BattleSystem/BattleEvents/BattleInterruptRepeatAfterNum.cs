@@ -13,7 +13,7 @@ public abstract class BattleInterruptRepeatAfterNum : BattleInterruptRepeated {
         if (interruptScene != null)
         {
             Debug.Log("Interrupt triggered: " + interruptScene.name);
-            state.addSceneToQueue(interruptScene);
+            //state.addSceneToQueue(interruptScene);
         }
         curr_triggers = 0;
         reset(state);

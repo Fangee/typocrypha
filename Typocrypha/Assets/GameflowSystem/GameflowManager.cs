@@ -30,8 +30,8 @@ namespace TypocryphaGameflow
         {
             yield return new WaitUntil(() => AudioPlayer.main.ready);
             AudioPlayer.main.stopAll();
-            yield return new WaitUntil(() => EnemyDatabase.main.is_loaded);
-            yield return new WaitUntil(() => AllyDatabase.main.is_loaded);
+            //yield return new WaitUntil(() => EnemyDatabase.main.is_loaded);
+            //yield return new WaitUntil(() => AllyDatabase.main.is_loaded);
             yield return new WaitUntil(() => AnimationPlayer.main.ready);
             Debug.Log("done loading assets");
             gameflowStart();

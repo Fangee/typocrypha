@@ -10,19 +10,27 @@ namespace ATB2
     {
         // Input field for cast bar
         public InputField input;
+
+        #region Static Solo Fields and Properties
+        //The castBar to enable after soloing ends
+        static CastBar _mainBar = null;
+        //public access to the main bar (for toggling focus for non-caster solo actors)
+        public static CastBar MainBar { get { return _mainBar; } }
         // Stack for showing only 1 castbar at once
-        static Stack<CastBar> soloStack = new Stack<CastBar>();
+        static readonly Stack<CastBar> soloStack = new Stack<CastBar>();
+        //List to track all CastBars for soloing
+        static readonly List<CastBar> allCastBars = new List<CastBar>();
+        #endregion
+
         // Puts bar in/out focus for typing
-        bool _focus;
         public bool focus
         {
             get
             {
-                return _focus;
+                return input.interactable;
             }
             set
             {
-                _focus = value;
                 input.interactable = true;
                 if (value)
                 {
@@ -54,6 +62,14 @@ namespace ATB2
         {
             pos = transform.position;
             input.onValueChanged.AddListener(keySFX);
+            allCastBars.Add(this);
+            if (gameObject.name == "PlayerCastBar")
+                _mainBar = this;
+        }
+
+        private void OnDestroy()
+        {
+            allCastBars.Remove(this);
         }
 
         // Clears cast bar
@@ -77,8 +93,7 @@ namespace ATB2
         // Shows only this cast bar
         public void solo()
         {
-            CastBar[] bars = FindObjectsOfType<CastBar>();
-            foreach (CastBar bar in bars)
+            foreach (CastBar bar in allCastBars)
                 bar.hidden = true;
             this.hidden = false;
         }
@@ -98,20 +113,8 @@ namespace ATB2
             // If stack is empty, hide all except for player
             if (soloStack.Count == 0) 
             {
-                CastBar[] bars = FindObjectsOfType<CastBar>();
-                foreach (CastBar bar in bars)
-                {
-                    if (bar.gameObject.name != "PlayerCastBar")
-                    {
-                        bar.hidden = true;
-                        bar.focus = false;
-                    }
-                    else
-                    {
-                        bar.hidden = false;
-                        bar.focus = true;
-                    }
-                }                    
+                foreach (CastBar bar in allCastBars)
+                    bar.hidden = !(bar.focus = (bar == _mainBar));                 
             }
             // Otherwise, solo the next in the stack
             else

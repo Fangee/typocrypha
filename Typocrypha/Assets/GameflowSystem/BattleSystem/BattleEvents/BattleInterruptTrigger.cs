@@ -12,7 +12,7 @@ public abstract class BattleInterruptTrigger : BattleEventTrigger {
         if(interruptScene != null)
         {
             Debug.Log("Interrupt triggered: " + interruptScene.name);
-            state.addSceneToQueue(interruptScene);
+            //state.addSceneToQueue(interruptScene);
         }
         triggered = true;
         return true;

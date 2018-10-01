@@ -52,23 +52,23 @@ public class EnemyStaggerBars : MonoBehaviour {
 
 	// update stagger bars
 	void Update() {
-		if (!BattleManagerS.main.enabled) return;
-		for (int i = 0; i < 3; i++) {
-			if (stagger_bars [i] != null) {
-				Enemy enemy = BattleManagerS.main.field.enemies [i];
-				if (!enemy.Is_dead) {
-					stagger_bars [i].setValue (enemy.getStagger ());
-					if (enemy.Is_stunned) {
-						stagger_bars[i].gameObject.SetActive(true);
-					} else {
-						stagger_bars[i].gameObject.SetActive(false);
-					}
-				} else { // if enemy has died, remove bar
-					stagger_bars[i].setValue(0);
-					stagger_bars[i].setAfterimage(0);
-					stagger_bars[i].gameObject.SetActive(false);
-				}
-			}
-		}
+		//if (!BattleManagerS.main.enabled) return;
+		//for (int i = 0; i < 3; i++) {
+		//	if (stagger_bars [i] != null) {
+		//		Enemy enemy = BattleManagerS.main.field.enemies [i];
+		//		if (!enemy.Is_dead) {
+		//			stagger_bars [i].setValue (enemy.getStagger ());
+		//			if (enemy.Is_stunned) {
+		//				stagger_bars[i].gameObject.SetActive(true);
+		//			} else {
+		//				stagger_bars[i].gameObject.SetActive(false);
+		//			}
+		//		} else { // if enemy has died, remove bar
+		//			stagger_bars[i].setValue(0);
+		//			stagger_bars[i].setAfterimage(0);
+		//			stagger_bars[i].gameObject.SetActive(false);
+		//		}
+		//	}
+		//}
 	}
 }
