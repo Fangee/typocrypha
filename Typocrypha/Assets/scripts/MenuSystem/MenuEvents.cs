@@ -8,6 +8,9 @@ using UnityEngine.EventSystems;
 // Container class for MenuOption callback functions
 public class MenuEvents : MonoBehaviour 
 {
+	// MenuEvents class will likely need to have references to variables it needs to change unless they're 
+	// global or something, put them here later
+	
 	public void TestCallback()
 	{
 		Debug.Log("abababababa");
