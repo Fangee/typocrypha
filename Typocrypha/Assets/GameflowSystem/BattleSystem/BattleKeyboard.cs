@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using ATB2;
+
 //Manages special conditions
 public class BattleKeyboard : MonoBehaviour {
     public Dictionary<char, Image> image_map; // map from characters to key images (set from trackTyping)

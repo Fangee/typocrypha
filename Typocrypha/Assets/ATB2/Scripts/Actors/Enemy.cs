@@ -7,7 +7,6 @@ namespace ATB2
     public partial class Enemy : Actor
     {
         // UI Objects
-        public GameObject healthUI;
         public GameObject chargeUI;
 
         // Properties

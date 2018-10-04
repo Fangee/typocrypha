@@ -18,7 +18,7 @@ namespace ATB2
         // Sent when ally cast is triggered
         public void allyMenu(StateEventArgs args)
         {
-            if (soloStack.Count == 0 || args.actor.isCurrentState("CastDisabled") || args.actor.isCast)
+            if (soloStack.Count == 0 || args.actor.isCast)
                 return;
             Ally ally = (Ally)args.actor;
             bool cast = false;
@@ -26,15 +26,9 @@ namespace ATB2
                 cast = true;
             if (soloStack.Peek().isCurrentState("AfterCast"))
                 cast = true;
-            // Check Mana
+            //Check mana cost
             if (ally.mana < ally.manaCost)
-            {
-                cast = false;
-            } 
-            else
-            {
-                cast = true;
-            }
+                return;
             if (cast)
             {
                 enterSolo(ally);

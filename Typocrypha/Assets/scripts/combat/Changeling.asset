@@ -11,19 +11,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185c389b97a40c04cba99fbc967264e0, type: 3}
   m_Name: Changeling
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
-  maxHP: 0
-  maxStagger: 0
-  atk: 0
-  def: 0
-  spd: 0
-  acc: 0
-  evade: 0
-  vsNull: 0
-  vsFire: 0
-  vsIce: 0
-  vsVolt: 0
+  image: {fileID: 0}
+  stats:
+    maxHP: 0
+    maxStagger: 0
+    staggerTime: 0
+    atk: 0
+    def: 0
+    spd: 0
+    acc: 0
+    evade: 0
   AIType: 
   AIParameters: []
   spells:
-    _keys: []
+    _keys:
+    - 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ATB2
 {
-    public class Player : Caster
+    public partial class Player : InputCaster
     {
         void Start()
         {

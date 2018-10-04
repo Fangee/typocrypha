@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using ATB2;
+
 public class BattleManagerS : MonoBehaviour, IPausable {
     public static BattleManagerS main = null;
     public Player player;

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace ATB2
 {
     // Actors with a cast bar
-    public abstract class Caster : Actor
+    public abstract class InputCaster : Actor
     {
         public CastBar castBar;
     }

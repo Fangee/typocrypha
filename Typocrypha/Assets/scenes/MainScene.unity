@@ -12693,7 +12693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateMachine: {fileID: 0}
-  healthUI: {fileID: 0}
+  isCast: 0
   chargeUI: {fileID: 0}
   chargeTime: 0
   enemyData: {fileID: 0}
@@ -15007,7 +15007,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28812bbc1bca1014d97373a5cf41b224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateMachine: {fileID: 0}
+  isCast: 0
+  castBar: {fileID: 0}
   status_manager: {fileID: 94137934}
+  stats:
+    maxHP: 0
+    maxStagger: 0
+    staggerTime: 0
+    atk: 0
+    def: 0
+    spd: 0
+    acc: 0
+    evade: 0
 --- !u!4 &1213398748
 Transform:
   m_ObjectHideFlags: 0

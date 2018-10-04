@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ATB2
 {
-    public class Ally : Caster
+    public partial class Ally : InputCaster
     {
         // UI Objects
         public GameObject healthUI;

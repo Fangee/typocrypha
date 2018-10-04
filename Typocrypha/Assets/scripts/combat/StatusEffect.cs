@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using ATB2;
+
 //A class that processes an input key
 public abstract class StatusEffect {
     public bool isNormal = false;
