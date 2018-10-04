@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 using TypocryphaGameflow.MathUtils;
 
@@ -27,5 +28,38 @@ public class CasterStats
     public int Acc { get { return acc; } set { acc = statRange.clamp(value); } }
     [SerializeField] private int evade;
     public int Evade { get { return evade; } set { evade = statRange.clamp(value); } }
+    #endregion
+
+    #region GUI
+    public void doGUILayout(bool isMod = false)
+    {
+        if (!isMod)
+        {
+            maxHP = EditorGUILayout.IntField(new GUIContent("Max HP", "TODO: tooltip"), maxHP);
+            maxStagger = EditorGUILayout.IntField(new GUIContent("Max Stagger", "TODO: tooltip"), maxStagger);
+            StaggerTime = EditorGUILayout.FloatField(new GUIContent("Stagger Time", "TODO: tooltip"), staggerTime);
+        }
+        atk = EditorGUILayout.IntSlider(new GUIContent("Atk", "TODO: tooltip"), atk, statRange.min, statRange.max);
+        def = EditorGUILayout.IntSlider(new GUIContent("Def", "TODO: tooltip"), def, statRange.min, statRange.max);
+        spd = EditorGUILayout.IntSlider(new GUIContent("Speed", "TODO: tooltip"), spd, statRange.min, statRange.max);
+        acc = EditorGUILayout.IntSlider(new GUIContent("Acc", "TODO: tooltip"), acc, statRange.min, statRange.max);
+        evade = EditorGUILayout.IntSlider(new GUIContent("Evade", "TODO: tooltip"), evade, statRange.min, statRange.max);
+    }
+    public void doModifierDataGUILayout()
+    {
+        string data = string.Empty;
+        if (atk != 0)
+            data += ("Atk " + (atk < 0 ? "" : "+") + atk + ", ");
+        if (def != 0)
+            data += ("Def " + (def < 0 ? "" : "+") + def + ", ");
+        if (spd != 0)
+            data += ("Spd " + (spd < 0 ? "" : "+") + spd + ", ");
+        if (acc != 0)
+            data += ("Acc " + (acc < 0 ? "" : "+") + acc + ", ");
+        if (Evade != 0)
+            data += ("Evade " + (evade < 0 ? "" : "+") + evade);
+        if (!string.IsNullOrEmpty(data))
+            EditorGUILayout.LabelField(data, new GUIStyle(GUI.skin.label) { wordWrap = true });
+    }
     #endregion
 }

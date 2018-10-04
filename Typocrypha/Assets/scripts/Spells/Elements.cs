@@ -18,6 +18,7 @@ public static class Elements
         NEUTRAL,
         WEAK,
         SUPERWEAK,
+        DODGE,
     }
     public enum Element
     {

@@ -85,7 +85,7 @@ namespace TypocryphaGameflow
                 nameSet._items.Add(string.Empty);
             }
             GUILayout.EndHorizontal();
-            EditorGUI.indentLevel = 1;
+            EditorGUI.indentLevel++;
             GUILayout.BeginHorizontal();
             GUILayout.Label("    Names");
             GUILayout.EndHorizontal();
@@ -113,7 +113,7 @@ namespace TypocryphaGameflow
             {
                 nameSet._items.RemoveAt(toDelete);
             }
-            EditorGUI.indentLevel = 0;
+            EditorGUI.indentLevel--;
         }
 
         void NameMapGUI(string title, NameMap nameMap)
