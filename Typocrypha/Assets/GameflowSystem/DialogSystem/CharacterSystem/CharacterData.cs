@@ -119,45 +119,27 @@ namespace TypocryphaGameflow
         void NameMapGUI(string title, NameMap nameMap)
         {
             GUILayout.BeginHorizontal();
-            GUILayout.Label(title + ": " + nameMap._keys.Count);
+            GUILayout.Label(title + ": " + nameMap.Count);
             if (GUILayout.Button("+"))
-            {
-                nameMap._keys.Add(string.Empty);
-                nameMap._values.Add(null);
-            }
+                nameMap.Add(string.Empty, null);
             GUILayout.EndHorizontal();
             EditorGUI.indentLevel = 1;
             GUILayout.BeginHorizontal();
             GUILayout.Label("    Names");
             GUILayout.Label("Sprites");
             GUILayout.EndHorizontal();
-            int toDelete = -1; // Item to delete; -1 if none chosen
-            int toAdd = -1; // Item after which to add; -1 if none chosen
-            for (int i = 0; i < nameMap._values.Count; ++i)
+            string toDelete = null; // Item to delete; -1 if none chosen
+            foreach (string key in nameMap)
             {
                 GUILayout.BeginHorizontal();
-                nameMap._keys[i] = EditorGUILayout.TextField(nameMap._keys[i]);
-                nameMap._values[i] = EditorGUILayout.ObjectField(nameMap._values[i], typeof(Sprite), false) as Sprite;
-                if (GUILayout.Button("+"))
-                {
-                    toAdd = i;
-                }
+                nameMap.replaceKey(key, EditorGUILayout.TextField(key));
+                nameMap[key] = EditorGUILayout.ObjectField(nameMap[key], typeof(Sprite), false) as Sprite;
                 if (GUILayout.Button("-"))
-                {
-                    toDelete = i;
-                }
+                    toDelete = key;
                 GUILayout.EndHorizontal();
             }
-            if (toAdd != -1)
-            {
-                nameMap._keys.Insert(toAdd + 1, string.Empty);
-                nameMap._values.Insert(toAdd + 1, null);
-            }
-            if (toDelete != -1)
-            {
-                nameMap._keys.RemoveAt(toDelete);
-                nameMap._values.RemoveAt(toDelete);
-            }
+            if (toDelete != null)
+                nameMap.Remove(toDelete);
             EditorGUI.indentLevel = 0;
         }
     }

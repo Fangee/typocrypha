@@ -24,7 +24,7 @@ public class CasterTag : ScriptableObject
 
     [System.Serializable] public class ReactionDict : SerializableDictionary<SpellTag, Elements.vsElement> { }
     [System.Serializable] public class TagSet : SerializableSet<CasterTag> { }
-    [System.Serializable] public class TagDict : SerializableDictionary2<string, CasterTag> { }
+    [System.Serializable] public class TagDict : SerializableDictionary<string, CasterTag> { }
     [System.Serializable] public class AbilitySet : SerializableSet<CasterAbility> { }
 }
 
