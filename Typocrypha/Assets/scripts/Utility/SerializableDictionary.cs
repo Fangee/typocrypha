@@ -5,7 +5,6 @@ using UnityEditor;
 
 // Serializable dictionary wrapper (native Dictionary serialization not yet available)
 // MUST BE INHERITED WITH TEMPLATE VARIABLES SET: generic classes are not serialized
-// Possible Upgrade to implement all methods of IDictionary
 public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiver, IEnumerable<KeyValuePair<TKey, TValue>>
 {
     private Dictionary<TKey, TValue> _dictionary = new Dictionary<TKey, TValue>(); // Internal dictionary interface
