@@ -64,7 +64,7 @@ namespace ATB2
         public override void Setup()
         {
             // Attaches sprite to SpriteRenderer
-            image = enemyData.image;
+            image.sprite = enemyData.image;
 
             // Sets AI
             AI = EnemyAI.GetAIFromString(enemyData.AIType, enemyData.AIParameters);

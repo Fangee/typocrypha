@@ -22,7 +22,7 @@ namespace TypocryphaGameflow
 
     // Serializable wrapper for dictionaries
     [System.Serializable]
-    public class NameMap : SerializableDictionary<string, Sprite> {}
+    public class NameMap : SerializableDictionary<string, Sprite> { [System.NonSerialized] public string addField; }
 
     // Serializable wrapper for sets
     [System.Serializable]
@@ -120,8 +120,9 @@ namespace TypocryphaGameflow
         {
             GUILayout.BeginHorizontal();
             GUILayout.Label(title + ": " + nameMap.Count);
+            nameMap.addField = EditorGUILayout.TextField(nameMap.addField);
             if (GUILayout.Button("+"))
-                nameMap.Add(string.Empty, null);
+                nameMap.Add(nameMap.addField, null);
             GUILayout.EndHorizontal();
             EditorGUI.indentLevel = 1;
             GUILayout.BeginHorizontal();
@@ -129,10 +130,12 @@ namespace TypocryphaGameflow
             GUILayout.Label("Sprites");
             GUILayout.EndHorizontal();
             string toDelete = null; // Item to delete; -1 if none chosen
-            foreach (string key in nameMap)
+            string[] keys = new string[nameMap.Count];
+            nameMap.Keys.CopyTo(keys, 0);
+            foreach (var key in keys)
             {
                 GUILayout.BeginHorizontal();
-                nameMap.replaceKey(key, EditorGUILayout.TextField(key));
+                EditorGUILayout.LabelField(key, GUILayout.Width(100));
                 nameMap[key] = EditorGUILayout.ObjectField(nameMap[key], typeof(Sprite), false) as Sprite;
                 if (GUILayout.Button("-"))
                     toDelete = key;

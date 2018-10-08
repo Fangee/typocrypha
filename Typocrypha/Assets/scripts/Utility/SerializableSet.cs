@@ -43,3 +43,4 @@ public class SerializableSet<T> : ISerializationCallbackReceiver, IEnumerable
     }
     #endregion
 }
+
