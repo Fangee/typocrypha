@@ -21,3 +21,5 @@ public class MenuEvents : MonoBehaviour
 		Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 	}
 }
+
+// make example events for checkbox/slider

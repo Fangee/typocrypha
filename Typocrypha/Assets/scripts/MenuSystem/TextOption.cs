@@ -10,14 +10,7 @@ public class TextOption : MenuOption
 {
 	// Reference to text object
 	public Text text;
-	
-	// Color to be changed to when selected
-	public Color highlightColor;
-	
-	// Default value variables
-	private string defaultText;
-	private Color defaultColor;
-	
+		
 	void Awake()
 	{
 		// Set flags

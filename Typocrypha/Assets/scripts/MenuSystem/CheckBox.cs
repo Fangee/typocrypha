@@ -19,13 +19,6 @@ public class CheckBox : MenuOption
 	public SpriteRenderer spriteRenderer;
 	public Text textBox;
 	
-	// Color for text to be changed to when selected
-	public Color highlightColor;
-	
-	// Default text box color
-	private string defaultText;
-	private Color defaultColor;
-	
 	// Whether the box is checked, (0/false == unchecked, 1/true == checked)
 	private bool checkedState;
 	
