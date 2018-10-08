@@ -26,7 +26,7 @@ namespace TypocryphaGameflow
 
     // Serializable wrapper for sets
     [System.Serializable]
-    public class NameSet : SerializableSet<string> { }
+    public class NameSet : SerializableSet<string> { [System.NonSerialized] public string addField; }
 
     #region GUI
     // CharacterData inspector (read-only)
@@ -79,39 +79,31 @@ namespace TypocryphaGameflow
         void NameSetGUI(string title, NameSet nameSet)
         {
             GUILayout.BeginHorizontal();
-            GUILayout.Label(title + ": " + nameSet._items.Count);
-            if (GUILayout.Button("+"))
+            GUILayout.Label(title + ": " + nameSet.Count, GUILayout.Width(100));
+            nameSet.addField = EditorGUILayout.TextField(nameSet.addField, GUILayout.Width(100));
+            if (GUILayout.Button("+") && !string.IsNullOrEmpty(nameSet.addField))
             {
-                nameSet._items.Add(string.Empty);
+                nameSet.Add(nameSet.addField);
             }
             GUILayout.EndHorizontal();
             EditorGUI.indentLevel++;
             GUILayout.BeginHorizontal();
             GUILayout.Label("    Names");
             GUILayout.EndHorizontal();
-            int toDelete = -1; // Item to delete; -1 if none chosen
-            int toAdd = -1; // Item after which to add; -1 if none chosen
-            for (int i = 0; i < nameSet._items.Count; ++i)
+            string toDelete = null; // Item to delete; -1 if none chosen
+            foreach (string s in nameSet)
             {
                 GUILayout.BeginHorizontal();
-                nameSet._items[i] = EditorGUILayout.TextField(nameSet._items[i]);
-                if (GUILayout.Button("+"))
-                {
-                    toAdd = i;
-                }
+                EditorGUILayout.LabelField(s);
                 if (GUILayout.Button("-"))
                 {
-                    toDelete = i;
+                    toDelete = s;
                 }
                 GUILayout.EndHorizontal();
             }
-            if (toAdd != -1)
+            if (toDelete != null)
             {
-                nameSet._items.Insert(toAdd + 1, string.Empty);
-            }
-            if (toDelete != -1)
-            {
-                nameSet._items.RemoveAt(toDelete);
+                nameSet.Remove(toDelete);
             }
             EditorGUI.indentLevel--;
         }
@@ -119,15 +111,16 @@ namespace TypocryphaGameflow
         void NameMapGUI(string title, NameMap nameMap)
         {
             GUILayout.BeginHorizontal();
-            GUILayout.Label(title + ": " + nameMap.Count);
-            nameMap.addField = EditorGUILayout.TextField(nameMap.addField);
-            if (GUILayout.Button("+"))
+            GUILayout.Label(title + ": " + nameMap.Count, GUILayout.Width(100));
+            nameMap.addField = EditorGUILayout.TextField(nameMap.addField, GUILayout.Width(100));
+            if (GUILayout.Button("+") && !string.IsNullOrEmpty(nameMap.addField))
                 nameMap.Add(nameMap.addField, null);
+            GUIStyle header = new GUIStyle(GUI.skin.label) { fontStyle = FontStyle.Bold };
             GUILayout.EndHorizontal();
-            EditorGUI.indentLevel = 1;
+            EditorGUI.indentLevel++;
             GUILayout.BeginHorizontal();
-            GUILayout.Label("    Names");
-            GUILayout.Label("Sprites");
+            GUILayout.Label("    Names", header);
+            GUILayout.Label("Sprites", header);
             GUILayout.EndHorizontal();
             string toDelete = null; // Item to delete; -1 if none chosen
             string[] keys = new string[nameMap.Count];
@@ -143,7 +136,7 @@ namespace TypocryphaGameflow
             }
             if (toDelete != null)
                 nameMap.Remove(toDelete);
-            EditorGUI.indentLevel = 0;
+            EditorGUI.indentLevel--;
         }
     }
     #endregion

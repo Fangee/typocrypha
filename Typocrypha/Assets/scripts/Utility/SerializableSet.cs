@@ -7,35 +7,54 @@ using UnityEditor;
 // Should only be set in Editor more; Is read only in game mode
 // MUST BE INHERITED WITH TEMPLATE VARIABLES SET: generic classes are not serialized
 [System.Serializable]
-public class SerializableSet<T> : ISerializationCallbackReceiver, IEnumerable
+public class SerializableSet<T> : ISerializationCallbackReceiver, IEnumerable<T>
 {
-    HashSet<T> _hashset; // Internal HashSet interface
-    public List<T> _items; // Serializable list of items
+    HashSet<T> _hashset = new HashSet<T>(); // Internal HashSet interface
+    [SerializeField] private List<T> _items = new List<T>(); // Serializable list of items
 
-    public SerializableSet()
-    {
-        _hashset = new HashSet<T>();
-        _items = new List<T>();
-    }
-
+    #region Set Implementation
+    public int Count { get { return _hashset.Count; } }
     public bool Contains(T item)
     {
         return _hashset.Contains(item);
     }
+    public void Add(T item)
+    {
+        if (!_hashset.Contains(item))
+            _hashset.Add(item);
+    }
+    public void Remove(T item)
+    {
+        _hashset.Remove(item);
+    }
 
+
+    #endregion
+
+    #region IEnumerable Implementation
     IEnumerator IEnumerable.GetEnumerator()
     {
         return _hashset.GetEnumerator();
     }
 
+    public IEnumerator<T> GetEnumerator()
+    {
+        return _hashset.GetEnumerator();
+    }
+    #endregion
+
     #region serialization
-    public void OnBeforeSerialize() { }
+    public void OnBeforeSerialize()
+    {
+        _items.Clear();
+        foreach (T item in _hashset)
+            _items.Add(item);
+    }
 
     // Convert list back into set
     public void OnAfterDeserialize()
     {
         _hashset = new HashSet<T>();
-
         foreach (T item in _items)
         {
             _hashset.Add(item);
