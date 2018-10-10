@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185c389b97a40c04cba99fbc967264e0, type: 3}
   m_Name: New Enemy Data
   m_EditorClassIdentifier: 
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 014f8993b714f3c489414f5fc3221115, type: 3}
   stats:
     maxHP: 0
     maxStagger: 0
@@ -26,11 +26,13 @@ MonoBehaviour:
   spells:
     _keys: []
   tags:
-    _keys:
-    - GloamKnight
-    - Lord
-    - ShapeShifter
-    _values:
-    - {fileID: 11400000, guid: c9e1fb5d9596a8144bc194029c4f1662, type: 2}
-    - {fileID: 11400000, guid: e0cb741647b973b48bdbb21acfd4958d, type: 2}
-    - {fileID: 11400000, guid: f6dfad0a9327ced4188c780b158b8fdf, type: 2}
+    tags:
+      _keys:
+      - GloamKnight
+      - Lord
+      _values:
+      - {fileID: 11400000, guid: c9e1fb5d9596a8144bc194029c4f1662, type: 2}
+      - {fileID: 11400000, guid: e0cb741647b973b48bdbb21acfd4958d, type: 2}
+    allTags:
+      _keys: []
+      _frequencies: 

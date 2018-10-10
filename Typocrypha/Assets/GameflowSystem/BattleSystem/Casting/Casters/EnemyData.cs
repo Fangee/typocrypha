@@ -20,7 +20,7 @@ public class EnemyData : ScriptableObject
 	public SpellMap spells;
 
     // Tags
-    public CasterTag.TagDict tags;
+    public CasterTagDictionary tags;
     //public CasterTagDictionary tags;
 
     // Serializable SpellMap Dictionary
@@ -37,34 +37,13 @@ public class EnemyDataInspector : Editor
     {
         EnemyData data = target as EnemyData;
 
-        #region Object Picker Message Handling
-        Event e = Event.current;
-        if (e.type == EventType.ExecuteCommand && e.commandName == "ObjectSelectorClosed")
-        {
-            CasterTag t = EditorGUIUtility.GetObjectPickerObject() as CasterTag;
-            if (t == null)
-                return;
-            data.tags.Add(t.name, t);
-            e.Use();
-            return;
-        }
-        #endregion
-
         GUILayout.Label("Enemy: " + data.name);
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
         data.image = EditorGUILayout.ObjectField(data.image, typeof(Sprite), false) as Sprite;
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
         data.stats.doGUILayout();
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
-        //data.tags.doGUILayout("Tags");
-        if(GUILayout.Button("Add"))
-            EditorGUIUtility.ShowObjectPicker<CasterTag>(null, false, "", 1);
-        EditorGUI.indentLevel++;
-        foreach(var kvp in data.tags)
-        {
-            EditorGUILayout.LabelField(kvp.Key);
-        }
-        EditorGUI.indentLevel--;
+        data.tags.doGUILayout("Tags");
 
         if(GUI.changed)
             EditorUtility.SetDirty(data);

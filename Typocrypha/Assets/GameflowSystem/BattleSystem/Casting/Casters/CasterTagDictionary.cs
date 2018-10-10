@@ -9,6 +9,7 @@ public class CasterTagDictionary
     private bool showDetails = false;
     //[SerializeField] private CasterTag.TagDict subTags;
     [SerializeField] private CasterTag.TagDict tags = new CasterTag.TagDict();
+    [SerializeField] private TagMultiSet allTags = new TagMultiSet();
 
     #region Dictionary Functions
     public void Add(CasterTag tag)
@@ -19,7 +20,6 @@ public class CasterTagDictionary
             return;
         }
         tags.Add(tag.name, tag);
-        //TODO: Handle SUBTAGS
     }
     public void Remove(string tagName)
     {
@@ -71,4 +71,6 @@ public class CasterTagDictionary
             Remove(toDelete);
         EditorGUI.indentLevel--;
     }
+
+    [System.Serializable] private class TagMultiSet : SerializableMultiSet<CasterTag> { }
 }

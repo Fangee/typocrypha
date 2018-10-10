@@ -19,9 +19,6 @@ public class CasterTag : ScriptableObject
         EditorGUI.indentLevel--;
     }
 
-
-
-
     [System.Serializable] public class ReactionDict : SerializableDictionary<SpellTag, Elements.vsElement> { }
     [System.Serializable] public class TagSet : SerializableSet<CasterTag> { }
     [System.Serializable] public class TagDict : SerializableDictionary<string, CasterTag> { }
