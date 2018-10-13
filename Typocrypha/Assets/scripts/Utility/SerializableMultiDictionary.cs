@@ -13,6 +13,7 @@ public class SerializableMultiDictionary<TKey, TValue> : ISerializationCallbackR
     [SerializeField] private List<int> _frequencies = new List<int>();
 
     #region Dictionary Implementation
+    //Total number of unique keys in the dictionary
     public int Count
     {
         get
@@ -20,6 +21,7 @@ public class SerializableMultiDictionary<TKey, TValue> : ISerializationCallbackR
             return _dictionary.Count;
         }
     }
+    //Total number of keys (including frquencies)
     public int TotalCount
     {
         get
@@ -30,7 +32,7 @@ public class SerializableMultiDictionary<TKey, TValue> : ISerializationCallbackR
             return count;
         }
     }
-    //Clear the whole multiset
+    //Clear the whole multidict
     public void Clear()
     {
         _dictionary.Clear();
@@ -47,7 +49,7 @@ public class SerializableMultiDictionary<TKey, TValue> : ISerializationCallbackR
     {
         return _dictionary.ContainsKey(item);
     }
-    //Return the frequency of the item in the multiset (read-only)
+    //Return the frequency of the item in the multidict (read-only)
     public int Frequency(TKey item)
     {
         return _frequencyDict[item];
@@ -64,7 +66,7 @@ public class SerializableMultiDictionary<TKey, TValue> : ISerializationCallbackR
         }
     }
     //Removes the item from the multiset if its frequency is less than amount, else lowers the frequency by amount
-    public void Remove(TKey key, TValue value, int amount = 1)
+    public void Remove(TKey key, int amount = 1)
     {
         if (_frequencyDict[key] <= amount)
         {
@@ -110,6 +112,8 @@ public class SerializableMultiDictionary<TKey, TValue> : ISerializationCallbackR
             _keys.Add(kvp.Key);
             _values.Add(kvp.Value);
         }
+        _frequencies.Clear();
+        _frequencies.AddRange(_frequencyDict.Values);
     }
 
     // Convert lists back into dictionary
@@ -121,6 +125,7 @@ public class SerializableMultiDictionary<TKey, TValue> : ISerializationCallbackR
             try
             {
                 _dictionary.Add(_keys[i], _values[i]);
+                _frequencyDict.Add(_keys[i], _frequencies[i]);
             }
             catch (System.ArgumentException)
             {

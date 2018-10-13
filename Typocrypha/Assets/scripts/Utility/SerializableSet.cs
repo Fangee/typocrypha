@@ -27,8 +27,6 @@ public class SerializableSet<T> : ISerializationCallbackReceiver, IEnumerable<T>
     {
         _hashset.Remove(item);
     }
-
-
     #endregion
 
     #region IEnumerable Implementation

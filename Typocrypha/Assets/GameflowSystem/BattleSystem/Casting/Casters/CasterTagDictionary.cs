@@ -8,8 +8,8 @@ public class CasterTagDictionary
 {
     private bool showDetails = false;
     //[SerializeField] private CasterTag.TagDict subTags;
-    [SerializeField] private CasterTag.TagDict tags = new CasterTag.TagDict();
-    [SerializeField] private TagMultiSet allTags = new TagMultiSet();
+    [SerializeField] private TagDict tags = new TagDict();
+    [SerializeField] private TagMultiDict allTags = new TagMultiDict();
 
     #region Dictionary Functions
     public void Add(CasterTag tag)
@@ -20,17 +20,35 @@ public class CasterTagDictionary
             return;
         }
         tags.Add(tag.name, tag);
+        addWithSubTags(tag);
+    }
+    private void addWithSubTags(CasterTag tag)
+    {
+        allTags.Add(tag.name, tag);
+        foreach (CasterTag t in tag.subTags)
+            addWithSubTags(t);
     }
     public void Remove(string tagName)
     {
+        CasterTag tag = tags[tagName];
         tags.Remove(tagName);
-        //TODO: Handle SUBTAGS
+        removeWithSubTags(tag);
     }
-
+    private void removeWithSubTags(CasterTag tag)
+    {
+        allTags.Remove(tag.name);
+        foreach (CasterTag t in tag.subTags)
+            removeWithSubTags(t);
+    }
     public bool ContainsTag(string tagName)
     {
-        return tags.ContainsKey(tagName);//|| subTags.ContainsKey(tagName);
+        return allTags.ContainsKey(tagName);
     }
+    #endregion
+
+    #region Aggregate Tag Data  (TODO)
+    public CasterStats statMod;
+    public List<CasterAbility> abilities;
     #endregion
 
     public void doGUILayout(string title)
@@ -42,35 +60,43 @@ public class CasterTagDictionary
             CasterTag t = EditorGUIUtility.GetObjectPickerObject() as CasterTag;
             if (t == null)
                 return;
+            if(allTags.ContainsKey(t.name))
+            {
+                Debug.LogWarning("Tag: " + t.name + " is already in this dict as a tag or subtag");
+                return;
+            }
             Add(t);
             e.Use();
             return;
         }
         #endregion
 
+        #region Title and Control
         GUILayout.BeginHorizontal();
         GUILayout.Label(title + ": " + tags.Count, new GUIStyle(GUI.skin.label) { fontStyle = FontStyle.Bold });
         showDetails = GUILayout.Toggle(showDetails, new GUIContent("Show Details"));
-        System.Random rnd = new System.Random();
         if (GUILayout.Button("+"))
             EditorGUIUtility.ShowObjectPicker<CasterTag>(null, false, "", 1);
         GUILayout.EndHorizontal();
+        #endregion
+
         EditorGUI.indentLevel++;
         string toDelete = null; // Item to delete; -1 if none chosen
-        foreach (var tag in tags)
+        foreach (var kvp in tags)
         {
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(tag.Key, new GUIStyle(GUI.skin.label) { fontStyle = FontStyle.Italic }, GUILayout.Width(240));
+            EditorGUILayout.LabelField(kvp.Key, new GUIStyle(GUI.skin.label) { fontStyle = showDetails ? FontStyle.Bold : FontStyle.Italic }, GUILayout.Width(240));
             if (GUILayout.Button("-"))
-                toDelete = tag.Key;
+                toDelete = kvp.Key;
             EditorGUILayout.EndHorizontal();
             if (showDetails)
-                tag.Value.dataGUILayout();
+                kvp.Value.dataGUILayout();
         }
         if (toDelete != null)
             Remove(toDelete);
         EditorGUI.indentLevel--;
     }
 
-    [System.Serializable] private class TagMultiSet : SerializableMultiSet<CasterTag> { }
+    [System.Serializable] private class TagDict : SerializableDictionary<string, CasterTag> { }
+    [System.Serializable] private class TagMultiDict : SerializableMultiDictionary<string, CasterTag> { }
 }
