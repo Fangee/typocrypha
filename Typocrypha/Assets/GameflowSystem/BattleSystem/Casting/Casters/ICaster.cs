@@ -21,4 +21,5 @@ using UnityEngine;
         bool Stunned { get; }
         bool Dead { get; }
         ICasterType CasterType { get; }
+        CasterTagDictionary Tags { get; }
     }

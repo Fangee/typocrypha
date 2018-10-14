@@ -45,6 +45,8 @@ namespace ATB2
         public bool Stunned { get { return false; } }
         public bool Dead { get { return Health <= 0; } }
         public ICasterType CasterType { get { return ICasterType.PLAYER; } }
+        private CasterTagDictionary _tags = new CasterTagDictionary();
+        public CasterTagDictionary Tags { get { return _tags; } }
         #endregion
 
         //Restores player's HP and Shields to Maximum

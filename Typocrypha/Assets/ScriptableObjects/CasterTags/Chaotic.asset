@@ -20,8 +20,11 @@ MonoBehaviour:
     spd: 0
     acc: 0
     evade: 0
-  tagReactions:
-    _values: 
+  reactions:
+    _keys:
+    - Bio
+    - Holy
+    _values: 0300000004000000
   subTags:
     _items:
     - {fileID: 11400000, guid: 68669da672c73c2428d48d28c4ef37b3, type: 2}

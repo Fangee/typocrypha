@@ -16,6 +16,8 @@ public class AllyData : ScriptableObject
     public string AIType;
     public string[] AIParameters;
 
+    public CasterTagDictionary tags;
+
     // Spells
     //public SpellMap spells;
 

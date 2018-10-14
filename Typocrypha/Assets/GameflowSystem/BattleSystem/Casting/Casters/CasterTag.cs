@@ -4,11 +4,23 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.AnimatedValues;
 
+public enum ReactionType
+{
+    ANY = -100,
+    WEAK = -1,
+    NEUTRAL,
+    RESIST,
+    BLOCK,
+    DODGE,
+    DRAIN,
+    REPEL,
+}
+
 [CreateAssetMenu(fileName = "CasterTag", menuName = "Caster Tag")]
 public class CasterTag : ScriptableObject
 {
     public CasterStats statMods;
-    public ReactionDict tagReactions;
+    public ReactionDict reactions;
     public TagSet subTags;
     public AbilitySet abilities;
 
@@ -33,7 +45,39 @@ public class CasterTag : ScriptableObject
         EditorGUI.indentLevel--;
     }
 
-    [System.Serializable] public class ReactionDict : SerializableDictionary<SpellTag, Elements.vsElement> { }
+    [System.Serializable] public class ReactionDict : SerializableDictionary<string, ReactionType>
+    {
+        private string addField;
+        public void doGUILayout(string title)
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(title + ": " + Count, new GUIStyle(GUI.skin.label) { fontStyle = FontStyle.Bold }, GUILayout.Width(100));
+            addField = EditorGUILayout.TextField(addField, GUILayout.Width(100));
+            if (GUILayout.Button("+") && !string.IsNullOrEmpty(addField))
+            {
+                Add(addField, ReactionType.NEUTRAL);
+                addField = string.Empty;
+            }
+            GUILayout.EndHorizontal();
+            EditorGUI.indentLevel++;
+            string toDelete = null; // Item to delete; -1 if none chosen
+            string[] keys = new string[Count];
+            Keys.CopyTo(keys, 0);
+            System.Array.Sort(keys);
+            foreach (var key in keys)
+            {
+                GUILayout.BeginHorizontal();
+                EditorGUILayout.LabelField(key, GUILayout.Width(100));
+                this[key] = (ReactionType)EditorGUILayout.EnumPopup(this[key]);
+                if (GUILayout.Button("-"))
+                    toDelete = key;
+                GUILayout.EndHorizontal();
+            }
+            if (toDelete != null)
+                Remove(toDelete);
+            EditorGUI.indentLevel--;
+        }
+    }
     [System.Serializable] public class TagSet : SerializableSet<CasterTag>
     {
         private bool showDetails = false;
@@ -95,7 +139,10 @@ public class CasterTagInspector : Editor
         if(tag.statMods != null)
             tag.statMods.doGUILayout(true);
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
-        if(tag.subTags != null)
+        tag.reactions.doGUILayout("Reactions");
+        GUILayout.Space(EditorGUIUtility.singleLineHeight / 2);
+        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+        if (tag.subTags != null)
         {
             tag.subTags.doGUILayout("SubTags");
             if (tag.subTags.Contains(tag))
@@ -107,14 +154,9 @@ public class CasterTagInspector : Editor
 }
 #endregion
 
-public class SpellTag
-{
-    string keyword;
-
-}
-
 public class CasterAbility
 {
 
 }
+
 

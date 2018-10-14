@@ -44,6 +44,7 @@ namespace ATB2
         public bool Stunned { get { return isCurrentState("Stunned"); } }
         public bool Dead { get { return Health <= 0; } }
         public ICasterType CasterType { get { return ICasterType.ALLY; } }
+        public CasterTagDictionary Tags { get { return data.tags; } }
         #endregion
 
         // UI Objects (TODO)
