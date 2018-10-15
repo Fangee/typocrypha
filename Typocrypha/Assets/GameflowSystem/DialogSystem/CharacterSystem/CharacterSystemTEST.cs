@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TypocryphaGameflow;
+using Gameflow;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
     // Testing script for Character System
     public class CharacterSystemTEST : MonoBehaviour

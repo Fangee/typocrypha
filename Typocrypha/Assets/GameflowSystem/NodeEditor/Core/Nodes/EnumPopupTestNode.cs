@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NodeEditorFramework;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
     [Node(true, "Event/Enum Test", new System.Type[] { typeof(GameflowCanvas) })]
     public class EnumPopupTestNode : Node

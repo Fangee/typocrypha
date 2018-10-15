@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-using TypocryphaGameflow.MathUtils;
+using Gameflow.MathUtils;
 
 [System.Serializable]
 public class CasterStats

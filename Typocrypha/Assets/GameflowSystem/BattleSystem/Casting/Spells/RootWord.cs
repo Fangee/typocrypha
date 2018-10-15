@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Gameflow.GUIUtilities;
 
 [CreateAssetMenu(fileName = "RootWord", menuName = "Spell Word/Root")]
 public class RootWord : SpellWord {
-
-    public int power;                   //Spell's intensity (not necessarily just damage)
-    public float cooldown;              //Spell's base cooldown
-    public int hitPercentage;           //Spell's base hit chance (1 = 1%)
-    public int critPercentage;          //Spell's base crit chance (1 = 1%)
+    [SerializeField] private List<RootSpellEffect> _effects = new List<RootSpellEffect>();
+    public ReorderableSOList<RootSpellEffect> effects = null;
     public SpellTagSet tags;
-    public virtual void doGUILayout()
+
+    public void initList()
     {
-        EditorGUILayout.LabelField("poopy b hole");
+        effects = new ReorderableSOList<RootSpellEffect>(_effects, true, true, new GUIContent("Effects", "TODO: tooltip"));
     }
 }
 
@@ -22,14 +21,20 @@ public class RootWord : SpellWord {
 [CustomEditor(typeof(RootWord))]
 public class RootWordInspector : Editor
 {
-
     public override void OnInspectorGUI()
     {
         RootWord data = target as RootWord;
+        if (data.effects == null)
+            data.initList();
 
         GUILayout.Label("Root Word: " + data.name);
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
-        data.doGUILayout();
+        //Do animation and Description GUI
+        data.doBaseGUILayout();
+        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+        data.effects.doLayoutList();
+        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+        data.tags.doGUILayout("Tags");
 
         if (GUI.changed)
             EditorUtility.SetDirty(data);

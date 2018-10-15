@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-using TypocryphaGameflow;
+using Gameflow;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
     // Container for data about specific characters (read only)
     [CreateAssetMenu]

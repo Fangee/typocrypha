@@ -2,7 +2,7 @@
 using UnityEditor;
 using NodeEditorFramework;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
 
     [Node(false, "Event/Set Variable", new System.Type[] { typeof(GameflowCanvas) })]

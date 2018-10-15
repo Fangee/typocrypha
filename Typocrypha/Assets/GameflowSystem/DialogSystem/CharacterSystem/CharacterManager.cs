@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TypocryphaGameflow;
+using Gameflow;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
     // Manages creation/deletion of characters in scene
     // Keeps track of current characters in scene, and dispatches commands to them

@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEditor.AnimatedValues;
 using NodeEditorFramework;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
     [Node(false, "Dialog/Dialog Input", new System.Type[] { typeof(GameflowCanvas) })]
     public class DialogNodeInput : DialogNodeVN

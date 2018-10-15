@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using NodeEditorFramework;
-using TypocryphaGameflow.GUIUtilities;
+using Gameflow.GUIUtilities;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
     public class BattleEvent : ReorderableSOList<BattleEvent>.ListItem
     {

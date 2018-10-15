@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using NodeEditorFramework;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
     public class GameflowManager : MonoBehaviour
     {    

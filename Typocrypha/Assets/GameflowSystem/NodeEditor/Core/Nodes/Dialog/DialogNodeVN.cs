@@ -2,7 +2,7 @@
 using UnityEditor;
 using NodeEditorFramework;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
     [Node(false, "Dialog/VN Dialog", new System.Type[] { typeof(GameflowCanvas) })]
     public class DialogNodeVN : DialogNode

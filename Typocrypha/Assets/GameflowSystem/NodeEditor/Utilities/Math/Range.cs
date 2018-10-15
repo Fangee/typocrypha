@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
     namespace MathUtils
     {

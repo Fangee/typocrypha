@@ -5,9 +5,9 @@ using UnityEditor;
 using NodeEditorFramework;
 using System;
 
-using TypocryphaGameflow.GUIUtilities;
+using Gameflow.GUIUtilities;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
     [Node(false, "Battle/Wave", new System.Type[] { typeof(GameflowCanvas) })]
     public class BattleNodeWave : BaseNodeIO

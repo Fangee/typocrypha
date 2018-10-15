@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using NodeEditorFramework;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
     [Node(false, "Gameflow/End", new System.Type[] { typeof(GameflowCanvas) })]
     public class GameflowEndNode : BaseNode

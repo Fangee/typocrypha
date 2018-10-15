@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using NodeEditorFramework;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
     [Node(false, "Event/Set Background", new System.Type[] { typeof(GameflowCanvas) })]
     public class setBackgroundNode : BaseNodeIO

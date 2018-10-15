@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TypocryphaGameflow;
+using Gameflow;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
     // Visual representation of a character in a dialogue scene
     public class Character : MonoBehaviour

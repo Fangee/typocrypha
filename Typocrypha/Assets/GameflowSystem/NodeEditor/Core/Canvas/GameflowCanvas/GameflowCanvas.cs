@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NodeEditorFramework;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
 
     [NodeCanvasType("Gameflow Canvas")]

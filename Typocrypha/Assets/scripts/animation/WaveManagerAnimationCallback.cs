@@ -8,7 +8,7 @@ public class WaveManagerAnimationCallback : StateMachineBehaviour {
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //GameObject.Find("/Managers/WaveManager").GetComponent<TypocryphaGameflow.WaveManager>().startCombat();
-        TypocryphaGameflow.GameflowManager.main.managers.waveManager.startCombat();
+        Gameflow.GameflowManager.main.managers.waveManager.startCombat();
     }
 
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using NodeEditorFramework;
 
-namespace TypocryphaGameflow {
+namespace Gameflow {
     [Node(false, "Event/Transition/Fade", new System.Type[] { typeof(GameflowCanvas) })]
     public class FadeNode : BaseNodeIO {
         public enum FadeType

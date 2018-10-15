@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NodeEditorFramework;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
     [Node(true, "Dialog/DialogBase", new System.Type[] { typeof(GameflowCanvas) })]
     public abstract class DialogNode : BaseNodeIO

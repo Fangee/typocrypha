@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
     //partial class to add all other GUI utility modules to
     namespace GUIUtilities

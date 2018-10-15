@@ -5,10 +5,10 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
 using NodeEditorFramework;
-using TypocryphaGameflow.GUIUtilities;
-using TypocryphaGameflow.MathUtils;
+using Gameflow.GUIUtilities;
+using Gameflow.MathUtils;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
     [Node(false, "Gameflow/Branch", new System.Type[] { typeof(GameflowCanvas) })]
     public class GameflowBranchNode : BaseNode

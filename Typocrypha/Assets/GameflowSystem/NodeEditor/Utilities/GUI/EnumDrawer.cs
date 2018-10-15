@@ -6,7 +6,7 @@ using NodeEditorFramework;
 
 using NodeEditorFramework.Utilities;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
     namespace GUIUtilities
     {

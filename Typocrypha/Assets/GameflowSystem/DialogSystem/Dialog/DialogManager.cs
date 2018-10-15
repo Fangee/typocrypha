@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
     //New Manager for Dialog scenes
     //TODO: Spacebar control, autoscroll
@@ -109,7 +109,7 @@ namespace TypocryphaGameflow
 
         private void finishDialogLine()
         {
-            TypocryphaGameflow.GameflowManager.main.next();
+            Gameflow.GameflowManager.main.next();
         }
         #endregion
 

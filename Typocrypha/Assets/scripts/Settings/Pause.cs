@@ -11,7 +11,7 @@ public interface IPausable
 
 public class Pause : MonoBehaviour {
 	public static Pause main = null; // Global static reference
-    public TypocryphaGameflow.DialogManager dialogManager;
+    public Gameflow.DialogManager dialogManager;
     public BattleManagerS battleManager;
 
     Color dimCol;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NodeEditorFramework;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
 
     [Node(true, "Gameflow/Standard IO Base", new System.Type[] { typeof(GameflowCanvas) })]

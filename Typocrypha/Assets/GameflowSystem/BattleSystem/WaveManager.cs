@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
 
     public class WaveManager : MonoBehaviour

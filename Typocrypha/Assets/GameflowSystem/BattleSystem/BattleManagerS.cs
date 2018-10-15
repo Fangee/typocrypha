@@ -266,7 +266,7 @@ public class BattleManagerS : MonoBehaviour, IPausable {
 		BattleEffects.main.screenFade (true, 2.5f, 0f, 0f, 0f);
 		BattleEffects.main.battleTransitionEffect("swirl_out", 0.45f);
 		yield return new WaitForSeconds(2.5f);
-		TypocryphaGameflow.GameflowManager.main.next();
+		Gameflow.GameflowManager.main.next();
         //Transition to victoryScreen
         //endBattle();
     }

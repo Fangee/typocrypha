@@ -11,7 +11,10 @@ public abstract class SpellWord : ScriptableObject {
 
     public void doBaseGUILayout()
     {
-
+        animationID = EditorGUILayout.TextField(new GUIContent("Animation ID"), animationID);
+        sfxID = EditorGUILayout.TextField(new GUIContent("Sfx ID"), sfxID);
+        GUILayout.Label(new GUIContent("Description"), new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold} );
+        description = EditorGUILayout.TextArea(description, new GUIStyle(GUI.skin.textArea) { wordWrap = true }, GUILayout.MinHeight(EditorGUIUtility.singleLineHeight * 2));
     }
 
     [System.Serializable] public class SpellTagSet : SerializableSet<string>
@@ -33,7 +36,7 @@ public abstract class SpellWord : ScriptableObject {
             foreach (var item in this)
             {
                 GUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField(item, GUILayout.Width(100));
+                EditorGUILayout.LabelField(item, GUILayout.Width(204));
                 if (GUILayout.Button("-"))
                     toDelete = item;
                 GUILayout.EndHorizontal();

@@ -5,9 +5,9 @@ using UnityEditor;
 using NodeEditorFramework;
 
 using System;
-using TypocryphaGameflow.GUIUtilities;
+using Gameflow.GUIUtilities;
 
-namespace TypocryphaGameflow
+namespace Gameflow
 {
     [Node(false, "Event/Character Control", new System.Type[] { typeof(GameflowCanvas) })]
     public class CharacterControlNode : BaseNodeIO
