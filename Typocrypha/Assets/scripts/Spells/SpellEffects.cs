@@ -107,10 +107,10 @@ public class SpellEffects : MonoBehaviour {
         //Spawn damage number and some other gubs
         spawnDamagePopup(d, shakeIntensity);
     }
-    public IEnumerator noTargetEffects(Transform pos, float delay = 0)
+    public IEnumerator noTargetEffects(Vector3 pos, float delay = 0)
     {
         yield return new WaitForSeconds(delay);
-        popp.spawnText("No Target!", POP_TIMER, pos.position, Color.red, Color.white);
+        popp.spawnText("No Target!", POP_TIMER, pos, Color.red, Color.white);
     }
     public IEnumerator finishFrenzyCast(int damage, string animationID, string sfxId, CastData d)
     {

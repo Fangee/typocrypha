@@ -66,37 +66,6 @@ public abstract class Spell
             name += ("-" + s.name);
         }
     }
-    //Returns target pattern of spell as a List of ICasters
-    //Precondition: modify() has been appropriately called on this spell
-    public List<ICaster> target(Battlefield field, ICaster caster)
-    {
-        List<ICaster> castAt = new List<ICaster>();
-        ICaster[] targets = caster.CasterType == ICasterType.ENEMY ? field.BottomRow : field.TopRow;
-        ICaster[] allies = caster.CasterType == ICasterType.ENEMY ? field.TopRow : field.BottomRow;
-        int i = 1;
-        if (targetData.targeted)//If spell is cursor-dependant
-            i += ((int)(caster.TargetPos) - 1);
-        if (targetData.enemyM)//Middle enemy
-            castAt.Add(targets[i]);
-        i--;
-        if (i >= 0 && targetData.enemyL)//Left enemy
-            castAt.Add(targets[i]);
-        i += 2;
-        if (i <= 2 && targetData.enemyR)//Right enemy
-            castAt.Add(targets[i]);
-        i = 1;
-        if (targetData.selfCenter)//If spell is not cursor-dependant
-            i += ((int)caster.FieldPos - 1);
-        if (targetData.allyM)//Middle ally
-            castAt.Add(allies[i]);
-        i--;
-        if (i >= 0 && targetData.allyL)//Left ally
-            castAt.Add(allies[i]);
-        i += 2;
-        if (i <= 2 && targetData.allyR)//Right ally
-            castAt.Add(allies[i]);
-        return castAt;
-    }
     //Helper method to copy data from one spell into another (s must be same type as this)
     //ONLY USE IN SPELLDICTIONARY
     public void copyInto(Spell s)
@@ -108,8 +77,8 @@ public abstract class Spell
         s.critPercentage = critPercentage;
         s.elementEffectMod = elementEffectMod;
         s.element = element;
-        s.targetData = new TargetData(false);
-        s.targetData.copyFrom(targetData);
+        //s.targetData = new TargetData(false);
+        //s.targetData.copyFrom(targetData);
         if(buff != null)
             s.buff = new BuffData(buff);
         s.buffPercentage = buffPercentage;
@@ -314,135 +283,4 @@ public class StyleMod
     public float statusEffectChanceModM;
     public bool isTarget = true;
     public TargetMod targets;
-}
-//Contains targeting data and associated targeting modification methods
-public class TargetData
-{
-    public bool enemyL;
-    public bool enemyM;
-    public bool enemyR;
-    public bool allyL;
-    public bool allyM;
-    public bool allyR;
-    public bool selfCenter;
-    public bool targeted;
-    public TargetData(bool b)
-    {
-        enemyL = b;
-        enemyM = b;
-        enemyR = b;
-        allyL = b;
-        allyM = b;
-        allyR = b;
-        selfCenter = b;
-        targeted = b;
-
-    }
-    public TargetData(string pattern)
-    {
-        if (pattern.Contains("A"))
-        {
-            enemyL = true;
-            enemyM = true;
-            enemyR = true;
-            allyL = true;
-            allyM = true;
-            allyR = true;
-            selfCenter = false;
-            targeted = false;
-        }
-        else
-        {
-            if (pattern.Contains("L"))
-                enemyL = true;
-            if (pattern.Contains("M"))
-                enemyM = true;
-            if (pattern.Contains("R"))
-                enemyR = true;
-            if (pattern.Contains("l"))
-                allyL = true;
-            if (pattern.Contains("m"))
-                allyM = true;
-            if (pattern.Contains("r"))
-                allyR = true;
-            if (pattern.Contains("S"))
-                selfCenter = true;
-            if (pattern.Contains("T"))
-                targeted = true;
-        }
-    }
-    public Pair<bool[], bool[]> toArrayPair(Battlefield field, ICaster caster)
-    {
-        bool[] enemy_r = { false, false, false };
-        bool[] ally_r = { false, false, false };
-        ICaster[] targets = caster.CasterType == ICasterType.ENEMY ? field.TopRow : field.BottomRow;
-        ICaster[] allies = caster.CasterType == ICasterType.ENEMY ? field.BottomRow : field.TopRow;
-        int i = 1;
-        if (targeted)//If spell is cursor-dependant
-            i += ((int)caster.TargetPos - 1);
-        if (enemyM && targets[i] != null && !targets[i].Dead)//Middle enemy
-            enemy_r[i] = true;
-        i--;
-        if (i >= 0 && enemyL && targets[i] != null && !targets[i].Dead)//Left enemy
-            enemy_r[i] = true;
-        i += 2;
-        if (i <= 2 && enemyR && targets[i] != null && !targets[i].Dead)//Right enemy
-            enemy_r[i] = true;
-        i = 1;
-        if (selfCenter)//If spell is not cursor-dependant
-            i += ((int)caster.FieldPos - 1);
-        if (allyM && allies[i] != null && !allies[i].Dead)//Middle ally
-            ally_r[i] = true;
-        i--;
-        if (i >= 0 && allyL && allies[i] != null && !allies[i].Dead)//Left ally
-            ally_r[i] = true;
-        i += 2;
-        if (i <= 2 && allyR && allies[i] != null && !allies[i].Dead)//Right ally
-            ally_r[i] = true;
-        return new Pair<bool[], bool[]>(enemy_r, ally_r);
-    }
-    //Modifies this by target data mod
-    public void modify(TargetData mod)
-    {
-        bool targets_enemy = (enemyL || enemyM || enemyR);
-        bool targets_ally = (allyL || allyM || allyR);
-        bool mod_targets_enemy = (mod.enemyL || mod.enemyM || mod.enemyR);
-        bool mod_targets_ally = (mod.allyL || mod.allyM || mod.allyR);
-        if (targets_enemy && targets_ally && mod_targets_ally && mod_targets_enemy)
-        {
-            enemyL = mod.enemyL;
-            enemyM = mod.enemyM;
-            enemyR = mod.enemyR;
-            allyL = mod.allyL;
-            allyM = mod.allyM;
-            allyR = mod.allyR;
-            targeted = mod.targeted;
-            selfCenter = mod.selfCenter;
-        }
-        else if (targets_enemy)
-        {
-            enemyL = mod.enemyL;
-            enemyM = mod.enemyM;
-            enemyR = mod.enemyR;
-            targeted = mod.targeted;
-        }
-        else if (targets_ally)
-        {
-            allyL = mod.allyL;
-            allyM = mod.allyM;
-            allyR = mod.allyR;
-            selfCenter = mod.selfCenter;
-        }
-    }
-    public void copyFrom(TargetData toCopy)
-    {
-        enemyL = toCopy.enemyL;
-        enemyM = toCopy.enemyM;
-        enemyR = toCopy.enemyR;
-        targeted = toCopy.targeted;
-        allyL = toCopy.allyL;
-        allyM = toCopy.allyM;
-        allyR = toCopy.allyR;
-        selfCenter = toCopy.selfCenter;
-    }
 }

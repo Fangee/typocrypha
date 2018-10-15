@@ -18,9 +18,9 @@ public class CastManager : MonoBehaviour
     //CASTING CODE//---------------------------------------------------------------------------------------------------------------------------------------//
 
     //Pre: spell.isValid() = true
-    public List<CastData> cast(SpellData spell, Battlefield field, ICaster caster, out List<Transform> noTargetPositions)
+    public List<CastData> cast(SpellData spell, Battlefield field, ICaster caster, out List<Battlefield.Position> noTargetPositions)
     {
-        noTargetPositions = new List<Transform>();
+        noTargetPositions = new List<Battlefield.Position>();
         Spell s = spellDict.getRoot(spell.root);
         Spell c = Spell.createSpellFromType(s.type);
         s.copyInto(c);
@@ -44,17 +44,16 @@ public class CastManager : MonoBehaviour
             ++wordCount;
         }
         c.Modify(e, st);
-        List<ICaster> toCastAt = c.target(field, caster);
+        List<Battlefield.Position> toCastAt = c.targetData.target(caster.FieldPos, caster.TargetPos);
         List<CastData> data = new List<CastData>();
-        foreach (ICaster target in toCastAt)
+        foreach (Battlefield.Position pos in toCastAt)
         {
-            if (target == null)
+            ICaster target = field.getCaster(pos);
+            if (pos == null)
+            {
+                noTargetPositions.Add(pos);
                 continue;
-            //if (target.Is_dead)
-            //{
-            //    noTargetPositions.Add(target.Transform);
-            //    continue;
-            //}
+            }
             CastData castData = c.cast(target, caster);
             animData.CopyTo(castData.animData, 0);
             sfxData.CopyTo(castData.sfxData, 0);
@@ -90,7 +89,7 @@ public class CastManager : MonoBehaviour
             else if (cooldown.isOnCooldown(s))
             {
                 //display.playOnCooldownEffects
-                //spellEffects.popp.spawnSprite("popups_oncooldown", 1.0F, field.Player.Transform.position - new Vector3(0, 0.375f, 0));
+                spellEffects.popp.spawnSprite("popups_oncooldown", 1.0F, field.Player.WorldPos - new Vector3(0, 0.375f, 0));
                 AudioPlayer.main.playSFX("sfx_enter_bad");
                 return false;
             }
@@ -123,7 +122,7 @@ public class CastManager : MonoBehaviour
         //CASTING//
         startCooldown(s, field.Player);
         List<CastData> data;
-        List<Transform> noTargetPositions;
+        List<Battlefield.Position> noTargetPositions;
         data = cast(s, field, caster, out noTargetPositions);
         processCast(data, s, noTargetPositions);
 
@@ -161,7 +160,7 @@ public class CastManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         //enemy.startSwell();
-        List<Transform> noTargetPositions;
+        List<Battlefield.Position> noTargetPositions;
         List<CastData> data = cast(s, field, enemy, out noTargetPositions);
         processCast(data, s, noTargetPositions);
 
@@ -178,15 +177,15 @@ public class CastManager : MonoBehaviour
 
     //Method for processing CastData (most effects now happen in SpellEffects.cs)
     //Called by Cast in the SUCCESS CastStatus case, possibly on BOTCH in the future
-    private void processCast(List<CastData> data, SpellData s, List<Transform> noTargetPositions)
+    private void processCast(List<CastData> data, SpellData s, List<Battlefield.Position> noTargetPositions)
     {
         field.lastCast = data;
         field.lastSpell = s;
 		uiManager.battle_log.stop ();
         float delay = 0;
-        foreach(Transform t in noTargetPositions)
+        foreach(Battlefield.Position t in noTargetPositions)
         {
-            spellEffects.StartCoroutine(spellEffects.noTargetEffects(t, delay));
+            spellEffects.StartCoroutine(spellEffects.noTargetEffects(field.getSpace(t), delay));
             //delay += 0.1f;
         }
         if (noTargetPositions.Count > 0 && data.Count == 0)

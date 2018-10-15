@@ -15,6 +15,7 @@ public class Serializable2DMatrix<T> : IEnumerable<T>
             throw new System.ArgumentOutOfRangeException("Matrix dimensions must be >= 0");
 #endif
         _rows = new Row[rows];
+        _rows.PopulateWithNew();
         foreach (Row r in _rows)
             r.row = new T[columns];
     }
@@ -53,6 +54,13 @@ public class Serializable2DMatrix<T> : IEnumerable<T>
         set
         {
             _rows[row][col] = value;
+        }
+    }
+    public T[] this[int row]
+    {
+        get
+        {
+            return _rows[row].row;
         }
     }
 

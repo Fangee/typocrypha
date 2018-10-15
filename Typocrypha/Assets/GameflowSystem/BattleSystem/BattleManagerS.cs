@@ -97,8 +97,8 @@ public class BattleManagerS : MonoBehaviour, IPausable {
         //TARGET RETICULE CODE 
 
         // move target left or right
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) --field.Player.TargetPos;
-        if (Input.GetKeyDown(KeyCode.RightArrow)) ++field.Player.TargetPos;
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) --field.Player.TargetPos.Col;
+        if (Input.GetKeyDown(KeyCode.RightArrow)) ++field.Player.TargetPos.Col;
 
         // third eye stuff
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift) && !thirdEyeActive)

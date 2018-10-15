@@ -5,59 +5,43 @@ using ATB2;
 // Encapsulates battle info
 public class Battlefield : MonoBehaviour
 {
-    public enum Position
-    {
-        NONE = -2,
-        ANY = -1,
-        LEFT,
-        MIDDLE,
-        RIGHT,
-        ALLYLEFT,
-        PLAYER,
-        ALLYRIGHT,
-    }
-
-    public ICaster Player { get { return casters[Position.PLAYER]; } }
+    public ICaster Player { get { return casters[1,1]; } }
 
     //DEBUG FOR TESTING ATB TWEAKS
     public Actor[] actorsToAdd;
 
     #region Row and List Accessor Properties
-    public ICaster[] TopRow { get { return new ICaster[3] { getCaster(Position.LEFT), getCaster(Position.MIDDLE), getCaster(Position.RIGHT) }; } }
-    public ICaster[] BottomRow { get { return new ICaster[3] { getCaster(Position.ALLYLEFT), getCaster(Position.PLAYER), getCaster(Position.ALLYRIGHT) }; } }
+    public ICaster[] TopRow { get { return casters[0]; } }
+    public ICaster[] BottomRow { get { return casters[1]; } }
     public ICaster[] Enemies { get { return castersLists[ICasterType.ENEMY].ToArray(); } }
     public ICaster[] Allies { get { return castersLists[ICasterType.ALLY].ToArray(); } }
-    public List<Actor> Actors { get { return actors; } }
+    public List<Actor> Actors { get; } = new List<Actor>();
     #endregion
 
     #region Data and Representative Lists
-    private Dictionary<Position, Transform> spaces;
-    private Dictionary<Position, ICaster> casters = new Dictionary<Position, ICaster>();
+    private SpaceMatrix spaces = new SpaceMatrix(2, 3);
+    private FieldMatrix casters = new FieldMatrix(2, 3);
     private Dictionary<ICasterType, List<ICaster>> castersLists = new Dictionary<ICasterType, List<ICaster>>
     {
         {ICasterType.PLAYER, new List<ICaster>()},
         {ICasterType.ENEMY, new List<ICaster>()},
         {ICasterType.ALLY, new List<ICaster>()},
     };
-    private List<Actor> actors = new List<Actor>();
     #endregion
 
     //Initialize space objects from children
     private void Start()
     {
-        spaces = new Dictionary<Position, Transform>
-        {
-            {Position.LEFT, transform.Find("Left").transform },
-            {Position.MIDDLE, transform.Find("Middle").transform },
-            {Position.RIGHT, transform.Find("Right").transform },
-            {Position.ALLYLEFT, transform.Find("AllyLeft").transform },
-            {Position.PLAYER, transform.Find("Player").transform },
-            {Position.ALLYRIGHT, transform.Find("AllyRight").transform },
-        };
-        actors.AddRange(actorsToAdd);
+        spaces[0, 0] = transform.Find("Left").transform;
+        spaces[0, 1] = transform.Find("Middle").transform;
+        spaces[0, 2] = transform.Find("Right").transform;
+        spaces[1, 0] = transform.Find("AllyLeft").transform;
+        spaces[1, 1] = transform.Find("Player").transform;
+        spaces[1, 2] = transform.Find("AllyRight").transform;
+        Actors.AddRange(actorsToAdd);
     }
 
-    #region Dictionary Functions
+    #region Interface Functions
     //Add a caster to the battlefield at toAdd.FieldPos
     //Implicitly add toAdd to the actor list if applicable
     public void Add(ICaster toAdd)
@@ -70,14 +54,14 @@ public class Battlefield : MonoBehaviour
     {
         toAdd.FieldPos = pos;
         toAdd.WorldPos = spaces[pos].transform.position;
-        casters.Add(pos, toAdd);
+        casters[pos] = toAdd;
         castersLists[toAdd.CasterType].Add(toAdd);
-        if (toAdd is Actor) actors.Add(toAdd as Actor);
+        if (toAdd is Actor) Actors.Add(toAdd as Actor);
     }
     //Add a non-caster actor to the battlefield
     public void AddActor(Actor a)
     {
-        actors.Add(a);
+        Actors.Add(a);
     }
     //Get the position of a battlefield space. The space may be empty
     public Vector3 getSpace(Position pos)
@@ -87,29 +71,30 @@ public class Battlefield : MonoBehaviour
     //Get the caster in a specific space. returns null if the space is empty
     public ICaster getCaster(Position pos)
     {
-        return casters.ContainsKey(pos) ? casters[pos] : null;
+        return casters[pos];
     }
     //Clear the data and representative lists
     public void clear()
     {
-        casters.Clear();
+        casters = new FieldMatrix(2, 3);
         foreach (var casterList in castersLists.Values)
             casterList.Clear();
-        actors.Clear();
+        Actors.Clear();
     }
     #endregion
 
     public void move(Position moveFrom, Position moveTo)
     {
 #if DEBUG
-        if (getCaster(moveTo) != null)
+        if (casters[moveTo] != null)
             throw new System.Exception("There is already a caster in the " + moveTo.ToString() + " space. Move failed.");
-        if (getCaster(moveFrom) == null)
+        if (casters[moveFrom] == null)
             throw new System.Exception("There is no caster in the " + moveFrom.ToString() + " space. Move failed");
 #endif
         casters[moveFrom].FieldPos = moveTo;
-        casters.Add(moveTo, casters[moveFrom]);
-        casters.Remove(moveFrom);
+        casters[moveFrom].WorldPos = spaces[moveTo].position;
+        casters[moveTo] = casters[moveFrom];
+        casters[moveFrom] = null;
     }
 
     #region Interrupt Tracking Data (potentially to be moved)
@@ -118,4 +103,58 @@ public class Battlefield : MonoBehaviour
     [HideInInspector] public SpellData lastSpell; // last performed spell
     [HideInInspector] public bool[] lastRegister; // last spell register status
     #endregion
+
+    private class FieldMatrix : Serializable2DMatrix<ICaster>
+    {
+        public FieldMatrix(int rows, int columns) : base(rows, columns) { }
+        public ICaster this[Position pos]
+        {
+            get
+            {
+                return this[pos.Row, pos.Col];
+            }
+            set
+            {
+                this[pos.Row, pos.Col] = value;
+            }
+        }
+
+    }
+    private class SpaceMatrix : Serializable2DMatrix<Transform>
+    {
+        public SpaceMatrix(int rows, int columns) : base(rows, columns) { }
+        public Transform this[Position pos]
+        {
+            get
+            {
+                return this[pos.Row, pos.Col];
+            }
+            set
+            {
+                this[pos.Row, pos.Col] = value;
+            }
+        }
+    }
+    public class Position : System.IEquatable<Position>
+    {
+        int _row;
+        public int Row { get { return _row; } set { _row = Mathf.Clamp(0, _row, 2); } }
+        int _col;
+        public int Col { get { return _col; } set { _col = Mathf.Clamp(0, _col, 2); } }
+        public Position(int row, int col)
+        {
+            _row = row;
+            _col = col;
+        }
+
+        public void SetIllegalPosition (int row, int col)
+        {
+            _row = row;
+            _col = col;
+        }
+        public bool Equals(Position other)
+        {
+            return Row == other.Row && Col == other.Col;
+        }
+    }
 }

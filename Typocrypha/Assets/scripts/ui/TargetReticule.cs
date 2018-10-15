@@ -116,7 +116,7 @@ public class TargetReticule : MonoBehaviour
             right_arrow.enabled = false;
             return;
         }
-        switch (BattleManagerS.main.field.Player.TargetPos)
+        switch (BattleManagerS.main.field.Player.TargetPos.Col)
         {
             //case 0:
             //    left_arrow.enabled = false;

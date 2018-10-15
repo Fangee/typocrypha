@@ -57,32 +57,32 @@ public class SpellDictionary : MonoBehaviour
             int.TryParse(cols[++ind].Trim(), out s.critPercentage);
             int.TryParse(cols[++ind].Trim(), out s.elementEffectMod);
             string pattern = cols[++ind].Trim();
-            if (pattern.Contains("A"))
-            {
-                s.targetData = new TargetData(true);
-                s.targetData.selfCenter = false;
-                s.targetData.targeted = false;
-            }
-            else
-            {
-                s.targetData = new TargetData(false);
-                if (pattern.Contains("L"))
-                    s.targetData.enemyL = true;
-                if (pattern.Contains("M"))
-                    s.targetData.enemyM = true;
-                if (pattern.Contains("R"))
-                    s.targetData.enemyR = true;
-                if (pattern.Contains("l"))
-                    s.targetData.allyL = true;
-                if (pattern.Contains("m"))
-                    s.targetData.allyM = true;
-                if (pattern.Contains("r"))
-                    s.targetData.allyR = true;
-                if (pattern.Contains("S"))
-                    s.targetData.selfCenter = true;
-                if (pattern.Contains("T"))
-                    s.targetData.targeted = true;
-            }
+            //if (pattern.Contains("A"))
+            //{
+            //    s.targetData = new TargetData(true);
+            //    s.targetData.selfCenter = false;
+            //    s.targetData.targeted = false;
+            //}
+            //else
+            //{
+            //    s.targetData = new TargetData(false);
+            //    if (pattern.Contains("L"))
+            //        s.targetData.enemyL = true;
+            //    if (pattern.Contains("M"))
+            //        s.targetData.enemyM = true;
+            //    if (pattern.Contains("R"))
+            //        s.targetData.enemyR = true;
+            //    if (pattern.Contains("l"))
+            //        s.targetData.allyL = true;
+            //    if (pattern.Contains("m"))
+            //        s.targetData.allyM = true;
+            //    if (pattern.Contains("r"))
+            //        s.targetData.allyR = true;
+            //    if (pattern.Contains("S"))
+            //        s.targetData.selfCenter = true;
+            //    if (pattern.Contains("T"))
+            //        s.targetData.targeted = true;
+            //}
             string buff = cols[++ind].Trim();
             if (!buff.Contains("N"))
             {
@@ -201,8 +201,8 @@ public class SpellDictionary : MonoBehaviour
             string[] pattern = cols[++ind].Trim().Split(',');
             if (pattern[0].Contains("N"))
                 s.isTarget = false;
-            else
-                s.targets = TargetMod.createFromString(pattern[0].Trim('"'), pattern);
+            //else
+            //    s.targets = TargetMod.createFromString(pattern[0].Trim('"'), pattern);
             styles.Add(key, s);
             i++;
         }
@@ -275,17 +275,18 @@ public class SpellDictionary : MonoBehaviour
     //Return the targeting pattern
     public Pair<bool[], bool[]> getTargetPattern(SpellData data, Battlefield field, ICaster caster)
     {
-        if (!string.IsNullOrEmpty(data.style) || !styles[data.style].isTarget)
-        {
-            return rootWords[data.root].targetData.toArrayPair(field, caster);
-        }
-        else
-        {
-            TargetData t = new TargetData(false);
-            t.copyFrom(rootWords[data.root].targetData);
-            styles[data.style].targets.modify(t);
-            return t.toArrayPair(field, caster);
-        }
+        //if (!string.IsNullOrEmpty(data.style) || !styles[data.style].isTarget)
+        //{
+        //    return rootWords[data.root].targetData.toArrayPair(field, caster);
+        //}
+        //else
+        //{
+        //    TargetData t = new TargetData(false);
+        //    t.copyFrom(rootWords[data.root].targetData);
+        //    styles[data.style].targets.modify(t);
+        //    return t.toArrayPair(field, caster);
+        //}
+        throw new System.Exception();
     }
 }
 //A class containing the required data to cast a spell (with defined keyword composition)

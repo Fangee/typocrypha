@@ -42,10 +42,8 @@ namespace ATB2
         }
         public string Name { get { return enemyData.name; } }
         public Vector3 WorldPos { get { return transform.position; } set { transform.position = value; } }
-        private Battlefield.Position _position;
-        public Battlefield.Position FieldPos { get { return _position; } set { _position = value >= 0 ? value : _position; } }
-        private Battlefield.Position _target;
-        public Battlefield.Position TargetPos { get { return _target; } set { _target = value >= 0 ? value : _target; } }
+        public Battlefield.Position FieldPos { get; set; }
+        public Battlefield.Position TargetPos { get; set; }
         public CasterStats Stats { get { return enemyData.stats; } }
         public bool Stunned { get { return isCurrentState("Stunned"); } }
         public bool Dead { get { return Health <= 0; } }

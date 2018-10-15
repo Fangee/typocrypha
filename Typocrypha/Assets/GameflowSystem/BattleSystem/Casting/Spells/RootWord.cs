@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using Gameflow.GUIUtilities;
+using GUIUtilities;
 
 [CreateAssetMenu(fileName = "RootWord", menuName = "Spell Word/Root")]
 public class RootWord : SpellWord {
