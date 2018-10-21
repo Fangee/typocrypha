@@ -10,11 +10,6 @@ using UnityEngine.Audio;
 //     3: talking effects
 //     4: spell sfx
 
-//// different types of music (DEPRECATED)
-//public enum MusicType { CUTSCENE, BATTLE };
-
-//// different types of sfx (DEPRECATED)
-//public enum SFXType { UI, SPELL, BATTLE, SPEAKING, OTHER, size };
 
 // manages playing music and sfx
 public class AudioPlayer : MonoBehaviour

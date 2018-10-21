@@ -6,8 +6,8 @@ public class BattleDataTracker {
 
     [HideInInspector] public System.DateTime time_started; // time battle started
     [HideInInspector] public Battlefield.Position lastCaster = null;
-    [HideInInspector] public List<CastData> last_enemy_cast; // last performed cast action
-    [HideInInspector] public List<CastData> last_player_cast;
+    [HideInInspector] public List<CastResults> last_enemy_cast; // last performed cast action
+    [HideInInspector] public List<CastResults> last_player_cast;
     [HideInInspector] public SpellData last_enemy_spell; // last performed spell
     [HideInInspector] public SpellData last_player_spell; // last performed spell
     [HideInInspector] public bool[] last_register; // last spell register status

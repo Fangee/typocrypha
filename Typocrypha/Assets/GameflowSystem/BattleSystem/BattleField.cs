@@ -99,7 +99,7 @@ public class Battlefield : MonoBehaviour
 
     #region Interrupt Tracking Data (potentially to be moved)
     [HideInInspector] public ICaster lastCaster = null;
-    [HideInInspector] public List<CastData> lastCast; // last performed cast action
+    [HideInInspector] public List<CastResults> lastCast; // last performed cast action
     [HideInInspector] public SpellData lastSpell; // last performed spell
     [HideInInspector] public SpellWord[] lastRegister; // last spell register status
     #endregion

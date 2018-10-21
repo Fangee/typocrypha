@@ -13,13 +13,9 @@ public abstract class SpellWord : ScriptableObject {
 
     public abstract WordType Type { get; }
     public string description;          //Spell's description (in spellbook)
-    public string animationID;          //Spell's animation ID 
-    public string sfxID;                //Spell's sfx ID
 
     public void doBaseGUILayout()
     {
-        animationID = EditorGUILayout.TextField(new GUIContent("Animation ID"), animationID);
-        sfxID = EditorGUILayout.TextField(new GUIContent("Sfx ID"), sfxID);
         GUILayout.Label(new GUIContent("Description"), new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold} );
         description = EditorGUILayout.TextArea(description, new GUIStyle(GUI.skin.textArea) { wordWrap = true }, GUILayout.MinHeight(EditorGUIUtility.singleLineHeight * 2));
     }

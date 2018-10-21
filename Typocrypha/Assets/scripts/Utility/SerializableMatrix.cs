@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Gameflow.MathUtils;
 
+[System.Serializable]
 public class Serializable2DMatrix<T> : IEnumerable<T>
 {
-    [SerializeField] private Row[] _rows;
-    public int Rows { get { return _rows.Length; } }
-    public int Columns { get { return _rows[0].row.Length; } }
+    [SerializeField] private T[] _data;
+    public int Rows { get; }
+    public int Columns { get; }
 
     public Serializable2DMatrix(int rows, int columns)
     {
@@ -14,88 +16,63 @@ public class Serializable2DMatrix<T> : IEnumerable<T>
         if (rows <= 0 || columns <= 0)
             throw new System.ArgumentOutOfRangeException("Matrix dimensions must be >= 0");
 #endif
-        _rows = new Row[rows];
-        _rows.PopulateWithNew();
-        foreach (Row r in _rows)
-            r.row = new T[columns];
+        Rows = rows;
+        Columns = columns;
+        _data = new T[rows * columns];
     }
-    private Serializable2DMatrix(Row[] rows)
+    private Serializable2DMatrix(T[] data)
     {
-        _rows = rows;
+        _data = data;
     }
     //Warning: shallow copy if reference type!
     public Serializable2DMatrix<T> rotated90()
     {
-        List<Row> rotatedRows = new List<Row>();
-        for(int i = 0; i < Columns; ++i)
-        {
-            Row r = new Row() { row = new T[Columns] };
-            for (int j = 0; j < Rows; ++j)
-            {
-                r.row[j] = _rows[j][i];
-            }
-        }
-        return new Serializable2DMatrix<T>(rotatedRows.ToArray());
+        T[] rot = new T[_data.Length];
+        _data.CopyTo(rot, 0);
+        for (IntRange range = new IntRange(0, Columns - 1); range.max < rot.Length; range.shift(Rows))
+            System.Array.Reverse(rot, range.min, Columns);
+        return new Serializable2DMatrix<T>(rot);
     }
     //Warning: shallow clone if reference type!
     public Serializable2DMatrix<T> rotated180()
     {
-        List<Row> rotatedRows = new List<Row>(_rows);
-        rotatedRows.Reverse();
-        return new Serializable2DMatrix<T>(rotatedRows.ToArray());
+        T[] rot = new T[_data.Length];
+        for (IntRange range = new IntRange(0, Columns - 1); range.max < rot.Length; range.shift(Rows))
+            System.Array.ConstrainedCopy(_data, range.min, rot, rot.Length - range.max, Columns);
+        return new Serializable2DMatrix<T>(rot);
     }
 
     public T this[int row, int col]
     {
         get
         {
-            return _rows[row][col];
+            return _data[(row * Columns) + col];
         }
         set
         {
-            _rows[row][col] = value;
+            _data[(row * Columns) + col] = value;
         }
     }
     public T[] this[int row]
     {
         get
         {
-            return _rows[row].row;
+            T[] _row = new T[Rows];
+            System.Array.ConstrainedCopy(_data, row * Columns, _row, 0, Rows);
+            return _row;
         }
     }
 
     #region IEnumarable Implementation
     System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
     {
-        foreach (Row r in _rows)
-            foreach (T t in r.row)
-                yield return t;
+        return _data.GetEnumerator();
     }
     IEnumerator<T> IEnumerable<T>.GetEnumerator()
     {
-        foreach (Row r in _rows)
-            foreach (T t in r.row)
-                yield return t;
+        return _data.GetEnumerator() as IEnumerator<T>;
     }
     #endregion
-
-    [System.Serializable]
-    private class Row
-    {
-        public T[] row;
-        public T this[int col]
-        {
-            get
-            {
-                return row[col];
-            }
-            set
-            {
-                row[col] = value;
-            }
-        }
-    }
-
 }
 
 [System.Serializable] public class BoolMatrix2D : Serializable2DMatrix<bool> { public BoolMatrix2D(int rows, int columns) : base(rows, columns) { } }

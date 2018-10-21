@@ -6,18 +6,20 @@ using UnityEngine.U2D;
 // plays effect animations
 public class AnimationPlayer : MonoBehaviour {
 	public static AnimationPlayer main = null; // global static ref
-	public bool ready; // are all of the assets loaded?
 	public Animator camera_animator; // animator for main camera
 	public Animator flash_animator; // animator for white flashes
 	public GameObject animation_holder_prefab; // object prefab that holds the animations
 
-	void Awake() {
+    [HideInInspector] public bool ready; // are all of the assets loaded?
+
+    void Awake() {
 		DontDestroyOnLoad(transform.gameObject);
 		if (main == null) main = this;
 		else GameObject.Destroy (gameObject); // avoid multiple copies
 		ready = true;
 	}
 	
+    //Plays any one-shot animation clip and returns the play time as a float
     public float playAnimation(AnimationClip clip, Vector2 pos, float speed = 1f)
     {
         GameObject display = Instantiate(animation_holder_prefab, transform);

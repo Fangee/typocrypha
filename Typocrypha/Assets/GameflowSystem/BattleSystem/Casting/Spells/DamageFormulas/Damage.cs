@@ -8,7 +8,7 @@ public static partial class Damage {
         Default,
         Custom,
     }
-    public delegate int Formula(Battlefield field, ICaster caster, CastData data);
+    public delegate int Formula(Battlefield field, ICaster caster, CastResults data);
     public static Dictionary<FormulaType, Formula> standardFormula = new Dictionary<FormulaType, Formula>
     {
         {FormulaType.Default, null}

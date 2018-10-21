@@ -31,7 +31,7 @@ public class BISpecificAttack : BattleInterruptTrigger
         //    ret = checkCast(state, state.last_player_cast, state.last_player_spell) || checkCast(state, state.last_enemy_cast, state.last_enemy_spell);
         return (ret && (++curr_attacks >= numAttacks));
     }
-    protected bool checkCast(Battlefield state, List<CastData> dataToCheck, SpellData spellToCheck)
+    protected bool checkCast(Battlefield state, List<CastResults> dataToCheck, SpellData spellToCheck)
     {
         //if (spellToCheck == null ||
         //    (!string.IsNullOrEmpty(rootKeywordIs) && (rootKeywordIs != spellToCheck.root)) ||

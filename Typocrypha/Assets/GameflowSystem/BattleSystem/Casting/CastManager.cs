@@ -17,52 +17,29 @@ public class CastManager : MonoBehaviour
     //CASTING CODE//---------------------------------------------------------------------------------------------------------------------------------------//
 
     //Pre: spell.isValid() = true
-    public List<CastData> cast(SpellData spell, Battlefield field, ICaster caster, out List<Battlefield.Position> noTargetPositions)
+    public List<CastResults> cast(SpellData spell, Battlefield field, ICaster caster, out List<Battlefield.Position> noTargetPositions)
     {
-        noTargetPositions = new List<Battlefield.Position>();
-        Spell s = null;
-        Spell c = Spell.createSpellFromType(s.type);
-        s.copyInto(c);
-        int wordCount = 1;
-        string[] animData = { null, s.animationID, null };
-        string[] sfxData = { null, s.sfxID, null };
-        ElementMod e = null;
-        StyleMod st = null;
-        //if (!string.IsNullOrEmpty(spell.element))
+        //TODO OR SOMEWHERE ELSE: MODIFICATION
+        noTargetPositions = new List<Battlefield.Position>(); 
+        //List<Battlefield.Position> toCastAt = spell.target(caster.FieldPos, caster.TargetPos);
+        List<CastResults> data = new List<CastResults>();
+        //foreach (Battlefield.Position pos in toCastAt)
         //{
-        //    e = spellDict.getElementMod(spell.element);
-        //    sfxData[2] = e.sfxID;
-        //    animData[2] = e.animationID;
-        //    ++wordCount;
+        //    ICaster target = field.getCaster(pos);
+        //    if (target == null)
+        //    {
+        //        noTargetPositions.Add(pos);
+        //        continue;
+        //    }
+        //    CastResults castResults = c.cast(target, caster);
+        //    //animData.CopyTo(castResults.animData, 0);
+        //    //sfxData.CopyTo(castResults.sfxData, 0);
+        //    if (castResults.repel == true)
+        //        castResults.setLocationData(caster, target);
+        //    else
+        //        castResults.setLocationData(target, caster);
+        //    data.Add(castResults);
         //}
-        //if (!string.IsNullOrEmpty(spell.style))
-        //{
-        //    st = spellDict.getStyleMod(spell.style);
-        //    sfxData[0] = st.sfxID;
-        //    animData[0] = st.animationID;
-        //    ++wordCount;
-        //}
-        c.Modify(e, st);
-        List<Battlefield.Position> toCastAt = c.targetData.target(caster.FieldPos, caster.TargetPos);
-        List<CastData> data = new List<CastData>();
-        foreach (Battlefield.Position pos in toCastAt)
-        {
-            ICaster target = field.getCaster(pos);
-            if (pos == null)
-            {
-                noTargetPositions.Add(pos);
-                continue;
-            }
-            CastData castData = c.cast(target, caster);
-            animData.CopyTo(castData.animData, 0);
-            sfxData.CopyTo(castData.sfxData, 0);
-            castData.wordCount = wordCount;
-            if (castData.repel == true)
-                castData.setLocationData(caster, target);
-            else
-                castData.setLocationData(target, caster);
-            data.Add(castData);
-        }
         return data;
     }
 
@@ -120,7 +97,7 @@ public class CastManager : MonoBehaviour
 
         //CASTING//
         startCooldown(s, field.Player);
-        List<CastData> data;
+        List<CastResults> data;
         List<Battlefield.Position> noTargetPositions;
         data = cast(s, field, caster, out noTargetPositions);
         processCast(data, s, noTargetPositions);
@@ -160,7 +137,7 @@ public class CastManager : MonoBehaviour
 
         //enemy.startSwell();
         List<Battlefield.Position> noTargetPositions;
-        List<CastData> data = cast(s, field, enemy, out noTargetPositions);
+        List<CastResults> data = cast(s, field, enemy, out noTargetPositions);
         processCast(data, s, noTargetPositions);
 
         yield return new WaitForSeconds(1f);
@@ -176,7 +153,7 @@ public class CastManager : MonoBehaviour
 
     //Method for processing CastData (most effects now happen in SpellEffects.cs)
     //Called by Cast in the SUCCESS CastStatus case, possibly on BOTCH in the future
-    private void processCast(List<CastData> data, SpellData s, List<Battlefield.Position> noTargetPositions)
+    private void processCast(List<CastResults> data, SpellData s, List<Battlefield.Position> noTargetPositions)
     {
         field.lastCast = data;
         field.lastSpell = s;
@@ -184,23 +161,23 @@ public class CastManager : MonoBehaviour
         float delay = 0;
         foreach(Battlefield.Position t in noTargetPositions)
         {
-            spellEffects.StartCoroutine(spellEffects.noTargetEffects(field.getSpace(t), delay));
+            //spellEffects.StartCoroutine(spellEffects.noTargetEffects(field.getSpace(t), delay));
             //delay += 0.1f;
         }
         if (noTargetPositions.Count > 0 && data.Count == 0)
             AudioPlayer.main.playSFX("sfx_miss");
         //Process the data here
-        foreach (CastData d in data)
+        foreach (CastResults d in data)
         {
-            spellEffects.StartCoroutine(spellEffects.playEffects(d, s, delay));
+            spellEffects.StartCoroutine(spellEffects.playEffects(d, delay));
             delay += 0.1f;
             if (!d.isHit)
                 continue;
             //Learn intel if applicable
-            if (d.Target.CasterType == ICasterType.ENEMY)
-                EnemyIntel.main.learnIntel(d.Target.Name, d.element);
-            else if (d.Caster.CasterType == ICasterType.ENEMY && d.Target.CasterType == ICasterType.PLAYER && d.repel)
-                EnemyIntel.main.learnIntel(d.Caster.Name, d.element);
+            //if (d.Target.CasterType == ICasterType.ENEMY)
+            //    EnemyIntel.main.learnIntel(d.Target.Name, d.element);
+            //else if (d.Caster.CasterType == ICasterType.ENEMY && d.Target.CasterType == ICasterType.PLAYER && d.repel)
+            //    EnemyIntel.main.learnIntel(d.Caster.Name, d.element);
         }
         //Register unregistered keywords here
         SpellWord[] regData = spellBook.safeRegister(s);

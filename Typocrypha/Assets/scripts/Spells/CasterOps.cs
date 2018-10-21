@@ -8,7 +8,7 @@ public static class CasterOps
     //Applies repel and prints appropriate debug log
     //Returns true if reflected, false if not.
     //MAY need fixing for targeting
-    public static bool calcRepel(CastData data, int d, int element, ICaster caster, ICaster target, bool crit, bool repel)
+    public static bool calcRepel(CastResults data, int d, int element, ICaster caster, ICaster target, bool crit, bool repel)
     {
         //repel damage to caster if enemy reflects this element (FIX for targeting)
         //if (target.Stats.vsElement[element] == Elements.repel && repel == false)
@@ -23,7 +23,7 @@ public static class CasterOps
     //Applies damage formula base on base_power (spell strength) and stats of caster and target)
     //damages ref stats appropriately (will not go below zero)
     //Precondition: target.Stats.vsElement[element] != Elements.repel
-    public static bool calcDamage(CastData data, int base_power, int element, ICaster caster, ICaster target, bool crit, bool is_stunned = false)
+    public static bool calcDamage(CastResults data, int base_power, int element, ICaster caster, ICaster target, bool crit, bool is_stunned = false)
     {
         float dMod = base_power;
         int staggerDamage = 0;

@@ -460,7 +460,7 @@ public class BattleManagerS : MonoBehaviour, IPausable {
         if (field.lastCast != null)
             field.lastCast.Clear(); // last performed cast action
         else
-            field.lastCast = new List<CastData>();
+            field.lastCast = new List<CastResults>();
         field.lastSpell = new SpellData(); // last performed spell
         field.lastRegister = new SpellWord[0]; // last spell register status
     }

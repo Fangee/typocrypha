@@ -29,7 +29,7 @@ public abstract class Spell
     //public methods
 
     //Casts this spell at selected target (at targets[selected])
-    public abstract CastData cast(ICaster target, ICaster caster);
+    public abstract CastResults cast(ICaster target, ICaster caster);
     //Apllies prefix and suffix to spell. both arguments can be null (if no prefix or suffix)
     public void Modify(ElementMod e, StyleMod s)
     {
@@ -90,7 +90,7 @@ public abstract class Spell
     //Return true if spell hits target, else false (does not actually apply spell effect)
     //Factors in target stunState if checkStun = true
     //ONLY CALL IN CAST (or after spell has been been properly modified with Modify())
-    protected virtual bool hitCheck(CastData data, ICaster target, ICaster caster, bool checkStun = false)
+    protected virtual bool hitCheck(CastResults data, ICaster target, ICaster caster, bool checkStun = false)
     {
         if (checkStun && target.Stunned)
         {
@@ -110,7 +110,7 @@ public abstract class Spell
     //Return true if spell crits target, else false. Multiplies power by 1.5 if a hit (round up)
     //Factors in target stunState if checkStun = true
     //ONLY CALL IN CAST (or after spell has been been properly modified with Modify())
-    protected virtual bool critCheck(CastData data, ICaster target, ICaster caster, out int newPower)
+    protected virtual bool critCheck(CastResults data, ICaster target, ICaster caster, out int newPower)
     {
         float accBonus = 0;//Mathf.Clamp(((caster.Stats.getModAcc(caster.BuffDebuff) -1) * (1 - (target.Stats.getModEvade(target.BuffDebuff) * 0.01F))) * 0.2F, 0, 2) * 10;
         float chance = critPercentage + accBonus;
@@ -125,12 +125,10 @@ public abstract class Spell
         return false;
     }
     //Returns true if spell inflicts a buff/debuff on target, and inflicts the buff/debuff
-    protected virtual bool buffCheck(CastData data, ICaster target, ICaster caster, int powerMod)
+    protected virtual bool buffCheck(CastResults data, ICaster target, ICaster caster, int powerMod)
     {
         if ((Random.Range(0.0F, 1F) * 100) <= buffPercentage)
         {
-            data.isBuff = true;
-            data.buffInflicted = buff;
             inflictBuff(target, caster, powerMod);
             return true;
         }
@@ -164,10 +162,9 @@ public abstract class Spell
 //Can have a chance to buff/debuff
 public class AttackSpell : Spell
 {
-    public override CastData cast(ICaster target, ICaster caster)
+    public override CastResults cast(ICaster target, ICaster caster)
     {
-        CastData data = new CastData();
-        data.element = element;
+        CastResults data = new CastResults();
         if(hitCheck(data, target,caster, true))
         {
             int powerMod;
@@ -184,16 +181,15 @@ public class AttackSpell : Spell
 //Spells that buff/debuff enemies, but do not do damage
 public class BuffSpell : Spell
 {
-    public override CastData cast(ICaster target, ICaster caster)
+    public override CastResults cast(ICaster target, ICaster caster)
     {
-        CastData data = new CastData();
-        data.element = element;
+        CastResults data = new CastResults();
         int powerMod;
         critCheck(data, target, caster, out powerMod);
         buffCheck(data, target, caster, powerMod);
         return data;
     }
-    protected override bool buffCheck(CastData data, ICaster target, ICaster caster, int powerMod)
+    protected override bool buffCheck(CastResults data, ICaster target, ICaster caster, int powerMod)
     {
         Elements.vsElement vs = Elements.vsElement.ANY;//target.Stats.getModVsElement(target.BuffDebuff, element);
         switch (vs)
@@ -229,9 +225,7 @@ public class BuffSpell : Spell
             case Elements.vsElement.INVALID:
                 throw new System.NotImplementedException();
         }
-        data.isBuff = true;
         data.isHit = true;
-        data.buffInflicted = buff;
         return true;
     }
 }
@@ -239,7 +233,7 @@ public class BuffSpell : Spell
 //Spells that attempt to heal friendly entities (CURRENTLY INCOMPLETE)
 public class HealSpell : Spell
 {
-    public override CastData cast(ICaster target, ICaster caster)
+    public override CastResults cast(ICaster target, ICaster caster)
     {
         throw new System.NotImplementedException();
     }
@@ -247,7 +241,7 @@ public class HealSpell : Spell
 //Spells that attempt to shield friendly entities (CURRENTLY INCOMPLETE)
 public class ShieldSpell : Spell
 {
-    public override CastData cast(ICaster target, ICaster caster)
+    public override CastResults cast(ICaster target, ICaster caster)
     {
         throw new System.NotImplementedException();
     }
