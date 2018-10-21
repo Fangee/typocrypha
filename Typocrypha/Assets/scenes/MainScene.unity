@@ -1531,7 +1531,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f83d5ff914633544ba85da8e35f45ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellDict: {fileID: 94137936}
   cooldown: {fileID: 910055481}
   spellBook: {fileID: 302921485}
   spellEffects: {fileID: 94137935}
@@ -1607,7 +1606,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   is_loaded: 0
+  text_file: {fileID: 0}
   file_name: spellDictionary
+  line_delim: []
+  col_delim: []
 --- !u!4 &94137937
 Transform:
   m_ObjectHideFlags: 0
@@ -2611,68 +2613,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 182027821}
   m_CullTransparentMesh: 0
---- !u!1001 &201745367
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1815578414}
-    m_Modifications:
-    - target: {fileID: 4565327583462998, guid: 601dae665ceb1c845b6091afcc091783, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4565327583462998, guid: 601dae665ceb1c845b6091afcc091783, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4565327583462998, guid: 601dae665ceb1c845b6091afcc091783, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4565327583462998, guid: 601dae665ceb1c845b6091afcc091783, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4565327583462998, guid: 601dae665ceb1c845b6091afcc091783, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4565327583462998, guid: 601dae665ceb1c845b6091afcc091783, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4565327583462998, guid: 601dae665ceb1c845b6091afcc091783, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4565327583462998, guid: 601dae665ceb1c845b6091afcc091783, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212441381720716690, guid: 601dae665ceb1c845b6091afcc091783,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 212441381720716690, guid: 601dae665ceb1c845b6091afcc091783,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 212441381720716690, guid: 601dae665ceb1c845b6091afcc091783,
-        type: 2}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 601dae665ceb1c845b6091afcc091783, type: 2}
-  m_IsPrefabAsset: 0
---- !u!4 &201745368 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4565327583462998, guid: 601dae665ceb1c845b6091afcc091783,
-    type: 2}
-  m_PrefabInternal: {fileID: 201745367}
 --- !u!1 &222677707
 GameObject:
   m_ObjectHideFlags: 0
@@ -19877,7 +19817,7 @@ MonoBehaviour:
   characterHolder: {fileID: 274643967}
   characterPrefab: {fileID: 2042472542}
   allCharacterData:
-  - {fileID: 11400000, guid: cdb6b1803b32e644d834077ab1722b7e, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: b2b0a790b586f1940afaef870e7f40d2, type: 2}
   - {fileID: 11400000, guid: 5f41864667710cc4cb76a13c826765f0, type: 2}
   - {fileID: 11400000, guid: 71a321618d0d55a40aeb098b88c0356f, type: 2}
@@ -20994,7 +20934,7 @@ MonoBehaviour:
   ready: 0
   camera_animator: {fileID: 1149999598}
   flash_animator: {fileID: 987136436}
-  animation_holder_prefab: {fileID: 1304328653455856, guid: 601dae665ceb1c845b6091afcc091783,
+  animation_holder_prefab: {fileID: 1168650087947976, guid: 601dae665ceb1c845b6091afcc091783,
     type: 2}
 --- !u!4 &1815578414
 Transform:
@@ -21005,8 +20945,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.031154305, y: 0.5505203, z: -0.08130566}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 201745368}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

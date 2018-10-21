@@ -11,5 +11,6 @@ public class ModifierWord : SpellWord {
         Right,
         Bidirectional,
     }
+    public override WordType Type { get { return WordType.Modifier; } }
     public Direction direction = Direction.Left;
 }

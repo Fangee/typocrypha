@@ -16,15 +16,15 @@ public class CooldownList : MonoBehaviour {
     {
         return cooldownBars.Count >= capacity;
     }
-    public bool isOnCooldown(SpellData s)
+    public bool isOnCooldown(SpellWord s)
     {
-        return onCooldown.Contains(s.root);
+        return onCooldown.Contains(s.name);
     }
     //Add spell to the cooldown list
     //Precondition: isFull() = false;
-    public bool add(SpellData s, float cooldownTime)
+    public bool add(SpellWord s, float cooldownTime)
     {
-        string wordOnCooldown = s.root;
+        string wordOnCooldown = s.name;
         onCooldown.Add(wordOnCooldown);
         CooldownBar c = new CooldownBar(bar_prefab, transform, transform.position, wordOnCooldown, cooldownTime);
         c.bar.transform.Translate(Vector3.down * cooldownBars.Count * bar_distance, 0);

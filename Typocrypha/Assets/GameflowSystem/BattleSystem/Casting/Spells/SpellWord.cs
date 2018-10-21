@@ -5,6 +5,13 @@ using UnityEditor;
 
 public abstract class SpellWord : ScriptableObject {
 
+    public enum WordType
+    {
+        Root,
+        Modifier,
+    }
+
+    public abstract WordType Type { get; }
     public string description;          //Spell's description (in spellbook)
     public string animationID;          //Spell's animation ID 
     public string sfxID;                //Spell's sfx ID

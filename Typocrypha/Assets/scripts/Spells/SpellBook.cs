@@ -48,34 +48,26 @@ public class SpellBook : MonoBehaviour
     }
     //Registeres all keywords in Spelldata s if they are unregistered and valid spell words in the given SpellDictionary
     //Returns bool[elem,root,style] (true if successful register, false if already registered)
-    public bool[] safeRegister(SpellDictionary dict, SpellData s)
+    public SpellWord[] safeRegister(SpellData s)
     {
-        return new bool[] { safeRegister(dict, s.element), safeRegister(dict, s.root), safeRegister(dict, s.style) };
+        List<SpellWord> ret = new List<SpellWord>();
+        SpellWord curr;
+        foreach (SpellWord word in s)
+            if ((curr = safeRegister(word)) != null)
+                ret.Add(word);
+        return ret.ToArray();
     }
     //Registers individual keyword if it is unregistered and is a valid spellword in the given dictionary
-    public bool safeRegister(SpellDictionary dict, string word)
+    public SpellWord safeRegister(SpellWord word)
     {
-        if (string.IsNullOrEmpty(word))
-            return false;
-        if (!isRegistered(word))
+        if (word == null)
+            return null;
+        if (!isRegistered(word.name))
         {
-            if (dict.containsRoot(word))
-            {
-                Spell root = dict.getRoot(word);
-                register(word, root.type, root.description);
-                return true;
-            }
-            else if (dict.containsElement(word))
-            {
-                register(word, "element", dict.getElementMod(word).description);
-                return true;
-            }
-            else if (dict.containsStyle(word))
-            {
-                register(word, "style", dict.getStyleMod(word).description);
-            }
+            register(word.name, word.Type.ToString(), word.description);
+            return word;
         }
-        return false;
+        return null;
     }
     //Inserts spell into spellbook (with description string)
     private void register(string word, string type, string description)

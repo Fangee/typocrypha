@@ -5,7 +5,6 @@ using ATB2;
 public class CastManager : MonoBehaviour
 {
 
-    public SpellDictionary spellDict;
     public CooldownList cooldown;
     public SpellBook spellBook;
     public SpellEffects spellEffects;
@@ -21,7 +20,7 @@ public class CastManager : MonoBehaviour
     public List<CastData> cast(SpellData spell, Battlefield field, ICaster caster, out List<Battlefield.Position> noTargetPositions)
     {
         noTargetPositions = new List<Battlefield.Position>();
-        Spell s = spellDict.getRoot(spell.root);
+        Spell s = null;
         Spell c = Spell.createSpellFromType(s.type);
         s.copyInto(c);
         int wordCount = 1;
@@ -29,20 +28,20 @@ public class CastManager : MonoBehaviour
         string[] sfxData = { null, s.sfxID, null };
         ElementMod e = null;
         StyleMod st = null;
-        if (!string.IsNullOrEmpty(spell.element))
-        {
-            e = spellDict.getElementMod(spell.element);
-            sfxData[2] = e.sfxID;
-            animData[2] = e.animationID;
-            ++wordCount;
-        }
-        if (!string.IsNullOrEmpty(spell.style))
-        {
-            st = spellDict.getStyleMod(spell.style);
-            sfxData[0] = st.sfxID;
-            animData[0] = st.animationID;
-            ++wordCount;
-        }
+        //if (!string.IsNullOrEmpty(spell.element))
+        //{
+        //    e = spellDict.getElementMod(spell.element);
+        //    sfxData[2] = e.sfxID;
+        //    animData[2] = e.animationID;
+        //    ++wordCount;
+        //}
+        //if (!string.IsNullOrEmpty(spell.style))
+        //{
+        //    st = spellDict.getStyleMod(spell.style);
+        //    sfxData[0] = st.sfxID;
+        //    animData[0] = st.animationID;
+        //    ++wordCount;
+        //}
         c.Modify(e, st);
         List<Battlefield.Position> toCastAt = c.targetData.target(caster.FieldPos, caster.TargetPos);
         List<CastData> data = new List<CastData>();
@@ -74,7 +73,7 @@ public class CastManager : MonoBehaviour
         SpellData s;
         string message = "";
         //Send spell, Enemy state, and target index to parser and caster
-        CastParser.ParseResults status = CastParser.parse(spell.ToLower().Split(' '), spellDict, out s);
+        CastParser.ParseResults status = CastParser.parse(spell.ToLower().Split(' '), out s);
         Pair<bool[], bool[]> targetPattern = null;
         callback.clearBuffer();
         if(status == CastParser.ParseResults.Valid)
@@ -86,14 +85,14 @@ public class CastManager : MonoBehaviour
                 AudioPlayer.main.playSFX("sfx_enter_bad");
                 return false;
             }
-            else if (cooldown.isOnCooldown(s))
-            {
-                //display.playOnCooldownEffects
-                spellEffects.popp.spawnSprite("popups_oncooldown", 1.0F, field.Player.WorldPos - new Vector3(0, 0.375f, 0));
-                AudioPlayer.main.playSFX("sfx_enter_bad");
-                return false;
-            }
-            targetPattern = spellDict.getTargetPattern(s, field, field.Player);
+            //else if (cooldown.isOnCooldown(s))
+            //{
+            //    //display.playOnCooldownEffects
+            //    spellEffects.popp.spawnSprite("popups_oncooldown", 1.0F, field.Player.WorldPos - new Vector3(0, 0.375f, 0));
+            //    AudioPlayer.main.playSFX("sfx_enter_bad");
+            //    return false;
+            //}
+            //targetPattern = spellDict.getTargetPattern(s, field, field.Player);
             //message = chat.getLine(field.Player.Stats.ChatDatabaseID);
             preCastEffects(targetPattern, field.Player, s, message);
             AudioPlayer.main.playSFX("sfx_enter");
@@ -139,19 +138,19 @@ public class CastManager : MonoBehaviour
     }
 
     //Casts from an enemy position: calls processCast on results
-    public void enemyCast(SpellDictionary dict, SpellData s, Enemy enemy)
+    public void enemyCast(SpellData s, Enemy enemy)
     {
         //field.breakThirdEye();
         //field.Pause = true; // parent.pause battle for attack
         AudioPlayer.main.playSFX("sfx_enemy_cast");
 		//AnimationPlayer.main.playAnimation("anim_spell_empower", enemy.Transform.position, 2f);
-        Pair<bool[], bool[]> targetPattern = spellDict.getTargetPattern(s, field, enemy);
+        //Pair<bool[], bool[]> targetPattern = spellDict.getTargetPattern(s, field, enemy);
        // preCastEffects(targetPattern, enemy, s, chat.getLine(enemy.Stats.ChatDatabaseID));
 		//BattleEffects.main.setDim(true, enemy.enemy_sprite);
-        StartCoroutine(enemy_pause_cast(dict, s, enemy));
+        StartCoroutine(enemy_pause_cast(s, enemy));
     }
 
-    private IEnumerator enemy_pause_cast(SpellDictionary dict, SpellData s, Enemy enemy)
+    private IEnumerator enemy_pause_cast(SpellData s, Enemy enemy)
     {
         uiManager.setEnabledGauges (false);
 
@@ -204,8 +203,8 @@ public class CastManager : MonoBehaviour
                 EnemyIntel.main.learnIntel(d.Caster.Name, d.element);
         }
         //Register unregistered keywords here
-        bool[] regData = spellBook.safeRegister(spellDict, s);
-        if (regData[0] || regData[1] || regData[2])
+        SpellWord[] regData = spellBook.safeRegister(s);
+        if (regData.Length > 0)
             StartCoroutine(learnSFX());
         field.lastRegister = regData;
         //Process regData (for register graphics) here. 
@@ -277,20 +276,10 @@ public class CastManager : MonoBehaviour
     //Starts cooldown of spell
     private void startCooldown(SpellData data, ICaster castingPlayer)
     {
-        float cooldownTime = data.getCastingTime(spellDict, castingPlayer.Stats.Spd);
-        cooldown.add(data, cooldownTime);
-    }
-
-    //Utility
-
-    //Play a spell animation without really doing anything
-    public IEnumerator playSpellEffects(SpellData s, CastData dummyValues)
-    {
-        dummyValues.animData = spellDict.getAnimData(s);
-        dummyValues.sfxData = spellDict.getSfxData(s);
-        dummyValues.element = Elements.fromString(s.element);
-        dummyValues.damageInflicted = spellDict.getRoot(s).power * 2;
-        yield return StartCoroutine(spellEffects.playEffects(dummyValues, s));
+        float cooldownTime = data.getCastingTime(castingPlayer.Stats.Spd);
+        foreach(SpellWord word in data)
+            if(word.Type == SpellWord.WordType.Root)
+                cooldown.add(word, cooldownTime);
     }
 
     //SpellBook management

@@ -17,17 +17,21 @@ public class AnimationPlayer : MonoBehaviour {
 		else GameObject.Destroy (gameObject); // avoid multiple copies
 		ready = true;
 	}
-		
-	// plays specified animation with specified speed
-	public void playAnimation(string name, Vector2 pos, float speed) {
-		GameObject display = Instantiate (animation_holder_prefab, transform);
-		display.transform.position = pos;
-		SpriteRenderer sprite_r = display.GetComponent<SpriteRenderer> ();
-		sprite_r.sortingOrder = 15; // put animation on top
-		Animator animator = display.GetComponent<Animator>();
-		animator.speed = speed;
-		animator.Play (name, 0, 0f);
-	}
+	
+    public float playAnimation(AnimationClip clip, Vector2 pos, float speed = 1f)
+    {
+        GameObject display = Instantiate(animation_holder_prefab, transform);
+        display.transform.position = pos;
+        SpriteRenderer sprite_r = display.GetComponent<SpriteRenderer>();
+        sprite_r.sortingOrder = 15; // put animation on top
+        Animator animator = display.GetComponent<Animator>();
+        animator.speed = speed;
+        AnimatorOverrideController overrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
+        animator.runtimeAnimatorController = overrideController;
+        overrideController["OneShot"] = clip;
+        animator.Play("OneShot", 0, 0f);
+        return clip.length;
+    }
 
 	// plays specified screen effect
 	public void playScreenEffect(string name) {

@@ -38,60 +38,61 @@ public class BattleLog : MonoBehaviour {
 		battleLogCast.SetActive(false);
 		battleLogTalk.SetActive(false);
 		battleLogSub.SetActive (true);
-		string ele = "";
-		switch (cast.element) {
-		case "agni":
-			battleLogSubSpellIcons [1].sprite = battleLogIcons [1];
-			battleLogSubSpellIcons [2].sprite = battleLogIcons [1];
-			ele = "FIRE";
-			break;
-		case "cryo":
-			battleLogSubSpellIcons [1].sprite = battleLogIcons [2];
-			battleLogSubSpellIcons [2].sprite = battleLogIcons [2];
-			ele = "ICE";
-			break;
-		case "veld":
-			battleLogSubSpellIcons [1].sprite = battleLogIcons [3];
-			battleLogSubSpellIcons [2].sprite = battleLogIcons [3];
-			ele = "VOLT";
-			break;
-		default:
-			battleLogSubSpellIcons [1].sprite = battleLogIcons [0];
-			battleLogSubSpellIcons [2].sprite = battleLogIcons [0];
-			ele = "PHYSICAL";
-			break;
-		}
-		battleLogSubAnimator.Play ("anim_sub_battlelog_enter");
-		battleLogCast.transform.position = casterPosition;
-		battleLogSubText[0].text = cast.ToString();
-		logCastText.text = "> " + cast.ToString();
-		logTalkText.text = talk;
-		//logTalkInfo.text = speaker;
-		logCastInfo.text = speaker;
-		if (caster == ICasterType.ENEMY)
-		{
-			castBox.color = enemyColor;
-			talkBox.color = enemyColor;
-			battleLogSubText[1].text = "ENEMY CASTS " + ele;
-		}
-		else if (caster == ICasterType.PLAYER)
-		{
-			castBox.color = playerColor;
-			talkBox.color = playerColor;
-			battleLogSubText[1].text = "PLAYER CASTS " + ele;
-		}
-		else if (caster == ICasterType.ALLY)
-		{
-			castBox.color = allyColor;
-			talkBox.color = allyColor;
-			battleLogSubText[1].text = "ALLY CASTS " + ele;
-		}
-		else //caster == IcasterType.INVALID (clarke is speaking)
-		{
-			castBox.color = clarkeColor;
-			talkBox.color = clarkeColor;
-			battleLogSubText[1].text = "ERROR CAST";
-		}
+        throw new System.NotImplementedException();
+		//string ele = "";
+		//switch (cast.element) {
+		//case "agni":
+		//	battleLogSubSpellIcons [1].sprite = battleLogIcons [1];
+		//	battleLogSubSpellIcons [2].sprite = battleLogIcons [1];
+		//	ele = "FIRE";
+		//	break;
+		//case "cryo":
+		//	battleLogSubSpellIcons [1].sprite = battleLogIcons [2];
+		//	battleLogSubSpellIcons [2].sprite = battleLogIcons [2];
+		//	ele = "ICE";
+		//	break;
+		//case "veld":
+		//	battleLogSubSpellIcons [1].sprite = battleLogIcons [3];
+		//	battleLogSubSpellIcons [2].sprite = battleLogIcons [3];
+		//	ele = "VOLT";
+		//	break;
+		//default:
+		//	battleLogSubSpellIcons [1].sprite = battleLogIcons [0];
+		//	battleLogSubSpellIcons [2].sprite = battleLogIcons [0];
+		//	ele = "PHYSICAL";
+		//	break;
+		//}
+		//battleLogSubAnimator.Play ("anim_sub_battlelog_enter");
+		//battleLogCast.transform.position = casterPosition;
+		//battleLogSubText[0].text = cast.ToString();
+		//logCastText.text = "> " + cast.ToString();
+		//logTalkText.text = talk;
+		////logTalkInfo.text = speaker;
+		//logCastInfo.text = speaker;
+		//if (caster == ICasterType.ENEMY)
+		//{
+		//	castBox.color = enemyColor;
+		//	talkBox.color = enemyColor;
+		//	battleLogSubText[1].text = "ENEMY CASTS " + ele;
+		//}
+		//else if (caster == ICasterType.PLAYER)
+		//{
+		//	castBox.color = playerColor;
+		//	talkBox.color = playerColor;
+		//	battleLogSubText[1].text = "PLAYER CASTS " + ele;
+		//}
+		//else if (caster == ICasterType.ALLY)
+		//{
+		//	castBox.color = allyColor;
+		//	talkBox.color = allyColor;
+		//	battleLogSubText[1].text = "ALLY CASTS " + ele;
+		//}
+		//else //caster == IcasterType.INVALID (clarke is speaking)
+		//{
+		//	castBox.color = clarkeColor;
+		//	talkBox.color = clarkeColor;
+		//	battleLogSubText[1].text = "ERROR CAST";
+		//}
 	}
 
 	//Stop battle log UI (call after every pause to cast)

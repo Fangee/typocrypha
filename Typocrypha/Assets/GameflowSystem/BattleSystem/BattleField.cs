@@ -101,7 +101,7 @@ public class Battlefield : MonoBehaviour
     [HideInInspector] public ICaster lastCaster = null;
     [HideInInspector] public List<CastData> lastCast; // last performed cast action
     [HideInInspector] public SpellData lastSpell; // last performed spell
-    [HideInInspector] public bool[] lastRegister; // last spell register status
+    [HideInInspector] public SpellWord[] lastRegister; // last spell register status
     #endregion
 
     private class FieldMatrix : Serializable2DMatrix<ICaster>

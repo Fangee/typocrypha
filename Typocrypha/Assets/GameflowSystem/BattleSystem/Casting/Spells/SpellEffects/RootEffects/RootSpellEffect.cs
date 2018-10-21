@@ -6,6 +6,8 @@ using GUIUtilities;
 
 public abstract class RootSpellEffect : ReorderableSOList<RootSpellEffect>.ListItem
 {
+    public AnimationClip animation;
+    public AudioClip sfx;
     public TargetData targetPattern = new TargetData();
     public abstract void castEffect(Battlefield field, ICaster caster, CastData data);
 }

@@ -461,8 +461,8 @@ public class BattleManagerS : MonoBehaviour, IPausable {
             field.lastCast.Clear(); // last performed cast action
         else
             field.lastCast = new List<CastData>();
-        field.lastSpell = new SpellData(""); // last performed spell
-        field.lastRegister = new bool[3] { false, false, false }; // last spell register status
+        field.lastSpell = new SpellData(); // last performed spell
+        field.lastRegister = new SpellWord[0]; // last spell register status
     }
 
     //Extra stuff

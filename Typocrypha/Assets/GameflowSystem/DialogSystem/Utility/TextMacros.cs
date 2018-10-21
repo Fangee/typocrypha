@@ -103,15 +103,16 @@ public class TextMacros : MonoBehaviour {
 	// substitutes last cast spell's attributes
 	// input: [0]: string, "elem","root","style" : specifies which part of spell to display (or "all" for whole spell)
 	string macroLastCast(string[] opt) {
-        string ret = string.Empty;
-		switch (opt [0]) {
-		    case "elem":  ret = BattleManagerS.main.field.lastSpell.element.ToUpper(); break;
-		    case "root":  ret =  BattleManagerS.main.field.lastSpell.root.ToUpper(); break;
-		    case "style": ret = BattleManagerS.main.field.lastSpell.style.ToUpper(); break;
-            case "all": ret = BattleManagerS.main.field.lastSpell.ToString(); break;
-            default:      return "error: bad spell substitute macro argument";	
-		}
-		return "<color=" + color_map["spell"] + ">" + ret + "</color>";
+        throw new System.NotImplementedException();
+  //      string ret = string.Empty;
+		//switch (opt [0]) {
+		//    case "elem":  ret = BattleManagerS.main.field.lastSpell.element.ToUpper(); break;
+		//    case "root":  ret =  BattleManagerS.main.field.lastSpell.root.ToUpper(); break;
+		//    case "style": ret = BattleManagerS.main.field.lastSpell.style.ToUpper(); break;
+  //          case "all": ret = BattleManagerS.main.field.lastSpell.ToString(); break;
+  //          default:      return "error: bad spell substitute macro argument";	
+		//}
+		//return "<color=" + color_map["spell"] + ">" + ret + "</color>";
 	}
 
     // substitutes with current time
