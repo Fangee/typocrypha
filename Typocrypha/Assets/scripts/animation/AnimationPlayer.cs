@@ -20,7 +20,7 @@ public class AnimationPlayer : MonoBehaviour {
 	}
 	
     //Plays any one-shot animation clip and returns the play time as a float
-    public float playAnimation(AnimationClip clip, Vector2 pos, float speed = 1f)
+    public CompletionData playAnimation(AnimationClip clip, Vector2 pos, float speed = 1f)
     {
         GameObject display = Instantiate(animation_holder_prefab, transform);
         display.transform.position = pos;
@@ -32,7 +32,9 @@ public class AnimationPlayer : MonoBehaviour {
         animator.runtimeAnimatorController = overrideController;
         overrideController["OneShot"] = clip;
         animator.Play("OneShot", 0, 0f);
-        return clip.length;
+        CompletionData data = display.GetComponent<AnimationHolder>().completionData;
+        data.time = (clip.length * 1/speed);
+        return data;
     }
 
 	// plays specified screen effect
@@ -44,4 +46,29 @@ public class AnimationPlayer : MonoBehaviour {
 	public void playFlashEffect(string name) {
 		flash_animator.Play (name);
 	}
+
+    //Contains a time and a completion trigger
+    public class CompletionData
+    {
+        public float time = 0;
+        public bool keepPlaying = true;
+    }
+}
+
+//Wait until the given CompletionData's time has elapsed, or the end trigger is set, whichever comes first
+public class WaitUntilAnimationComplete : CustomYieldInstruction
+{
+    AnimationPlayer.CompletionData data;
+    private float elapsedTime = 0;
+    public override bool keepWaiting
+    {
+        get
+        {
+            return data.keepPlaying && ((elapsedTime += Time.deltaTime) < data.time);
+        }
+    }
+    public WaitUntilAnimationComplete(AnimationPlayer.CompletionData data)
+    {
+        this.data = data;
+    }
 }

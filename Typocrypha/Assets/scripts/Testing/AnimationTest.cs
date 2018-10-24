@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AnimationTest : MonoBehaviour {
 
+    public bool CompletionTriggers = true;
     public float speed = 1f;
     public AnimationClip[] clips;
 
@@ -14,10 +15,15 @@ public class AnimationTest : MonoBehaviour {
 
     IEnumerator play()
     {
-        foreach(var clip in clips)
+        while (true)
         {
-            yield return new WaitForSeconds(AnimationPlayer.main.playAnimation(clip, new Vector2(0, 0), speed));
+            foreach (var clip in clips)
+            {
+                if(CompletionTriggers)
+                    yield return new WaitUntilAnimationComplete(AnimationPlayer.main.playAnimation(clip, new Vector2(0, 0), speed));
+                else
+                    yield return new WaitForSeconds(AnimationPlayer.main.playAnimation(clip, new Vector2(0, 0), speed).time);
+            }
         }
-
     }
 }

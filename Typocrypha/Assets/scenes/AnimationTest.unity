@@ -218,11 +218,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b597cc626f2094439562b450de25535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ready: 0
   camera_animator: {fileID: 0}
   flash_animator: {fileID: 0}
   animation_holder_prefab: {fileID: 1168650087947976, guid: 601dae665ceb1c845b6091afcc091783,
     type: 2}
+  ready: 0
 --- !u!4 &1401546237
 Transform:
   m_ObjectHideFlags: 0
@@ -247,10 +247,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901523c03ee41cf4b886fa71dcec1817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  CompletionTriggers: 1
+  speed: 2
   clips:
-  - {fileID: 7400000, guid: 6ef31a5e574a6194cbbd3ddd8013354d, type: 2}
+  - {fileID: 7400000, guid: cccb16dc141740545b7a7d6b4d30e4ff, type: 2}
   - {fileID: 7400000, guid: 9ab79e221b4eacc40b3764e32961847d, type: 2}
-  - {fileID: 7400000, guid: 2b1f21dbf068fb946bbfdcb7e31a07a0, type: 2}
-  - {fileID: 7400000, guid: 1e694f578231f8a449169afcfaae2fb1, type: 2}
-  - {fileID: 7400000, guid: 6ef31a5e574a6194cbbd3ddd8013354d, type: 2}
+  - {fileID: 7400000, guid: 2dd2743bc073da24ba3ca5f83aa7001c, type: 2}
+  - {fileID: 7400000, guid: 75002fd170a14e945887715b5a7f92c9, type: 2}
+  - {fileID: 7400000, guid: 75002fd170a14e945887715b5a7f92c9, type: 2}

@@ -44,7 +44,7 @@ public class SpellEffects : MonoBehaviour {
 		if (d.repel)
 		{
 			//spawnElementPopup(d.element, ReactionType.REPEL, d.caster.WorldPos);
-            yield return new WaitForSeconds(AnimationPlayer.main.playAnimation(reflectAnim, d.caster.WorldPos, 2f));
+            yield return new WaitUntilAnimationComplete(AnimationPlayer.main.playAnimation(reflectAnim, d.caster.WorldPos, 2f));
 			
 		}
         float shakeIntensity = 0;
@@ -60,7 +60,7 @@ public class SpellEffects : MonoBehaviour {
                 popp.spawnText(d.wordName.ToUpper() + "!", POP_TIMER - 1, d.caster.WorldPos, Color.black, new Color(1, 111f / 255f, 1));
             else
                 popp.spawnText(d.wordName.ToUpper() + "!", POP_TIMER - 1, d.caster.WorldPos, new Color(1, 111f / 255f, 1), Color.white);
-            yield return new WaitForSeconds(AnimationPlayer.main.playAnimation(data.animation, d.target.WorldPos, 1));
+            yield return new WaitUntilAnimationComplete(AnimationPlayer.main.playAnimation(data.animation, d.target.WorldPos, 1));
         }
         if (d.isCrit && d.reaction != ReactionType.BLOCK) {//Spell is crit
 			if (d.target.CasterType == ICasterType.ENEMY)
@@ -98,9 +98,9 @@ public class SpellEffects : MonoBehaviour {
 
 		//Play block/reflect/drain animations if necessary
 		if (d.reaction == ReactionType.BLOCK)
-            yield return new WaitForSeconds(AnimationPlayer.main.playAnimation(blockAnim, d.target.WorldPos, 2f));
+            yield return new WaitUntilAnimationComplete(AnimationPlayer.main.playAnimation(blockAnim, d.target.WorldPos, 2f));
 		else if (d.reaction == ReactionType.DRAIN)
-            yield return new WaitForSeconds(AnimationPlayer.main.playAnimation(drainAnim, d.target.WorldPos, 2f));
+            yield return new WaitUntilAnimationComplete(AnimationPlayer.main.playAnimation(drainAnim, d.target.WorldPos, 2f));
         //Spawn damage number and some other gubs
         spawnDamagePopup(d, shakeIntensity);
     }

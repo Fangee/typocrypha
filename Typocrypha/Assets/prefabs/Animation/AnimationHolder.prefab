@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4922561711047828}
   - component: {fileID: 212439823695560138}
   - component: {fileID: 95108527027645110}
+  - component: {fileID: 114702943320779264}
   m_Layer: 0
   m_Name: AnimationHolder
   m_TagString: Untagged
@@ -59,6 +60,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114702943320779264
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1168650087947976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58dfdc88281c20247a0093c702873369, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212439823695560138
 SpriteRenderer:
   m_ObjectHideFlags: 1
