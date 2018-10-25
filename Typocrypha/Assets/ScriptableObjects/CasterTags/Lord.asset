@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f793b24362e7b4899da3d5af46b94b, type: 3}
   m_Name: Lord
   m_EditorClassIdentifier: 
+  displayName: 
   statMods:
     maxHP: 0
     maxStagger: 0
@@ -20,7 +21,17 @@ MonoBehaviour:
     spd: 0
     acc: 0
     evade: 0
-  tagReactions:
-    _values: 
+  reactions:
+    _keys:
+    - IceDmg
+    - VoltDmg
+    - FireDmg
+    _values:
+    - reactTo: {fileID: 11400000, guid: 31105542aae449c48a7b6475f080ce74, type: 2}
+      reactionType: 0
+    - reactTo: {fileID: 11400000, guid: 2f5affed792ed8a4dac404b641602939, type: 2}
+      reactionType: 0
+    - reactTo: {fileID: 11400000, guid: 7d1b236bf7ced2b4ea8761cdc78f94aa, type: 2}
+      reactionType: 0
   subTags:
     _items: []

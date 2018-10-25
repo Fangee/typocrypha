@@ -11,14 +11,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185c389b97a40c04cba99fbc967264e0, type: 3}
   m_Name: GloamKnightNemesis
   m_EditorClassIdentifier: 
-  image: {fileID: 21300000, guid: 014f8993b714f3c489414f5fc3221115, type: 3}
+  displayName: My Girl Adrestia
+  image: {fileID: 21300000, guid: 51cc5169d7f1dce4eb025e8b88f17781, type: 3}
   stats:
     maxHP: 0
     maxStagger: 0
     staggerTime: 0
     atk: 0
     def: 0
-    spd: 5
+    spd: 0
     acc: 0
     evade: 0
   AIType: 
@@ -28,43 +29,27 @@ MonoBehaviour:
   tags:
     tags:
       _keys:
-      - GloamKnight
-      - Lord
       - DarkLight
-      - Scaled
-      - Shapeshifter
-      - Undead
+      - GloamKnight
       _values:
-      - {fileID: 11400000, guid: c9e1fb5d9596a8144bc194029c4f1662, type: 2}
-      - {fileID: 11400000, guid: e0cb741647b973b48bdbb21acfd4958d, type: 2}
       - {fileID: 11400000, guid: 2b204b0f6c339f449945c6ab92fff3ee, type: 2}
-      - {fileID: 11400000, guid: e1b134bd867722446bb3efbf6f89d60f, type: 2}
-      - {fileID: 11400000, guid: f6dfad0a9327ced4188c780b158b8fdf, type: 2}
-      - {fileID: 11400000, guid: 0d2cb9bf128dbfa49a87d94d74b268f7, type: 2}
+      - {fileID: 11400000, guid: c9e1fb5d9596a8144bc194029c4f1662, type: 2}
     allTags:
       _keys:
-      - GloamKnight
-      - Chaotic
-      - Evil
+      - Chaos
+      - NotGood
       - Holy
-      - Boss
       - DarkLight
-      - Scaled
-      - ShapeShifter
-      - Shapeshifter
-      - Undead
+      - GloamKnight
+      - Boss
       _values:
-      - {fileID: 11400000, guid: c9e1fb5d9596a8144bc194029c4f1662, type: 2}
       - {fileID: 11400000, guid: bb70dacbd43c4ea40a158e0241fc11a6, type: 2}
       - {fileID: 11400000, guid: 68669da672c73c2428d48d28c4ef37b3, type: 2}
       - {fileID: 11400000, guid: 0aeaad070a13a50458cefeaea6dfd80e, type: 2}
-      - {fileID: 11400000, guid: 0af816e919b3df24d95c48f1318f9329, type: 2}
       - {fileID: 11400000, guid: 2b204b0f6c339f449945c6ab92fff3ee, type: 2}
-      - {fileID: 11400000, guid: e1b134bd867722446bb3efbf6f89d60f, type: 2}
-      - {fileID: 0}
-      - {fileID: 11400000, guid: f6dfad0a9327ced4188c780b158b8fdf, type: 2}
-      - {fileID: 11400000, guid: 0d2cb9bf128dbfa49a87d94d74b268f7, type: 2}
-      _frequencies: 01000000010000000200000002000000010000000100000001000000010000000100000001000000
+      - {fileID: 11400000, guid: c9e1fb5d9596a8144bc194029c4f1662, type: 2}
+      - {fileID: 11400000, guid: 0af816e919b3df24d95c48f1318f9329, type: 2}
+      _frequencies: 010000000200000002000000010000000100000001000000
     statMod:
       maxHP: 0
       maxStagger: 0

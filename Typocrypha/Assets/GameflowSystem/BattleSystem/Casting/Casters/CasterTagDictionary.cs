@@ -82,15 +82,44 @@ public class CasterTagDictionary
 
         EditorGUI.indentLevel++;
         string toDelete = null; // Item to delete; -1 if none chosen
-        foreach (var kvp in tags)
+        string[] keys = new string[tags.Count];
+        tags.Keys.CopyTo(keys, 0);
+        System.Array.Sort(keys);
+        List<string> toReplace = new List<string>();
+        foreach (var key in keys)
         {
+            if (key != tags[key].name)
+                toReplace.Add(key);
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(kvp.Key, new GUIStyle(GUI.skin.label) { fontStyle = showDetails ? FontStyle.Bold : FontStyle.Italic }, GUILayout.Width(240));
+            EditorGUILayout.LabelField(key, new GUIStyle(GUI.skin.label) { fontStyle = showDetails ? FontStyle.Bold : FontStyle.Italic }, GUILayout.Width(240));
             if (GUILayout.Button("-"))
-                toDelete = kvp.Key;
+                toDelete = key;
             EditorGUILayout.EndHorizontal();
             if (showDetails)
-                kvp.Value.dataGUILayout();
+                tags[key].dataGUILayout();
+        }
+        foreach (var key in toReplace)
+        {
+            if (key == toDelete)
+                continue;
+            CasterTag t = tags[key];
+            Remove(key);
+            Add(t);
+        }
+        toReplace.Clear();
+        foreach(var kvp in allTags)
+        {
+            if (kvp.Key != kvp.Value.name)
+                toReplace.Add(kvp.Key);
+        }
+        foreach (var key in toReplace)
+        {
+            if (key == toDelete)
+                continue;
+            CasterTag t = allTags[key];
+            int val = allTags.Frequency(key);
+            allTags.ClearItem(key);
+            allTags.Add(t.name, t, val);
         }
         if (toDelete != null)
             Remove(toDelete);

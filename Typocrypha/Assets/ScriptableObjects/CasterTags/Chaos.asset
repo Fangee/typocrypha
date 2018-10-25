@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7f793b24362e7b4899da3d5af46b94b, type: 3}
+  m_Name: Chaos
+  m_EditorClassIdentifier: 
+  displayName: Chaos
+  statMods:
+    maxHP: 0
+    maxStagger: 0
+    staggerTime: 0
+    atk: 0
+    def: 0
+    spd: 0
+    acc: 0
+    evade: 0
+  reactions:
+    _keys:
+    - FireDmg
+    - IceDmg
+    - VoltDmg
+    - Wah
+    _values:
+    - reactTo: {fileID: 11400000, guid: 7d1b236bf7ced2b4ea8761cdc78f94aa, type: 2}
+      reactionType: 0
+    - reactTo: {fileID: 11400000, guid: 31105542aae449c48a7b6475f080ce74, type: 2}
+      reactionType: 0
+    - reactTo: {fileID: 11400000, guid: 2f5affed792ed8a4dac404b641602939, type: 2}
+      reactionType: 0
+    - reactTo: {fileID: 11400000, guid: d91cec13aa5e4b54aba9707d40f79e53, type: 2}
+      reactionType: 0
+  subTags:
+    _items:
+    - {fileID: 11400000, guid: 68669da672c73c2428d48d28c4ef37b3, type: 2}
+    - {fileID: 11400000, guid: 0aeaad070a13a50458cefeaea6dfd80e, type: 2}

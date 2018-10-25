@@ -16,7 +16,7 @@ public class CastResults
     public ICaster target;
     public ICaster caster;
 
-    public SpellWord.SpellTagSet tags;
+    public SpellTag.TagDict tags;
 
     //Accurate now, but don't use this when you don't have to (may still be a little wonky)
     public bool repel = false;

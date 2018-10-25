@@ -16,9 +16,10 @@ public enum ReactionType
     REPEL,
 }
 
-[CreateAssetMenu(fileName = "CasterTag", menuName = "Caster Tag")]
+[CreateAssetMenu(fileName = "CasterTag", menuName = "Tag/Caster Tag")]
 public class CasterTag : ScriptableObject
 {
+    public string displayName = string.Empty;
     public CasterStats statMods;
     public ReactionDict reactions;
     public TagSet subTags;
@@ -45,33 +46,64 @@ public class CasterTag : ScriptableObject
         EditorGUI.indentLevel--;
     }
 
-    [System.Serializable] public class ReactionDict : SerializableDictionary<string, ReactionType>
+    [System.Serializable]
+    public class Reaction
     {
-        private string addField;
+        public SpellTag reactTo;
+        public ReactionType reactionType = ReactionType.NEUTRAL;
+    }
+    [System.Serializable] public class ReactionDict : SerializableDictionary<string, Reaction>
+    {
         public void doGUILayout(string title)
         {
-            GUILayout.BeginHorizontal();
-            GUILayout.Label(title + ": " + Count, new GUIStyle(GUI.skin.label) { fontStyle = FontStyle.Bold }, GUILayout.Width(100));
-            addField = EditorGUILayout.TextField(addField, GUILayout.Width(100));
-            if (GUILayout.Button("+") && !string.IsNullOrEmpty(addField))
+            #region Object Picker Message Handling
+            Event e = Event.current;
+            if (e.type == EventType.ExecuteCommand && e.commandName == "ObjectSelectorClosed")
             {
-                Add(addField, ReactionType.NEUTRAL);
-                addField = string.Empty;
+                SpellTag t = EditorGUIUtility.GetObjectPickerObject() as SpellTag;
+                if (t == null)
+                    return;
+                Add(t.name, new Reaction() { reactTo = t});
+                e.Use();
+                return;
             }
+            #endregion
+
+            #region Title and Controls
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(title + ": " + Count, new GUIStyle(GUI.skin.label) { fontStyle = FontStyle.Bold });
+            if (GUILayout.Button("+"))
+                EditorGUIUtility.ShowObjectPicker<SpellTag>(null, false, "", 1);
             GUILayout.EndHorizontal();
+            #endregion
+
             EditorGUI.indentLevel++;
             string toDelete = null; // Item to delete; -1 if none chosen
             string[] keys = new string[Count];
             Keys.CopyTo(keys, 0);
             System.Array.Sort(keys);
+            List<string> toReplace = new List<string>();
             foreach (var key in keys)
             {
+                if (key != this[key].reactTo.name)
+                    toReplace.Add(key);
                 GUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField(key, GUILayout.Width(100));
-                this[key] = (ReactionType)EditorGUILayout.EnumPopup(this[key]);
+                GUILayout.BeginVertical();
+                GUILayout.Space(3);
+                this[key].reactionType = (ReactionType)EditorGUILayout.EnumPopup(this[key].reactionType, GUILayout.Width(150), GUILayout.Height(EditorGUIUtility.singleLineHeight - 3));
+                GUILayout.EndVertical();
                 if (GUILayout.Button("-"))
                     toDelete = key;
                 GUILayout.EndHorizontal();
+            }
+            foreach (var key in toReplace)
+            {
+                if (key == toDelete)
+                    continue;
+                Reaction r = this[key];
+                Remove(key);
+                Add(r.reactTo.name, r);
             }
             if (toDelete != null)
                 Remove(toDelete);
@@ -133,7 +165,9 @@ public class CasterTagInspector : Editor
     public override void OnInspectorGUI()
     {
         CasterTag tag = target as CasterTag;
-        GUILayout.Label("Caster Tag: " + tag.name);
+        GUILayout.Label("Caster Tag: " + tag.name + " (" + tag.displayName + ")");
+        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+        tag.displayName = EditorGUILayout.TextField(new GUIContent("Display Name"), tag.displayName);
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
         EditorGUILayout.LabelField("Stat Modifiers", new GUIStyle(GUI.skin.label) { fontStyle = FontStyle.Bold, alignment = TextAnchor.MiddleCenter});
         if(tag.statMods != null)

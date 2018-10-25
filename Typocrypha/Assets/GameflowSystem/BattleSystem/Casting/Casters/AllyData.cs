@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu] // attribute allows creation of EnemyData assets in unity editor
 public class AllyData : ScriptableObject
 {
+    public string displayName;
     // Enemy sprite
     public Sprite BattleIcon;
     public Sprite sprite;

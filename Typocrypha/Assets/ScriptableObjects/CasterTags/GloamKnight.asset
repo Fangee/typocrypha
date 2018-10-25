@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f793b24362e7b4899da3d5af46b94b, type: 3}
   m_Name: GloamKnight
   m_EditorClassIdentifier: 
+  displayName: 
   statMods:
     maxHP: 0
     maxStagger: 0
@@ -20,8 +21,12 @@ MonoBehaviour:
     spd: 10
     acc: 10
     evade: 10
-  tagReactions:
-    _values: 
+  reactions:
+    _keys:
+    - Wah
+    _values:
+    - reactTo: {fileID: 11400000, guid: d91cec13aa5e4b54aba9707d40f79e53, type: 2}
+      reactionType: 5
   subTags:
     _items:
     - {fileID: 11400000, guid: bb70dacbd43c4ea40a158e0241fc11a6, type: 2}

@@ -7,10 +7,12 @@ using UnityEditor;
 [CreateAssetMenu] // attribute allows creation of EnemyData assets in unity editor
 public class EnemyData : ScriptableObject
 {
+    //Display Name
+    public string displayName = string.Empty;
 	// Enemy sprite
 	public Sprite image;
-
-    public CasterStats stats;
+    
+    public CasterStats stats = new CasterStats();
 		
 	// AI settings
 	public string AIType;
@@ -20,7 +22,7 @@ public class EnemyData : ScriptableObject
 	public SpellMap spells;
 
     // Tags
-    public CasterTagDictionary tags;
+    public CasterTagDictionary tags = new CasterTagDictionary();
     //public CasterTagDictionary tags;
 
     // Serializable SpellMap Dictionary
@@ -37,14 +39,14 @@ public class EnemyDataInspector : Editor
     {
         EnemyData data = target as EnemyData;
 
-        GUILayout.Label("Enemy: " + data.name);
+        GUILayout.Label("Enemy: " + data.name + " (" + data.displayName + ")");
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
-        data.image = EditorGUILayout.ObjectField(data.image, typeof(Sprite), false) as Sprite;
+        data.displayName = EditorGUILayout.TextField(new GUIContent("Display Name"), data.displayName);
+        data.image = EditorGUILayout.ObjectField(new GUIContent("Sprite"), data.image, typeof(Sprite), false) as Sprite;
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
         data.stats.doGUILayout();
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
         data.tags.doGUILayout("Tags");
-
         if(GUI.changed)
             EditorUtility.SetDirty(data);
     }

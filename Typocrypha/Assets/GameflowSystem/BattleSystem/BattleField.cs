@@ -156,5 +156,19 @@ public class Battlefield : MonoBehaviour
         {
             return Row == other.Row && Col == other.Col;
         }
+        public override bool Equals(object other)
+        {
+            return other is Position ? Equals(other as Position) : false;
+        }
+        public override int GetHashCode()
+        {
+            unchecked // Overflow is fine, just wrap
+            {
+                int hash = 17;
+                hash = hash * 23 + _row.GetHashCode();
+                hash = hash * 23 + _col.GetHashCode();
+                return hash;
+            }
+        }
     }
 }

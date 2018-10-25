@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f793b24362e7b4899da3d5af46b94b, type: 3}
   m_Name: Shapeshifter
   m_EditorClassIdentifier: 
+  displayName: Form-Faffer
   statMods:
     maxHP: 0
     maxStagger: 0
@@ -20,7 +21,8 @@ MonoBehaviour:
     spd: 0
     acc: 0
     evade: 0
-  tagReactions:
-    _values: 
+  reactions:
+    _keys: []
+    _values: []
   subTags:
     _items: []
