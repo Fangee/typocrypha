@@ -5,8 +5,8 @@ using UnityEditor;
 using System.IO;
 using System.Linq;
 
-public class AssetUtils : MonoBehaviour {
-
+public class AssetUtils
+{
     public static List<T> GetAssetList<T>(string path) where T : class
     {
         string[] fileEntries = Directory.GetFiles(Application.dataPath + "/" + path);

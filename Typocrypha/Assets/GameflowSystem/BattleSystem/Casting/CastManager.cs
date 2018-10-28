@@ -43,7 +43,6 @@ public class CastManager : MonoBehaviour
         return data;
     }
 
-
     // attack currently targeted enemy with spell
     public bool attackCurrent(string spell, TrackTyping callback)
     {
