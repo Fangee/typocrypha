@@ -9,7 +9,7 @@ public class RootWord : SpellWord {
     public override WordType Type { get { return WordType.Root; } }
     [SerializeField] private List<RootSpellEffect> _effects = new List<RootSpellEffect>();
     public ReorderableSOList<RootSpellEffect> effects = null;
-    public SpellTag.TagDict tags = new SpellTag.TagDict();
+    public SpellTag.TagSet tags = new SpellTag.TagSet();
 
     public void initList()
     {

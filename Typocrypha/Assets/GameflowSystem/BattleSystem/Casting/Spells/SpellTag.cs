@@ -4,11 +4,22 @@ using UnityEngine;
 using UnityEditor;
 
 [CreateAssetMenu(fileName = "SpellTag", menuName = "Tag/Spell Tag")]
-public class SpellTag : ScriptableObject
+public class SpellTag : ScriptableObject, System.IComparable<SpellTag>
 {
     public string displayName = string.Empty;
-    [System.Serializable] public class TagDict : SerializableDictionary<string, SpellTag>
+
+    public int CompareTo(SpellTag other)
     {
+        return name.CompareTo(other.name);
+    }
+
+    [System.Serializable]
+    public class TagSet : SerializableSet<SpellTag>
+    {
+        public bool Contains(string tagName)
+        {
+            return Contains(SpellTagIndex.getTagFromString(tagName));
+        }
         public void doGUILayout(string title)
         {
             #region Object Picker Message Handling
@@ -18,7 +29,7 @@ public class SpellTag : ScriptableObject
                 SpellTag t = EditorGUIUtility.GetObjectPickerObject() as SpellTag;
                 if (t == null)
                     return;
-                Add(t.name, t);
+                Add(t);
                 e.Use();
                 return;
             }
@@ -33,30 +44,18 @@ public class SpellTag : ScriptableObject
             #endregion
 
             EditorGUI.indentLevel++;
-            string toDelete = string.Empty;
-            string[] keys = new string[Count];
-            Keys.CopyTo(keys, 0);
-            System.Array.Sort(keys);
-            List<string> toReplace = new List<string>();
-            foreach (string key in keys)
+            SpellTag toDelete = null;
+            SpellTag[] tags = Items;
+            System.Array.Sort(tags);
+            foreach (var tag in tags)
             {
-                if (key != this[key].name)
-                    toReplace.Add(key);
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField(key, new GUIStyle(GUI.skin.label) { fontStyle = FontStyle.Italic }, GUILayout.Width(240));
+                EditorGUILayout.LabelField(tag.name + " (" + tag.displayName + ")", new GUIStyle(GUI.skin.label) { fontStyle = FontStyle.Italic }, GUILayout.Width(240));
                 if (GUILayout.Button("-"))
-                    toDelete = key;
+                    toDelete = tag;
                 EditorGUILayout.EndHorizontal();
             }
-            foreach (var key in toReplace)
-            {
-                if (key == toDelete)
-                    continue;
-                SpellTag s = this[key];
-                Remove(key);
-                Add(s.name, s);
-            }
-            if (!string.IsNullOrEmpty(toDelete))
+            if (tags != null)
                 Remove(toDelete);
             EditorGUI.indentLevel--;
         }
@@ -64,9 +63,8 @@ public class SpellTag : ScriptableObject
 }
 
 #region Caster Tag Inspector GUI
-// CharacterData inspector (read-only)
 [CustomEditor(typeof(SpellTag))]
-public class SpellTagInspector : Editor 
+public class SpellTagInspector : Editor
 {
     public override void OnInspectorGUI()
     {

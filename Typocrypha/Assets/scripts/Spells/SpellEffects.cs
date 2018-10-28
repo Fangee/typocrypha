@@ -244,7 +244,7 @@ public class SpellEffects : MonoBehaviour {
         }
     }
     //Plays screen overlay
-    private void spawnDamageOverlay(SpellTag.TagDict tags)
+    private void spawnDamageOverlay(SpellTag.TagSet tags)
     {
         throw new System.Exception();
         int element = 0;
