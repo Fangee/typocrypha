@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   _effects:
-  - {fileID: 114857784777047168}
   - {fileID: 114617646237758526}
+  - {fileID: 114857784777047168}
   tags:
     _items:
     - {fileID: 11400000, guid: d91cec13aa5e4b54aba9707d40f79e53, type: 2}
@@ -48,10 +48,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animationData:
-  - animation: {fileID: 0}
-    sfx: {fileID: 0}
-  - animation: {fileID: 0}
-    sfx: {fileID: 0}
+  - animations: []
+    sfx:
+    - {fileID: 0}
+  - animations: []
+    sfx: []
+  - animations: []
+    sfx: []
   targetPattern:
     pattern:
       _data: 000000000100
@@ -142,8 +145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animationData:
-  - animation: {fileID: 0}
-    sfx: {fileID: 0}
+  - animations: []
+    sfx: []
   targetPattern:
     pattern:
       _data: 010101000000

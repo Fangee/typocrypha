@@ -14,15 +14,19 @@ namespace GUIUtilities
     //T: Should only be used with non-polymorphic types marked with the System.Serializable attribute
     public class ReorderableList<T> where T : ReorderableList<T>.ListItem
     {
+        private bool expand = false;
+        private GUIContent titleLabel;
+
         #region Callbacks
         public delegate void processAddedItemCallback(T addedItem);
         public processAddedItemCallback processAddedItem = (T) => { return; };
         #endregion
 
-        public float Height { get { return _list.GetHeight(); } }
+        public float Height { get { return expand ? _list.GetHeight() : EditorGUIUtility.singleLineHeight; } }
         protected UnityEditorInternal.ReorderableList _list;
         public ReorderableList(List<T> elements, bool draggable = true, bool displayHeader = false, GUIContent headerLabel = null, bool displayAddButton = true, bool displayRemoveButton = true)
         {
+            titleLabel = headerLabel;
             _list = new UnityEditorInternal.ReorderableList(elements, typeof(T), draggable, displayHeader, displayAddButton, displayRemoveButton);
             _list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
             {
@@ -33,7 +37,9 @@ namespace GUIUtilities
             };
             _list.elementHeightCallback = (index) => { return elements[index].Height; };
             _list.drawHeaderCallback = (Rect rect) => {
-                EditorGUI.LabelField(rect, headerLabel, new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold });
+                EditorGUI.LabelField(new Rect(rect), headerLabel, new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold });
+                Rect UIRect = new Rect(rect) { width = 50, x = rect.x + (expand ? 0 : 5) };
+                expand = EditorGUI.ToggleLeft(UIRect, new GUIContent("Show"), expand);
             };
             _list.drawElementBackgroundCallback = (rect, index, active, focused) => {
                 if (_list.count <= 0)
@@ -54,11 +60,23 @@ namespace GUIUtilities
         }
         public void doLayoutList()
         {
-            _list.DoLayoutList();
+            if (expand)
+                _list.DoLayoutList();
+            else
+            {
+                GUILayout.BeginHorizontal();
+                GUILayout.Space(5);
+                expand = EditorGUILayout.ToggleLeft(new GUIContent("Show", "TODO: Tooltip"), expand, GUILayout.Width(50));
+                EditorGUILayout.LabelField(titleLabel, new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleLeft, fontStyle = FontStyle.Bold });
+                GUILayout.EndHorizontal();
+            }
         }
         public void doList(Rect rect)
         {
-            _list.DoList(rect);
+            if (expand)
+                _list.DoList(rect);
+            else
+                _list.drawHeaderCallback(rect);
         }
 
         #region List Item
@@ -76,16 +94,20 @@ namespace GUIUtilities
     //Specific reorderablelist implementation to be used with polymorphic scriptable objects that inherit from an abstract base that inherits from ReorderableListSOBase
     public class ReorderableSOList<T> where T : ReorderableSOList<T>.ListItem
     {
+        private bool expand = false;
+        private GUIContent titleLabel;
+
         #region Callbacks
         public delegate void processAddedItemCallback(T addedItem);
         public processAddedItemCallback processAddedItem = (T) => { return; };
         #endregion
 
-        public float Height { get { return _list.GetHeight(); } }
+        public float Height { get { return expand ? _list.GetHeight() : EditorGUIUtility.singleLineHeight; } }
         protected UnityEditorInternal.ReorderableList _list;
         private IEnumerable _subtypes;
         public ReorderableSOList(List<T> elements, bool draggable = true, bool displayHeader = false, GUIContent headerLabel = null, bool displayAddButton = true, bool useDopdownMenu = true, bool displayRemoveButton = true)
         {
+            titleLabel = headerLabel;
             _list = new UnityEditorInternal.ReorderableList(elements, typeof(T), draggable, displayHeader, displayAddButton, displayRemoveButton);
             _list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
             {
@@ -96,7 +118,9 @@ namespace GUIUtilities
             };
             _list.elementHeightCallback = (index) => { return elements[index].Height; };
             _list.drawHeaderCallback = (Rect rect) => {
-                EditorGUI.LabelField(rect, headerLabel, new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold });
+                EditorGUI.LabelField(new Rect(rect), headerLabel, new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold });
+                Rect UIRect = new Rect(rect) { width = 50, x = rect.x + (expand ? 0 : 5) };
+                expand = EditorGUI.ToggleLeft(UIRect, new GUIContent("Show"), expand);
             };
             _list.drawElementBackgroundCallback = (rect, index, active, focused) => {
                 if (_list.count <= 0)
@@ -150,11 +174,24 @@ namespace GUIUtilities
 
         public void doLayoutList()
         {
-            _list.DoLayoutList();
+            if (expand)
+                _list.DoLayoutList();
+            else
+            {
+                GUILayout.BeginHorizontal();
+                GUILayout.Space(5);
+                expand = EditorGUILayout.ToggleLeft(new GUIContent("Show", "TODO: Tooltip"), expand, GUILayout.Width(50));
+                EditorGUILayout.LabelField(titleLabel, new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleLeft, fontStyle = FontStyle.Bold });
+                GUILayout.EndHorizontal();
+            }
+
         }
         public void doList(Rect rect)
         {
-            _list.DoList(rect);
+            if (expand)
+                _list.DoList(rect);
+            else
+                _list.drawHeaderCallback(rect);
         }
 
         #region List Item

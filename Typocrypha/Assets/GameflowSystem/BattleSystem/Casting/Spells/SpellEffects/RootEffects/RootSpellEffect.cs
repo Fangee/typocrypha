@@ -13,6 +13,6 @@ public abstract class RootSpellEffect : ReorderableSOList<RootSpellEffect>.ListI
     protected void init()
     {
         if(animationData == null)
-            animationData = new ReorderableList<SpellAnimationData>(_animationData, true, true, new GUIContent("Animation Data"));
+            animationData = new ReorderableList<SpellAnimationData>(_animationData, true, true, new GUIContent("Anim/Sfx (Sequential)"));
     }
 }

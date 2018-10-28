@@ -51,7 +51,7 @@ public class SpellEffects : MonoBehaviour {
         //Process hit graphics (if not a repelled attack)
         foreach (var data in d.animationData)
         {
-            AudioPlayer.main.setSFX(AudioPlayer.channel_spell_sfx, data.sfx);
+            //AudioPlayer.main.setSFX(AudioPlayer.channel_spell_sfx, data.sfx);
             AudioPlayer.main.playSFX(AudioPlayer.channel_spell_sfx);
             if (d.target.CasterType == ICasterType.PLAYER)
                 BattleEffects.main.screenShake(0.15f + shakeIntensity / 8, 0.05f + shakeIntensity);
@@ -60,7 +60,7 @@ public class SpellEffects : MonoBehaviour {
                 popp.spawnText(d.wordName.ToUpper() + "!", POP_TIMER - 1, d.caster.WorldPos, Color.black, new Color(1, 111f / 255f, 1));
             else
                 popp.spawnText(d.wordName.ToUpper() + "!", POP_TIMER - 1, d.caster.WorldPos, new Color(1, 111f / 255f, 1), Color.white);
-            yield return new WaitUntilAnimationComplete(AnimationPlayer.main.playAnimation(data.animation, d.target.WorldPos, 1));
+            //yield return new WaitUntilAnimationComplete(AnimationPlayer.main.playAnimation(data.animation, d.target.WorldPos, 1));
         }
         if (d.isCrit && d.reaction != ReactionType.BLOCK) {//Spell is crit
 			if (d.target.CasterType == ICasterType.ENEMY)
