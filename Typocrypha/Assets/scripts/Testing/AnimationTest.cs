@@ -6,8 +6,7 @@ public class AnimationTest : MonoBehaviour {
 
     public bool CompletionTriggers = true;
     public float speed = 1f;
-    public AnimationClip[] clips;
-
+    public List<SpellAnimationData> clips;
 	// Use this for initialization
 	void Start () {
         StartCoroutine(play());
@@ -19,10 +18,22 @@ public class AnimationTest : MonoBehaviour {
         {
             foreach (var clip in clips)
             {
-                if(CompletionTriggers)
-                    yield return new WaitUntilAnimationComplete(AnimationPlayer.main.playAnimation(clip, new Vector2(0, 0), speed));
+                if (CompletionTriggers)
+                 {
+                    AnimationPlayer.CompletionData data = null;
+                    foreach (var anim in clip.animations)
+                        data = AnimationPlayer.main.playAnimation(anim, new Vector2(0, 0), speed);
+                    if(data != null)
+                        yield return new WaitUntilAnimationComplete(data);
+                }  
                 else
-                    yield return new WaitForSeconds(AnimationPlayer.main.playAnimation(clip, new Vector2(0, 0), speed).time);
+                {
+                    AnimationPlayer.CompletionData data = null;
+                    foreach (var anim in clip.animations)
+                        data = AnimationPlayer.main.playAnimation(anim, new Vector2(0, 0), speed);
+                    if (data != null)
+                        yield return new WaitForSeconds(data.time);
+                }
             }
         }
     }

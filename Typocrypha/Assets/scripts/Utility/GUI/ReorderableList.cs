@@ -26,7 +26,7 @@ namespace GUIUtilities
         protected UnityEditorInternal.ReorderableList _list;
         public ReorderableList(List<T> elements, bool draggable = true, bool displayHeader = false, GUIContent headerLabel = null, bool displayAddButton = true, bool displayRemoveButton = true)
         {
-            titleLabel = headerLabel;
+            titleLabel = displayHeader ? headerLabel : new GUIContent("");
             _list = new UnityEditorInternal.ReorderableList(elements, typeof(T), draggable, displayHeader, displayAddButton, displayRemoveButton);
             _list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
             {
@@ -37,7 +37,7 @@ namespace GUIUtilities
             };
             _list.elementHeightCallback = (index) => { return elements[index].Height; };
             _list.drawHeaderCallback = (Rect rect) => {
-                EditorGUI.LabelField(new Rect(rect), headerLabel, new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold });
+                EditorGUI.LabelField(new Rect(rect), titleLabel, new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, fontStyle = FontStyle.Bold });
                 Rect UIRect = new Rect(rect) { width = 50, x = rect.x + (expand ? 0 : 5) };
                 expand = EditorGUI.ToggleLeft(UIRect, new GUIContent("Show"), expand);
             };
