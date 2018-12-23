@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 [CreateAssetMenu(fileName = "SpellTag", menuName = "Tag/Spell Tag")]
 public class SpellTag : ScriptableObject, System.IComparable<SpellTag>
@@ -20,6 +22,7 @@ public class SpellTag : ScriptableObject, System.IComparable<SpellTag>
         {
             return Contains(SpellTagIndex.getTagFromString(tagName));
         }
+#if UNITY_EDITOR
         public void doGUILayout(string title)
         {
             #region Object Picker Message Handling
@@ -59,21 +62,6 @@ public class SpellTag : ScriptableObject, System.IComparable<SpellTag>
                 Remove(toDelete);
             EditorGUI.indentLevel--;
         }
+#endif
     }
 }
-
-#region Caster Tag Inspector GUI
-[CustomEditor(typeof(SpellTag))]
-public class SpellTagInspector : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        SpellTag tag = target as SpellTag;
-        GUILayout.Label("Spell Tag: " + tag.name + " (" + tag.displayName + ")");
-        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
-        tag.displayName = EditorGUILayout.TextField(new GUIContent("Display Name"), tag.displayName);
-        if (GUI.changed)
-            EditorUtility.SetDirty(tag);
-    }
-}
-#endregion

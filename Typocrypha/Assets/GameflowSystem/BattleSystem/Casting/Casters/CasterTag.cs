@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
-using UnityEditor.AnimatedValues;
+#endif
 
 public enum ReactionType
 {
@@ -54,6 +55,7 @@ public class CasterTag : ScriptableObject
     }
     [System.Serializable] public class ReactionDict : SerializableDictionary<string, Reaction>
     {
+#if UNITY_EDITOR
         public void doGUILayout(string title)
         {
             #region Object Picker Message Handling
@@ -109,9 +111,11 @@ public class CasterTag : ScriptableObject
                 Remove(toDelete);
             EditorGUI.indentLevel--;
         }
+#endif
     }
     [System.Serializable] public class TagSet : SerializableSet<CasterTag>
     {
+#if UNITY_EDITOR
         private bool showDetails = false;
         public void doGUILayout(string title)
         {
@@ -153,40 +157,10 @@ public class CasterTag : ScriptableObject
                 Remove(toDelete);
             EditorGUI.indentLevel--;
         }
+#endif
     }
     [System.Serializable] public class AbilitySet : SerializableSet<CasterAbility> { }
 }
-
-#region Caster Tag Inspector GUI
-// CharacterData inspector (read-only)
-[CustomEditor(typeof(CasterTag))]
-public class CasterTagInspector : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        CasterTag tag = target as CasterTag;
-        GUILayout.Label("Caster Tag: " + tag.name + " (" + tag.displayName + ")");
-        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
-        tag.displayName = EditorGUILayout.TextField(new GUIContent("Display Name"), tag.displayName);
-        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
-        EditorGUILayout.LabelField("Stat Modifiers", new GUIStyle(GUI.skin.label) { fontStyle = FontStyle.Bold, alignment = TextAnchor.MiddleCenter});
-        if(tag.statMods != null)
-            tag.statMods.doGUILayout(true);
-        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
-        tag.reactions.doGUILayout("Reactions");
-        GUILayout.Space(EditorGUIUtility.singleLineHeight / 2);
-        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
-        if (tag.subTags != null)
-        {
-            tag.subTags.doGUILayout("SubTags");
-            if (tag.subTags.Contains(tag))
-                tag.subTags.Remove(tag);
-        }
-        if (GUI.changed)
-            EditorUtility.SetDirty(tag);
-    }
-}
-#endregion
 
 public class CasterAbility
 {

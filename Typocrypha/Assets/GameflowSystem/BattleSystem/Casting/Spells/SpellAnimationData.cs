@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using GUIUtilities;
 
 [System.Serializable]
@@ -10,6 +12,7 @@ public class SpellAnimationData : ReorderableList<SpellAnimationData>.ListItem {
     public List<AnimationClip> animations = new List<AnimationClip>();
     public List<AudioClip> sfx = new List<AudioClip>();
 
+#if UNITY_EDITOR
     public override float Height
     {
         get
@@ -84,5 +87,5 @@ public class SpellAnimationData : ReorderableList<SpellAnimationData>.ListItem {
             }
         }
     }
-
+#endif
 }

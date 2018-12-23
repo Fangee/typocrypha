@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
-using UnityEditorInternal;
 using ReflectionUtils;
+#endif
 
 namespace GUIUtilities
 {
+#if UNITY_EDITOR
     #region List Classes
 
     #region Serializable Class Lists
@@ -208,4 +210,5 @@ namespace GUIUtilities
     #endregion
 
     #endregion
+#endif
 }

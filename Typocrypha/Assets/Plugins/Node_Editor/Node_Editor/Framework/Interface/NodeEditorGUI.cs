@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using NodeEditorFramework.Utilities;
 
 namespace NodeEditorFramework 
@@ -62,10 +61,11 @@ namespace NodeEditorFramework
             nodeSkin = Object.Instantiate(GUI.skin);
 			GUI.skin = nodeSkin;
 
-            //Set Custom Styles dark color only if on pro skin
-            Color textColor = EditorGUIUtility.isProSkin ? NE_TextColor : new Color(0.1f, 0.1f, 0.1f);
+            // Set Custom Styles dark color only if on pro skin
+            // Color textColor = EditorGUIUtility.isProSkin ? NE_TextColor : new Color(0.1f, 0.1f, 0.1f);
+            Color textColor = new Color(0.1f, 0.1f, 0.1f);
 
-			foreach (GUIStyle style in GUI.skin)
+            foreach (GUIStyle style in GUI.skin)
 			{
 				style.fontSize = 11;
             }
