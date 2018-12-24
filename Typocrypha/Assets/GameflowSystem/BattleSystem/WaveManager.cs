@@ -49,9 +49,9 @@ namespace Gameflow
         }
         private void waveTransition(BattleNodeWave waveData)
         {
-            GameObject waveTransition = Instantiate(waveTransitionPrefab, waveTransitionCanvas.transform);
-            waveTransition.transform.Find("WaveBannerText").GetComponent<Text>().text = DialogParser.main.substituteMacros(waveData.waveTitle);
-            waveTransition.transform.Find("WaveTitleText").GetComponent<Text>().text = "Wave " + ++waveNum + "/ " + totalWaves;
+            GameObject wT = Instantiate(waveTransitionPrefab, waveTransitionCanvas.transform);
+            wT.transform.Find("WaveBanner").GetComponentInChildren<Text>().text = DialogParser.main.substituteMacros(waveData.waveTitle);
+            wT.transform.Find("WaveTitle").GetComponentInChildren<Text>().text = "Wave " + ++waveNum + "/ " + totalWaves;
         }
         public void startCombat()
         {
