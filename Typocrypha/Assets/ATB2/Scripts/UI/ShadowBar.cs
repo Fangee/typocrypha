@@ -5,6 +5,7 @@ using UnityEngine;
 namespace ATB2
 {
     // UI amount bar with shadowed transitions between amounts
+    // To set up in scene, set amount and shadow (with amount layered directly on top of shadow)
     public class ShadowBar : MonoBehaviour
     {
         public RectTransform amount; // Transform for main bar

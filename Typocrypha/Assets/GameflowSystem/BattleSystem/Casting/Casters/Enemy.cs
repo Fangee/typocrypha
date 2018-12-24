@@ -16,6 +16,8 @@ namespace ATB2
         public Animator spriteAnimator; // animates sprite
         public Text nameText;
         public Text actionText;
+        // UI Objects
+        public ShadowBar healthBar;
 
         #region ICaster implementation
         private int _health; // health property field
@@ -28,6 +30,8 @@ namespace ATB2
             set
             {
                 _health = Mathf.Clamp(value, 0, Stats.maxHP); // allocates field
+                // Process/signal death
+                healthBar.curr = _health / (float)Stats.maxHP;
             }
         }
         private int _stagger; // stagger property field
@@ -40,6 +44,7 @@ namespace ATB2
             set
             {
                 _stagger = Mathf.Clamp(value, 0, Stats.maxStagger);
+                // Process/ signal stun
             }
         }
         public string Name { get { return enemyData.name; } }
@@ -49,14 +54,11 @@ namespace ATB2
         public CasterStats Stats { get { return enemyData.stats; } }
         public bool Stunned { get { return isCurrentState("Stunned"); } }
         public bool Dead { get { return Health <= 0; } }
-        public ICasterType CasterType { get { return ICasterType.ENEMY; } } 
+        public ICasterType CasterType { get { return ICasterType.ENEMY; } }
         public CasterTagDictionary Tags { get { return enemyData.tags; } }
         #endregion
 
-        // UI Objects 
-        public GameObject healthBar;
         public GameObject staggerBar;
-        public GameObject chargeBar;
 
         // AI State
         public EnemyAI AI;
