@@ -16,6 +16,7 @@ public class EnemyDataInspector : Editor
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
         data.displayName = EditorGUILayout.TextField(new GUIContent("Display Name"), data.displayName);
         data.image = EditorGUILayout.ObjectField(new GUIContent("Sprite"), data.image, typeof(Sprite), false) as Sprite;
+        data.AIType = EditorGUILayout.TextField(new GUIContent("AI Type (temp)"), data.AIType);
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
         data.stats.doGUILayout();
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);

@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 224386658562951548}
   - component: {fileID: 222041410615911972}
   - component: {fileID: 114889259095780512}
+  - component: {fileID: 95350987752350660}
   m_Layer: 0
   m_Name: EnemyImage
   m_TagString: Untagged
@@ -144,7 +145,7 @@ GameObject:
   - component: {fileID: 114540524075195314}
   - component: {fileID: 114455357863037046}
   m_Layer: 5
-  m_Name: SpellName
+  m_Name: ActionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -309,6 +310,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!95 &95350987752350660
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1126381269965552}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 112a468d686c975499be5bdda3db5318, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!95 &95852212730301108
 Animator:
   serializedVersion: 3
@@ -318,7 +337,7 @@ Animator:
   m_GameObject: {fileID: 1686005953262472}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 14ddf7bc35bd54b4daf9a1e5f2ff8485, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -783,9 +802,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee75789cfbee2f48b74f04534bb27a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stateMachine: {fileID: 95852212730301108}
+  isCast: 0
+  chargeUI: {fileID: 0}
+  chargeTime: 0
   enemyData: {fileID: 0}
   image: {fileID: 114889259095780512}
-  animator: {fileID: 95852212730301108}
+  spriteAnimator: {fileID: 95350987752350660}
+  nameText: {fileID: 114107256740483612}
+  actionText: {fileID: 114340255186930946}
   healthBar: {fileID: 1500150623846082}
   staggerBar: {fileID: 1233119925266504}
   chargeBar: {fileID: 1274052004322206}

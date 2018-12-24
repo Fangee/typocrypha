@@ -21,7 +21,9 @@ namespace Gameflow
 
         public override ProcessFlag process(GameManagers managers)
         {
-            throw new System.NotImplementedException();
+            managers.waveManager.totalWaves = numWaves;
+            // Do battle transition
+            return ProcessFlag.Continue;
         }
     }
 }

@@ -13,7 +13,9 @@ namespace ATB2
 
         // Visual Data
         public Image image; // enemy sprite
-        public Animator animator; // animates sprite
+        public Animator spriteAnimator; // animates sprite
+        public Text nameText;
+        public Text actionText;
 
         #region ICaster implementation
         private int _health; // health property field
@@ -64,6 +66,9 @@ namespace ATB2
         {
             // Attaches sprite to SpriteRenderer
             image.sprite = enemyData.image;
+            spriteAnimator.Play("enemy_spawn_in");
+            // Sets name text
+            nameText.text = Name;
 
             // Sets AI
             AI = EnemyAI.GetAIFromString(enemyData.AIType, enemyData.AIParameters);
@@ -71,7 +76,7 @@ namespace ATB2
             // Sets properies
             Health = Stats.maxHP;
             Stagger = Stats.maxStagger;
-            charge = 0;
+            //charge = 0;
         }
     }
 }
