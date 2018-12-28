@@ -11,8 +11,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185c389b97a40c04cba99fbc967264e0, type: 3}
   m_Name: Gary
   m_EditorClassIdentifier: 
-  displayName: 
+  displayName: Gary Numan
   image: {fileID: 21300000, guid: 2169b86692f43ec4fa9322e16690fad3, type: 3}
+  overrideSpawnAnim: 0
+  spawnAnim: {fileID: 0}
+  overrideSpawnSfx: 1
+  spawnSfx: {fileID: 8300000, guid: 9465fd303cbf920468933cd4e00d5e21, type: 3}
+  deathAnim: 0
   stats:
     maxHP: 125
     maxStagger: 0

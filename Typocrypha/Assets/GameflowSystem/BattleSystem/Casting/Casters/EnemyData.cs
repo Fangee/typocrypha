@@ -9,9 +9,16 @@ public class EnemyData : ScriptableObject
 {
     //Display Name
     public string displayName = string.Empty;
-	// Enemy sprite
-	public Sprite image;
-    
+
+    #region Display Data
+    public Sprite image;
+    public bool overrideSpawnAnim = false;
+    public AnimationClip spawnAnim = null;
+    public bool overrideSpawnSfx = false;
+    public AudioClip spawnSfx = null;
+    public ATB2.Enemy.DeathAnimation deathAnim = ATB2.Enemy.DeathAnimation.Blastoff;
+    #endregion
+
     public CasterStats stats = new CasterStats();
 		
 	// AI settings

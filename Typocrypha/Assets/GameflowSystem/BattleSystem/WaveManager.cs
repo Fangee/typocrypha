@@ -14,6 +14,8 @@ namespace Gameflow
         public GameObject allyPrefab;
         public GameObject waveTransitionPrefab;
         public Canvas waveTransitionCanvas;
+        public AnimationClip defaultSpawnAnimation;
+        public AudioClip defaultSpawnSfx;
         [HideInInspector] public int totalWaves;
 
         private int waveNum = 0;
@@ -42,10 +44,15 @@ namespace Gameflow
                 ATB2.Enemy e = Instantiate(enemyPrefab, enemyCanvas.transform).GetComponent<ATB2.Enemy>();
                 e.enemyData = data;
                 field.Add(e, new Battlefield.Position(0, i));
-                e.Setup();
-                // Enemy Spawn Graphics               
+                playSpawnEffects(e.enemyData, e.transform.position);
+                e.Setup();            
                 yield return new WaitForSeconds(0.4f);
             }
+        }
+        private void playSpawnEffects(EnemyData d, Vector2 position)
+        {
+            AudioPlayer.main.playSFX(d.overrideSpawnSfx ? d.spawnSfx : defaultSpawnSfx);
+            AnimationPlayer.main.playAnimation(d.overrideSpawnAnim ? d.spawnAnim : defaultSpawnAnimation, position, 2f);
         }
         private void waveTransition(BattleNodeWave waveData)
         {

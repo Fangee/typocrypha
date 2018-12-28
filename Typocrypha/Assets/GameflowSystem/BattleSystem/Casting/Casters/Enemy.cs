@@ -8,6 +8,11 @@ namespace ATB2
 {
     public partial class Enemy : ICaster
     {
+        public enum DeathAnimation
+        {
+            Blastoff,
+        }
+
         // Container for enemy data
         public EnemyData enemyData;
 

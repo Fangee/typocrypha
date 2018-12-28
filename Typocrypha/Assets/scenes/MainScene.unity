@@ -11887,6 +11887,9 @@ MonoBehaviour:
   waveTransitionPrefab: {fileID: 1714847575084950, guid: 22c0a300ffb38eb49b9be36b467f7c41,
     type: 2}
   waveTransitionCanvas: {fileID: 1175833205}
+  defaultSpawnAnimation: {fileID: 7400000, guid: 3874818644be6c84b81ea352f0f4610e,
+    type: 2}
+  defaultSpawnSfx: {fileID: 8300000, guid: b6898b592e469354ebf03f8edcca0ded, type: 3}
   totalWaves: 0
 --- !u!1001 &995692021
 Prefab:
@@ -15380,7 +15383,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!224 &1296834164
 RectTransform:
