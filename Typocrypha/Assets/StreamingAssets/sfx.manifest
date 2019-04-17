@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1584432142
+CRC: 4172769666
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e9340efc55f29bd14a492e09e198fb53
+    Hash: b086ec165c16033df65138f4a8514dc8
   TypeTreeHash:
     serializedVersion: 2
     Hash: 3f7d0c5e0986ec71841622bcb2f9be1c
@@ -17,11 +17,13 @@ Assets:
 - Assets/audio/sfx/spell_sfx/sfx_astral_hit.wav
 - Assets/audio/sfx/cutscene_sfx/sfx_bark.wav
 - Assets/audio/sfx/ui_sfx/menu_boop.ogg
-- Assets/audio/sfx/battle_sfx/sfx_slowmo_2.wav
+- Assets/audio/sfx/battle_sfx/sfx_heal.wav
 - Assets/audio/sfx/other/Static_Sound.wav
 - Assets/audio/sfx/battle_sfx/vo_demon.wav
 - Assets/audio/sfx/spell_sfx/magic_sound.wav
 - Assets/audio/sfx/speaking_sfx/vo_cat.wav
+- Assets/INCUBATOR ASSETS/Battlesfx/sfx_miss.wav
+- Assets/INCUBATOR ASSETS/Battlesfx/enemy_attack_ready.wav
 - Assets/audio/sfx/speaking_sfx/vo_iris.wav
 - Assets/audio/sfx/battle_sfx/sfx_bootup_2.wav
 - Assets/audio/sfx/battle_sfx/sfx_bootup.wav
@@ -35,7 +37,7 @@ Assets:
 - Assets/audio/sfx/battle_sfx/sfx_speedup2.wav
 - Assets/audio/sfx/speaking_sfx/vo_doppelganger.ogg
 - Assets/audio/sfx/spell_sfx/sfx_cast.wav
-- Assets/audio/sfx/battle_sfx/sfx_miss.wav
+- Assets/audio/sfx/battle_sfx/sfx_miss_OLD.wav
 - Assets/audio/sfx/spell_sfx/sfx_fire_hit.wav
 - Assets/audio/sfx/ui_sfx/status_key_sfx/sfx_status_frozen.wav
 - Assets/audio/sfx/spell_sfx/sfx_slash.wav
@@ -44,7 +46,7 @@ Assets:
 - Assets/audio/sfx/ui_sfx/sfx_key_voltage.wav
 - Assets/audio/sfx/spell_sfx/sfx_stab.wav
 - Assets/audio/sfx/battle_sfx/sfx_enemy_weakcrit_dmg.wav
-- Assets/audio/sfx/battle_sfx/sfx_speedup.wav
+- Assets/audio/sfx/battle_sfx/sfx_spell_reflect.wav
 - Assets/audio/sfx/speaking_sfx/vo_illyia.ogg
 - Assets/audio/sfx/ui_sfx/sfx_scanner_open.wav
 - Assets/audio/sfx/spell_sfx/sfx_volt_hit.wav
@@ -55,10 +57,10 @@ Assets:
 - Assets/audio/sfx/ui_sfx/status_key_sfx/sfx_status_frozen_key_hit.wav
 - Assets/audio/sfx/speaking_sfx/vo_mc.ogg
 - Assets/audio/sfx/battle_sfx/sfx_damage_number.wav
-- Assets/audio/sfx/battle_sfx/sfx_spell_reflect.wav
+- Assets/audio/sfx/battle_sfx/sfx_spell_reflect_OLD.wav
 - Assets/audio/sfx/spell_sfx/sfx_enemy_cast.wav
-- Assets/audio/sfx/battle_sfx/sfx_heal.wav
-- Assets/audio/sfx/battle_sfx/sfx_spell_resist.wav
+- Assets/audio/sfx/battle_sfx/sfx_heal_OLD.wav
+- Assets/audio/sfx/battle_sfx/sfx_spell_resist_OLD.wav
 - Assets/audio/sfx/battle_sfx/sfx_party_weakcrit_dmg.wav
 - Assets/audio/sfx/ui_sfx/sfx_enemy_select.wav
 - Assets/audio/sfx/battle_sfx/sfx_spellbook_scroll.wav
@@ -66,25 +68,30 @@ Assets:
 - Assets/audio/sfx/battle_sfx/sfx_battle_start.wav
 - Assets/audio/sfx/ui_sfx/sfx_backspace.wav
 - Assets/audio/sfx/cutscene_sfx/sfx_ringtone.wav
+- Assets/INCUBATOR ASSETS/Battlesfx/sfx_spell_resist.wav
 - Assets/audio/sfx/spell_sfx/sfx_blight_hit.wav
 - Assets/audio/sfx/battle_sfx/sfx_learn_spell_battle.wav
+- Assets/INCUBATOR ASSETS/Battlesfx/sfx_spell_hit.wav
 - Assets/audio/sfx/battle_sfx/sfx_speedup3.wav
 - Assets/audio/sfx/speaking_sfx/vo_marcel.ogg
 - Assets/audio/sfx/speaking_sfx/speak_boop.ogg
 - Assets/audio/sfx/ui_sfx/sfx_enter_bad.wav
+- Assets/INCUBATOR ASSETS/Battlesfx/SFXBattleKeysFire.wav
 - Assets/audio/sfx/ui_sfx/sfx_enter.wav
 - Assets/audio/sfx/cutscene_sfx/sfx_vr_bootup.wav
-- Assets/audio/sfx/battle_sfx/sfx_enemy_death.wav
+- Assets/INCUBATOR ASSETS/Battlesfx/SFXBattleKeysLightning.wav
+- Assets/audio/sfx/battle_sfx/sfx_enemy_death_OLD.wav
 - Assets/audio/sfx/battle_sfx/sfx_death_flyaway.wav
 - Assets/audio/sfx/spell_sfx/sfx_ice_hit.wav
 - Assets/audio/sfx/cutscene_sfx/sfx_evil_laugh.wav
 - Assets/audio/sfx/battle_sfx/sfx_spell_drain.wav
 - Assets/audio/sfx/speaking_sfx/vo_dahlia.ogg
+- Assets/INCUBATOR ASSETS/Battlesfx/sfx_spell_block.wav
 - Assets/audio/sfx/speaking_sfx/vo_evil_eye.ogg
-- Assets/audio/sfx/battle_sfx/sfx_spell_hit.wav
-- Assets/audio/sfx/battle_sfx/enemy_attack_ready.wav
+- Assets/audio/sfx/battle_sfx/sfx_spell_hit_OLD.wav
+- Assets/audio/sfx/battle_sfx/enemy_attack_ready_old.wav
 - Assets/audio/sfx/spell_sfx/sfx_crush.wav
-- Assets/audio/sfx/battle_sfx/sfx_spell_block.wav
+- Assets/audio/sfx/battle_sfx/sfx_spell_block_OLD.wav
 - Assets/audio/sfx/battle_sfx/sfx_botch.wav
 - Assets/audio/sfx/ui_sfx/sfx_next_textbox.wav
 - Assets/audio/sfx/battle_sfx/sfx_mystery_effect.wav
